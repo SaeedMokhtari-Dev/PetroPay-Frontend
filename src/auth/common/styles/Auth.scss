@@ -1,0 +1,110 @@
+@import "../../../app/styles/colors";
+
+.auth-page {
+  background-color: $foggyGray;
+
+  .container
+  {
+    height: 100vh;
+    min-height: 100vh;
+
+    .ant-alert-success {
+      background-color: $colonialWhite;
+      border: 1px solid darken($foggyGray, 10%);
+    }
+    .link {
+      text-align: left;
+      margin-top: 30px;
+      a {
+        text-align: left;
+        color: $woodland;
+        margin-top: 10px;
+        font-size: 14px;
+      }
+    }
+
+    .response-error-msg {
+      border: 2px dotted darken($red, 5%);
+      color: $woodland;
+      padding: 10px 10px 10px 14px;
+      margin: 30px 0 15px;
+    }
+
+    .center-item {
+      display: flex;
+      /*justify-content: center;*/
+      padding: 70px 0;
+      align-items: center;
+      flex-direction: column;
+      color: $woodland;
+
+
+      .reg-mark {
+        font-size: 15px;
+        margin-top: 4px;
+        vertical-align: top;
+        display: inline-block;
+      }
+
+      .petro-pay {
+        font-size: 30px;
+        padding-bottom: 15px;
+      }
+
+      .logo {
+        height: 185px;
+      }
+
+      .authentication {
+        font-size: 25px;
+        padding-top: 15px;
+        margin-bottom: 40px;
+      }
+
+      form {
+        width: 500px;
+
+        .ant-form-item-explain-error div {
+          color: darken($red, 12%)
+        }
+
+        .text-input {
+          border-radius: 5px;
+          height: 40px !important;
+        }
+
+        button {
+          background-color: $woodland;
+          color: #ffffff;
+          margin-top: 15px;
+          border-radius: 5px;
+          width: 240px;
+          font-size: 14px;
+          height: 42px;
+
+        }
+      }
+    }
+  }
+}
+
+@media(max-width:692px) {
+  .center-item {
+    form {
+      width: 60%;
+    }
+  }
+}
+
+@media(max-width:452px) {
+  .center-item {
+    form {
+      width: 70%;
+      padding: 25px;
+
+      p {
+        font-size: 14px;
+      }
+    }
+  }
+}

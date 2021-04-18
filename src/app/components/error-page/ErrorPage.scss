@@ -1,0 +1,11 @@
+@import "../../../app/styles/colors";
+
+.ant-result-500
+{
+  .ant-result-title {
+    color: $foreground;
+  }
+  .ant-result-subtitle {
+    font-size: 13px;
+  }
+}

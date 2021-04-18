@@ -1,0 +1,35 @@
+@import "colors";
+
+.ant-popover-inner-content {
+  font-size: 13px;
+  padding: 14px 16px 16px 16px;
+
+  .icon {
+    color: $red;
+  }
+}
+.ant-popover-message {
+  display: flex;
+  align-items: center;
+  font-size: 13px;
+}
+.ant-popover-message-title {
+  margin-left: 10px;
+  padding-left: 0;
+}
+.ant-popover-message>.anticon {
+  position: inherit;
+  top: auto;
+}
+.ant-popover-message>.anticon {
+  font-size: 22px;
+}
+.ant-popover-buttons button {
+  height: 26px;
+  min-width: 80px;
+  max-width: 80px;
+}
+.ant-popover-buttons {
+  margin-top: 0;
+  text-align: center;
+}

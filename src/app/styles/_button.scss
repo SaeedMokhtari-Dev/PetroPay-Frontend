@@ -1,0 +1,67 @@
+@import "colors";
+
+/*
+.ant-btn {
+  min-width: 100px;
+  height: 36px;
+  font-size: 13px;
+}
+.ant-btn-primary {
+  background-color: $woodland;
+  border-color: $woodland !important;
+  color: #ffffff;
+
+  &:hover {
+    background-color: $woodland !important;
+    border-color: $woodland !important;
+    color: #ffffff;
+  }
+  &:focus {
+    background-color: $woodland !important;
+    border-color: $woodland !important;
+    color: #ffffff;
+    //opacity: 100%;
+  }
+  &:active {
+    background-color: $woodland !important;
+    border-color: $woodland !important;
+    color: #ffffff;
+    opacity: 50%;
+  }
+}
+
+.ant-btn {
+  @extend .noselect;
+  transition-duration: 0s;
+  &:hover {
+    opacity: 85%;
+  }
+  &:active {
+    opacity: 70%;
+  }
+  &:disabled {
+    opacity: 30%;
+  }
+}
+
+.btn-simple {
+  @extend .noselect;
+  border: none;
+  box-shadow: none;
+  outline: none;
+  padding: 0;
+  margin: 0;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.btn-simple:hover {
+  opacity: 0.8;
+}
+.btn-simple:active {
+  opacity: 0.6;
+}
+.btn-simple:disabled {
+  opacity: 0.3;
+}*/

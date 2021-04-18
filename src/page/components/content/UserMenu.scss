@@ -1,0 +1,25 @@
+@import "../../../app/styles/colors";
+
+.user-menu {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+
+  .icon {
+    color: $darkIconColor
+  }
+
+  .user-name {
+    display: inline-block;
+    margin: 0 5px 0 10px;
+    font-size: 13px;
+    font-weight: 600;
+    color: $darkIconColor;
+    flex-shrink: 0;
+    white-space: nowrap;
+  }
+}
+.user-menu-dropdown {
+  margin-top: 5px;
+  border-radius: 3px;
+}

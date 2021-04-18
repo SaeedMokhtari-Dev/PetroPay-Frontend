@@ -1,0 +1,16 @@
+.hamburger-btn-ct {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ffffff;
+
+  .btn-page-hamburger {
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+  }
+}

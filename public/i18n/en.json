@@ -1,0 +1,103 @@
+{
+  "App.Title": "PetroPay Portal",
+
+  "General.Button.Add": "New",
+  "General.Button.Edit": "Edit",
+  "General.Button.Delete": "Delete",
+  "General.Column.Action": "Actions",
+  "General.Confirm.Delete": "Are you sure to delete?",
+
+
+  "General.Error.Title": "An error has occurred",
+  "General.Error.Message": "Failed to load the requested page",
+  "General.Reload.Application": "Reload the application",
+
+  "User.Menu.ChangePassword": "Change Password",
+  "User.Menu.Logout": "Logout",
+
+  "Authentication.Label.PetroPay": "PetroPay",
+  "Authentication.Label.Authentication": "Authentication",
+  "Authentication.Validation.Message.RoleType.Required": "Please enter your Role",
+  "Authentication.Validation.Message.Username.Required": "Please enter your Username",
+  "Authentication.Validation.Message.Password.Required": "Please enter your password",
+  "Authentication.Label.RoleType": "Role",
+  "Authentication.Label.Username": "Username",
+  "Authentication.Label.Password": "Password",
+  "Authentication.Button.Login": "Login",
+  "Authentication.Link.ForgotPassword": "Forgot your password?",
+  "Authentication.Error.AuthFailed": "An error has occurred while trying to authenticate.",
+  "Api.Auth.Invalid.Credentials": "Username or Password is wrong.",
+
+  "ResetPassword.Label.ResetPassword": "Reset Password",
+  "ResetPassword.Link.BackToLogin": "Back to Login",
+  "ResetPassword.Button.ResetPassword": "Reset Password",
+  "ResetPassword.Alert.EmailSentSuccessfully": "A link successfully sent to your email, please click on it to reset your password",
+  "ResetPassword.Error.ResetPasswordFailed": "An error has occurred while trying to reset password.",
+
+  "Api.Auth.ResetPassword.Response": "If the information entered is associated with an account, we have sent you an email with password reset instructions.",
+
+  "ChangePassword.Label.ChangePassword": "Change Password",
+  "ChangePassword.Button.ChangePassword": "Change Password",
+  "ChangePassword.Error.ChangePasswordFailed": "An error has occurred while trying to change password.",
+  "ChangePassword.Label.NewPassword": "New Password",
+  "ChangePassword.Label.ConfirmPassword": "Confirm Password",
+  "ChangePassword.Validation.Message.NewPassword.Required": "Please enter your new password",
+  "ChangePassword.Validation.Message.ConfirmPassword.Required": "Please enter your confirm password",
+  "ChangePassword.Token.Validation.Message": "Please wait, validating your request ...",
+
+  "Api.Auth.ValidateResetPasswordToken.InvalidToken": "Token is invalid or outdated.",
+  "Api.Auth.ValidateResetPasswordToken.ValidToken": "Token is valid.",
+
+  "Api.Auth.ChangePassword.NotEqualPasswords": "Password and confirm password are not equals",
+  "Api.Auth.ChangePassword.Successful": "Password Changed Successfully",
+
+
+  "Companies.Menu.Title": "Companies",
+  "Companies.Label.key": "key",
+  "Companies.Label.companyId": "Company Id",
+  "Companies.Label.companyName": "Company Name",
+  "Companies.Label.companyCommercialNumber": "Company Commercial Number",
+  "Companies.Label.companyCommercialPhoto": "Company Commercial Photo",
+  "Companies.Label.companyType": "Company Type",
+  "Companies.Label.companyAdminUserName": "Company Admin User Name",
+  "Companies.Label.companyAdminUserPassword": "Company Admin User Password",
+  "Companies.Label.companyCountry": "Company Country",
+  "Companies.Label.companyRegion": "Company Region",
+  "Companies.Label.companyAddress": "Company Address",
+  "Companies.Label.companyAdminName": "Company Admin Name",
+  "Companies.Label.companyAdminPosition": "Company Admin Position",
+  "Companies.Label.companyAdminPhone": "Company Admin Phone",
+  "Companies.Label.companyAdminEmail": "Company Admin Email",
+  "Companies.Label.companyBalnce": "Company Balnce",
+
+  "Companies.Modal.Add.HeaderText": "Add Company",
+  "Companies.Modal.Add.SaveButton": "Save",
+  "Companies.Modal.Add.CancelButton": "Cancel",
+
+  "Companies.Validation.Message.CompanyName.Required": "Please enter company name",
+  "Companies.Validation.Message.CompanyCommercialNumber.Required": "Please enter company email",
+
+
+  "Companies.Error.Get.Message": "An error has occurred while trying to get companies list.",
+  "Companies.Error.Detail.Message": "An error has occurred while trying to get company details.",
+  "Companies.Error.Add.Message": "An error has occurred while trying to add new company.",
+  "Companies.Error.Edit.Message": "An error has occurred while trying to edit company.",
+  "Companies.Error.Delete.Message": "An error has occurred while trying to delete company.",
+
+  "Api.AuditingCompany.Id.Required": "Please enter company id.",
+  "Api.AuditingCompany.Name.Required": "Please enter company name.",
+  "Api.AuditingCompany.Email.Required": "Please enter company email.",
+  "Api.AuditingCompany.Logo.Required": "Please enter company logo.",
+  "Api.AuditingCompany.Email.Duplicate": "Email you entered is duplicate.",
+  "Api.AuditingCompany.Email.IsWrong": "Email you entered is wrong.",
+  "Api.AuditingCompany.Add.Successful": "New company successfully added.",
+  "Api.AuditingCompany.Edit.Successful": "Selected company successfully updated.",
+  "Api.AuditingCompany.Archived.Successful": "Selected company successfully un/archived.",
+  "Api.AuditingCompany.ArchivedEntityEdit.NotAllowed": "Archived company can't edit.",
+
+  "Api.Generic.Error": "An error has occurred while processing the request",
+  "Api.Resource.Not.Found": "The specified resource was not found",
+  "Api.Invalid.Request": "Invalid request",
+  "Api.Forbidden": "Forbidden",
+  "Api.Auth.MinPasswordLengthError": "The minimum password length is 8 characters"
+}
