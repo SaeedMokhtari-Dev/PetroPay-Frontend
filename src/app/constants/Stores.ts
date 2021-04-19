@@ -5,5 +5,6 @@ export default {
     customerStore: 'customerStore',
     supplierStore: 'supplierStore',
     adminStore: 'adminStore',
-    companiesStore: 'companiesStore'
+    companiesStore: 'companiesStore',
+    bundlesStore: 'bundlesStore'
 }

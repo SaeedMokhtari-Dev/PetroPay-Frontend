@@ -15,5 +15,11 @@ export default
     apiCompanyDetail: "/api/company/detail",
     apiCompanyDelete: "/api/company/delete",
 
+    apiBundleAdd: "/api/bundle/add",
+    apiBundleEdit: "/api/bundle/edit",
+    apiBundleGet: "/api/bundle/get",
+    apiBundleDetail: "/api/bundle/detail",
+    apiBundleDelete: "/api/bundle/delete",
+
     apiLog: "/api/log"
 }

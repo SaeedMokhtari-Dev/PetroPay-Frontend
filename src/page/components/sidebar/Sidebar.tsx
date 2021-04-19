@@ -7,12 +7,12 @@ import { Link } from "react-router-dom";
 
 import { Layout, Menu } from 'antd';
 import {
-    UserOutlined,
+    UserOutlined,DashboardOutlined,
     PieChartOutlined, DesktopOutlined, TeamOutlined, FileOutlined, ShopOutlined
 } from '@ant-design/icons';
 import Routes from "../../../app/constants/Routes";
 import i18next from "i18next";
-import GetCompaniesRequest from "../../../companies/handlers/get/GetCompaniesRequest";
+import GetCompaniesRequest from "../../../entities/companies/handlers/get/GetCompaniesRequest";
 import UserContext from "../../../identity/contexts/UserContext";
 import RoleType from "../../../identity/constants/RoleType";
 
@@ -32,8 +32,14 @@ const Sidebar: React.FC<SidebarProps> = inject(Stores.pageStore)(observer(({page
     }, []);
 
     const adminMenu= (<Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
-        <Menu.Item key="1" icon={<ShopOutlined />}>
+        <Menu.Item key="1" icon={<DashboardOutlined />}>
+            <Link to={Routes.app}>{i18next.t('Dashboard.Menu.Title')}</Link>
+        </Menu.Item>
+        <Menu.Item key="2" icon={<ShopOutlined />}>
             <Link to={Routes.company}>{i18next.t('Companies.Menu.Title')}</Link>
+        </Menu.Item>
+        <Menu.Item key="3" icon={<ShopOutlined />}>
+            <Link to={Routes.bundle}>{i18next.t('Bundles.Menu.Title')}</Link>
         </Menu.Item>
         {/*<Menu.Item key="2" icon={<DesktopOutlined />}>
             Option 2
@@ -52,14 +58,20 @@ const Sidebar: React.FC<SidebarProps> = inject(Stores.pageStore)(observer(({page
         </Menu.Item>*/}
     </Menu>)
     const customerMenu= (<Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
-        <Menu.Item key="1" icon={<ShopOutlined />}>
-            <Link to={Routes.company}>{i18next.t('Companies.Menu.Title')}</Link>
+        <Menu.Item key="1" icon={<DashboardOutlined />}>
+            <Link to={Routes.app}>{i18next.t('Dashboard.Menu.Title')}</Link>
         </Menu.Item>
+        {/*<Menu.Item key="1" icon={<ShopOutlined />}>
+            <Link to={Routes.company}>{i18next.t('Companies.Menu.Title')}</Link>
+        </Menu.Item>*/}
     </Menu>)
     const supplierMenu= (<Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
-        <Menu.Item key="1" icon={<ShopOutlined />}>
-            <Link to={Routes.company}>{i18next.t('Companies.Menu.Title')}</Link>
+        <Menu.Item key="1" icon={<DashboardOutlined />}>
+            <Link to={Routes.app}>{i18next.t('Dashboard.Menu.Title')}</Link>
         </Menu.Item>
+        {/*<Menu.Item key="1" icon={<ShopOutlined />}>
+            <Link to={Routes.company}>{i18next.t('Companies.Menu.Title')}</Link>
+        </Menu.Item>*/}
     </Menu>)
     async function onLoad() {
     }

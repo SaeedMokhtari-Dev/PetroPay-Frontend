@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import {inject, observer} from "mobx-react";
 import { useHistory } from "react-router-dom";
-import "./CompaniesList.scss";
+import "./BundlesList.scss";
 import Stores from "app/constants/Stores";
-import CompaniesStore from "companies/stores/CompaniesStore";
+import BundlesStore from "entities/bundles/stores/BundlesStore";
 import {
     Button,
     Pagination,
@@ -13,33 +13,34 @@ import {
     EditOutlined, DeleteOutlined,
     ExclamationCircleOutlined, PlusCircleOutlined
 } from '@ant-design/icons';
-import GetCompaniesRequest from "../../handlers/get/GetCompaniesRequest";
 import i18next from "i18next";
-import CompaniesColumns from "./ComaniesColumns";
-import EditCompany from "../company/EditCompany";
-import AddCompanyRequest from "../../handlers/add/AddCompanyRequest";
-import Routes from "../../../app/constants/Routes";
-import NavigationService from "../../../app/services/NavigationService";
+import BundlesColumns from "./BundlesColumns";
+import AddBundleRequest from "../../handlers/add/AddBundleRequest";
+import Routes from "../../../../app/constants/Routes";
+import NavigationService from "../../../../app/services/NavigationService";
+import GetBundleRequest from "../../handlers/get/GetBundleRequest";
 
 
 const { confirm } = Modal;
 
 
-interface CompaniesSidebarProps {
-    companiesStore?: CompaniesStore
+interface BundlesSidebarProps {
+    bundlesStore?: BundlesStore
 }
 
 
 
-const CompaniesList: React.FC<CompaniesSidebarProps> = inject(Stores.companiesStore)(observer(({companiesStore}) => {
-    const history = useHistory();
+const BundlesList: React.FC<BundlesSidebarProps> = inject(Stores.bundlesStore)(observer(({bundlesStore}) => {
     useEffect(() => {
         onLoad();
 
         return onUnload;
     }, []);
 
-    const columns: any[] = [...CompaniesColumns, {
+    BundlesColumns.forEach(w => {
+       w.title = i18next.t(w.title)
+    });
+    const columns: any[] = [...BundlesColumns, {
         title: i18next.t("General.Column.Action"),
         dataIndex: 'operation',
         key: 'action',
@@ -55,74 +56,67 @@ const CompaniesList: React.FC<CompaniesSidebarProps> = inject(Stores.companiesSt
         )
     }];
     async function showEditPage(e){
-        debugger;
-        companiesStore.editCompanyViewModel.key = e.key;
+        bundlesStore.editBundleViewModel.key = e.key;
         if(e.key)
         {
-            debugger;
-            await companiesStore.editCompanyViewModel.getDetailCompany(e.key);
+            await bundlesStore.editBundleViewModel.getDetailBundle(e.key);
+            NavigationService.navigate(`/app/bundle/edit/${e.key}`);
         }
         else{
-            companiesStore.editCompanyViewModel.addCompanyRequest = new AddCompanyRequest();
-            history.push(Routes.addCompany);
+            bundlesStore.editBundleViewModel.addBundleRequest = new AddBundleRequest();
+            NavigationService.navigate(Routes.addBundle);
         }
-        history.push(`/app/company/edit/${e.key}`);
     }
     async function showDeleteConfirm(e) {
         console.log(e.key);
-        debugger;
         confirm({
             title: i18next.t("General.Confirm.Delete"),
             icon: <ExclamationCircleOutlined />,
             async onOk() {
                 console.log(e.key);
-                debugger;
                 await onDelete(e.key);
             },
             onCancel() {},
         });
     }
-    let viewModel = companiesStore.getCompanyViewModel;
+    let viewModel = bundlesStore.getBundleViewModel;
 
     if (!viewModel) return;
 
-
-
     async function onDelete(key: number){
-        debugger;
-        await viewModel.deleteCompany(key);
+        await viewModel.deleteBundle(key);
     }
 
     async function onLoad() {
-        companiesStore.onCompanyGetPageLoad();
-        companiesStore.onCompanyEditPageLoad();
-        companiesStore.getCompanyViewModel.pageIndex = 0;
-        companiesStore.getCompanyViewModel.pageSize = 20;
-        await companiesStore.getCompanyViewModel.getAllCompanies(new GetCompaniesRequest(20, 0));
+        bundlesStore.onBundleGetPageLoad();
+        bundlesStore.onBundleEditPageLoad();
+        bundlesStore.getBundleViewModel.pageIndex = 0;
+        bundlesStore.getBundleViewModel.pageSize = 20;
+        await bundlesStore.getBundleViewModel.getAllBundles(new GetBundleRequest(20, 0));
     }
 
     function onUnload() {
-        companiesStore.onCompanyGetPageUnload();
-        companiesStore.onCompanyEditPageUnload();
+        bundlesStore.onBundleGetPageUnload();
+        bundlesStore.onBundleEditPageUnload();
     }
 
     async function pageIndexChanged(pageIndex, pageSize){
         viewModel.pageIndex = pageIndex - 1;
         viewModel.pageSize = pageSize;
-        await companiesStore.getCompanyViewModel.getAllCompanies(new GetCompaniesRequest(pageSize, pageIndex - 1));
+        await bundlesStore.getBundleViewModel.getAllBundles(new GetBundleRequest(pageSize, pageIndex - 1));
     }
     async function pageSizeChanged(current, pageSize){
         viewModel.pageIndex = 0;
         viewModel.pageSize = pageSize;
-        await companiesStore.getCompanyViewModel.getAllCompanies(new GetCompaniesRequest(pageSize, 0));
+        await bundlesStore.getBundleViewModel.getAllBundles(new GetBundleRequest(pageSize, 0));
     }
     return (
         <div>
             <PageHeader
                 ghost={false}
                 onBack={() => window.history.back()}
-                title="Company"
-                subTitle="This is a subtitle"
+                title={i18next.t("Bundles.Page.Title")}
+                subTitle={i18next.t("Bundles.Page.SubTitle")}
                 extra={[
                         <Button key={"Add"} type="primary" icon={<PlusCircleOutlined />} onClick={showEditPage}>
                             {i18next.t("General.Button.Add")}
@@ -131,7 +125,7 @@ const CompaniesList: React.FC<CompaniesSidebarProps> = inject(Stores.companiesSt
                 ]}
             />
 
-            <Table dataSource={viewModel?.companyList} columns={columns} loading={viewModel?.isProcessing}
+            <Table dataSource={viewModel?.bundleList} columns={columns} loading={viewModel?.isProcessing}
                    bordered={true} pagination={false} scroll={{ x: 1500 }} sticky/>
             <br/>
             <Pagination
@@ -143,13 +137,11 @@ const CompaniesList: React.FC<CompaniesSidebarProps> = inject(Stores.companiesSt
                 onShowSizeChange={pageSizeChanged}
                 showTotal={total => `Total ${total} items`}
             />
-
-            {/*<EditCompany />*/}
         </div>
     )
 }));
 
 
-export default CompaniesList;
+export default BundlesList;
 
 

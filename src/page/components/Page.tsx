@@ -37,7 +37,7 @@ const Page: React.FC<PageProps> = inject(Stores.pageStore)(observer(({pageStore,
                             {children}
                         </div>
                     </Content>
-                    <Footer style={{ textAlign: 'center' }}>{i18next.t("Authentication.Label.PetroPay")}</Footer>
+                    <Footer style={{ textAlign: 'center' }}>{i18next.t("App.Footer")}</Footer>
                 </Layout>
             </Layout>
         </div>

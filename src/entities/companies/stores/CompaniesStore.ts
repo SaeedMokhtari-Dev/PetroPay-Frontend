@@ -1,5 +1,5 @@
 import {AppStore} from "app/stores/AppStore";
-import LoginViewModel from "../../auth/login/view-models/LoginViewModel";
+import LoginViewModel from "../../../auth/login/view-models/LoginViewModel";
 import {makeAutoObservable} from "mobx";
 import EditCompanyViewModel from "../view-models/EditCompanyViewModel";
 import GetCompanyViewModel from "../view-models/GetCompanyViewModel";

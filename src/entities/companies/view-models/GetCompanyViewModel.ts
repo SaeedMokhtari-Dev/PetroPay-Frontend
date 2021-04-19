@@ -5,7 +5,7 @@ import {makeAutoObservable} from "mobx";
 import GetCompaniesRequest from "../handlers/get/GetCompaniesRequest";
 import GetCompaniesHandler from "../handlers/get/GetCompaniesHandler";
 import GetCompaniesResponse from "../handlers/get/GetCompaniesResponse";
-import {getLocalizedString} from "../../app/utils/Localization";
+import {getLocalizedString} from "../../../app/utils/Localization";
 import i18next from "i18next";
 import log from "loglevel";
 import DeleteCompanyHandler from "../handlers/delete/DeleteCompanyHandler";
@@ -41,10 +41,7 @@ export default class GetCompanyViewModel {
                 let result = response.data;
                 let items = result.items;
                 this.companyList = items;
-                console.log(this.companyList);
                 this.totalSize = result.totalCount;
-                console.log(this.totalSize);
-                //this.companyList = this.completeCompanyList;
                 this.addedSuccessfully = true;
             } else {
                 this.errorMessage = getLocalizedString(response.message);
@@ -62,7 +59,7 @@ export default class GetCompanyViewModel {
     {
         try
         {
-            debugger;
+
             this.errorMessage = "";
             let request = new DeleteCompanyRequest();
             request.companyId = key;

@@ -53,7 +53,7 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = (props) =>
     {
         if(props.allRoles || (UserContext.info && UserContext.info.role))
         {
-            return <Route {...rest} render={() => <Component {...props} />} />
+            return <Route exact {...rest} render={() => <Component {...props} />} />
         }
         else
         {

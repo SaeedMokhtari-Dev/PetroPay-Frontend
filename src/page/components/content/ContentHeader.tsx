@@ -47,14 +47,14 @@ const ContentHeader: React.FC<ContentHeaderProps> = inject(Stores.pageStore)(obs
 
     return (
         <Header className="site-layout-background" style={{ padding: 0 }}>
-            <Menu mode="horizontal" style={{float:"right"}}>
-                <SubMenu key="language" icon={<SettingOutlined />} title="Languages">
-                    <Menu.Item key="en" onClick={changeLanguage}>English</Menu.Item>
-                    <Menu.Item key="ar" onClick={changeLanguage}>Arabic</Menu.Item>
+            <Menu mode="horizontal" style={localStorage.getItem("currentLanguage") == 'en' ? {float:"right"} : {float:"left"}}>
+                <SubMenu key="language" icon={<SettingOutlined />} title={i18next.t("General.HeaderMenu.Languages")}>
+                    <Menu.Item key="en" onClick={changeLanguage}>{i18next.t("General.HeaderMenu.English")}</Menu.Item>
+                    <Menu.Item key="ar" onClick={changeLanguage}>{i18next.t("General.HeaderMenu.Arabic")}</Menu.Item>
                 </SubMenu>
-                <SubMenu key="user" icon={<UserOutlined />} title={"Hi " + UserContext.info?.name}>
-                    <Menu.Item key="profile">Profile</Menu.Item>
-                    <Menu.Item key="signOut" onClick={handleSignOut}>Sign out</Menu.Item>
+                <SubMenu key="user" icon={<UserOutlined />} title={i18next.t("General.HeaderMenu.User") + " " + UserContext.info?.name}>
+                    <Menu.Item key="profile">{i18next.t("General.HeaderMenu.Profile")}</Menu.Item>
+                    <Menu.Item key="signOut" onClick={handleSignOut}>{i18next.t("General.HeaderMenu.SignOut")}</Menu.Item>
                 </SubMenu>
             </Menu>
         </Header>

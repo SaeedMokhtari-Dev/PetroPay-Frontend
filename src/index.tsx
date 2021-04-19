@@ -49,6 +49,7 @@ ReactDOM.render(
                       adminStore={appStore.admin}
                       supplierStore={appStore.supplier}
                       companiesStore={appStore.companies}
+                      bundlesStore={appStore.bundles}
             >
                 <App />
             </Provider>

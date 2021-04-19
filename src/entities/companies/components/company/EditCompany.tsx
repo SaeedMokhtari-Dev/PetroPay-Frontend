@@ -1,7 +1,7 @@
 import React from 'react';
 import {inject, observer} from "mobx-react";
 import Stores from "app/constants/Stores";
-import CompaniesStore from "companies/stores/CompaniesStore";
+import CompaniesStore from "entities/companies/stores/CompaniesStore";
 import {useParams} from "react-router-dom";
 import {Button, Col, Divider, Form, Input, message, Modal, PageHeader, Radio, Row, Spin, Upload} from "antd";
 import i18next from "i18next";
@@ -9,15 +9,17 @@ import EditCompanyRequest from "../../handlers/edit/EditCompanyRequest";
 import DetailCompanyResponse from "../../handlers/detail/DetailCompanyResponse";
 import AddCompanyRequest from "../../handlers/add/AddCompanyRequest";
 import {
-    PlusOutlined
+    PlusOutlined, EyeInvisibleOutlined, EyeTwoTone
 } from '@ant-design/icons';
+import history from "../../../../app/utils/History";
 const {useEffect} = React;
 
 interface EditCompanyProps {
     companiesStore?: CompaniesStore;
+    match?: any;
 }
 
-const EditCompany: React.FC<EditCompanyProps> = inject(Stores.companiesStore)(observer(({companiesStore}) =>
+const EditCompany: React.FC<EditCompanyProps> = inject(Stores.companiesStore)(observer(({companiesStore, match}) =>
 {
 
 
@@ -41,8 +43,18 @@ const EditCompany: React.FC<EditCompanyProps> = inject(Stores.companiesStore)(ob
         },
     };
 
-    const onFinish = (values: any) => {
-        console.log('Received values of form: ', values);
+    async function onFinish(values: any) {
+
+        if(companyId)
+        {
+            await viewModel.editCompany(viewModel.editCompanyRequest);
+        }
+        else
+        {
+            await viewModel.addCompany(viewModel.addCompanyRequest);
+        }
+        if(!viewModel.errorMessage)
+            history.goBack();
     };
 
     useEffect(() => {
@@ -50,19 +62,18 @@ const EditCompany: React.FC<EditCompanyProps> = inject(Stores.companiesStore)(ob
         return onUnload;
     }, []);
 
-    function onLoad()
+    async function onLoad()
     {
-        debugger;
         companiesStore.onCompanyEditPageLoad();
 
-        /*debugger;
         if(match.params?.companyId)
         {
             await companiesStore.editCompanyViewModel.getDetailCompany(+match.params.companyId);
         }
         else{
             companiesStore.editCompanyViewModel.addCompanyRequest = new AddCompanyRequest();
-        }*/
+            companiesStore.editCompanyViewModel.detailCompanyResponse = new DetailCompanyResponse();
+        }
     }
 
 
@@ -71,14 +82,12 @@ const EditCompany: React.FC<EditCompanyProps> = inject(Stores.companiesStore)(ob
         companiesStore.onCompanyEditPageUnload();
     }
     function onChanged(e){
-        debugger;
         if(companyId)
             companiesStore.editCompanyViewModel.editCompanyRequest[`${e.target.id}`] = e.target.value;
         else
             companiesStore.editCompanyViewModel.addCompanyRequest[`${e.target.id}`] = e.target.value;
     }
     function resetEveryThing(){
-        debugger;
         if(companiesStore.editCompanyViewModel.key) {
             companiesStore.editCompanyViewModel.editCompanyRequest = new EditCompanyRequest();
             companiesStore.editCompanyViewModel.detailCompanyResponse = new DetailCompanyResponse();
@@ -96,7 +105,6 @@ const EditCompany: React.FC<EditCompanyProps> = inject(Stores.companiesStore)(ob
     }
 
     function beforeUpload(file) {
-        debugger;
         viewModel.uploadLoading = true;
         const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
         if (!isJpgOrPng) {
@@ -110,7 +118,15 @@ const EditCompany: React.FC<EditCompanyProps> = inject(Stores.companiesStore)(ob
         }
         getBase64(file, imageUrl => {
             viewModel.uploadLoading = false;
-            viewModel.addCompanyRequest.companyCommercialPhoto = imageUrl;
+            if(companyId){
+                viewModel.editCompanyRequest.companyCommercialPhoto = imageUrl;
+                viewModel.detailCompanyResponse.companyCommercialPhoto = imageUrl;
+                viewModel.editCompanyRequest.IsCompanyCommercialPhotoChanged = true;
+            }
+            else {
+                viewModel.detailCompanyResponse.companyCommercialPhoto = imageUrl;
+                viewModel.addCompanyRequest.companyCommercialPhoto = imageUrl;
+            }
         });
         return true;
     }
@@ -126,8 +142,7 @@ const EditCompany: React.FC<EditCompanyProps> = inject(Stores.companiesStore)(ob
             <PageHeader
                 ghost={false}
                 onBack={() => window.history.back()}
-                title={companyId ? `Edit Company with Id: ${companyId}` : "New Company"}
-                subTitle="This is a subtitle"
+                title={companyId ? `${i18next.t("Companies.Edit.HeaderText")} ${companyId}` : i18next.t("Companies.Add.HeaderText")}
             />
 
             <Divider>General Information</Divider>
@@ -136,28 +151,28 @@ const EditCompany: React.FC<EditCompanyProps> = inject(Stores.companiesStore)(ob
             /*initialValues={initialValues}*/ scrollToFirstError>
                 <Row gutter={[24, 16]}>
                     <Col span={8}>
-                <Form.Item name="companyAdminName"
-                           key={"companyAdminName"}
-                           label={i18next.t("Companies.Label.companyAdminName")}
+                <Form.Item name="companyName" initialValue={viewModel?.detailCompanyResponse?.companyName}
+                           key={"companyName"}
+                           label={i18next.t("Companies.Label.companyName")}
                            rules={[
                                {
                                    required: true,
-                                   message: i18next.t("Companies.Validation.Message.CompanyName.Required")
+                                   message: i18next.t("Companies.Validation.Message.companyName.Required")
                                }
                            ]}>
                     <Input onChange={onChanged}/>
                 </Form.Item>
                     </Col>
                     <Col span={8}>
-                <Form.Item name="companyCommercialNumber"
+                <Form.Item name="companyCommercialNumber" initialValue={viewModel?.detailCompanyResponse?.companyCommercialNumber}
                            key={"companyCommercialNumber"}
                            label={i18next.t("Companies.Label.companyCommercialNumber")}
-                           /*rules={[
+                           rules={[
                                {
                                    required: true,
                                    message: i18next.t("Companies.Validation.Message.companyCommercialNumber.Required")
                                }
-                           ]}*/>
+                           ]}>
                     <Input onChange={onChanged}/>
                 </Form.Item>
                     </Col>
@@ -176,7 +191,7 @@ const EditCompany: React.FC<EditCompanyProps> = inject(Stores.companiesStore)(ob
                 </Form.Item>
                     </Col>
                     <Col span={8}>
-                <Form.Item name="companyAdminUserName"
+                <Form.Item name="companyAdminUserName" initialValue={viewModel?.detailCompanyResponse?.companyAdminUserName}
                            key={"companyAdminUserName"}
                            label={i18next.t("Companies.Label.companyAdminUserName")}
                            rules={[
@@ -189,7 +204,7 @@ const EditCompany: React.FC<EditCompanyProps> = inject(Stores.companiesStore)(ob
                 </Form.Item>
                     </Col>
                     <Col span={8}>
-                <Form.Item name="companyAdminUserPassword"
+                <Form.Item name="companyAdminUserPassword" initialValue={viewModel?.detailCompanyResponse?.companyAdminUserPassword}
                            key={"companyAdminUserPassword"}
                            label={i18next.t("Companies.Label.companyAdminUserPassword")}
                            rules={[
@@ -198,123 +213,118 @@ const EditCompany: React.FC<EditCompanyProps> = inject(Stores.companiesStore)(ob
                                    message: i18next.t("Companies.Validation.Message.companyAdminUserPassword.Required")
                                }
                            ]}>
-                    <Input onChange={onChanged}/>
+                    <Input.Password
+                        onChange={onChanged}
+                        iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
+                    />
                 </Form.Item>
                     </Col>
                     <Col span={8}>
-                <Form.Item name="companyCountry"
+                <Form.Item name="companyCountry" initialValue={viewModel?.detailCompanyResponse?.companyCountry}
                            key={"companyCountry"}
                            label={i18next.t("Companies.Label.companyCountry")}
-                           rules={[
+                           /*rules={[
                                {
                                    required: true,
                                    message: i18next.t("Companies.Validation.Message.companyCountry.Required")
                                }
-                           ]}>
+                           ]}*/>
                     <Input onChange={onChanged}/>
                 </Form.Item>
                     </Col>
                     <Col span={8}>
-                <Form.Item name="companyRegion"
+                <Form.Item name="companyRegion" initialValue={viewModel?.detailCompanyResponse?.companyRegion}
                            key={"companyRegion"}
                            label={i18next.t("Companies.Label.companyRegion")}
-                           rules={[
+                           /*rules={[
                                {
                                    required: true,
                                    message: i18next.t("Companies.Validation.Message.companyRegion.Required")
                                }
-                           ]}>
+                           ]}*/>
                     <Input onChange={onChanged}/>
                 </Form.Item>
                     </Col>
                     <Col span={8}>
-                <Form.Item name="companyRegion"
-                           key={"companyRegion"}
+                <Form.Item name="companyAddress" initialValue={viewModel?.detailCompanyResponse?.companyAddress}
+                           key={"companyAddress"}
                            label={i18next.t("Companies.Label.companyAddress")}
-                           rules={[
+                           /*rules={[
                                {
                                    required: true,
                                    message: i18next.t("Companies.Validation.Message.companyAddress.Required")
                                }
-                           ]}>
+                           ]}*/>
                     <Input onChange={onChanged}/>
                 </Form.Item>
                     </Col>
                     <Col span={8}>
-                <Form.Item name="companyAdminName"
+                <Form.Item name="companyAdminName" initialValue={viewModel?.detailCompanyResponse?.companyAdminName}
                            key={"companyAdminName"}
                            label={i18next.t("Companies.Label.companyAdminName")}
-                           rules={[
+                           /*rules={[
                                {
                                    required: true,
                                    message: i18next.t("Companies.Validation.Message.companyAdminName.Required")
                                }
-                           ]}>
+                           ]}*/>
                     <Input onChange={onChanged}/>
                 </Form.Item>
                     </Col>
                     <Col span={8}>
-                <Form.Item name="companyAdminPosition"
+                <Form.Item name="companyAdminPosition" initialValue={viewModel?.detailCompanyResponse?.companyAdminPosition}
                            key={"companyAdminPosition"}
                            label={i18next.t("Companies.Label.companyAdminPosition")}
-                           rules={[
+                           /*rules={[
                                {
                                    required: true,
                                    message: i18next.t("Companies.Validation.Message.companyAdminPosition.Required")
                                }
-                           ]}>
+                           ]}*/>
                     <Input onChange={onChanged}/>
                 </Form.Item>
                     </Col>
                     <Col span={8}>
-                <Form.Item name="companyAdminPhone"
+                <Form.Item name="companyAdminPhone" initialValue={viewModel?.detailCompanyResponse?.companyAdminPhone}
                            key={"companyAdminPhone"}
                            label={i18next.t("Companies.Label.companyAdminPhone")}
-                           rules={[
+                           /*rules={[
                                {
                                    required: true,
                                    message: i18next.t("Companies.Validation.Message.companyAdminPhone.Required")
                                }
-                           ]}>
+                           ]}*/>
                     <Input onChange={onChanged}/>
                 </Form.Item>
                     </Col>
                     <Col span={8}>
-                <Form.Item name="companyAdminEmail"
+                <Form.Item name="companyAdminEmail" initialValue={viewModel?.detailCompanyResponse?.companyAdminEmail}
                            key={"companyAdminEmail"}
                            label={i18next.t("Companies.Label.companyAdminEmail")}
-                           rules={[
+                           /*rules={[
                                {
                                    required: true,
                                    message: i18next.t("Companies.Validation.Message.companyAdminEmail.Required")
                                }
-                           ]}>
-                    <Input onChange={onChanged}/>
+                           ]}*/>
+                    <Input type={"email"} onChange={onChanged}/>
                 </Form.Item>
                     </Col>
                     <Col span={8}>
-                <Form.Item name="companyBalnce"
+                <Form.Item name="companyBalnce" initialValue={viewModel?.detailCompanyResponse?.companyBalnce}
                            key={"companyBalnce"}
                            label={i18next.t("Companies.Label.companyBalnce")}
-                           rules={[
+                           /*rules={[
                                {
                                    required: true,
                                    message: i18next.t("Companies.Validation.Message.companyBalnce.Required")
                                }
-                           ]}>
-                    <Input onChange={onChanged}/>
+                           ]}*/>
+                    <Input type={"number"} onChange={onChanged}/>
                 </Form.Item>
                     </Col>
-                    <Divider>Upload File</Divider>
-                    <Col span={8}>
-                        <Form.Item name="companyCommercialPhoto" key={"companyCommercialPhoto"} valuePropName="fileList"
-                                   label={i18next.t("Companies.Label.companyCommercialPhoto")}
-                            /*rules={[
-                                {
-                                    required: true,
-                                    message: i18next.t("Companies.Validation.Message.companyCommercialNumber.Required")
-                                }
-                            ]}*/>
+                    <Divider>{i18next.t("Companies.Label.companyCommercialPhoto")}</Divider>
+                    <Col offset={8} span={8}>
                             <Upload
                                 key={"uploader"}
                                 listType="picture-card"
@@ -322,23 +332,21 @@ const EditCompany: React.FC<EditCompanyProps> = inject(Stores.companiesStore)(ob
 
                                 beforeUpload={beforeUpload}
                             >
-                                {viewModel?.addCompanyRequest?.companyCommercialPhoto ?
-                                    <img src={viewModel?.addCompanyRequest?.companyCommercialPhoto} alt="logo"
+                                {viewModel?.detailCompanyResponse?.companyCommercialPhoto ?
+                                    <img src={viewModel?.detailCompanyResponse?.companyCommercialPhoto} alt="logo"
                                          style={{width: '100%'}}/> : uploadButton}
                             </Upload>
-                        </Form.Item>
                     </Col>
                 </Row>
+                <Divider></Divider>
                 {viewModel.errorMessage && (
                     <div className='response-error-msg'>{viewModel.errorMessage}</div>
                 )}
                     <PageHeader
                         ghost={false}
-                        title="Company"
-                        subTitle="This is a subtitle"
                         extra={[
-                            <Button type="primary" loading={viewModel.isProcessing} key="submit" htmlType="submit">
-                                {i18next.t("Authentication.Button.Login")}
+                            <Button type="primary" loading={viewModel.isProcessing} key="submit" size={"large"} htmlType="submit">
+                                {i18next.t("General.Add.SaveButton")}
                             </Button>
                         ]}
                     />

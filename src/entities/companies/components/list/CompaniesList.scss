@@ -1,0 +1,18 @@
+@import '../../../../app/styles/style';
+
+.ant-dropdown {
+  z-index: 100;
+}
+
+.actionMenuClass{
+  z-index: 9999;
+}
+
+.editFilled{
+  color: #13c2c2;
+  cursor: pointer;
+}
+.deleteFilled{
+  color: red;
+  cursor: pointer;
+}

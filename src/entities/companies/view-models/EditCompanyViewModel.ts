@@ -1,8 +1,8 @@
-import CompaniesStore from "companies/stores/CompaniesStore";
+import CompaniesStore from "entities/companies/stores/CompaniesStore";
 import {makeAutoObservable} from "mobx";
 import DetailCompanyResponse from "../handlers/detail/DetailCompanyResponse";
 import GetCompaniesHandler from "../handlers/get/GetCompaniesHandler";
-import {getLocalizedString} from "../../app/utils/Localization";
+import {getLocalizedString} from "../../../app/utils/Localization";
 import i18next from "i18next";
 import log from "loglevel";
 import DetailCompanyHandler from "../handlers/detail/DetailCompanyHandler";
@@ -12,6 +12,7 @@ import EditCompanyRequest from "../handlers/edit/EditCompanyRequest";
 import AddCompanyHandler from "../handlers/add/AddCompanyHandler";
 import {message} from "antd";
 import GetCompaniesRequest from "../handlers/get/GetCompaniesRequest";
+import EditCompanyHandler from "../handlers/edit/EditCompanyHandler";
 
 export default class EditCompanyViewModel
 {
@@ -31,7 +32,8 @@ export default class EditCompanyViewModel
     {
         try
         {
-            debugger;
+
+            this.errorMessage = "";
             this.isProcessing = true;
 
             let request = new DetailCompanyRequest(companyId);
@@ -39,7 +41,7 @@ export default class EditCompanyViewModel
 
             if(response && response.success)
             {
-                debugger;
+
                 this.detailCompanyResponse = new DetailCompanyResponse().deserialize(response.data);
                 this.editCompanyRequest = new EditCompanyRequest();
                 for ( let i in this.editCompanyRequest )
@@ -67,6 +69,7 @@ export default class EditCompanyViewModel
     {
         try
         {
+            this.errorMessage = "";
             this.isProcessing = true;
 
             let response = await AddCompanyHandler.add(request);
@@ -74,7 +77,7 @@ export default class EditCompanyViewModel
             if(response && response.success)
             {
                 message.success(getLocalizedString(response.message));
-                await this.companiesStore.getCompanyViewModel.getAllCompanies(new GetCompaniesRequest(20, 0));
+                /*await this.companiesStore.getCompanyViewModel.getAllCompanies(new GetCompaniesRequest(20, 0));*/
             }
             else{
                 this.errorMessage = getLocalizedString(response.message);
@@ -83,6 +86,34 @@ export default class EditCompanyViewModel
         catch(e)
         {
             this.errorMessage = i18next.t('Companies.Error.Add.Message');
+            log.error(e);
+        }
+        finally
+        {
+            this.isProcessing = false;
+        }
+    }
+    public async editCompany(request: EditCompanyRequest)
+    {
+        try
+        {
+            this.errorMessage = "";
+            this.isProcessing = true;
+
+            let response = await EditCompanyHandler.edit(request);
+
+            if(response && response.success)
+            {
+                message.success(getLocalizedString(response.message));
+                /*await this.companiesStore.getCompanyViewModel.getAllCompanies(new GetCompaniesRequest(20, 0));*/
+            }
+            else{
+                this.errorMessage = getLocalizedString(response.message);
+            }
+        }
+        catch(e)
+        {
+            this.errorMessage = i18next.t('Companies.Error.Edit.Message');
             log.error(e);
         }
         finally

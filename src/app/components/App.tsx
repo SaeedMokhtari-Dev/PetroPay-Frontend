@@ -18,11 +18,13 @@ import ProtectedRedirectRoute from "app/components/routes/ProtectedRedirectRoute
 import Page from "page/components/Page";
 import RoleType from "identity/constants/RoleType";
 import Dashboard from "app/components/common/Dashboard";
-import EditCompany from "companies/components/company/EditCompany";
-import CompaniesList from "../../companies/components/list/CompaniesList";
+import EditCompany from "entities/companies/components/company/EditCompany";
+import CompaniesList from "../../entities/companies/components/list/CompaniesList";
 import en_US from 'antd/lib/locale/en_US';
 import ar_EG from 'antd/lib/locale/ar_EG';
 import {DirectionType} from "antd/es/config-provider";
+import BundlesList from "../../entities/bundles/components/list/BundlesList";
+import EditBundle from "../../entities/bundles/components/bundle/EditBundle";
 
 const App: React.FC = () =>
 {
@@ -62,6 +64,10 @@ const App: React.FC = () =>
                                     <Route exact roles={[RoleType.admin]} path={Routes.company} component={CompaniesList} />
                                     <Route exact roles={[RoleType.admin]} path={Routes.editCompany} component={EditCompany} />
                                     <Route exact roles={[RoleType.admin]} path={Routes.addCompany} component={EditCompany} />
+
+                                    <Route exact roles={[RoleType.admin]} path={Routes.bundle} component={BundlesList} />
+                                    <Route exact roles={[RoleType.admin]} path={Routes.editBundle} component={EditBundle} />
+                                    <Route exact roles={[RoleType.admin]} path={Routes.addBundle} component={EditBundle} />
 
                                     {/* Admin */}
 

@@ -7,6 +7,8 @@ import i18next from "i18next";
 import {withTranslation} from "react-i18next";
 import Routes from "app/constants/Routes";
 import { Link } from "react-router-dom";
+import history from "../../../app/utils/History";
+import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 
 interface LoginProps {
     authStore?: AuthStore
@@ -60,12 +62,13 @@ const Login: React.FC<LoginProps> = inject('authStore')(observer(({authStore}) =
 
     const optionsWithDisabled = [
         { label: 'English', value: 'en' },
-        { label: 'Arabic', value: 'ar'}
+        { label: 'Arabic', value: 'ar' }
     ];
 
     function onLanguageChanged(e) {
         i18next.changeLanguage(e.target.value);
         localStorage.setItem("currentLanguage", e.target.value);
+        history.go(0);
     }
     return (
         <div className="container">
@@ -102,7 +105,11 @@ const Login: React.FC<LoginProps> = inject('authStore')(observer(({authStore}) =
                                        message: i18next.t("Authentication.Validation.Message.Password.Required")
                                    }
                                ]}>
-                        <Input.Password onChange={onPasswordChanged} className="text-input"/>
+                        <Input.Password
+                            iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
+                            onChange={onPasswordChanged}
+                            className="text-input"
+                        />
                     </Form.Item>
                     {viewModel.errorMessage && (
                         <div className='response-error-msg'>{viewModel.errorMessage}</div>
@@ -117,7 +124,7 @@ const Login: React.FC<LoginProps> = inject('authStore')(observer(({authStore}) =
                 <br/>
                 <br/>
                 <br/>
-                <Radio.Group
+                <Radio.Group value={localStorage.getItem('currentLanguage')}
                     options={optionsWithDisabled}
                     onChange={onLanguageChanged}
                     optionType="button"

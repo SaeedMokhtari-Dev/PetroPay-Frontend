@@ -1,4 +1,4 @@
-import IDeserialize from "../../../app/interfaces/deserialize";
+import IDeserialize from "../../../../app/interfaces/deserialize";
 import {makeAutoObservable} from "mobx";
 
 export default class CompanyItem implements IDeserialize
