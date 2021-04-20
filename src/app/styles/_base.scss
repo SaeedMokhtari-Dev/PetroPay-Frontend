@@ -1,8 +1,21 @@
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700");
 @import "colors";
 
-body {
+@font-face {font-family: "Nassim";
+  src: url("//db.onlinewebfonts.com/t/29e9a3f5cf847428382058f505969b17.eot");
+  src: url("//db.onlinewebfonts.com/t/29e9a3f5cf847428382058f505969b17.eot?#iefix") format("embedded-opentype"),
+  url("//db.onlinewebfonts.com/t/29e9a3f5cf847428382058f505969b17.woff2") format("woff2"),
+  url("//db.onlinewebfonts.com/t/29e9a3f5cf847428382058f505969b17.woff") format("woff"),
+  url("//db.onlinewebfonts.com/t/29e9a3f5cf847428382058f505969b17.ttf") format("truetype"),
+  url("//db.onlinewebfonts.com/t/29e9a3f5cf847428382058f505969b17.svg#Nassim") format("svg"); }
+
+[dir=ltr] body {
   font-family: "Open Sans", "Helvetica Neue", sans-serif;
+  font-size: 13px;
+  color: $foreground;
+}
+[dir=rtl] body {
+  font-family: "Nassim", "Helvetica Neue", sans-serif;
   font-size: 13px;
   color: $foreground;
 }

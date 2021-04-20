@@ -87,7 +87,7 @@ const Sidebar: React.FC<SidebarProps> = inject(Stores.pageStore)(observer(({page
     return (
         <Sider collapsible collapsed={pageStore?.isSidebarCollapsed} onCollapse={toggle}>
             <div className="logo" >
-                <img src="/images/petro-pay-logo1.png" hidden={pageStore?.isSidebarCollapsed} width={150} height={100} alt="logo"/>
+                <img src="/images/petro-pay-logo.png" hidden={pageStore?.isSidebarCollapsed} width={150} height={100} alt="logo"/>
             </div>
             {UserContext.info.role == RoleType.customer ? customerMenu : ""}
             {UserContext.info.role == RoleType.supplier ? supplierMenu : ""}

@@ -145,7 +145,7 @@ const EditCompany: React.FC<EditCompanyProps> = inject(Stores.companiesStore)(ob
                 title={companyId ? `${i18next.t("Companies.Edit.HeaderText")} ${companyId}` : i18next.t("Companies.Add.HeaderText")}
             />
 
-            <Divider>General Information</Divider>
+            <Divider>{i18next.t("Companies.Section.GeneralInformation")}</Divider>
             <Form {...formItemLayout} layout={"vertical"} onFinish={onFinish} form={form}
                   key={"companyForm"}
             /*initialValues={initialValues}*/ scrollToFirstError>
@@ -198,6 +198,10 @@ const EditCompany: React.FC<EditCompanyProps> = inject(Stores.companiesStore)(ob
                                {
                                    required: true,
                                    message: i18next.t("Companies.Validation.Message.companyAdminUserName.Required")
+                               },
+                               {
+                                   pattern: /^\S*$/,
+                                   message: i18next.t("Companies.Validation.Message.companyAdminUserName.Valid"),
                                }
                            ]}>
                     <Input onChange={onChanged}/>

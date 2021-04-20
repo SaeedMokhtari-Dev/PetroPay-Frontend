@@ -23,13 +23,19 @@
   "General.Reload.Application": "Reload the application",
 
   "Dashboard.Menu.Title": "Dashboard",
+  "Dashboard.Admin.Title": "Admin Dashboard",
+  "Dashboard.Supplier.Title": "Supplier Dashboard",
+  "Dashboard.Customer.Title": "Customer Dashboard",
 
   "Authentication.Label.PetroPay": "PetroPay",
   "Authentication.Label.Authentication": "Authentication",
-  "Authentication.Validation.Message.RoleType.Required": "Please enter your Role",
+  "Authentication.Validation.Message.RoleType.Required": "Please enter your User Type",
   "Authentication.Validation.Message.Username.Required": "Please enter your Username",
   "Authentication.Validation.Message.Password.Required": "Please enter your password",
-  "Authentication.Label.RoleType": "Role",
+  "Authentication.Label.RoleType": "UserType",
+  "Authentication.RoleType.Customer": "Customer",
+  "Authentication.RoleType.Supplier": "Supplier",
+  "Authentication.RoleType.Admin": "Admin",
   "Authentication.Label.Username": "Username",
   "Authentication.Label.Password": "Password",
   "Authentication.Button.Login": "Login",
@@ -62,11 +68,13 @@
 
   "Companies.Add.HeaderText": "Add Company",
   "Companies.Edit.HeaderText": "Edit Company with Id:",
+  "Companies.Section.GeneralInformation": "General Information",
 
   "Companies.Validation.Message.companyName.Required": "Please enter company name",
   "Companies.Validation.Message.companyCommercialNumber.Required": "Please enter commercial number",
   "Companies.Validation.Message.companyType.Required": "Please enter company type",
   "Companies.Validation.Message.companyAdminUserName.Required": "Please enter company admin username",
+  "Companies.Validation.Message.companyAdminUserName.Valid": "Please enter a valid Username",
   "Companies.Validation.Message.companyAdminUserPassword.Required": "Please enter company admin password",
 
   "Api.Company.Add.Successful": "A new company added successfully",

@@ -62,7 +62,7 @@ const Login: React.FC<LoginProps> = inject('authStore')(observer(({authStore}) =
 
     const optionsWithDisabled = [
         { label: 'English', value: 'en' },
-        { label: 'Arabic', value: 'ar' }
+        { label: 'عربي', value: 'ar' }
     ];
 
     function onLanguageChanged(e) {
@@ -84,9 +84,9 @@ const Login: React.FC<LoginProps> = inject('authStore')(observer(({authStore}) =
                 <Form layout="vertical" onFinish={onFinish} >
                     <Form.Item initialValue={viewModel.roleType} name="roleType" label={i18next.t("Authentication.Label.RoleType")} required={false}>
                         <Radio.Group onChange={onRoleTypeChanged} defaultValue={1}>
-                            <Radio value={1}>Customer</Radio>
-                            <Radio value={10}>Supplier</Radio>
-                            <Radio value={100}>Admin</Radio>
+                            <Radio value={1}>{i18next.t("Authentication.RoleType.Customer")}</Radio>
+                            <Radio value={10}>{i18next.t("Authentication.RoleType.Supplier")}</Radio>
+                            <Radio value={100}>{i18next.t("Authentication.RoleType.Admin")}</Radio>
                         </Radio.Group>
                     </Form.Item>
                     <Form.Item initialValue={viewModel.username} name="username" label={i18next.t("Authentication.Label.Username")} required={false}
