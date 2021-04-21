@@ -25,6 +25,8 @@ import ar_EG from 'antd/lib/locale/ar_EG';
 import {DirectionType} from "antd/es/config-provider";
 import BundlesList from "../../entities/bundles/components/list/BundlesList";
 import EditBundle from "../../entities/bundles/components/bundle/EditBundle";
+import BranchList from "../../entities/branches/components/list/BranchList";
+import EditBranch from "../../entities/branches/components/branch/EditBranch";
 
 const App: React.FC = () =>
 {
@@ -68,6 +70,10 @@ const App: React.FC = () =>
                                     <Route exact roles={[RoleType.admin]} path={Routes.bundle} component={BundlesList} />
                                     <Route exact roles={[RoleType.admin]} path={Routes.editBundle} component={EditBundle} />
                                     <Route exact roles={[RoleType.admin]} path={Routes.addBundle} component={EditBundle} />
+
+                                    <Route exact roles={[RoleType.customer]} path={Routes.branch} component={BranchList} />
+                                    <Route exact roles={[RoleType.customer]} path={Routes.editBranch} component={EditBranch} />
+                                    <Route exact roles={[RoleType.customer]} path={Routes.addBranch} component={EditBranch} />
 
                                     {/* Admin */}
 

@@ -50,6 +50,7 @@ ReactDOM.render(
                       supplierStore={appStore.supplier}
                       companiesStore={appStore.companies}
                       bundlesStore={appStore.bundles}
+                      branchStore={appStore.branch}
             >
                 <App />
             </Provider>

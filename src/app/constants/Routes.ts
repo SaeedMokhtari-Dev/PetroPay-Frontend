@@ -13,6 +13,11 @@ export default
     editCompany: "/app/company/edit/:companyId",
     addCompany: "/app/company/add",
 
+    // Company
+    branch: "/app/branch",
+    editBranch: "/app/branch/edit/:branchId",
+    addBranch: "/app/branch/add",
+
     //Bundle
     bundle: "/app/bundle",
     editBundle: "/app/bundle/edit/:bundleId",

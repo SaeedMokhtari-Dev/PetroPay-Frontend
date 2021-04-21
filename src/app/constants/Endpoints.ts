@@ -15,6 +15,12 @@ export default
     apiCompanyDetail: "/api/company/detail",
     apiCompanyDelete: "/api/company/delete",
 
+    apiBranchAdd: "/api/branch/add",
+    apiBranchEdit: "/api/branch/edit",
+    apiBranchGet: "/api/branch/get",
+    apiBranchDetail: "/api/branch/detail",
+    apiBranchDelete: "/api/branch/delete",
+
     apiBundleAdd: "/api/bundle/add",
     apiBundleEdit: "/api/bundle/edit",
     apiBundleGet: "/api/bundle/get",

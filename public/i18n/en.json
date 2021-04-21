@@ -121,5 +121,44 @@
   "Api.Resource.Not.Found": "The specified resource was not found",
   "Api.Invalid.Request": "Invalid request",
   "Api.Forbidden": "Forbidden",
-  "Api.Auth.MinPasswordLengthError": "The minimum password length is 8 characters"
+  "Api.Auth.MinPasswordLengthError": "The minimum password length is 8 characters",
+
+
+  "Branches.Menu.Title": "Branches",
+  "Branches.Page.Title": "Branches",
+  "Branches.Page.SubTitle": "This page is for define branches",
+  "Branches.Label.key": "key",
+  "Branches.Label.companyId": "Company Id",
+  "Branches.Label.companyBranchName": "Name",
+  "Branches.Label.companyBranchNumberOfcar": "Number of car",
+  "Branches.Label.companyBranchAddress": "Address",
+  "Branches.Label.companyBranchActiva": "Active?",
+  "Branches.Label.companyBranchBalnce": "Balance",
+  "Branches.Label.companyBranchAdminName": "Admin Name",
+  "Branches.Label.companyBranchAdminUserName": "Admin User Name",
+  "Branches.Label.companyBranchAdminPhone": "Admin Phone",
+  "Branches.Label.companyBranchAdminUserPassword": "Admin User Password",
+  "Branches.Label.companyBranchAdminEmail": "Admin Email",
+
+  "Branches.Add.HeaderText": "Add Branch",
+  "Branches.Edit.HeaderText": "Edit Branch with Id:",
+  "Branches.Section.GeneralInformation": "General Information",
+
+  "Branches.Validation.Message.companyBranchName.Required": "Please enter branch name",
+  "Branches.Validation.Message.companyBranchNumberOfcar.Required": "Please enter branch number of car",
+  "Branches.Validation.Message.companyBranchAddress.Required": "Please enter branch address",
+  "Branches.Validation.Message.companyBranchAdminUserName.Required": "Please enter branch admin username",
+  "Branches.Validation.Message.companyBranchAdminUserName.Valid": "Please enter a valid Username",
+  "Branches.Validation.Message.companyBranchAdminUserPassword.Required": "Please enter branch admin password",
+  "Branches.Validation.Message.companyBranchAdminEmail.Valid": "Please enter a valid Email",
+
+  "Api.Branch.Add.Successful": "A new branch added successfully",
+  "Api.Branch.Edit.Successful": "selected branch edited successfully",
+  "Api.Branch.Deleted.Successful": "selected branch deleted successfully",
+
+  "Branches.Error.Get.Message": "An error has occurred while trying to get branches list.",
+  "Branches.Error.Detail.Message": "An error has occurred while trying to get branch details.",
+  "Branches.Error.Add.Message": "An error has occurred while trying to add new branch.",
+  "Branches.Error.Edit.Message": "An error has occurred while trying to edit branch.",
+  "Branches.Error.Delete.Message": "An error has occurred while trying to delete branch."
 }

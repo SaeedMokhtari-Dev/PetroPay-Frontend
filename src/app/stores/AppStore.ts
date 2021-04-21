@@ -5,6 +5,7 @@ import CompaniesStore from "entities/companies/stores/CompaniesStore";
 import CustomerStore from "../../customer/stores/CustomerStore";
 import SupplierStore from "../../supplier/stores/SupplierStore";
 import BundlesStore from "../../entities/bundles/stores/BundlesStore";
+import BranchStore from "../../entities/branches/stores/BranchStore";
 
 export class AppStore
 {
@@ -15,6 +16,7 @@ export class AppStore
     supplier: SupplierStore;
     companies: CompaniesStore;
     bundles: BundlesStore;
+    branch: BranchStore;
 
     constructor()
     {
@@ -25,5 +27,6 @@ export class AppStore
         this.supplier = new SupplierStore(this);
         this.companies = new CompaniesStore(this);
         this.bundles = new BundlesStore(this);
+        this.branch = new BranchStore(this);
     }
 }
