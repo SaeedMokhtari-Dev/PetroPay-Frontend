@@ -41,6 +41,9 @@ const Sidebar: React.FC<SidebarProps> = inject(Stores.pageStore)(observer(({page
         <Menu.Item key="3" icon={<ShopOutlined />}>
             <Link to={Routes.bundle}>{i18next.t('Bundles.Menu.Title')}</Link>
         </Menu.Item>
+        <Menu.Item key="4" icon={<ShopOutlined />}>
+            <Link to={Routes.petroStation}>{i18next.t('PetroStations.Menu.Title')}</Link>
+        </Menu.Item>
         {/*<Menu.Item key="2" icon={<DesktopOutlined />}>
             Option 2
         </Menu.Item>
@@ -69,9 +72,9 @@ const Sidebar: React.FC<SidebarProps> = inject(Stores.pageStore)(observer(({page
         <Menu.Item key="1" icon={<DashboardOutlined />}>
             <Link to={Routes.app}>{i18next.t('Dashboard.Menu.Title')}</Link>
         </Menu.Item>
-        {/*<Menu.Item key="1" icon={<ShopOutlined />}>
-            <Link to={Routes.company}>{i18next.t('Companies.Menu.Title')}</Link>
-        </Menu.Item>*/}
+        <Menu.Item key="2" icon={<ShopOutlined />}>
+            <Link to={Routes.stationUser}>{i18next.t('StationUsers.Menu.Title')}</Link>
+        </Menu.Item>
     </Menu>)
     async function onLoad() {
     }

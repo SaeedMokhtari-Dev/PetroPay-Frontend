@@ -57,4 +57,15 @@ export default class LoginViewModel
             this.isProcessing = false;
         }
     }
+    public getRoleTitle() {
+        switch (this.roleType){
+            case 1:
+                return "Customer";
+            case 10:
+                return "Supplier";
+            case 100:
+                return "Admin";
+
+        }
+    }
 }

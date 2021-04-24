@@ -6,6 +6,8 @@ import CustomerStore from "../../customer/stores/CustomerStore";
 import SupplierStore from "../../supplier/stores/SupplierStore";
 import BundlesStore from "../../entities/bundles/stores/BundlesStore";
 import BranchStore from "../../entities/branches/stores/BranchStore";
+import PetroStationStore from "../../entities/petro-stations/stores/PetroStationStore";
+import StationUserStore from "../../entities/station-users/stores/StationUserStore";
 
 export class AppStore
 {
@@ -17,6 +19,8 @@ export class AppStore
     companies: CompaniesStore;
     bundles: BundlesStore;
     branch: BranchStore;
+    petroStation: PetroStationStore;
+    stationUser: StationUserStore;
 
     constructor()
     {
@@ -28,5 +32,7 @@ export class AppStore
         this.companies = new CompaniesStore(this);
         this.bundles = new BundlesStore(this);
         this.branch = new BranchStore(this);
+        this.petroStation = new PetroStationStore(this);
+        this.stationUser = new StationUserStore(this);
     }
 }

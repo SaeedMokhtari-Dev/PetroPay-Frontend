@@ -13,7 +13,17 @@ export default
     editCompany: "/app/company/edit/:companyId",
     addCompany: "/app/company/add",
 
-    // Company
+    // PetroStation
+    petroStation: "/app/petroStation",
+    editPetroStation: "/app/petroStation/edit/:petroStationId",
+    addPetroStation: "/app/petroStation/add",
+
+    // PetroStation
+    stationUser: "/app/stationUser",
+    editStationUser: "/app/stationUser/edit/:stationUserId",
+    addStationUser: "/app/stationUser/add",
+
+    // Branch
     branch: "/app/branch",
     editBranch: "/app/branch/edit/:branchId",
     addBranch: "/app/branch/add",

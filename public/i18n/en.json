@@ -40,10 +40,31 @@
   "Authentication.Label.Password": "Password",
   "Authentication.Button.Login": "Login",
   "Authentication.Error.AuthFailed": "An error has occurred while trying to authenticate.",
+  "Authentication.Link.ForgotPassword": "Forgot your password?",
   "Api.Auth.Invalid.Credentials": "Username or Password is wrong.",
+
+  "ResetPassword.Label.ResetPassword": "Reset Password",
+  "ResetPassword.Link.BackToLogin": "Back to Login",
+  "ResetPassword.Button.ResetPassword": "Reset Password",
+  "ResetPassword.Alert.EmailSentSuccessfully": "A link successfully sent to your email, please click on it to reset your password",
+  "ResetPassword.Error.ResetPasswordFailed": "An error has occurred while trying to reset password.",
+
+  "Api.Auth.ResetPassword.Response": "If the information entered is associated with an account, we have sent you an email with password reset instructions.",
+
+  "ChangePassword.Label.ChangePassword": "Change Password",
+  "ChangePassword.Button.ChangePassword": "Change Password",
+  "ChangePassword.Error.ChangePasswordFailed": "An error has occurred while trying to change password.",
+  "ChangePassword.Label.NewPassword": "New Password",
+  "ChangePassword.Label.ConfirmPassword": "Confirm Password",
+  "ChangePassword.Validation.Message.NewPassword.Required": "Please enter your new password",
+  "ChangePassword.Validation.Message.ConfirmPassword.Required": "Please enter your confirm password",
+  "ChangePassword.Token.Validation.Message": "Please wait, validating your request ...",
 
   "Api.Auth.ValidateResetPasswordToken.InvalidToken": "Token is invalid or outdated.",
   "Api.Auth.ValidateResetPasswordToken.ValidToken": "Token is valid.",
+
+  "Api.Auth.ChangePassword.NotEqualPasswords": "Password and confirm password are not equals",
+  "Api.Auth.ChangePassword.Successful": "Password Changed Successfully",
 
 
   "Companies.Menu.Title": "Companies",
@@ -80,14 +101,13 @@
   "Api.Company.Add.Successful": "A new company added successfully",
   "Api.Company.Edit.Successful": "selected company edited successfully",
   "Api.Company.Deleted.Successful": "selected company deleted successfully",
+  "Api.Company.Id.Required": "Id is Required",
 
   "Companies.Error.Get.Message": "An error has occurred while trying to get companies list.",
   "Companies.Error.Detail.Message": "An error has occurred while trying to get company details.",
   "Companies.Error.Add.Message": "An error has occurred while trying to add new company.",
   "Companies.Error.Edit.Message": "An error has occurred while trying to edit company.",
   "Companies.Error.Delete.Message": "An error has occurred while trying to delete company.",
-
-
 
   "Bundles.Menu.Title": "Bundles",
   "Bundles.Page.Title": "Bundles",
@@ -109,6 +129,7 @@
   "Api.Bundle.Add.Successful": "A new bundle added successfully",
   "Api.Bundle.Edit.Successful": "selected bundle edited successfully",
   "Api.Bundle.Deleted.Successful": "selected bundle deleted successfully",
+  "Api.Bundle.Id.Required": "Id is Required",
 
   "Bundles.Error.Get.Message": "An error has occurred while trying to get bundles list.",
   "Bundles.Error.Detail.Message": "An error has occurred while trying to get bundle details.",
@@ -155,10 +176,83 @@
   "Api.Branch.Add.Successful": "A new branch added successfully",
   "Api.Branch.Edit.Successful": "selected branch edited successfully",
   "Api.Branch.Deleted.Successful": "selected branch deleted successfully",
+  "Api.Branch.CompanyId.Required": "CompanyId is Required",
+  "Api.Branch.Id.Required": "Id is Required",
 
   "Branches.Error.Get.Message": "An error has occurred while trying to get branches list.",
   "Branches.Error.Detail.Message": "An error has occurred while trying to get branch details.",
   "Branches.Error.Add.Message": "An error has occurred while trying to add new branch.",
   "Branches.Error.Edit.Message": "An error has occurred while trying to edit branch.",
-  "Branches.Error.Delete.Message": "An error has occurred while trying to delete branch."
+  "Branches.Error.Delete.Message": "An error has occurred while trying to delete branch.",
+
+  "PetroStations.Menu.Title": "PetroStations",
+  "PetroStations.Page.Title": "PetroStations",
+  "PetroStations.Page.SubTitle": "This page is for define petroStations",
+  "PetroStations.Label.key": "key",
+  "PetroStations.Label.stationId": "Station Id",
+  "PetroStations.Label.stationName": "Name",
+  "PetroStations.Label.stationAddress": "Address",
+  "PetroStations.Label.stationLucationName": "Location Name",
+  "PetroStations.Label.stationOwnerName": "Owner Name",
+  "PetroStations.Label.stationPhone": "Phone",
+  "PetroStations.Label.stationBanckAccount": "Bank Account",
+  "PetroStations.Label.stationLatitude": "Latitude",
+  "PetroStations.Label.stationLongitude": "Longitude",
+  "PetroStations.Label.stationUserName": "User Name",
+  "PetroStations.Label.stationPassword": "Password",
+  "PetroStations.Label.stationNameAr": "Name Ar",
+  "PetroStations.Label.stationDiesel": "Diesel",
+  "PetroStations.Label.stationBalance": "Balance",
+
+  "PetroStations.Add.HeaderText": "Add PetroStation",
+  "PetroStations.Edit.HeaderText": "Edit PetroStation with Id:",
+  "PetroStations.Section.GeneralInformation": "General Information",
+
+  "PetroStations.Validation.Message.stationName.Required": "Please enter station name",
+  "PetroStations.Validation.Message.stationAddress.Required": "Please enter station address",
+  "PetroStations.Validation.Message.stationLucationName.Required": "Please enter station Location Name",
+  "PetroStations.Validation.Message.stationOwnerName.Required": "Please enter station Owner Name",
+  "PetroStations.Validation.Message.stationUserName.Valid": "Please enter a valid Username",
+  "PetroStations.Validation.Message.stationUserName.Required": "Please enter station username",
+  "PetroStations.Validation.Message.stationPassword.Required": "Please enter station password",
+
+  "Api.PetroStation.Add.Successful": "A new petroStation added successfully",
+  "Api.PetroStation.Edit.Successful": "selected petroStation edited successfully",
+  "Api.PetroStation.Deleted.Successful": "selected petroStation deleted successfully",
+  "Api.PetroStation.Id.Required": "Id is Required",
+
+
+  "StationUsers.Menu.Title": "StationUsers",
+  "StationUsers.Page.Title": "StationUsers",
+  "StationUsers.Page.SubTitle": "This page is for define stationUsers",
+  "StationUsers.Label.key": "key",
+  "StationUsers.Label.stationWorkerId": "Id",
+  "StationUsers.Label.stationWorkerFname": "FName",
+  "StationUsers.Label.stationWorkerPhone": "Phone",
+  "StationUsers.Label.stationUserName": "User Name",
+  "StationUsers.Label.stationUserPassword": "Password",
+  "StationUsers.Label.stationId": "stationId",
+
+
+  "StationUsers.Add.HeaderText": "Add StationUser",
+  "StationUsers.Edit.HeaderText": "Edit StationUser with Id:",
+  "StationUsers.Section.GeneralInformation": "General Information",
+
+  "StationUsers.Validation.Message.stationWorkerFname.Required": "Please enter station Worker Fname",
+  "StationUsers.Validation.Message.stationWorkerPhone.Required": "Please enter station Worker Phone",
+  "StationUsers.Validation.Message.stationUserName.Valid": "Please enter a valid Username",
+  "StationUsers.Validation.Message.stationUserName.Required": "Please enter station username",
+  "StationUsers.Validation.Message.stationUserPassword.Required": "Please enter station password",
+
+  "Api.StationUser.Add.Successful": "A new stationUser added successfully",
+  "Api.StationUser.Edit.Successful": "selected stationUser edited successfully",
+  "Api.StationUser.Deleted.Successful": "selected stationUser deleted successfully",
+  "Api.StationUser.StationId.Required": "StationId is Required",
+  "Api.StationUser.Id.Required": "Id is Required",
+
+  "StationUsers.Error.Get.Message": "An error has occurred while trying to get stationUsers list.",
+  "StationUsers.Error.Detail.Message": "An error has occurred while trying to get stationUser details.",
+  "StationUsers.Error.Add.Message": "An error has occurred while trying to add new stationUser.",
+  "StationUsers.Error.Edit.Message": "An error has occurred while trying to edit stationUser.",
+  "StationUsers.Error.Delete.Message": "An error has occurred while trying to delete stationUser."
 }

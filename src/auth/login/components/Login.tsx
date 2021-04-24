@@ -8,7 +8,7 @@ import {withTranslation} from "react-i18next";
 import Routes from "app/constants/Routes";
 import { Link } from "react-router-dom";
 import history from "../../../app/utils/History";
-import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
+import { EyeInvisibleOutlined, EyeTwoTone, UserOutlined, LockOutlined } from '@ant-design/icons';
 
 interface LoginProps {
     authStore?: AuthStore
@@ -24,7 +24,7 @@ const Login: React.FC<LoginProps> = inject('authStore')(observer(({authStore}) =
 
     function onLoad()
     {
-        document.body.classList.add('auth-page');
+        /*document.body.classList.add('auth-page');*/
         authStore.onLoginPageLoad();
     }
 
@@ -71,66 +71,79 @@ const Login: React.FC<LoginProps> = inject('authStore')(observer(({authStore}) =
         history.go(0);
     }
     return (
-        <div className="container">
-            <div className="center-item">
-
-            <span className="petro-pay">
-                {i18next.t("Authentication.Label.PetroPay")}
-            </span>
-                <img src="/images/petro-pay-logo.png" className="logo" alt="logo"/>
-                <span className="authentication">
-                {i18next.t("Authentication.Label.Authentication")}
-            </span>
-                <Form layout="vertical" onFinish={onFinish} >
-                    <Form.Item initialValue={viewModel.roleType} name="roleType" label={i18next.t("Authentication.Label.RoleType")} required={false}>
-                        <Radio.Group onChange={onRoleTypeChanged} defaultValue={1}>
-                            <Radio value={1}>{i18next.t("Authentication.RoleType.Customer")}</Radio>
-                            <Radio value={10}>{i18next.t("Authentication.RoleType.Supplier")}</Radio>
-                            <Radio value={100}>{i18next.t("Authentication.RoleType.Admin")}</Radio>
+        <div>
+            {!viewModel?.roleType ?
+                <div className={"mainContent"}>
+                    <div className={"role-type"}>
+                        <Radio.Group onChange={onRoleTypeChanged} className={"radio-role"}>
+                            <Radio  value={1}>
+                                <img src="/images/customer.png" className="logo" alt="logo"/>
+                                <h2 style={{textAlign: "center"}}>
+                                    {i18next.t("Authentication.RoleType.Customer")}
+                                </h2>
+                            </Radio>
+                            <Radio value={10}>
+                                <img src="/images/petro-station.png" className="logo" alt="logo"/>
+                                <h2 style={{textAlign: "center"}}>
+                                    {i18next.t("Authentication.RoleType.Supplier")}
+                                </h2>
+                            </Radio>
+                            <Radio value={100}>
+                                <img src="/images/admin.png" className="logo" alt="logo"/>
+                                <h2 style={{textAlign: "center"}}>
+                                    {i18next.t("Authentication.RoleType.Admin")}
+                                </h2>
+                            </Radio>
                         </Radio.Group>
-                    </Form.Item>
-                    <Form.Item initialValue={viewModel.username} name="username" label={i18next.t("Authentication.Label.Username")} required={false}
-                               rules={[
-                                   {
-                                       required: true,
-                                       message: i18next.t("Authentication.Validation.Message.Username.Required")
-                                   }
-                               ]}>
-                        <Input onChange={onUsernameChanged} className="text-input"/>
-                    </Form.Item>
-                    <Form.Item initialValue={viewModel.password} name="password" label={i18next.t("Authentication.Label.Password")} required={false}
-                               rules={[
-                                   {
-                                       required: true,
-                                       message: i18next.t("Authentication.Validation.Message.Password.Required")
-                                   }
-                               ]}>
-                        <Input.Password
-                            iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
-                            onChange={onPasswordChanged}
-                            className="text-input"
-                        />
-                    </Form.Item>
-                    {viewModel.errorMessage && (
-                        <div className='response-error-msg'>{viewModel.errorMessage}</div>
-                    )}
-                    <Button type="primary" loading={viewModel.isProcessing} htmlType="submit">
-                        {i18next.t("Authentication.Button.Login")}
-                    </Button>
-                    {/*<div className="link">
-                        <Link to={Routes.resetPassword}>{i18next.t('Authentication.Link.ForgotPassword')}</Link>
-                    </div>*/}
-                </Form>
-                <br/>
-                <br/>
-                <br/>
-                <Radio.Group value={localStorage.getItem('currentLanguage')}
-                    options={optionsWithDisabled}
-                    onChange={onLanguageChanged}
-                    optionType="button"
-                    buttonStyle="solid"
-                />
-            </div>
+                    </div>
+                </div>: ""}
+            {viewModel?.roleType ?
+                <div className={"mainContent"}>
+                    <div className="signup-connect">
+                        <img src="/images/petro-pay-logo.png" className="logo" alt="logo"/>
+                    </div>
+                    <div className="signup-classic">
+                        <h2>Welcome {viewModel?.getRoleTitle()}</h2>
+                        <Form layout="vertical" onFinish={onFinish} >
+                            {/*<Form.Item initialValue={viewModel.roleType} name="roleType" label={i18next.t("Authentication.Label.RoleType")} required={false}>
+
+                        </Form.Item>*/}
+                            <Form.Item initialValue={viewModel.username} name="username" label={i18next.t("Authentication.Label.Username")} required={false}
+                                       rules={[
+                                           {
+                                               required: true,
+                                               message: i18next.t("Authentication.Validation.Message.Username.Required")
+                                           }
+                                       ]}>
+                                <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Username" onChange={onUsernameChanged} className="text-input"/>
+                            </Form.Item>
+                            <Form.Item initialValue={viewModel.password} name="password" label={i18next.t("Authentication.Label.Password")} required={false}
+                                       rules={[
+                                           {
+                                               required: true,
+                                               message: i18next.t("Authentication.Validation.Message.Password.Required")
+                                           }
+                                       ]}>
+                                <Input.Password
+                                    prefix={<LockOutlined className="site-form-item-icon" />}
+                                    iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
+                                    onChange={onPasswordChanged}
+                                    className="text-input"
+                                />
+                            </Form.Item>
+                            {viewModel.errorMessage && (
+                                <div className='response-error-msg'>{viewModel.errorMessage}</div>
+                            )}
+                            <Button type="primary" className={"button"} loading={viewModel.isProcessing} htmlType="submit">
+                                {i18next.t("Authentication.Button.Login")}
+                            </Button>
+                            <div className="link">
+                                <Link to={Routes.resetPassword}>{i18next.t('Authentication.Link.ForgotPassword')}</Link>
+                            </div>
+                        </Form>
+                    </div>
+                </div>
+                : ""}
         </div>
     );
 }));

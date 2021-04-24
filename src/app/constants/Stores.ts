@@ -7,5 +7,7 @@ export default {
     adminStore: 'adminStore',
     companiesStore: 'companiesStore',
     bundlesStore: 'bundlesStore',
-    branchStore: 'branchStore'
+    branchStore: 'branchStore',
+    petroStationStore: 'petroStationStore',
+    stationUserStore: 'stationUserStore'
 }

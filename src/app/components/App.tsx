@@ -27,6 +27,10 @@ import BundlesList from "../../entities/bundles/components/list/BundlesList";
 import EditBundle from "../../entities/bundles/components/bundle/EditBundle";
 import BranchList from "../../entities/branches/components/list/BranchList";
 import EditBranch from "../../entities/branches/components/branch/EditBranch";
+import PetroStationList from "../../entities/petro-stations/components/list/PetroStationList";
+import EditPetroStation from "../../entities/petro-stations/components/petro-station/EditPetroStation";
+import StationUserList from "../../entities/station-users/components/list/StationUserList";
+import EditStationUser from "../../entities/station-users/components/station-user/EditStationUser";
 
 const App: React.FC = () =>
 {
@@ -71,9 +75,17 @@ const App: React.FC = () =>
                                     <Route exact roles={[RoleType.admin]} path={Routes.editBundle} component={EditBundle} />
                                     <Route exact roles={[RoleType.admin]} path={Routes.addBundle} component={EditBundle} />
 
+                                    <Route exact roles={[RoleType.admin]} path={Routes.petroStation} component={PetroStationList} />
+                                    <Route exact roles={[RoleType.admin]} path={Routes.addPetroStation} component={EditPetroStation} />
+                                    <Route exact roles={[RoleType.admin]} path={Routes.editPetroStation} component={EditPetroStation} />
+
                                     <Route exact roles={[RoleType.customer]} path={Routes.branch} component={BranchList} />
                                     <Route exact roles={[RoleType.customer]} path={Routes.editBranch} component={EditBranch} />
                                     <Route exact roles={[RoleType.customer]} path={Routes.addBranch} component={EditBranch} />
+
+                                    <Route exact roles={[RoleType.supplier]} path={Routes.stationUser} component={StationUserList} />
+                                    <Route exact roles={[RoleType.supplier]} path={Routes.editStationUser} component={EditStationUser} />
+                                    <Route exact roles={[RoleType.supplier]} path={Routes.addStationUser} component={EditStationUser} />
 
                                     {/* Admin */}
 
