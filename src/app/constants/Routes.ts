@@ -28,6 +28,11 @@ export default
     editBranch: "/app/branch/edit/:branchId",
     addBranch: "/app/branch/add",
 
+    // Car
+    car: "/app/car/:companyBranchId/list",
+    editCar: "/app/car/edit/:carId",
+    addCar: "/app/car/add/:companyBranchId",
+
     //Bundle
     bundle: "/app/bundle",
     editBundle: "/app/bundle/edit/:bundleId",

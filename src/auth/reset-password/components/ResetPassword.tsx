@@ -24,6 +24,7 @@ const ResetPassword: React.FC<ResetPasswordProps> = inject('authStore')(observer
     {
         document.body.classList.add('auth-page');
         authStore.onResetPasswordPageLoad();
+        authStore.resetPasswordViewModel.roleType = +localStorage.getItem("roleType");
     }
 
     function onUnload()
@@ -46,16 +47,13 @@ const ResetPassword: React.FC<ResetPasswordProps> = inject('authStore')(observer
     }
 
     return (
-        <div className="container">
-            <div className="center-item">
+        <div className="mainContent">
+            <div className="signup-connect">
+                <img src="/images/petro-pay-logo.png" className="logo" alt="logo"/>
+            </div>
+            <div className="signup-classic">
+                <h2>{i18next.t("ResetPassword.Label.ResetPassword")}</h2>
 
-                <span className="wp-soft">
-                    wp-soft<span className="reg-mark">®</span> {i18next.t("Authentication.Label.WebPortal")}
-                </span>
-                <img src="/images/wp-soft-logo.png" className="logo" alt="logo"/>
-                <span className="authentication">
-                    {i18next.t("ResetPassword.Label.ResetPassword")}
-                </span>
                 {viewModel.responseMessage && (
                     <div>
                         <Alert message={viewModel.responseMessage} type="success"/>

@@ -18,6 +18,7 @@ export default class PetroStationItem implements IDeserialize
     stationNameAr: string;
     stationDiesel: boolean;
     stationBalance: number;
+    stationEmail: number;
 
 
     constructor() {

@@ -15,6 +15,7 @@ export default class AddPetroStationRequest
     stationNameAr: string;
     stationDiesel: boolean;
     stationBalance: number;
+    stationEmail: number;
 
     constructor(
     ) {

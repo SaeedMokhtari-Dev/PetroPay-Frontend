@@ -10,7 +10,7 @@ import {
     Table, Modal, PageHeader
 } from "antd";
 import {
-    EditOutlined, DeleteOutlined, CheckOutlined, CloseOutlined,
+    EditOutlined, DeleteOutlined, CheckOutlined, CloseOutlined, CarOutlined,
     ExclamationCircleOutlined, PlusCircleOutlined
 } from '@ant-design/icons';
 import i18next from "i18next";
@@ -55,14 +55,18 @@ const BranchList: React.FC<BranchListProps> = inject(Stores.branchStore)(observe
         fixed: 'right',
         render: (text, record) => (
             <div className="inline">
-
-                    <Button type="primary" icon={<EditOutlined />} onClick={() => showEditPage(record)}
-                            title={i18next.t("General.Button.Edit")} />
+                <Button type="default" icon={<CarOutlined />} onClick={() => showCarPage(record)}
+                        title={i18next.t("Branches.Button.CarList")} />
+                <Button type="primary" icon={<EditOutlined />} onClick={() => showEditPage(record)}
+                        title={i18next.t("General.Button.Edit")} />
                 <Button type="primary" danger icon={<DeleteOutlined />} onClick={() => showDeleteConfirm(record)}
                         title={i18next.t("General.Button.Delete")} />
             </div>
         )
     }];
+    function showCarPage(e){
+        NavigationService.navigate(`/app/car/${e.key}/list`);
+    }
     async function showEditPage(e){
         branchStore.editBranchViewModel.key = e.key;
         if(e.key)

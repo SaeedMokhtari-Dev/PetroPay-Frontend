@@ -12,6 +12,7 @@ import {
 } from '@ant-design/icons';
 import history from "../../../../app/utils/History";
 import PetroStationStore from "../../stores/PetroStationStore";
+import { PasswordInput } from 'antd-password-input-strength';
 const {useEffect} = React;
 
 interface EditPetroStationProps {
@@ -177,38 +178,7 @@ const EditPetroStation: React.FC<EditPetroStationProps> = inject(Stores.petroSta
                     <Input type={"number"} onChange={onChanged}/>
                 </Form.Item>
                     </Col>
-                    <Col span={8}>
-                <Form.Item name="stationUserName" initialValue={viewModel?.detailPetroStationResponse?.stationUserName}
-                           key={"stationUserName"}
-                           label={i18next.t("PetroStations.Label.stationUserName")}
-                           rules={[
-                               {
-                                   required: true,
-                                   message: i18next.t("PetroStations.Validation.Message.stationUserName.Required")
-                               },
-                               {
-                                   pattern: /^\S*$/,
-                                   message: i18next.t("PetroStations.Validation.Message.stationUserName.Valid"),
-                               }]}>
-                    <Input onChange={onChanged}/>
-                </Form.Item>
-                    </Col>
-                    <Col span={8}>
-                        <Form.Item name="stationPassword" initialValue={viewModel?.detailPetroStationResponse?.stationPassword}
-                                   key={"stationPassword"}
-                                   label={i18next.t("PetroStations.Label.stationPassword")}
-                                   rules={[
-                                       {
-                                           required: true,
-                                           message: i18next.t("PetroStations.Validation.Message.stationPassword.Required")
-                                       }
-                                   ]}>
-                            <Input.Password
-                                onChange={onChanged}
-                                iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
-                            />
-                        </Form.Item>
-                    </Col>
+
                     <Col span={8}>
                 <Form.Item name="stationNameAr" initialValue={viewModel?.detailPetroStationResponse?.stationNameAr}
                            key={"stationNameAr"}
@@ -231,6 +201,56 @@ const EditPetroStation: React.FC<EditPetroStationProps> = inject(Stores.petroSta
                         <Input type={"number"} onChange={onChanged}/>
                     </Form.Item>
                 </Col>
+
+                    <Col span={8}>
+                        <Form.Item name="stationEmail" initialValue={viewModel?.detailPetroStationResponse?.stationEmail}
+                                   key={"stationEmail"}
+                                   label={i18next.t("PetroStations.Label.stationEmail")}
+                                   rules={[
+                                       {
+                                           type:"email",
+                                           message: i18next.t("General.Email.Valid")
+                                       },
+                                       {
+                                           required: true,
+                                           message: i18next.t("PetroStations.Validation.Message.stationEmail.Required")
+                                       }
+                                   ]}>
+                            <Input type={"email"} onChange={onChanged}/>
+                        </Form.Item>
+                    </Col>
+                    <Divider>{i18next.t("Companies.Section.LoginInformation")}</Divider>
+                    <Col span={8}>
+                        <Form.Item name="stationUserName" initialValue={viewModel?.detailPetroStationResponse?.stationUserName}
+                                   key={"stationUserName"}
+                                   label={i18next.t("PetroStations.Label.stationUserName")}
+                                   rules={[
+                                       {
+                                           required: true,
+                                           message: i18next.t("PetroStations.Validation.Message.stationUserName.Required")
+                                       },
+                                       {
+                                           pattern: /^\S*$/,
+                                           message: i18next.t("PetroStations.Validation.Message.stationUserName.Valid"),
+                                       }]}>
+                            <Input onChange={onChanged}/>
+                        </Form.Item>
+                    </Col>
+                    <Col span={8}>
+                        <Form.Item name="stationPassword" initialValue={viewModel?.detailPetroStationResponse?.stationPassword}
+                                   key={"stationPassword"}
+                                   label={i18next.t("PetroStations.Label.stationPassword")}
+                                   rules={[
+                                       {
+                                           required: true,
+                                           message: i18next.t("PetroStations.Validation.Message.stationPassword.Required")
+                                       }
+                                   ]}>
+                            <PasswordInput
+                                onChange={onChanged}
+                            />
+                        </Form.Item>
+                    </Col>
                 </Row>
                 <Divider></Divider>
                 {viewModel.errorMessage && (

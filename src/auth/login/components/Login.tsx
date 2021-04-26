@@ -58,6 +58,7 @@ const Login: React.FC<LoginProps> = inject('authStore')(observer(({authStore}) =
     function onRoleTypeChanged(e)
     {
         viewModel.roleType = e.target.value;
+        localStorage.setItem("roleType", e.target.value);
     }
 
     const optionsWithDisabled = [
@@ -72,7 +73,7 @@ const Login: React.FC<LoginProps> = inject('authStore')(observer(({authStore}) =
     }
     return (
         <div>
-            {!viewModel?.roleType ?
+            {!viewModel?.roleType && (
                 <div className={"mainContent"}>
                     <div className={"role-type"}>
                         <Radio.Group onChange={onRoleTypeChanged} className={"radio-role"}>
@@ -96,8 +97,8 @@ const Login: React.FC<LoginProps> = inject('authStore')(observer(({authStore}) =
                             </Radio>
                         </Radio.Group>
                     </div>
-                </div>: ""}
-            {viewModel?.roleType ?
+                </div>)}
+            {viewModel?.roleType && (
                 <div className={"mainContent"}>
                     <div className="signup-connect">
                         <img src="/images/petro-pay-logo.png" className="logo" alt="logo"/>
@@ -105,9 +106,6 @@ const Login: React.FC<LoginProps> = inject('authStore')(observer(({authStore}) =
                     <div className="signup-classic">
                         <h2>Welcome {viewModel?.getRoleTitle()}</h2>
                         <Form layout="vertical" onFinish={onFinish} >
-                            {/*<Form.Item initialValue={viewModel.roleType} name="roleType" label={i18next.t("Authentication.Label.RoleType")} required={false}>
-
-                        </Form.Item>*/}
                             <Form.Item initialValue={viewModel.username} name="username" label={i18next.t("Authentication.Label.Username")} required={false}
                                        rules={[
                                            {
@@ -143,7 +141,7 @@ const Login: React.FC<LoginProps> = inject('authStore')(observer(({authStore}) =
                         </Form>
                     </div>
                 </div>
-                : ""}
+            )}
         </div>
     );
 }));

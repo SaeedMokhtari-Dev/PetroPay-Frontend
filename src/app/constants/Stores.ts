@@ -9,5 +9,6 @@ export default {
     bundlesStore: 'bundlesStore',
     branchStore: 'branchStore',
     petroStationStore: 'petroStationStore',
-    stationUserStore: 'stationUserStore'
+    stationUserStore: 'stationUserStore',
+    carStore: 'carStore'
 }

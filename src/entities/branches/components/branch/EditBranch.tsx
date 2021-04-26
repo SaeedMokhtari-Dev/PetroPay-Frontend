@@ -12,6 +12,7 @@ import {
     PlusOutlined, EyeInvisibleOutlined, EyeTwoTone
 } from '@ant-design/icons';
 import history from "../../../../app/utils/History";
+import { PasswordInput } from 'antd-password-input-strength';
 const {useEffect} = React;
 
 interface EditBranchProps {
@@ -164,38 +165,6 @@ const EditBranch: React.FC<EditBranchProps> = inject(Stores.branchStore)(observe
                 </Form.Item>
                     </Col>
                     <Col span={8}>
-                <Form.Item name="companyBranchAdminUserName" initialValue={viewModel?.detailBranchResponse?.companyBranchAdminUserName}
-                           key={"companyBranchAdminUserName"}
-                           label={i18next.t("Branches.Label.companyBranchAdminUserName")}
-                           rules={[
-                               {
-                                   required: true,
-                                   message: i18next.t("Branches.Validation.Message.companyBranchAdminUserName.Required")
-                               },
-                               {
-                                   pattern: /^\S*$/,
-                                   message: i18next.t("Branches.Validation.Message.companyBranchAdminUserName.Valid"),
-                               }]}>
-                    <Input onChange={onChanged}/>
-                </Form.Item>
-                    </Col>
-                    <Col span={8}>
-                        <Form.Item name="companyBranchAdminUserPassword" initialValue={viewModel?.detailBranchResponse?.companyBranchAdminUserPassword}
-                                   key={"companyBranchAdminUserPassword"}
-                                   label={i18next.t("Branches.Label.companyBranchAdminUserPassword")}
-                                   rules={[
-                                       {
-                                           required: true,
-                                           message: i18next.t("Branches.Validation.Message.companyBranchAdminUserPassword.Required")
-                                       }
-                                   ]}>
-                            <Input.Password
-                                onChange={onChanged}
-                                iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
-                            />
-                        </Form.Item>
-                    </Col>
-                    <Col span={8}>
                 <Form.Item name="companyBranchAdminPhone" initialValue={viewModel?.detailBranchResponse?.companyBranchAdminPhone}
                            key={"companyBranchAdminPhone"}
                            label={i18next.t("Branches.Label.companyBranchAdminPhone")}>
@@ -214,6 +183,39 @@ const EditBranch: React.FC<EditBranchProps> = inject(Stores.branchStore)(observe
                            ]}>
                     <Input type={"email"} onChange={onChanged}/>
                 </Form.Item>
+                    </Col>
+                    <Divider>{i18next.t("Companies.Section.LoginInformation")}</Divider>
+
+                    <Col span={8}>
+                        <Form.Item name="companyBranchAdminUserName" initialValue={viewModel?.detailBranchResponse?.companyBranchAdminUserName}
+                                   key={"companyBranchAdminUserName"}
+                                   label={i18next.t("Branches.Label.companyBranchAdminUserName")}
+                                   rules={[
+                                       {
+                                           required: true,
+                                           message: i18next.t("Branches.Validation.Message.companyBranchAdminUserName.Required")
+                                       },
+                                       {
+                                           pattern: /^\S*$/,
+                                           message: i18next.t("Branches.Validation.Message.companyBranchAdminUserName.Valid"),
+                                       }]}>
+                            <Input onChange={onChanged}/>
+                        </Form.Item>
+                    </Col>
+                    <Col span={8}>
+                        <Form.Item name="companyBranchAdminUserPassword" initialValue={viewModel?.detailBranchResponse?.companyBranchAdminUserPassword}
+                                   key={"companyBranchAdminUserPassword"}
+                                   label={i18next.t("Branches.Label.companyBranchAdminUserPassword")}
+                                   rules={[
+                                       {
+                                           required: true,
+                                           message: i18next.t("Branches.Validation.Message.companyBranchAdminUserPassword.Required")
+                                       }
+                                   ]}>
+                            <PasswordInput
+                                onChange={onChanged}
+                            />
+                        </Form.Item>
                     </Col>
                 </Row>
                 <Divider></Divider>

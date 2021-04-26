@@ -8,6 +8,7 @@ import BundlesStore from "../../entities/bundles/stores/BundlesStore";
 import BranchStore from "../../entities/branches/stores/BranchStore";
 import PetroStationStore from "../../entities/petro-stations/stores/PetroStationStore";
 import StationUserStore from "../../entities/station-users/stores/StationUserStore";
+import CarStore from "../../entities/cars/stores/CarStore";
 
 export class AppStore
 {
@@ -21,6 +22,7 @@ export class AppStore
     branch: BranchStore;
     petroStation: PetroStationStore;
     stationUser: StationUserStore;
+    car: CarStore;
 
     constructor()
     {
@@ -34,5 +36,6 @@ export class AppStore
         this.branch = new BranchStore(this);
         this.petroStation = new PetroStationStore(this);
         this.stationUser = new StationUserStore(this);
+        this.car = new CarStore(this);
     }
 }

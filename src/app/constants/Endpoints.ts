@@ -33,6 +33,12 @@ export default
     apiBranchDetail: "/api/branch/detail",
     apiBranchDelete: "/api/branch/delete",
 
+    apiCarAdd: "/api/car/add",
+    apiCarEdit: "/api/car/edit",
+    apiCarGet: "/api/car/get",
+    apiCarDetail: "/api/car/detail",
+    apiCarDelete: "/api/car/delete",
+
     apiBundleAdd: "/api/bundle/add",
     apiBundleEdit: "/api/bundle/edit",
     apiBundleGet: "/api/bundle/get",

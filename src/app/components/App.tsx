@@ -31,6 +31,8 @@ import PetroStationList from "../../entities/petro-stations/components/list/Petr
 import EditPetroStation from "../../entities/petro-stations/components/petro-station/EditPetroStation";
 import StationUserList from "../../entities/station-users/components/list/StationUserList";
 import EditStationUser from "../../entities/station-users/components/station-user/EditStationUser";
+import CarList from "../../entities/cars/components/list/CarList";
+import EditCar from "../../entities/cars/components/car/EditCar";
 
 const App: React.FC = () =>
 {
@@ -53,7 +55,7 @@ const App: React.FC = () =>
                         <Route path={Routes.auth}>
                             <Switch>
                                 <AuthRoute exact path={Routes.auth} component={Login} />
-                                <AuthRoute exact path={Routes.resetPassword} component={ResetPassword} />
+                                <Route exact path={Routes.resetPassword} component={ResetPassword} />
                                 <Route exact path={Routes.changePassword} component={ChangePassword} />
 
                                 <Route component={NotFoundPage} />
@@ -86,6 +88,10 @@ const App: React.FC = () =>
                                     <Route exact roles={[RoleType.supplier]} path={Routes.stationUser} component={StationUserList} />
                                     <Route exact roles={[RoleType.supplier]} path={Routes.editStationUser} component={EditStationUser} />
                                     <Route exact roles={[RoleType.supplier]} path={Routes.addStationUser} component={EditStationUser} />
+
+                                    <Route exact roles={[RoleType.customer]} path={Routes.car} component={CarList} />
+                                    <Route exact roles={[RoleType.customer]} path={Routes.editCar} component={EditCar} />
+                                    <Route exact roles={[RoleType.customer]} path={Routes.addCar} component={EditCar} />
 
                                     {/* Admin */}
 

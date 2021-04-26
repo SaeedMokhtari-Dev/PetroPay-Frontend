@@ -10,6 +10,8 @@ export default class ResetPasswordViewModel
 {
     email: string;
 
+    roleType: number;
+
     isProcessing: boolean;
 
     responseMessage: string;
@@ -27,7 +29,7 @@ export default class ResetPasswordViewModel
         {
             this.isProcessing = true;
 
-            let request = new ResetPasswordRequest(this.email);
+            let request = new ResetPasswordRequest(this.roleType, this.email);
 
             let response = await ResetPasswordHandler.resetPassword(request);
 

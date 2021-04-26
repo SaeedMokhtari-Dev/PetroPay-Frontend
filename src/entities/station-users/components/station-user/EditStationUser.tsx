@@ -12,6 +12,7 @@ import {
 } from '@ant-design/icons';
 import history from "../../../../app/utils/History";
 import StationUserStore from "../../stores/StationUserStore";
+import { PasswordInput } from 'antd-password-input-strength';
 const {useEffect} = React;
 
 interface EditStationUserProps {
@@ -133,7 +134,7 @@ const EditStationUser: React.FC<EditStationUserProps> = inject(Stores.stationUse
                     <Input onChange={onChanged}/>
                 </Form.Item>
                     </Col>
-
+                    <Divider>{i18next.t("Companies.Section.LoginInformation")}</Divider>
                     <Col span={8}>
                 <Form.Item name="stationUserName" initialValue={viewModel?.detailStationUserResponse?.stationUserName}
                            key={"stationUserName"}
@@ -160,9 +161,8 @@ const EditStationUser: React.FC<EditStationUserProps> = inject(Stores.stationUse
                                            message: i18next.t("StationUsers.Validation.Message.stationUserPassword.Required")
                                        }
                                    ]}>
-                            <Input.Password
+                            <PasswordInput
                                 onChange={onChanged}
-                                iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
                             />
                         </Form.Item>
                     </Col>

@@ -5,6 +5,7 @@
   "dependencies": {
     "@iconify/react": "^1.1.4",
     "antd": "^4.13.0",
+    "antd-password-input-strength": "^1.1.1",
     "dayjs": "^1.10.4",
     "i18next": "^19.9.0",
     "i18next-xhr-backend": "^3.2.2",

@@ -7,6 +7,7 @@ import i18next from "i18next";
 import {withTranslation} from "react-i18next";
 import Routes from "app/constants/Routes";
 import { Link, withRouter } from "react-router-dom";
+import { PasswordInput } from 'antd-password-input-strength';
 
 class ChangePasswordProps {
     authStore?: AuthStore;
@@ -59,16 +60,14 @@ const ChangePassword: React.FC<ChangePasswordProps> = inject('authStore')(observ
 
 
     return (
-        <div className="container">
-            <div className="center-item">
-
-            <span className="wp-soft">
-                wp-soft<span className="reg-mark">®</span> {i18next.t("Authentication.Label.WebPortal")}
-            </span>
-                <img src="/images/wp-soft-logo.png" className="logo" alt="logo"/>
-                <span className="authentication">
+        <div className="mainContent">
+            <div className="signup-connect">
+                <img src="/images/petro-pay-logo.png" className="logo" alt="logo"/>
+            </div>
+            <div className="signup-classic">
+                <h2>
                 {i18next.t("ChangePassword.Label.ChangePassword")}
-            </span>
+                </h2>
                 {viewModel.isValidating ?
                     <div className='token-validate-loader'>
                         <Spin size="large" />
@@ -92,7 +91,7 @@ const ChangePassword: React.FC<ChangePasswordProps> = inject('authStore')(observ
                                            message: i18next.t("ChangePassword.Validation.Message.NewPassword.Required")
                                        }
                                    ]}>
-                            <Input.Password onChange={onNewPasswordChanged} className="text-input"/>
+                            <PasswordInput onChange={onNewPasswordChanged}/>
                         </Form.Item>
                         <Form.Item initialValue={viewModel.confirmPassword} name="confirmPassword"
                                    label={i18next.t("ChangePassword.Label.ConfirmPassword")} required={false}
@@ -111,7 +110,7 @@ const ChangePassword: React.FC<ChangePasswordProps> = inject('authStore')(observ
                                            },
                                        }),
                                    ]}>
-                            <Input.Password onChange={onConfirmPasswordChanged} className="text-input"/>
+                            <PasswordInput onChange={onConfirmPasswordChanged}/>
                         </Form.Item>
                         {viewModel.errorMessage && (
                             <div className='response-error-msg'>{viewModel.errorMessage}</div>

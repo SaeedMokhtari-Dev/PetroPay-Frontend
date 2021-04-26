@@ -53,6 +53,7 @@ ReactDOM.render(
                       branchStore={appStore.branch}
                       petroStationStore={appStore.petroStation}
                       stationUserStore={appStore.stationUser}
+                      carStore={appStore.car}
             >
                 <App />
             </Provider>
