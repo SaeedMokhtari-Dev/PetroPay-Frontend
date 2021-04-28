@@ -10,5 +10,6 @@ export default {
     branchStore: 'branchStore',
     petroStationStore: 'petroStationStore',
     stationUserStore: 'stationUserStore',
-    carStore: 'carStore'
+    carStore: 'carStore',
+    rechargeBalanceStore: 'rechargeBalanceStore'
 }

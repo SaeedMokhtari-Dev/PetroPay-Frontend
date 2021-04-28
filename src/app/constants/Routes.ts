@@ -23,6 +23,11 @@ export default
     editStationUser: "/app/stationUser/edit/:stationUserId",
     addStationUser: "/app/stationUser/add",
 
+    // RechargeBalance
+    rechargeBalance: "/app/rechargeBalance",
+    editRechargeBalance: "/app/rechargeBalance/edit/:rechargeBalanceId",
+    addRechargeBalance: "/app/rechargeBalance/add",
+
     // Branch
     branch: "/app/branch",
     editBranch: "/app/branch/edit/:branchId",

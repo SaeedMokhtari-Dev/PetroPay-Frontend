@@ -9,6 +9,7 @@
   "General.Add.SaveButton": "Save",
   "General.Add.CancelButton": "Cancel",
   "General.Confirm.Delete": "Are you sure to delete?",
+  "General.Confirm.Accept": "Are you sure to accept?",
 
 
   "General.HeaderMenu.User": "Hi",
@@ -335,6 +336,43 @@
   "Cars.Error.Edit.Message": "An error has occurred while trying to edit car.",
   "Cars.Error.Delete.Message": "An error has occurred while trying to delete car.",
 
+  "RechargeBalances.Menu.Title": "Recharge Balance Request",
+  "RechargeBalances.Page.Title": "Recharge Balance Request",
+  "RechargeBalances.Page.SubTitle": "This page is for define Recharge Balance Requests",
+  "RechargeBalances.Label.key": "key",
+  "RechargeBalances.Label.rechargeId": "rechargeId",
+  "RechargeBalances.Label.rechageDate": "Rechage Date",
+  "RechargeBalances.Label.companyId": "companyId",
+  "RechargeBalances.Label.rechargeAmount": "Recharge Amount",
+  "RechargeBalances.Label.rechargePaymentMethod": "Recharge Payment Method",
+  "RechargeBalances.Label.bankName": "Bank Name",
+  "RechargeBalances.Label.bankTransactionDate": "Bank Transaction Date",
+  "RechargeBalances.Label.transactionPersonName": "Transaction Person Name",
+  "RechargeBalances.Label.rechargeDocumentPhoto": "Recharge Document Photo",
+  "RechargeBalances.Label.rechargeRequstConfirmed": "Recharge Request Confirmed",
+
+  "RechargeBalances.Add.HeaderText": "Add Recharge Balance",
+  "RechargeBalances.Edit.HeaderText": "Edit Recharge Balance with Id:",
+  "RechargeBalances.Section.GeneralInformation": "General Information",
+  "RechargeBalances.Button.ConfirmRequest": "Confirm Request",
+
+  "RechargeBalances.Validation.Message.rechargeAmount.Required": "Please enter recharge amount",
+  "RechargeBalances.Validation.Message.rechargePaymentMethod.Required": "Please enter recharge payment method",
+
+  "Api.RechargeBalance.Add.Successful": "A new recharge balance request added successfully",
+  "Api.RechargeBalance.Edit.Successful": "selected recharge balance request edited successfully",
+  "Api.RechargeBalance.Deleted.Successful": "selected recharge balance request deleted successfully",
+  "Api.RechargeBalance.Confirmed.Successful": "selected recharge balance request confirmed successfully",
+  "Api.RechargeBalance.companyId.Required": "Company Id is Required",
+  "Api.RechargeBalance.Id.Required": "Id is Required",
+  "Api.RechargeBalance.ConfirmedEntityEdit.NotAllowed": "Confirmed Balance Request cannot edit.",
+
+  "RechargeBalances.Error.Get.Message": "An error has occurred while trying to get recharge balances list.",
+  "RechargeBalances.Error.Detail.Message": "An error has occurred while trying to get recharge balance details.",
+  "RechargeBalances.Error.Add.Message": "An error has occurred while trying to add new recharge balance.",
+  "RechargeBalances.Error.Edit.Message": "An error has occurred while trying to edit recharge balance.",
+  "RechargeBalances.Error.Delete.Message": "An error has occurred while trying to delete recharge balance.",
+
 
   "General.Country.Egypt": "Egypt",
   "General.Region.Alexandria": "Alexandria",
@@ -377,5 +415,9 @@
   "General.Type.MULTI-ACTIVITY": "MULTI-ACTIVITY",
   "General.Type.THEMEDICALSECTOR": "THE MEDICAL SECTOR",
   "General.Type.GOVERNMENTSECTOR": "GOVERNMENT SECTOR",
-  "General.Type.OTHERS": "OTHERS"
+  "General.Type.OTHERS": "OTHERS",
+  "General.PaymentMethod.Cash": "Cash",
+  "General.PaymentMethod.BankTransfer": "Bank Transfer",
+  "General.PaymentMethod.Check": "Check",
+  "General.PaymentMethod.Credit": "Credit"
 }

@@ -1,12 +1,7 @@
 import IDeserialize from "app/interfaces/deserialize";
 
-export default class UserInfo implements IDeserialize
+export default class EditRechargeBalanceResponse implements IDeserialize
 {
-    id: number;
-    name: string;
-    role: number;
-    balance: number;
-
     deserialize(input: any): this
     {
         Object.assign(this, input);

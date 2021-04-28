@@ -44,6 +44,9 @@ const Sidebar: React.FC<SidebarProps> = inject(Stores.pageStore)(observer(({page
         <Menu.Item key="4" icon={<ShopOutlined />}>
             <Link to={Routes.petroStation}>{i18next.t('PetroStations.Menu.Title')}</Link>
         </Menu.Item>
+        <Menu.Item key="5" icon={<ShopOutlined />}>
+            <Link to={Routes.rechargeBalance}>{i18next.t('RechargeBalances.Menu.Title')}</Link>
+        </Menu.Item>
         {/*<Menu.Item key="2" icon={<DesktopOutlined />}>
             Option 2
         </Menu.Item>
@@ -67,9 +70,9 @@ const Sidebar: React.FC<SidebarProps> = inject(Stores.pageStore)(observer(({page
         <Menu.Item key="2" icon={<ShopOutlined />}>
             <Link to={Routes.branch}>{i18next.t('Branches.Menu.Title')}</Link>
         </Menu.Item>
-        {/*<Menu.Item key="3" icon={<ShopOutlined />}>
-            <Link to={Routes.car}>{i18next.t('Cars.Menu.Title')}</Link>
-        </Menu.Item>*/}
+        <Menu.Item key="3" icon={<ShopOutlined />}>
+            <Link to={Routes.rechargeBalance}>{i18next.t('RechargeBalances.Menu.Title')}</Link>
+        </Menu.Item>
     </Menu>)
     const supplierMenu= (<Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
         <Menu.Item key="1" icon={<DashboardOutlined />}>

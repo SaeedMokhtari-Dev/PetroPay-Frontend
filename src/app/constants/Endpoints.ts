@@ -45,5 +45,12 @@ export default
     apiBundleDetail: "/api/bundle/detail",
     apiBundleDelete: "/api/bundle/delete",
 
+    apiRechargeBalanceAdd: "/api/recharge-balance/add",
+    apiRechargeBalanceEdit: "/api/recharge-balance/edit",
+    apiRechargeBalanceGet: "/api/recharge-balance/get",
+    apiRechargeBalanceDetail: "/api/recharge-balance/detail",
+    apiRechargeBalanceDelete: "/api/recharge-balance/delete",
+    apiRechargeBalanceConfirm: "/api/recharge-balance/confirm",
+
     apiLog: "/api/log"
 }

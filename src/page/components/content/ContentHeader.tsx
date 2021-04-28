@@ -5,8 +5,8 @@ import Stores from "app/constants/Stores";
 import PageStore from "page/stores/PageStore";
 import "./ContentHeader.scss";
 import {Header} from "antd/es/layout/layout";
-import {Avatar, Badge, List, Menu, Popover} from "antd";
-import {MailOutlined, AppstoreOutlined, SettingOutlined, UserOutlined} from '@ant-design/icons';
+import {Avatar, Badge, List, Menu, Popover, Tag} from "antd";
+import {MailOutlined, AppstoreOutlined, SettingOutlined, UserOutlined, DollarOutlined} from '@ant-design/icons';
 import LogoutHandler from "auth/common/handlers/logout/LogoutHandler";
 import UserContext from "../../../identity/contexts/UserContext";
 import history from "../../../app/utils/History";
@@ -48,6 +48,14 @@ const ContentHeader: React.FC<ContentHeaderProps> = inject(Stores.pageStore)(obs
     return (
         <Header className="site-layout-background" style={{ padding: 0 }}>
             <Menu mode="horizontal" style={localStorage.getItem("currentLanguage") == 'en' ? {float:"right"} : {float:"left"}}>
+                <Menu.Item disabled  key={"balance"}>
+                {UserContext.info?.role !== 100 &&
+                    <div>
+                <Tag icon={<DollarOutlined />} color="success">
+                    {UserContext.info?.balance?.toLocaleString()}
+                </Tag> </div>}
+                </Menu.Item>
+
                 <SubMenu key="language" icon={<SettingOutlined />} title={i18next.t("General.HeaderMenu.Languages")}>
                     <Menu.Item key="en" onClick={changeLanguage}>{i18next.t("General.HeaderMenu.English")}</Menu.Item>
                     <Menu.Item key="ar" onClick={changeLanguage}>{i18next.t("General.HeaderMenu.Arabic")}</Menu.Item>

@@ -33,6 +33,8 @@ import StationUserList from "../../entities/station-users/components/list/Statio
 import EditStationUser from "../../entities/station-users/components/station-user/EditStationUser";
 import CarList from "../../entities/cars/components/list/CarList";
 import EditCar from "../../entities/cars/components/car/EditCar";
+import RechargeBalanceList from "../../entities/recharge-balances/components/list/RechargeBalanceList";
+import EditRechargeBalance from "../../entities/recharge-balances/components/recharge-balance/EditRechargeBalance";
 
 const App: React.FC = () =>
 {
@@ -92,6 +94,10 @@ const App: React.FC = () =>
                                     <Route exact roles={[RoleType.customer]} path={Routes.car} component={CarList} />
                                     <Route exact roles={[RoleType.customer]} path={Routes.editCar} component={EditCar} />
                                     <Route exact roles={[RoleType.customer]} path={Routes.addCar} component={EditCar} />
+
+                                    <Route exact roles={[RoleType.customer]} path={Routes.rechargeBalance} component={RechargeBalanceList} />
+                                    <Route exact roles={[RoleType.customer]} path={Routes.editRechargeBalance} component={EditRechargeBalance} />
+                                    <Route exact roles={[RoleType.customer]} path={Routes.addRechargeBalance} component={EditRechargeBalance} />
 
                                     {/* Admin */}
 
