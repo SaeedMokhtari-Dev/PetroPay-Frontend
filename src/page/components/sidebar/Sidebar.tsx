@@ -32,20 +32,23 @@ const Sidebar: React.FC<SidebarProps> = inject(Stores.pageStore)(observer(({page
     }, []);
 
     const adminMenu= (<Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
-        <Menu.Item key="1" icon={<DashboardOutlined />}>
+        <Menu.Item key="app" icon={<DashboardOutlined />}>
             <Link to={Routes.app}>{i18next.t('Dashboard.Menu.Title')}</Link>
         </Menu.Item>
-        <Menu.Item key="2" icon={<ShopOutlined />}>
+        <Menu.Item key="company" icon={<ShopOutlined />}>
             <Link to={Routes.company}>{i18next.t('Companies.Menu.Title')}</Link>
         </Menu.Item>
-        <Menu.Item key="3" icon={<ShopOutlined />}>
+        <Menu.Item key="bundle" icon={<ShopOutlined />}>
             <Link to={Routes.bundle}>{i18next.t('Bundles.Menu.Title')}</Link>
         </Menu.Item>
-        <Menu.Item key="4" icon={<ShopOutlined />}>
+        <Menu.Item key="petroStation" icon={<ShopOutlined />}>
             <Link to={Routes.petroStation}>{i18next.t('PetroStations.Menu.Title')}</Link>
         </Menu.Item>
-        <Menu.Item key="5" icon={<ShopOutlined />}>
+        <Menu.Item key="rechargeBalance" icon={<ShopOutlined />}>
             <Link to={Routes.rechargeBalance}>{i18next.t('RechargeBalances.Menu.Title')}</Link>
+        </Menu.Item>
+        <Menu.Item key="subscription" icon={<ShopOutlined />}>
+            <Link to={Routes.subscription}>{i18next.t('Subscriptions.Menu.Title')}</Link>
         </Menu.Item>
         {/*<Menu.Item key="2" icon={<DesktopOutlined />}>
             Option 2
@@ -64,21 +67,24 @@ const Sidebar: React.FC<SidebarProps> = inject(Stores.pageStore)(observer(({page
         </Menu.Item>*/}
     </Menu>)
     const customerMenu= (<Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
-        <Menu.Item key="1" icon={<DashboardOutlined />}>
+        <Menu.Item key="app" icon={<DashboardOutlined />}>
             <Link to={Routes.app}>{i18next.t('Dashboard.Menu.Title')}</Link>
         </Menu.Item>
-        <Menu.Item key="2" icon={<ShopOutlined />}>
+        <Menu.Item key="branch" icon={<ShopOutlined />}>
             <Link to={Routes.branch}>{i18next.t('Branches.Menu.Title')}</Link>
         </Menu.Item>
-        <Menu.Item key="3" icon={<ShopOutlined />}>
+        <Menu.Item key="rechargeBalance" icon={<ShopOutlined />}>
             <Link to={Routes.rechargeBalance}>{i18next.t('RechargeBalances.Menu.Title')}</Link>
+        </Menu.Item>
+        <Menu.Item key="subscription" icon={<ShopOutlined />}>
+            <Link to={Routes.subscription}>{i18next.t('Subscriptions.Menu.Title')}</Link>
         </Menu.Item>
     </Menu>)
     const supplierMenu= (<Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
-        <Menu.Item key="1" icon={<DashboardOutlined />}>
+        <Menu.Item key="app" icon={<DashboardOutlined />}>
             <Link to={Routes.app}>{i18next.t('Dashboard.Menu.Title')}</Link>
         </Menu.Item>
-        <Menu.Item key="2" icon={<ShopOutlined />}>
+        <Menu.Item key="stationUser" icon={<ShopOutlined />}>
             <Link to={Routes.stationUser}>{i18next.t('StationUsers.Menu.Title')}</Link>
         </Menu.Item>
     </Menu>)

@@ -14,8 +14,6 @@ import {message} from "antd";
 import UserContext from "../../../identity/contexts/UserContext";
 
 export default class GetPetroStationViewModel {
-    searchText: string;
-    showArchived: boolean;
     columns: any[];
     petroStationList: PetroStationItem[];
     totalSize: number;
@@ -88,40 +86,5 @@ export default class GetPetroStationViewModel {
             this.isProcessing = false;
         }
     }
-
-    /*public search(searchText: string){
-         this.petroStationList = this.completePetroStationList.filter(w => w.name.toUpperCase().includes(searchText.toUpperCase()));
-    }*/
-
-    /*public async addPetroStation(request: AddPetroStationRequest)
-    {
-        try
-        {
-            this.isProcessing = true;
-            this.errorMessage = "";
-            let response = await AddPetroStationHandler.add(request);
-
-            if(response && response.success)
-            {
-                message.success(getLocalizedString(response.message));
-                this.addPetroStationRequest = new AddPetroStationRequest();
-                await this.getAllAuditingPetroStations(this.showArchived);
-            }
-            else{
-                this.errorMessage = getLocalizedString(response.message);
-                message.error(this.errorMessage);
-            }
-        }
-        catch(e)
-        {
-            this.errorMessage = i18next.t('PetroStations.Error.Add.Message');
-            message.error(this.errorMessage);
-            log.error(e);
-        }
-        finally
-        {
-            this.isProcessing = false;
-        }
-    }*/
 
 }

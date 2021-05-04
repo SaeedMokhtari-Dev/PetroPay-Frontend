@@ -9,7 +9,7 @@
   "General.Add.SaveButton": "Save",
   "General.Add.CancelButton": "Cancel",
   "General.Confirm.Delete": "Are you sure to delete?",
-  "General.Confirm.Accept": "Are you sure to accept?",
+  "General.Confirm.Active": "Are you sure to active?",
 
 
   "General.HeaderMenu.User": "Hi",
@@ -373,6 +373,47 @@
   "RechargeBalances.Error.Edit.Message": "An error has occurred while trying to edit recharge balance.",
   "RechargeBalances.Error.Delete.Message": "An error has occurred while trying to delete recharge balance.",
 
+  "Subscriptions.Menu.Title": "Subscription Request",
+  "Subscriptions.Page.Title": "Subscription Request",
+  "Subscriptions.Page.SubTitle": "This page is for define Subscription Requests",
+  "Subscriptions.Label.key": "key",
+  "Subscriptions.Label.subscriptionId": "subscriptionId",
+  "Subscriptions.Label.companyId": "companyId",
+  "Subscriptions.Label.bundlesId": "bundlesId",
+  "Subscriptions.Label.subscriptionCarNumbers": "subscriptionCarNumbers",
+  "Subscriptions.Label.subscriptionPaymentMethod": "subscriptionPaymentMethod",
+  "Subscriptions.Label.subscriptionType": "subscriptionType",
+  "Subscriptions.Label.subscriptionStartDate": "subscriptionStartDate",
+  "Subscriptions.Label.subscriptionEndDate": "subscriptionEndDate",
+  "Subscriptions.Label.subscriptionCost": "subscriptionCost",
+  "Subscriptions.Label.subscriptionActive": "subscriptionActive",
+  "Subscriptions.Label.paymentReferenceNumber": "paymentReferenceNumber",
+  "Subscriptions.Label.subscriptionDate": "subscriptionDate",
+
+
+  "Subscriptions.Add.HeaderText": "Add Subscription",
+  "Subscriptions.Edit.HeaderText": "Edit Subscription with Id:",
+  "Subscriptions.Section.GeneralInformation": "General Information",
+  "Subscriptions.Button.AcceptRequest": "Accept Request",
+
+  "Subscriptions.Validation.Message.rechargeAmount.Required": "Please enter recharge amount",
+  "Subscriptions.Validation.Message.rechargePaymentMethod.Required": "Please enter recharge payment method",
+
+  "Api.Subscription.Add.Successful": "A new subscription request added successfully",
+  "Api.Subscription.Edit.Successful": "selected subscription request edited successfully",
+  "Api.Subscription.Deleted.Successful": "selected subscription request deleted successfully",
+  "Api.Subscription.Activated.Successful": "selected subscription activated successfully",
+  "Api.Subscription.companyId.Required": "Company Id is Required",
+  "Api.Subscription.Id.Required": "Id is Required",
+  "Api.Subscription.ConfirmedEntityEdit.NotAllowed": "Confirmed Balance Request cannot edit.",
+
+  "Subscriptions.Error.Get.Message": "An error has occurred while trying to get subscriptions list.",
+  "Subscriptions.Error.Detail.Message": "An error has occurred while trying to get subscription details.",
+  "Subscriptions.Error.Add.Message": "An error has occurred while trying to add new subscription.",
+  "Subscriptions.Error.Edit.Message": "An error has occurred while trying to edit subscription.",
+  "Subscriptions.Error.Delete.Message": "An error has occurred while trying to delete subscription.",
+
+
 
   "General.Country.Egypt": "Egypt",
   "General.Region.Alexandria": "Alexandria",
@@ -419,5 +460,8 @@
   "General.PaymentMethod.Cash": "Cash",
   "General.PaymentMethod.BankTransfer": "Bank Transfer",
   "General.PaymentMethod.Check": "Check",
-  "General.PaymentMethod.Credit": "Credit"
+  "General.PaymentMethod.Credit": "Credit",
+  "General.SubscriptionType.Monthly": "Monthly",
+  "General.SubscriptionType.Quarterly": "Quarterly",
+  "General.SubscriptionType.Yearly": "Yearly"
 }

@@ -28,6 +28,11 @@ export default
     editRechargeBalance: "/app/rechargeBalance/edit/:rechargeBalanceId",
     addRechargeBalance: "/app/rechargeBalance/add",
 
+    // Subscription
+    subscription: "/app/subscription",
+    editSubscription: "/app/subscription/edit/:subscriptionId",
+    addSubscription: "/app/subscription/add",
+
     // Branch
     branch: "/app/branch",
     editBranch: "/app/branch/edit/:branchId",

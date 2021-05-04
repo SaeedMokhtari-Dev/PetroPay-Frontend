@@ -14,8 +14,6 @@ import {message} from "antd";
 import UserContext from "../../../identity/contexts/UserContext";
 
 export default class GetCarViewModel {
-    searchText: string;
-    showArchived: boolean;
     columns: any[];
     carList: CarItem[];
     totalSize: number;
@@ -88,40 +86,5 @@ export default class GetCarViewModel {
             this.isProcessing = false;
         }
     }
-
-    /*public search(searchText: string){
-         this.carList = this.completeCarList.filter(w => w.name.toUpperCase().includes(searchText.toUpperCase()));
-    }*/
-
-    /*public async addCar(request: AddCarRequest)
-    {
-        try
-        {
-            this.isProcessing = true;
-            this.errorMessage = "";
-            let response = await AddCarHandler.add(request);
-
-            if(response && response.success)
-            {
-                message.success(getLocalizedString(response.message));
-                this.addCarRequest = new AddCarRequest();
-                await this.getAllAuditingCars(this.showArchived);
-            }
-            else{
-                this.errorMessage = getLocalizedString(response.message);
-                message.error(this.errorMessage);
-            }
-        }
-        catch(e)
-        {
-            this.errorMessage = i18next.t('Cars.Error.Add.Message');
-            message.error(this.errorMessage);
-            log.error(e);
-        }
-        finally
-        {
-            this.isProcessing = false;
-        }
-    }*/
 
 }

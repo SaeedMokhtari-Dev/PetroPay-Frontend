@@ -13,8 +13,6 @@ import DeleteCompanyRequest from "../handlers/delete/DeleteCompanyRequest";
 import {message} from "antd";
 
 export default class GetCompanyViewModel {
-    searchText: string;
-    showArchived: boolean;
     columns: any[];
     companyList: CompanyItem[];
     totalSize: number;
@@ -86,40 +84,5 @@ export default class GetCompanyViewModel {
             this.isProcessing = false;
         }
     }
-
-    /*public search(searchText: string){
-         this.companyList = this.completeCompanyList.filter(w => w.name.toUpperCase().includes(searchText.toUpperCase()));
-    }*/
-
-    /*public async addCompany(request: AddCompanyRequest)
-    {
-        try
-        {
-            this.isProcessing = true;
-            this.errorMessage = "";
-            let response = await AddCompanyHandler.add(request);
-
-            if(response && response.success)
-            {
-                message.success(getLocalizedString(response.message));
-                this.addCompanyRequest = new AddCompanyRequest();
-                await this.getAllAuditingCompanies(this.showArchived);
-            }
-            else{
-                this.errorMessage = getLocalizedString(response.message);
-                message.error(this.errorMessage);
-            }
-        }
-        catch(e)
-        {
-            this.errorMessage = i18next.t('Companies.Error.Add.Message');
-            message.error(this.errorMessage);
-            log.error(e);
-        }
-        finally
-        {
-            this.isProcessing = false;
-        }
-    }*/
 
 }

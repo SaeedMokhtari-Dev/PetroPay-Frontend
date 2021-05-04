@@ -38,6 +38,7 @@ export default
     apiCarGet: "/api/car/get",
     apiCarDetail: "/api/car/detail",
     apiCarDelete: "/api/car/delete",
+    apiCarList: "/api/car/list",
 
     apiBundleAdd: "/api/bundle/add",
     apiBundleEdit: "/api/bundle/edit",
@@ -51,6 +52,13 @@ export default
     apiRechargeBalanceDetail: "/api/recharge-balance/detail",
     apiRechargeBalanceDelete: "/api/recharge-balance/delete",
     apiRechargeBalanceConfirm: "/api/recharge-balance/confirm",
+
+    apiSubscriptionAdd: "/api/subscription/add",
+    apiSubscriptionEdit: "/api/subscription/edit",
+    apiSubscriptionGet: "/api/subscription/get",
+    apiSubscriptionDetail: "/api/subscription/detail",
+    apiSubscriptionDelete: "/api/subscription/delete",
+    apiSubscriptionActive: "/api/subscription/active",
 
     apiLog: "/api/log"
 }

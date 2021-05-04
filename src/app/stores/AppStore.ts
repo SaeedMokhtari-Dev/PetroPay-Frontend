@@ -10,6 +10,7 @@ import PetroStationStore from "../../entities/petro-stations/stores/PetroStation
 import StationUserStore from "../../entities/station-users/stores/StationUserStore";
 import CarStore from "../../entities/cars/stores/CarStore";
 import RechargeBalanceStore from "../../entities/recharge-balances/stores/RechargeBalanceStore";
+import SubscriptionStore from "../../entities/Subscriptions/stores/SubscriptionStore";
 
 export class AppStore
 {
@@ -25,6 +26,7 @@ export class AppStore
     stationUser: StationUserStore;
     car: CarStore;
     rechargeBalance: RechargeBalanceStore;
+    subscription: SubscriptionStore;
 
     constructor()
     {
@@ -40,5 +42,6 @@ export class AppStore
         this.stationUser = new StationUserStore(this);
         this.car = new CarStore(this);
         this.rechargeBalance = new RechargeBalanceStore(this);
+        this.subscription = new SubscriptionStore(this);
     }
 }

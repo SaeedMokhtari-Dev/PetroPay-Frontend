@@ -13,8 +13,6 @@ import DeleteBundleRequest from "../handlers/delete/DeleteBundleRequest";
 import {message} from "antd";
 
 export default class GetBundleViewModel {
-    searchText: string;
-    showArchived: boolean;
     columns: any[];
     bundleList: BundleItem[];
     totalSize: number;
@@ -87,40 +85,5 @@ export default class GetBundleViewModel {
             this.isProcessing = false;
         }
     }
-
-    /*public search(searchText: string){
-         this.bundleList = this.completeBundleList.filter(w => w.name.toUpperCase().includes(searchText.toUpperCase()));
-    }*/
-
-    /*public async addBundle(request: AddBundleRequest)
-    {
-        try
-        {
-            this.isProcessing = true;
-            this.errorMessage = "";
-            let response = await AddBundleHandler.add(request);
-
-            if(response && response.success)
-            {
-                message.success(getLocalizedString(response.message));
-                this.addBundleRequest = new AddBundleRequest();
-                await this.getAllAuditingBundles(this.showArchived);
-            }
-            else{
-                this.errorMessage = getLocalizedString(response.message);
-                message.error(this.errorMessage);
-            }
-        }
-        catch(e)
-        {
-            this.errorMessage = i18next.t('Bundles.Error.Add.Message');
-            message.error(this.errorMessage);
-            log.error(e);
-        }
-        finally
-        {
-            this.isProcessing = false;
-        }
-    }*/
 
 }

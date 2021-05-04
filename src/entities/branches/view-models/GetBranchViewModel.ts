@@ -14,8 +14,6 @@ import {message} from "antd";
 import UserContext from "../../../identity/contexts/UserContext";
 
 export default class GetBranchViewModel {
-    searchText: string;
-    showArchived: boolean;
     columns: any[];
     branchList: BranchItem[];
     totalSize: number;
@@ -88,40 +86,5 @@ export default class GetBranchViewModel {
             this.isProcessing = false;
         }
     }
-
-    /*public search(searchText: string){
-         this.branchList = this.completeBranchList.filter(w => w.name.toUpperCase().includes(searchText.toUpperCase()));
-    }*/
-
-    /*public async addBranch(request: AddBranchRequest)
-    {
-        try
-        {
-            this.isProcessing = true;
-            this.errorMessage = "";
-            let response = await AddBranchHandler.add(request);
-
-            if(response && response.success)
-            {
-                message.success(getLocalizedString(response.message));
-                this.addBranchRequest = new AddBranchRequest();
-                await this.getAllAuditingBranchs(this.showArchived);
-            }
-            else{
-                this.errorMessage = getLocalizedString(response.message);
-                message.error(this.errorMessage);
-            }
-        }
-        catch(e)
-        {
-            this.errorMessage = i18next.t('Branchs.Error.Add.Message');
-            message.error(this.errorMessage);
-            log.error(e);
-        }
-        finally
-        {
-            this.isProcessing = false;
-        }
-    }*/
 
 }

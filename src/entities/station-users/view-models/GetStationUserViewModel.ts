@@ -14,8 +14,6 @@ import {message} from "antd";
 import UserContext from "../../../identity/contexts/UserContext";
 
 export default class GetStationUserViewModel {
-    searchText: string;
-    showArchived: boolean;
     columns: any[];
     stationUserList: StationUserItem[];
     totalSize: number;
@@ -88,40 +86,5 @@ export default class GetStationUserViewModel {
             this.isProcessing = false;
         }
     }
-
-    /*public search(searchText: string){
-         this.stationUserList = this.completeStationUserList.filter(w => w.name.toUpperCase().includes(searchText.toUpperCase()));
-    }*/
-
-    /*public async addStationUser(request: AddStationUserRequest)
-    {
-        try
-        {
-            this.isProcessing = true;
-            this.errorMessage = "";
-            let response = await AddStationUserHandler.add(request);
-
-            if(response && response.success)
-            {
-                message.success(getLocalizedString(response.message));
-                this.addStationUserRequest = new AddStationUserRequest();
-                await this.getAllAuditingStationUsers(this.showArchived);
-            }
-            else{
-                this.errorMessage = getLocalizedString(response.message);
-                message.error(this.errorMessage);
-            }
-        }
-        catch(e)
-        {
-            this.errorMessage = i18next.t('StationUsers.Error.Add.Message');
-            message.error(this.errorMessage);
-            log.error(e);
-        }
-        finally
-        {
-            this.isProcessing = false;
-        }
-    }*/
 
 }

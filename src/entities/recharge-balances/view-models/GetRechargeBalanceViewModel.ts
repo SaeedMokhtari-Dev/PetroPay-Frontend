@@ -16,8 +16,6 @@ import ConfirmRechargeBalanceHandler from "../handlers/confirm/ConfirmRechargeBa
 import ConfirmRechargeBalanceRequest from "../handlers/confirm/ConfirmRechargeBalanceRequest";
 
 export default class GetRechargeBalanceViewModel {
-    searchText: string;
-    showArchived: boolean;
     columns: any[];
     rechargeBalanceList: RechargeBalanceItem[];
     totalSize: number;
@@ -127,40 +125,5 @@ export default class GetRechargeBalanceViewModel {
             this.isProcessing = false;
         }
     }
-
-    /*public search(searchText: string){
-         this.rechargeBalanceList = this.completeRechargeBalanceList.filter(w => w.name.toUpperCase().includes(searchText.toUpperCase()));
-    }*/
-
-    /*public async addRechargeBalance(request: AddRechargeBalanceRequest)
-    {
-        try
-        {
-            this.isProcessing = true;
-            this.errorMessage = "";
-            let response = await AddRechargeBalanceHandler.add(request);
-
-            if(response && response.success)
-            {
-                message.success(getLocalizedString(response.message));
-                this.addRechargeBalanceRequest = new AddRechargeBalanceRequest();
-                await this.getAllAuditingRechargeBalances(this.showArchived);
-            }
-            else{
-                this.errorMessage = getLocalizedString(response.message);
-                message.error(this.errorMessage);
-            }
-        }
-        catch(e)
-        {
-            this.errorMessage = i18next.t('RechargeBalances.Error.Add.Message');
-            message.error(this.errorMessage);
-            log.error(e);
-        }
-        finally
-        {
-            this.isProcessing = false;
-        }
-    }*/
 
 }
