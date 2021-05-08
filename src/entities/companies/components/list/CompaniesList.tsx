@@ -11,7 +11,7 @@ import {
 } from "antd";
 import {
     EditOutlined, DeleteOutlined,
-    ExclamationCircleOutlined, PlusCircleOutlined
+    ExclamationCircleOutlined, PlusCircleOutlined, BranchesOutlined
 } from '@ant-design/icons';
 import GetCompaniesRequest from "../../handlers/get/GetCompaniesRequest";
 import i18next from "i18next";
@@ -19,9 +19,7 @@ import CompaniesColumns from "./ComaniesColumns";
 import EditCompany from "../company/EditCompany";
 import AddCompanyRequest from "../../handlers/add/AddCompanyRequest";
 import Routes from "../../../../app/constants/Routes";
-import NavigationService from "../../../../app/services/NavigationService";
-import DetailCompanyResponse from "../../handlers/detail/DetailCompanyResponse";
-
+import { Link } from "react-router-dom";
 
 const { confirm } = Modal;
 
@@ -51,9 +49,12 @@ const CompaniesList: React.FC<CompaniesSidebarProps> = inject(Stores.companiesSt
         fixed: 'right',
         render: (text, record) => (
             <div className="inline">
-
-                    <Button type="primary" icon={<EditOutlined />} onClick={() => showEditPage(record)}
-                            title={i18next.t("General.Button.Edit")} />
+                <Link to={`/app/branch/${record.key}`} title={i18next.t("Companies.Button.Branches")}>
+                    <Button type="default" icon={<BranchesOutlined />}
+                            title={i18next.t("Companies.Button.Branches")} />
+                </Link>
+                <Button type="primary" icon={<EditOutlined />} onClick={() => showEditPage(record)}
+                        title={i18next.t("General.Button.Edit")} />
                 <Button type="primary" danger icon={<DeleteOutlined />} onClick={() => showDeleteConfirm(record)}
                         title={i18next.t("General.Button.Delete")} />
             </div>

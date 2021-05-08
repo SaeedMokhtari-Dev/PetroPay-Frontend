@@ -32,6 +32,7 @@ export default
     apiBranchGet: "/api/branch/get",
     apiBranchDetail: "/api/branch/detail",
     apiBranchDelete: "/api/branch/delete",
+    apiBranchActive: "/api/branch/active",
 
     apiCarAdd: "/api/car/add",
     apiCarEdit: "/api/car/edit",
@@ -39,6 +40,7 @@ export default
     apiCarDetail: "/api/car/detail",
     apiCarDelete: "/api/car/delete",
     apiCarList: "/api/car/list",
+    apiCarActive: "/api/car/active",
 
     apiBundleAdd: "/api/bundle/add",
     apiBundleEdit: "/api/bundle/edit",
@@ -59,6 +61,11 @@ export default
     apiSubscriptionDetail: "/api/subscription/detail",
     apiSubscriptionDelete: "/api/subscription/delete",
     apiSubscriptionActive: "/api/subscription/active",
+    apiSubscriptionCalculate: "/api/subscription/calculate",
+    apiSubscriptionCarAdd: "/api/subscription/car-add",
+
+    apiInvoiceSummaryGet: "/api/invoice-summary/get",
+    apiInvoiceDetailGet: "/api/invoice-detail/get",
 
     apiLog: "/api/log"
 }

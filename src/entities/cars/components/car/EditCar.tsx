@@ -354,31 +354,10 @@ const EditCar: React.FC<EditCarProps> = inject(Stores.carStore)(observer(({carSt
                             </Form.Item>
                         </Col>
                         <Col span={8}>
-                            <Form.Item name="carWorkWithApproval" initialValue={viewModel?.detailCarResponse?.carWorkWithApproval}
-                                       key={"carWorkWithApproval"}
-                                       label={i18next.t("Cars.Label.carWorkWithApproval")}>
-                                <Switch onChange={(e) => onSwitchChange(e, 'carWorkWithApproval')} defaultChecked={viewModel?.detailCarResponse?.carWorkWithApproval} />
-                            </Form.Item>
-                        </Col>
-                        <Col span={8}>
-                            <Form.Item name="carApprovedOneTime" initialValue={viewModel?.detailCarResponse?.carApprovedOneTime}
-                                       key={"carApprovedOneTime"}
-                                       label={i18next.t("Cars.Label.carApprovedOneTime")}>
-                                <Switch onChange={(e) => onSwitchChange(e, 'carApprovedOneTime')} defaultChecked={viewModel?.detailCarResponse?.carApprovedOneTime} />
-                            </Form.Item>
-                        </Col>
-                        <Col span={8}>
                             <Form.Item name="workAllDays" initialValue={viewModel?.detailCarResponse?.workAllDays}
                                        key={"workAllDays"}
                                        label={i18next.t("Cars.Label.workAllDays")}>
                                 <Switch onChange={(e) => onSwitchChange(e, 'workAllDays')} defaultChecked={viewModel?.detailCarResponse?.workAllDays} />
-                            </Form.Item>
-                        </Col>
-                        <Col span={8}>
-                            <Form.Item name="carNfcCode" initialValue={viewModel?.detailCarResponse?.carNfcCode}
-                                       key={"carNfcCode"}
-                                       label={i18next.t("Cars.Label.carNfcCode")}>
-                                <Input onChange={onChanged}/>
                             </Form.Item>
                         </Col>
 

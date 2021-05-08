@@ -37,6 +37,8 @@ import RechargeBalanceList from "../../entities/recharge-balances/components/lis
 import EditRechargeBalance from "../../entities/recharge-balances/components/recharge-balance/EditRechargeBalance";
 import SubscriptionList from "../../entities/Subscriptions/components/list/SubscriptionList";
 import EditSubscription from "../../entities/Subscriptions/components/subscription/EditSubscription";
+import InvoiceSummaryList from "../../reports/InvoiceSummaries/components/list/InvoiceSummaryList";
+import InvoiceDetail from "../../reports/InvoiceDetails/components/detail/InvoiceDetail";
 
 const App: React.FC = () =>
 {
@@ -72,7 +74,7 @@ const App: React.FC = () =>
                                     {/* All Roles */}
                                     <Route exact path={Routes.app} component={Dashboard} />
 
-                                    {/* Superadmin */}
+                                    {/* Entities */}
                                     <Route exact roles={[RoleType.admin]} path={Routes.company} component={CompaniesList} />
                                     <Route exact roles={[RoleType.admin]} path={Routes.editCompany} component={EditCompany} />
                                     <Route exact roles={[RoleType.admin]} path={Routes.addCompany} component={EditCompany} />
@@ -86,6 +88,7 @@ const App: React.FC = () =>
                                     <Route exact roles={[RoleType.admin]} path={Routes.editPetroStation} component={EditPetroStation} />
 
                                     <Route exact roles={[RoleType.customer]} path={Routes.branch} component={BranchList} />
+                                    <Route exact roles={[RoleType.customer]} path={Routes.branchList} component={BranchList} />
                                     <Route exact roles={[RoleType.customer]} path={Routes.editBranch} component={EditBranch} />
                                     <Route exact roles={[RoleType.customer]} path={Routes.addBranch} component={EditBranch} />
 
@@ -105,7 +108,9 @@ const App: React.FC = () =>
                                     <Route exact roles={[RoleType.customer]} path={Routes.editSubscription} component={EditSubscription} />
                                     <Route exact roles={[RoleType.customer]} path={Routes.addSubscription} component={EditSubscription} />
 
-                                    {/* Admin */}
+                                    {/* Reports */}
+                                    <Route exact roles={[RoleType.customer]} path={Routes.invoiceSummary} component={InvoiceSummaryList} />
+                                    <Route exact roles={[RoleType.customer]} path={Routes.invoiceDetail} component={InvoiceDetail} />
 
                                     <Route component={NotFoundPage} />
                                 </Switch>

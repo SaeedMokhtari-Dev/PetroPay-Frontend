@@ -2,9 +2,9 @@ import IDeserialize from "app/interfaces/deserialize";
 
 export default class DetailSubscriptionResponse implements IDeserialize
 {
-    key: number;
     subscriptionId: number;
     companyId: number;
+    companyName: string;
     bundlesId: number;
     subscriptionCarNumbers: number;
     subscriptionPaymentMethod: string;

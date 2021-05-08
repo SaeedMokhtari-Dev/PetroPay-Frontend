@@ -2,7 +2,6 @@ import {makeAutoObservable} from "mobx";
 
 export default class AddSubscriptionRequest
 {
-    subscriptionId: number;
     companyId: number;
     bundlesId: number;
     subscriptionCarNumbers: number;

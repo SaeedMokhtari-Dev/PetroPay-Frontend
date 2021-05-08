@@ -6,6 +6,7 @@ export default class SubscriptionItem implements IDeserialize
     key: number;
     subscriptionId: number;
     companyId: number;
+    companyName: string;
     bundlesId: number;
     subscriptionCarNumbers: number;
     subscriptionPaymentMethod: string;

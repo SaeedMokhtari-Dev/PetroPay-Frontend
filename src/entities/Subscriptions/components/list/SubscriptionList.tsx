@@ -14,13 +14,14 @@ import {
     ExclamationCircleOutlined, PlusCircleOutlined, CheckCircleOutlined
 } from '@ant-design/icons';
 import i18next from "i18next";
-import SubscriptionColumns from "./SubscriptionColumns";
 import AddSubscriptionRequest from "../../handlers/add/AddSubscriptionRequest";
 import Routes from "../../../../app/constants/Routes";
 import NavigationService from "../../../../app/services/NavigationService";
 import GetSubscriptionRequest from "../../handlers/get/GetSubscriptionRequest";
-import SubscriptionStore from "../../stores/SubscriptionStore";
 import UserContext from "../../../../identity/contexts/UserContext";
+import SubscriptionStore from 'entities/Subscriptions/stores/SubscriptionStore';
+import SubscriptionColumns from "./SubscriptionColumns";
+
 
 const { confirm } = Modal;
 
@@ -31,12 +32,6 @@ interface SubscriptionListProps {
 
 
 const SubscriptionList: React.FC<SubscriptionListProps> = inject(Stores.subscriptionStore)(observer(({subscriptionStore}) => {
-    useEffect(() => {
-        onLoad();
-
-        return onUnload;
-    }, []);
-
     SubscriptionColumns.forEach(w => {
        w.title = i18next.t(w.title);
         if(w.key == "subscriptionActive")
@@ -46,7 +41,11 @@ const SubscriptionList: React.FC<SubscriptionListProps> = inject(Stores.subscrip
             }
         }
     });
-    const columns: any[] = [...SubscriptionColumns, {
+
+
+    const columns: any[] = [...SubscriptionColumns,
+        {title: i18next.t("Subscriptions.Label.companyName"), dataIndex: "companyName", key: "companyName", responsive: ['md']},
+        {
         title: i18next.t("General.Column.Action"),
         dataIndex: 'operation',
         key: 'action',
@@ -57,7 +56,7 @@ const SubscriptionList: React.FC<SubscriptionListProps> = inject(Stores.subscrip
                 (
                     <div>
                         <Button type="default"  icon={<CheckCircleOutlined />} onClick={() => showActivation(record)}
-                                title={i18next.t("Subscriptions.Button.ActiveRequest")} style={{ background: "green", borderColor: "white" }}/>
+                                title={i18next.t("Subscriptions.Button.AcceptRequest")} style={{ background: "green", borderColor: "white" }}/>
                     </div>
                 )}
                 {!record.subscriptionActive &&
@@ -65,24 +64,52 @@ const SubscriptionList: React.FC<SubscriptionListProps> = inject(Stores.subscrip
                        <div>
                            <Button type="primary" icon={<EditOutlined/>} onClick={() => showEditPage(record)}
                                    title={i18next.t("General.Button.Edit")}/>
+                           <Button type="primary" icon={<EditOutlined/>} onClick={() => showEditPage(record)}
+                                   title={i18next.t("General.Button.Edit")}/>
                            <Button type="primary" danger icon={<DeleteOutlined/>}
                            onClick={() => showDeleteConfirm(record)}
                            title={i18next.t("General.Button.Delete")}/>
                        </div>
                      )
-                };
+                }
             </div>
         )
     }];
+
+    useEffect(() => {
+        onLoad();
+
+        return onUnload;
+    }, []);
+
+    async function onLoad() {
+        subscriptionStore.onSubscriptionGetPageLoad();
+        //subscriptionStore.onSubscriptionEditPageLoad();
+        subscriptionStore.getSubscriptionViewModel.pageIndex = 0;
+        subscriptionStore.getSubscriptionViewModel.pageSize = 20;
+        debugger;
+        if(UserContext.info.role == 100) {
+            await subscriptionStore.getSubscriptionViewModel.getAllSubscription(new GetSubscriptionRequest(
+                20, 0));
+        }
+        else if(UserContext.info.role == 1)
+            await subscriptionStore.getSubscriptionViewModel.getAllSubscription(new GetSubscriptionRequest(
+                20, 0, UserContext.info.id));
+    }
+
+    let viewModel = subscriptionStore.getSubscriptionViewModel;
+
+    if (!viewModel) return;
+
     async function showEditPage(e){
-        subscriptionStore.editSubscriptionViewModel.key = e.key;
+        debugger;
         if(e.key)
         {
-            await subscriptionStore.editSubscriptionViewModel.getDetailSubscription(e.key);
+            //await subscriptionStore.editSubscriptionViewModel.getDetailSubscription(e.key);
             NavigationService.navigate(`/app/subscription/edit/${e.key}`);
         }
         else{
-            subscriptionStore.editSubscriptionViewModel.addSubscriptionRequest = new AddSubscriptionRequest();
+            //subscriptionStore.editSubscriptionViewModel.addSubscriptionRequest = new AddSubscriptionRequest();
             NavigationService.navigate(Routes.addSubscription);
         }
     }
@@ -110,9 +137,7 @@ const SubscriptionList: React.FC<SubscriptionListProps> = inject(Stores.subscrip
             onCancel() {},
         });
     }
-    let viewModel = subscriptionStore.getSubscriptionViewModel;
 
-    if (!viewModel) return;
 
     async function onDelete(key: number){
         await viewModel.deleteSubscription(key);
@@ -122,22 +147,11 @@ const SubscriptionList: React.FC<SubscriptionListProps> = inject(Stores.subscrip
         await viewModel.activeSubscription(key);
     }
 
-    async function onLoad() {
-        subscriptionStore.onSubscriptionGetPageLoad();
-        subscriptionStore.onSubscriptionEditPageLoad();
-        subscriptionStore.getSubscriptionViewModel.pageIndex = 0;
-        subscriptionStore.getSubscriptionViewModel.pageSize = 20;
-        if(UserContext.info.role == 100)
-            await subscriptionStore.getSubscriptionViewModel.getAllSubscription(new GetSubscriptionRequest(
-                20, 0));
-        else if(UserContext.info.role == 1)
-            await subscriptionStore.getSubscriptionViewModel.getAllSubscription(new GetSubscriptionRequest(
-                20, 0, UserContext.info.id));
-    }
+
 
     function onUnload() {
         subscriptionStore.onSubscriptionGetPageUnload();
-        subscriptionStore.onSubscriptionEditPageUnload();
+        //subscriptionStore.onSubscriptionEditPageUnload();
     }
 
     async function pageIndexChanged(pageIndex, pageSize){
@@ -168,7 +182,7 @@ const SubscriptionList: React.FC<SubscriptionListProps> = inject(Stores.subscrip
                 title={i18next.t("Subscriptions.Page.Title")}
                 subTitle={i18next.t("Subscriptions.Page.SubTitle")}
                 extra={[
-                        <Button key={"Add"} type="primary" icon={<PlusCircleOutlined />} onClick={showEditPage}>
+                        <Button hidden={UserContext.info.role == 100} key={"Add"} type="primary" icon={<PlusCircleOutlined />} onClick={showEditPage}>
                             {i18next.t("General.Button.Add")}
                         </Button>
                     ,

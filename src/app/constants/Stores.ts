@@ -13,4 +13,6 @@ export default {
     carStore: 'carStore',
     rechargeBalanceStore: 'rechargeBalanceStore',
     subscriptionStore: 'subscriptionStore',
+    invoiceSummaryStore: 'invoiceSummaryStore',
+    invoiceDetailStore: 'invoiceDetailStore',
 }

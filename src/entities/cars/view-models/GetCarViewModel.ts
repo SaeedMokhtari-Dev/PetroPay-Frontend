@@ -12,6 +12,9 @@ import DeleteCarHandler from "../handlers/delete/DeleteCarHandler";
 import DeleteCarRequest from "../handlers/delete/DeleteCarRequest";
 import {message} from "antd";
 import UserContext from "../../../identity/contexts/UserContext";
+import ActiveCarRequest from "../handlers/active/ActiveCarRequest";
+import ActiveBranchHandler from "../../branches/handlers/active/ActiveBranchHandler";
+import ActiveCarHandler from "../handlers/active/ActiveCarHandler";
 
 export default class GetCarViewModel {
     columns: any[];
@@ -23,8 +26,10 @@ export default class GetCarViewModel {
     pageSize: number;
     companyBranchId: number;
 
-    addCarRequest: AddCarRequest = new AddCarRequest();
+    addCarRequest: AddCarRequest;
     addedSuccessfully: boolean;
+
+    activeCarRequest: ActiveCarRequest = new ActiveCarRequest();
 
     constructor(public carStore: CarStore) {
         makeAutoObservable(this);
@@ -64,6 +69,35 @@ export default class GetCarViewModel {
             let request = new DeleteCarRequest();
             request.carId = key;
             let response = await DeleteCarHandler.delete(request);
+
+            if(response && response.success)
+            {
+                message.success(getLocalizedString(response.message));
+                await this.getAllCar(new GetCarRequest(companyBranchId, this.pageSize, this.pageIndex));
+            }
+            else{
+                this.errorMessage = getLocalizedString(response.message);
+                message.error(this.errorMessage);
+            }
+        }
+        catch(e)
+        {
+            this.errorMessage = i18next.t('Cars.Error.Delete.Message');
+            message.error(this.errorMessage);
+            log.error(e);
+        }
+        finally
+        {
+            this.isProcessing = false;
+        }
+    }
+    public async activeCar(request: ActiveCarRequest, companyBranchId: number)
+    {
+        try
+        {
+            this.errorMessage = "";
+
+            let response = await ActiveCarHandler.active(request);
 
             if(response && response.success)
             {

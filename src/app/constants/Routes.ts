@@ -31,12 +31,14 @@ export default
     // Subscription
     subscription: "/app/subscription",
     editSubscription: "/app/subscription/edit/:subscriptionId",
+    carAddSubscription: "/app/subscription/carAdd/:subscriptionId",
     addSubscription: "/app/subscription/add",
 
     // Branch
     branch: "/app/branch",
+    branchList: "/app/branch/:companyId",
     editBranch: "/app/branch/edit/:branchId",
-    addBranch: "/app/branch/add",
+    addBranch: "/app/branch/add/new",
 
     // Car
     car: "/app/car/:companyBranchId/list",
@@ -48,15 +50,7 @@ export default
     editBundle: "/app/bundle/edit/:bundleId",
     addBundle: "/app/bundle/add",
 
-    admins: "/app/company/:companyId/admins/:adminId?",
-
-    // Admin
-    auditors: "/app/auditors/:auditorId?",
-
-    // Auditor
-    mandants: "/app/mandants/:mandantId?",
-
-    // User
-
-    // Debtor
+    //Reports
+    invoiceSummary: '/app/invoiceSummary',
+    invoiceDetail: '/app/invoiceDetail/:invoiceId',
 }

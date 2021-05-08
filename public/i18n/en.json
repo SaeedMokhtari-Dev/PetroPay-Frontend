@@ -25,8 +25,11 @@
   "General.Reload.Application": "Reload the application",
 
   "General.Email.Valid": "Please enter a valid email address",
+  "General.Menu.Reports": "Reports",
 
-
+  "General.SearchPanel.Text": "Search Panel",
+  "General.SearchPanel.SearchButton": "Search",
+  "General.SearchPanel.ResetButton": "Reset",
 
   "Dashboard.Menu.Title": "Dashboard",
   "Dashboard.Admin.Title": "Admin Dashboard",
@@ -99,6 +102,7 @@
   "Companies.Edit.HeaderText": "Edit Company with Id:",
   "Companies.Section.GeneralInformation": "General Information",
   "Companies.Section.LoginInformation": "Login Information",
+  "Companies.Button.Branches": "Branches",
 
   "Companies.Validation.Message.companyName.Required": "Please enter company name",
   "Companies.Validation.Message.companyCommercialNumber.Required": "Please enter commercial number",
@@ -316,6 +320,9 @@
   "Cars.Add.HeaderText": "Add Car",
   "Cars.Edit.HeaderText": "Edit Car with Id:",
   "Cars.Section.GeneralInformation": "General Information",
+  "Cars.Button.ActiveAndNfcCode": "Active And Set Nfc Code",
+  "Cars.Modal.Active.Title": "Please specify NFC Code and Activate the car.",
+  "Cars.Modal.OkButton.Title": "Active",
 
   "Cars.Validation.Message.carIdNumber.Required": "Please enter carId Number",
   "Cars.Validation.Message.carDriverName.Required": "Please enter Car Driver Name",
@@ -379,6 +386,7 @@
   "Subscriptions.Label.key": "key",
   "Subscriptions.Label.subscriptionId": "subscriptionId",
   "Subscriptions.Label.companyId": "companyId",
+  "Subscriptions.Label.companyName": "companyName",
   "Subscriptions.Label.bundlesId": "bundlesId",
   "Subscriptions.Label.subscriptionCarNumbers": "subscriptionCarNumbers",
   "Subscriptions.Label.subscriptionPaymentMethod": "subscriptionPaymentMethod",
@@ -395,9 +403,11 @@
   "Subscriptions.Edit.HeaderText": "Edit Subscription with Id:",
   "Subscriptions.Section.GeneralInformation": "General Information",
   "Subscriptions.Button.AcceptRequest": "Accept Request",
+  "Subscriptions.Button.Calculate": "Calculate cost",
 
-  "Subscriptions.Validation.Message.rechargeAmount.Required": "Please enter recharge amount",
-  "Subscriptions.Validation.Message.rechargePaymentMethod.Required": "Please enter recharge payment method",
+  "Subscriptions.Validation.Message.subscriptionCarNumbers.Required": "Please enter Subscription Car Numbers",
+  "Subscriptions.Validation.Message.subscriptionPaymentMethod.Required": "Please enter Subscription Payment Method",
+  "Subscriptions.Validation.Message.subscriptionType.Required": "Please enter Subscription Type Method",
 
   "Api.Subscription.Add.Successful": "A new subscription request added successfully",
   "Api.Subscription.Edit.Successful": "selected subscription request edited successfully",
@@ -412,7 +422,67 @@
   "Subscriptions.Error.Add.Message": "An error has occurred while trying to add new subscription.",
   "Subscriptions.Error.Edit.Message": "An error has occurred while trying to edit subscription.",
   "Subscriptions.Error.Delete.Message": "An error has occurred while trying to delete subscription.",
+  "Subscriptions.Error.Calculate.Message": "An error has occurred while trying to calculate subscription.",
 
+  "InvoiceSummaries.Menu.Title": "Invoice Summaries",
+  "InvoiceSummaries.Page.Title": "Invoice Summaries",
+  "InvoiceSummaries.Page.SubTitle": "Invoice Summaries report",
+  "InvoiceSummaries.Label.key": "key",
+  "InvoiceSummaries.Label.invoiceId": "Invoice Number",
+  "InvoiceSummaries.Label.companyBranchId": "companyBranchId",
+  "InvoiceSummaries.Label.companyBranchName": "Branch Name",
+  "InvoiceSummaries.Label.invoiceDataTime": "Date",
+  "InvoiceSummaries.Label.serviceEnDescription": "Service Description (En)",
+  "InvoiceSummaries.Label.serviceArDescription": "Service Description (Ar)",
+  "InvoiceSummaries.Label.carIdNumber": "Car Number",
+  "InvoiceSummaries.Label.invoiceFuelConsumptionLiter": "Fuel Consumption Liter",
+  "InvoiceSummaries.Label.invoiceAmount": "Invoice Amount",
+  "InvoiceSummaries.Label.paymentMethodName": "Payment Method",
+
+  "InvoiceSummaries.SearchPanel.Label.carIdNumber": "Car Id Number",
+  "InvoiceSummaries.SearchPanel.Label.companyBranchName": "Branch Name",
+  "InvoiceSummaries.SearchPanel.Label.invoiceDataTimeFrom": "Date From",
+  "InvoiceSummaries.SearchPanel.Label.invoiceDataTimeTo": "Date To",
+  "InvoiceSummaries.SearchPanel.Label.serviceDescription": "Service Description",
+  "InvoiceSummaries.SearchPanel.Label.companyId": "Company Id",
+  "InvoiceSummaries.SearchPanel.Label.companyName": "Company Name",
+
+  "InvoiceSummaries.Section.GeneralInformation": "General Information",
+
+  "InvoiceSummaries.Error.Get.Message": "An error has occurred while trying to get invoice list.",
+  "InvoiceSummaries.Error.Detail.Message": "An error has occurred while trying to get invoice details.",
+
+
+  "InvoiceDetails.Menu.Title": "Invoice details",
+  "InvoiceDetails.Page.Title": "Invoice details",
+  "InvoiceDetails.Page.SubTitle": "Invoice details report",
+  "InvoiceDetails.Label.key": "key",
+  "InvoiceDetails.Label.invoiceId": "invoice #",
+  "InvoiceDetails.Label.invoiceDataTime": "Data/Time",
+  "InvoiceDetails.Label.invoicePayType": "Payment Method",
+  "InvoiceDetails.Label.invoicePayStatus": "Payment Status",
+  "InvoiceDetails.Label.serviceEnDescription": "Service Description (EN)",
+  "InvoiceDetails.Label.serviceArDescription": "Service Description (AR)",
+  "InvoiceDetails.Label.stationName": "Station Name (EN)",
+  "InvoiceDetails.Label.stationNameAr": "Station Name (AR)",
+  "InvoiceDetails.Label.invoicePumpPhoto": "Pump Photo",
+  "InvoiceDetails.Label.invoicePlatePhoto": "Plate Photo",
+  "InvoiceDetails.Label.stationLatitude": "Station Latitude",
+  "InvoiceDetails.Label.stationLongitude": "Station Longitude",
+
+  "InvoiceDetails.SearchPanel.Label.carIdNumber": "Car Id Number",
+  "InvoiceDetails.SearchPanel.Label.companyBranchName": "Branch Name",
+  "InvoiceDetails.SearchPanel.Label.invoiceDataTimeFrom": "Date From",
+  "InvoiceDetails.SearchPanel.Label.invoiceDataTimeTo": "Date To",
+  "InvoiceDetails.SearchPanel.Label.serviceDescription": "Service Description",
+  "InvoiceDetails.SearchPanel.Label.companyId": "Company Id",
+  "InvoiceDetails.SearchPanel.Label.companyName": "Company Name",
+
+  "InvoiceDetails.Section.GeneralInformation": "General Information",
+  "InvoiceDetails.Section.Photos": "Photos",
+
+  "InvoiceDetails.Error.Get.Message": "An error has occurred while trying to get invoice list.",
+  "InvoiceDetails.Error.Detail.Message": "An error has occurred while trying to get invoice details.",
 
 
   "General.Country.Egypt": "Egypt",

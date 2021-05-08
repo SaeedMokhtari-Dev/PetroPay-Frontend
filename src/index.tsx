@@ -56,6 +56,8 @@ ReactDOM.render(
                       carStore={appStore.car}
                       rechargeBalanceStore={appStore.rechargeBalance}
                       subscriptionStore={appStore.subscription}
+                      invoiceSummaryStore={appStore.invoiceSummary}
+                      invoiceDetailStore={appStore.invoiceDetail}
             >
                 <App />
             </Provider>

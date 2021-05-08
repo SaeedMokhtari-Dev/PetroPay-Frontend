@@ -7,8 +7,8 @@ import { Link } from "react-router-dom";
 
 import { Layout, Menu } from 'antd';
 import {
-    UserOutlined,DashboardOutlined,
-    PieChartOutlined, DesktopOutlined, TeamOutlined, FileOutlined, ShopOutlined
+    DashboardOutlined, ReadOutlined, ShoppingOutlined, DollarOutlined, HomeOutlined,
+    ShopOutlined, BookOutlined
 } from '@ant-design/icons';
 import Routes from "../../../app/constants/Routes";
 import i18next from "i18next";
@@ -35,36 +35,27 @@ const Sidebar: React.FC<SidebarProps> = inject(Stores.pageStore)(observer(({page
         <Menu.Item key="app" icon={<DashboardOutlined />}>
             <Link to={Routes.app}>{i18next.t('Dashboard.Menu.Title')}</Link>
         </Menu.Item>
-        <Menu.Item key="company" icon={<ShopOutlined />}>
+        <Menu.Item key="company" icon={<HomeOutlined />}>
             <Link to={Routes.company}>{i18next.t('Companies.Menu.Title')}</Link>
         </Menu.Item>
-        <Menu.Item key="bundle" icon={<ShopOutlined />}>
+        <Menu.Item key="bundle" icon={<ShoppingOutlined />}>
             <Link to={Routes.bundle}>{i18next.t('Bundles.Menu.Title')}</Link>
         </Menu.Item>
         <Menu.Item key="petroStation" icon={<ShopOutlined />}>
             <Link to={Routes.petroStation}>{i18next.t('PetroStations.Menu.Title')}</Link>
         </Menu.Item>
-        <Menu.Item key="rechargeBalance" icon={<ShopOutlined />}>
+        <Menu.Item key="rechargeBalance" icon={<DollarOutlined />}>
             <Link to={Routes.rechargeBalance}>{i18next.t('RechargeBalances.Menu.Title')}</Link>
         </Menu.Item>
-        <Menu.Item key="subscription" icon={<ShopOutlined />}>
+        <Menu.Item key="subscription" icon={<ShoppingOutlined />}>
             <Link to={Routes.subscription}>{i18next.t('Subscriptions.Menu.Title')}</Link>
         </Menu.Item>
-        {/*<Menu.Item key="2" icon={<DesktopOutlined />}>
-            Option 2
-        </Menu.Item>
-        <SubMenu key="sub1" icon={<UserOutlined />} title="User">
-            <Menu.Item key="3">Tom</Menu.Item>
-            <Menu.Item key="4">Bill</Menu.Item>
-            <Menu.Item key="5">Alex</Menu.Item>
+        <SubMenu key="reports" icon={<ReadOutlined />} title={'General.Menu.Reports'}>
+            <Menu.Item key="invoiceSummary" icon={<BookOutlined />}>
+                <Link to={Routes.invoiceSummary}>{i18next.t('InvoiceSummaries.Menu.Title')}</Link>
+            </Menu.Item>
+
         </SubMenu>
-        <SubMenu key="sub2" icon={<TeamOutlined />} title="Team">
-            <Menu.Item key="6">Team 1</Menu.Item>
-            <Menu.Item key="8">Team 2</Menu.Item>
-        </SubMenu>
-        <Menu.Item key="9" icon={<FileOutlined />}>
-            Files
-        </Menu.Item>*/}
     </Menu>)
     const customerMenu= (<Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
         <Menu.Item key="app" icon={<DashboardOutlined />}>
@@ -73,12 +64,18 @@ const Sidebar: React.FC<SidebarProps> = inject(Stores.pageStore)(observer(({page
         <Menu.Item key="branch" icon={<ShopOutlined />}>
             <Link to={Routes.branch}>{i18next.t('Branches.Menu.Title')}</Link>
         </Menu.Item>
-        <Menu.Item key="rechargeBalance" icon={<ShopOutlined />}>
+        <Menu.Item key="rechargeBalance" icon={<DollarOutlined />}>
             <Link to={Routes.rechargeBalance}>{i18next.t('RechargeBalances.Menu.Title')}</Link>
         </Menu.Item>
-        <Menu.Item key="subscription" icon={<ShopOutlined />}>
+        <Menu.Item key="subscription" icon={<ShoppingOutlined />}>
             <Link to={Routes.subscription}>{i18next.t('Subscriptions.Menu.Title')}</Link>
         </Menu.Item>
+        <SubMenu key="reports" icon={<ReadOutlined />} title={i18next.t('General.Menu.Reports')}>
+            <Menu.Item key="invoiceSummary" icon={<BookOutlined />}>
+                <Link to={Routes.invoiceSummary}>{i18next.t('InvoiceSummaries.Menu.Title')}</Link>
+            </Menu.Item>
+
+        </SubMenu>
     </Menu>)
     const supplierMenu= (<Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
         <Menu.Item key="app" icon={<DashboardOutlined />}>
@@ -87,6 +84,12 @@ const Sidebar: React.FC<SidebarProps> = inject(Stores.pageStore)(observer(({page
         <Menu.Item key="stationUser" icon={<ShopOutlined />}>
             <Link to={Routes.stationUser}>{i18next.t('StationUsers.Menu.Title')}</Link>
         </Menu.Item>
+        <SubMenu key="reports" icon={<ReadOutlined />} title={'General.Menu.Reports'}>
+            <Menu.Item key="invoiceSummary" icon={<BookOutlined />}>
+                <Link to={Routes.invoiceSummary}>{i18next.t('InvoiceSummaries.Menu.Title')}</Link>
+            </Menu.Item>
+
+        </SubMenu>
     </Menu>)
     async function onLoad() {
     }

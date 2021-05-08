@@ -7,11 +7,11 @@ import Stores from "app/constants/Stores";
 import {
     Button,
     Pagination,
-    Table, Modal, PageHeader
+    Table, Modal, PageHeader, Input
 } from "antd";
 import {
     EditOutlined, DeleteOutlined, CheckOutlined, CloseOutlined,
-    ExclamationCircleOutlined, PlusCircleOutlined
+    ExclamationCircleOutlined, PlusCircleOutlined, CheckCircleOutlined, BarcodeOutlined
 } from '@ant-design/icons';
 import i18next from "i18next";
 import CarColumns from "./CarColumns";
@@ -21,6 +21,7 @@ import NavigationService from "../../../../app/services/NavigationService";
 import GetCarRequest from "../../handlers/get/GetCarRequest";
 import CarStore from "../../stores/CarStore";
 import UserContext from "../../../../identity/contexts/UserContext";
+import ActiveCarRequest from "../../handlers/active/ActiveCarRequest";
 
 
 const { confirm } = Modal;
@@ -31,9 +32,8 @@ interface CarListProps {
     match?: any;
 }
 
-
-
 const CarList: React.FC<CarListProps> = inject(Stores.carStore)(observer(({carStore, match}) => {
+    const[visible, setVisible] = React.useState(false);
     useEffect(() => {
         onLoad();
 
@@ -57,13 +57,27 @@ const CarList: React.FC<CarListProps> = inject(Stores.carStore)(observer(({carSt
         fixed: 'right',
         render: (text, record) => (
             <div className="inline">
-                <Button type="primary" icon={<EditOutlined />} onClick={() => showEditPage(record)}
-                            title={i18next.t("General.Button.Edit")} />
-                <Button type="primary" danger icon={<DeleteOutlined />} onClick={() => showDeleteConfirm(record)}
-                        title={i18next.t("General.Button.Delete")} />
+                {UserContext.info.role == 100 &&
+                (
+                    <div>
+                        <Button type="default"  icon={<BarcodeOutlined />} onClick={() => showActivation(record)}
+                                title={i18next.t("Cars.Button.ActiveAndNfcCode")} style={{ background: "green", borderColor: "white" }}/>
+                    </div>
+                )}
+                {!record.carWorkWithApproval &&
+                (
+                    <div>
+                        <Button type="primary" icon={<EditOutlined/>} onClick={() => showEditPage(record)}
+                                title={i18next.t("General.Button.Edit")}/>
+                            <Button type="primary" danger icon={<DeleteOutlined />} onClick={() => showDeleteConfirm(record)}
+                            title={i18next.t("General.Button.Delete")} />
+                    </div>
+                    )
+                }
             </div>
         )
     }];
+
     async function showEditPage(e){
         carStore.editCarViewModel.key = e.key;
         if(e.key)
@@ -99,6 +113,7 @@ const CarList: React.FC<CarListProps> = inject(Stores.carStore)(observer(({carSt
     async function onLoad() {
         carStore.onCarGetPageLoad();
         carStore.onCarEditPageLoad();
+
         carStore.getCarViewModel.pageIndex = 0;
         carStore.getCarViewModel.pageSize = 20;
         const companyBranchId: number = +match.params.companyBranchId;
@@ -124,6 +139,28 @@ const CarList: React.FC<CarListProps> = inject(Stores.carStore)(observer(({carSt
         await carStore.getCarViewModel.getAllCar(new GetCarRequest(viewModel.companyBranchId,
             pageSize, 0));
     }
+    async function onActive(key: number){
+
+    }
+    function changeInput(e){
+        debugger;
+        let n: string = e.target.value;
+        viewModel.activeCarRequest.carNfcCode = n;
+    }
+    async function showActivation(e) {
+        viewModel.activeCarRequest = new ActiveCarRequest();
+        viewModel.activeCarRequest.carId = e.key;
+        setVisible(true);
+    }
+    async function handleOk(){
+        await viewModel.activeCar(viewModel.activeCarRequest, viewModel.companyBranchId);
+        viewModel.activeCarRequest = new ActiveCarRequest();
+        setVisible(false);
+    }
+    function handleCancel(){
+        viewModel.activeCarRequest = new ActiveCarRequest();
+        setVisible(false);
+    }
     return (
         <div>
             <PageHeader
@@ -132,7 +169,7 @@ const CarList: React.FC<CarListProps> = inject(Stores.carStore)(observer(({carSt
                 title={i18next.t("Cars.Page.Title")}
                 subTitle={i18next.t("Cars.Page.SubTitle")}
                 extra={[
-                        <Button key={"Add"} type="primary" icon={<PlusCircleOutlined />} onClick={showEditPage}>
+                        <Button hidden={UserContext.info.role != 100} key={"Add"} type="primary" icon={<PlusCircleOutlined />} onClick={showEditPage}>
                             {i18next.t("General.Button.Add")}
                         </Button>
                     ,
@@ -140,7 +177,9 @@ const CarList: React.FC<CarListProps> = inject(Stores.carStore)(observer(({carSt
             />
 
             <Table dataSource={viewModel?.carList} columns={columns} loading={viewModel?.isProcessing}
-                   bordered={true} pagination={false} scroll={{ x: 1500 }} sticky/>
+                   bordered={true} pagination={false} scroll={{ x: 1500 }} sticky
+                   rowClassName={(record, index) => (record.carWorkWithApproval ? "green" : "red")}
+            />
             <br/>
             <Pagination
                 total={viewModel?.totalSize}
@@ -151,6 +190,21 @@ const CarList: React.FC<CarListProps> = inject(Stores.carStore)(observer(({carSt
                 onShowSizeChange={pageSizeChanged}
                 showTotal={total => `Total ${total} items`}
             />
+
+            <Modal
+                title={i18next.t("Cars.Modal.Active.Title")}
+                okButtonProps={{disabled: !(viewModel?.activeCarRequest?.carNfcCode?.length > 0)}}
+                visible={visible}
+                onOk={handleOk}
+                okText={i18next.t("Cars.Modal.OkButton.Title")}
+                confirmLoading={viewModel?.isProcessing}
+                onCancel={handleCancel}
+            >
+                <p>
+                    <label>{i18next.t("Cars.Label.carNfcCode")}</label>
+                    <Input onChange={changeInput}></Input>
+                </p>
+            </Modal>
         </div>
     )
 }));

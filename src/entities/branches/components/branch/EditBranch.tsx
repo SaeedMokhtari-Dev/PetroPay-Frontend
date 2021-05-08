@@ -143,21 +143,6 @@ const EditBranch: React.FC<EditBranchProps> = inject(Stores.branchStore)(observe
                         </Form.Item>
                     </Col>
                     <Col span={8}>
-                <Form.Item name="companyBranchActiva" initialValue={viewModel?.detailBranchResponse?.companyBranchActiva}
-                           key={"companyBranchActiva"}
-                           label={i18next.t("Branches.Label.companyBranchActiva")}
-                           >
-                    <Switch onChange={onSwitchChange} defaultChecked={viewModel?.detailBranchResponse?.companyBranchActiva} />
-                </Form.Item>
-                    </Col>
-                    <Col span={8}>
-                <Form.Item name="companyBranchBalnce" initialValue={viewModel?.detailBranchResponse?.companyBranchBalnce}
-                           key={"companyBranchBalnce"}
-                           label={i18next.t("Branches.Label.companyBranchBalnce")}>
-                    <Input type={"number"} onChange={onChanged}/>
-                </Form.Item>
-                    </Col>
-                    <Col span={8}>
                 <Form.Item name="companyBranchAdminName" initialValue={viewModel?.detailBranchResponse?.companyBranchAdminName}
                            key={"companyBranchAdminName"}
                            label={i18next.t("Branches.Label.companyBranchAdminName")}>

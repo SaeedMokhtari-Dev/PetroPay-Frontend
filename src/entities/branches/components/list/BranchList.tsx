@@ -11,7 +11,7 @@ import {
 } from "antd";
 import {
     EditOutlined, DeleteOutlined, CheckOutlined, CloseOutlined, CarOutlined,
-    ExclamationCircleOutlined, PlusCircleOutlined
+    ExclamationCircleOutlined, PlusCircleOutlined, CheckCircleOutlined
 } from '@ant-design/icons';
 import i18next from "i18next";
 import BranchColumns from "./BranchColumns";
@@ -28,11 +28,14 @@ const { confirm } = Modal;
 
 interface BranchListProps {
     branchStore?: BranchStore
+    match?: any;
 }
 
 
 
-const BranchList: React.FC<BranchListProps> = inject(Stores.branchStore)(observer(({branchStore}) => {
+const BranchList: React.FC<BranchListProps> = inject(Stores.branchStore)(observer(({branchStore, match}) => {
+    const [companyId, setCompanyId] = React.useState(0);
+
     useEffect(() => {
         onLoad();
 
@@ -55,15 +58,45 @@ const BranchList: React.FC<BranchListProps> = inject(Stores.branchStore)(observe
         fixed: 'right',
         render: (text, record) => (
             <div className="inline">
-                <Button type="default" icon={<CarOutlined />} onClick={() => showCarPage(record)}
-                        title={i18next.t("Branches.Button.CarList")} />
-                <Button type="primary" icon={<EditOutlined />} onClick={() => showEditPage(record)}
-                        title={i18next.t("General.Button.Edit")} />
-                <Button type="primary" danger icon={<DeleteOutlined />} onClick={() => showDeleteConfirm(record)}
-                        title={i18next.t("General.Button.Delete")} />
+                {UserContext.info.role == 100 && (!record.companyBranchActiva) &&
+                (
+                    <div>
+                        <Button type="default"  icon={<CheckCircleOutlined />} onClick={() => showActivation(record)}
+                                title={i18next.t("Subscriptions.Button.AcceptRequest")} style={{ background: "green", borderColor: "white" }}/>
+                    </div>
+                )}
+                {record.companyBranchActiva &&
+                    <div>
+                        <Button type="default" icon={<CarOutlined/>} onClick={() => showCarPage(record)}
+                                title={i18next.t("Branches.Button.CarList")}/>
+                    </div>
+                }
+                {!record.companyBranchActiva &&
+                <div>
+                    <Button type="primary" icon={<EditOutlined />} onClick={() => showEditPage(record)}
+                    title={i18next.t("General.Button.Edit")} />
+                    <Button type="primary" danger icon={<DeleteOutlined />} onClick={() => showDeleteConfirm(record)}
+                    title={i18next.t("General.Button.Delete")} />
+                </div>
+                }
             </div>
         )
     }];
+    async function onActive(key: number){
+        await viewModel.activeBranch(key, companyId);
+    }
+    async function showActivation(e) {
+        console.log(e.key);
+        confirm({
+            title: i18next.t("General.Confirm.Active"),
+            icon: <ExclamationCircleOutlined />,
+            async onOk() {
+                console.log(e.key);
+                await onActive(e.key);
+            },
+            onCancel() {},
+        });
+    }
     function showCarPage(e){
         NavigationService.navigate(`/app/car/${e.key}/list`);
     }
@@ -96,16 +129,26 @@ const BranchList: React.FC<BranchListProps> = inject(Stores.branchStore)(observe
     if (!viewModel) return;
 
     async function onDelete(key: number){
-        await viewModel.deleteBranch(key);
+        await viewModel.deleteBranch(key, companyId);
     }
 
     async function onLoad() {
         branchStore.onBranchGetPageLoad();
         branchStore.onBranchEditPageLoad();
+        debugger;
+        let companyIdParam = 0;
+        if(match.params?.companyId){
+            companyIdParam = +match.params?.companyId;
+        }
+        else {
+            companyIdParam = UserContext.info.id;
+        }
         branchStore.getBranchViewModel.pageIndex = 0;
         branchStore.getBranchViewModel.pageSize = 20;
         await branchStore.getBranchViewModel.getAllBranch(new GetBranchRequest(
-            UserContext.info.id,20, 0));
+            companyIdParam,20, 0));
+
+        setCompanyId(companyIdParam);
     }
 
     function onUnload() {
@@ -116,13 +159,13 @@ const BranchList: React.FC<BranchListProps> = inject(Stores.branchStore)(observe
     async function pageIndexChanged(pageIndex, pageSize){
         viewModel.pageIndex = pageIndex - 1;
         viewModel.pageSize = pageSize;
-        await branchStore.getBranchViewModel.getAllBranch(new GetBranchRequest(UserContext.info.id,
+        await branchStore.getBranchViewModel.getAllBranch(new GetBranchRequest(companyId,
             pageSize, pageIndex - 1));
     }
     async function pageSizeChanged(current, pageSize){
         viewModel.pageIndex = 0;
         viewModel.pageSize = pageSize;
-        await branchStore.getBranchViewModel.getAllBranch(new GetBranchRequest(UserContext.info.id,
+        await branchStore.getBranchViewModel.getAllBranch(new GetBranchRequest(companyId,
             pageSize, 0));
     }
     return (
@@ -133,7 +176,7 @@ const BranchList: React.FC<BranchListProps> = inject(Stores.branchStore)(observe
                 title={i18next.t("Branches.Page.Title")}
                 subTitle={i18next.t("Branches.Page.SubTitle")}
                 extra={[
-                        <Button key={"Add"} type="primary" icon={<PlusCircleOutlined />} onClick={showEditPage}>
+                        <Button hidden={UserContext.info.role == 100} key={"Add"} type="primary" icon={<PlusCircleOutlined />} onClick={showEditPage}>
                             {i18next.t("General.Button.Add")}
                         </Button>
                     ,
@@ -141,7 +184,8 @@ const BranchList: React.FC<BranchListProps> = inject(Stores.branchStore)(observe
             />
 
             <Table dataSource={viewModel?.branchList} columns={columns} loading={viewModel?.isProcessing}
-                   bordered={true} pagination={false} scroll={{ x: 1500 }} sticky/>
+                   bordered={true} pagination={false} scroll={{ x: 1500 }} sticky
+                   rowClassName={(record, index) => (record.companyBranchActiva ? "green" : "red")}/>
             <br/>
             <Pagination
                 total={viewModel?.totalSize}

@@ -12,6 +12,8 @@ import DeleteBranchHandler from "../handlers/delete/DeleteBranchHandler";
 import DeleteBranchRequest from "../handlers/delete/DeleteBranchRequest";
 import {message} from "antd";
 import UserContext from "../../../identity/contexts/UserContext";
+import ActiveBranchRequest from "../handlers/active/ActiveBranchRequest";
+import ActiveBranchHandler from "../handlers/active/ActiveBranchHandler";
 
 export default class GetBranchViewModel {
     columns: any[];
@@ -55,7 +57,7 @@ export default class GetBranchViewModel {
             this.isProcessing = false;
         }
     }
-    public async deleteBranch(key: number)
+    public async deleteBranch(key: number, companyId)
     {
         try
         {
@@ -68,7 +70,38 @@ export default class GetBranchViewModel {
             if(response && response.success)
             {
                 message.success(getLocalizedString(response.message));
-                await this.getAllBranch(new GetBranchRequest(UserContext.info.id, this.pageSize, this.pageIndex));
+                await this.getAllBranch(new GetBranchRequest(companyId, this.pageSize, this.pageIndex));
+            }
+            else{
+                this.errorMessage = getLocalizedString(response.message);
+                message.error(this.errorMessage);
+            }
+        }
+        catch(e)
+        {
+            this.errorMessage = i18next.t('Branches.Error.Delete.Message');
+            message.error(this.errorMessage);
+            log.error(e);
+        }
+        finally
+        {
+            this.isProcessing = false;
+        }
+    }
+    public async activeBranch(key: number, companyId)
+    {
+        try
+        {
+
+            this.errorMessage = "";
+            let request = new ActiveBranchRequest();
+            request.branchId = key;
+            let response = await ActiveBranchHandler.active(request);
+
+            if(response && response.success)
+            {
+                message.success(getLocalizedString(response.message));
+                await this.getAllBranch(new GetBranchRequest(companyId, this.pageSize, this.pageIndex));
             }
             else{
                 this.errorMessage = getLocalizedString(response.message);

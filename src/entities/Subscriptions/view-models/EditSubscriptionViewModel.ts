@@ -1,6 +1,5 @@
 import {makeAutoObservable} from "mobx";
-import DetailSubscriptionResponse from "../handlers/detail/DetailSubscriptionResponse";
-import GetSubscriptionHandler from "../handlers/get/GetSubscriptionHandler";
+
 import {getLocalizedString} from "../../../app/utils/Localization";
 import i18next from "i18next";
 import log from "loglevel";
@@ -13,11 +12,18 @@ import {message} from "antd";
 import GetSubscriptionRequest from "../handlers/get/GetSubscriptionRequest";
 import EditSubscriptionHandler from "../handlers/edit/EditSubscriptionHandler";
 import UserContext from "../../../identity/contexts/UserContext";
+import CalculateSubscriptionRequest from "../handlers/calculate/CalculateSubscriptionRequest";
+import CalculateSubscriptionHandler from "../handlers/calculate/CalculateSubscriptionHandler";
+import CalculateSubscriptionResponse from "../handlers/calculate/CalculateSubscriptionResponse";
+import DetailSubscriptionResponse from "../handlers/detail/DetailSubscriptionResponse";
 import SubscriptionStore from "../stores/SubscriptionStore";
+import AddCarRequest from "../../cars/handlers/add/AddCarRequest";
+import AddCarHandler from "../../cars/handlers/add/AddCarHandler";
 
 export default class EditSubscriptionViewModel
 {
     isProcessing: boolean;
+    calculating: boolean;
     errorMessage: string;
     key: number;
     uploadLoading: boolean;
@@ -57,7 +63,7 @@ export default class EditSubscriptionViewModel
         }
         catch(e)
         {
-            this.errorMessage = i18next.t('Subscriptiones.Error.Detail.Message');
+            this.errorMessage = i18next.t('Subscriptions.Error.Detail.Message');
             log.error(e);
         }
         finally
@@ -86,7 +92,35 @@ export default class EditSubscriptionViewModel
         }
         catch(e)
         {
-            this.errorMessage = i18next.t('Subscriptiones.Error.Add.Message');
+            this.errorMessage = i18next.t('Subscriptions.Error.Add.Message');
+            log.error(e);
+        }
+        finally
+        {
+            this.isProcessing = false;
+        }
+    }
+    public async addCarSubscription(request: AddCarRequest)
+    {
+        try
+        {
+            this.errorMessage = "";
+            this.isProcessing = true;
+
+            let response = await AddCarHandler.add(request);
+
+            if(response && response.success)
+            {
+                message.success(getLocalizedString(response.message));
+                /*await this.subscriptionsStore.getSubscriptionViewModel.getAllSubscriptions(new GetSubscriptionsRequest(20, 0));*/
+            }
+            else{
+                this.errorMessage = getLocalizedString(response.message);
+            }
+        }
+        catch(e)
+        {
+            this.errorMessage = i18next.t('Subscriptions.Error.Add.Message');
             log.error(e);
         }
         finally
@@ -114,12 +148,51 @@ export default class EditSubscriptionViewModel
         }
         catch(e)
         {
-            this.errorMessage = i18next.t('Subscriptiones.Error.Edit.Message');
+            this.errorMessage = i18next.t('Subscriptions.Error.Edit.Message');
             log.error(e);
         }
         finally
         {
             this.isProcessing = false;
         }
+    }
+    public async calculateCost(request: CalculateSubscriptionRequest, subscriptionId?: number): Promise<number>
+    {
+        let subscriptionCost = 0;
+        try
+        {
+            this.errorMessage = "";
+            this.calculating = true;
+
+            let response = await CalculateSubscriptionHandler.calculate(request);
+
+            if(response && response.success)
+            {
+                let result = new CalculateSubscriptionResponse().deserialize(response.data);
+                if(subscriptionId){
+                    this.editSubscriptionRequest.subscriptionCost = result.subscriptionCost;
+                    this.editSubscriptionRequest.bundlesId = result.bundlesId;
+                    subscriptionCost = result.subscriptionCost;
+                }
+                else{
+                    this.addSubscriptionRequest.subscriptionCost = result.subscriptionCost;
+                    this.addSubscriptionRequest.bundlesId = result.bundlesId;
+                    subscriptionCost = result.subscriptionCost;
+                }
+            }
+            else{
+                this.errorMessage = getLocalizedString(response.message);
+            }
+        }
+        catch(e)
+        {
+            this.errorMessage = i18next.t('Subscriptions.Error.Calculate.Message');
+            log.error(e);
+        }
+        finally
+        {
+            this.calculating = false;
+        }
+        return subscriptionCost;
     }
 }
