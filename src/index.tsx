@@ -59,6 +59,7 @@ ReactDOM.render(
                       invoiceSummaryStore={appStore.invoiceSummary}
                       invoiceDetailStore={appStore.invoiceDetail}
                       carBalanceStore={appStore.carBalance}
+                      stationReportStore={appStore.stationReport}
             >
                 <App />
             </Provider>

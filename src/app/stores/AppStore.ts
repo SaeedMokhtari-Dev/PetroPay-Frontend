@@ -14,6 +14,7 @@ import SubscriptionStore from "../../entities/Subscriptions/stores/SubscriptionS
 import InvoiceSummaryStore from "../../reports/InvoiceSummaries/stores/InvoiceSummaryStore";
 import InvoiceDetailStore from "../../reports/InvoiceDetails/stores/InvoiceDetailStore";
 import CarBalanceStore from "../../reports/CarBalances/stores/CarBalanceStore";
+import StationReportStore from "../../reports/StationReports/stores/StationReportStore";
 
 export class AppStore
 {
@@ -33,6 +34,7 @@ export class AppStore
     invoiceSummary: InvoiceSummaryStore;
     invoiceDetail: InvoiceDetailStore;
     carBalance: CarBalanceStore;
+    stationReport: StationReportStore;
 
     constructor()
     {
@@ -52,5 +54,6 @@ export class AppStore
         this.invoiceSummary = new InvoiceSummaryStore(this);
         this.invoiceDetail = new InvoiceDetailStore(this);
         this.carBalance = new CarBalanceStore(this);
+        this.stationReport = new StationReportStore(this);
     }
 }

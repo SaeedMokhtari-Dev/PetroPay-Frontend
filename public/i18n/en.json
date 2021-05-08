@@ -450,6 +450,8 @@
 
   "InvoiceSummaries.Section.GeneralInformation": "General Information",
 
+  "InvoiceSummaries.Button.InvoiceDetail": "Invoice Detail",
+
   "InvoiceSummaries.Error.Get.Message": "An error has occurred while trying to get invoice list.",
   "InvoiceSummaries.Error.Detail.Message": "An error has occurred while trying to get invoice details.",
 
@@ -502,17 +504,30 @@
   "CarBalances.Label.subscriptionStartDate": "Subscription Start Date",
   "CarBalances.Label.subscriptionEndDate": "Subscription End Date",
 
-  "CarBalances.SearchPanel.Label.carIdNumber": "Car Id Number",
-  "CarBalances.SearchPanel.Label.companyBranchName": "Branch Name",
-  "CarBalances.SearchPanel.Label.invoiceDataTimeFrom": "Date From",
-  "CarBalances.SearchPanel.Label.invoiceDataTimeTo": "Date To",
-  "CarBalances.SearchPanel.Label.serviceDescription": "Service Description",
-  "CarBalances.SearchPanel.Label.companyId": "Company Id",
-  "CarBalances.SearchPanel.Label.companyName": "Company Name",
-
-  "CarBalances.Section.GeneralInformation": "General Information",
-
   "CarBalances.Error.Get.Message": "An error has occurred while trying to get invoice list.",
+
+  "StationReports.Menu.Title": "Station Report",
+  "StationReports.Page.Title": "Station Report",
+  "StationReports.Page.SubTitle": "Station Report",
+  "StationReports.Label.key": "key",
+  "StationReports.Label.stationWorkerId": "Station Worker Id",
+  "StationReports.Label.stationWorkerFname": "Station Worker Name",
+  "StationReports.Label.invoiceId": "Invoice #",
+  "StationReports.Label.serviceId": "Service #",
+  "StationReports.Label.serviceArDescription": "service Description (AR)",
+  "StationReports.Label.carIdNumber": "Car Id Number",
+  "StationReports.Label.invoiceAmount": "Invoice Amount",
+  "StationReports.Label.paymentMethodName": "Payment Method Name",
+  "StationReports.Label.invoiceDataTime": "Invoice Data Time",
+
+  "StationReports.SearchPanel.Label.stationWorkerId": "Station WorkerId",
+  "StationReports.SearchPanel.Label.stationWorkerFname": "Station Worker Name",
+  "StationReports.SearchPanel.Label.invoiceDataTimeFrom": "Invoice Data Time From",
+  "StationReports.SearchPanel.Label.invoiceDataTimeTo": "Invoice Data Time To",
+
+  "StationReports.Button.InvoiceDetail": "Invoice Detail",
+
+  "StationReports.Error.Get.Message": "An error has occurred while trying to get station report list.",
 
 
   "General.Country.Egypt": "Egypt",

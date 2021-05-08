@@ -44,21 +44,7 @@ const CarBalanceList: React.FC<CarBalanceListProps> = inject(Stores.carBalanceSt
        w.title = i18next.t(w.title);
     });
 
-    const columns: any[] = [...CarBalanceColumns,
-        {
-        title: i18next.t("General.Column.Action"),
-        dataIndex: 'operation',
-        key: 'action',
-        fixed: 'right',
-        render: (text, record) => (
-            <div className="inline">
-                <Link to={`/app/invoiceDetail/${record.key}`}>
-                    <Button type="default"  icon={<FolderViewOutlined />}
-                            title={i18next.t("CarBalances.Button.AcceptRequest")} style={{ background: "green", borderColor: "white" }}/>
-                </Link>
-            </div>
-        )
-    }];
+    const columns: any[] = [...CarBalanceColumns];
 
     useEffect(() => {
         onLoad();

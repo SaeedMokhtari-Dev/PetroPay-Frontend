@@ -50,12 +50,15 @@ const Sidebar: React.FC<SidebarProps> = inject(Stores.pageStore)(observer(({page
         <Menu.Item key="subscription" icon={<ShoppingOutlined />}>
             <Link to={Routes.subscription}>{i18next.t('Subscriptions.Menu.Title')}</Link>
         </Menu.Item>
-        <SubMenu key="reports" icon={<ReadOutlined />} title={'General.Menu.Reports'}>
+        <SubMenu key="reports" icon={<ReadOutlined />} title={i18next.t('General.Menu.Reports')}>
             <Menu.Item key="invoiceSummary" icon={<BookOutlined />}>
                 <Link to={Routes.invoiceSummary}>{i18next.t('InvoiceSummaries.Menu.Title')}</Link>
             </Menu.Item>
             <Menu.Item key="carBalance" icon={<BookOutlined />}>
                 <Link to={Routes.carBalance}>{i18next.t('CarBalances.Menu.Title')}</Link>
+            </Menu.Item>
+            <Menu.Item key="stationReport" icon={<BookOutlined />}>
+                <Link to={Routes.stationReport}>{i18next.t('StationReports.Menu.Title')}</Link>
             </Menu.Item>
 
         </SubMenu>
@@ -90,9 +93,9 @@ const Sidebar: React.FC<SidebarProps> = inject(Stores.pageStore)(observer(({page
         <Menu.Item key="stationUser" icon={<ShopOutlined />}>
             <Link to={Routes.stationUser}>{i18next.t('StationUsers.Menu.Title')}</Link>
         </Menu.Item>
-        <SubMenu key="reports" icon={<ReadOutlined />} title={'General.Menu.Reports'}>
-            <Menu.Item key="invoiceSummary" icon={<BookOutlined />}>
-                <Link to={Routes.invoiceSummary}>{i18next.t('InvoiceSummaries.Menu.Title')}</Link>
+        <SubMenu key="reports" icon={<ReadOutlined />} title={i18next.t('General.Menu.Reports')}>
+            <Menu.Item key="stationReport" icon={<BookOutlined />}>
+                <Link to={Routes.stationReport}>{i18next.t('StationReports.Menu.Title')}</Link>
             </Menu.Item>
 
         </SubMenu>

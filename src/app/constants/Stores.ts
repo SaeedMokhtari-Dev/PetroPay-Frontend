@@ -16,4 +16,5 @@ export default {
     invoiceSummaryStore: 'invoiceSummaryStore',
     invoiceDetailStore: 'invoiceDetailStore',
     carBalanceStore: 'carBalanceStore',
+    stationReportStore: 'stationReportStore',
 }

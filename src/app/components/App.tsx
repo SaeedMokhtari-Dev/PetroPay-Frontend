@@ -40,6 +40,7 @@ import EditSubscription from "../../entities/Subscriptions/components/subscripti
 import InvoiceSummaryList from "../../reports/InvoiceSummaries/components/list/InvoiceSummaryList";
 import InvoiceDetail from "../../reports/InvoiceDetails/components/detail/InvoiceDetail";
 import CarBalanceList from "../../reports/CarBalances/components/list/CarBalanceList";
+import StationReportList from "../../reports/StationReports/components/list/StationReportList";
 
 const App: React.FC = () =>
 {
@@ -113,6 +114,8 @@ const App: React.FC = () =>
                                     <Route exact roles={[RoleType.customer]} path={Routes.invoiceSummary} component={InvoiceSummaryList} />
                                     <Route exact roles={[RoleType.customer]} path={Routes.invoiceDetail} component={InvoiceDetail} />
                                     <Route exact roles={[RoleType.customer]} path={Routes.carBalance} component={CarBalanceList} />
+
+                                    <Route exact roles={[RoleType.supplier]} path={Routes.stationReport} component={StationReportList} />
 
                                     <Route component={NotFoundPage} />
                                 </Switch>

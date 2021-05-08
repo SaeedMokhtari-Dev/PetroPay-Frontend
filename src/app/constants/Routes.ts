@@ -54,4 +54,5 @@ export default
     invoiceSummary: '/app/invoiceSummary',
     invoiceDetail: '/app/invoiceDetail/:invoiceId',
     carBalance: '/app/carBalance',
+    stationReport: '/app/stationReport',
 }

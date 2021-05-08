@@ -55,7 +55,7 @@ const InvoiceSummaryList: React.FC<InvoiceSummaryListProps> = inject(Stores.invo
             <div className="inline">
                 <Link to={`/app/invoiceDetail/${record.key}`}>
                     <Button type="default"  icon={<FolderViewOutlined />}
-                            title={i18next.t("InvoiceSummaries.Button.AcceptRequest")} style={{ background: "green", borderColor: "white" }}/>
+                            title={i18next.t("InvoiceSummaries.Button.InvoiceDetail")} style={{ background: "green", borderColor: "white" }}/>
                 </Link>
             </div>
         )
