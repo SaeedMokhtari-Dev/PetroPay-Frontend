@@ -66,6 +66,7 @@ export default
 
     apiInvoiceSummaryGet: "/api/invoice-summary/get",
     apiInvoiceDetailGet: "/api/invoice-detail/get",
+    apiCarBalanceGet: "/api/car-balance/get",
 
     apiLog: "/api/log"
 }

@@ -26,6 +26,7 @@
 
   "General.Email.Valid": "Please enter a valid email address",
   "General.Menu.Reports": "Reports",
+  "General.Table.Total": "Total",
 
   "General.SearchPanel.Text": "Search Panel",
   "General.SearchPanel.SearchButton": "Search",
@@ -483,6 +484,35 @@
 
   "InvoiceDetails.Error.Get.Message": "An error has occurred while trying to get invoice list.",
   "InvoiceDetails.Error.Detail.Message": "An error has occurred while trying to get invoice details.",
+
+
+  "CarBalances.Menu.Title": "Car Balances",
+  "CarBalances.Page.Title": "Car Balances",
+  "CarBalances.Page.SubTitle": "Car Balances report",
+  "CarBalances.Label.key": "key",
+  "CarBalances.Label.companyId": "companyId",
+  "CarBalances.Label.companyName": "company Name",
+  "CarBalances.Label.companyBranchId": "companyBranchId",
+  "CarBalances.Label.companyBranchName": "Branch Name",
+  "CarBalances.Label.carIdNumber": "Car Id Number",
+  "CarBalances.Label.carDriverName": "Car Driver Name",
+  "CarBalances.Label.consumptionValue": "Consumption Value",
+  "CarBalances.Label.carBalnce": "Car Balnce",
+  "CarBalances.Label.carId": "Car Id",
+  "CarBalances.Label.subscriptionStartDate": "Subscription Start Date",
+  "CarBalances.Label.subscriptionEndDate": "Subscription End Date",
+
+  "CarBalances.SearchPanel.Label.carIdNumber": "Car Id Number",
+  "CarBalances.SearchPanel.Label.companyBranchName": "Branch Name",
+  "CarBalances.SearchPanel.Label.invoiceDataTimeFrom": "Date From",
+  "CarBalances.SearchPanel.Label.invoiceDataTimeTo": "Date To",
+  "CarBalances.SearchPanel.Label.serviceDescription": "Service Description",
+  "CarBalances.SearchPanel.Label.companyId": "Company Id",
+  "CarBalances.SearchPanel.Label.companyName": "Company Name",
+
+  "CarBalances.Section.GeneralInformation": "General Information",
+
+  "CarBalances.Error.Get.Message": "An error has occurred while trying to get invoice list.",
 
 
   "General.Country.Egypt": "Egypt",

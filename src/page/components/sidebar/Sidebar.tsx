@@ -54,6 +54,9 @@ const Sidebar: React.FC<SidebarProps> = inject(Stores.pageStore)(observer(({page
             <Menu.Item key="invoiceSummary" icon={<BookOutlined />}>
                 <Link to={Routes.invoiceSummary}>{i18next.t('InvoiceSummaries.Menu.Title')}</Link>
             </Menu.Item>
+            <Menu.Item key="carBalance" icon={<BookOutlined />}>
+                <Link to={Routes.carBalance}>{i18next.t('CarBalances.Menu.Title')}</Link>
+            </Menu.Item>
 
         </SubMenu>
     </Menu>)
@@ -73,6 +76,9 @@ const Sidebar: React.FC<SidebarProps> = inject(Stores.pageStore)(observer(({page
         <SubMenu key="reports" icon={<ReadOutlined />} title={i18next.t('General.Menu.Reports')}>
             <Menu.Item key="invoiceSummary" icon={<BookOutlined />}>
                 <Link to={Routes.invoiceSummary}>{i18next.t('InvoiceSummaries.Menu.Title')}</Link>
+            </Menu.Item>
+            <Menu.Item key="carBalance" icon={<BookOutlined />}>
+                <Link to={Routes.carBalance}>{i18next.t('CarBalances.Menu.Title')}</Link>
             </Menu.Item>
 
         </SubMenu>

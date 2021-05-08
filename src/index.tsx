@@ -58,6 +58,7 @@ ReactDOM.render(
                       subscriptionStore={appStore.subscription}
                       invoiceSummaryStore={appStore.invoiceSummary}
                       invoiceDetailStore={appStore.invoiceDetail}
+                      carBalanceStore={appStore.carBalance}
             >
                 <App />
             </Provider>

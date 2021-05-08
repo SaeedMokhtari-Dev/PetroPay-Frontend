@@ -13,6 +13,7 @@ import RechargeBalanceStore from "../../entities/recharge-balances/stores/Rechar
 import SubscriptionStore from "../../entities/Subscriptions/stores/SubscriptionStore";
 import InvoiceSummaryStore from "../../reports/InvoiceSummaries/stores/InvoiceSummaryStore";
 import InvoiceDetailStore from "../../reports/InvoiceDetails/stores/InvoiceDetailStore";
+import CarBalanceStore from "../../reports/CarBalances/stores/CarBalanceStore";
 
 export class AppStore
 {
@@ -31,6 +32,7 @@ export class AppStore
     subscription: SubscriptionStore;
     invoiceSummary: InvoiceSummaryStore;
     invoiceDetail: InvoiceDetailStore;
+    carBalance: CarBalanceStore;
 
     constructor()
     {
@@ -49,5 +51,6 @@ export class AppStore
         this.subscription = new SubscriptionStore(this);
         this.invoiceSummary = new InvoiceSummaryStore(this);
         this.invoiceDetail = new InvoiceDetailStore(this);
+        this.carBalance = new CarBalanceStore(this);
     }
 }

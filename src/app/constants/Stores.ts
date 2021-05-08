@@ -15,4 +15,5 @@ export default {
     subscriptionStore: 'subscriptionStore',
     invoiceSummaryStore: 'invoiceSummaryStore',
     invoiceDetailStore: 'invoiceDetailStore',
+    carBalanceStore: 'carBalanceStore',
 }
