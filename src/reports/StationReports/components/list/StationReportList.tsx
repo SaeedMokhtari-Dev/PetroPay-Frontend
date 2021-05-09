@@ -134,7 +134,7 @@ const StationReportList: React.FC<StationReportListProps> = inject(Stores.statio
                         <Row gutter={[24, 16]}>
                             {UserContext.info.role == 100 ?
                                 <Col span={8}>
-                                    <Form.Item name="companyName" initialValue={viewModel?.getStationReportsRequest?.stationWorkerFname}
+                                    <Form.Item name="stationWorkerFname" initialValue={viewModel?.getStationReportsRequest?.stationWorkerFname}
                                                key={"stationWorkerFname"}
                                                label={i18next.t("StationReports.SearchPanel.Label.stationWorkerFname")}>
                                         <Input onChange={onChanged}/>

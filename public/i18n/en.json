@@ -529,6 +529,26 @@
 
   "StationReports.Error.Get.Message": "An error has occurred while trying to get station report list.",
 
+  "StationSales.Menu.Title": "Station Sales",
+  "StationSales.Page.Title": "Station Sales Report",
+  "StationSales.Page.SubTitle": "Station Sales",
+  "StationSales.Label.key": "key",
+  "StationSales.Label.stationWorkerId": "stationWorkerId",
+  "StationSales.Label.stationWorkerFname": "Worker Name",
+  "StationSales.Label.sumInvoiceAmount": "Invoice Amount",
+  "StationSales.Label.sumInvoiceFuelConsumptionLiter": "Invoice Fuel Consumption Liter",
+  "StationSales.Label.invoiceFuelType": "Invoice Fuel Type",
+  "StationSales.Label.sumInvoiceDataTime": "Invoice Date",
+
+
+  "StationSales.SearchPanel.Label.stationWorkerId": "stationWorkerId",
+  "StationSales.SearchPanel.Label.stationWorkerFname": "Worker Name",
+  "StationSales.SearchPanel.Label.invoiceFuelType": "Invoice Fuel Type",
+  "StationSales.SearchPanel.Label.invoiceDataTimeFrom": "Invoice Date Time From",
+  "StationSales.SearchPanel.Label.invoiceDataTimeTo": "Invoice Date Time To",
+
+  "StationSales.Error.Get.Message": "An error has occurred while trying to get station sale list.",
+
 
   "General.Country.Egypt": "Egypt",
   "General.Region.Alexandria": "Alexandria",

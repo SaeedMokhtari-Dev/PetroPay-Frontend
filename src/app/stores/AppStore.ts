@@ -15,6 +15,7 @@ import InvoiceSummaryStore from "../../reports/InvoiceSummaries/stores/InvoiceSu
 import InvoiceDetailStore from "../../reports/InvoiceDetails/stores/InvoiceDetailStore";
 import CarBalanceStore from "../../reports/CarBalances/stores/CarBalanceStore";
 import StationReportStore from "../../reports/StationReports/stores/StationReportStore";
+import StationSaleStore from "../../reports/StationSales/stores/StationSaleStore";
 
 export class AppStore
 {
@@ -35,6 +36,7 @@ export class AppStore
     invoiceDetail: InvoiceDetailStore;
     carBalance: CarBalanceStore;
     stationReport: StationReportStore;
+    stationSale: StationSaleStore;
 
     constructor()
     {
@@ -55,5 +57,6 @@ export class AppStore
         this.invoiceDetail = new InvoiceDetailStore(this);
         this.carBalance = new CarBalanceStore(this);
         this.stationReport = new StationReportStore(this);
+        this.stationSale = new StationSaleStore(this);
     }
 }
