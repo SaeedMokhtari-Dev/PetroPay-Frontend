@@ -60,6 +60,10 @@ const InvoiceSummaryList: React.FC<InvoiceSummaryListProps> = inject(Stores.invo
             </div>
         )
     }];
+    if(UserContext.info.role == 100)
+    {
+        columns.unshift({title: i18next.t("InvoiceSummaries.Label.companyName"), dataIndex: "companyName", key: "companyName", responsive: ['md']});
+    }
 
     useEffect(() => {
         onLoad();

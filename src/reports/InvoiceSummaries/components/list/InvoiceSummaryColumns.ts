@@ -1,6 +1,6 @@
 export default
 [
-    {title: "InvoiceSummaries.Label.key", dataIndex: "key", key: "key", responsive: ['md']},
+    /*{title: "InvoiceSummaries.Label.key", dataIndex: "key", key: "key", responsive: ['md']},*/
     {title: "InvoiceSummaries.Label.invoiceId", dataIndex: "invoiceId", key: "invoiceId", responsive: ['md']},
     /*{title: "InvoiceSummaries.Label.companyBranchId", dataIndex: "companyBranchId", key: "companyBranchId", responsive: ['md']},*/
     {title: "InvoiceSummaries.Label.companyBranchName", dataIndex: "companyBranchName", key: "companyBranchName", responsive: ['md']},

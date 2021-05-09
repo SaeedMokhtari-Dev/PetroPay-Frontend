@@ -14,6 +14,8 @@ export default class InvoiceSummaryItem implements IDeserialize
     invoiceFuelConsumptionLiter: number;
     invoiceAmount: number;
     paymentMethodName: string;
+    companyId: number;
+    companyName: string;
 
     constructor() {
         makeAutoObservable(this);

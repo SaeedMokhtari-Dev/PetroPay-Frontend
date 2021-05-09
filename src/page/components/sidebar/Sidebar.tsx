@@ -54,14 +54,17 @@ const Sidebar: React.FC<SidebarProps> = inject(Stores.pageStore)(observer(({page
             <Menu.Item key="invoiceSummary" icon={<BookOutlined />}>
                 <Link to={Routes.invoiceSummary}>{i18next.t('InvoiceSummaries.Menu.Title')}</Link>
             </Menu.Item>
-            <Menu.Item key="carBalance" icon={<BookOutlined />}>
+            <Menu.Item key="carBalance" icon={<DollarOutlined />}>
                 <Link to={Routes.carBalance}>{i18next.t('CarBalances.Menu.Title')}</Link>
             </Menu.Item>
             <Menu.Item key="stationReport" icon={<ShopOutlined />}>
                 <Link to={Routes.stationReport}>{i18next.t('StationReports.Menu.Title')}</Link>
             </Menu.Item>
-            <Menu.Item key="stationSale" icon={<ShopOutlined />}>
+            <Menu.Item key="stationSale" icon={<DollarOutlined />}>
                 <Link to={Routes.stationSale}>{i18next.t('StationSales.Menu.Title')}</Link>
+            </Menu.Item>
+            <Menu.Item key="stationStatement" icon={<ShopOutlined />}>
+                <Link to={Routes.stationStatement}>{i18next.t('StationStatements.Menu.Title')}</Link>
             </Menu.Item>
 
         </SubMenu>
@@ -83,7 +86,7 @@ const Sidebar: React.FC<SidebarProps> = inject(Stores.pageStore)(observer(({page
             <Menu.Item key="invoiceSummary" icon={<BookOutlined />}>
                 <Link to={Routes.invoiceSummary}>{i18next.t('InvoiceSummaries.Menu.Title')}</Link>
             </Menu.Item>
-            <Menu.Item key="carBalance" icon={<BookOutlined />}>
+            <Menu.Item key="carBalance" icon={<DollarOutlined />}>
                 <Link to={Routes.carBalance}>{i18next.t('CarBalances.Menu.Title')}</Link>
             </Menu.Item>
 
@@ -100,8 +103,11 @@ const Sidebar: React.FC<SidebarProps> = inject(Stores.pageStore)(observer(({page
             <Menu.Item key="stationReport" icon={<BookOutlined />}>
                 <Link to={Routes.stationReport}>{i18next.t('StationReports.Menu.Title')}</Link>
             </Menu.Item>
-            <Menu.Item key="stationSale" icon={<ShopOutlined />}>
+            <Menu.Item key="stationSale" icon={<DollarOutlined />}>
                 <Link to={Routes.stationSale}>{i18next.t('StationSales.Menu.Title')}</Link>
+            </Menu.Item>
+            <Menu.Item key="stationStatement" icon={<ShopOutlined />}>
+                <Link to={Routes.stationStatement}>{i18next.t('StationStatements.Menu.Title')}</Link>
             </Menu.Item>
 
         </SubMenu>

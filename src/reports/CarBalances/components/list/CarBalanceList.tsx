@@ -185,7 +185,7 @@ const CarBalanceList: React.FC<CarBalanceListProps> = inject(Stores.carBalanceSt
                            <Table.Summary.Cell index={0}>{i18next.t("General.Table.Total")}</Table.Summary.Cell>
                            <Table.Summary.Cell colSpan={4} index={1}></Table.Summary.Cell>
                            <Table.Summary.Cell index={5}>{viewModel?.sumCarBalance?.toLocaleString()}</Table.Summary.Cell>
-                           <Table.Summary.Cell colSpan={3} index={6}></Table.Summary.Cell>
+                           <Table.Summary.Cell colSpan={2} index={6}></Table.Summary.Cell>
                        </Table.Summary.Row>
                    )}/>
             <br/>

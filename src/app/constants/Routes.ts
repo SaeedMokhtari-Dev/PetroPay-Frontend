@@ -56,4 +56,5 @@ export default
     carBalance: '/app/carBalance',
     stationReport: '/app/stationReport',
     stationSale: '/app/stationSale',
+    stationStatement: '/app/stationStatement',
 }

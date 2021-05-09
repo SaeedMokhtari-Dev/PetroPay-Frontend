@@ -429,6 +429,7 @@
   "InvoiceSummaries.Page.Title": "Invoice Summaries",
   "InvoiceSummaries.Page.SubTitle": "Invoice Summaries report",
   "InvoiceSummaries.Label.key": "key",
+  "InvoiceSummaries.Label.companyName": "Company Name",
   "InvoiceSummaries.Label.invoiceId": "Invoice Number",
   "InvoiceSummaries.Label.companyBranchId": "companyBranchId",
   "InvoiceSummaries.Label.companyBranchName": "Branch Name",
@@ -548,6 +549,25 @@
   "StationSales.SearchPanel.Label.invoiceDataTimeTo": "Invoice Date Time To",
 
   "StationSales.Error.Get.Message": "An error has occurred while trying to get station sale list.",
+
+  "StationStatements.Menu.Title": "Station Statement",
+  "StationStatements.Page.Title": "Station Statement Report",
+  "StationStatements.Page.SubTitle": "Station Statement",
+  "StationStatements.Label.key": "key",
+  "StationStatements.Label.invoiceDataTime": "Invoice Date Time",
+  "StationStatements.Label.accountId": "Account Id",
+  "StationStatements.Label.stationName": "Station Name",
+  "StationStatements.Label.transDocument": "Transaction Document",
+  "StationStatements.Label.sumTransAmount": "Transaction Amount",
+  "StationStatements.Label.accountName": "Account Name",
+  "StationStatements.Label.stationId": "Station Id",
+
+  "StationStatements.SearchPanel.Label.stationId": "station Id",
+  "StationStatements.SearchPanel.Label.stationName": "Station Name",
+  "StationStatements.SearchPanel.Label.invoiceDataTimeFrom": "Invoice Date From",
+  "StationStatements.SearchPanel.Label.invoiceDataTimeTo": "Invoice Data To",
+
+  "StationStatements.Error.Get.Message": "An error has occurred while trying to get station statement list.",
 
 
   "General.Country.Egypt": "Egypt",

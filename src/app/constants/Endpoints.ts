@@ -69,6 +69,7 @@ export default
     apiCarBalanceGet: "/api/car-balance/get",
     apiStationReportGet: "/api/station-report/get",
     apiStationSaleGet: "/api/station-sale/get",
+    apiStationStatementGet: "/api/station-statement/get",
 
     apiLog: "/api/log"
 }

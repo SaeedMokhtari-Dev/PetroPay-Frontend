@@ -13,6 +13,7 @@ export default class CarBalanceItem implements IDeserialize
     consumptionValue: number;
     carBalnce: number;
     carId: number;
+    subscriptionStartDate: string;
     subscriptionEndDate: string;
 
     constructor() {
