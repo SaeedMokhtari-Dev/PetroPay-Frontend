@@ -11,8 +11,7 @@ import {
 } from "antd";
 import {
     FolderViewOutlined,
-    PlusCircleOutlined,
-    SearchOutlined
+    FileExcelOutlined
 } from '@ant-design/icons';
 import i18next from "i18next";
 import GetInvoiceSummaryRequest from "../../handlers/get/GetInvoiceSummaryRequest";
@@ -20,7 +19,7 @@ import UserContext from "../../../../identity/contexts/UserContext";
 import InvoiceSummaryColumns from "./InvoiceSummaryColumns";
 import InvoiceSummaryStore from "../../stores/InvoiceSummaryStore";
 
-import Highlighter from 'react-highlight-words';
+import ExportExcel from "../../../../app/utils/ExportExcel";
 
 const { Panel } = Collapse;
 
@@ -45,6 +44,7 @@ const InvoiceSummaryList: React.FC<InvoiceSummaryListProps> = inject(Stores.invo
        w.title = i18next.t(w.title);
     });
 
+    const companyColumn = {title: i18next.t("InvoiceSummaries.Label.companyName"), dataIndex: "companyName", key: "companyName", responsive: ['md']};
     const columns: any[] = [...InvoiceSummaryColumns,
         {
         title: i18next.t("General.Column.Action"),
@@ -62,7 +62,7 @@ const InvoiceSummaryList: React.FC<InvoiceSummaryListProps> = inject(Stores.invo
     }];
     if(UserContext.info.role == 100)
     {
-        columns.unshift({title: i18next.t("InvoiceSummaries.Label.companyName"), dataIndex: "companyName", key: "companyName", responsive: ['md']});
+        columns.unshift(companyColumn);
     }
 
     useEffect(() => {
@@ -122,6 +122,11 @@ const InvoiceSummaryList: React.FC<InvoiceSummaryListProps> = inject(Stores.invo
         await viewModel.getAllInvoiceSummary(viewModel.getInvoiceSummariesRequest);
         form.resetFields();
     }
+    async function ExportToExcel(){
+        await viewModel.getAllInvoiceSummary(viewModel.getInvoiceSummariesRequest, true);
+        columns.pop();
+        ExportExcel(columns, viewModel?.invoiceSummaryExport, "InvoiceSummary");
+    }
 
     return (
         <div>
@@ -130,6 +135,12 @@ const InvoiceSummaryList: React.FC<InvoiceSummaryListProps> = inject(Stores.invo
                 onBack={() => window.history.back()}
                 title={i18next.t("InvoiceSummaries.Page.Title")}
                 subTitle={i18next.t("InvoiceSummaries.Page.SubTitle")}
+                extra={[
+                    <Button key={"ExportExcel"} type="primary" loading={viewModel?.isProcessing} icon={<FileExcelOutlined />} onClick={ExportToExcel}>
+                        {i18next.t("General.Button.ExportExcel")}
+                    </Button>
+                    ,
+                ]}
             />
 
             <Collapse>

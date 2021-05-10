@@ -8,6 +8,7 @@ export default class GetStationReportRequest
     invoiceDataTimeTo: string;
     pageIndex: number;
     pageSize: number;
+    exportToFile: boolean;
 
     constructor(
     ) {

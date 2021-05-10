@@ -10,6 +10,7 @@ import log from "loglevel";
 export default class GetStationStatementViewModel {
     columns: any[];
     stationStatementList: StationStatementItem[];
+    stationStatementExport: StationStatementItem[];
     totalSize: number;
     isProcessing: boolean;
     errorMessage: string;
@@ -20,17 +21,24 @@ export default class GetStationStatementViewModel {
 
     }
 
-    public async getAllStationStatement(getStationStatementsRequest: GetStationStatementRequest) {
+    public async getAllStationStatement(getStationStatementsRequest: GetStationStatementRequest, exportToFile: boolean = false) {
         try {
             this.isProcessing = true;
+            if(exportToFile)
+                getStationStatementsRequest.exportToFile = exportToFile;
+
             let response = await GetStationStatementHandler.get(getStationStatementsRequest);
 
             if (response && response.success) {
 
                 let result = response.data;
                 let items = result.items;
-                this.stationStatementList = items;
-                this.totalSize = result.totalCount;
+                if(exportToFile)
+                    this.stationStatementExport = items;
+                else{
+                    this.stationStatementList = items;
+                    this.totalSize = result.totalCount;
+                }
             } else {
                 this.errorMessage = getLocalizedString(response.message);
             }
@@ -38,6 +46,7 @@ export default class GetStationStatementViewModel {
             this.errorMessage = i18next.t('StationStatements.Error.Get.Message');
             log.error(e);
         } finally {
+            getStationStatementsRequest.exportToFile = false;
             this.isProcessing = false;
         }
     }

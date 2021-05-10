@@ -10,15 +10,16 @@ import {
     Table, PageHeader, Space, DatePicker
 } from "antd";
 import {
-    FolderViewOutlined,
-    PlusCircleOutlined,
-    SearchOutlined
+    FileExcelOutlined,
+
 } from '@ant-design/icons';
 import i18next from "i18next";
 import GetCarBalanceRequest from "../../handlers/get/GetCarBalanceRequest";
 import UserContext from "../../../../identity/contexts/UserContext";
 import CarBalanceColumns from "./CarBalanceColumns";
 import CarBalanceStore from "../../stores/CarBalanceStore";
+import ExportExcel from "../../../../app/utils/ExportExcel";
+import CarTransactionColumns from "../../../CarTransactions/components/list/CarTransactionColumns";
 
 
 const { Panel } = Collapse;
@@ -103,6 +104,10 @@ const CarBalanceList: React.FC<CarBalanceListProps> = inject(Stores.carBalanceSt
         await viewModel.getAllCarBalance(viewModel.getCarBalancesRequest);
         form.resetFields();
     }
+    async function ExportToExcel(){
+        await viewModel.getAllCarBalance(viewModel.getCarBalancesRequest, true);
+        ExportExcel(columns, viewModel?.carBalanceExport, "CarBalance");
+    }
 
     return (
         <div>
@@ -111,6 +116,12 @@ const CarBalanceList: React.FC<CarBalanceListProps> = inject(Stores.carBalanceSt
                 onBack={() => window.history.back()}
                 title={i18next.t("CarBalances.Page.Title")}
                 subTitle={i18next.t("CarBalances.Page.SubTitle")}
+                extra={[
+                    <Button key={"ExportExcel"} type="primary" loading={viewModel?.isProcessing} icon={<FileExcelOutlined />} onClick={ExportToExcel}>
+                        {i18next.t("General.Button.ExportExcel")}
+                    </Button>
+                    ,
+                ]}
             />
 
             {/*<Collapse>

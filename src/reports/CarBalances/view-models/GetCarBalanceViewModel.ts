@@ -13,6 +13,7 @@ import UserContext from "../../../identity/contexts/UserContext";
 export default class GetCarBalanceViewModel {
     columns: any[];
     carBalanceList: CarBalanceItem[];
+    carBalanceExport: CarBalanceItem[];
     sumCarBalance: number;
     totalSize: number;
     isProcessing: boolean;
@@ -24,18 +25,23 @@ export default class GetCarBalanceViewModel {
 
     }
 
-    public async getAllCarBalance(getCarBalancesRequest: GetCarBalanceRequest) {
+    public async getAllCarBalance(getCarBalancesRequest: GetCarBalanceRequest, exportToFile: boolean = false) {
         try {
             this.isProcessing = true;
+            getCarBalancesRequest.exportToFile = exportToFile;
             let response = await GetCarBalanceHandler.get(getCarBalancesRequest);
 
             if (response && response.success) {
 
                 let result = response.data;
                 let items = result.items;
-                this.carBalanceList = items;
-                this.totalSize = result.totalCount;
-                this.sumCarBalance = result.sumCarBalance;
+                if(exportToFile)
+                    this.carBalanceExport = items;
+                else {
+                    this.carBalanceList = items;
+                    this.totalSize = result.totalCount;
+                    this.sumCarBalance = result.sumCarBalance;
+                }
             } else {
                 this.errorMessage = getLocalizedString(response.message);
             }
@@ -43,6 +49,7 @@ export default class GetCarBalanceViewModel {
             this.errorMessage = i18next.t('CarBalances.Error.Get.Message');
             log.error(e);
         } finally {
+            getCarBalancesRequest.exportToFile = false;
             this.isProcessing = false;
         }
     }

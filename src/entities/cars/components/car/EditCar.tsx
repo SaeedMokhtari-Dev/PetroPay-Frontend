@@ -3,7 +3,7 @@ import {inject, observer} from "mobx-react";
 import Stores from "app/constants/Stores";
 import CarStore from "entities/cars/stores/CarStore";
 import {useParams} from "react-router-dom";
-import {Button, Col, Divider, Form, Input, InputNumber, message, Modal, PageHeader, Radio, Row, Spin, Switch, Upload} from "antd";
+import {Button, Col, Divider, Form, Input, InputNumber, message, Select, PageHeader, Radio, Row, Spin, Switch, Upload} from "antd";
 import i18next from "i18next";
 import EditCarRequest from "../../handlers/edit/EditCarRequest";
 import DetailCarResponse from "../../handlers/detail/DetailCarResponse";
@@ -13,6 +13,11 @@ import {
 } from '@ant-design/icons';
 import history from "../../../../app/utils/History";
 import { PasswordInput } from 'antd-password-input-strength';
+import Types from "../../../../app/constants/Types";
+import CarTypes from "../../../../app/constants/CarTypes";
+import ConsumptionMethods from "../../../../app/constants/ConsumptionMethods";
+import CarBrands from "../../../../app/constants/CarBrands";
+import CarTypeOfFuels from "../../../../app/constants/CarTypeOfFuels";
 const {useEffect} = React;
 
 interface EditCarProps {
@@ -25,6 +30,8 @@ const EditCar: React.FC<EditCarProps> = inject(Stores.carStore)(observer(({carSt
     const [imageUrl, setImageUrl] = React.useState("");
     const [dataFetched, setDataFetched] = React.useState(false);
     const [carId, setCarId] = React.useState(0);
+    const [switchDisabled, setSwitchDisabled] = React.useState(false);
+    const [switchChecked, setSwitchChecked] = React.useState(false);
 
     const [form] = Form.useForm();
 
@@ -39,6 +46,17 @@ const EditCar: React.FC<EditCarProps> = inject(Stores.carStore)(observer(({carSt
         },
     };
 
+    CarTypes.forEach(w =>{ w.title = i18next.t(w.title) });
+    const carTypeOptions = [...CarTypes];
+
+    ConsumptionMethods.forEach(w =>{ w.title = i18next.t(w.title) });
+    const consumptionMethodOptions = [...ConsumptionMethods];
+
+    CarBrands.forEach(w =>{ w.title = i18next.t(w.title) });
+    const carBrandOptions = [...CarBrands];
+
+    CarTypeOfFuels.forEach(w =>{ w.title = i18next.t(w.title) });
+    const carTypeOfFuelOptions = [...CarTypeOfFuels];
 
     useEffect(() => {
         onLoad();
@@ -55,6 +73,8 @@ const EditCar: React.FC<EditCarProps> = inject(Stores.carStore)(observer(({carSt
         {
             await carStore.editCarViewModel.getDetailCar(carIdParam);
             setImageUrl(carStore.editCarViewModel?.detailCarResponse?.carPlatePhoto);
+            if(carStore.editCarViewModel.detailCarResponse.workAllDays)
+                setSwitchDisabled(true);
         }
         else{
             carStore.editCarViewModel.addCarRequest = new AddCarRequest();
@@ -89,17 +109,54 @@ const EditCar: React.FC<EditCarProps> = inject(Stores.carStore)(observer(({carSt
     function onUnload() {
         carStore.onCarEditPageUnload();
     }
+
+    function onSelectChanged(e, propName){
+
+        if(carId)
+            carStore.editCarViewModel.editCarRequest[`${propName}`] = e;
+        else
+            carStore.editCarViewModel.addCarRequest[`${propName}`] = e;
+    }
+
     function onChanged(e){
         if(carId)
             carStore.editCarViewModel.editCarRequest[`${e.target.id}`] = e.target.value;
         else
             carStore.editCarViewModel.addCarRequest[`${e.target.id}`] = e.target.value;
     }
+    function onWorkAllDaysSwitchChange(e){
+        const boolProps = ["saturday", "sunday", "monday", "tuesday", "wednesday", "thursday", "friday"];
+        if(e == true) {
+            if (carId) {
+                carStore.editCarViewModel.editCarRequest.workAllDays = true;
+                boolProps.forEach(w => {
+                    carStore.editCarViewModel.editCarRequest[`${w}`] = true;
+                    carStore.editCarViewModel.detailCarResponse[`${w}`] = true;
+                })
+            } else {
+                carStore.editCarViewModel.addCarRequest.workAllDays = true;
+                boolProps.forEach(w => {
+                    carStore.editCarViewModel.addCarRequest[`${w}`] = true;
+                    carStore.editCarViewModel.detailCarResponse[`${w}`] = true;
+                })
+            }
+
+            setSwitchDisabled(true);
+        }
+        else {
+            setSwitchDisabled(false);
+        }
+    }
     function onSwitchChange(e, propName){
-        if(carId)
+        debugger;
+        if(carId) {
             carStore.editCarViewModel.editCarRequest[`${propName}`] = e;
-        else
+            carStore.editCarViewModel.detailCarResponse[`${propName}`] = e;
+        }
+        else {
             carStore.editCarViewModel.addCarRequest[`${propName}`] = e;
+            carStore.editCarViewModel.detailCarResponse[`${propName}`] = e;
+        }
     }
     function getBase64(img, callback) {
         const reader = new FileReader();
@@ -180,6 +237,13 @@ const EditCar: React.FC<EditCarProps> = inject(Stores.carStore)(observer(({carSt
                 </Form.Item>
                     </Col>
                     <Col span={8}>
+                        <Form.Item name="carIdNumber1E" initialValue={viewModel?.detailCarResponse?.carIdNumber1E}
+                                   key={"carIdNumber1E"}
+                                   label={i18next.t("Cars.Label.carIdNumber1E")}>
+                            <Input maxLength={8} onChange={onChanged}/>
+                        </Form.Item>
+                    </Col>
+                    <Col span={8}>
                 <Form.Item name="carIdText1E" initialValue={viewModel?.detailCarResponse?.carIdText1E}
                            key={"carIdText1E"}
                            label={i18next.t("Cars.Label.carIdText1E")}>
@@ -192,13 +256,6 @@ const EditCar: React.FC<EditCarProps> = inject(Stores.carStore)(observer(({carSt
                                    key={"carIdText1A"}
                                    label={i18next.t("Cars.Label.carIdText1A")}>
                             <Input maxLength={6} onChange={onChanged}/>
-                        </Form.Item>
-                    </Col>
-                    <Col span={8}>
-                        <Form.Item name="carIdNumber1E" initialValue={viewModel?.detailCarResponse?.carIdNumber1E}
-                                   key={"carIdNumber1E"}
-                                   label={i18next.t("Cars.Label.carIdNumber1E")}>
-                            <Input maxLength={8} onChange={onChanged}/>
                         </Form.Item>
                     </Col>
 
@@ -220,7 +277,7 @@ const EditCar: React.FC<EditCarProps> = inject(Stores.carStore)(observer(({carSt
                 <Form.Item name="consumptionMethod" initialValue={viewModel?.detailCarResponse?.consumptionMethod}
                            key={"consumptionMethod"}
                            label={i18next.t("Cars.Label.consumptionMethod")}>
-                    <Input onChange={onChanged}/>
+                    <Select options={consumptionMethodOptions} showSearch={true} onChange={(e) => onSelectChanged(e, "consumptionMethod")} />
                 </Form.Item>
                     </Col>
                     {/*<Col span={8}>
@@ -234,14 +291,14 @@ const EditCar: React.FC<EditCarProps> = inject(Stores.carStore)(observer(({carSt
                         <Form.Item name="carType" initialValue={viewModel?.detailCarResponse?.carType}
                                    key={"carType"}
                                    label={i18next.t("Cars.Label.carType")}>
-                            <Input onChange={onChanged}/>
+                            <Select options={carTypeOptions} showSearch={true} onChange={(e) => onSelectChanged(e, "carType")} />
                         </Form.Item>
                     </Col>
                     <Col span={8}>
                         <Form.Item name="carBrand" initialValue={viewModel?.detailCarResponse?.carBrand}
                                    key={"carBrand"}
                                    label={i18next.t("Cars.Label.carBrand")}>
-                            <Input onChange={onChanged}/>
+                            <Select options={carBrandOptions} showSearch={true} onChange={(e) => onSelectChanged(e, "carBrand")} />
                         </Form.Item>
                     </Col>
                     <Col span={8}>
@@ -263,59 +320,10 @@ const EditCar: React.FC<EditCarProps> = inject(Stores.carStore)(observer(({carSt
                         <Form.Item name="carTypeOfFuel" initialValue={viewModel?.detailCarResponse?.carTypeOfFuel}
                                    key={"carTypeOfFuel"}
                                    label={i18next.t("Cars.Label.carTypeOfFuel")}>
-                            <Input onChange={onChanged}/>
+                            <Select options={carTypeOfFuelOptions} showSearch={true} onChange={(e) => onSelectChanged(e, "carTypeOfFuel")} />
                         </Form.Item>
                     </Col>
-                    <Col span={3}>
-                <Form.Item name="saturday" initialValue={viewModel?.detailCarResponse?.saturday}
-                           key={"saturday"}
-                           label={i18next.t("Cars.Label.saturday")}>
-                    <Switch onChange={(e) => onSwitchChange(e, 'saturday')} defaultChecked={viewModel?.detailCarResponse?.saturday} />
-                </Form.Item>
-                    </Col>
-                    <Col span={3}>
-                <Form.Item name="sunday" initialValue={viewModel?.detailCarResponse?.sunday}
-                           key={"sunday"}
-                           label={i18next.t("Cars.Label.sunday")}>
-                    <Switch onChange={(e) => onSwitchChange(e, 'sunday')} defaultChecked={viewModel?.detailCarResponse?.sunday} />
-                </Form.Item>
-                    </Col>
-                    <Col span={3}>
-                <Form.Item name="monday" initialValue={viewModel?.detailCarResponse?.monday}
-                           key={"monday"}
-                           label={i18next.t("Cars.Label.monday")}>
-                    <Switch onChange={(e) => onSwitchChange(e, 'monday')} defaultChecked={viewModel?.detailCarResponse?.monday} />
-                </Form.Item>
-                    </Col>
-                    <Col span={3}>
-                <Form.Item name="tuesday" initialValue={viewModel?.detailCarResponse?.tuesday}
-                           key={"tuesday"}
-                           label={i18next.t("Cars.Label.tuesday")}>
-                    <Switch onChange={(e) => onSwitchChange(e, 'tuesday')} defaultChecked={viewModel?.detailCarResponse?.tuesday} />
-                </Form.Item>
-                    </Col>
-                    <Col span={3}>
-                <Form.Item name="wednesday" initialValue={viewModel?.detailCarResponse?.wednesday}
-                           key={"wednesday"}
-                           label={i18next.t("Cars.Label.wednesday")}>
-                    <Switch onChange={(e) => onSwitchChange(e, 'wednesday')} defaultChecked={viewModel?.detailCarResponse?.wednesday} />
-                </Form.Item>
-                    </Col>
-                    <Col span={3}>
-                <Form.Item name="thursday" initialValue={viewModel?.detailCarResponse?.thursday}
-                           key={"thursday"}
-                           label={i18next.t("Cars.Label.thursday")}>
-                    <Switch onChange={(e) => onSwitchChange(e, 'thursday')} defaultChecked={viewModel?.detailCarResponse?.thursday} />
-                </Form.Item>
-                    </Col>
-                    <Col span={3}>
-                <Form.Item name="friday" initialValue={viewModel?.detailCarResponse?.friday}
-                           key={"friday"}
-                           label={i18next.t("Cars.Label.friday")}>
-                    <Switch onChange={(e) => onSwitchChange(e, 'friday')} defaultChecked={viewModel?.detailCarResponse?.friday} />
-                </Form.Item>
-                    </Col>
-
+                    <Divider>{i18next.t("Cars.Section.DriverInformation")}</Divider>
                     <Col span={8}>
                         <Form.Item name="carDriverName" initialValue={viewModel?.detailCarResponse?.carDriverName}
                                    key={"carDriverName"}
@@ -331,39 +339,86 @@ const EditCar: React.FC<EditCarProps> = inject(Stores.carStore)(observer(({carSt
                         </Form.Item>
                     </Col>
                     <Col span={8}>
-                <Form.Item name="carDriverEmail" initialValue={viewModel?.detailCarResponse?.carDriverEmail}
-                           key={"carDriverEmail"}
-                           label={i18next.t("Cars.Label.carDriverEmail")}
-                           rules={[
-                               {
-                                   type: "email",
-                                   message: i18next.t("Cars.Validation.Message.carDriverEmail.Valid")
-                               }
-                           ]}>
-                    <Input type={"email"} onChange={onChanged}/>
+                        <Form.Item name="carDriverEmail" initialValue={viewModel?.detailCarResponse?.carDriverEmail}
+                                   key={"carDriverEmail"}
+                                   label={i18next.t("Cars.Label.carDriverEmail")}
+                                   rules={[
+                                       {
+                                           type: "email",
+                                           message: i18next.t("Cars.Validation.Message.carDriverEmail.Valid")
+                                       }
+                                   ]}>
+                            <Input type={"email"} onChange={onChanged}/>
+                        </Form.Item>
+                    </Col>
+                    <Col span={8}>
+                        <Form.Item name="carDriverActive" initialValue={viewModel?.detailCarResponse?.carDriverActive}
+                                   key={"carDriverActive"}
+                                   label={i18next.t("Cars.Label.carDriverActive")}>
+                            <Switch onChange={(e) => onSwitchChange(e, 'carDriverActive')} defaultChecked={viewModel?.detailCarResponse?.carDriverActive} />
+                        </Form.Item>
+                    </Col>
+                    <Col span={8}>
+                        <Form.Item name="carDriverConfirmationCode" initialValue={viewModel?.detailCarResponse?.carDriverConfirmationCode}
+                                   key={"carDriverConfirmationCode"}
+                                   label={i18next.t("Cars.Label.carDriverConfirmationCode")}>
+                            <Input onChange={onChanged}/>
+                        </Form.Item>
+                    </Col>
+                    <Divider>
+                            {i18next.t("Cars.Label.workAllDays")} <Switch onChange={onWorkAllDaysSwitchChange} defaultChecked={viewModel?.detailCarResponse?.workAllDays} />
+                    </Divider>
+                    <Col span={3}>
+
+                <Form.Item name="saturday"
+                           key={"saturday"}
+                           label={i18next.t("Cars.Label.saturday")}>
+                    <Switch disabled={switchDisabled} defaultChecked={viewModel?.detailCarResponse?.saturday} onChange={(e) => onSwitchChange(e, 'saturday')} />
                 </Form.Item>
                     </Col>
-                        <Col span={8}>
-                            <Form.Item name="carDriverActive" initialValue={viewModel?.detailCarResponse?.carDriverActive}
-                                       key={"carDriverActive"}
-                                       label={i18next.t("Cars.Label.carDriverActive")}>
-                                <Switch onChange={(e) => onSwitchChange(e, 'carDriverActive')} defaultChecked={viewModel?.detailCarResponse?.carDriverActive} />
-                            </Form.Item>
-                        </Col>
-                        <Col span={8}>
-                            <Form.Item name="carDriverConfirmationCode" initialValue={viewModel?.detailCarResponse?.carDriverConfirmationCode}
-                                       key={"carDriverConfirmationCode"}
-                                       label={i18next.t("Cars.Label.carDriverConfirmationCode")}>
-                                <Input onChange={onChanged}/>
-                            </Form.Item>
-                        </Col>
-                        <Col span={8}>
-                            <Form.Item name="workAllDays" initialValue={viewModel?.detailCarResponse?.workAllDays}
-                                       key={"workAllDays"}
-                                       label={i18next.t("Cars.Label.workAllDays")}>
-                                <Switch onChange={(e) => onSwitchChange(e, 'workAllDays')} defaultChecked={viewModel?.detailCarResponse?.workAllDays} />
-                            </Form.Item>
-                        </Col>
+                    <Col span={3}>
+                <Form.Item name="sunday" initialValue={viewModel?.detailCarResponse?.sunday}
+                           key={"sunday"}
+                           label={i18next.t("Cars.Label.sunday")}>
+                    <Switch disabled={switchDisabled} defaultChecked={viewModel?.detailCarResponse?.sunday} onChange={(e) => onSwitchChange(e, 'sunday')} />
+                </Form.Item>
+                    </Col>
+                    <Col span={3}>
+                <Form.Item name="monday" initialValue={viewModel?.detailCarResponse?.monday}
+                           key={"monday"}
+                           label={i18next.t("Cars.Label.monday")}>
+                    <Switch disabled={switchDisabled} onChange={(e) => onSwitchChange(e, 'monday')} defaultChecked={viewModel?.detailCarResponse?.monday} />
+                </Form.Item>
+                    </Col>
+                    <Col span={3}>
+                <Form.Item name="tuesday" initialValue={viewModel?.detailCarResponse?.tuesday}
+                           key={"tuesday"}
+                           label={i18next.t("Cars.Label.tuesday")}>
+                    <Switch disabled={switchDisabled}  onChange={(e) => onSwitchChange(e, 'tuesday')} defaultChecked={viewModel?.detailCarResponse?.tuesday} />
+                </Form.Item>
+                    </Col>
+                    <Col span={3}>
+                <Form.Item name="wednesday" initialValue={viewModel?.detailCarResponse?.wednesday}
+                           key={"wednesday"}
+                           label={i18next.t("Cars.Label.wednesday")}>
+                    <Switch disabled={switchDisabled} onChange={(e) => onSwitchChange(e, 'wednesday')} defaultChecked={viewModel?.detailCarResponse?.wednesday} />
+                </Form.Item>
+                    </Col>
+                    <Col span={3}>
+                <Form.Item name="thursday" initialValue={viewModel?.detailCarResponse?.thursday}
+                           key={"thursday"}
+                           label={i18next.t("Cars.Label.thursday")}>
+                    <Switch disabled={switchDisabled} onChange={(e) => onSwitchChange(e, 'thursday')} defaultChecked={viewModel?.detailCarResponse?.thursday} />
+                </Form.Item>
+                    </Col>
+                    <Col span={3}>
+                <Form.Item name="friday" initialValue={viewModel?.detailCarResponse?.friday}
+                           key={"friday"}
+                           label={i18next.t("Cars.Label.friday")}>
+                    <Switch disabled={switchDisabled} onChange={(e) => onSwitchChange(e, 'friday')} defaultChecked={viewModel?.detailCarResponse?.friday} />
+                </Form.Item>
+                    </Col>
+
 
                     <Divider>{i18next.t("Companies.Section.LoginInformation")}</Divider>
 

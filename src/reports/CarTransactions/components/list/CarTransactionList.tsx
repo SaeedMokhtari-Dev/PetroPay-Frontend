@@ -10,15 +10,14 @@ import {
     Table, PageHeader, Space, DatePicker
 } from "antd";
 import {
-    FolderViewOutlined,
-    PlusCircleOutlined,
-    SearchOutlined
+    FileExcelOutlined
 } from '@ant-design/icons';
 import i18next from "i18next";
 import GetCarTransactionRequest from "../../handlers/get/GetCarTransactionRequest";
 import UserContext from "../../../../identity/contexts/UserContext";
 import CarTransactionColumns from "./CarTransactionColumns";
 import CarTransactionStore from "../../stores/CarTransactionStore";
+import ExportExcel from "../../../../app/utils/ExportExcel";
 
 const { Panel } = Collapse;
 
@@ -42,11 +41,12 @@ const CarTransactionList: React.FC<CarTransactionListProps> = inject(Stores.carT
     CarTransactionColumns.forEach(w => {
        w.title = i18next.t(w.title);
     });
+    const companyColumn = {title: i18next.t("CarTransactions.Label.companyName"), dataIndex: "companyName", key: "companyName", responsive: ['md']};
 
     const columns: any[] = [...CarTransactionColumns];
     if(UserContext.info.role == 100)
     {
-        columns.unshift({title: i18next.t("CarTransactions.Label.companyName"), dataIndex: "companyName", key: "companyName", responsive: ['md']});
+        columns.unshift(companyColumn);
     }
 
     useEffect(() => {
@@ -106,6 +106,10 @@ const CarTransactionList: React.FC<CarTransactionListProps> = inject(Stores.carT
         await viewModel.getAllCarTransaction(viewModel.getCarTransactionsRequest);
         form.resetFields();
     }
+    async function ExportToExcel(){
+        await viewModel.getAllCarTransaction(viewModel.getCarTransactionsRequest, true);
+        ExportExcel(columns, viewModel?.carTransactionExport, "CarTransaction");
+    }
 
     return (
         <div>
@@ -114,6 +118,12 @@ const CarTransactionList: React.FC<CarTransactionListProps> = inject(Stores.carT
                 onBack={() => window.history.back()}
                 title={i18next.t("CarTransactions.Page.Title")}
                 subTitle={i18next.t("CarTransactions.Page.SubTitle")}
+                extra={[
+                    <Button key={"ExportExcel"} type="primary" loading={viewModel?.isProcessing} icon={<FileExcelOutlined />} onClick={ExportToExcel}>
+                        {i18next.t("General.Button.ExportExcel")}
+                    </Button>
+                    ,
+                ]}
             />
 
             <Collapse>

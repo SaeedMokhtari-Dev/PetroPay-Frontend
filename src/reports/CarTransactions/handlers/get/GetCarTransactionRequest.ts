@@ -8,6 +8,7 @@ export default class GetCarTransactionRequest
     transDateTo: string;
     companyId: number;
     companyName: string;
+    exportToFile: boolean;
 
     pageIndex: number;
     pageSize: number;

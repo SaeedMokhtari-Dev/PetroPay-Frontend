@@ -13,6 +13,7 @@ import UserContext from "../../../identity/contexts/UserContext";
 export default class GetInvoiceSummaryViewModel {
     columns: any[];
     invoiceSummaryList: InvoiceSummaryItem[];
+    invoiceSummaryExport: InvoiceSummaryItem[];
     totalSize: number;
     isProcessing: boolean;
     errorMessage: string;
@@ -23,17 +24,23 @@ export default class GetInvoiceSummaryViewModel {
 
     }
 
-    public async getAllInvoiceSummary(getInvoiceSummariesRequest: GetInvoiceSummaryRequest) {
+    public async getAllInvoiceSummary(getInvoiceSummariesRequest: GetInvoiceSummaryRequest, exportToFile: boolean = false) {
         try {
             this.isProcessing = true;
+            if(exportToFile)
+                getInvoiceSummariesRequest.exportToFile = exportToFile;
             let response = await GetInvoiceSummaryHandler.get(getInvoiceSummariesRequest);
 
             if (response && response.success) {
 
                 let result = response.data;
                 let items = result.items;
-                this.invoiceSummaryList = items;
-                this.totalSize = result.totalCount;
+                if(exportToFile)
+                    this.invoiceSummaryExport = items;
+                else {
+                    this.invoiceSummaryList = items;
+                    this.totalSize = result.totalCount;
+                }
             } else {
                 this.errorMessage = getLocalizedString(response.message);
             }
@@ -41,6 +48,7 @@ export default class GetInvoiceSummaryViewModel {
             this.errorMessage = i18next.t('InvoiceSummaries.Error.Get.Message');
             log.error(e);
         } finally {
+            getInvoiceSummariesRequest.exportToFile = false;
             this.isProcessing = false;
         }
     }

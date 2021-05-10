@@ -6,6 +6,7 @@ export default class GetStationStatementRequest
     stationName: string;
     invoiceDataTimeFrom: string;
     invoiceDataTimeTo: string;
+    exportToFile: boolean;
 
     pageIndex: number;
     pageSize: number;

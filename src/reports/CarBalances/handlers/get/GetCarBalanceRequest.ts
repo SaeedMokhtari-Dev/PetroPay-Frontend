@@ -11,6 +11,7 @@ export default class GetCarBalanceRequest
     companyName: string;
     pageIndex: number;
     pageSize: number;
+    exportToFile: boolean;
 
     constructor(
     ) {

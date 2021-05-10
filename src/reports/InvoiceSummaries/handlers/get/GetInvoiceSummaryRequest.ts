@@ -11,6 +11,7 @@ export default class GetInvoiceSummaryRequest
     companyName: string;
     pageIndex: number;
     pageSize: number;
+    exportToFile: boolean;
 
     constructor(
     ) {

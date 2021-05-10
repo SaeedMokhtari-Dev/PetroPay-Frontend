@@ -10,6 +10,7 @@ import log from "loglevel";
 export default class GetStationSaleViewModel {
     columns: any[];
     stationSaleList: StationSaleItem[];
+    stationSaleExport: StationSaleItem[];
     totalSize: number;
     isProcessing: boolean;
     errorMessage: string;
@@ -20,17 +21,23 @@ export default class GetStationSaleViewModel {
 
     }
 
-    public async getAllStationSale(getStationSalesRequest: GetStationSaleRequest) {
+    public async getAllStationSale(getStationSalesRequest: GetStationSaleRequest, exportToFile: boolean = false) {
         try {
             this.isProcessing = true;
+            if(exportToFile)
+                getStationSalesRequest.exportToFile = exportToFile;
             let response = await GetStationSaleHandler.get(getStationSalesRequest);
 
             if (response && response.success) {
 
                 let result = response.data;
                 let items = result.items;
-                this.stationSaleList = items;
-                this.totalSize = result.totalCount;
+                if(exportToFile)
+                    this.stationSaleExport = items;
+                else {
+                    this.stationSaleList = items;
+                    this.totalSize = result.totalCount;
+                }
             } else {
                 this.errorMessage = getLocalizedString(response.message);
             }
@@ -38,6 +45,7 @@ export default class GetStationSaleViewModel {
             this.errorMessage = i18next.t('StationSales.Error.Get.Message');
             log.error(e);
         } finally {
+            getStationSalesRequest.exportToFile = false;
             this.isProcessing = false;
         }
     }

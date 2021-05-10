@@ -13,6 +13,7 @@ import UserContext from "../../../identity/contexts/UserContext";
 export default class GetCarTransactionViewModel {
     columns: any[];
     carTransactionList: CarTransactionItem[];
+    carTransactionExport: CarTransactionItem[];
     totalSize: number;
     isProcessing: boolean;
     errorMessage: string;
@@ -23,17 +24,25 @@ export default class GetCarTransactionViewModel {
 
     }
 
-    public async getAllCarTransaction(getCarTransactionsRequest: GetCarTransactionRequest) {
+    public async getAllCarTransaction(getCarTransactionsRequest: GetCarTransactionRequest, exportToFile: boolean = false) {
         try {
+            debugger;
             this.isProcessing = true;
+            getCarTransactionsRequest.exportToFile = exportToFile;
             let response = await GetCarTransactionHandler.get(getCarTransactionsRequest);
 
             if (response && response.success) {
 
                 let result = response.data;
                 let items = result.items;
-                this.carTransactionList = items;
-                this.totalSize = result.totalCount;
+
+                if(exportToFile)
+                    this.carTransactionExport = items;
+                else
+                {
+                    this.carTransactionList = items;
+                    this.totalSize = result.totalCount;
+                }
             } else {
                 this.errorMessage = getLocalizedString(response.message);
             }
@@ -41,6 +50,7 @@ export default class GetCarTransactionViewModel {
             this.errorMessage = i18next.t('CarTransactions.Error.Get.Message');
             log.error(e);
         } finally {
+            getCarTransactionsRequest.exportToFile = false;
             this.isProcessing = false;
         }
     }

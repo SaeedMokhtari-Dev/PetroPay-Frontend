@@ -10,15 +10,14 @@ import {
     Table, PageHeader, Space, DatePicker
 } from "antd";
 import {
-    FolderViewOutlined,
-    PlusCircleOutlined,
-    SearchOutlined
+    FileExcelOutlined
 } from '@ant-design/icons';
 import i18next from "i18next";
 import GetStationStatementRequest from "../../handlers/get/GetStationStatementRequest";
 import UserContext from "../../../../identity/contexts/UserContext";
 import StationStatementColumns from "./StationStatementColumns";
 import StationStatementStore from "../../stores/StationStatementStore";
+import ExportExcel from "../../../../app/utils/ExportExcel";
 
 const { Panel } = Collapse;
 
@@ -102,6 +101,10 @@ const StationStatementList: React.FC<StationStatementListProps> = inject(Stores.
         await viewModel.getAllStationStatement(viewModel.getStationStatementsRequest);
         form.resetFields();
     }
+    async function ExportToExcel(){
+        await viewModel.getAllStationStatement(viewModel.getStationStatementsRequest, true);
+        ExportExcel(columns, viewModel?.stationStatementExport, "StationStatement");
+    }
 
     return (
         <div>
@@ -110,6 +113,12 @@ const StationStatementList: React.FC<StationStatementListProps> = inject(Stores.
                 onBack={() => window.history.back()}
                 title={i18next.t("StationStatements.Page.Title")}
                 subTitle={i18next.t("StationStatements.Page.SubTitle")}
+                extra={[
+                    <Button key={"ExportExcel"} type="primary" loading={viewModel?.isProcessing} icon={<FileExcelOutlined />} onClick={ExportToExcel}>
+                        {i18next.t("General.Button.ExportExcel")}
+                    </Button>
+                    ,
+                ]}
             />
 
             <Collapse>

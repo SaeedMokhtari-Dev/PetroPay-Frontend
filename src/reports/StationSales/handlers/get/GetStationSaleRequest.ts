@@ -7,6 +7,7 @@ export default class GetStationSaleRequest
     invoiceFuelType: string;
     invoiceDataTimeFrom: string;
     invoiceDataTimeTo: string;
+    exportToFile: boolean;
 
     pageIndex: number;
     pageSize: number;
