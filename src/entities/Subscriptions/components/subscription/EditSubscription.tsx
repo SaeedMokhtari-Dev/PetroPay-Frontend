@@ -31,7 +31,7 @@ const EditSubscription: React.FC<EditSubscriptionProps> = inject(Stores.subscrip
 
     const dateFormat = 'YYYY-MM-DD';
 
-    debugger;
+
     const [subscriptionType, setSubscriptionType] = React.useState("");
     const [subscriptionCost, setSubscriptionCost] = React.useState(0);
     const [calculateButtonDisable, setCalculateButtonDisable] = React.useState(true);
@@ -67,7 +67,7 @@ const EditSubscription: React.FC<EditSubscriptionProps> = inject(Stores.subscrip
 
     async function onLoad()
     {
-        debugger;
+
         subscriptionStore.onSubscriptionEditPageLoad();
         let subscriptionIdParam = +match.params?.subscriptionId;
 
@@ -95,7 +95,7 @@ const EditSubscription: React.FC<EditSubscriptionProps> = inject(Stores.subscrip
 
 
     async function onFinish(values: any) {
-        debugger;
+
         if(subscriptionId)
         {
             await viewModel.editSubscription(viewModel.editSubscriptionRequest);
@@ -166,7 +166,7 @@ const EditSubscription: React.FC<EditSubscriptionProps> = inject(Stores.subscrip
         }
 
         let result = await viewModel.calculateCost(request, subscriptionId);
-        debugger;
+
         setSubscriptionCost(result);
     }
     return (
@@ -176,7 +176,7 @@ const EditSubscription: React.FC<EditSubscriptionProps> = inject(Stores.subscrip
                 onBack={() => window.history.back()}
                 title={subscriptionId ? `${i18next.t("Subscriptions.Edit.HeaderText")} ${subscriptionId}` : i18next.t("Subscriptions.Add.HeaderText")}
             />
-            <Divider>General Information</Divider>
+            <Divider>{i18next.t("Subscriptions.Section.GeneralInformation")}</Divider>
             {dataFetched ?
             <Form {...formItemLayout} layout={"vertical"} onFinish={onFinish} form={form}
                   key={"subscriptionForm"}

@@ -21,14 +21,8 @@ interface EditBundleProps {
 
 const EditBundle: React.FC<EditBundleProps> = inject(Stores.bundlesStore)(observer(({bundlesStore, match}) =>
 {
-
-
-    let { bundleId } = useParams();
-
-    let viewModel = bundlesStore.editBundleViewModel;
-
-    if(!viewModel) return;
-
+    const [dataFetched, setDataFetched] = React.useState(false);
+    const [bundleId, setBundleId] = React.useState(0);
 
     const [form] = Form.useForm();
 
@@ -43,6 +37,34 @@ const EditBundle: React.FC<EditBundleProps> = inject(Stores.bundlesStore)(observ
         },
     };
 
+
+    useEffect(() => {
+        onLoad();
+        return onUnload;
+    }, []);
+
+    async function onLoad()
+    {
+        bundlesStore.onBundleEditPageLoad();
+        let bundleIdParam = +match.params?.bundleId;
+
+        if(bundleIdParam)
+        {
+            await bundlesStore.editBundleViewModel.getDetailBundle(bundleIdParam);
+        }
+        else{
+            bundlesStore.editBundleViewModel.addBundleRequest = new AddBundleRequest();
+            bundlesStore.editBundleViewModel.detailBundleResponse = new DetailBundleResponse();
+        }
+        setBundleId(bundleIdParam);
+        setDataFetched(true);
+    }
+
+    let viewModel = bundlesStore.editBundleViewModel;
+
+    if(!viewModel) return;
+
+
     async function onFinish(values: any) {
 
         if(bundleId)
@@ -56,27 +78,6 @@ const EditBundle: React.FC<EditBundleProps> = inject(Stores.bundlesStore)(observ
         if(!viewModel.errorMessage)
             history.goBack();
     };
-
-    useEffect(() => {
-        onLoad();
-        return onUnload;
-    }, []);
-
-    async function onLoad()
-    {
-        bundlesStore.onBundleEditPageLoad();
-
-        if(match.params?.bundleId)
-        {
-            await bundlesStore.editBundleViewModel.getDetailBundle(+match.params.bundleId);
-        }
-        else{
-            bundlesStore.editBundleViewModel.addBundleRequest = new AddBundleRequest();
-            bundlesStore.editBundleViewModel.detailBundleResponse = new DetailBundleResponse();
-        }
-    }
-
-
 
     function onUnload() {
         bundlesStore.onBundleEditPageUnload();
@@ -96,7 +97,8 @@ const EditBundle: React.FC<EditBundleProps> = inject(Stores.bundlesStore)(observ
                 title={bundleId ? `${i18next.t("Bundles.Edit.HeaderText")} ${bundleId}` : i18next.t("Bundles.Add.HeaderText")}
             />
 
-            <Divider>General Information</Divider>
+            <Divider>{i18next.t("Bundles.Section.GeneralInformation")}</Divider>
+            {dataFetched ?
             <Form {...formItemLayout} layout={"vertical"} onFinish={onFinish} form={form}
                   key={"bundleForm"}
                  scrollToFirstError>
@@ -165,7 +167,13 @@ const EditBundle: React.FC<EditBundleProps> = inject(Stores.bundlesStore)(observ
                     />
 
             </Form>
-
+                :
+                <Row gutter={[24, 16]}>
+                    <Col offset={11} span={8}>
+                        <Spin className={"spine"} size="large" />
+                    </Col>
+                </Row>
+            }
         </div>
     )
 }));

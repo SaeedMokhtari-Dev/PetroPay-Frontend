@@ -56,14 +56,14 @@ const BundlesList: React.FC<BundlesSidebarProps> = inject(Stores.bundlesStore)(o
         )
     }];
     async function showEditPage(e){
-        bundlesStore.editBundleViewModel.key = e.key;
+        //bundlesStore.editBundleViewModel.key = e.key;
         if(e.key)
         {
-            await bundlesStore.editBundleViewModel.getDetailBundle(e.key);
+            //await bundlesStore.editBundleViewModel.getDetailBundle(e.key);
             NavigationService.navigate(`/app/bundle/edit/${e.key}`);
         }
         else{
-            bundlesStore.editBundleViewModel.addBundleRequest = new AddBundleRequest();
+            //bundlesStore.editBundleViewModel.addBundleRequest = new AddBundleRequest();
             NavigationService.navigate(Routes.addBundle);
         }
     }
@@ -89,7 +89,7 @@ const BundlesList: React.FC<BundlesSidebarProps> = inject(Stores.bundlesStore)(o
 
     async function onLoad() {
         bundlesStore.onBundleGetPageLoad();
-        bundlesStore.onBundleEditPageLoad();
+        //bundlesStore.onBundleEditPageLoad();
         bundlesStore.getBundleViewModel.pageIndex = 0;
         bundlesStore.getBundleViewModel.pageSize = 20;
         await bundlesStore.getBundleViewModel.getAllBundles(new GetBundleRequest(20, 0));
@@ -97,7 +97,7 @@ const BundlesList: React.FC<BundlesSidebarProps> = inject(Stores.bundlesStore)(o
 
     function onUnload() {
         bundlesStore.onBundleGetPageUnload();
-        bundlesStore.onBundleEditPageUnload();
+        //bundlesStore.onBundleEditPageUnload();
     }
 
     async function pageIndexChanged(pageIndex, pageSize){

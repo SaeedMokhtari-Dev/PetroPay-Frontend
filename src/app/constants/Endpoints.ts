@@ -70,6 +70,7 @@ export default
     apiStationReportGet: "/api/station-report/get",
     apiStationSaleGet: "/api/station-sale/get",
     apiStationStatementGet: "/api/station-statement/get",
+    apiCarTransactionGet: "/api/car-transaction/get",
 
     apiLog: "/api/log"
 }

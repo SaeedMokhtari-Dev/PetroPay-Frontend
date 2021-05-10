@@ -104,7 +104,7 @@ const Login: React.FC<LoginProps> = inject('authStore')(observer(({authStore}) =
                         <img src="/images/petro-pay-logo.png" className="logo" alt="logo"/>
                     </div>
                     <div className="signup-classic">
-                        <h2>Welcome {viewModel?.getRoleTitle()}</h2>
+                        <h1>Welcome {viewModel?.getRoleTitle()}</h1>
                         <Form layout="vertical" onFinish={onFinish} >
                             <Form.Item initialValue={viewModel.username} name="username" label={i18next.t("Authentication.Label.Username")} required={false}
                                        rules={[

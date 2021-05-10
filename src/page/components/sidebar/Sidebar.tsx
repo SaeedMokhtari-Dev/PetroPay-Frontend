@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 import { Layout, Menu } from 'antd';
 import {
     DashboardOutlined, ReadOutlined, ShoppingOutlined, DollarOutlined, HomeOutlined,
-    ShopOutlined, BookOutlined
+    ShopOutlined, BookOutlined, CarOutlined
 } from '@ant-design/icons';
 import Routes from "../../../app/constants/Routes";
 import i18next from "i18next";
@@ -57,6 +57,9 @@ const Sidebar: React.FC<SidebarProps> = inject(Stores.pageStore)(observer(({page
             <Menu.Item key="carBalance" icon={<DollarOutlined />}>
                 <Link to={Routes.carBalance}>{i18next.t('CarBalances.Menu.Title')}</Link>
             </Menu.Item>
+            <Menu.Item key="carTransaction" icon={<CarOutlined />}>
+                <Link to={Routes.carTransaction}>{i18next.t('CarTransactions.Menu.Title')}</Link>
+            </Menu.Item>
             <Menu.Item key="stationReport" icon={<ShopOutlined />}>
                 <Link to={Routes.stationReport}>{i18next.t('StationReports.Menu.Title')}</Link>
             </Menu.Item>
@@ -88,6 +91,9 @@ const Sidebar: React.FC<SidebarProps> = inject(Stores.pageStore)(observer(({page
             </Menu.Item>
             <Menu.Item key="carBalance" icon={<DollarOutlined />}>
                 <Link to={Routes.carBalance}>{i18next.t('CarBalances.Menu.Title')}</Link>
+            </Menu.Item>
+            <Menu.Item key="carTransaction" icon={<CarOutlined />}>
+                <Link to={Routes.carTransaction}>{i18next.t('CarTransactions.Menu.Title')}</Link>
             </Menu.Item>
 
         </SubMenu>

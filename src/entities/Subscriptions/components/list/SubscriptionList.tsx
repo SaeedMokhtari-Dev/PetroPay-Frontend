@@ -64,8 +64,6 @@ const SubscriptionList: React.FC<SubscriptionListProps> = inject(Stores.subscrip
                        <div>
                            <Button type="primary" icon={<EditOutlined/>} onClick={() => showEditPage(record)}
                                    title={i18next.t("General.Button.Edit")}/>
-                           <Button type="primary" icon={<EditOutlined/>} onClick={() => showEditPage(record)}
-                                   title={i18next.t("General.Button.Edit")}/>
                            <Button type="primary" danger icon={<DeleteOutlined/>}
                            onClick={() => showDeleteConfirm(record)}
                            title={i18next.t("General.Button.Delete")}/>
@@ -87,7 +85,7 @@ const SubscriptionList: React.FC<SubscriptionListProps> = inject(Stores.subscrip
         //subscriptionStore.onSubscriptionEditPageLoad();
         subscriptionStore.getSubscriptionViewModel.pageIndex = 0;
         subscriptionStore.getSubscriptionViewModel.pageSize = 20;
-        debugger;
+
         if(UserContext.info.role == 100) {
             await subscriptionStore.getSubscriptionViewModel.getAllSubscription(new GetSubscriptionRequest(
                 20, 0));
@@ -102,7 +100,7 @@ const SubscriptionList: React.FC<SubscriptionListProps> = inject(Stores.subscrip
     if (!viewModel) return;
 
     async function showEditPage(e){
-        debugger;
+
         if(e.key)
         {
             //await subscriptionStore.editSubscriptionViewModel.getDetailSubscription(e.key);

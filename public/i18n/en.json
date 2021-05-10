@@ -10,6 +10,7 @@
   "General.Add.CancelButton": "Cancel",
   "General.Confirm.Delete": "Are you sure to delete?",
   "General.Confirm.Active": "Are you sure to active?",
+  "General.Confirm.Accept": "Are you sure to accept?",
 
 
   "General.HeaderMenu.User": "Hi",
@@ -138,6 +139,7 @@
 
   "Bundles.Add.HeaderText": "Add Bundle",
   "Bundles.Edit.HeaderText": "Edit Bundle with Id:",
+  "Bundles.Section.GeneralInformation": "General Information",
 
   "Bundles.Validation.Message.bundlesNumberFrom.Required": "Please enter bundle number from",
   "Bundles.Validation.Message.bundlesNumberTo.Required": "Please enter bundle number to",
@@ -158,9 +160,13 @@
   "Api.Resource.Not.Found": "The specified resource was not found",
   "Api.Invalid.Request": "Invalid request",
   "Api.Forbidden": "Forbidden",
+  "Api.PageSize": "Page size required",
+  "Api.PageIndex": "Page index required",
   "Api.Auth.MinPasswordLengthError": "The minimum password length is 8 characters and must have a number and upper character",
   "Api.MinPasswordLengthError": "The minimum password length is 8 characters and must have a number and upper character",
   "Api.Username.Duplicate": "There has already used this username, please choose another username.",
+  "Api.NotEnoughBalance": "Balance is not enough, please charge your balance then try again.",
+  "Api.Validate.IdRequired": "Id is Required",
 
 
   "Branches.Menu.Title": "Branches",
@@ -195,6 +201,7 @@
   "Api.Branch.Add.Successful": "A new branch added successfully",
   "Api.Branch.Edit.Successful": "selected branch edited successfully",
   "Api.Branch.Deleted.Successful": "selected branch deleted successfully",
+  "Api.Branch.Activated.Successful": "selected branch activated successfully",
   "Api.Branch.CompanyId.Required": "CompanyId is Required",
   "Api.Branch.Id.Required": "Id is Required",
 
@@ -335,8 +342,12 @@
   "Api.Car.Add.Successful": "A new car added successfully",
   "Api.Car.Edit.Successful": "selected car edited successfully",
   "Api.Car.Deleted.Successful": "selected car deleted successfully",
+  "Api.Car.Activated.Successful": "selected car activated successfully",
   "Api.Car.CompanyBranchId.Required": "CompanyBranchId is Required",
   "Api.Car.Id.Required": "Id is Required",
+  "Api.Car.CarNfcCode.Required": "Car NFC Code is required",
+  "Api.Car.AddMoreThanMax.NotAllowed": "Cannot add more than definition maximum cars for this branch.",
+  "Api.Car.AddMoreThanSubscriptions.NotAllowed": "Cannot add more than subscribed cars, If you want to add more cars, subscribe for more cars.",
 
   "Cars.Error.Get.Message": "An error has occurred while trying to get cars list.",
   "Cars.Error.Detail.Message": "An error has occurred while trying to get car details.",
@@ -387,17 +398,17 @@
   "Subscriptions.Label.key": "key",
   "Subscriptions.Label.subscriptionId": "subscriptionId",
   "Subscriptions.Label.companyId": "companyId",
-  "Subscriptions.Label.companyName": "companyName",
-  "Subscriptions.Label.bundlesId": "bundlesId",
-  "Subscriptions.Label.subscriptionCarNumbers": "subscriptionCarNumbers",
-  "Subscriptions.Label.subscriptionPaymentMethod": "subscriptionPaymentMethod",
-  "Subscriptions.Label.subscriptionType": "subscriptionType",
-  "Subscriptions.Label.subscriptionStartDate": "subscriptionStartDate",
-  "Subscriptions.Label.subscriptionEndDate": "subscriptionEndDate",
-  "Subscriptions.Label.subscriptionCost": "subscriptionCost",
-  "Subscriptions.Label.subscriptionActive": "subscriptionActive",
-  "Subscriptions.Label.paymentReferenceNumber": "paymentReferenceNumber",
-  "Subscriptions.Label.subscriptionDate": "subscriptionDate",
+  "Subscriptions.Label.companyName": "Company Name",
+  "Subscriptions.Label.bundlesId": "bundles #",
+  "Subscriptions.Label.subscriptionCarNumbers": "Car Numbers",
+  "Subscriptions.Label.subscriptionPaymentMethod": "Payment Method",
+  "Subscriptions.Label.subscriptionType": "Subscription Type",
+  "Subscriptions.Label.subscriptionStartDate": "Start Date",
+  "Subscriptions.Label.subscriptionEndDate": "End Date",
+  "Subscriptions.Label.subscriptionCost": "Cost",
+  "Subscriptions.Label.subscriptionActive": "Active?",
+  "Subscriptions.Label.paymentReferenceNumber": "Payment Reference Number",
+  "Subscriptions.Label.subscriptionDate": "Subscription Date",
 
 
   "Subscriptions.Add.HeaderText": "Add Subscription",
@@ -414,9 +425,18 @@
   "Api.Subscription.Edit.Successful": "selected subscription request edited successfully",
   "Api.Subscription.Deleted.Successful": "selected subscription request deleted successfully",
   "Api.Subscription.Activated.Successful": "selected subscription activated successfully",
+  "Api.Subscription.CarsAdded.Successful": "selected cars added successfully",
+
   "Api.Subscription.companyId.Required": "Company Id is Required",
+  "Api.Subscription.BundleId.Required": "Bundle Id is Required",
+  "Api.Subscription.SubscriptionCarIds.Required": "Subscription Car Ids is Required",
+  "Api.Subscription.SubscriptionCost.Required": "Subscription Cost is Required",
+  "Api.Subscription.SubscriptionCarNumbers.Required": "Subscription Car Numbers is Required",
+  "Api.Subscription.SubscriptionStartDate.Required": "Subscription Start Date is Required",
+  "Api.Subscription.SubscriptionEndDate.Required": "Subscription End Date is Required",
+  "Api.Subscription.SubscriptionPaymentMethod.Required": "Subscription Payment Method is Required",
   "Api.Subscription.Id.Required": "Id is Required",
-  "Api.Subscription.ConfirmedEntityEdit.NotAllowed": "Confirmed Balance Request cannot edit.",
+  "Api.Subscription.ActiveEntityDelete.NotAllowed": "Active Subscription Request cannot delete.",
 
   "Subscriptions.Error.Get.Message": "An error has occurred while trying to get subscriptions list.",
   "Subscriptions.Error.Detail.Message": "An error has occurred while trying to get subscription details.",
@@ -569,6 +589,31 @@
 
   "StationStatements.Error.Get.Message": "An error has occurred while trying to get station statement list.",
 
+
+  "CarTransactions.Menu.Title": "Car Transactions",
+  "CarTransactions.Page.Title": "Car Transactions",
+  "CarTransactions.Page.SubTitle": "Car Transactions report",
+  "CarTransactions.Label.key": "key",
+  "CarTransactions.Label.carId": "carId",
+  "CarTransactions.Label.carIdNumber": "Car Id Number",
+  "CarTransactions.Label.companyBranchId": "companyBranchId",
+  "CarTransactions.Label.companyBranchName": "Company Branch Name",
+  "CarTransactions.Label.companyId": "Company Id",
+  "CarTransactions.Label.companyName": "Company Name",
+  "CarTransactions.Label.transId": "Transaction Id",
+  "CarTransactions.Label.transDate": "Transaction Date",
+  "CarTransactions.Label.transDocument": "Transaction Document",
+  "CarTransactions.Label.transAmount": "Transaction Amount",
+  "CarTransactions.Label.transReference": "Transaction Reference",
+
+  "CarTransactions.SearchPanel.Label.carIdNumber": "Car Id Number",
+  "CarTransactions.SearchPanel.Label.companyBranchName": "Company Branch Name",
+  "CarTransactions.SearchPanel.Label.transDateFrom": "Transaction Date From",
+  "CarTransactions.SearchPanel.Label.transDateTo": "Transaction Date To",
+  "CarTransactions.SearchPanel.Label.companyId": "companyId",
+  "CarTransactions.SearchPanel.Label.companyName": "Company Name",
+
+  "CarTransactions.Error.Get.Message": "An error has occurred while trying to get Car Transaction list.",
 
   "General.Country.Egypt": "Egypt",
   "General.Region.Alexandria": "Alexandria",

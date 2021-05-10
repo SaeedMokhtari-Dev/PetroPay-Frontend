@@ -29,12 +29,9 @@ interface EditCompanyProps {
 const EditCompany: React.FC<EditCompanyProps> = inject(Stores.companiesStore)(observer(({companiesStore, match}) =>
 {
     const [imageUrl, setImageUrl] = React.useState("");
+    const [dataFetched, setDataFetched] = React.useState(false);
+    const [companyId, setCompanyId] = React.useState(0);
 
-    let { companyId } = useParams();
-
-    let viewModel = companiesStore.editCompanyViewModel;
-
-    if(!viewModel) return;
 
     const [form] = Form.useForm();
 
@@ -58,6 +55,35 @@ const EditCompany: React.FC<EditCompanyProps> = inject(Stores.companiesStore)(ob
     Regions.forEach(w =>{ w.title = i18next.t(w.title) });
     const regionOptions = [...Regions];
 
+
+    useEffect(() => {
+        onLoad();
+        return onUnload;
+    }, []);
+
+    async function onLoad()
+    {
+        companiesStore.onCompanyEditPageLoad();
+        let companyIdParam = +match.params?.companyId;
+
+        if(companyIdParam)
+        {
+            await companiesStore.editCompanyViewModel.getDetailCompany(companyIdParam);
+            setImageUrl(companiesStore.editCompanyViewModel?.detailCompanyResponse?.companyCommercialPhoto);
+        }
+        else{
+            companiesStore.editCompanyViewModel.addCompanyRequest = new AddCompanyRequest();
+            companiesStore.editCompanyViewModel.detailCompanyResponse = new DetailCompanyResponse();
+        }
+        setCompanyId(companyIdParam);
+        setDataFetched(true);
+    }
+
+    let viewModel = companiesStore.editCompanyViewModel;
+
+    if(!viewModel) return;
+
+
     async function onFinish(values: any) {
 
         if(companyId)
@@ -72,33 +98,11 @@ const EditCompany: React.FC<EditCompanyProps> = inject(Stores.companiesStore)(ob
             history.goBack();
     };
 
-    useEffect(() => {
-        onLoad();
-        return onUnload;
-    }, []);
-
-    async function onLoad()
-    {
-        companiesStore.onCompanyEditPageLoad();
-
-        if(match.params?.companyId)
-        {
-            await companiesStore.editCompanyViewModel.getDetailCompany(+match.params.companyId);
-        }
-        else{
-            companiesStore.editCompanyViewModel.addCompanyRequest = new AddCompanyRequest();
-            companiesStore.editCompanyViewModel.detailCompanyResponse = new DetailCompanyResponse();
-        }
-        setImageUrl(companiesStore.editCompanyViewModel?.detailCompanyResponse?.companyCommercialPhoto);
-    }
-
-
-
     function onUnload() {
         companiesStore.onCompanyEditPageUnload();
     }
     function onSelectChanged(e, propName){
-        debugger;
+
         if(companyId)
             companiesStore.editCompanyViewModel.editCompanyRequest[`${propName}`] = e;
         else
@@ -141,7 +145,7 @@ const EditCompany: React.FC<EditCompanyProps> = inject(Stores.companiesStore)(ob
             return false;
         }*/
         getBase64(file, imageUrl => {
-            debugger;
+
             viewModel.uploadLoading = false;
             if(companyId){
                 viewModel.editCompanyRequest.companyCommercialPhoto = imageUrl;
@@ -181,6 +185,7 @@ const EditCompany: React.FC<EditCompanyProps> = inject(Stores.companiesStore)(ob
             />
 
             <Divider>{i18next.t("Companies.Section.GeneralInformation")}</Divider>
+            {dataFetched ?
             <Form {...formItemLayout} layout={"vertical"} onFinish={onFinish} form={form}
                   key={"companyForm"}
             /*initialValues={initialValues}*/ scrollToFirstError>
@@ -402,6 +407,13 @@ const EditCompany: React.FC<EditCompanyProps> = inject(Stores.companiesStore)(ob
                     />
 
             </Form>
+                :
+                <Row gutter={[24, 16]}>
+                    <Col offset={11} span={8}>
+                        <Spin className={"spine"} size="large" />
+                    </Col>
+                </Row>
+            }
 
         </div>
     )

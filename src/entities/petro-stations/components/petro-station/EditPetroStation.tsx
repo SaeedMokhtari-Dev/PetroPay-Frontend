@@ -2,7 +2,7 @@ import React from 'react';
 import {inject, observer} from "mobx-react";
 import Stores from "app/constants/Stores";
 import {useParams} from "react-router-dom";
-import {Button, Col, Divider, Form, Input, InputNumber, message, Modal, PageHeader, Radio, Row, Switch} from "antd";
+import {Button, Col, Divider, Spin, Form, Input, InputNumber, message, Modal, PageHeader, Radio, Row, Switch} from "antd";
 import i18next from "i18next";
 import EditPetroStationRequest from "../../handlers/edit/EditPetroStationRequest";
 import DetailPetroStationResponse from "../../handlers/detail/DetailPetroStationResponse";
@@ -22,14 +22,8 @@ interface EditPetroStationProps {
 
 const EditPetroStation: React.FC<EditPetroStationProps> = inject(Stores.petroStationStore)(observer(({petroStationStore, match}) =>
 {
-
-
-    let { petroStationId } = useParams();
-
-    let viewModel = petroStationStore.editPetroStationViewModel;
-
-    if(!viewModel) return;
-
+    const [dataFetched, setDataFetched] = React.useState(false);
+    const [petroStationId, setPetroStationId] = React.useState(0);
 
     const [form] = Form.useForm();
 
@@ -44,6 +38,34 @@ const EditPetroStation: React.FC<EditPetroStationProps> = inject(Stores.petroSta
         },
     };
 
+
+    useEffect(() => {
+        onLoad();
+        return onUnload;
+    }, []);
+
+    async function onLoad()
+    {
+        petroStationStore.onPetroStationEditPageLoad();
+        let petroStationIdParam = +match.params?.petroStationId;
+
+        if(petroStationIdParam)
+        {
+            await petroStationStore.editPetroStationViewModel.getDetailPetroStation(petroStationIdParam);
+        }
+        else{
+            petroStationStore.editPetroStationViewModel.addPetroStationRequest = new AddPetroStationRequest();
+            petroStationStore.editPetroStationViewModel.detailPetroStationResponse = new DetailPetroStationResponse();
+        }
+        setPetroStationId(petroStationIdParam);
+        setDataFetched(true);
+    }
+
+    let viewModel = petroStationStore.editPetroStationViewModel;
+
+    if(!viewModel) return;
+
+
     async function onFinish(values: any) {
 
         if(petroStationId)
@@ -57,27 +79,6 @@ const EditPetroStation: React.FC<EditPetroStationProps> = inject(Stores.petroSta
         if(!viewModel.errorMessage)
             history.goBack();
     };
-
-    useEffect(() => {
-        onLoad();
-        return onUnload;
-    }, []);
-
-    async function onLoad()
-    {
-        petroStationStore.onPetroStationEditPageLoad();
-
-        if(match.params?.petroStationId)
-        {
-            await petroStationStore.editPetroStationViewModel.getDetailPetroStation(+match.params.petroStationId);
-        }
-        else{
-            petroStationStore.editPetroStationViewModel.addPetroStationRequest = new AddPetroStationRequest();
-            petroStationStore.editPetroStationViewModel.detailPetroStationResponse = new DetailPetroStationResponse();
-        }
-    }
-
-
 
     function onUnload() {
         petroStationStore.onPetroStationEditPageUnload();
@@ -103,7 +104,8 @@ const EditPetroStation: React.FC<EditPetroStationProps> = inject(Stores.petroSta
                 title={petroStationId ? `${i18next.t("PetroStations.Edit.HeaderText")} ${petroStationId}` : i18next.t("PetroStations.Add.HeaderText")}
             />
 
-            <Divider>General Information</Divider>
+            <Divider>{i18next.t("PetroStations.Section.GeneralInformation")}</Divider>
+            {dataFetched ?
             <Form {...formItemLayout} layout={"vertical"} onFinish={onFinish} form={form}
                   key={"petroStationForm"}
                  scrollToFirstError>
@@ -120,6 +122,13 @@ const EditPetroStation: React.FC<EditPetroStationProps> = inject(Stores.petroSta
                            ]}>
                     <Input onChange={onChanged}/>
                 </Form.Item>
+                    </Col>
+                    <Col span={8}>
+                        <Form.Item name="stationNameAr" initialValue={viewModel?.detailPetroStationResponse?.stationNameAr}
+                                   key={"stationNameAr"}
+                                   label={i18next.t("PetroStations.Label.stationNameAr")}>
+                            <Input onChange={onChanged}/>
+                        </Form.Item>
                     </Col>
                     <Col span={8}>
                 <Form.Item name="stationAddress" initialValue={viewModel?.detailPetroStationResponse?.stationAddress}
@@ -179,13 +188,6 @@ const EditPetroStation: React.FC<EditPetroStationProps> = inject(Stores.petroSta
                 </Form.Item>
                     </Col>
 
-                    <Col span={8}>
-                <Form.Item name="stationNameAr" initialValue={viewModel?.detailPetroStationResponse?.stationNameAr}
-                           key={"stationNameAr"}
-                           label={i18next.t("PetroStations.Label.stationNameAr")}>
-                    <Input onChange={onChanged}/>
-                </Form.Item>
-                    </Col>
                     <Col span={8}>
                         <Form.Item name="stationDiesel" initialValue={viewModel?.detailPetroStationResponse?.stationDiesel}
                                    key={"stationDiesel"}
@@ -266,7 +268,13 @@ const EditPetroStation: React.FC<EditPetroStationProps> = inject(Stores.petroSta
                     />
 
             </Form>
-
+                :
+                <Row gutter={[24, 16]}>
+                    <Col offset={11} span={8}>
+                        <Spin className={"spine"} size="large" />
+                    </Col>
+                </Row>
+            }
         </div>
     )
 }));

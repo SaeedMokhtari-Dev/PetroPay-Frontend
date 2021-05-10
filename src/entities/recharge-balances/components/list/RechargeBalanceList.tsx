@@ -83,14 +83,14 @@ const RechargeBalanceList: React.FC<RechargeBalanceListProps> = inject(Stores.re
         )
     }];
     async function showEditPage(e){
-        rechargeBalanceStore.editRechargeBalanceViewModel.key = e.key;
+        //rechargeBalanceStore.editRechargeBalanceViewModel.key = e.key;
         if(e.key)
         {
-            await rechargeBalanceStore.editRechargeBalanceViewModel.getDetailRechargeBalance(e.key);
+            //await rechargeBalanceStore.editRechargeBalanceViewModel.getDetailRechargeBalance(e.key);
             NavigationService.navigate(`/app/rechargeBalance/edit/${e.key}`);
         }
         else{
-            rechargeBalanceStore.editRechargeBalanceViewModel.addRechargeBalanceRequest = new AddRechargeBalanceRequest();
+            //rechargeBalanceStore.editRechargeBalanceViewModel.addRechargeBalanceRequest = new AddRechargeBalanceRequest();
             NavigationService.navigate(Routes.addRechargeBalance);
         }
     }
@@ -132,7 +132,7 @@ const RechargeBalanceList: React.FC<RechargeBalanceListProps> = inject(Stores.re
 
     async function onLoad() {
         rechargeBalanceStore.onRechargeBalanceGetPageLoad();
-        rechargeBalanceStore.onRechargeBalanceEditPageLoad();
+        //rechargeBalanceStore.onRechargeBalanceEditPageLoad();
         rechargeBalanceStore.getRechargeBalanceViewModel.pageIndex = 0;
         rechargeBalanceStore.getRechargeBalanceViewModel.pageSize = 20;
         if(UserContext.info.role == 100)
@@ -145,7 +145,7 @@ const RechargeBalanceList: React.FC<RechargeBalanceListProps> = inject(Stores.re
 
     function onUnload() {
         rechargeBalanceStore.onRechargeBalanceGetPageUnload();
-        rechargeBalanceStore.onRechargeBalanceEditPageUnload();
+        //rechargeBalanceStore.onRechargeBalanceEditPageUnload();
     }
 
     async function pageIndexChanged(pageIndex, pageSize){

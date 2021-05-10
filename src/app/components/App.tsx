@@ -43,6 +43,7 @@ import CarBalanceList from "../../reports/CarBalances/components/list/CarBalance
 import StationReportList from "../../reports/StationReports/components/list/StationReportList";
 import StationSaleList from "../../reports/StationSales/components/list/StationSaleList";
 import StationStatementList from "../../reports/StationStatements/components/list/StationStatementList";
+import CarTransactionList from "../../reports/CarTransactions/components/list/CarTransactionList";
 
 const App: React.FC = () =>
 {
@@ -116,6 +117,7 @@ const App: React.FC = () =>
                                     <Route exact roles={[RoleType.customer]} path={Routes.invoiceSummary} component={InvoiceSummaryList} />
                                     <Route exact roles={[RoleType.customer]} path={Routes.invoiceDetail} component={InvoiceDetail} />
                                     <Route exact roles={[RoleType.customer]} path={Routes.carBalance} component={CarBalanceList} />
+                                    <Route exact roles={[RoleType.customer]} path={Routes.carTransaction} component={CarTransactionList} />
 
                                     <Route exact roles={[RoleType.supplier]} path={Routes.stationReport} component={StationReportList} />
                                     <Route exact roles={[RoleType.supplier]} path={Routes.stationSale} component={StationSaleList} />

@@ -44,7 +44,7 @@ const CarAddSubscription: React.FC<EditSubscriptionProps> = inject(Stores.subscr
     let listCarViewModel: ListCarViewModel;
     async function onLoad()
     {
-        debugger;
+
         subscriptionStore.onSubscriptionEditPageLoad();
         let subscriptionIdParam = +match.params?.subscriptionId;
 
@@ -68,7 +68,7 @@ const CarAddSubscription: React.FC<EditSubscriptionProps> = inject(Stores.subscr
 
 
     async function onFinish(values: any) {
-        debugger;
+
         if(subscriptionId)
         {
             await viewModel.editSubscription(viewModel.editSubscriptionRequest);
@@ -108,7 +108,7 @@ const CarAddSubscription: React.FC<EditSubscriptionProps> = inject(Stores.subscr
                 onBack={() => window.history.back()}
                 title={subscriptionId ? `${i18next.t("Subscriptions.Edit.HeaderText")} ${subscriptionId}` : i18next.t("Subscriptions.Add.HeaderText")}
             />
-            <Divider>General Information</Divider>
+            <Divider>{i18next.t("Subscriptions.Section.GeneralInformation")}</Divider>
             {dataFetched ?
             <Form {...formItemLayout} layout={"vertical"} onFinish={onFinish} form={form}
                   key={"subscriptionForm"}

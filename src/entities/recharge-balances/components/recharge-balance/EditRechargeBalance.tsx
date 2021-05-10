@@ -17,6 +17,8 @@ import RechargeBalanceStore from "../../stores/RechargeBalanceStore";
 import { PasswordInput } from 'antd-password-input-strength';
 import Countries from "../../../../app/constants/Countries";
 import PaymentMethods from "../../../../app/constants/PaymentMethods";
+import moment from 'moment';
+import Constants from 'app/constants/Constants';
 const {useEffect} = React;
 
 interface EditRechargeBalanceProps {
@@ -27,12 +29,9 @@ interface EditRechargeBalanceProps {
 const EditRechargeBalance: React.FC<EditRechargeBalanceProps> = inject(Stores.rechargeBalanceStore)(observer(({rechargeBalanceStore, match}) =>
 {
     const [imageUrl, setImageUrl] = React.useState("");
+    const [dataFetched, setDataFetched] = React.useState(false);
 
-    let { rechargeBalanceId } = useParams();
-
-    let viewModel = rechargeBalanceStore.editRechargeBalanceViewModel;
-
-    if(!viewModel) return;
+    const [rechargeBalanceId, setRechargeBalanceId] = React.useState(0);
 
     const [form] = Form.useForm();
 
@@ -50,6 +49,34 @@ const EditRechargeBalance: React.FC<EditRechargeBalanceProps> = inject(Stores.re
     PaymentMethods.forEach(w =>{ w.title = i18next.t(w.title) });
     const paymentMethodOptions = [...PaymentMethods];
 
+
+    useEffect(() => {
+        onLoad();
+        return onUnload;
+    }, []);
+
+    async function onLoad()
+    {
+        rechargeBalanceStore.onRechargeBalanceEditPageLoad();
+        let rechargeBalanceIdParam = +match.params?.rechargeBalanceId;
+
+        if(rechargeBalanceIdParam)
+        {
+            await rechargeBalanceStore.editRechargeBalanceViewModel.getDetailRechargeBalance(rechargeBalanceIdParam);
+            setImageUrl(rechargeBalanceStore?.editRechargeBalanceViewModel?.detailRechargeBalanceResponse?.rechargeDocumentPhoto);
+        }
+        else{
+            rechargeBalanceStore.editRechargeBalanceViewModel.addRechargeBalanceRequest = new AddRechargeBalanceRequest();
+            rechargeBalanceStore.editRechargeBalanceViewModel.detailRechargeBalanceResponse = new DetailRechargeBalanceResponse();
+        }
+        setRechargeBalanceId(rechargeBalanceIdParam);
+        setDataFetched(true);
+    }
+    let viewModel = rechargeBalanceStore.editRechargeBalanceViewModel;
+
+    if(!viewModel) return;
+
+
     async function onFinish(values: any) {
 
         if(rechargeBalanceId)
@@ -64,30 +91,11 @@ const EditRechargeBalance: React.FC<EditRechargeBalanceProps> = inject(Stores.re
             history.goBack();
     };
 
-    useEffect(() => {
-        onLoad();
-        return onUnload;
-    }, []);
-
-    async function onLoad()
-    {
-        rechargeBalanceStore.onRechargeBalanceEditPageLoad();
-
-        if(match.params?.rechargeBalanceId)
-        {
-            await rechargeBalanceStore.editRechargeBalanceViewModel.getDetailRechargeBalance(+match.params.rechargeBalanceId);
-        }
-        else{
-            rechargeBalanceStore.editRechargeBalanceViewModel.addRechargeBalanceRequest = new AddRechargeBalanceRequest();
-            rechargeBalanceStore.editRechargeBalanceViewModel.detailRechargeBalanceResponse = new DetailRechargeBalanceResponse();
-        }
-    }
-
     function onUnload() {
         rechargeBalanceStore.onRechargeBalanceEditPageUnload();
     }
     function onSelectChanged(e, propName){
-        debugger;
+
         if(rechargeBalanceId)
             rechargeBalanceStore.editRechargeBalanceViewModel.editRechargeBalanceRequest[`${propName}`] = e;
         else
@@ -100,7 +108,7 @@ const EditRechargeBalance: React.FC<EditRechargeBalanceProps> = inject(Stores.re
             rechargeBalanceStore.editRechargeBalanceViewModel.addRechargeBalanceRequest[`${e.target.id}`] = e.target.value;
     }
     function onDateChange(date, dateString){
-        debugger;
+
         if(rechargeBalanceId)
             rechargeBalanceStore.editRechargeBalanceViewModel.editRechargeBalanceRequest.bankTransactionDate = dateString;
         else
@@ -127,7 +135,7 @@ const EditRechargeBalance: React.FC<EditRechargeBalanceProps> = inject(Stores.re
             return false;
         }*/
         getBase64(file, imageUrl => {
-            debugger;
+
             viewModel.uploadLoading = false;
             if(rechargeBalanceId){
                 viewModel.editRechargeBalanceRequest.rechargeDocumentPhoto = imageUrl;
@@ -165,7 +173,8 @@ const EditRechargeBalance: React.FC<EditRechargeBalanceProps> = inject(Stores.re
                 title={rechargeBalanceId ? `${i18next.t("RechargeBalances.Edit.HeaderText")} ${rechargeBalanceId}` : i18next.t("RechargeBalances.Add.HeaderText")}
             />
 
-            <Divider>General Information</Divider>
+            <Divider>{i18next.t("RechargeBalances.Section.GeneralInformation")}</Divider>
+            {dataFetched ?
             <Form {...formItemLayout} layout={"vertical"} onFinish={onFinish} form={form}
                   key={"rechargeBalanceForm"}
                  scrollToFirstError>
@@ -204,10 +213,10 @@ const EditRechargeBalance: React.FC<EditRechargeBalanceProps> = inject(Stores.re
                         </Form.Item>
                     </Col>
                     <Col span={8}>
-                        <Form.Item name="bankTransactionDate" initialValue={viewModel?.detailRechargeBalanceResponse?.bankTransactionDate}
+                        <Form.Item name="bankTransactionDate" initialValue={moment(viewModel?.detailRechargeBalanceResponse?.bankTransactionDate, Constants.dateFormat)}
                                    key={"bankTransactionDate"}
                                    label={i18next.t("RechargeBalances.Label.bankTransactionDate")}>
-                            <DatePicker onChange={onDateChange} />
+                            <DatePicker onChange={onDateChange} format={Constants.dateFormat}/>
                         </Form.Item>
                     </Col>
                     <Col span={8}>
@@ -251,6 +260,13 @@ const EditRechargeBalance: React.FC<EditRechargeBalanceProps> = inject(Stores.re
                     />
 
             </Form>
+                :
+                <Row gutter={[24, 16]}>
+                    <Col offset={11} span={8}>
+                        <Spin className={"spine"} size="large" />
+                    </Col>
+                </Row>
+            }
 
         </div>
     )

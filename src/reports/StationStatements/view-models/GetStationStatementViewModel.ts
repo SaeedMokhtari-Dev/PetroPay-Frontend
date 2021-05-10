@@ -26,7 +26,7 @@ export default class GetStationStatementViewModel {
             let response = await GetStationStatementHandler.get(getStationStatementsRequest);
 
             if (response && response.success) {
-                debugger;
+
                 let result = response.data;
                 let items = result.items;
                 this.stationStatementList = items;

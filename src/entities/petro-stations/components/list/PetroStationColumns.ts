@@ -10,7 +10,7 @@ export default
     {title: "PetroStations.Label.stationLatitude", dataIndex: "stationLatitude", key: "stationLatitude", responsive: ['md']},
     {title: "PetroStations.Label.stationLongitude", dataIndex: "stationLongitude", key: "stationLongitude", responsive: ['md']},
     {title: "PetroStations.Label.stationUserName", dataIndex: "stationUserName", key: "stationUserName", responsive: ['md']},
-    {title: "PetroStations.Label.stationPassword", dataIndex: "stationPassword", key: "stationPassword", responsive: ['md']},
+    /*{title: "PetroStations.Label.stationPassword", dataIndex: "stationPassword", key: "stationPassword", responsive: ['md']},*/
     {title: "PetroStations.Label.stationNameAr", dataIndex: "stationNameAr", key: "stationNameAr", responsive: ['md']},
     {title: "PetroStations.Label.stationDiesel", dataIndex: "stationDiesel", key: "stationDiesel", responsive: ['md']},
     {title: "PetroStations.Label.stationBalance", dataIndex: "stationBalance", key: "stationBalance", responsive: ['md']}

@@ -79,14 +79,14 @@ const CarList: React.FC<CarListProps> = inject(Stores.carStore)(observer(({carSt
     }];
 
     async function showEditPage(e){
-        carStore.editCarViewModel.key = e.key;
+        //carStore.editCarViewModel.key = e.key;
         if(e.key)
         {
-            await carStore.editCarViewModel.getDetailCar(e.key);
+            //await carStore.editCarViewModel.getDetailCar(e.key);
             NavigationService.navigate(`/app/car/edit/${e.key}`);
         }
         else{
-            carStore.editCarViewModel.addCarRequest = new AddCarRequest();
+            //carStore.editCarViewModel.addCarRequest = new AddCarRequest();
             NavigationService.navigate(`/app/car/add/${viewModel.companyBranchId}`);
         }
     }
@@ -112,7 +112,7 @@ const CarList: React.FC<CarListProps> = inject(Stores.carStore)(observer(({carSt
 
     async function onLoad() {
         carStore.onCarGetPageLoad();
-        carStore.onCarEditPageLoad();
+        //carStore.onCarEditPageLoad();
 
         carStore.getCarViewModel.pageIndex = 0;
         carStore.getCarViewModel.pageSize = 20;
@@ -124,7 +124,7 @@ const CarList: React.FC<CarListProps> = inject(Stores.carStore)(observer(({carSt
 
     function onUnload() {
         carStore.onCarGetPageUnload();
-        carStore.onCarEditPageUnload();
+        //carStore.onCarEditPageUnload();
     }
 
     async function pageIndexChanged(pageIndex, pageSize){
@@ -143,7 +143,7 @@ const CarList: React.FC<CarListProps> = inject(Stores.carStore)(observer(({carSt
 
     }
     function changeInput(e){
-        debugger;
+
         let n: string = e.target.value;
         viewModel.activeCarRequest.carNfcCode = n;
     }
@@ -169,7 +169,7 @@ const CarList: React.FC<CarListProps> = inject(Stores.carStore)(observer(({carSt
                 title={i18next.t("Cars.Page.Title")}
                 subTitle={i18next.t("Cars.Page.SubTitle")}
                 extra={[
-                        <Button hidden={UserContext.info.role != 100} key={"Add"} type="primary" icon={<PlusCircleOutlined />} onClick={showEditPage}>
+                        <Button hidden={UserContext.info.role == 100} key={"Add"} type="primary" icon={<PlusCircleOutlined />} onClick={showEditPage}>
                             {i18next.t("General.Button.Add")}
                         </Button>
                     ,

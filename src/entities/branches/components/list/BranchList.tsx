@@ -101,14 +101,13 @@ const BranchList: React.FC<BranchListProps> = inject(Stores.branchStore)(observe
         NavigationService.navigate(`/app/car/${e.key}/list`);
     }
     async function showEditPage(e){
-        branchStore.editBranchViewModel.key = e.key;
         if(e.key)
         {
-            await branchStore.editBranchViewModel.getDetailBranch(e.key);
+            //await branchStore.editBranchViewModel.getDetailBranch(e.key);
             NavigationService.navigate(`/app/branch/edit/${e.key}`);
         }
         else{
-            branchStore.editBranchViewModel.addBranchRequest = new AddBranchRequest();
+            //branchStore.editBranchViewModel.addBranchRequest = new AddBranchRequest();
             NavigationService.navigate(Routes.addBranch);
         }
     }
@@ -134,8 +133,8 @@ const BranchList: React.FC<BranchListProps> = inject(Stores.branchStore)(observe
 
     async function onLoad() {
         branchStore.onBranchGetPageLoad();
-        branchStore.onBranchEditPageLoad();
-        debugger;
+        //branchStore.onBranchEditPageLoad();
+
         let companyIdParam = 0;
         if(match.params?.companyId){
             companyIdParam = +match.params?.companyId;
@@ -153,7 +152,7 @@ const BranchList: React.FC<BranchListProps> = inject(Stores.branchStore)(observe
 
     function onUnload() {
         branchStore.onBranchGetPageUnload();
-        branchStore.onBranchEditPageUnload();
+        //branchStore.onBranchEditPageUnload();
     }
 
     async function pageIndexChanged(pageIndex, pageSize){

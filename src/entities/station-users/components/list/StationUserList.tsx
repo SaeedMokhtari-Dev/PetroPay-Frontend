@@ -58,14 +58,14 @@ const StationUserList: React.FC<StationUserListProps> = inject(Stores.stationUse
         )
     }];
     async function showEditPage(e){
-        stationUserStore.editStationUserViewModel.key = e.key;
+        //stationUserStore.editStationUserViewModel.key = e.key;
         if(e.key)
         {
-            await stationUserStore.editStationUserViewModel.getDetailStationUser(e.key);
+            //await stationUserStore.editStationUserViewModel.getDetailStationUser(e.key);
             NavigationService.navigate(`/app/stationUser/edit/${e.key}`);
         }
         else{
-            stationUserStore.editStationUserViewModel.addStationUserRequest = new AddStationUserRequest();
+            //stationUserStore.editStationUserViewModel.addStationUserRequest = new AddStationUserRequest();
             NavigationService.navigate(Routes.addStationUser);
         }
     }
@@ -91,7 +91,7 @@ const StationUserList: React.FC<StationUserListProps> = inject(Stores.stationUse
 
     async function onLoad() {
         stationUserStore.onStationUserGetPageLoad();
-        stationUserStore.onStationUserEditPageLoad();
+        //stationUserStore.onStationUserEditPageLoad();
         stationUserStore.getStationUserViewModel.pageIndex = 0;
         stationUserStore.getStationUserViewModel.pageSize = 20;
         await stationUserStore.getStationUserViewModel.getAllStationUser(new GetStationUserRequest(

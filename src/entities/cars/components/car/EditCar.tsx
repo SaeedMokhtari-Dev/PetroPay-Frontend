@@ -23,13 +23,8 @@ interface EditCarProps {
 const EditCar: React.FC<EditCarProps> = inject(Stores.carStore)(observer(({carStore, match}) =>
 {
     const [imageUrl, setImageUrl] = React.useState("");
-
-    let { carId } = useParams();
-
-    let viewModel = carStore.editCarViewModel;
-
-    if(!viewModel) return;
-
+    const [dataFetched, setDataFetched] = React.useState(false);
+    const [carId, setCarId] = React.useState(0);
 
     const [form] = Form.useForm();
 
@@ -44,6 +39,39 @@ const EditCar: React.FC<EditCarProps> = inject(Stores.carStore)(observer(({carSt
         },
     };
 
+
+    useEffect(() => {
+        onLoad();
+        return onUnload;
+    }, []);
+
+    async function onLoad()
+    {
+        debugger;
+        carStore.onCarEditPageLoad();
+        let carIdParam = +match.params?.carId;
+
+        if(carIdParam)
+        {
+            await carStore.editCarViewModel.getDetailCar(carIdParam);
+            setImageUrl(carStore.editCarViewModel?.detailCarResponse?.carPlatePhoto);
+        }
+        else{
+            carStore.editCarViewModel.addCarRequest = new AddCarRequest();
+            carStore.editCarViewModel.detailCarResponse = new DetailCarResponse();
+            if(match.params?.companyBranchId) {
+                carStore.editCarViewModel.addCarRequest.companyBarnchId = +match.params.companyBranchId;
+            }
+        }
+        setCarId(carIdParam);
+        setDataFetched(true);
+    }
+
+
+    let viewModel = carStore.editCarViewModel;
+
+    if(!viewModel) return;
+
     async function onFinish(values: any) {
 
         if(carId)
@@ -57,32 +85,6 @@ const EditCar: React.FC<EditCarProps> = inject(Stores.carStore)(observer(({carSt
         if(!viewModel.errorMessage)
             history.goBack();
     };
-
-    useEffect(() => {
-        onLoad();
-        return onUnload;
-    }, []);
-
-    async function onLoad()
-    {
-
-        carStore.onCarEditPageLoad();
-
-        if(match.params?.carId)
-        {
-            await carStore.editCarViewModel.getDetailCar(+match.params.carId);
-        }
-        else{
-            carStore.editCarViewModel.addCarRequest = new AddCarRequest();
-            carStore.editCarViewModel.detailCarResponse = new DetailCarResponse();
-            if(match.params?.companyBranchId) {
-                carStore.editCarViewModel.addCarRequest.companyBarnchId = match.params.companyBranchId;
-            }
-        }
-        setImageUrl(carStore.editCarViewModel?.detailCarResponse?.carPlatePhoto);
-    }
-
-
 
     function onUnload() {
         carStore.onCarEditPageUnload();
@@ -158,7 +160,8 @@ const EditCar: React.FC<EditCarProps> = inject(Stores.carStore)(observer(({carSt
                 title={carId ? `${i18next.t("Cars.Edit.HeaderText")} ${carId}` : i18next.t("Cars.Add.HeaderText")}
             />
 
-            <Divider>General Information</Divider>
+            <Divider>{i18next.t("Cars.Section.GeneralInformation")}</Divider>
+            {dataFetched ?
             <Form {...formItemLayout} layout={"vertical"} onFinish={onFinish} form={form}
                   key={"carForm"}
                  scrollToFirstError>
@@ -220,13 +223,13 @@ const EditCar: React.FC<EditCarProps> = inject(Stores.carStore)(observer(({carSt
                     <Input onChange={onChanged}/>
                 </Form.Item>
                     </Col>
-                    <Col span={8}>
+                    {/*<Col span={8}>
                 <Form.Item name="carBalnce" initialValue={viewModel?.detailCarResponse?.carBalnce}
                            key={"carBalnce"}
                            label={i18next.t("Cars.Label.carBalnce")}>
                     <Input type={"number"} onChange={onChanged}/>
                 </Form.Item>
-                    </Col>
+                    </Col>*/}
                     <Col span={8}>
                         <Form.Item name="carType" initialValue={viewModel?.detailCarResponse?.carType}
                                    key={"carType"}
@@ -253,6 +256,14 @@ const EditCar: React.FC<EditCarProps> = inject(Stores.carStore)(observer(({carSt
                                    key={"carModelYear"}
                                    label={i18next.t("Cars.Label.carModelYear")}>
                             <Input type={"number"} onChange={onChanged}/>
+                        </Form.Item>
+                    </Col>
+
+                    <Col span={8}>
+                        <Form.Item name="carTypeOfFuel" initialValue={viewModel?.detailCarResponse?.carTypeOfFuel}
+                                   key={"carTypeOfFuel"}
+                                   label={i18next.t("Cars.Label.carTypeOfFuel")}>
+                            <Input onChange={onChanged}/>
                         </Form.Item>
                     </Col>
                     <Col span={3}>
@@ -305,13 +316,6 @@ const EditCar: React.FC<EditCarProps> = inject(Stores.carStore)(observer(({carSt
                 </Form.Item>
                     </Col>
 
-                    <Col span={8}>
-                        <Form.Item name="carTypeOfFuel" initialValue={viewModel?.detailCarResponse?.carTypeOfFuel}
-                                   key={"carTypeOfFuel"}
-                                   label={i18next.t("Cars.Label.carTypeOfFuel")}>
-                            <Input onChange={onChanged}/>
-                        </Form.Item>
-                    </Col>
                     <Col span={8}>
                         <Form.Item name="carDriverName" initialValue={viewModel?.detailCarResponse?.carDriverName}
                                    key={"carDriverName"}
@@ -435,6 +439,13 @@ const EditCar: React.FC<EditCarProps> = inject(Stores.carStore)(observer(({carSt
                     />
 
             </Form>
+                :
+                <Row gutter={[24, 16]}>
+                    <Col offset={11} span={8}>
+                        <Spin className={"spine"} size="large" />
+                    </Col>
+                </Row>
+            }
 
         </div>
     )

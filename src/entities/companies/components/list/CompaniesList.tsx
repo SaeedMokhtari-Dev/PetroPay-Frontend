@@ -61,14 +61,14 @@ const CompaniesList: React.FC<CompaniesSidebarProps> = inject(Stores.companiesSt
         )
     }];
     async function showEditPage(e){
-        companiesStore.editCompanyViewModel.key = e.key;
+        //companiesStore.editCompanyViewModel.key = e.key;
         if(e.key)
         {
-            await companiesStore.editCompanyViewModel.getDetailCompany(e.key);
+            //await companiesStore.editCompanyViewModel.getDetailCompany(e.key);
             history.push(`/app/company/edit/${e.key}`);
         }
         else{
-            companiesStore.editCompanyViewModel.addCompanyRequest = new AddCompanyRequest();
+            //companiesStore.editCompanyViewModel.addCompanyRequest = new AddCompanyRequest();
             history.push(Routes.addCompany);
         }
     }
@@ -96,7 +96,7 @@ const CompaniesList: React.FC<CompaniesSidebarProps> = inject(Stores.companiesSt
 
     async function onLoad() {
         companiesStore.onCompanyGetPageLoad();
-        companiesStore.onCompanyEditPageLoad();
+        //companiesStore.onCompanyEditPageLoad();
         companiesStore.getCompanyViewModel.pageIndex = 0;
         companiesStore.getCompanyViewModel.pageSize = 20;
         await companiesStore.getCompanyViewModel.getAllCompanies(new GetCompaniesRequest(20, 0));
@@ -104,7 +104,7 @@ const CompaniesList: React.FC<CompaniesSidebarProps> = inject(Stores.companiesSt
 
     function onUnload() {
         companiesStore.onCompanyGetPageUnload();
-        companiesStore.onCompanyEditPageUnload();
+        //companiesStore.onCompanyEditPageUnload();
     }
 
     async function pageIndexChanged(pageIndex, pageSize){

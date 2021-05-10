@@ -1,6 +1,6 @@
 export default
 [
-    {title: "RechargeBalances.Label.key", dataIndex: "key", key: "key", responsive: ['md']},
+    /*{title: "RechargeBalances.Label.key", dataIndex: "key", key: "key", responsive: ['md']},*/
     /*{title: "RechargeBalances.Label.rechargeId", dataIndex: "rechargeId", key: "rechargeId", responsive: ['md']},*/
     {title: "RechargeBalances.Label.rechageDate", dataIndex: "rechageDate", key: "rechageDate", responsive: ['md']},
     /*{title: "RechargeBalances.Label.companyId", dataIndex: "companyId", key: "companyId", responsive: ['md']},*/

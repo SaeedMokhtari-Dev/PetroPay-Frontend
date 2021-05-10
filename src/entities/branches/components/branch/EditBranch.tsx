@@ -3,7 +3,7 @@ import {inject, observer} from "mobx-react";
 import Stores from "app/constants/Stores";
 import BranchStore from "entities/branches/stores/BranchStore";
 import {useParams} from "react-router-dom";
-import {Button, Col, Divider, Form, Input, InputNumber, message, Modal, PageHeader, Radio, Row, Switch} from "antd";
+import {Button, Col, Divider, Form, Input, InputNumber, message, Modal, PageHeader, Radio, Row, Switch, Spin} from "antd";
 import i18next from "i18next";
 import EditBranchRequest from "../../handlers/edit/EditBranchRequest";
 import DetailBranchResponse from "../../handlers/detail/DetailBranchResponse";
@@ -23,13 +23,9 @@ interface EditBranchProps {
 const EditBranch: React.FC<EditBranchProps> = inject(Stores.branchStore)(observer(({branchStore, match}) =>
 {
 
+    const [dataFetched, setDataFetched] = React.useState(false);
 
-    let { branchId } = useParams();
-
-    let viewModel = branchStore.editBranchViewModel;
-
-    if(!viewModel) return;
-
+    const [branchId, setBranchId] = React.useState(0);
 
     const [form] = Form.useForm();
 
@@ -44,6 +40,35 @@ const EditBranch: React.FC<EditBranchProps> = inject(Stores.branchStore)(observe
         },
     };
 
+
+
+    useEffect(() => {
+        onLoad();
+        return onUnload;
+    }, []);
+
+    async function onLoad()
+    {
+        branchStore.onBranchEditPageLoad();
+        const branchIdParam = +match.params?.branchId;
+
+        if(branchIdParam)
+        {
+            await branchStore.editBranchViewModel.getDetailBranch(branchIdParam);
+        }
+        else{
+            branchStore.editBranchViewModel.addBranchRequest = new AddBranchRequest();
+            branchStore.editBranchViewModel.detailBranchResponse = new DetailBranchResponse();
+        }
+        setBranchId(branchIdParam);
+        setDataFetched(true);
+
+    }
+
+    let viewModel = branchStore.editBranchViewModel;
+
+    if(!viewModel) return;
+
     async function onFinish(values: any) {
 
         if(branchId)
@@ -57,27 +82,6 @@ const EditBranch: React.FC<EditBranchProps> = inject(Stores.branchStore)(observe
         if(!viewModel.errorMessage)
             history.goBack();
     };
-
-    useEffect(() => {
-        onLoad();
-        return onUnload;
-    }, []);
-
-    async function onLoad()
-    {
-        branchStore.onBranchEditPageLoad();
-
-        if(match.params?.branchId)
-        {
-            await branchStore.editBranchViewModel.getDetailBranch(+match.params.branchId);
-        }
-        else{
-            branchStore.editBranchViewModel.addBranchRequest = new AddBranchRequest();
-            branchStore.editBranchViewModel.detailBranchResponse = new DetailBranchResponse();
-        }
-    }
-
-
 
     function onUnload() {
         branchStore.onBranchEditPageUnload();
@@ -103,7 +107,8 @@ const EditBranch: React.FC<EditBranchProps> = inject(Stores.branchStore)(observe
                 title={branchId ? `${i18next.t("Branches.Edit.HeaderText")} ${branchId}` : i18next.t("Branches.Add.HeaderText")}
             />
 
-            <Divider>General Information</Divider>
+            <Divider>{i18next.t("Branches.Section.GeneralInformation")}</Divider>
+            {dataFetched ?
             <Form {...formItemLayout} layout={"vertical"} onFinish={onFinish} form={form}
                   key={"branchForm"}
                  scrollToFirstError>
@@ -217,7 +222,13 @@ const EditBranch: React.FC<EditBranchProps> = inject(Stores.branchStore)(observe
                     />
 
             </Form>
-
+                :
+                <Row gutter={[24, 16]}>
+                    <Col offset={11} span={8}>
+                        <Spin className={"spine"} size="large" />
+                    </Col>
+                </Row>
+            }
         </div>
     )
 }));

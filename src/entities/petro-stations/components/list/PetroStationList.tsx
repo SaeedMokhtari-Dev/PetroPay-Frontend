@@ -64,14 +64,14 @@ const PetroStationList: React.FC<PetroStationListProps> = inject(Stores.petroSta
         )
     }];
     async function showEditPage(e){
-        petroStationStore.editPetroStationViewModel.key = e.key;
+        //petroStationStore.editPetroStationViewModel.key = e.key;
         if(e.key)
         {
-            await petroStationStore.editPetroStationViewModel.getDetailPetroStation(e.key);
+            //await petroStationStore.editPetroStationViewModel.getDetailPetroStation(e.key);
             NavigationService.navigate(`/app/petroStation/edit/${e.key}`);
         }
         else{
-            petroStationStore.editPetroStationViewModel.addPetroStationRequest = new AddPetroStationRequest();
+            //petroStationStore.editPetroStationViewModel.addPetroStationRequest = new AddPetroStationRequest();
             NavigationService.navigate(Routes.addPetroStation);
         }
     }
@@ -97,7 +97,7 @@ const PetroStationList: React.FC<PetroStationListProps> = inject(Stores.petroSta
 
     async function onLoad() {
         petroStationStore.onPetroStationGetPageLoad();
-        petroStationStore.onPetroStationEditPageLoad();
+        //petroStationStore.onPetroStationEditPageLoad();
         petroStationStore.getPetroStationViewModel.pageIndex = 0;
         petroStationStore.getPetroStationViewModel.pageSize = 20;
         await petroStationStore.getPetroStationViewModel.getAllPetroStation(new GetPetroStationRequest(
@@ -106,7 +106,7 @@ const PetroStationList: React.FC<PetroStationListProps> = inject(Stores.petroSta
 
     function onUnload() {
         petroStationStore.onPetroStationGetPageUnload();
-        petroStationStore.onPetroStationEditPageUnload();
+        //petroStationStore.onPetroStationEditPageUnload();
     }
 
     async function pageIndexChanged(pageIndex, pageSize){

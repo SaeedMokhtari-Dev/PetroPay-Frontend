@@ -26,7 +26,7 @@ export default
     {title: "Cars.Label.carDriverName", dataIndex: "carDriverName", key: "carDriverName", width: "100px"},
     {title: "Cars.Label.carDriverPhoneNumber", dataIndex: "carDriverPhoneNumber", key: "carDriverPhoneNumber", width: "100px"},
     {title: "Cars.Label.carDriverUserName", dataIndex: "carDriverUserName", key: "carDriverUserName", width: "100px"},
-    {title: "Cars.Label.carDriverPassword", dataIndex: "carDriverPassword", key: "carDriverPassword", width: "100px"},
+    /*{title: "Cars.Label.carDriverPassword", dataIndex: "carDriverPassword", key: "carDriverPassword", width: "100px"},*/
     {title: "Cars.Label.carDriverEmail", dataIndex: "carDriverEmail", key: "carDriverEmail", width: "100px"},
     {title: "Cars.Label.carDriverActive", dataIndex: "carDriverActive", key: "carDriverActive", width: "100px"},
     {title: "Cars.Label.carDriverConfirmationCode", dataIndex: "carDriverConfirmationCode", key: "carDriverConfirmationCode", width: "100px"},

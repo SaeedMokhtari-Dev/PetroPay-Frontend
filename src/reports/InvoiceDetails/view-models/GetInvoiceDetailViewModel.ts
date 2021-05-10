@@ -25,10 +25,10 @@ export default class GetInvoiceDetailViewModel {
             this.errorMessage = "";
             this.isProcessing = true;
 
-            debugger;
+
             let request = new GetInvoiceDetailRequest(invoiceId);
             let response = await GetInvoiceDetailHandler.get(request);
-            debugger;
+
             if(response && response.success)
             {
                 this.invoiceDetailResponse = new GetInvoiceDetailResponse().deserialize(response.data);

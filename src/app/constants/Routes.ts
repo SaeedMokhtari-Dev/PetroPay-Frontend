@@ -57,4 +57,5 @@ export default
     stationReport: '/app/stationReport',
     stationSale: '/app/stationSale',
     stationStatement: '/app/stationStatement',
+    carTransaction: '/app/carTransaction',
 }

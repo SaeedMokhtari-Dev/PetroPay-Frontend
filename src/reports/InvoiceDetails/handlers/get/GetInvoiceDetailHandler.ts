@@ -7,7 +7,7 @@ export default class GetInvoiceDetailHandler
 {
     public static async get(request: GetInvoiceDetailRequest): Promise<ApiResponse>
     {
-        debugger;
+
         let response = await ApiService.post(Endpoints.apiInvoiceDetailGet, request, true);
         return response;
     }

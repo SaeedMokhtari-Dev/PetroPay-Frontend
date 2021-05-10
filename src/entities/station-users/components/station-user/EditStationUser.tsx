@@ -2,7 +2,7 @@ import React from 'react';
 import {inject, observer} from "mobx-react";
 import Stores from "app/constants/Stores";
 import {useParams} from "react-router-dom";
-import {Button, Col, Divider, Form, Input, InputNumber, message, Modal, PageHeader, Radio, Row, Switch} from "antd";
+import {Button, Col, Divider, Form, Input, InputNumber, message, Modal, PageHeader, Radio, Row, Spin} from "antd";
 import i18next from "i18next";
 import EditStationUserRequest from "../../handlers/edit/EditStationUserRequest";
 import DetailStationUserResponse from "../../handlers/detail/DetailStationUserResponse";
@@ -22,13 +22,10 @@ interface EditStationUserProps {
 
 const EditStationUser: React.FC<EditStationUserProps> = inject(Stores.stationUserStore)(observer(({stationUserStore, match}) =>
 {
+    const [dataFetched, setDataFetched] = React.useState(false);
+    const [stationUserId, setStationUserId] = React.useState(0);
 
 
-    let { stationUserId } = useParams();
-
-    let viewModel = stationUserStore.editStationUserViewModel;
-
-    if(!viewModel) return;
 
 
     const [form] = Form.useForm();
@@ -44,6 +41,33 @@ const EditStationUser: React.FC<EditStationUserProps> = inject(Stores.stationUse
         },
     };
 
+
+    useEffect(() => {
+        onLoad();
+        return onUnload;
+    }, []);
+
+    async function onLoad()
+    {
+        stationUserStore.onStationUserEditPageLoad();
+        let stationUserIdParam = +match.params?.stationUserId;
+
+        if(stationUserIdParam)
+        {
+            await stationUserStore.editStationUserViewModel.getDetailStationUser(stationUserIdParam);
+        }
+        else{
+            stationUserStore.editStationUserViewModel.addStationUserRequest = new AddStationUserRequest();
+            stationUserStore.editStationUserViewModel.detailStationUserResponse = new DetailStationUserResponse();
+        }
+        setStationUserId(stationUserIdParam);
+        setDataFetched(true);
+    }
+    let viewModel = stationUserStore.editStationUserViewModel;
+
+    if(!viewModel) return;
+
+
     async function onFinish(values: any) {
 
         if(stationUserId)
@@ -57,28 +81,6 @@ const EditStationUser: React.FC<EditStationUserProps> = inject(Stores.stationUse
         if(!viewModel.errorMessage)
             history.goBack();
     };
-
-    useEffect(() => {
-        onLoad();
-        return onUnload;
-    }, []);
-
-    async function onLoad()
-    {
-        stationUserStore.onStationUserEditPageLoad();
-
-        if(match.params?.stationUserId)
-        {
-            await stationUserStore.editStationUserViewModel.getDetailStationUser(+match.params.stationUserId);
-        }
-        else{
-            stationUserStore.editStationUserViewModel.addStationUserRequest = new AddStationUserRequest();
-            stationUserStore.editStationUserViewModel.detailStationUserResponse = new DetailStationUserResponse();
-        }
-    }
-
-
-
     function onUnload() {
         stationUserStore.onStationUserEditPageUnload();
     }
@@ -103,7 +105,8 @@ const EditStationUser: React.FC<EditStationUserProps> = inject(Stores.stationUse
                 title={stationUserId ? `${i18next.t("StationUsers.Edit.HeaderText")} ${stationUserId}` : i18next.t("StationUsers.Add.HeaderText")}
             />
 
-            <Divider>General Information</Divider>
+            <Divider>{i18next.t("StationUsers.Section.GeneralInformation")}</Divider>
+            {dataFetched ?
             <Form {...formItemLayout} layout={"vertical"} onFinish={onFinish} form={form}
                   key={"stationUserForm"}
                  scrollToFirstError>
@@ -181,6 +184,13 @@ const EditStationUser: React.FC<EditStationUserProps> = inject(Stores.stationUse
                     />
 
             </Form>
+                :
+                <Row gutter={[24, 16]}>
+                    <Col offset={11} span={8}>
+                        <Spin className={"spine"} size="large" />
+                    </Col>
+                </Row>
+            }
 
         </div>
     )

@@ -17,6 +17,7 @@ import CarBalanceStore from "../../reports/CarBalances/stores/CarBalanceStore";
 import StationReportStore from "../../reports/StationReports/stores/StationReportStore";
 import StationSaleStore from "../../reports/StationSales/stores/StationSaleStore";
 import StationStatementStore from "../../reports/StationStatements/stores/StationStatementStore";
+import CarTransactionStore from "../../reports/CarTransactions/stores/CarTransactionStore";
 
 export class AppStore
 {
@@ -39,6 +40,7 @@ export class AppStore
     stationReport: StationReportStore;
     stationSale: StationSaleStore;
     stationStatement: StationStatementStore;
+    carTransaction: CarTransactionStore;
 
     constructor()
     {
@@ -61,5 +63,6 @@ export class AppStore
         this.stationReport = new StationReportStore(this);
         this.stationSale = new StationSaleStore(this);
         this.stationStatement = new StationStatementStore(this);
+        this.carTransaction = new CarTransactionStore(this);
     }
 }
