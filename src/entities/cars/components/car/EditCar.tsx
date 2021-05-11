@@ -18,6 +18,7 @@ import CarTypes from "../../../../app/constants/CarTypes";
 import ConsumptionMethods from "../../../../app/constants/ConsumptionMethods";
 import CarBrands from "../../../../app/constants/CarBrands";
 import CarTypeOfFuels from "../../../../app/constants/CarTypeOfFuels";
+import MaskedInput from 'antd-mask-input'
 const {useEffect} = React;
 
 interface EditCarProps {
@@ -119,10 +120,17 @@ const EditCar: React.FC<EditCarProps> = inject(Stores.carStore)(observer(({carSt
     }
 
     function onChanged(e){
-        if(carId)
+        if(carId) {
             carStore.editCarViewModel.editCarRequest[`${e.target.id}`] = e.target.value;
-        else
+            carStore.editCarViewModel.editCarRequest.carIdNumber =
+                `${carStore.editCarViewModel?.editCarRequest?.carIdNumber1E} ${carStore.editCarViewModel?.editCarRequest?.carIdText1E}`;
+        }
+        else {
             carStore.editCarViewModel.addCarRequest[`${e.target.id}`] = e.target.value;
+
+            carStore.editCarViewModel.addCarRequest.carIdNumber =
+                `${carStore.editCarViewModel?.addCarRequest?.carIdNumber1E} ${carStore.editCarViewModel?.addCarRequest?.carIdText1E}`;
+        }
     }
     function onWorkAllDaysSwitchChange(e){
         const boolProps = ["saturday", "sunday", "monday", "tuesday", "wednesday", "thursday", "friday"];
@@ -209,7 +217,6 @@ const EditCar: React.FC<EditCarProps> = inject(Stores.carStore)(observer(({carSt
 
         return true;
     }
-
     return (
         <div>
             <PageHeader
@@ -224,60 +231,95 @@ const EditCar: React.FC<EditCarProps> = inject(Stores.carStore)(observer(({carSt
                   key={"carForm"}
                  scrollToFirstError>
                 <Row gutter={[24, 16]}>
-                    <Col span={8}>
-                <Form.Item name="carIdNumber" initialValue={viewModel?.detailCarResponse?.carIdNumber}
-                           key={"carIdNumber"}
-                           label={i18next.t("Cars.Label.carIdNumber")}
+                    <Col span={6}>
+                        <Form.Item name="carIdNumber1E" initialValue={viewModel?.detailCarResponse?.carIdNumber1E}
+                                   key={"carIdNumber1E"}
+                                   label={i18next.t("Cars.Label.carIdNumber1E")}
+                                   rules={[
+                                       {
+                                           required: true,
+                                           message: i18next.t("Cars.Validation.Message.carIdNumber1E.Required")
+                                       }
+                                   ]}>
+                            <MaskedInput mask="1 1 1 1" maxLength= {8} onChange={onChanged}/>
+                        </Form.Item>
+                    </Col>
+                    <Col span={6}>
+                <Form.Item name="carIdText1E" initialValue={viewModel?.detailCarResponse?.carIdText1E}
+                           key={"carIdText1E"}
+                           label={i18next.t("Cars.Label.carIdText1E")}
                            rules={[
                                {
                                    required: true,
-                                   message: i18next.t("Cars.Validation.Message.carIdNumber.Required")
+                                   message: i18next.t("Cars.Validation.Message.carIdText1E.Required")
+                               }
+                           ]}>
+                    <MaskedInput mask="A A A" maxLength={6} onChange={onChanged}/>
+                </Form.Item>
+                    </Col>
+
+                    <Col span={6}>
+                        <Form.Item name="carIdText1A" initialValue={viewModel?.detailCarResponse?.carIdText1A}
+                                   key={"carIdText1A"}
+                                   label={i18next.t("Cars.Label.carIdText1A")}
+                                   rules={[
+                                       {
+                                           required: true,
+                                           message: i18next.t("Cars.Validation.Message.carIdText1A.Required")
+                                       }
+                                   ]}>
+                            <Input dir={"rtl"} maxLength={6} onChange={onChanged}/>
+                        </Form.Item>
+                    </Col>
+                    <Col span={6}>
+                        <Form.Item name="carIdNumber" initialValue={viewModel?.detailCarResponse?.carIdNumber}
+                                   key={"carIdNumber"}
+                                   label={i18next.t("Cars.Label.carIdNumber")}
+                                   rules={[
+                                       {
+                                           required: true,
+                                           message: i18next.t("Cars.Validation.Message.carIdNumber.Required")
+                                       }
+                                   ]}>
+                            <Input onChange={onChanged}/>
+                        </Form.Item>
+                    </Col>
+                    <Col span={8}>
+                <Form.Item name="consumptionType" initialValue={viewModel?.detailCarResponse?.consumptionType}
+                           key={"consumptionType"}
+                           label={i18next.t("Cars.Label.consumptionType")}
+                           rules={[
+                               {
+                                   required: true,
+                                   message: i18next.t("Cars.Validation.Message.consumptionType.Required")
                                }
                            ]}>
                     <Input onChange={onChanged}/>
                 </Form.Item>
                     </Col>
                     <Col span={8}>
-                        <Form.Item name="carIdNumber1E" initialValue={viewModel?.detailCarResponse?.carIdNumber1E}
-                                   key={"carIdNumber1E"}
-                                   label={i18next.t("Cars.Label.carIdNumber1E")}>
-                            <Input maxLength={8} onChange={onChanged}/>
-                        </Form.Item>
-                    </Col>
-                    <Col span={8}>
-                <Form.Item name="carIdText1E" initialValue={viewModel?.detailCarResponse?.carIdText1E}
-                           key={"carIdText1E"}
-                           label={i18next.t("Cars.Label.carIdText1E")}>
-                    <Input maxLength={6} onChange={onChanged}/>
-                </Form.Item>
-                    </Col>
-
-                    <Col span={8}>
-                        <Form.Item name="carIdText1A" initialValue={viewModel?.detailCarResponse?.carIdText1A}
-                                   key={"carIdText1A"}
-                                   label={i18next.t("Cars.Label.carIdText1A")}>
-                            <Input maxLength={6} onChange={onChanged}/>
-                        </Form.Item>
-                    </Col>
-
-                    <Col span={8}>
-                <Form.Item name="consumptionType" initialValue={viewModel?.detailCarResponse?.consumptionType}
-                           key={"consumptionType"}
-                           label={i18next.t("Cars.Label.consumptionType")}>
-                    <Input onChange={onChanged}/>
-                </Form.Item>
-                    </Col>
-                    <Col span={8}>
                 <Form.Item name="consumptionValue" initialValue={viewModel?.detailCarResponse?.consumptionValue}
                            key={"consumptionValue"}
-                           label={i18next.t("Cars.Label.consumptionValue")}>
+                           label={i18next.t("Cars.Label.consumptionValue")}
+                           rules={[
+                               {
+                                   required: true,
+                                   message: i18next.t("Cars.Validation.Message.consumptionValue.Required")
+                               }
+                           ]}>
                     <Input type={"number"} onChange={onChanged}/>
                 </Form.Item>
                     </Col>
                     <Col span={8}>
                 <Form.Item name="consumptionMethod" initialValue={viewModel?.detailCarResponse?.consumptionMethod}
                            key={"consumptionMethod"}
-                           label={i18next.t("Cars.Label.consumptionMethod")}>
+                           label={i18next.t("Cars.Label.consumptionMethod")}
+                           rules={[
+                               {
+                                   required: true,
+                                   message: i18next.t("Cars.Validation.Message.consumptionMethod.Required")
+                               }
+                           ]}>
                     <Select options={consumptionMethodOptions} showSearch={true} onChange={(e) => onSelectChanged(e, "consumptionMethod")} />
                 </Form.Item>
                     </Col>
@@ -291,28 +333,52 @@ const EditCar: React.FC<EditCarProps> = inject(Stores.carStore)(observer(({carSt
                     <Col span={8}>
                         <Form.Item name="carType" initialValue={viewModel?.detailCarResponse?.carType}
                                    key={"carType"}
-                                   label={i18next.t("Cars.Label.carType")}>
+                                   label={i18next.t("Cars.Label.carType")}
+                                   rules={[
+                                       {
+                                           required: true,
+                                           message: i18next.t("Cars.Validation.Message.carType.Required")
+                                       }
+                                   ]}>
                             <Select options={carTypeOptions} showSearch={true} onChange={(e) => onSelectChanged(e, "carType")} />
                         </Form.Item>
                     </Col>
                     <Col span={8}>
                         <Form.Item name="carBrand" initialValue={viewModel?.detailCarResponse?.carBrand}
                                    key={"carBrand"}
-                                   label={i18next.t("Cars.Label.carBrand")}>
+                                   label={i18next.t("Cars.Label.carBrand")}
+                                   rules={[
+                                       {
+                                           required: true,
+                                           message: i18next.t("Cars.Validation.Message.carBrand.Required")
+                                       }
+                                   ]}>
                             <Select options={carBrandOptions} showSearch={true} onChange={(e) => onSelectChanged(e, "carBrand")} />
                         </Form.Item>
                     </Col>
                     <Col span={8}>
                         <Form.Item name="carModel" initialValue={viewModel?.detailCarResponse?.carModel}
                                    key={"carModel"}
-                                   label={i18next.t("Cars.Label.carModel")}>
+                                   label={i18next.t("Cars.Label.carModel")}
+                                   rules={[
+                                       {
+                                           required: true,
+                                           message: i18next.t("Cars.Validation.Message.carModel.Required")
+                                       }
+                                   ]}>
                             <Input onChange={onChanged}/>
                         </Form.Item>
                     </Col>
                     <Col span={8}>
                         <Form.Item name="carModelYear" initialValue={viewModel?.detailCarResponse?.carModelYear}
                                    key={"carModelYear"}
-                                   label={i18next.t("Cars.Label.carModelYear")}>
+                                   label={i18next.t("Cars.Label.carModelYear")}
+                                   rules={[
+                                       {
+                                           required: true,
+                                           message: i18next.t("Cars.Validation.Message.carModelYear.Required")
+                                       }
+                                   ]}>
                             <Input type={"number"} onChange={onChanged}/>
                         </Form.Item>
                     </Col>
@@ -320,7 +386,13 @@ const EditCar: React.FC<EditCarProps> = inject(Stores.carStore)(observer(({carSt
                     <Col span={8}>
                         <Form.Item name="carTypeOfFuel" initialValue={viewModel?.detailCarResponse?.carTypeOfFuel}
                                    key={"carTypeOfFuel"}
-                                   label={i18next.t("Cars.Label.carTypeOfFuel")}>
+                                   label={i18next.t("Cars.Label.carTypeOfFuel")}
+                                   rules={[
+                                       {
+                                           required: true,
+                                           message: i18next.t("Cars.Validation.Message.carTypeOfFuel.Required")
+                                       }
+                                   ]}>
                             <Select options={carTypeOfFuelOptions} showSearch={true} onChange={(e) => onSelectChanged(e, "carTypeOfFuel")} />
                         </Form.Item>
                     </Col>
