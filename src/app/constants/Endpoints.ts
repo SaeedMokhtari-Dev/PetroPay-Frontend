@@ -34,6 +34,7 @@ export default
     apiBranchDetail: "/api/branch/detail",
     apiBranchDelete: "/api/branch/delete",
     apiBranchActive: "/api/branch/active",
+    apiBranchChargeBalance: "/api/branch/charge-balance",
 
     apiCarAdd: "/api/car/add",
     apiCarEdit: "/api/car/edit",

@@ -195,11 +195,15 @@
   "Branches.Label.companyBranchAdminPhone": "Admin Phone",
   "Branches.Label.companyBranchAdminUserPassword": "Admin User Password",
   "Branches.Label.companyBranchAdminEmail": "Admin Email",
+  "Branches.Label.increaseAmount": "Increase Amount",
 
   "Branches.Add.HeaderText": "Add Branch",
   "Branches.Edit.HeaderText": "Edit Branch with Id:",
   "Branches.Section.GeneralInformation": "General Information",
   "Branches.Button.CarList": "Cars",
+  "Branches.Button.ChargeBalanceBranch": "Charge Branch Balance",
+  "Branches.Button.Charge": "Charge",
+
 
   "Branches.Validation.Message.companyBranchName.Required": "Please enter branch name",
   "Branches.Validation.Message.companyBranchNumberOfcar.Required": "Please enter branch number of car",
@@ -208,13 +212,18 @@
   "Branches.Validation.Message.companyBranchAdminUserName.Valid": "Please enter a valid Username",
   "Branches.Validation.Message.companyBranchAdminUserPassword.Required": "Please enter branch admin password",
   "Branches.Validation.Message.companyBranchAdminEmail.Valid": "Please enter a valid Email",
+  "Branches.Validation.Message.increaseAmount.Valid": "Please enter an amount less than company balance",
+  "Branches.Validation.Message.increaseAmount.Required": "Please enter increase amount",
 
   "Api.Branch.Add.Successful": "A new branch added successfully",
   "Api.Branch.Edit.Successful": "selected branch edited successfully",
   "Api.Branch.Deleted.Successful": "selected branch deleted successfully",
   "Api.Branch.Activated.Successful": "selected branch activated successfully",
+  "Api.Branch.BalanceIncreased.Successful": "selected branch balance increased successfully",
   "Api.Branch.CompanyId.Required": "CompanyId is Required",
   "Api.Branch.Id.Required": "Id is Required",
+  "Api.Branch.IncreaseAmount.Required": "Increase Amount is Required",
+  "Api.Branch.IncreaseAmountCannotBeMoreThanBalance": "Increase Amount Cannot Be More Than Company Balance.",
 
   "Branches.Error.Get.Message": "An error has occurred while trying to get branches list.",
   "Branches.Error.Detail.Message": "An error has occurred while trying to get branch details.",

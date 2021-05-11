@@ -14,6 +14,8 @@ import {message} from "antd";
 import UserContext from "../../../identity/contexts/UserContext";
 import ActiveBranchRequest from "../handlers/active/ActiveBranchRequest";
 import ActiveBranchHandler from "../handlers/active/ActiveBranchHandler";
+import ChargeBalanceBranchRequest from "../handlers/chargeBalance/ChargeBalanceBranchRequest";
+import ChargeBalanceBranchHandler from "../handlers/chargeBalance/ChargeBalanceBranchHandler";
 
 export default class GetBranchViewModel {
     columns: any[];
@@ -26,6 +28,8 @@ export default class GetBranchViewModel {
 
     addBranchRequest: AddBranchRequest = new AddBranchRequest();
     addedSuccessfully: boolean;
+
+
 
     constructor(public branchStore: BranchStore) {
         makeAutoObservable(this);
@@ -112,6 +116,38 @@ export default class GetBranchViewModel {
         {
             this.errorMessage = i18next.t('Branches.Error.Delete.Message');
             message.error(this.errorMessage);
+            log.error(e);
+        }
+        finally
+        {
+            this.isProcessing = false;
+        }
+    }
+    public async ChargeBalanceBranch(branchId: number, increaseAmount: number, companyId: number)
+    {
+        try
+        {
+
+            this.errorMessage = "";
+            let request = new ChargeBalanceBranchRequest();
+            request.branchId = branchId;
+            request.increaseAmount = increaseAmount;
+            let response = await ChargeBalanceBranchHandler.chargeBalance(request);
+
+            if(response && response.success)
+            {
+                message.success(getLocalizedString(response.message), 5);
+                await this.getAllBranch(new GetBranchRequest(companyId, this.pageSize, this.pageIndex));
+            }
+            else{
+                this.errorMessage = getLocalizedString(response.message);
+                message.error(this.errorMessage, 10);
+            }
+        }
+        catch(e)
+        {
+            this.errorMessage = i18next.t('Branches.Error.Delete.Message');
+            message.error(this.errorMessage, 10);
             log.error(e);
         }
         finally

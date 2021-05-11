@@ -6,11 +6,11 @@ import Stores from "app/constants/Stores";
 
 import {
     Button,
-    Pagination,
+    Pagination, Form, InputNumber,
     Table, Modal, PageHeader
 } from "antd";
 import {
-    EditOutlined, DeleteOutlined, CheckOutlined, CloseOutlined, CarOutlined,
+    EditOutlined, DeleteOutlined, CheckOutlined, CloseOutlined, CarOutlined, DollarOutlined,
     ExclamationCircleOutlined, PlusCircleOutlined, CheckCircleOutlined
 } from '@ant-design/icons';
 import i18next from "i18next";
@@ -21,6 +21,9 @@ import NavigationService from "../../../../app/services/NavigationService";
 import GetBranchRequest from "../../handlers/get/GetBranchRequest";
 import BranchStore from "../../stores/BranchStore";
 import UserContext from "../../../../identity/contexts/UserContext";
+import ChangeUserPasswordHandler from "../../../../auth/common/handlers/change-user-password/ChangeUserPasswordHandler";
+import ChangeUserPasswordRequest from "../../../../auth/common/handlers/change-user-password/ChangeUserPasswordRequest";
+import ChargeBalanceBranchHandler from "../../handlers/chargeBalance/ChargeBalanceBranchHandler";
 
 
 const { confirm } = Modal;
@@ -35,6 +38,15 @@ interface BranchListProps {
 
 const BranchList: React.FC<BranchListProps> = inject(Stores.branchStore)(observer(({branchStore, match}) => {
     const [companyId, setCompanyId] = React.useState(0);
+    const [modalVisible, setModalVisible] = React.useState(false);
+    const [isLoading, setLoading] = React.useState(false);
+    const [selectedBranchId, setSelectedBranchId] = React.useState(0);
+    const [increaseAmount, setIncreaseAmount] = React.useState(0);
+    const [form] = Form.useForm();
+    const layout = {
+        labelCol: { span: 8 },
+        wrapperCol: { span: 16 },
+    };
 
     useEffect(() => {
         onLoad();
@@ -69,6 +81,8 @@ const BranchList: React.FC<BranchListProps> = inject(Stores.branchStore)(observe
                     <div>
                         <Button type="default" icon={<CarOutlined/>} onClick={() => showCarPage(record)}
                                 title={i18next.t("Branches.Button.CarList")}/>
+                        <Button type="primary" icon={<DollarOutlined/>} onClick={() => showChargeBalanceBranchModal(record)}
+                                title={i18next.t("Branches.Button.ChargeBalanceBranch")}/>
                     </div>
                 }
                 {!record.companyBranchActiva &&
@@ -82,6 +96,10 @@ const BranchList: React.FC<BranchListProps> = inject(Stores.branchStore)(observe
             </div>
         )
     }];
+    function showChargeBalanceBranchModal(e){
+        setSelectedBranchId(e.key);
+        setModalVisible(true);
+    }
     async function onActive(key: number){
         await viewModel.activeBranch(key, companyId);
     }
@@ -167,6 +185,25 @@ const BranchList: React.FC<BranchListProps> = inject(Stores.branchStore)(observe
         await branchStore.getBranchViewModel.getAllBranch(new GetBranchRequest(companyId,
             pageSize, 0));
     }
+    async function handleChargeBalanceBranch(){
+        setLoading(true);
+        await viewModel?.ChargeBalanceBranch(selectedBranchId, increaseAmount, companyId);
+        setLoading(false);
+        if(!viewModel.errorMessage)
+            setModalVisible(false)
+    }
+    function handleCancel(){
+        debugger;
+        setSelectedBranchId(0);
+        setIncreaseAmount(0);
+        setModalVisible(false)
+    }
+    function onIncreaseAmountChanged(e){
+        debugger;
+        setIncreaseAmount(e);
+        //pageStore.changeUserPasswordRequest.currentPassword = e.target.value;
+        //bundlesStore.editBundleViewModel.editBundleRequest[`${e.target.id}`] = e.target.value;
+    }
     return (
         <div>
             <PageHeader
@@ -195,6 +232,44 @@ const BranchList: React.FC<BranchListProps> = inject(Stores.branchStore)(observe
                 onShowSizeChange={pageSizeChanged}
                 showTotal={total => `Total ${total} items`}
             />
+
+            <Modal
+                title={i18next.t("Branches.Button.ChargeBalanceBranch")}
+                centered
+                visible={modalVisible}
+                destroyOnClose={true}
+                closable={false}
+                footer={[
+                    <Button type={"default"} loading={isLoading} danger key="cancel" onClick={handleCancel}>
+                        {i18next.t("General.Add.CancelButton")}
+                    </Button>,
+                    <Button type={"primary"} loading={isLoading} form="ChargeBalanceBranchForm" key="submit" htmlType="submit">
+                        {i18next.t("Branches.Button.Charge")}
+                    </Button>
+                ]}
+            >
+                <Form {...layout} form={form} onFinish={handleChargeBalanceBranch}
+                      key={"ChargeBalanceBranchForm"} id={"ChargeBalanceBranchForm"}>
+                    <Form.Item name="increaseAmount" initialValue={increaseAmount}
+                               key={"increaseAmount"}
+                               label={i18next.t("Branches.Label.increaseAmount")}
+                               rules={[
+                                   {
+                                       required: true,
+                                       message: i18next.t("Branches.Validation.Message.increaseAmount.Required")
+                                   }
+                               ]}>
+                        <InputNumber
+                            max = {UserContext?.info?.balance}
+                            precision={2}
+                            style={{width: '100%'}}
+                            formatter={value => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                            parser={value => value.replace(/\$\s?|(,*)/g, '')}
+                            onChange={onIncreaseAmountChanged}
+                        />
+                    </Form.Item>
+                </Form>
+            </Modal>
         </div>
     )
 }));
