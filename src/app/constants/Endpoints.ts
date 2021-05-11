@@ -4,6 +4,7 @@ export default
     apiAuthResetPassword: "/api/auth/reset-password",
     apiAuthValidateResetPasswordToken: "/api/auth/validate-reset-password-token",
     apiAuthChangePassword: "/api/auth/change-password",
+    apiAuthChangeUserPassword: "/api/auth/change-user-password",
     apiAuthLogout: "/api/auth/logout",
     apiAuthCheck: "/api/auth/check",
     apiAuthRefreshAccessToken: "/api/auth/refresh-access-token",

@@ -3,7 +3,7 @@ import {inject, observer} from "mobx-react";
 import Stores from "app/constants/Stores";
 import CarStore from "entities/cars/stores/CarStore";
 import {useParams} from "react-router-dom";
-import {Button, Col, Divider, Form, Input, InputNumber, message, Select, PageHeader, Radio, Row, Spin, Switch, Upload} from "antd";
+import {Button, Col, Divider, Form, Input, Image, message, Select, PageHeader, Radio, Row, Spin, Switch, Upload} from "antd";
 import i18next from "i18next";
 import EditCarRequest from "../../handlers/edit/EditCarRequest";
 import DetailCarResponse from "../../handlers/detail/DetailCarResponse";
@@ -180,6 +180,7 @@ const EditCar: React.FC<EditCarProps> = inject(Stores.carStore)(observer(({carSt
         getBase64(file, imageUrl => {
 
             viewModel.uploadLoading = false;
+            /*const image = imageUrl.substr(imageUrl.indexOf(',') + 1);*/
             if(carId){
                 viewModel.editCarRequest.carPlatePhoto = imageUrl;
                 setImageUrl(imageUrl);
@@ -361,8 +362,12 @@ const EditCar: React.FC<EditCarProps> = inject(Stores.carStore)(observer(({carSt
                     <Col span={8}>
                         <Form.Item name="carDriverConfirmationCode" initialValue={viewModel?.detailCarResponse?.carDriverConfirmationCode}
                                    key={"carDriverConfirmationCode"}
-                                   label={i18next.t("Cars.Label.carDriverConfirmationCode")}>
-                            <Input onChange={onChanged}/>
+                                   label={i18next.t("Cars.Label.carDriverConfirmationCode")}
+                                   rules={[
+                                       { min: 4, message: i18next.t("Cars.Validation.Message.carDriverConfirmationCode.4MinLength") }
+                                   ]}
+                        >
+                            <Input type={"number"} onChange={onChanged}/>
                         </Form.Item>
                     </Col>
                     <Divider>
@@ -472,8 +477,7 @@ const EditCar: React.FC<EditCarProps> = inject(Stores.carStore)(observer(({carSt
                         >
                             {imageUrl ? (
                                 <div>
-                                    <img src={imageUrl} alt="logo"
-                                         style={{width: '100%', height: '150px'}}/>
+                                    <img src={imageUrl} style={{width: '100%', height: '150px'}} alt="logo" />
                                     <p>{i18next.t("General.Upload.ChangePhoto")}</p>
                                 </div>
                             ) : uploadButton}

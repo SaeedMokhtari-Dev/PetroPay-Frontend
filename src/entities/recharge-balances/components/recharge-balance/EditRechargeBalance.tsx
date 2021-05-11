@@ -213,7 +213,8 @@ const EditRechargeBalance: React.FC<EditRechargeBalanceProps> = inject(Stores.re
                         </Form.Item>
                     </Col>
                     <Col span={8}>
-                        <Form.Item name="bankTransactionDate" initialValue={moment(viewModel?.detailRechargeBalanceResponse?.bankTransactionDate, Constants.dateFormat)}
+                        <Form.Item name="bankTransactionDate"
+                                   initialValue={viewModel?.detailRechargeBalanceResponse?.bankTransactionDate ? moment(viewModel?.detailRechargeBalanceResponse?.bankTransactionDate, Constants.dateFormat) : ""}
                                    key={"bankTransactionDate"}
                                    label={i18next.t("RechargeBalances.Label.bankTransactionDate")}>
                             <DatePicker onChange={onDateChange} format={Constants.dateFormat}/>
