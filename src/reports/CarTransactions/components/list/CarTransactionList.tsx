@@ -43,7 +43,7 @@ const CarTransactionList: React.FC<CarTransactionListProps> = inject(Stores.carT
     });
     const companyColumn = {title: i18next.t("CarTransactions.Label.companyName"), dataIndex: "companyName", key: "companyName", responsive: ['md']};
 
-    const columns: any[] = [...CarTransactionColumns];
+    let columns: any[] = [...CarTransactionColumns];
     if(UserContext.info.role == 100)
     {
         columns.unshift(companyColumn);

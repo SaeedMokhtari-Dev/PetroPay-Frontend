@@ -1,6 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import {inject, observer} from "mobx-react";
-import { useHistory } from "react-router-dom";
+import { BrowserRouter as Router,
+    Switch,
+    Route,
+    Link } from "react-router-dom";
 import "./SubscriptionList.scss";
 import Stores from "app/constants/Stores";
 
@@ -11,7 +14,7 @@ import {
 } from "antd";
 import {
     EditOutlined, DeleteOutlined, CheckOutlined, CloseOutlined,
-    ExclamationCircleOutlined, PlusCircleOutlined, CheckCircleOutlined
+    ExclamationCircleOutlined, PlusCircleOutlined, CheckCircleOutlined, CarOutlined
 } from '@ant-design/icons';
 import i18next from "i18next";
 import AddSubscriptionRequest from "../../handlers/add/AddSubscriptionRequest";
@@ -43,8 +46,7 @@ const SubscriptionList: React.FC<SubscriptionListProps> = inject(Stores.subscrip
     });
 
 
-    const columns: any[] = [...SubscriptionColumns,
-        {title: i18next.t("Subscriptions.Label.companyName"), dataIndex: "companyName", key: "companyName", responsive: ['md']},
+    let columns: any[] = [...SubscriptionColumns,
         {
         title: i18next.t("General.Column.Action"),
         dataIndex: 'operation',
@@ -70,9 +72,20 @@ const SubscriptionList: React.FC<SubscriptionListProps> = inject(Stores.subscrip
                        </div>
                      )
                 }
+                {UserContext.info.role == 1 && record.subscriptionActive ?
+                       <Link to={`/app/subscription/carAdd/${record.key}`}>
+                           <Button type="default" icon={<CarOutlined/>}
+                                   title={i18next.t("Subscriptions.Button.CarList")}/>
+                       </Link>
+                    : ""
+                }
             </div>
         )
     }];
+    const companyColumn = {title: i18next.t("Subscriptions.Label.companyName"), dataIndex: "companyName", key: "companyName", responsive: ['md']};
+    if(UserContext.info.role == 100){
+        columns.unshift(companyColumn);
+    }
 
     useEffect(() => {
         onLoad();
@@ -99,7 +112,7 @@ const SubscriptionList: React.FC<SubscriptionListProps> = inject(Stores.subscrip
 
     if (!viewModel) return;
 
-    async function showEditPage(e){
+    function showEditPage(e){
 
         if(e.key)
         {
@@ -144,8 +157,6 @@ const SubscriptionList: React.FC<SubscriptionListProps> = inject(Stores.subscrip
     async function onActive(key: number){
         await viewModel.activeSubscription(key);
     }
-
-
 
     function onUnload() {
         subscriptionStore.onSubscriptionGetPageUnload();

@@ -1,1 +1,47 @@
 @import "../../../app/styles/colors";
+
+.ant-layout-sider {
+  background: orange;
+  .ant-layout-sider-children {
+    background: orange;
+    .ant-menu-dark{
+      background: orange;
+      color: black;
+      .ant-menu-item {
+        color: black;
+
+        a {
+          color: black;
+        }
+      }
+    }
+    .ant-menu-submenu {
+      .ant-menu-submenu-title {
+        .ant-menu-submenu-arrow {
+          color: black;
+        }
+      }
+      color: black;
+      background: orange;
+      .ant-menu {
+        background: orange;
+        color: black;
+      .ant-menu-item {
+        background: orange;
+        color: black;
+
+        a {
+          color: black;
+        }
+      }
+      }
+    }
+  }
+  .ant-layout-sider-trigger {
+    background: orange;
+  }
+}
+
+.logo{
+  background-color: white;
+}

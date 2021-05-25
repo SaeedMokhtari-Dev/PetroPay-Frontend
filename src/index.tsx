@@ -63,6 +63,7 @@ ReactDOM.render(
                       stationSaleStore={appStore.stationSale}
                       stationStatementStore={appStore.stationStatement}
                       carTransactionStore={appStore.carTransaction}
+                      accountBalanceStore={appStore.accountBalance}
             >
                 <App />
             </Provider>

@@ -15,6 +15,7 @@ export default class GetInvoiceSummaryViewModel {
     invoiceSummaryList: InvoiceSummaryItem[];
     invoiceSummaryExport: InvoiceSummaryItem[];
     totalSize: number;
+    sumInvoiceAmount: number;
     isProcessing: boolean;
     errorMessage: string;
     getInvoiceSummariesRequest: GetInvoiceSummaryRequest;
@@ -40,6 +41,7 @@ export default class GetInvoiceSummaryViewModel {
                 else {
                     this.invoiceSummaryList = items;
                     this.totalSize = result.totalCount;
+                    this.sumInvoiceAmount = result.sumInvoiceAmount;
                 }
             } else {
                 this.errorMessage = getLocalizedString(response.message);

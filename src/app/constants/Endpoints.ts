@@ -34,6 +34,7 @@ export default
     apiBranchDetail: "/api/branch/detail",
     apiBranchDelete: "/api/branch/delete",
     apiBranchActive: "/api/branch/active",
+    apiBranchList: "/api/branch/list",
     apiBranchChargeBalance: "/api/branch/charge-balance",
 
     apiCarAdd: "/api/car/add",
@@ -66,6 +67,7 @@ export default
     apiSubscriptionCalculate: "/api/subscription/calculate",
     apiSubscriptionCarAdd: "/api/subscription/car-add",
 
+    apiAccountBalanceGet: "/api/account-balance/get",
     apiInvoiceSummaryGet: "/api/invoice-summary/get",
     apiInvoiceDetailGet: "/api/invoice-detail/get",
     apiCarBalanceGet: "/api/car-balance/get",
@@ -73,6 +75,9 @@ export default
     apiStationSaleGet: "/api/station-sale/get",
     apiStationStatementGet: "/api/station-statement/get",
     apiCarTransactionGet: "/api/car-transaction/get",
+
+    apiPetropayAccountList: "/api/petropay-account/list",
+    apiServiceMasterList: "/api/service-master/list",
 
     apiLog: "/api/log"
 }

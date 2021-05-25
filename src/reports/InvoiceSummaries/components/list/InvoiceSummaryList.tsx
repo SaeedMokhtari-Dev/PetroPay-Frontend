@@ -7,7 +7,7 @@ import Stores from "app/constants/Stores";
 import {
     Button, Collapse, Col, Row,
     Pagination, Input, Form,
-    Table, PageHeader, Space, DatePicker
+    Table, PageHeader, Space, DatePicker, Select
 } from "antd";
 import {
     FolderViewOutlined,
@@ -22,12 +22,16 @@ import InvoiceSummaryStore from "../../stores/InvoiceSummaryStore";
 import ExportExcel from "../../../../app/utils/ExportExcel";
 
 const { Panel } = Collapse;
+const { Option } = Select;
 
 interface InvoiceSummaryListProps {
     invoiceSummaryStore?: InvoiceSummaryStore
 }
 
 const InvoiceSummaryList: React.FC<InvoiceSummaryListProps> = inject(Stores.invoiceSummaryStore)(observer(({invoiceSummaryStore}) => {
+    const [carOptions, setCarOptions] = React.useState([]);
+    const [branchOptions, setBranchOptions] = React.useState([]);
+    const [serviceMasterOptions, setServiceMasterOptions] = React.useState([]);
 
     const formItemLayout = {
         labelCol: {
@@ -73,6 +77,9 @@ const InvoiceSummaryList: React.FC<InvoiceSummaryListProps> = inject(Stores.invo
 
     async function onLoad() {
         invoiceSummaryStore.onInvoiceSummaryGetPageLoad();
+        await invoiceSummaryStore.listBranchViewModel.getBranchList();
+        await invoiceSummaryStore.listCarViewModel.getCarList();
+        await invoiceSummaryStore.listServiceMasterViewModel.getServiceMasterList();
         invoiceSummaryStore.getInvoiceSummaryViewModel.getInvoiceSummariesRequest = new GetInvoiceSummaryRequest();
         invoiceSummaryStore.getInvoiceSummaryViewModel.getInvoiceSummariesRequest.pageSize = 20;
         invoiceSummaryStore.getInvoiceSummaryViewModel.getInvoiceSummariesRequest.pageIndex = 0;
@@ -81,6 +88,24 @@ const InvoiceSummaryList: React.FC<InvoiceSummaryListProps> = inject(Stores.invo
         }
 
         await invoiceSummaryStore.getInvoiceSummaryViewModel.getAllInvoiceSummary(invoiceSummaryStore.getInvoiceSummaryViewModel.getInvoiceSummariesRequest);
+
+        let carOptions = [];
+        for (let item of invoiceSummaryStore.listCarViewModel.listCarResponse.items) {
+            carOptions.push(<Option key={item.key} value={item.carNumber}>{item.carNumber}</Option>);
+        }
+        setCarOptions(carOptions);
+
+        let branchOptions = [];
+        for (let item of invoiceSummaryStore.listBranchViewModel.listBranchResponse.items) {
+            branchOptions.push(<Option key={item.key} value={item.key}>{item.title}</Option>);
+        }
+        setBranchOptions(branchOptions);
+
+        let serviceMasterOptions = [];
+        for (let item of invoiceSummaryStore.listServiceMasterViewModel.listServiceMasterResponse.items) {
+            serviceMasterOptions.push(<Option key={item.key} value={item.title}>{item.title}</Option>);
+        }
+        setServiceMasterOptions(serviceMasterOptions);
     }
 
     let viewModel = invoiceSummaryStore.getInvoiceSummaryViewModel;
@@ -103,6 +128,9 @@ const InvoiceSummaryList: React.FC<InvoiceSummaryListProps> = inject(Stores.invo
     }
     function onChanged(e){
         viewModel.getInvoiceSummariesRequest[`${e.target.id}`] = e.target.value;
+    }
+    function onSelectChanged(e, propName){
+        viewModel.getInvoiceSummariesRequest[`${propName}`] = e;
     }
     function onDateChange(date, dateString, prop) {
         viewModel.getInvoiceSummariesRequest[`${prop}`] = dateString;
@@ -157,25 +185,48 @@ const InvoiceSummaryList: React.FC<InvoiceSummaryListProps> = inject(Stores.invo
                                         <Input onChange={onChanged}/>
                                     </Form.Item>
                                 </Col>: ""}
-                            <Col span={8}>
+                            {/*<Col span={8}>
                                 <Form.Item name="companyBranchName" initialValue={viewModel?.getInvoiceSummariesRequest?.companyBranchName}
                                            key={"companyBranchName"}
                                            label={i18next.t("InvoiceSummaries.SearchPanel.Label.companyBranchName")}>
                                     <Input onChange={onChanged}/>
+                                    <Select style={{width: "100%", display:"block"}}
+                                            showSearch={true} onChange={(e) => onSelectChanged(e, "companyBranchName")}>
+                                        {petropayAccountOptions}
+                                    </Select>
+                                </Form.Item>
+                            </Col>*/}
+                            <Col span={8}>
+                                <Form.Item name="companyBranchId" initialValue={viewModel?.getInvoiceSummariesRequest?.companyBranchId}
+                                           key={"companyBranchId"}
+                                           label={i18next.t("InvoiceSummaries.SearchPanel.Label.companyBranchName")}>
+                                    {/*<Input onChange={onChanged} />*/}
+                                    <Select style={{width: "100%", display:"block"}}
+                                            showSearch={true} onChange={(e) => onSelectChanged(e, "companyBranchId")}>
+                                        {branchOptions}
+                                    </Select>
                                 </Form.Item>
                             </Col>
                             <Col span={8}>
                                 <Form.Item name="carIdNumber" initialValue={viewModel?.getInvoiceSummariesRequest?.carIdNumber}
                                            key={"carIdNumber"}
                                            label={i18next.t("InvoiceSummaries.SearchPanel.Label.carIdNumber")}>
-                                    <Input onChange={onChanged}/>
+                                    {/*<Input onChange={onChanged}/>*/}
+                                    <Select style={{width: "100%", display:"block"}}
+                                            showSearch={true} onChange={(e) => onSelectChanged(e, "carIdNumber")}>
+                                        {carOptions}
+                                    </Select>
                                 </Form.Item>
                             </Col>
                             <Col span={8}>
                                 <Form.Item name="serviceDescription" initialValue={viewModel?.getInvoiceSummariesRequest?.serviceDescription}
                                            key={"serviceDescription"}
                                            label={i18next.t("InvoiceSummaries.SearchPanel.Label.serviceDescription")}>
-                                    <Input onChange={onChanged}/>
+                                    {/*<Input onChange={onChanged}/>*/}
+                                    <Select style={{width: "100%", display:"block"}}
+                                            showSearch={true} onChange={(e) => onSelectChanged(e, "serviceDescription")}>
+                                        {serviceMasterOptions}
+                                    </Select>
                                 </Form.Item>
                             </Col>
                             <Col span={8}>
@@ -209,7 +260,15 @@ const InvoiceSummaryList: React.FC<InvoiceSummaryListProps> = inject(Stores.invo
             </Collapse>
             <br/>
             <Table dataSource={viewModel?.invoiceSummaryList} columns={columns} loading={viewModel?.isProcessing}
-                   bordered={true} pagination={false} scroll={{ x: 1500 }} sticky />
+                   bordered={true} pagination={false} scroll={{ x: 1500 }} sticky
+                   summary={() => (
+                       <Table.Summary.Row>
+                           <Table.Summary.Cell index={0}>{i18next.t("General.Table.Total")}</Table.Summary.Cell>
+                           <Table.Summary.Cell colSpan={7} index={1}></Table.Summary.Cell>
+                           <Table.Summary.Cell index={5}>{viewModel?.sumInvoiceAmount?.toLocaleString()}</Table.Summary.Cell>
+                           <Table.Summary.Cell colSpan={2} index={6}></Table.Summary.Cell>
+                       </Table.Summary.Row>
+                   )} />
             <br/>
             <Pagination
                 total={viewModel?.totalSize}

@@ -70,11 +70,15 @@ const BranchList: React.FC<BranchListProps> = inject(Stores.branchStore)(observe
         fixed: 'right',
         render: (text, record) => (
             <div className="inline">
-                {UserContext.info.role == 100 && (!record.companyBranchActiva) &&
+                {(!record.companyBranchActiva) &&
                 (
                     <div>
                         <Button type="default"  icon={<CheckCircleOutlined />} onClick={() => showActivation(record)}
                                 title={i18next.t("Subscriptions.Button.AcceptRequest")} style={{ background: "green", borderColor: "white" }}/>
+                        <Button type="primary" icon={<EditOutlined />} onClick={() => showEditPage(record)}
+                                title={i18next.t("General.Button.Edit")} />
+                        <Button type="primary" danger icon={<DeleteOutlined />} onClick={() => showDeleteConfirm(record)}
+                                title={i18next.t("General.Button.Delete")} />
                     </div>
                 )}
                 {record.companyBranchActiva &&
@@ -84,14 +88,6 @@ const BranchList: React.FC<BranchListProps> = inject(Stores.branchStore)(observe
                         <Button type="primary" icon={<DollarOutlined/>} onClick={() => showChargeBalanceBranchModal(record)}
                                 title={i18next.t("Branches.Button.ChargeBalanceBranch")}/>
                     </div>
-                }
-                {!record.companyBranchActiva &&
-                <div>
-                    <Button type="primary" icon={<EditOutlined />} onClick={() => showEditPage(record)}
-                    title={i18next.t("General.Button.Edit")} />
-                    <Button type="primary" danger icon={<DeleteOutlined />} onClick={() => showDeleteConfirm(record)}
-                    title={i18next.t("General.Button.Delete")} />
-                </div>
                 }
             </div>
         )
@@ -170,6 +166,11 @@ const BranchList: React.FC<BranchListProps> = inject(Stores.branchStore)(observe
 
     function onUnload() {
         branchStore.onBranchGetPageUnload();
+        setCompanyId(0);
+        setModalVisible(false);
+        setLoading(false);
+        setSelectedBranchId(0);
+        setIncreaseAmount(0);
         //branchStore.onBranchEditPageUnload();
     }
 

@@ -34,6 +34,7 @@ interface CarListProps {
 
 const CarList: React.FC<CarListProps> = inject(Stores.carStore)(observer(({carStore, match}) => {
     const[visible, setVisible] = React.useState(false);
+
     useEffect(() => {
         onLoad();
 
@@ -87,7 +88,7 @@ const CarList: React.FC<CarListProps> = inject(Stores.carStore)(observer(({carSt
         }
         else{
             //carStore.editCarViewModel.addCarRequest = new AddCarRequest();
-            NavigationService.navigate(`/app/car/add/${viewModel.companyBranchId}`);
+            NavigationService.navigate(`/app/car/add`);
         }
     }
     async function showDeleteConfirm(e) {
@@ -107,19 +108,28 @@ const CarList: React.FC<CarListProps> = inject(Stores.carStore)(observer(({carSt
     if (!viewModel) return;
 
     async function onDelete(key: number){
-        await viewModel.deleteCar(key, +match.params.companyBranchId);
+        await viewModel.deleteCar(key, viewModel.getCarsRequest);
     }
 
     async function onLoad() {
         carStore.onCarGetPageLoad();
         //carStore.onCarEditPageLoad();
 
-        carStore.getCarViewModel.pageIndex = 0;
-        carStore.getCarViewModel.pageSize = 20;
-        const companyBranchId: number = +match.params.companyBranchId;
-        carStore.getCarViewModel.companyBranchId = companyBranchId;
-        await carStore.getCarViewModel.getAllCar(new GetCarRequest(
-            companyBranchId,20, 0));
+        carStore.getCarViewModel.getCarsRequest = new GetCarRequest();
+        carStore.getCarViewModel.getCarsRequest.pageIndex = 0;
+        carStore.getCarViewModel.getCarsRequest.pageSize = 20;
+
+        let companyIdParam = 0;
+        if(UserContext.info.role == 1){
+            companyIdParam = UserContext.info.id;
+            carStore.getCarViewModel.getCarsRequest.CompanyId = companyIdParam;
+        }
+        let branchIdParam = 0;
+        if(match?.params?.companyBranchId){
+            branchIdParam = +match.params.companyBranchId;
+            carStore.getCarViewModel.getCarsRequest.companyBranchId = branchIdParam;
+        }
+        await carStore.getCarViewModel.getAllCar(carStore.getCarViewModel.getCarsRequest);
     }
 
     function onUnload() {
@@ -128,16 +138,14 @@ const CarList: React.FC<CarListProps> = inject(Stores.carStore)(observer(({carSt
     }
 
     async function pageIndexChanged(pageIndex, pageSize){
-        viewModel.pageIndex = pageIndex - 1;
-        viewModel.pageSize = pageSize;
-        await carStore.getCarViewModel.getAllCar(new GetCarRequest(viewModel.companyBranchId,
-            pageSize, pageIndex - 1));
+        viewModel.getCarsRequest.pageIndex = pageIndex - 1;
+        viewModel.getCarsRequest.pageSize = pageSize;
+        await carStore.getCarViewModel.getAllCar(viewModel.getCarsRequest);
     }
     async function pageSizeChanged(current, pageSize){
-        viewModel.pageIndex = 0;
-        viewModel.pageSize = pageSize;
-        await carStore.getCarViewModel.getAllCar(new GetCarRequest(viewModel.companyBranchId,
-            pageSize, 0));
+        viewModel.getCarsRequest.pageIndex = 0;
+        viewModel.getCarsRequest.pageSize = pageSize;
+        await carStore.getCarViewModel.getAllCar(viewModel.getCarsRequest);
     }
     async function onActive(key: number){
 
@@ -153,7 +161,7 @@ const CarList: React.FC<CarListProps> = inject(Stores.carStore)(observer(({carSt
         setVisible(true);
     }
     async function handleOk(){
-        await viewModel.activeCar(viewModel.activeCarRequest, viewModel.companyBranchId);
+        await viewModel.activeCar(viewModel.activeCarRequest, viewModel.getCarsRequest);
         viewModel.activeCarRequest = new ActiveCarRequest();
         setVisible(false);
     }

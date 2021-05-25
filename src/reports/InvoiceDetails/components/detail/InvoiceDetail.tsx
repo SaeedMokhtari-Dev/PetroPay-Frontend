@@ -71,8 +71,8 @@ const InvoiceDetail: React.FC<InvoiceDetailProps> = inject(Stores.invoiceDetailS
                 <Descriptions.Item label={i18next.t("InvoiceDetails.Label.serviceArDescription")}>{viewModel?.invoiceDetailResponse?.serviceArDescription}</Descriptions.Item>
                 <Descriptions.Item label={i18next.t("InvoiceDetails.Label.stationName")}>{viewModel?.invoiceDetailResponse?.stationName}</Descriptions.Item>
                 <Descriptions.Item label={i18next.t("InvoiceDetails.Label.stationNameAr")}>{viewModel?.invoiceDetailResponse?.stationNameAr}</Descriptions.Item>
-                <Descriptions.Item label={i18next.t("InvoiceDetails.Label.stationLatitude")}>{viewModel?.invoiceDetailResponse?.stationLatitude}</Descriptions.Item>
-                <Descriptions.Item label={i18next.t("InvoiceDetails.Label.stationLongitude")}>{viewModel?.invoiceDetailResponse?.stationLongitude}</Descriptions.Item>
+                {/*<Descriptions.Item label={i18next.t("InvoiceDetails.Label.stationLatitude")}>{viewModel?.invoiceDetailResponse?.stationLatitude}</Descriptions.Item>
+                <Descriptions.Item label={i18next.t("InvoiceDetails.Label.stationLongitude")}>{viewModel?.invoiceDetailResponse?.stationLongitude}</Descriptions.Item>*/}
             </Descriptions>
                     <Divider >{i18next.t("InvoiceDetails.Section.Photos")}</Divider>
                 <Descriptions bordered>
@@ -91,6 +91,7 @@ const InvoiceDetail: React.FC<InvoiceDetailProps> = inject(Stores.invoiceDetailS
                         />
                     </Descriptions.Item>
                 </Descriptions>
+
                 </div>
                 : <Row gutter={[24, 16]}>
                     <Col offset={11} span={8}>

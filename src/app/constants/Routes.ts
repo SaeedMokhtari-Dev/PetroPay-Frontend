@@ -1,6 +1,8 @@
 export default
 {
     auth: "/auth",
+    login: "/auth/:roleType",
+
     resetPassword: "/auth/reset-password",
     changePassword: "/auth/change-password/:token",
     unknown: "/unknown",
@@ -41,9 +43,10 @@ export default
     addBranch: "/app/branch/add/new",
 
     // Car
-    car: "/app/car/:companyBranchId/list",
+    car: "/app/car",
+    branchCars: "/app/car/:companyBranchId/list",
     editCar: "/app/car/edit/:carId",
-    addCar: "/app/car/add/:companyBranchId",
+    addCar: "/app/car/add",
 
     //Bundle
     bundle: "/app/bundle",
@@ -51,6 +54,7 @@ export default
     addBundle: "/app/bundle/add",
 
     //Reports
+    accountBalance: '/app/accountBalance',
     invoiceSummary: '/app/invoiceSummary',
     invoiceDetail: '/app/invoiceDetail/:invoiceId',
     carBalance: '/app/carBalance',

@@ -6,6 +6,7 @@ export default class GetInvoiceSummaryResponse implements IDeserialize
 {
     items: InvoiceSummaryItem[] = [];
     totalCount: number;
+    sumInvoiceAmount: number;
 
     constructor() {
         makeAutoObservable(this);

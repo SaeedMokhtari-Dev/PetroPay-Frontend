@@ -21,6 +21,8 @@ import moment from 'moment';
 import Constants from 'app/constants/Constants';
 const {useEffect} = React;
 
+const { Option } = Select;
+
 interface EditRechargeBalanceProps {
     rechargeBalanceStore?: RechargeBalanceStore;
     match?: any;
@@ -32,6 +34,7 @@ const EditRechargeBalance: React.FC<EditRechargeBalanceProps> = inject(Stores.re
     const [dataFetched, setDataFetched] = React.useState(false);
 
     const [rechargeBalanceId, setRechargeBalanceId] = React.useState(0);
+    const [petropayAccountOptions, setPetropayAccountOptions] = React.useState([]);
 
     const [form] = Form.useForm();
 
@@ -46,8 +49,8 @@ const EditRechargeBalance: React.FC<EditRechargeBalanceProps> = inject(Stores.re
         },
     };
 
-    PaymentMethods.forEach(w =>{ w.title = i18next.t(w.title) });
-    const paymentMethodOptions = [...PaymentMethods];
+    /*PaymentMethods.forEach(w =>{ w.title = i18next.t(w.title) });
+    const paymentMethodOptions = [...PaymentMethods];*/
 
 
     useEffect(() => {
@@ -59,6 +62,8 @@ const EditRechargeBalance: React.FC<EditRechargeBalanceProps> = inject(Stores.re
     {
         rechargeBalanceStore.onRechargeBalanceEditPageLoad();
         let rechargeBalanceIdParam = +match.params?.rechargeBalanceId;
+        debugger;
+        await rechargeBalanceStore.listPetropayAccountViewModel.getPetropayAccountList();
 
         if(rechargeBalanceIdParam)
         {
@@ -69,6 +74,12 @@ const EditRechargeBalance: React.FC<EditRechargeBalanceProps> = inject(Stores.re
             rechargeBalanceStore.editRechargeBalanceViewModel.addRechargeBalanceRequest = new AddRechargeBalanceRequest();
             rechargeBalanceStore.editRechargeBalanceViewModel.detailRechargeBalanceResponse = new DetailRechargeBalanceResponse();
         }
+
+        let petropayAccountOptions = [];
+        for (let item of rechargeBalanceStore.listPetropayAccountViewModel.listPetropayAccountResponse.items) {
+            petropayAccountOptions.push(<Option key={item.key} value={item.title}>{item.title}</Option>);
+        }
+        setPetropayAccountOptions(petropayAccountOptions);
         setRechargeBalanceId(rechargeBalanceIdParam);
         setDataFetched(true);
     }
@@ -202,7 +213,10 @@ const EditRechargeBalance: React.FC<EditRechargeBalanceProps> = inject(Stores.re
                                    message: i18next.t("RechargeBalances.Validation.Message.rechargePaymentMethod.Required")
                                }
                            ]}>
-                    <Select options={paymentMethodOptions} showSearch={true} onChange={(e) => onSelectChanged(e, "rechargePaymentMethod")} />
+                    <Select style={{width: "100%", display:"block"}} defaultValue={viewModel?.detailRechargeBalanceResponse?.rechargePaymentMethod}
+                            showSearch={true} onChange={(e) => onSelectChanged(e, "rechargePaymentMethod")}>
+                        {petropayAccountOptions}
+                    </Select>
                 </Form.Item>
                     </Col>
                     <Col span={8}>

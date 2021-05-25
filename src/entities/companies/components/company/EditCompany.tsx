@@ -17,6 +17,7 @@ import "./EditCompany.scss";
 import Types from "../../../../app/constants/Types";
 import Countries from "../../../../app/constants/Countries";
 import Regions from "../../../../app/constants/Regions";
+import MaskedInput from "antd-mask-input";
 const {useEffect} = React;
 
 const { Option } = Select;
@@ -108,6 +109,13 @@ const EditCompany: React.FC<EditCompanyProps> = inject(Stores.companiesStore)(ob
         else
             companiesStore.editCompanyViewModel.addCompanyRequest[`${propName}`] = e;
     }
+    function onMaskChanged(e){
+        if(companyId)
+            companiesStore.editCompanyViewModel.editCompanyRequest[`${e.target.id}`] = e.target.value.replace(/\s+/g, '');
+        else
+            companiesStore.editCompanyViewModel.addCompanyRequest[`${e.target.id}`] = e.target.value.replace(/\s+/g, '');
+    }
+
     function onChanged(e){
         if(companyId)
             companiesStore.editCompanyViewModel.editCompanyRequest[`${e.target.id}`] = e.target.value;
@@ -308,7 +316,8 @@ const EditCompany: React.FC<EditCompanyProps> = inject(Stores.companiesStore)(ob
                                    message: i18next.t("Companies.Validation.Message.companyAdminPhone.Required")
                                }
                            ]}*/>
-                    <Input onChange={onChanged}/>
+                    {/*<Input onChange={onChanged}/>*/}
+                    <MaskedInput mask="+2 111 111 11111" onChange={onMaskChanged}/>
                 </Form.Item>
                     </Col>
                     <Col span={8}>
@@ -328,7 +337,7 @@ const EditCompany: React.FC<EditCompanyProps> = inject(Stores.companiesStore)(ob
                     <Input type={"email"} onChange={onChanged}/>
                 </Form.Item>
                     </Col>
-                    <Col span={8}>
+                    {/*<Col span={8}>
                 <Form.Item name="companyBalnce" initialValue={viewModel?.detailCompanyResponse?.companyBalnce}
                            key={"companyBalnce"}
                            label={i18next.t("Companies.Label.companyBalnce")}
@@ -337,10 +346,10 @@ const EditCompany: React.FC<EditCompanyProps> = inject(Stores.companiesStore)(ob
                                    required: true,
                                    message: i18next.t("Companies.Validation.Message.companyBalnce.Required")
                                }
-                           ]}*/>
+                           ]}
                     <Input type={"number"} onChange={onChanged}/>
                 </Form.Item>
-                    </Col>
+                    </Col>*/}
                     <Divider>{i18next.t("Companies.Section.LoginInformation")}</Divider>
                     <Col span={8}>
                         <Form.Item name="companyAdminUserName" initialValue={viewModel?.detailCompanyResponse?.companyAdminUserName}

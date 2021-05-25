@@ -9,7 +9,7 @@ import EditCarRequest from "../../handlers/edit/EditCarRequest";
 import DetailCarResponse from "../../handlers/detail/DetailCarResponse";
 import AddCarRequest from "../../handlers/add/AddCarRequest";
 import {
-    PlusOutlined, EyeInvisibleOutlined, EyeTwoTone
+    PlusOutlined, EyeInvisibleOutlined, EyeTwoTone, ClusterOutlined
 } from '@ant-design/icons';
 import history from "../../../../app/utils/History";
 import { PasswordInput } from 'antd-password-input-strength';
@@ -19,6 +19,11 @@ import ConsumptionMethods from "../../../../app/constants/ConsumptionMethods";
 import CarBrands from "../../../../app/constants/CarBrands";
 import CarTypeOfFuels from "../../../../app/constants/CarTypeOfFuels";
 import MaskedInput from 'antd-mask-input'
+import ListBranchViewModel from "../../../branches/view-models/ListBranchViewModel";
+import UserContext from "../../../../identity/contexts/UserContext";
+
+const { Option } = Select;
+
 const {useEffect} = React;
 
 interface EditCarProps {
@@ -33,6 +38,8 @@ const EditCar: React.FC<EditCarProps> = inject(Stores.carStore)(observer(({carSt
     const [carId, setCarId] = React.useState(0);
     const [switchDisabled, setSwitchDisabled] = React.useState(false);
     const [switchChecked, setSwitchChecked] = React.useState(false);
+    const [carIdNumberValue, setCarIdNumberValue] = React.useState("");
+    const [children, setChildren] = React.useState([]);
 
     const [form] = Form.useForm();
 
@@ -69,7 +76,8 @@ const EditCar: React.FC<EditCarProps> = inject(Stores.carStore)(observer(({carSt
         debugger;
         carStore.onCarEditPageLoad();
         let carIdParam = +match.params?.carId;
-
+        let listBranchViewModel: ListBranchViewModel = new ListBranchViewModel();
+        await listBranchViewModel.getBranchList(UserContext.info.id);
         if(carIdParam)
         {
             await carStore.editCarViewModel.getDetailCar(carIdParam);
@@ -84,6 +92,13 @@ const EditCar: React.FC<EditCarProps> = inject(Stores.carStore)(observer(({carSt
                 carStore.editCarViewModel.addCarRequest.companyBarnchId = +match.params.companyBranchId;
             }
         }
+        debugger;
+        let children = [];
+        for (let item of listBranchViewModel.listBranchResponse.items) {
+            children.push(<Option key={item.key} value={item.key}>{item.title}</Option>);
+        }
+
+        setChildren(children);
         setCarId(carIdParam);
         setDataFetched(true);
     }
@@ -94,6 +109,7 @@ const EditCar: React.FC<EditCarProps> = inject(Stores.carStore)(observer(({carSt
     if(!viewModel) return;
 
     async function onFinish(values: any) {
+
 
         if(carId)
         {
@@ -109,6 +125,12 @@ const EditCar: React.FC<EditCarProps> = inject(Stores.carStore)(observer(({carSt
 
     function onUnload() {
         carStore.onCarEditPageUnload();
+        setImageUrl("");
+        setDataFetched(false);
+        setCarId(0);
+        setSwitchDisabled(false);
+        setSwitchChecked(false);
+        setCarIdNumberValue("");
     }
 
     function onSelectChanged(e, propName){
@@ -118,19 +140,40 @@ const EditCar: React.FC<EditCarProps> = inject(Stores.carStore)(observer(({carSt
         else
             carStore.editCarViewModel.addCarRequest[`${propName}`] = e;
     }
+    function onMaskChanged(e) {
+        if(carId)
+            carStore.editCarViewModel.editCarRequest[`${e.target.id}`] = e.target.value.replace(/\s+/g, '');
+        else
+            carStore.editCarViewModel.addCarRequest[`${e.target.id}`] = e.target.value.replace(/\s+/g, '');
+    }
 
     function onChanged(e){
         if(carId) {
             carStore.editCarViewModel.editCarRequest[`${e.target.id}`] = e.target.value;
+            carStore.editCarViewModel.editCarRequest.carIdNumber1E = carStore.editCarViewModel?.editCarRequest?.carIdNumber1E?.replace(/\s+/g, '').replace(/_/g, "") ?? "";
+            carStore.editCarViewModel.editCarRequest.carIdText1E = carStore.editCarViewModel?.editCarRequest?.carIdText1E?.replace(/_/g, "") ?? "";
             carStore.editCarViewModel.editCarRequest.carIdNumber =
-                `${carStore.editCarViewModel?.editCarRequest?.carIdNumber1E} ${carStore.editCarViewModel?.editCarRequest?.carIdText1E}`;
+                `${carStore.editCarViewModel?.editCarRequest?.carIdNumber1E} ${carStore.editCarViewModel?.editCarRequest?.carIdText1A}`;
+            if(carStore?.editCarViewModel?.editCarRequest?.carIdNumber != undefined)
+                setCarIdNumberValue(carStore.editCarViewModel.editCarRequest.carIdNumber);
+            /*carStore.editCarViewModel.detailCarResponse.carIdNumber =
+                `${carStore.editCarViewModel?.editCarRequest?.carIdNumber1E?.replace(/\s+/g, '').replace(/_/g, "")} ${carStore.editCarViewModel?.editCarRequest?.carIdText1E?.replace(/\s+/g, '').replace(/_/g, "")}`;*/
         }
         else {
             carStore.editCarViewModel.addCarRequest[`${e.target.id}`] = e.target.value;
 
+            carStore.editCarViewModel.addCarRequest.carIdNumber1E = carStore.editCarViewModel?.addCarRequest?.carIdNumber1E?.replace(/\s+/g, '').replace(/_/g, "") ?? "";
+            carStore.editCarViewModel.addCarRequest.carIdText1E = carStore.editCarViewModel?.addCarRequest?.carIdText1E?.replace(/_/g, "") ?? "";
+
             carStore.editCarViewModel.addCarRequest.carIdNumber =
-                `${carStore.editCarViewModel?.addCarRequest?.carIdNumber1E} ${carStore.editCarViewModel?.addCarRequest?.carIdText1E}`;
+                `${carStore.editCarViewModel?.addCarRequest?.carIdNumber1E} ${carStore.editCarViewModel?.addCarRequest?.carIdText1A}`;
+            if(carStore.editCarViewModel?.addCarRequest?.carIdNumber  != undefined)
+                setCarIdNumberValue(carStore.editCarViewModel.addCarRequest.carIdNumber);
+            /*carStore.editCarViewModel.detailCarResponse.carIdNumber =
+                `${carStore.editCarViewModel?.addCarRequest?.carIdNumber1E?.replace(/\s+/g, '').replace(/_/g, "")} ${carStore.editCarViewModel?.addCarRequest?.carIdText1E?.replace(/\s+/g, '').replace(/_/g, "")}`;*/
         }
+
+
     }
     function onWorkAllDaysSwitchChange(e){
         const boolProps = ["saturday", "sunday", "monday", "tuesday", "wednesday", "thursday", "friday"];
@@ -201,6 +244,7 @@ const EditCar: React.FC<EditCarProps> = inject(Stores.carStore)(observer(({carSt
         });
         return true;
     }
+    const regex = /[ء-ي]{1} [ء-ي]{1} [ء-ي]{1}/gm;
     const uploadButton = (
         /*<div>
         {!viewModel?.detailCompanyResponse?.companyCommercialPhoto &&
@@ -217,6 +261,10 @@ const EditCar: React.FC<EditCarProps> = inject(Stores.carStore)(observer(({carSt
 
         return true;
     }
+
+
+
+
     return (
         <div>
             <PageHeader
@@ -231,6 +279,25 @@ const EditCar: React.FC<EditCarProps> = inject(Stores.carStore)(observer(({carSt
                   key={"carForm"}
                  scrollToFirstError>
                 <Row gutter={[24, 16]}>
+                    <Col span={8}>
+                        <Form.Item name="companyBarnchId" initialValue={viewModel?.detailCarResponse?.companyBarnchId}
+                                   key={"companyBarnchId"}
+                                   label={i18next.t("Cars.Label.companyBarnchId")}
+                                   rules={[
+                                       {
+                                           required: true,
+                                           message: i18next.t("Cars.Validation.Message.companyBarnchId.Required")
+                                       }
+                                   ]}>
+                            <Select
+                                style={{ width: "100%" }}
+                                onChange={(e) => onSelectChanged(e, 'companyBarnchId')}
+                            >
+                                {children}
+                            </Select>
+                        </Form.Item>
+                    </Col>
+                    <Divider>{i18next.t("Cars.Section.CarInformation")}</Divider>
                     <Col span={6}>
                         <Form.Item name="carIdNumber1E" initialValue={viewModel?.detailCarResponse?.carIdNumber1E}
                                    key={"carIdNumber1E"}
@@ -266,23 +333,19 @@ const EditCar: React.FC<EditCarProps> = inject(Stores.carStore)(observer(({carSt
                                        {
                                            required: true,
                                            message: i18next.t("Cars.Validation.Message.carIdText1A.Required")
+                                       },
+                                       {
+                                           required: true,
+                                           pattern: regex,
+                                           message: i18next.t("Cars.Validation.Message.carIdText1A.Valid")
                                        }
                                    ]}>
-                            <Input dir={"rtl"} maxLength={6} onChange={onChanged}/>
+                            <Input placeholder={"س ي ج"} dir={"rtl"} maxLength={6} onChange={onChanged}/>
                         </Form.Item>
                     </Col>
                     <Col span={6}>
-                        <Form.Item name="carIdNumber" initialValue={viewModel?.detailCarResponse?.carIdNumber}
-                                   key={"carIdNumber"}
-                                   label={i18next.t("Cars.Label.carIdNumber")}
-                                   rules={[
-                                       {
-                                           required: true,
-                                           message: i18next.t("Cars.Validation.Message.carIdNumber.Required")
-                                       }
-                                   ]}>
-                            <Input onChange={onChanged}/>
-                        </Form.Item>
+                            <span>{i18next.t("Cars.Label.carIdNumber")}</span>
+                            <h2>{carIdNumberValue != "undefined undefined" ? carIdNumberValue : ""}</h2>
                     </Col>
                     <Col span={8}>
                 <Form.Item name="consumptionType" initialValue={viewModel?.detailCarResponse?.consumptionType}
@@ -408,7 +471,8 @@ const EditCar: React.FC<EditCarProps> = inject(Stores.carStore)(observer(({carSt
                         <Form.Item name="carDriverPhoneNumber" initialValue={viewModel?.detailCarResponse?.carDriverPhoneNumber}
                                    key={"carDriverPhoneNumber"}
                                    label={i18next.t("Cars.Label.carDriverPhoneNumber")}>
-                            <Input onChange={onChanged}/>
+                            {/*<Input onChange={onChanged}/>*/}
+                            <MaskedInput mask="+2 111 111 11111" onChange={onMaskChanged}/>
                         </Form.Item>
                     </Col>
                     <Col span={8}>

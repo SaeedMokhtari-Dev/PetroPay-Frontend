@@ -28,6 +28,7 @@ export default class GetCarViewModel {
 
     addCarRequest: AddCarRequest;
     addedSuccessfully: boolean;
+    getCarsRequest: GetCarRequest;
 
     activeCarRequest: ActiveCarRequest = new ActiveCarRequest();
 
@@ -61,7 +62,7 @@ export default class GetCarViewModel {
             this.isProcessing = false;
         }
     }
-    public async deleteCar(key: number, companyBranchId: number)
+    public async deleteCar(key: number, getCarsRequest: GetCarRequest)
     {
         try
         {
@@ -73,7 +74,7 @@ export default class GetCarViewModel {
             if(response && response.success)
             {
                 message.success(getLocalizedString(response.message));
-                await this.getAllCar(new GetCarRequest(companyBranchId, this.pageSize, this.pageIndex));
+                await this.getAllCar(getCarsRequest);
             }
             else{
                 this.errorMessage = getLocalizedString(response.message);
@@ -91,7 +92,7 @@ export default class GetCarViewModel {
             this.isProcessing = false;
         }
     }
-    public async activeCar(request: ActiveCarRequest, companyBranchId: number)
+    public async activeCar(request: ActiveCarRequest, getCarsRequest: GetCarRequest)
     {
         try
         {
@@ -102,7 +103,7 @@ export default class GetCarViewModel {
             if(response && response.success)
             {
                 message.success(getLocalizedString(response.message));
-                await this.getAllCar(new GetCarRequest(companyBranchId, this.pageSize, this.pageIndex));
+                await this.getAllCar(getCarsRequest);
             }
             else{
                 this.errorMessage = getLocalizedString(response.message);

@@ -19,6 +19,8 @@ import DetailSubscriptionResponse from "../handlers/detail/DetailSubscriptionRes
 import SubscriptionStore from "../stores/SubscriptionStore";
 import AddCarRequest from "../../cars/handlers/add/AddCarRequest";
 import AddCarHandler from "../../cars/handlers/add/AddCarHandler";
+import CarAddSubscriptionRequest from "../handlers/carAdd/CarAddSubscriptionRequest";
+import CarAddSubscriptionHandler from "../handlers/carAdd/CarAddSubscriptionHandler";
 
 export default class EditSubscriptionViewModel
 {
@@ -31,6 +33,8 @@ export default class EditSubscriptionViewModel
     detailSubscriptionResponse: DetailSubscriptionResponse;
     addSubscriptionRequest: AddSubscriptionRequest;
     editSubscriptionRequest: EditSubscriptionRequest;
+
+    carAddSubscriptionRequest: CarAddSubscriptionRequest;
 
     constructor(public subscriptionStore: SubscriptionStore) {
         makeAutoObservable(this);
@@ -100,14 +104,14 @@ export default class EditSubscriptionViewModel
             this.isProcessing = false;
         }
     }
-    public async addCarSubscription(request: AddCarRequest)
+    public async addCarSubscription(request: CarAddSubscriptionRequest)
     {
         try
         {
             this.errorMessage = "";
             this.isProcessing = true;
 
-            let response = await AddCarHandler.add(request);
+            let response = await CarAddSubscriptionHandler.carAdd(request);
 
             if(response && response.success)
             {

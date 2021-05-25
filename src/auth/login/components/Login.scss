@@ -9,20 +9,11 @@ Signup
 {
   width: 100%;
   padding: 30px 50px;
+  display: flex;
+  align-items: center;
 
-  .radio-role{
-
-
-    h2 {
-      text-align: center;
-    }
-
-    .ant-radio-wrapper{
-      padding: 30px;
-    }
-    .ant-radio{
-      display: none;
-    }
+  a {
+    margin-right: 10%;
   }
 }
 

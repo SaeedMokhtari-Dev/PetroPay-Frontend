@@ -3,7 +3,9 @@ import { makeAutoObservable } from "mobx";
 export default class GetInvoiceSummaryRequest
 {
     carIdNumber: string;
+    carId: number;
     companyBranchName: string;
+    companyBranchId: number;
     invoiceDataTimeFrom: string;
     invoiceDataTimeTo: string;
     serviceDescription: string;

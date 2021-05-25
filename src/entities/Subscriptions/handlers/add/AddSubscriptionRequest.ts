@@ -6,6 +6,9 @@ export default class AddSubscriptionRequest
     bundlesId: number;
     subscriptionCarNumbers: number;
     subscriptionPaymentMethod: string;
+    payFromCompanyBalance: boolean;
+    petropayAccountId: number;
+
     subscriptionType: string;
     subscriptionStartDate: string;
     subscriptionEndDate: string;

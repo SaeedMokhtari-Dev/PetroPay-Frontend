@@ -1,5 +1,5 @@
 import BundleItem from "../handlers/get/BundleItem";
-import AddBundleRequest from "../handlers/add/AddBundleRequest";
+
 import BundlesStore from "../stores/BundlesStore";
 import {makeAutoObservable} from "mobx";
 import GetBundleRequest from "../handlers/get/GetBundleRequest";
@@ -21,9 +21,6 @@ export default class GetBundleViewModel {
     pageIndex: number;
     pageSize: number;
 
-    addBundleRequest: AddBundleRequest = new AddBundleRequest();
-    addedSuccessfully: boolean;
-
     constructor(public bundlesStore: BundlesStore) {
         makeAutoObservable(this);
 
@@ -41,14 +38,11 @@ export default class GetBundleViewModel {
                 let items = result.items;
                 this.bundleList = items;
                 this.totalSize = result.totalCount;
-                this.addedSuccessfully = true;
             } else {
                 this.errorMessage = getLocalizedString(response.message);
-                this.addedSuccessfully = false;
             }
         } catch (e) {
             this.errorMessage = i18next.t('Bundles.Error.Get.Message');
-            this.addedSuccessfully = false;
             log.error(e);
         } finally {
             this.isProcessing = false;

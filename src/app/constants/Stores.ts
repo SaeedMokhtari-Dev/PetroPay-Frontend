@@ -20,4 +20,5 @@ export default {
     stationSaleStore: 'stationSaleStore',
     stationStatementStore: 'stationStatementStore',
     carTransactionStore: 'carTransactionStore',
+    accountBalanceStore: 'accountBalanceStore',
 }

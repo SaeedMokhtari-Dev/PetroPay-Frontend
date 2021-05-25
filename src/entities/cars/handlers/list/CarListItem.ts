@@ -3,8 +3,10 @@ import {makeAutoObservable} from "mobx";
 
 export default class CarListItem implements IDeserialize
 {
-    key: string;
-    title: string;
+    key: number;
+    carNumber: string;
+    branchName: string;
+    disabled: boolean;
 
     constructor() {
         makeAutoObservable(this);

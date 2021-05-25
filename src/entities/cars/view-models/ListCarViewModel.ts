@@ -21,6 +21,7 @@ export default class ListCarViewModel {
 
     public async getCarList(companyId?: number)  {
         try {
+            debugger;
             this.isProcessing = true;
 
             let request = new ListCarRequest(companyId);
@@ -28,9 +29,10 @@ export default class ListCarViewModel {
 
             if (response && response.success) {
 
+                this.listCarResponse = new ListCarResponse();
                 let result = response.data;
                 //let items = result.items;
-                this.listCarResponse = result;
+                this.listCarResponse.items = result;
 
                 return this.listCarResponse;
             } else {

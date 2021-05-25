@@ -44,13 +44,15 @@ import StationReportList from "../../reports/StationReports/components/list/Stat
 import StationSaleList from "../../reports/StationSales/components/list/StationSaleList";
 import StationStatementList from "../../reports/StationStatements/components/list/StationStatementList";
 import CarTransactionList from "../../reports/CarTransactions/components/list/CarTransactionList";
+import AccountBalanceList from "../../reports/AccountBalances/components/list/AccountBalanceList";
+import CarAddSubscription from "../../entities/Subscriptions/components/carAdd/CarAddSubscription";
 
 const App: React.FC = () =>
 {
     let antLang = en_US;
     let dir: DirectionType = 'ltr';
     const language = localStorage.getItem("currentLanguage");
-    if(language != 'en') {
+    if(language && language != 'en') {
         antLang = ar_EG;
         dir = 'rtl';
     }
@@ -66,6 +68,7 @@ const App: React.FC = () =>
                         <Route path={Routes.auth}>
                             <Switch>
                                 <AuthRoute exact path={Routes.auth} component={Login} />
+                                <Route exact path={Routes.login} component={Login} />
                                 <Route exact path={Routes.resetPassword} component={ResetPassword} />
                                 <Route exact path={Routes.changePassword} component={ChangePassword} />
 
@@ -102,6 +105,7 @@ const App: React.FC = () =>
                                     <Route exact roles={[RoleType.supplier]} path={Routes.addStationUser} component={EditStationUser} />
 
                                     <Route exact roles={[RoleType.customer]} path={Routes.car} component={CarList} />
+                                    <Route exact roles={[RoleType.customer]} path={Routes.branchCars} component={CarList} />
                                     <Route exact roles={[RoleType.customer]} path={Routes.editCar} component={EditCar} />
                                     <Route exact roles={[RoleType.customer]} path={Routes.addCar} component={EditCar} />
 
@@ -112,6 +116,7 @@ const App: React.FC = () =>
                                     <Route exact roles={[RoleType.customer]} path={Routes.subscription} component={SubscriptionList} />
                                     <Route exact roles={[RoleType.customer]} path={Routes.editSubscription} component={EditSubscription} />
                                     <Route exact roles={[RoleType.customer]} path={Routes.addSubscription} component={EditSubscription} />
+                                    <Route exact roles={[RoleType.customer]} path={Routes.carAddSubscription} component={CarAddSubscription} />
 
                                     {/* Reports */}
                                     <Route exact roles={[RoleType.customer]} path={Routes.invoiceSummary} component={InvoiceSummaryList} />
@@ -122,6 +127,8 @@ const App: React.FC = () =>
                                     <Route exact roles={[RoleType.supplier]} path={Routes.stationReport} component={StationReportList} />
                                     <Route exact roles={[RoleType.supplier]} path={Routes.stationSale} component={StationSaleList} />
                                     <Route exact roles={[RoleType.supplier]} path={Routes.stationStatement} component={StationStatementList} />
+
+                                    <Route exact roles={[RoleType.admin]} path={Routes.accountBalance} component={AccountBalanceList} />
 
                                     <Route component={NotFoundPage} />
                                 </Switch>

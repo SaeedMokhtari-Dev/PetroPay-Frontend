@@ -81,6 +81,8 @@ const EditBundle: React.FC<EditBundleProps> = inject(Stores.bundlesStore)(observ
 
     function onUnload() {
         bundlesStore.onBundleEditPageUnload();
+        setDataFetched(false);
+        setBundleId(0);
     }
     function onChanged(e){
         if(bundleId)

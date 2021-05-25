@@ -13,6 +13,7 @@ import {
 import history from "../../../../app/utils/History";
 import StationUserStore from "../../stores/StationUserStore";
 import { PasswordInput } from 'antd-password-input-strength';
+import { MaskedInput } from 'antd-mask-input';
 const {useEffect} = React;
 
 interface EditStationUserProps {
@@ -90,6 +91,12 @@ const EditStationUser: React.FC<EditStationUserProps> = inject(Stores.stationUse
         else
             stationUserStore.editStationUserViewModel.addStationUserRequest[`${e.target.id}`] = e.target.value;
     }
+    function onMaskChanged(e){
+        if(stationUserId)
+            stationUserStore.editStationUserViewModel.editStationUserRequest[`${e.target.id}`] = e.target.value.replace(/\s+/g, '');
+        else
+            stationUserStore.editStationUserViewModel.addStationUserRequest[`${e.target.id}`] = e.target.value.replace(/\s+/g, '');
+    }
     /*function onSwitchChange(e){
         if(stationUserId)
             stationUserStore.editStationUserViewModel.editStationUserRequest.companyStationUserActiva = e;
@@ -134,7 +141,8 @@ const EditStationUser: React.FC<EditStationUserProps> = inject(Stores.stationUse
                                    message: i18next.t("StationUsers.Validation.Message.stationWorkerPhone.Required")
                                }
                            ]}>
-                    <Input onChange={onChanged}/>
+                    {/*<Input onChange={onChanged}/>*/}
+                    <MaskedInput mask="+2 111 111 11111" onChange={onMaskChanged}/>
                 </Form.Item>
                     </Col>
                     <Divider>{i18next.t("Companies.Section.LoginInformation")}</Divider>

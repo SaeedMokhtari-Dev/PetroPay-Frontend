@@ -13,6 +13,7 @@ import {
 } from '@ant-design/icons';
 import history from "../../../../app/utils/History";
 import { PasswordInput } from 'antd-password-input-strength';
+import MaskedInput from "antd-mask-input";
 const {useEffect} = React;
 
 interface EditBranchProps {
@@ -85,6 +86,14 @@ const EditBranch: React.FC<EditBranchProps> = inject(Stores.branchStore)(observe
 
     function onUnload() {
         branchStore.onBranchEditPageUnload();
+        setDataFetched(false);
+        setBranchId(0);
+    }
+    function onMaskChanged(e) {
+        if(branchId)
+            branchStore.editBranchViewModel.editBranchRequest[`${e.target.id}`] = e.target.value.replace(/\s+/g, '');
+        else
+            branchStore.editBranchViewModel.addBranchRequest[`${e.target.id}`] = e.target.value.replace(/\s+/g, '');
     }
     function onChanged(e){
         if(branchId)
@@ -158,7 +167,8 @@ const EditBranch: React.FC<EditBranchProps> = inject(Stores.branchStore)(observe
                 <Form.Item name="companyBranchAdminPhone" initialValue={viewModel?.detailBranchResponse?.companyBranchAdminPhone}
                            key={"companyBranchAdminPhone"}
                            label={i18next.t("Branches.Label.companyBranchAdminPhone")}>
-                    <Input onChange={onChanged}/>
+                    {/*<Input onChange={onChanged}/>*/}
+                    <MaskedInput mask="+2 111 111 11111" onChange={onMaskChanged}/>
                 </Form.Item>
                     </Col>
                     <Col span={8}>

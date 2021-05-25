@@ -8,14 +8,18 @@ import {withTranslation} from "react-i18next";
 import Routes from "app/constants/Routes";
 import { Link } from "react-router-dom";
 import history from "../../../app/utils/History";
+import {useParams} from "react-router-dom";
 import { EyeInvisibleOutlined, EyeTwoTone, UserOutlined, LockOutlined } from '@ant-design/icons';
 
 interface LoginProps {
-    authStore?: AuthStore
+    authStore?: AuthStore,
+    match?: any
 }
 
-const Login: React.FC<LoginProps> = inject('authStore')(observer(({authStore}) =>
+const Login: React.FC<LoginProps> = inject('authStore')(observer(({authStore, match}) =>
 {
+    let params = useParams();
+
     useEffect(() =>
     {
         onLoad();
@@ -26,6 +30,19 @@ const Login: React.FC<LoginProps> = inject('authStore')(observer(({authStore}) =
     {
         /*document.body.classList.add('auth-page');*/
         authStore.onLoginPageLoad();
+        debugger;
+        if(params?.roleType){
+            if(match.params.roleType.toLowerCase() == 'customer'){
+                authStore.loginViewModel.roleType = 1;
+            }
+            if(match.params.roleType.toLowerCase() == 'petrol-station'){
+                authStore.loginViewModel.roleType = 10;
+            }
+            if(match.params.roleType.toLowerCase() == 'admin'){
+                authStore.loginViewModel.roleType = 100;
+            }
+
+        }
     }
 
     function onUnload()
@@ -76,7 +93,25 @@ const Login: React.FC<LoginProps> = inject('authStore')(observer(({authStore}) =
             {!viewModel?.roleType && (
                 <div className={"mainContent"}>
                     <div className={"role-type"}>
-                        <Radio.Group onChange={onRoleTypeChanged} className={"radio-role"}>
+                        <Link to={"/auth/customer"}>
+                            <img src="/images/customer.png" className="logo" alt="logo"/>
+                            <h2 style={{textAlign: "center"}}>
+                                {i18next.t("Authentication.RoleType.Customer")}
+                            </h2>
+                        </Link>
+                        <Link to={"/auth/petrol-station"}>
+                            <img src="/images/petro-station.png" className="logo" alt="logo"/>
+                            <h2 style={{textAlign: "center"}}>
+                                {i18next.t("Authentication.RoleType.Supplier")}
+                            </h2>
+                        </Link>
+                        <Link to={"/auth/admin"}>
+                            <img src="/images/admin.png" className="logo" alt="logo"/>
+                            <h2 style={{textAlign: "center"}}>
+                                {i18next.t("Authentication.RoleType.Admin")}
+                            </h2>
+                        </Link>
+                        {/*<Radio.Group onChange={onRoleTypeChanged} className={"radio-role"}>
                             <Radio  value={1}>
                                 <img src="/images/customer.png" className="logo" alt="logo"/>
                                 <h2 style={{textAlign: "center"}}>
@@ -95,7 +130,7 @@ const Login: React.FC<LoginProps> = inject('authStore')(observer(({authStore}) =
                                     {i18next.t("Authentication.RoleType.Admin")}
                                 </h2>
                             </Radio>
-                        </Radio.Group>
+                        </Radio.Group>*/}
                     </div>
                 </div>)}
             {viewModel?.roleType && (
@@ -104,7 +139,7 @@ const Login: React.FC<LoginProps> = inject('authStore')(observer(({authStore}) =
                         <img src="/images/petro-pay-logo.png" className="logo" alt="logo"/>
                     </div>
                     <div className="signup-classic">
-                        <h1>Welcome {viewModel?.getRoleTitle()}</h1>
+                        <h1>{i18next.t("General.HeaderMenu.User")} {i18next.t(`Authentication.RoleType.${viewModel?.getRoleTitle()}`)}</h1>
                         <Form layout="vertical" onFinish={onFinish} >
                             <Form.Item initialValue={viewModel.username} name="username" label={i18next.t("Authentication.Label.Username")} required={false}
                                        rules={[
@@ -113,7 +148,7 @@ const Login: React.FC<LoginProps> = inject('authStore')(observer(({authStore}) =
                                                message: i18next.t("Authentication.Validation.Message.Username.Required")
                                            }
                                        ]}>
-                                <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Username" onChange={onUsernameChanged} className="text-input"/>
+                                <Input prefix={<UserOutlined className="site-form-item-icon" />} onChange={onUsernameChanged} className="text-input"/>
                             </Form.Item>
                             <Form.Item initialValue={viewModel.password} name="password" label={i18next.t("Authentication.Label.Password")} required={false}
                                        rules={[

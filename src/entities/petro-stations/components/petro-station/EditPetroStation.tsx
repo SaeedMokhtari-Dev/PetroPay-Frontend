@@ -13,6 +13,7 @@ import {
 import history from "../../../../app/utils/History";
 import PetroStationStore from "../../stores/PetroStationStore";
 import { PasswordInput } from 'antd-password-input-strength';
+import MaskedInput from "antd-mask-input";
 const {useEffect} = React;
 
 interface EditPetroStationProps {
@@ -89,6 +90,12 @@ const EditPetroStation: React.FC<EditPetroStationProps> = inject(Stores.petroSta
         else
             petroStationStore.editPetroStationViewModel.addPetroStationRequest[`${e.target.id}`] = e.target.value;
     }
+    function onMaskChanged(e){
+        if(petroStationId)
+            petroStationStore.editPetroStationViewModel.editPetroStationRequest[`${e.target.id}`] = e.target.value.replace(/\s+/g, '');
+        else
+            petroStationStore.editPetroStationViewModel.addPetroStationRequest[`${e.target.id}`] = e.target.value.replace(/\s+/g, '');
+    }
     function onSwitchChange(e){
         if(petroStationId)
             petroStationStore.editPetroStationViewModel.editPetroStationRequest.stationDiesel = e;
@@ -163,7 +170,8 @@ const EditPetroStation: React.FC<EditPetroStationProps> = inject(Stores.petroSta
                 <Form.Item name="stationPhone" initialValue={viewModel?.detailPetroStationResponse?.stationPhone}
                            key={"stationPhone"}
                            label={i18next.t("PetroStations.Label.stationPhone")}>
-                    <Input onChange={onChanged}/>
+                    {/*<Input onChange={onChanged}/>*/}
+                    <MaskedInput mask="+2 111 111 11111" onChange={onMaskChanged}/>
                 </Form.Item>
                     </Col>
                     <Col span={8}>
@@ -196,13 +204,13 @@ const EditPetroStation: React.FC<EditPetroStationProps> = inject(Stores.petroSta
                             <Switch onChange={onSwitchChange} defaultChecked={viewModel?.detailPetroStationResponse?.stationDiesel} />
                         </Form.Item>
                     </Col>
-                <Col span={8}>
+                {/*<Col span={8}>
                     <Form.Item name="stationBalance" initialValue={viewModel?.detailPetroStationResponse?.stationBalance}
                                key={"stationBalance"}
                                label={i18next.t("PetroStations.Label.stationBalance")}>
                         <Input type={"number"} onChange={onChanged}/>
                     </Form.Item>
-                </Col>
+                </Col>*/}
 
                     <Col span={8}>
                         <Form.Item name="stationEmail" initialValue={viewModel?.detailPetroStationResponse?.stationEmail}

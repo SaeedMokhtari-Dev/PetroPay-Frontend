@@ -1,4 +1,5 @@
 import IDeserialize from "app/interfaces/deserialize";
+import SubscriptionCar from "./SubscriptionCar";
 
 export default class DetailSubscriptionResponse implements IDeserialize
 {
@@ -8,6 +9,9 @@ export default class DetailSubscriptionResponse implements IDeserialize
     bundlesId: number;
     subscriptionCarNumbers: number;
     subscriptionPaymentMethod: string;
+    payFromCompanyBalance: boolean;
+    petropayAccountId: number;
+
     subscriptionType: string;
     subscriptionStartDate: string;
     subscriptionEndDate: string;
@@ -16,7 +20,7 @@ export default class DetailSubscriptionResponse implements IDeserialize
     paymentReferenceNumber: string;
     subscriptionDate: string;
 
-    SubscriptionCarIds: number[];
+    subscriptionCars: SubscriptionCar[];
 
     deserialize(input: any): this
     {

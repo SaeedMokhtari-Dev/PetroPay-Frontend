@@ -51,6 +51,9 @@ const Sidebar: React.FC<SidebarProps> = inject(Stores.pageStore)(observer(({page
             <Link to={Routes.subscription}>{i18next.t('Subscriptions.Menu.Title')}</Link>
         </Menu.Item>
         <SubMenu key="reports" icon={<ReadOutlined />} title={i18next.t('General.Menu.Reports')}>
+            <Menu.Item key="accountBalance" icon={<DollarOutlined />}>
+                <Link to={Routes.accountBalance}>{i18next.t('AccountBalances.Menu.Title')}</Link>
+            </Menu.Item>
             <Menu.Item key="invoiceSummary" icon={<BookOutlined />}>
                 <Link to={Routes.invoiceSummary}>{i18next.t('InvoiceSummaries.Menu.Title')}</Link>
             </Menu.Item>
@@ -69,7 +72,6 @@ const Sidebar: React.FC<SidebarProps> = inject(Stores.pageStore)(observer(({page
             <Menu.Item key="stationStatement" icon={<ShopOutlined />}>
                 <Link to={Routes.stationStatement}>{i18next.t('StationStatements.Menu.Title')}</Link>
             </Menu.Item>
-
         </SubMenu>
     </Menu>)
     const customerMenu= (<Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
@@ -78,6 +80,9 @@ const Sidebar: React.FC<SidebarProps> = inject(Stores.pageStore)(observer(({page
         </Menu.Item>
         <Menu.Item key="branch" icon={<ShopOutlined />}>
             <Link to={Routes.branch}>{i18next.t('Branches.Menu.Title')}</Link>
+        </Menu.Item>
+        <Menu.Item key="car" icon={<CarOutlined />}>
+            <Link to={Routes.car}>{i18next.t('Cars.Menu.Title')}</Link>
         </Menu.Item>
         <Menu.Item key="rechargeBalance" icon={<DollarOutlined />}>
             <Link to={Routes.rechargeBalance}>{i18next.t('RechargeBalances.Menu.Title')}</Link>

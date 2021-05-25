@@ -1,15 +1,17 @@
 import React from 'react';
 import {inject, observer} from "mobx-react";
 import Stores from "app/constants/Stores";
-import {Button, Col,
+import {
+    Button, Col,
     DatePicker,
-    Descriptions,
-    Divider, Form, Input, PageHeader, Row, Select, Skeleton, Spin} from "antd";
+    Modal,
+    Divider, Form, Input, InputNumber, PageHeader, Radio, Row, Select, Skeleton, Space, Spin, Table
+} from "antd";
 import i18next from "i18next";
 import DetailSubscriptionResponse from "../../handlers/detail/DetailSubscriptionResponse";
 import AddSubscriptionRequest from "../../handlers/add/AddSubscriptionRequest";
 import {
-    PlusOutlined, EyeInvisibleOutlined, EyeTwoTone
+    ExclamationCircleOutlined, EyeInvisibleOutlined, EyeTwoTone
 } from '@ant-design/icons';
 import history from "../../../../app/utils/History";
 import PaymentMethods from "../../../../app/constants/PaymentMethods";
@@ -18,8 +20,11 @@ import SubscriptionTypes from 'app/constants/SubscriptionTypes';
 import SubscriptionStore from "../../stores/SubscriptionStore";
 import CalculateSubscriptionRequest from "../../handlers/calculate/CalculateSubscriptionRequest";
 import "./EditSubscription.scss";
+import BundlesColumns from "../../../bundles/components/list/BundlesColumns";
+import BundleItem from "../../../bundles/handlers/get/BundleItem";
 const {useEffect} = React;
 const { RangePicker } = DatePicker;
+const { Option } = Select;
 
 interface EditSubscriptionProps {
     subscriptionStore?: SubscriptionStore;
@@ -40,6 +45,11 @@ const EditSubscription: React.FC<EditSubscriptionProps> = inject(Stores.subscrip
     const [dataFetched, setDataFetched] = React.useState(false);
 
     const [subscriptionId, setSubscriptionId] = React.useState(0);
+    const [bundleId, setBundleId] = React.useState(0);
+    const [carNumbersMinimum, setCarNumbersMinimum] = React.useState(0);
+    const [carNumbersMaximum, setCarNumbersMaximum] = React.useState(0);
+    const [payFromCompanyBalance, setPayFromCompanyBalance] = React.useState(true);
+    const [petropayAccountOptions, setPetropayAccountOptions] = React.useState([]);
 
     const [form] = Form.useForm();
 
@@ -54,8 +64,13 @@ const EditSubscription: React.FC<EditSubscriptionProps> = inject(Stores.subscrip
         },
     };
 
-    PaymentMethods.forEach(w =>{ w.title = i18next.t(w.title) });
-    const paymentMethodOptions = [...PaymentMethods];
+    BundlesColumns.forEach(w => {
+        w.title = i18next.t(w.title)
+    });
+    const columns: any[] = [...BundlesColumns];
+    columns.pop();
+    /*PaymentMethods.forEach(w =>{ w.title = i18next.t(w.title) });
+    const paymentMethodOptions = [...PaymentMethods];*/
 
     SubscriptionTypes.forEach(w =>{ w.title = i18next.t(w.title) });
     const subscriptionTypeOptions = [...SubscriptionTypes];
@@ -69,6 +84,8 @@ const EditSubscription: React.FC<EditSubscriptionProps> = inject(Stores.subscrip
     {
 
         subscriptionStore.onSubscriptionEditPageLoad();
+        await subscriptionStore.listBundleViewModel.getAllBundles();
+        await subscriptionStore.listPetropayAccountViewModel.getPetropayAccountList();
         let subscriptionIdParam = +match.params?.subscriptionId;
 
         if(subscriptionIdParam)
@@ -79,36 +96,59 @@ const EditSubscription: React.FC<EditSubscriptionProps> = inject(Stores.subscrip
             setSubscriptionType(subscriptionStore.editSubscriptionViewModel?.detailSubscriptionResponse?.subscriptionType);
             setStartDatePickerDefault(moment(subscriptionStore.editSubscriptionViewModel?.detailSubscriptionResponse?.subscriptionStartDate));
             setEndDatePickerDefault(moment(subscriptionStore.editSubscriptionViewModel?.detailSubscriptionResponse?.subscriptionEndDate));
+
+            setBundleId(subscriptionStore.editSubscriptionViewModel?.detailSubscriptionResponse?.bundlesId);
+            setPayFromCompanyBalance(subscriptionStore.editSubscriptionViewModel?.detailSubscriptionResponse?.payFromCompanyBalance);
         }
         else{
             subscriptionStore.editSubscriptionViewModel.addSubscriptionRequest = new AddSubscriptionRequest();
             subscriptionStore.editSubscriptionViewModel.detailSubscriptionResponse = new DetailSubscriptionResponse();
+            setPayFromCompanyBalance(true);
         }
         setSubscriptionId(subscriptionIdParam);
+
+        debugger;
+        let petropayAccountOptions = [];
+        for (let item of subscriptionStore.listPetropayAccountViewModel.listPetropayAccountResponse.items) {
+            petropayAccountOptions.push(<Option key={item.key} value={item.key}>{item.title}</Option>);
+        }
+        setPetropayAccountOptions(petropayAccountOptions);
+
         setDataFetched(true);
+
     }
 
     let viewModel = subscriptionStore.editSubscriptionViewModel;
 
     if(!viewModel) return;
 
-
-
     async function onFinish(values: any) {
-
+        debugger;
+        viewModel.errorMessage = "";
+        if(!bundleId)
+        {
+            viewModel.errorMessage = i18next.t("Subscriptions.Validation.Message.bundlesId.Required");
+            return;
+        }
         if(subscriptionId)
         {
+            if(!viewModel.editSubscriptionRequest.payFromCompanyBalance && !viewModel.editSubscriptionRequest.petropayAccountId){
+                viewModel.errorMessage = i18next.t("Subscriptions.Validation.Message.subscriptionPaymentMethod.Required");
+                return;
+            }
             await viewModel.editSubscription(viewModel.editSubscriptionRequest);
         }
         else
         {
+            if(!viewModel.addSubscriptionRequest.payFromCompanyBalance && !viewModel.addSubscriptionRequest.petropayAccountId){
+                viewModel.errorMessage = i18next.t("Subscriptions.Validation.Message.subscriptionPaymentMethod.Required");
+                return;
+            }
             await viewModel.addSubscription(viewModel.addSubscriptionRequest);
         }
         if(!viewModel.errorMessage)
             history.goBack();
     };
-
-
 
     function onUnload() {
         subscriptionStore.onSubscriptionEditPageUnload();
@@ -151,7 +191,14 @@ const EditSubscription: React.FC<EditSubscriptionProps> = inject(Stores.subscrip
     }
     async function calculate(){
         setSubscriptionCost(0);
+        if(!bundleId)
+        {
+            viewModel.errorMessage = i18next.t("Subscriptions.Validation.Message.bundlesId.Required");
+            return;
+        }
+
         let request: CalculateSubscriptionRequest = new CalculateSubscriptionRequest();
+        request.bundlesId = bundleId;
         if(subscriptionId){
             request.subscriptionCarNumbers = viewModel.editSubscriptionRequest.subscriptionCarNumbers;
             request.subscriptionType = viewModel.editSubscriptionRequest.subscriptionType;
@@ -169,6 +216,65 @@ const EditSubscription: React.FC<EditSubscriptionProps> = inject(Stores.subscrip
 
         setSubscriptionCost(result);
     }
+    const rowSelection = {
+        onChange: (selectedRowKeys: React.Key[], selectedRows: BundleItem[]) => {
+            debugger;
+            console.log(`selectedRowKeys: ${selectedRowKeys}`);
+            setBundleId(+selectedRowKeys[0]);
+            setCarNumbersMinimum(selectedRows[0]?.bundlesNumberFrom)
+            setCarNumbersMaximum(selectedRows[0]?.bundlesNumberTo)
+            if(subscriptionId)
+            {
+                viewModel.editSubscriptionRequest.bundlesId = bundleId;
+            }
+            else{
+                viewModel.addSubscriptionRequest.bundlesId = bundleId;
+            }
+        }
+    };
+
+    function onNumberChanged(e){
+        if(subscriptionId)
+        {
+            viewModel.editSubscriptionRequest.subscriptionCarNumbers = e;
+        }
+        else{
+            viewModel.addSubscriptionRequest.subscriptionCarNumbers = e;
+        }
+    }
+    function onRadioChange(e){
+        debugger;
+        setPayFromCompanyBalance(e.target.value);
+        if(subscriptionId)
+        {
+            if(e.target.value)
+            {
+                viewModel.editSubscriptionRequest.subscriptionPaymentMethod = 'CompanyBalance';
+                viewModel.editSubscriptionRequest.payFromCompanyBalance = true;
+                viewModel.editSubscriptionRequest.petropayAccountId = null;
+            }
+            else{
+                viewModel.editSubscriptionRequest.subscriptionPaymentMethod = 'other';
+                viewModel.editSubscriptionRequest.payFromCompanyBalance = false;
+            }
+        }
+        else{
+            if(e.target.value)
+            {
+                viewModel.addSubscriptionRequest.subscriptionPaymentMethod = 'CompanyBalance';
+                viewModel.addSubscriptionRequest.payFromCompanyBalance = true;
+                viewModel.addSubscriptionRequest.petropayAccountId = null;
+            }
+            else{
+                viewModel.addSubscriptionRequest.subscriptionPaymentMethod = 'other';
+                viewModel.addSubscriptionRequest.payFromCompanyBalance = false;
+            }
+        }
+    }
+    const options = [
+        { label: i18next.t("Subscriptions.subscriptionPaymentMethod.PayFromCompanyBalance"), value: true },
+        { label: i18next.t("Subscriptions.subscriptionPaymentMethod.SelectOtherPayment"), value: false }
+    ];
     return (
         <div>
             <PageHeader
@@ -176,11 +282,16 @@ const EditSubscription: React.FC<EditSubscriptionProps> = inject(Stores.subscrip
                 onBack={() => window.history.back()}
                 title={subscriptionId ? `${i18next.t("Subscriptions.Edit.HeaderText")} ${subscriptionId}` : i18next.t("Subscriptions.Add.HeaderText")}
             />
-            <Divider>{i18next.t("Subscriptions.Section.GeneralInformation")}</Divider>
+            <Divider>{i18next.t("Subscriptions.Section.BundleInformation")}</Divider>
             {dataFetched ?
             <Form {...formItemLayout} layout={"vertical"} onFinish={onFinish} form={form}
                   key={"subscriptionForm"}
                  scrollToFirstError>
+                <Table dataSource={subscriptionStore.listBundleViewModel?.bundleList} columns={columns} loading={subscriptionStore.listBundleViewModel?.isProcessing}
+                       bordered={true} pagination={false} scroll={{ x: 1500 }} sticky
+                        rowSelection={{type: 'radio', ...rowSelection}}/>
+
+                <Divider>{i18next.t("Subscriptions.Section.GeneralInformation")}</Divider>
                 <Row gutter={[24, 16]}>
                     <Col span={8}>
                         <Form.Item name="subscriptionCarNumbers" initialValue={viewModel?.detailSubscriptionResponse?.subscriptionCarNumbers}
@@ -192,10 +303,10 @@ const EditSubscription: React.FC<EditSubscriptionProps> = inject(Stores.subscrip
                                            message: i18next.t("Subscriptions.Validation.Message.subscriptionCarNumbers.Required")
                                        }
                                    ]}>
-                            <Input type={"number"} onChange={onChanged}/>
+                            <InputNumber style={{width: "100%"}} min={carNumbersMinimum} max={carNumbersMaximum} onChange={(e) => onNumberChanged(e)}/>
                         </Form.Item>
                     </Col>
-                    <Col span={8}>
+                    {/*<Col span={8}>
                 <Form.Item name="subscriptionPaymentMethod" initialValue={viewModel?.detailSubscriptionResponse?.subscriptionPaymentMethod}
                            key={"subscriptionPaymentMethod"}
                            label={i18next.t("Subscriptions.Label.subscriptionPaymentMethod")}
@@ -207,7 +318,7 @@ const EditSubscription: React.FC<EditSubscriptionProps> = inject(Stores.subscrip
                            ]}>
                     <Select options={paymentMethodOptions} showSearch={true} onChange={(e) => onSelectChanged(e, "subscriptionPaymentMethod")} />
                 </Form.Item>
-                    </Col>
+                    </Col>*/}
                     <Col span={8}>
                 <Form.Item name="paymentReferenceNumber" initialValue={viewModel?.detailSubscriptionResponse?.paymentReferenceNumber}
                            key={"paymentReferenceNumber"}
@@ -216,6 +327,7 @@ const EditSubscription: React.FC<EditSubscriptionProps> = inject(Stores.subscrip
                     <Input onChange={onChanged}/>
                 </Form.Item>
                     </Col>
+                    <Col span={8}></Col>
                     <Col span={8}>
                 <Form.Item name="subscriptionType" initialValue={viewModel?.detailSubscriptionResponse?.subscriptionType}
                            key={"subscriptionType"}
@@ -246,7 +358,29 @@ const EditSubscription: React.FC<EditSubscriptionProps> = inject(Stores.subscrip
                             {i18next.t("Subscriptions.Button.Calculate")}
                         </Button>
                     </Col>
-                    <Col offset={8} span={8}>
+                    <Col span={8}>
+                        <Form.Item name="payFromCompanyBalance" initialValue={viewModel?.detailSubscriptionResponse?.payFromCompanyBalance}
+                                   key={"payFromCompanyBalance"}
+                                   label={i18next.t("Subscriptions.Label.subscriptionPaymentMethod")}
+                                   rules={[
+                                       {
+                                           required: true,
+                                           message: i18next.t("Subscriptions.Validation.Message.payFromCompany.Required")
+                                       }
+                                   ]}>
+                        <Radio.Group key={"payFromCompanyBalance"} options={options}  onChange={onRadioChange}
+                                     defaultValue={viewModel?.detailSubscriptionResponse?.payFromCompanyBalance}>
+                        </Radio.Group>
+                        </Form.Item>
+                        {!payFromCompanyBalance &&
+                        <Select style={{width: "100%", display:"block"}} defaultValue={viewModel?.detailSubscriptionResponse?.petropayAccountId}
+                                key={"petropayAccountId"}
+                                showSearch={true} onChange={(e) => onSelectChanged(e, "petropayAccountId")}>
+                            {petropayAccountOptions}
+                        </Select>
+                        }
+                    </Col>
+                    <Col span={8}>
                         {subscriptionCost ?
                             <div>
                                 <h2>{i18next.t("Subscriptions.Label.subscriptionCost")}</h2>
@@ -262,6 +396,8 @@ const EditSubscription: React.FC<EditSubscriptionProps> = inject(Stores.subscrip
                 )}
                     <PageHeader
                         ghost={false}
+                        title={payFromCompanyBalance ? i18next.t("Subscriptions.Alert.BeCareful") : ""}
+
                         extra={[
                             <Button type="primary" loading={viewModel.isProcessing} key="submit" disabled={!subscriptionCost} size={"large"} htmlType="submit">
                                 {i18next.t("General.Add.SaveButton")}
