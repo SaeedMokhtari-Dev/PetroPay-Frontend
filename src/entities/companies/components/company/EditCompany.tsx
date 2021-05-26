@@ -32,6 +32,9 @@ const EditCompany: React.FC<EditCompanyProps> = inject(Stores.companiesStore)(ob
     const [imageUrl, setImageUrl] = React.useState("");
     const [dataFetched, setDataFetched] = React.useState(false);
     const [companyId, setCompanyId] = React.useState(0);
+    const [companyTypeOptions, setCompanyTypeOptions] = React.useState([]);
+    const [countryOptions, setCountryOptions] = React.useState([]);
+    const [regionOptions, setRegionOptions] = React.useState([]);
 
 
     const [form] = Form.useForm();
@@ -46,16 +49,6 @@ const EditCompany: React.FC<EditCompanyProps> = inject(Stores.companiesStore)(ob
             sm: { span: 24 },
         },
     };
-
-    Types.forEach(w =>{ w.title = i18next.t(w.title) });
-    const companyTypeOptions = [...Types];
-
-    Countries.forEach(w =>{ w.title = i18next.t(w.title) });
-    const countryOptions = [...Countries];
-
-    Regions.forEach(w =>{ w.title = i18next.t(w.title) });
-    const regionOptions = [...Regions];
-
 
     useEffect(() => {
         onLoad();
@@ -76,6 +69,24 @@ const EditCompany: React.FC<EditCompanyProps> = inject(Stores.companiesStore)(ob
             companiesStore.editCompanyViewModel.addCompanyRequest = new AddCompanyRequest();
             companiesStore.editCompanyViewModel.detailCompanyResponse = new DetailCompanyResponse();
         }
+        let typesOptions = [];
+        for (let item of Types) {
+            typesOptions.push(<Option key={item.value} value={item.value}>{i18next.t(item.title)}</Option>);
+        }
+        setCompanyTypeOptions(typesOptions);
+
+        let countriesOptions = [];
+        for (let item of Countries) {
+            countriesOptions.push(<Option key={item.value} value={item.value}>{i18next.t(item.title)}</Option>);
+        }
+        setCountryOptions(countriesOptions);
+
+        let regionsOptions = [];
+        for (let item of Regions) {
+            regionsOptions.push(<Option key={item.value} value={item.value}>{i18next.t(item.title)}</Option>);
+        }
+        setRegionOptions(regionsOptions);
+
         setCompanyId(companyIdParam);
         setDataFetched(true);
     }
@@ -236,7 +247,10 @@ const EditCompany: React.FC<EditCompanyProps> = inject(Stores.companiesStore)(ob
                                }
                            ]}>
                     {/*<Input onChange={onChanged}/>*/}
-                    <Select options={companyTypeOptions} showSearch={true} onChange={(e) => onSelectChanged(e, "companyType")} />
+                    <Select showSearch={true} onChange={(e) => onSelectChanged(e, "companyType")} >
+                        {companyTypeOptions}
+                    </Select>
+
                 </Form.Item>
                     </Col>
                     <Col span={8}>
@@ -250,21 +264,19 @@ const EditCompany: React.FC<EditCompanyProps> = inject(Stores.companiesStore)(ob
                                }
                            ]}*/>
                     {/*<Input onChange={onChanged}/>*/}
-                    <Select options={countryOptions} showSearch={true} onChange={(e) => onSelectChanged(e, "companyCountry")} />
+                    <Select showSearch={true} onChange={(e) => onSelectChanged(e, "companyCountry")} >
+                        {countryOptions}
+                    </Select>
                 </Form.Item>
                     </Col>
                     <Col span={8}>
                 <Form.Item name="companyRegion" initialValue={viewModel?.detailCompanyResponse?.companyRegion}
                            key={"companyRegion"}
                            label={i18next.t("Companies.Label.companyRegion")}
-                           /*rules={[
-                               {
-                                   required: true,
-                                   message: i18next.t("Companies.Validation.Message.companyRegion.Required")
-                               }
-                           ]}*/>
-                    {/*<Input onChange={onChanged}/>*/}
-                    <Select options={regionOptions} showSearch={true} onChange={(e) => onSelectChanged(e, "companyRegion")} />
+                           >
+                    <Select showSearch={true} onChange={(e) => onSelectChanged(e, "companyRegion")} >
+                        {regionOptions}
+                    </Select>
                 </Form.Item>
                     </Col>
                     <Col span={8}>
@@ -376,6 +388,10 @@ const EditCompany: React.FC<EditCompanyProps> = inject(Stores.companiesStore)(ob
                                        {
                                            required: true,
                                            message: i18next.t("Companies.Validation.Message.companyAdminUserPassword.Required")
+                                       },
+                                       {
+                                           pattern: /^.*(?=.{8,})((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/g,
+                                           message: i18next.t("Companies.Validation.Message.companyAdminUserPassword.Valid"),
                                        }
                                    ]}>
                             <PasswordInput

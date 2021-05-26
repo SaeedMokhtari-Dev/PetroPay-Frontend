@@ -75,9 +75,13 @@ export default
     apiStationSaleGet: "/api/station-sale/get",
     apiStationStatementGet: "/api/station-statement/get",
     apiCarTransactionGet: "/api/car-transaction/get",
+    apiPetrolStationListGet: "/api/petrol-station-list/get",
 
     apiPetropayAccountList: "/api/petropay-account/list",
     apiServiceMasterList: "/api/service-master/list",
+
+    apiTransferBalance: "/api/transfer-balance",
+
 
     apiLog: "/api/log"
 }

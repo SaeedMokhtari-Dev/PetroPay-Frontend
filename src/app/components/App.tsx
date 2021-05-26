@@ -46,6 +46,8 @@ import StationStatementList from "../../reports/StationStatements/components/lis
 import CarTransactionList from "../../reports/CarTransactions/components/list/CarTransactionList";
 import AccountBalanceList from "../../reports/AccountBalances/components/list/AccountBalanceList";
 import CarAddSubscription from "../../entities/Subscriptions/components/carAdd/CarAddSubscription";
+import PetrolStationListList from "../../reports/PetrolStationLists/components/list/PetrolStationListList";
+import EditTransferBalance from "../../entities/transfer-balances/components/transfer-balance/EditTransferBalance";
 
 const App: React.FC = () =>
 {
@@ -117,6 +119,7 @@ const App: React.FC = () =>
                                     <Route exact roles={[RoleType.customer]} path={Routes.editSubscription} component={EditSubscription} />
                                     <Route exact roles={[RoleType.customer]} path={Routes.addSubscription} component={EditSubscription} />
                                     <Route exact roles={[RoleType.customer]} path={Routes.carAddSubscription} component={CarAddSubscription} />
+                                    <Route exact roles={[RoleType.customer]} path={Routes.transferBalance} component={EditTransferBalance} />
 
                                     {/* Reports */}
                                     <Route exact roles={[RoleType.customer]} path={Routes.invoiceSummary} component={InvoiceSummaryList} />
@@ -129,6 +132,7 @@ const App: React.FC = () =>
                                     <Route exact roles={[RoleType.supplier]} path={Routes.stationStatement} component={StationStatementList} />
 
                                     <Route exact roles={[RoleType.admin]} path={Routes.accountBalance} component={AccountBalanceList} />
+                                    <Route exact roles={[RoleType.admin]} path={Routes.petrolStationList} component={PetrolStationListList} />
 
                                     <Route component={NotFoundPage} />
                                 </Switch>

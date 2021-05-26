@@ -2,7 +2,7 @@ export default
 [
     {title: "PetroStations.Label.key", dataIndex: "key", key: "key", responsive: ['md']},
     {title: "PetroStations.Label.stationName", dataIndex: "stationName", key: "stationName", responsive: ['md']},
-    {title: "PetroStations.Label.stationAddress", dataIndex: "stationAddress", key: "stationAddress", responsive: ['md']},
+    /*{title: "PetroStations.Label.stationAddress", dataIndex: "stationAddress", key: "stationAddress", responsive: ['md']},*/
     {title: "PetroStations.Label.stationLucationName", dataIndex: "stationLucationName", key: "stationLucationName", responsive: ['md']},
     {title: "PetroStations.Label.stationOwnerName", dataIndex: "stationOwnerName", key: "stationOwnerName", responsive: ['md']},
     {title: "PetroStations.Label.stationPhone", dataIndex: "stationPhone", key: "stationPhone", responsive: ['md']},

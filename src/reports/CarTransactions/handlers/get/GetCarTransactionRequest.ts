@@ -3,6 +3,7 @@ import { makeAutoObservable } from "mobx";
 export default class GetCarTransactionRequest
 {
     carIdNumber: string;
+    companyBranchId: number;
     companyBranchName: string;
     transDateFrom: string;
     transDateTo: string;

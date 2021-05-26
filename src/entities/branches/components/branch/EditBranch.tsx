@@ -210,6 +210,10 @@ const EditBranch: React.FC<EditBranchProps> = inject(Stores.branchStore)(observe
                                        {
                                            required: true,
                                            message: i18next.t("Branches.Validation.Message.companyBranchAdminUserPassword.Required")
+                                       },
+                                       {
+                                           pattern: /^.*(?=.{8,})((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/g,
+                                           message: i18next.t("Branches.Validation.Message.companyBranchAdminUserPassword.Valid"),
                                        }
                                    ]}>
                             <PasswordInput

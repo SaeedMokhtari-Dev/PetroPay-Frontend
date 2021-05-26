@@ -53,6 +53,9 @@ export default
     editBundle: "/app/bundle/edit/:bundleId",
     addBundle: "/app/bundle/add",
 
+    //TransferBalance
+    transferBalance: "/app/transferBalance",
+
     //Reports
     accountBalance: '/app/accountBalance',
     invoiceSummary: '/app/invoiceSummary',
@@ -62,4 +65,5 @@ export default
     stationSale: '/app/stationSale',
     stationStatement: '/app/stationStatement',
     carTransaction: '/app/carTransaction',
+    petrolStationList: '/app/petrolStationLists',
 }

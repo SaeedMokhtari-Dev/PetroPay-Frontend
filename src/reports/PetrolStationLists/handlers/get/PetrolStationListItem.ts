@@ -1,13 +1,15 @@
 import IDeserialize from "../../../../app/interfaces/deserialize";
 import {makeAutoObservable} from "mobx";
 
-export default class CarListItem implements IDeserialize
+export default class PetrolStationListItem implements IDeserialize
 {
-    key: number;
-    carNumber: string;
-    branchName: string;
-    disabled: boolean;
-    balance: number;
+    key: string;
+    stationLucationName: string;
+    stationName: string;
+    stationNameAr: string;
+    stationDiesel: boolean;
+    stationLatitude: number;
+    stationLongitude: number;
 
     constructor() {
         makeAutoObservable(this);

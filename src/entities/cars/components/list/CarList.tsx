@@ -22,6 +22,7 @@ import GetCarRequest from "../../handlers/get/GetCarRequest";
 import CarStore from "../../stores/CarStore";
 import UserContext from "../../../../identity/contexts/UserContext";
 import ActiveCarRequest from "../../handlers/active/ActiveCarRequest";
+import AdminCarColumns from "./AdminCarColumns";
 
 
 const { confirm } = Modal;
@@ -51,7 +52,10 @@ const CarList: React.FC<CarListProps> = inject(Stores.carStore)(observer(({carSt
            }
        }
     });
-    const columns: any[] = [...CarColumns, {
+    AdminCarColumns.forEach(w => {
+        w.title = i18next.t(w.title);
+    });
+    const columns: any[] = [...(UserContext.info.role == 100 ? AdminCarColumns : CarColumns), {
         title: i18next.t("General.Column.Action"),
         dataIndex: 'operation',
         key: 'action',
@@ -65,6 +69,16 @@ const CarList: React.FC<CarListProps> = inject(Stores.carStore)(observer(({carSt
                                 title={i18next.t("Cars.Button.ActiveAndNfcCode")} style={{ background: "green", borderColor: "white" }}/>
                     </div>
                 )}
+                {record.carWorkWithApproval && UserContext.info.role == 100 &&
+                (
+                    <div>
+                        <Button type="primary" icon={<EditOutlined/>} onClick={() => showEditPage(record)}
+                                title={i18next.t("General.Button.Edit")}/>
+                            <Button type="primary" danger icon={<DeleteOutlined />} onClick={() => showDeleteConfirm(record)}
+                            title={i18next.t("General.Button.Delete")} />
+                    </div>
+                    )
+                }
                 {!record.carWorkWithApproval &&
                 (
                     <div>

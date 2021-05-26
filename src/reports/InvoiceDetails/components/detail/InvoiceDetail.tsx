@@ -91,7 +91,12 @@ const InvoiceDetail: React.FC<InvoiceDetailProps> = inject(Stores.invoiceDetailS
                         />
                     </Descriptions.Item>
                 </Descriptions>
-
+                    <Divider >{i18next.t("InvoiceDetails.Section.Map")}</Divider>
+                    <div style={{textAlign: "center"}}>
+                        <iframe width="600" height="500" id="gmap_canvas"
+                                src={`https://maps.google.com/maps?q=${viewModel?.invoiceDetailResponse?.stationLatitude},${viewModel?.invoiceDetailResponse?.stationLongitude}&t=&z=13&ie=UTF8&iwloc=&output=embed`}
+                                frameBorder="0" scrolling="no"></iframe>
+                    </div>
                 </div>
                 : <Row gutter={[24, 16]}>
                     <Col offset={11} span={8}>

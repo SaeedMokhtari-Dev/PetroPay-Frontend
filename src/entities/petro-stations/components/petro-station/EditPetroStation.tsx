@@ -2,7 +2,22 @@ import React from 'react';
 import {inject, observer} from "mobx-react";
 import Stores from "app/constants/Stores";
 import {useParams} from "react-router-dom";
-import {Button, Col, Divider, Spin, Form, Input, InputNumber, message, Modal, PageHeader, Radio, Row, Switch} from "antd";
+import {
+    Button,
+    Col,
+    Divider,
+    Spin,
+    Form,
+    Input,
+    InputNumber,
+    message,
+    Modal,
+    PageHeader,
+    Radio,
+    Row,
+    Switch,
+    Select
+} from "antd";
 import i18next from "i18next";
 import EditPetroStationRequest from "../../handlers/edit/EditPetroStationRequest";
 import DetailPetroStationResponse from "../../handlers/detail/DetailPetroStationResponse";
@@ -14,7 +29,9 @@ import history from "../../../../app/utils/History";
 import PetroStationStore from "../../stores/PetroStationStore";
 import { PasswordInput } from 'antd-password-input-strength';
 import MaskedInput from "antd-mask-input";
+import Regions from "../../../../app/constants/Regions";
 const {useEffect} = React;
+const { Option } = Select;
 
 interface EditPetroStationProps {
     petroStationStore?: PetroStationStore;
@@ -25,6 +42,7 @@ const EditPetroStation: React.FC<EditPetroStationProps> = inject(Stores.petroSta
 {
     const [dataFetched, setDataFetched] = React.useState(false);
     const [petroStationId, setPetroStationId] = React.useState(0);
+    const [regionOptions, setRegionOptions] = React.useState([]);
 
     const [form] = Form.useForm();
 
@@ -58,6 +76,13 @@ const EditPetroStation: React.FC<EditPetroStationProps> = inject(Stores.petroSta
             petroStationStore.editPetroStationViewModel.addPetroStationRequest = new AddPetroStationRequest();
             petroStationStore.editPetroStationViewModel.detailPetroStationResponse = new DetailPetroStationResponse();
         }
+
+        let regionsOptions = [];
+        for (let item of Regions) {
+            regionsOptions.push(<Option key={item.value} value={item.value}>{i18next.t(item.title)}</Option>);
+        }
+        setRegionOptions(regionsOptions);
+
         setPetroStationId(petroStationIdParam);
         setDataFetched(true);
     }
@@ -86,21 +111,28 @@ const EditPetroStation: React.FC<EditPetroStationProps> = inject(Stores.petroSta
     }
     function onChanged(e){
         if(petroStationId)
-            petroStationStore.editPetroStationViewModel.editPetroStationRequest[`${e.target.id}`] = e.target.value;
+            viewModel.editPetroStationRequest[`${e.target.id}`] = e.target.value;
         else
-            petroStationStore.editPetroStationViewModel.addPetroStationRequest[`${e.target.id}`] = e.target.value;
+            viewModel.addPetroStationRequest[`${e.target.id}`] = e.target.value;
     }
     function onMaskChanged(e){
         if(petroStationId)
-            petroStationStore.editPetroStationViewModel.editPetroStationRequest[`${e.target.id}`] = e.target.value.replace(/\s+/g, '');
+            viewModel.editPetroStationRequest[`${e.target.id}`] = e.target.value.replace(/\s+/g, '');
         else
-            petroStationStore.editPetroStationViewModel.addPetroStationRequest[`${e.target.id}`] = e.target.value.replace(/\s+/g, '');
+            viewModel.addPetroStationRequest[`${e.target.id}`] = e.target.value.replace(/\s+/g, '');
     }
     function onSwitchChange(e){
         if(petroStationId)
-            petroStationStore.editPetroStationViewModel.editPetroStationRequest.stationDiesel = e;
+            viewModel.editPetroStationRequest.stationDiesel = e;
         else
-            petroStationStore.editPetroStationViewModel.addPetroStationRequest.stationDiesel = e;
+            viewModel.addPetroStationRequest.stationDiesel = e;
+    }
+    function onSelectChanged(e, propName){
+
+        if(petroStationId)
+            viewModel.editPetroStationRequest[`${propName}`] = e;
+        else
+            viewModel.addPetroStationRequest[`${propName}`] = e;
     }
 
     return (
@@ -155,7 +187,9 @@ const EditPetroStation: React.FC<EditPetroStationProps> = inject(Stores.petroSta
                         <Form.Item name="stationLucationName" initialValue={viewModel?.detailPetroStationResponse?.stationLucationName}
                                    key={"stationLucationName"}
                                    label={i18next.t("PetroStations.Label.stationLucationName")}>
-                            <Input onChange={onChanged}/>
+                            <Select showSearch={true} onChange={(e) => onSelectChanged(e, "stationLucationName")} >
+                                {regionOptions}
+                            </Select>
                         </Form.Item>
                     </Col>
 
@@ -254,7 +288,11 @@ const EditPetroStation: React.FC<EditPetroStationProps> = inject(Stores.petroSta
                                        {
                                            required: true,
                                            message: i18next.t("PetroStations.Validation.Message.stationPassword.Required")
-                                       }
+                                       }/*,
+                                       {
+                                           pattern: /^.*(?=.{8,})((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/g,
+                                           message: i18next.t("PetroStations.Validation.Message.stationPassword.Valid"),
+                                       }*/
                                    ]}>
                             <PasswordInput
                                 onChange={onChanged}

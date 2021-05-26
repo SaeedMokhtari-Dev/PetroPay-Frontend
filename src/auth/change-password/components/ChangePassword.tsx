@@ -89,6 +89,10 @@ const ChangePassword: React.FC<ChangePasswordProps> = inject('authStore')(observ
                                        {
                                            required: true,
                                            message: i18next.t("ChangePassword.Validation.Message.NewPassword.Required")
+                                       },
+                                       {
+                                           pattern: /^.*(?=.{8,})((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/g,
+                                           message: i18next.t("Companies.Validation.Message.companyAdminUserPassword.Valid"),
                                        }
                                    ]}>
                             <PasswordInput onChange={onNewPasswordChanged}/>

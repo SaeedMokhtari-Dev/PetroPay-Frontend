@@ -7,7 +7,7 @@ import Stores from "app/constants/Stores";
 import {
     Button, Collapse, Col, Row,
     Pagination, Input, Form,
-    Table, PageHeader, Space, DatePicker
+    Table, PageHeader, Space, DatePicker, Select
 } from "antd";
 import {
     FileExcelOutlined
@@ -20,12 +20,16 @@ import CarTransactionStore from "../../stores/CarTransactionStore";
 import ExportExcel from "../../../../app/utils/ExportExcel";
 
 const { Panel } = Collapse;
+const { Option } = Select;
 
 interface CarTransactionListProps {
     carTransactionStore?: CarTransactionStore
 }
 
 const CarTransactionList: React.FC<CarTransactionListProps> = inject(Stores.carTransactionStore)(observer(({carTransactionStore}) => {
+
+    const [carOptions, setCarOptions] = React.useState([]);
+    const [branchOptions, setBranchOptions] = React.useState([]);
 
     const formItemLayout = {
         labelCol: {
@@ -57,6 +61,8 @@ const CarTransactionList: React.FC<CarTransactionListProps> = inject(Stores.carT
 
     async function onLoad() {
         carTransactionStore.onCarTransactionGetPageLoad();
+        await carTransactionStore.listBranchViewModel.getBranchList();
+        await carTransactionStore.listCarViewModel.getCarList();
         carTransactionStore.getCarTransactionViewModel.getCarTransactionsRequest = new GetCarTransactionRequest();
         carTransactionStore.getCarTransactionViewModel.getCarTransactionsRequest.pageSize = 20;
         carTransactionStore.getCarTransactionViewModel.getCarTransactionsRequest.pageIndex = 0;
@@ -65,6 +71,18 @@ const CarTransactionList: React.FC<CarTransactionListProps> = inject(Stores.carT
         }
 
         await carTransactionStore.getCarTransactionViewModel.getAllCarTransaction(carTransactionStore.getCarTransactionViewModel.getCarTransactionsRequest);
+
+        let carOptions = [];
+        for (let item of carTransactionStore.listCarViewModel.listCarResponse.items) {
+            carOptions.push(<Option key={item.key} value={item.carNumber}>{item.carNumber}</Option>);
+        }
+        setCarOptions(carOptions);
+
+        let branchOptions = [];
+        for (let item of carTransactionStore.listBranchViewModel.listBranchResponse.items) {
+            branchOptions.push(<Option key={item.key} value={item.key}>{item.title}</Option>);
+        }
+        setBranchOptions(branchOptions);
     }
 
     let viewModel = carTransactionStore.getCarTransactionViewModel;
@@ -110,7 +128,9 @@ const CarTransactionList: React.FC<CarTransactionListProps> = inject(Stores.carT
         await viewModel.getAllCarTransaction(viewModel.getCarTransactionsRequest, true);
         ExportExcel(columns, viewModel?.carTransactionExport, "CarTransaction");
     }
-
+    function onSelectChanged(e, propName){
+        viewModel.getCarTransactionsRequest[`${propName}`] = e;
+    }
     return (
         <div>
             <PageHeader
@@ -144,14 +164,22 @@ const CarTransactionList: React.FC<CarTransactionListProps> = inject(Stores.carT
                                 <Form.Item name="companyBranchName" initialValue={viewModel?.getCarTransactionsRequest?.companyBranchName}
                                            key={"companyBranchName"}
                                            label={i18next.t("CarTransactions.SearchPanel.Label.companyBranchName")}>
-                                    <Input onChange={onChanged}/>
+                                    {/*<Input onChange={onChanged}/>*/}
+                                    <Select style={{width: "100%", display:"block"}}
+                                            showSearch={true} onChange={(e) => onSelectChanged(e, "companyBranchId")}>
+                                        {branchOptions}
+                                    </Select>
                                 </Form.Item>
                             </Col>
                             <Col span={8}>
                                 <Form.Item name="carIdNumber" initialValue={viewModel?.getCarTransactionsRequest?.carIdNumber}
                                            key={"carIdNumber"}
                                            label={i18next.t("CarTransactions.SearchPanel.Label.carIdNumber")}>
-                                    <Input onChange={onChanged}/>
+                                    {/*<Input onChange={onChanged}/>*/}
+                                    <Select style={{width: "100%", display:"block"}}
+                                            showSearch={true} onChange={(e) => onSelectChanged(e, "carIdNumber")}>
+                                        {carOptions}
+                                    </Select>
                                 </Form.Item>
                             </Col>
                             <Col span={8}>

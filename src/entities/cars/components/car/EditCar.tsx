@@ -587,6 +587,10 @@ const EditCar: React.FC<EditCarProps> = inject(Stores.carStore)(observer(({carSt
                                        {
                                            required: true,
                                            message: i18next.t("Cars.Validation.Message.carDriverPassword.Required")
+                                       },
+                                       {
+                                           pattern: /^.*(?=.{8,})((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/g,
+                                           message: i18next.t("Cars.Validation.Message.carDriverPassword.Valid"),
                                        }
                                    ]}>
                             <PasswordInput

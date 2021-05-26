@@ -64,6 +64,8 @@ ReactDOM.render(
                       stationStatementStore={appStore.stationStatement}
                       carTransactionStore={appStore.carTransaction}
                       accountBalanceStore={appStore.accountBalance}
+                      petrolStationListStore={appStore.petrolStationList}
+                      transferBalanceStore={appStore.transferBalance}
             >
                 <App />
             </Provider>

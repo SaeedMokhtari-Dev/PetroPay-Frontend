@@ -124,6 +124,7 @@
   "Companies.Validation.Message.companyAdminUserName.Required": "Please enter company admin username",
   "Companies.Validation.Message.companyAdminUserName.Valid": "Please enter a valid Username",
   "Companies.Validation.Message.companyAdminUserPassword.Required": "Please enter company admin password",
+  "Companies.Validation.Message.companyAdminUserPassword.Valid": "The minimum password length is 8 characters and must have at least a number, upper, lower and special character",
 
   "Api.Company.Add.Successful": "A new company added successfully",
   "Api.Company.Edit.Successful": "selected company edited successfully",
@@ -173,8 +174,8 @@
   "Api.Forbidden": "Forbidden",
   "Api.PageSize": "Page size required",
   "Api.PageIndex": "Page index required",
-  "Api.Auth.MinPasswordLengthError": "The minimum password length is 8 characters and must have a number and upper character",
-  "Api.MinPasswordLengthError": "The minimum password length is 8 characters and must have a number and upper character",
+  "Api.Auth.MinPasswordLengthError": "The minimum password length is 8 characters and must have at least a number, upper, lower and special character",
+  "Api.MinPasswordLengthError": "The minimum password length is 8 characters and must have at least a number, upper, lower and special character",
   "Api.Username.Duplicate": "There has already used this username, please choose another username.",
   "Api.NotEnoughBalance": "Balance is not enough, please charge your balance then try again.",
   "Api.Validate.IdRequired": "Id is Required",
@@ -211,6 +212,7 @@
   "Branches.Validation.Message.companyBranchAdminUserName.Required": "Please enter branch admin username",
   "Branches.Validation.Message.companyBranchAdminUserName.Valid": "Please enter a valid Username",
   "Branches.Validation.Message.companyBranchAdminUserPassword.Required": "Please enter branch admin password",
+  "Branches.Validation.Message.companyBranchAdminUserPassword.Valid": "The minimum password length is 8 characters and must have at least a number, upper, lower and special character",
   "Branches.Validation.Message.companyBranchAdminEmail.Valid": "Please enter a valid Email",
   "Branches.Validation.Message.increaseAmount.Valid": "Please enter an amount less than company balance",
   "Branches.Validation.Message.increaseAmount.Required": "Please enter increase amount",
@@ -238,7 +240,7 @@
   "PetroStations.Label.stationId": "Station Id",
   "PetroStations.Label.stationName": "Name",
   "PetroStations.Label.stationAddress": "Address",
-  "PetroStations.Label.stationLucationName": "Location Name",
+  "PetroStations.Label.stationLucationName": "Region",
   "PetroStations.Label.stationOwnerName": "Owner Name",
   "PetroStations.Label.stationPhone": "Phone",
   "PetroStations.Label.stationBanckAccount": "Bank Account",
@@ -262,6 +264,7 @@
   "PetroStations.Validation.Message.stationUserName.Valid": "Please enter a valid Username",
   "PetroStations.Validation.Message.stationUserName.Required": "Please enter station username",
   "PetroStations.Validation.Message.stationPassword.Required": "Please enter station password",
+  "PetroStations.Validation.Message.stationPassword.Valid": "The minimum password length is 8 characters and must have at least a number, upper, lower and special character",
   "PetroStations.Validation.Message.stationEmail.Required": "Please enter station email address",
 
   "Api.PetroStation.Add.Successful": "A new Petrol Stations added successfully",
@@ -291,6 +294,7 @@
   "StationUsers.Validation.Message.stationUserName.Valid": "Please enter a valid Username",
   "StationUsers.Validation.Message.stationUserName.Required": "Please enter station username",
   "StationUsers.Validation.Message.stationUserPassword.Required": "Please enter station password",
+  "StationUsers.Validation.Message.stationUserPassword.Valid": "The minimum password length is 8 characters and must have at least a number, upper, lower and special character",
 
   "Api.StationUser.Add.Successful": "A new station User added successfully",
   "Api.StationUser.Edit.Successful": "selected station User edited successfully",
@@ -373,6 +377,7 @@
   "Cars.Validation.Message.carDriverUserName.Valid": "Please enter a valid Username",
   "Cars.Validation.Message.carDriverUserName.Required": "Please enter car driver username",
   "Cars.Validation.Message.carDriverPassword.Required": "Please enter car driver password",
+  "Cars.Validation.Message.carDriverPassword.Valid": "The minimum password length is 8 characters and must have at least a number, upper, lower and special character",
   "Cars.Validation.Message.carDriverConfirmationCode.4MinLength": "Please at least 4 number.",
 
   "Api.Car.Add.Successful": "A new car added successfully",
@@ -557,6 +562,7 @@
 
   "InvoiceDetails.Section.GeneralInformation": "General Information",
   "InvoiceDetails.Section.Photos": "Photos",
+  "InvoiceDetails.Section.Map": "Location",
 
   "InvoiceDetails.Error.Get.Message": "An error has occurred while trying to get invoice list.",
   "InvoiceDetails.Error.Detail.Message": "An error has occurred while trying to get invoice details.",
@@ -679,9 +685,56 @@
 
   "AccountBalances.Error.Get.Message": "An error has occurred while trying to get account balance list.",
 
+  "PetrolStationList.Menu.Title": "Service Sites",
+  "PetrolStationList.Page.Title": "Service Sites",
+  "PetrolStationList.Page.SubTitle": "Service Sites report",
+  "PetrolStationLists.Label.key": "key",
+  "PetrolStationLists.Label.stationLucationName": "Region",
+  "PetrolStationLists.Label.stationName": "Station Name",
+  "PetrolStationLists.Label.stationNameAr": "Station Name",
+  "PetrolStationLists.Label.stationDiesel": "Diesel Available",
+  "PetrolStationLists.Label.stationLatitude": "Station Latitude",
+  "PetrolStationLists.Label.stationLongitude": "Station Longitude",
+
+  "PetrolStationLists.SearchPanel.Label.region": "Region",
+
+  "PetrolStationList.Error.Get.Message": "An error has occurred while trying to get petrol station list.",
+
+  "TransferBalances.Menu.Title": "Balance transfer",
+  "TransferBalances.Page.Title": "Balance transfers",
+  "TransferBalances.Page.SubTitle": "Balance transfer Page",
+  "TransferBalances.Label.key": "key",
+  "TransferBalances.Label.transferBalanceType": "Transfer Balance Type",
+  "TransferBalances.Label.amount": "Amount",
+  "TransferBalances.Label.companyBalance": "Company Balance",
+  "TransferBalances.Label.toBranch": "To Branch",
+  "TransferBalances.Label.fromBranch": "From Branch",
+  "TransferBalances.Label.branchBalance": "Branch Balance",
+  "TransferBalances.Label.carBalance": "Car Balance",
+  "TransferBalances.Label.fromCar": "From Car",
+  "TransferBalances.Label.toCar": "Destination Car",
+
+  "TransferBalances.Validation.Message.branch.Required": "Please select an Branch.",
+  "TransferBalances.Validation.Message.car.Required": "Please select a Car.",
+  "TransferBalances.Validation.Message.amount.Required": "Please enter an Amount.",
+  "TransferBalances.Validation.Message.transferBalanceType.Required": "Please select a Transfer BalanceType.",
+
+  "TransferBalances.Section.GeneralInformation": "GeneralInformation",
+  "TransferBalances.Error.Get.Message": "An error has occurred while trying to get petrol station list.",
+
+  "Api.TransferBalance.Add.Successful": "Balance transferred successfully",
+
+  "General.TransferBalanceType.CompanyToBranch": "Recharge Branch Balance",
+  "General.TransferBalanceType.BranchToCompany": "Refund Balance To Company (Branch To Company)",
+  "General.TransferBalanceType.BranchToCar": "Recharge Car Balance",
+  "General.TransferBalanceType.CarToBranch": "Refund Balance To Branch (Car To Branch)",
+  "General.TransferBalanceType.CarToCar": "Transfer Balance Car To Car",
+
+
   "PetropayAccounts.Error.List.Message": "An error has occurred while trying to get Petropay Account list.",
 
   "General.Country.Egypt": "Egypt",
+
   "General.Region.Alexandria": "Alexandria",
   "General.Region.Aswan": "Aswan",
   "General.Region.Asyut": "Asyut",
@@ -709,6 +762,7 @@
   "General.Region.Sohag": "Sohag",
   "General.Region.SouthSinai": "South Sinai",
   "General.Region.Suez": "Suez",
+
   "General.Type.PETROLEUM": "PETROLEUM",
   "General.Type.TELECOMMUNICATIONS": "TELECOMMUNICATIONS",
   "General.Type.INFORMATIONTECHNOLOGY": "INFORMATION TECHNOLOGY",
@@ -723,10 +777,12 @@
   "General.Type.THEMEDICALSECTOR": "THE MEDICAL SECTOR",
   "General.Type.GOVERNMENTSECTOR": "GOVERNMENT SECTOR",
   "General.Type.OTHERS": "OTHERS",
+
   "General.PaymentMethod.Cash": "Cash",
   "General.PaymentMethod.BankTransfer": "Bank Transfer",
   "General.PaymentMethod.Check": "Check",
   "General.PaymentMethod.Credit": "Credit",
+
   "General.SubscriptionType.Monthly": "Monthly",
   "General.SubscriptionType.Quarterly": "Quarterly",
   "General.SubscriptionType.Yearly": "Yearly",

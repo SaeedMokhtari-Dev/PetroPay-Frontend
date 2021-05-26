@@ -1,5 +1,6 @@
 export default [
     {title: "General.Region.Aswan", value: "Aswan"},
+    {title: "General.Region.Alexandria", value: "Alexandria"},
     {title: "General.Region.Asyut", value: "Asyut"},
     {title: "General.Region.Beheira", value: "Beheira"},
     {title: "General.Region.BeniSuef", value: "BeniSuef"},

@@ -170,6 +170,10 @@ const EditStationUser: React.FC<EditStationUserProps> = inject(Stores.stationUse
                                        {
                                            required: true,
                                            message: i18next.t("StationUsers.Validation.Message.stationUserPassword.Required")
+                                       },
+                                       {
+                                           pattern: /^.*(?=.{8,})((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/g,
+                                           message: i18next.t("StationUsers.Validation.Message.stationUserPassword.Valid"),
                                        }
                                    ]}>
                             <PasswordInput
