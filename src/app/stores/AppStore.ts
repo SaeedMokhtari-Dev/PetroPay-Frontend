@@ -21,6 +21,7 @@ import CarTransactionStore from "../../reports/CarTransactions/stores/CarTransac
 import AccountBalanceStore from "../../reports/AccountBalances/stores/AccountBalanceStore";
 import PetrolStationListStore from "../../reports/PetrolStationLists/stores/PetrolStationListStore";
 import TransferBalanceStore from "../../entities/transfer-balances/stores/TransferBalanceStore";
+import PetropayAccountStore from "../../entities/PetropayAccounts/stores/PetropayAccountStore";
 
 export class AppStore
 {
@@ -47,6 +48,7 @@ export class AppStore
     accountBalance: AccountBalanceStore;
     petrolStationList: PetrolStationListStore;
     transferBalance: TransferBalanceStore;
+    petropayAccount: PetropayAccountStore;
 
     constructor()
     {
@@ -73,5 +75,6 @@ export class AppStore
         this.accountBalance = new AccountBalanceStore(this);
         this.petrolStationList = new PetrolStationListStore(this);
         this.transferBalance = new TransferBalanceStore(this);
+        this.petropayAccount = new PetropayAccountStore(this);
     }
 }

@@ -23,4 +23,5 @@ export default {
     accountBalanceStore: 'accountBalanceStore',
     petrolStationListStore: 'petrolStationListStore',
     transferBalanceStore: 'transferBalanceStore',
+    petropayAccountStore: 'petropayAccountStore',
 }

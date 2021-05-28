@@ -253,9 +253,16 @@
   "PetroStations.Label.stationBalance": "Balance",
   "PetroStations.Label.stationEmail": "Email Address",
 
+  "PetroStations.Label.petroPayAccountId": "PaymentMethod",
+  "PetroStations.Label.amount": "Amount",
+  "PetroStations.Label.reference": "Reference",
+
   "PetroStations.Add.HeaderText": "Add Petrol Stations",
   "PetroStations.Edit.HeaderText": "Edit Petrol Stations with Id:",
+  "PetroStations.Payment.HeaderText": "Payment Petrol Stations",
   "PetroStations.Section.GeneralInformation": "General Information",
+
+  "PetroStations.Button.Payment": "Payment Receipt Transaction",
 
   "PetroStations.Validation.Message.stationName.Required": "Please enter station name",
   "PetroStations.Validation.Message.stationAddress.Required": "Please enter station address",
@@ -267,10 +274,52 @@
   "PetroStations.Validation.Message.stationPassword.Valid": "The minimum password length is 8 characters and must have at least a number, upper, lower and special character",
   "PetroStations.Validation.Message.stationEmail.Required": "Please enter station email address",
 
+  "PetroStations.Validation.Message.petroPayAccountId.Required": "Please select a PaymentMethod",
+  "PetroStations.Validation.Message.amount.Required": "Please enter Amount",
+  "PetroStations.Validation.Message.reference.Required": "Please enter Reference",
+
   "Api.PetroStation.Add.Successful": "A new Petrol Stations added successfully",
   "Api.PetroStation.Edit.Successful": "selected Petrol Station edited successfully",
   "Api.PetroStation.Deleted.Successful": "selected Petrol Station deleted successfully",
   "Api.PetroStation.Id.Required": "Id is Required",
+  "Api.PetroStation.PetroPayAccountId.Required": "Payment Method is Required",
+  "Api.PetroStation.Amount.Required": "Amount is Required",
+  "Api.PetroStation.Reference.Required": "Reference is Required",
+
+  "PetropayAccounts.Menu.Title": "PetroPay Account",
+  "PetropayAccounts.Page.Title": "PetroPay Account",
+  "PetropayAccounts.Page.SubTitle": "This page is for define PetroPay Account",
+  "PetropayAccounts.Label.key": "key",
+  "PetropayAccounts.Label.fromPetroPayAccountId": "From Account",
+  "PetropayAccounts.Label.toPetroPayAccountId": "To Account",
+  "PetropayAccounts.Label.fromPetroPayAccountBalance": "From Balance",
+  "PetropayAccounts.Label.toPetroPayAccountBalance": "To Balance",
+
+  "PetropayAccounts.Label.petroPayAccountId": "PaymentMethod",
+  "PetropayAccounts.Label.amount": "Amount",
+  "PetropayAccounts.Label.reference": "Reference",
+
+  "PetropayAccounts.Add.HeaderText": "Add PetroPay Account",
+  "PetropayAccounts.Edit.HeaderText": "Edit PetroPay Account with Id:",
+  "PetropayAccounts.Payment.HeaderText": "Payment PetroPay Account",
+  "PetropayAccounts.Section.GeneralInformation": "General Information",
+
+  "PetropayAccounts.Button.Payment": "Payment Receipt Transaction",
+
+  "PetropayAccounts.Validation.Message.fromPetroPayAccountId.Required": "Please select a from account",
+  "PetropayAccounts.Validation.Message.toPetroPayAccountId.Required": "Please select a to account",
+  "PetropayAccounts.Validation.Message.amount.Required": "Please enter Amount",
+  "PetropayAccounts.Validation.Message.reference.Required": "Please enter Reference",
+
+  "Api.PetropayAccount.Add.Successful": "A new PetroPay Account added successfully",
+  "Api.PetropayAccount.Edit.Successful": "selected Petrol Station edited successfully",
+  "Api.PetropayAccount.Deleted.Successful": "selected Petrol Station deleted successfully",
+  "Api.PetropayAccount.Id.Required": "Id is Required",
+  "Api.PetropayAccount.FromPetroPayAccountId.Required": "From Account is Required",
+  "Api.PetropayAccount.ToPetroPayAccountId.Required": "To Account is Required",
+  "Api.PetroPayAccount.PetroPayAccounts.NotEqual": "From Account and To Account cannot be equal.",
+  "Api.PetropayAccount.Amount.Required": "Amount is Required",
+  "Api.PetropayAccount.Reference.Required": "Reference is Required",
 
 
   "StationUsers.Menu.Title": "Station Users",
@@ -724,6 +773,34 @@
 
   "Api.TransferBalance.Add.Successful": "Balance transferred successfully",
 
+  "CustomerDashboard.Title": "Customer Dashboard",
+  "CustomerDashboard.TotalCustomerBalance": "Total Customer Balance",
+  "CustomerDashboard.TotalCarBalance": "Total Car Balance",
+  "CustomerDashboard.CompanyBranchItem.Label.key": "Key",
+  "CustomerDashboard.CompanyBranchItem.Label.branchName": "Branch Name",
+  "CustomerDashboard.CompanyBranchItem.Label.branchBalance": "Branch Balance",
+  "CustomerDashboard.CompanySubscriptionItem.Label.key": "Key",
+  "CustomerDashboard.CompanySubscriptionItem.Label.startDate": "Start Date",
+  "CustomerDashboard.CompanySubscriptionItem.Label.endDate": "End Date",
+
+  "CustomerDashboard.Section.BranchesBalance": "Branches Balance",
+  "CustomerDashboard.Section.Subscriptions": "Subscriptions",
+
+  "AdminDashboard.Title": "Admin Dashboard",
+  "AdminDashboard.SubscriptionRequests": "Subscription Requests",
+  "AdminDashboard.RechargeRequests": "Recharge Requests",
+  "AdminDashboard.CarRequests": "Car Requests",
+  "AdminDashboard.CompanyListItem.Label.key": "Key",
+  "AdminDashboard.CompanyListItem.Label.name": "Company Name",
+  "AdminDashboard.CompanyListItem.Label.balance": "Company Balance (Including Company, Branches, and Cars)",
+  "AdminDashboard.PetrolStationItem.Label.key": "Key",
+  "AdminDashboard.PetrolStationItem.Label.name": "Petrol Station Name",
+  "AdminDashboard.PetrolStationItem.Label.balance": "PetrolStation Balance",
+
+  "AdminDashboard.Section.CompaniesBalance": "Companies Balance",
+  "AdminDashboard.Section.PetrolStationsBalance": "PetrolStations Balance",
+
+
   "General.TransferBalanceType.CompanyToBranch": "Recharge Branch Balance",
   "General.TransferBalanceType.BranchToCompany": "Refund Balance To Company (Branch To Company)",
   "General.TransferBalanceType.BranchToCar": "Recharge Car Balance",
@@ -858,5 +935,8 @@
   "General.CarTypeOfFuel.92": "92",
   "General.CarTypeOfFuel.95": "95",
   "General.CarTypeOfFuel.80": "80",
-  "General.CarTypeOfFuel.Gas": "Gas"
+  "General.CarTypeOfFuel.Gas": "Gas",
+
+  "General.ConsumptionType.Limited": "Limited",
+  "General.ConsumptionType.Unlimited": "Unlimited"
 }

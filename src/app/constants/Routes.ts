@@ -19,6 +19,7 @@ export default
     petroStation: "/app/petroStation",
     editPetroStation: "/app/petroStation/edit/:petroStationId",
     addPetroStation: "/app/petroStation/add",
+    paymentPetroStation: "/app/petroStation/payment/:petroStationId",
 
     // PetroStation
     stationUser: "/app/stationUser",
@@ -55,6 +56,9 @@ export default
 
     //TransferBalance
     transferBalance: "/app/transferBalance",
+
+    //PetroPayAccount
+    paymentTransferAccount: "/app/pPetroPayAccount/payment",
 
     //Reports
     accountBalance: '/app/accountBalance',

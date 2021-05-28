@@ -1,18 +1,16 @@
 import React from 'react';
 import {inject, observer} from "mobx-react";
 import Stores from "app/constants/Stores";
-import AdminStore from "admin/stores/AdminStore";
+import AdminStore from "../../stores/AdminStore";
 
 interface AdminSidebarProps {
-    adminStore?: AdminStore
+    customerStore?: AdminStore
 }
 
-const AdminSidebar: React.FC<AdminSidebarProps> = inject(Stores.adminStore)(observer(({adminStore}) =>
+const AdminSidebar: React.FC<AdminSidebarProps> = inject(Stores.customerStore)(observer(({customerStore}) =>
 {
     return (
-        <div>
-            Auditors ...
-        </div>
+        <div></div>
     )
 }));
 

@@ -1,11 +1,11 @@
-import IDeserialize from "../../../../app/interfaces/deserialize";
 import {makeAutoObservable} from "mobx";
+import IDeserialize from "../../../app/interfaces/deserialize";
 
-export default class PetropayAccountListItem implements IDeserialize
+export default class CompanyListItem implements IDeserialize
 {
-    key: string;
-    title: string;
-    balance: string;
+    key: number;
+    name: string;
+    balance: number;
 
     constructor() {
         makeAutoObservable(this);

@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {inject, observer} from "mobx-react";
-import { useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./PetroStationList.scss";
 import Stores from "app/constants/Stores";
 
@@ -11,7 +11,7 @@ import {
 } from "antd";
 import {
     EditOutlined, DeleteOutlined, CheckOutlined, CloseOutlined,
-    ExclamationCircleOutlined, PlusCircleOutlined
+    ExclamationCircleOutlined, PlusCircleOutlined, CarOutlined, DollarOutlined
 } from '@ant-design/icons';
 import i18next from "i18next";
 import PetroStationColumns from "./PetroStationColumns";
@@ -48,6 +48,7 @@ const PetroStationList: React.FC<PetroStationListProps> = inject(Stores.petroSta
            }
        }
     });
+
     const columns: any[] = [...PetroStationColumns, {
         title: i18next.t("General.Column.Action"),
         dataIndex: 'operation',
@@ -55,8 +56,11 @@ const PetroStationList: React.FC<PetroStationListProps> = inject(Stores.petroSta
         fixed: 'right',
         render: (text, record) => (
             <div className="inline">
-
-                    <Button type="primary" icon={<EditOutlined />} onClick={() => showEditPage(record)}
+                <Link to={`/app/petroStation/payment/${record.key}`}>
+                    <Button type="default" icon={<DollarOutlined/>}
+                            title={i18next.t("PetroStations.Button.Payment")}/>
+                </Link>
+                <Button type="primary" icon={<EditOutlined />} onClick={() => showEditPage(record)}
                             title={i18next.t("General.Button.Edit")} />
                 <Button type="primary" danger icon={<DeleteOutlined />} onClick={() => showDeleteConfirm(record)}
                         title={i18next.t("General.Button.Delete")} />

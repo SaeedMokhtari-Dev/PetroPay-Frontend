@@ -21,6 +21,7 @@ import CarTypeOfFuels from "../../../../app/constants/CarTypeOfFuels";
 import MaskedInput from 'antd-mask-input'
 import ListBranchViewModel from "../../../branches/view-models/ListBranchViewModel";
 import UserContext from "../../../../identity/contexts/UserContext";
+import ConsumptionTypes from "../../../../app/constants/ConsumptionTypes";
 
 const { Option } = Select;
 
@@ -65,6 +66,9 @@ const EditCar: React.FC<EditCarProps> = inject(Stores.carStore)(observer(({carSt
 
     CarTypeOfFuels.forEach(w =>{ w.title = i18next.t(w.title) });
     const carTypeOfFuelOptions = [...CarTypeOfFuels];
+
+    ConsumptionTypes.forEach(w =>{ w.title = i18next.t(w.title) });
+    const consumptionTypeOptions = [...ConsumptionTypes];
 
     useEffect(() => {
         onLoad();
@@ -357,7 +361,8 @@ const EditCar: React.FC<EditCarProps> = inject(Stores.carStore)(observer(({carSt
                                    message: i18next.t("Cars.Validation.Message.consumptionType.Required")
                                }
                            ]}>
-                    <Input onChange={onChanged}/>
+                    {/*<Input onChange={onChanged}/>*/}
+                    <Select options={consumptionTypeOptions} showSearch={true} onChange={(e) => onSelectChanged(e, "consumptionType")} />
                 </Form.Item>
                     </Col>
                     <Col span={8}>

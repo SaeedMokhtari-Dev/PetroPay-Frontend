@@ -21,6 +21,7 @@ export default
     apiPetroStationGet: "/api/petro-station/get",
     apiPetroStationDetail: "/api/petro-station/detail",
     apiPetroStationDelete: "/api/petro-station/delete",
+    apiPetroStationPayment: "/api/petro-station/payment",
 
     apiStationUserAdd: "/api/station-user/add",
     apiStationUserEdit: "/api/station-user/edit",
@@ -78,10 +79,15 @@ export default
     apiPetrolStationListGet: "/api/petrol-station-list/get",
 
     apiPetropayAccountList: "/api/petropay-account/list",
+    apiPetropayAccountPayment: "/api/petropay-account/payment",
+
     apiServiceMasterList: "/api/service-master/list",
 
     apiTransferBalance: "/api/transfer-balance",
 
+    apiDashboardCustomerGet: "/api/dashboard/customer",
+    apiDashboardSupplierGet: "/api/dashboard/supplier",
+    apiDashboardAdminGet: "/api/dashboard/admin",
 
     apiLog: "/api/log"
 }
