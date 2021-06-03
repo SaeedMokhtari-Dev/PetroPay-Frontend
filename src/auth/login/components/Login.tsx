@@ -30,7 +30,7 @@ const Login: React.FC<LoginProps> = inject('authStore')(observer(({authStore, ma
     {
         /*document.body.classList.add('auth-page');*/
         authStore.onLoginPageLoad();
-        debugger;
+        
         if(params?.roleType){
             if(match.params.roleType.toLowerCase() == 'customer'){
                 authStore.loginViewModel.roleType = 1;
@@ -41,7 +41,6 @@ const Login: React.FC<LoginProps> = inject('authStore')(observer(({authStore, ma
             if(match.params.roleType.toLowerCase() == 'admin'){
                 authStore.loginViewModel.roleType = 100;
             }
-
         }
     }
 

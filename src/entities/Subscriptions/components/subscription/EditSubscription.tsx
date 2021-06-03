@@ -107,7 +107,7 @@ const EditSubscription: React.FC<EditSubscriptionProps> = inject(Stores.subscrip
         }
         setSubscriptionId(subscriptionIdParam);
 
-        debugger;
+        
         let petropayAccountOptions = [];
         for (let item of subscriptionStore.listPetropayAccountViewModel.listPetropayAccountResponse.items) {
             petropayAccountOptions.push(<Option key={item.key} value={item.key}>{item.title}</Option>);
@@ -123,7 +123,7 @@ const EditSubscription: React.FC<EditSubscriptionProps> = inject(Stores.subscrip
     if(!viewModel) return;
 
     async function onFinish(values: any) {
-        debugger;
+        
         viewModel.errorMessage = "";
         if(!bundleId)
         {
@@ -218,7 +218,7 @@ const EditSubscription: React.FC<EditSubscriptionProps> = inject(Stores.subscrip
     }
     const rowSelection = {
         onChange: (selectedRowKeys: React.Key[], selectedRows: BundleItem[]) => {
-            debugger;
+            
             console.log(`selectedRowKeys: ${selectedRowKeys}`);
             setBundleId(+selectedRowKeys[0]);
             setCarNumbersMinimum(selectedRows[0]?.bundlesNumberFrom)
@@ -243,7 +243,7 @@ const EditSubscription: React.FC<EditSubscriptionProps> = inject(Stores.subscrip
         }
     }
     function onRadioChange(e){
-        debugger;
+        
         setPayFromCompanyBalance(e.target.value);
         if(subscriptionId)
         {

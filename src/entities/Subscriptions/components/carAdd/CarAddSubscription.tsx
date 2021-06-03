@@ -80,7 +80,7 @@ const CarAddSubscription: React.FC<EditSubscriptionProps> = inject(Stores.subscr
         else{
             history.goBack();
         }
-        debugger;
+        
         subscriptionStore.editSubscriptionViewModel.carAddSubscriptionRequest = new CarAddSubscriptionRequest();
         subscriptionStore.editSubscriptionViewModel.carAddSubscriptionRequest.subscriptionId = subscriptionIdParam;
 
@@ -101,7 +101,7 @@ const CarAddSubscription: React.FC<EditSubscriptionProps> = inject(Stores.subscr
     if(!viewModel) return;
 
     async function onFinish(values: any) {
-        debugger;
+        
         await viewModel.addCarSubscription(viewModel.carAddSubscriptionRequest);
         if(!viewModel.errorMessage)
             history.goBack();
@@ -119,7 +119,7 @@ const CarAddSubscription: React.FC<EditSubscriptionProps> = inject(Stores.subscr
                   selectedKeys: listSelectedKeys,
                   disabled: listDisabled,
               }) => {
-                debugger;
+                
                 const columns = direction === 'left' ? leftColumns : rightColumns;
 
                 const rowSelection = {
@@ -159,7 +159,7 @@ const CarAddSubscription: React.FC<EditSubscriptionProps> = inject(Stores.subscr
     );
     function onChange(nextTargetKeys) {
         viewModel.errorMessage = "";
-        debugger;
+        
         if(viewModel.detailSubscriptionResponse.subscriptionCarNumbers < nextTargetKeys.length) {
             viewModel.errorMessage = i18next.t("Subscriptions.Validation.Message.cannotAdd.MoreCar");
             return;

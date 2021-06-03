@@ -194,13 +194,13 @@ const BranchList: React.FC<BranchListProps> = inject(Stores.branchStore)(observe
             setModalVisible(false)
     }
     function handleCancel(){
-        debugger;
+        
         setSelectedBranchId(0);
         setIncreaseAmount(0);
         setModalVisible(false)
     }
     function onIncreaseAmountChanged(e){
-        debugger;
+        
         setIncreaseAmount(e);
         //pageStore.changeUserPasswordRequest.currentPassword = e.target.value;
         //bundlesStore.editBundleViewModel.editBundleRequest[`${e.target.id}`] = e.target.value;

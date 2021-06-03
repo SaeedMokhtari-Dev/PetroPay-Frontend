@@ -71,7 +71,7 @@ const PaymentPetropayAccount: React.FC<EditPetropayAccountProps> = inject(Stores
             petropayAccountOptions.push(<Option key={item.key} value={item.key} balance={item.balance}>{item.title}</Option>);
         }
         setPetropayAccountOptions(petropayAccountOptions);
-        debugger;
+        
         petropayAccountStore.paymentPetropayAccountViewModel.paymentPetropayAccountRequest = new PaymentPetropayAccountRequest();
         petropayAccountStore.paymentPetropayAccountViewModel.paymentPetropayAccountRequest.amount = 0;
 
@@ -90,7 +90,7 @@ const PaymentPetropayAccount: React.FC<EditPetropayAccountProps> = inject(Stores
             history.goBack();
     };
     function onAmountChanged(e){
-        debugger;
+        
         viewModel.paymentPetropayAccountRequest.amount = +e;
     }
     function onUnload() {
@@ -100,7 +100,7 @@ const PaymentPetropayAccount: React.FC<EditPetropayAccountProps> = inject(Stores
             viewModel.paymentPetropayAccountRequest[`${e.target.id}`] = e.target.value;
     }
     function onOptionSelectChanged(e, option, propName, isFrom) {
-        debugger;
+        
         viewModel.paymentPetropayAccountRequest[`${propName}`] = e;
         console.log(option);
         if(isFrom){

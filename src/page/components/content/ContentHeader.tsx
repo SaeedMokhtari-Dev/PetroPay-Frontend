@@ -62,7 +62,7 @@ const ContentHeader: React.FC<ContentHeaderProps> = inject(Stores.pageStore)(obs
             setModalVisible(false)
     }
     function handleCancel(){
-        debugger;
+        
         pageStore.changeUserPasswordRequest = new ChangeUserPasswordRequest();
         setModalVisible(false)
     }

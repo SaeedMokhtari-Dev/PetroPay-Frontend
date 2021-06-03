@@ -27,7 +27,7 @@ export default class ListBranchViewModel {
             let response = await ListBranchHandler.get(request);
 
             if (response && response.success) {
-                debugger;
+                
                 this.listBranchResponse = new ListBranchResponse();
                 let result = response.data;
                 //let items = result.items;

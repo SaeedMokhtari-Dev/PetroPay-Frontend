@@ -26,7 +26,7 @@ export default class ListServiceMasterViewModel {
             let response = await ListServiceMasterHandler.get(request);
 
             if (response && response.success) {
-                debugger;
+                
                 this.listServiceMasterResponse = new ListServiceMasterResponse();
                 let result = response.data;
                 //let items = result.items;

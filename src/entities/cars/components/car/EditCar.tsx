@@ -77,7 +77,7 @@ const EditCar: React.FC<EditCarProps> = inject(Stores.carStore)(observer(({carSt
 
     async function onLoad()
     {
-        debugger;
+        
         carStore.onCarEditPageLoad();
         let carIdParam = +match.params?.carId;
         let listBranchViewModel: ListBranchViewModel = new ListBranchViewModel();
@@ -96,7 +96,7 @@ const EditCar: React.FC<EditCarProps> = inject(Stores.carStore)(observer(({carSt
                 carStore.editCarViewModel.addCarRequest.companyBarnchId = +match.params.companyBranchId;
             }
         }
-        debugger;
+        
         let children = [];
         for (let item of listBranchViewModel.listBranchResponse.items) {
             children.push(<Option key={item.key} value={item.key}>{item.title}</Option>);
@@ -203,7 +203,7 @@ const EditCar: React.FC<EditCarProps> = inject(Stores.carStore)(observer(({carSt
         }
     }
     function onSwitchChange(e, propName){
-        debugger;
+        
         if(carId) {
             carStore.editCarViewModel.editCarRequest[`${propName}`] = e;
             carStore.editCarViewModel.detailCarResponse[`${propName}`] = e;

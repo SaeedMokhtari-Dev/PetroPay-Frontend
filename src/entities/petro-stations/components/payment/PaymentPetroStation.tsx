@@ -98,7 +98,7 @@ const PaymentPetroStation: React.FC<EditPetroStationProps> = inject(Stores.petro
             history.goBack();
     };
     function onAmountChanged(e){
-        debugger;
+        
         viewModel.paymentPetroStationRequest.amount = +e;
     }
     function onUnload() {

@@ -26,7 +26,7 @@ export default class ListPetropayAccountViewModel {
             let response = await ListPetropayAccountHandler.get(request);
 
             if (response && response.success) {
-                debugger;
+                
                 this.listPetropayAccountResponse = new ListPetropayAccountResponse();
                 let result = response.data;
                 //let items = result.items;

@@ -26,7 +26,7 @@ export default class RechargeBalanceStore
 
     onRechargeBalanceEditPageLoad()
     {
-        debugger;
+        
         this.listPetropayAccountViewModel = new ListPetropayAccountViewModel();
         this.editRechargeBalanceViewModel = new EditRechargeBalanceViewModel(this);
     }

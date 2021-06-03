@@ -26,7 +26,7 @@ export default class GetCarTransactionViewModel {
 
     public async getAllCarTransaction(getCarTransactionsRequest: GetCarTransactionRequest, exportToFile: boolean = false) {
         try {
-            debugger;
+            
             this.isProcessing = true;
             getCarTransactionsRequest.exportToFile = exportToFile;
             let response = await GetCarTransactionHandler.get(getCarTransactionsRequest);

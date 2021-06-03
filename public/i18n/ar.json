@@ -14,7 +14,7 @@
   "General.Confirm.Accept": "هل أنت متأكد من الموافقة?",
 
 
-  "General.HeaderMenu.User": "مرحبا بك ",
+  "General.HeaderMenu.User": "مرحبا ",
   "General.HeaderMenu.Profile": "الملف الشخصي",
   "General.HeaderMenu.ChangePassword": "تغير كلمة المرور",
   "General.HeaderMenu.SignOut": "خروج",
@@ -79,7 +79,7 @@
   "ChangePassword.Label.currentPassword": "كلمة المرور الحالية",
   "ChangePassword.Label.NewPassword": "كلمة مرور جديدة",
   "ChangePassword.Label.ConfirmPassword": "تأكيد كلمة المرور",
-  "ChangePassword.Validation.Message.CurrentPassword.Required": "Please enter your current password",
+  "ChangePassword.Validation.Message.CurrentPassword.Required": "يرجي ادخال كلمة المرور الحالية",
   "ChangePassword.Validation.Message.NewPassword.Required": "يرجي ادخال كلمة المرور الجديدة",
   "ChangePassword.Validation.Message.ConfirmPassword.Required": "يرجي تاكيد كلمة المرور الجديدة",
   "ChangePassword.Token.Validation.Message": " ..الرجاء الانتظار ، للتحقق من صحة طلبك ",
@@ -124,6 +124,7 @@
   "Companies.Validation.Message.companyAdminUserName.Required": "يرجي ادخال اسم المستخدم لمدير الحساب",
   "Companies.Validation.Message.companyAdminUserName.Valid": "يرجي ادخال اسم مستخدم صحيح",
   "Companies.Validation.Message.companyAdminUserPassword.Required": "يرجي ادخال كلمة المرور لمدير الحساب",
+  "Companies.Validation.Message.companyAdminUserPassword.Valid": "لحد الأدنى لطول كلمة المرور هو 8 أحرف ويجب أن تحتوي على الأقل على رقم وحرف علوي وسفلي و رمز خاص",
 
   "Api.Company.Add.Successful": "تم اضافة الشركة بنجاح",
   "Api.Company.Edit.Successful": "تم التعديل بنجاح",
@@ -210,6 +211,7 @@
   "Branches.Validation.Message.companyBranchAdminUserName.Required": "يرجي ادخال اسم المستخدم للمشرف",
   "Branches.Validation.Message.companyBranchAdminUserName.Valid": "يرجي ادخال اسم مستخدم صحيح",
   "Branches.Validation.Message.companyBranchAdminUserPassword.Required": "يرجي ادخال كلمة المرور لمشرف الفرع",
+  "Branches.Validation.Message.companyBranchAdminUserPassword.Valid": "لحد الأدنى لطول كلمة المرور هو 8 أحرف ويجب أن تحتوي على الأقل على رقم وحرف علوي وسفلي و رمز خاص",
   "Branches.Validation.Message.companyBranchAdminEmail.Valid": "يرجي ادخال بريد الكتروني صحيح",
   "Branches.Validation.Message.increaseAmount.Valid": "الرجاء إدخال مبلغ أقل من رصيد الشركة",
   "Branches.Validation.Message.increaseAmount.Required": "الرجاء إدخال مبلغ الشحن ",
@@ -250,9 +252,16 @@
   "PetroStations.Label.stationBalance": "رصيد المحطة",
   "PetroStations.Label.stationEmail": "البريد الالكتروني",
 
+  "PetroStations.Label.petroPayAccountId": "طريقة السداد",
+  "PetroStations.Label.amount": "المبلغ",
+  "PetroStations.Label.reference": "المرجع",
+
   "PetroStations.Add.HeaderText": "اضافة محطة وقود",
   "PetroStations.Edit.HeaderText": "تعديل حساب محطة الوقود",
+  "PetroStations.Payment.HeaderText": "السداد لمحطات الوقود",
   "PetroStations.Section.GeneralInformation": "المعلومات العامة",
+
+  "PetroStations.Button.Payment": "ايصال السداد",
 
   "PetroStations.Validation.Message.stationName.Required": "يرجي ادخال اسم المحطة",
   "PetroStations.Validation.Message.stationAddress.Required": "يرجي ادخال عنوان المحطة",
@@ -261,13 +270,55 @@
   "PetroStations.Validation.Message.stationUserName.Valid": "يرجي ادخال اسم مستخدم صحيح",
   "PetroStations.Validation.Message.stationUserName.Required": "يرجي ادخال اسم المستخدم",
   "PetroStations.Validation.Message.stationPassword.Required": "يرجي ادخال كلمة المرور",
+  "PetroStations.Validation.Message.stationPassword.Valid": "لحد الأدنى لطول كلمة المرور هو 8 أحرف ويجب أن تحتوي على الأقل على رقم وحرف علوي وسفلي و رمز خاص",
   "PetroStations.Validation.Message.stationEmail.Required": "يرجي ادخال البريد الالكتروني",
+
+  "PetroStations.Validation.Message.petroPayAccountId.Required": "يرجي اختيار طريقة الدفع",
+  "PetroStations.Validation.Message.amount.Required": "يرجي ادخال المبلغ",
+  "PetroStations.Validation.Message.reference.Required": "يرجي ادخال المرجع",
 
   "Api.PetroStation.Add.Successful": "تم اضافة محطة وقود جديدة بنجاح",
   "Api.PetroStation.Edit.Successful": "تم التعديل بنجاح",
   "Api.PetroStation.Deleted.Successful": "تم حذف حساب المحطة بنجاح",
   "Api.PetroStation.Id.Required": "Id is Required",
+  "Api.PetroStation.PetroPayAccountId.Required": "يجب اختيار طريقة السداد",
+  "Api.PetroStation.Amount.Required": "يرجي ادخال المبلغ",
+  "Api.PetroStation.Reference.Required": "يرجي اضافة المرجع",
 
+  "PetropayAccounts.Menu.Title": "حسابات بتروباي",
+  "PetropayAccounts.Page.Title": "حسابات بتروباي",
+  "PetropayAccounts.Page.SubTitle": "حسابات بتروباي",
+  "PetropayAccounts.Label.key": "key",
+  "PetropayAccounts.Label.fromPetroPayAccountId": "من حساب",
+  "PetropayAccounts.Label.toPetroPayAccountId": "الي حساب",
+  "PetropayAccounts.Label.fromPetroPayAccountBalance": "الرصيد",
+  "PetropayAccounts.Label.toPetroPayAccountBalance": "الرصيد",
+
+  "PetropayAccounts.Label.petroPayAccountId": "طرقة الدفع",
+  "PetropayAccounts.Label.amount": "المبلغ",
+  "PetropayAccounts.Label.reference": "المرجع",
+
+  "PetropayAccounts.Add.HeaderText": "اضافة حساب",
+  "PetropayAccounts.Edit.HeaderText": "تعديل",
+  "PetropayAccounts.Payment.HeaderText": "Payment PetroPay Account",
+  "PetropayAccounts.Section.GeneralInformation": "General Information",
+
+  "PetropayAccounts.Button.Payment": "Payment Receipt Transaction",
+
+  "PetropayAccounts.Validation.Message.fromPetroPayAccountId.Required": "يرجي اختيار - من حساب",
+  "PetropayAccounts.Validation.Message.toPetroPayAccountId.Required": "يرجي اختيار -الي حساب",
+  "PetropayAccounts.Validation.Message.amount.Required": "يرجي ادخال المبلغ",
+  "PetropayAccounts.Validation.Message.reference.Required": "يرجي اضافة المرجع",
+
+  "Api.PetropayAccount.Add.Successful": "تمت إضافة حساب بتروباي  جديد بنجاح",
+  "Api.PetropayAccount.Edit.Successful": "تم التعديل بنجاح",
+  "Api.PetropayAccount.Deleted.Successful": "تم الحذف بنجاح",
+  "Api.PetropayAccount.Id.Required": "Id is Required",
+  "Api.PetropayAccount.FromPetroPayAccountId.Required": "يجب اختيار- من الحساب",
+  "Api.PetropayAccount.ToPetroPayAccountId.Required": "يرجي اختيار -الي حساب",
+  "Api.PetroPayAccount.PetroPayAccounts.NotEqual": "لايمكن اختيار نفس الحساب في الجانبين.",
+  "Api.PetropayAccount.Amount.Required": "يرجي اضافة المرجع",
+  "Api.PetropayAccount.Reference.Required": "يرجي اضافة المرجع",
 
   "StationUsers.Menu.Title": "موظفي المحطة",
   "StationUsers.Page.Title": "موظفي المحطة",
@@ -290,6 +341,7 @@
   "StationUsers.Validation.Message.stationUserName.Valid": "يرجي ادخال اسم مستخدم صحيح",
   "StationUsers.Validation.Message.stationUserName.Required": "يرجي ادخال اسم المستخدم",
   "StationUsers.Validation.Message.stationUserPassword.Required": "يرجي ادخال كلمة المرور",
+  "StationUsers.Validation.Message.stationUserPassword.Valid": "لحد الأدنى لطول كلمة المرور هو 8 أحرف ويجب أن تحتوي على الأقل على رقم وحرف علوي وسفلي و رمز خاص",
 
   "Api.StationUser.Add.Successful": "تم اضافة الموظف بنجاح ",
   "Api.StationUser.Edit.Successful": "تم التعديل بنجاح",
@@ -347,11 +399,13 @@
   "Cars.Add.HeaderText": "اضافة سيارة",
   "Cars.Edit.HeaderText": "تعديل بيانات السيارة",
   "Cars.Section.GeneralInformation": "المعلومات العامة",
+  "Cars.Section.CarInformation": "Car Information",
   "Cars.Section.DriverInformation": "معلومات السائق",
   "Cars.Button.ActiveAndNfcCode": " NFC كود ",
   "Cars.Modal.Active.Title": "يرجى تحديد رمز NFC وتفعيل السيارة",
   "Cars.Modal.OkButton.Title": "تفعيل",
 
+  "Cars.Validation.Message.companyBarnchId.Required": "يرجي تحديد فرع السيارة",
   "Cars.Validation.Message.carIdNumber.Required": "يرجي ادخال رقم السيارة",
   "Cars.Validation.Message.carIdText1E.Required": "برجاء ادخال حروف اللوحة  الانجليزية",
   "Cars.Validation.Message.carIdText1A.Required": "برجاء ادخال حروف اللوحة العربية",
@@ -370,6 +424,7 @@
   "Cars.Validation.Message.carDriverUserName.Valid": "يرجي ادخال اسم مستخدم صحيح",
   "Cars.Validation.Message.carDriverUserName.Required": "يرجي ادخال اسم المستخدم",
   "Cars.Validation.Message.carDriverPassword.Required": "يرجي ادخال كلمة المرور",
+  "Cars.Validation.Message.carDriverPassword.Valid": "لحد الأدنى لطول كلمة المرور هو 8 أحرف ويجب أن تحتوي على الأقل على رقم وحرف علوي وسفلي و رمز خاص",
   "Cars.Validation.Message.carDriverConfirmationCode.4MinLength": "كود التموين لابد من ان يكون اكثر من 4 ارقام",
 
   "Api.Car.Add.Successful": "تم اضافة السيارة بنجاح",
@@ -443,27 +498,43 @@
   "Subscriptions.Label.paymentReferenceNumber": "الرقم المرجعي للسداد",
   "Subscriptions.Label.subscriptionDate": "التاريخ",
 
+  "Subscriptions.Label.branchName": "اسم الفرع",
+  "Subscriptions.Label.carNumber": "رقم السيارة",
+
+  "Subscriptions.subscriptionPaymentMethod.PayFromCompanyBalance": "السداد من رصيد الشركة",
+  "Subscriptions.subscriptionPaymentMethod.SelectOtherPayment": "اختيار طريقة سداد اخري",
 
   "Subscriptions.Add.HeaderText": "اضافة اشتراك",
   "Subscriptions.Edit.HeaderText": "تعديل اشتراك",
+  "Subscriptions.CarAdd.Edit.HeaderText": "اضافة السيارات الي الخدمة",
   "Subscriptions.Section.GeneralInformation": "معلومات عامة",
+  "Subscriptions.Section.BundleInformation": "Bundle Information (يرجي اختيار الباقة)",
+
+  "Subscriptions.Alert.BeCareful": "بعد حفظ هذا الاشتراك ، لا يمكنك تغييره بعد الآن ، يرجى توخي الحذر",
+
   "Subscriptions.Button.AcceptRequest": "الطلب مقبول ",
   "Subscriptions.Button.Calculate": "حساب التكلفة",
+  "Subscriptions.Button.CarList": "السيارات",
 
+  "Subscriptions.Validation.Message.bundlesId.Required": "يرجي اختيار الباقة",
   "Subscriptions.Validation.Message.subscriptionCarNumbers.Required": "يرجي ادخال عدد السيارات المطلوبة للاشتراك",
   "Subscriptions.Validation.Message.subscriptionPaymentMethod.Required": "يرجي ادخال طريقة الدفع",
+  "Subscriptions.Validation.Message.payFromCompany.Required": "يرجي اختيار احد وسائل السداد",
   "Subscriptions.Validation.Message.subscriptionType.Required": "يرجي ادخال نوع الاشتراك",
+
+  "Subscriptions.Validation.Message.cannotAdd.MoreCar": "لا يمكنك إضافة سيارة أكثر مما قمت بالاشتراك بة",
 
   "Api.Subscription.Add.Successful": "تم الاضافة بنجاح",
   "Api.Subscription.Edit.Successful": "تم التعديل بنجاح",
   "Api.Subscription.Deleted.Successful": "تم الحذف بنجاح",
   "Api.Subscription.Activated.Successful": "تم تفعيل الاشتراك بنجاح",
   "Api.Subscription.CarsAdded.Successful": "تم ضافة السيارة بنجاح",
+  "Api.Subscription.SubscriptionCarAdd.NotAllowed": "لا يمكنك إضافة سيارة أكثر مما قمت بالاشتراك بة",
 
   "Api.Subscription.companyId.Required": "Company Id is Required",
-  "Api.Subscription.BundleId.Required": "Bundle Id is Required",
+  "Api.Subscription.BundleId.Required": "يجب اختيار الباقة",
   "Api.Subscription.SubscriptionCarIds.Required": "Subscription Car Ids is Required",
-  "Api.Subscription.SubscriptionCost.Required": "Subscription Cost is Required",
+  "Api.Subscription.SubscriptionCost.Required": "يجب حساب التكلفة",
   "Api.Subscription.SubscriptionCarNumbers.Required": "مطلوب  ادخال عدد السيارات",
   "Api.Subscription.SubscriptionStartDate.Required": "يرجي تحديد بداية تاريخ الاشتراك",
   "Api.Subscription.SubscriptionEndDate.Required": "يرجي تحديد تاريخ نهاية الاشتراط",
@@ -537,6 +608,7 @@
 
   "InvoiceDetails.Section.GeneralInformation": "معلومات عامة",
   "InvoiceDetails.Section.Photos": "الصور",
+  "InvoiceDetails.Section.Map": "Location",
 
   "InvoiceDetails.Error.Get.Message": "حدث خطأ أثناء محاولة الحصول على قائمة الفواتير",
   "InvoiceDetails.Error.Detail.Message": "حدث خطأ أثناء محاولة الحصول على تفاصيل الفاتورة",
@@ -648,7 +720,95 @@
 
   "CarTransactions.Error.Get.Message": "حدث خطأ أثناء محاولة الحصول على قائمة معاملات السيارات",
 
+  "AccountBalances.Menu.Title": "ارصدة الحسابات",
+  "AccountBalances.Page.Title": "ارصدة الحسابات",
+  "AccountBalances.Page.SubTitle": "تقرير ارصدة الحسابات",
+  "AccountBalances.Label.key": "key",
+  "AccountBalances.Label.accountId": "الحساب #",
+  "AccountBalances.Label.accountTaype": "نوع الحساب",
+  "AccountBalances.Label.accountName": "اسم الحساب",
+  "AccountBalances.Label.sumTransAmount": "اجمالي مبلغ المعاملات",
+
+  "AccountBalances.Error.Get.Message": "حدث خطأ أثناء محاولة الحصول على قائمة رصيد الحساب",
+
+  "PetrolStationList.Menu.Title": "مواقع الخدمات",
+  "PetrolStationList.Page.Title": "مواقع الخدمات",
+  "PetrolStationList.Page.SubTitle": "تقرير مواقع الخدمات",
+  "PetrolStationLists.Label.key": "key",
+  "PetrolStationLists.Label.stationLucationName": "المنطقة",
+  "PetrolStationLists.Label.stationName": "اسم المحطة",
+  "PetrolStationLists.Label.stationNameAr": "اسم المحطة",
+  "PetrolStationLists.Label.stationDiesel": "متوفر سولار",
+  "PetrolStationLists.Label.stationLatitude": "Station Latitude",
+  "PetrolStationLists.Label.stationLongitude": "Station Longitude",
+
+  "PetrolStationLists.SearchPanel.Label.region": "المنطقة",
+
+  "PetrolStationList.Error.Get.Message": "حدث خطأ أثناء محاولة الحصول على قائمة محطات الوقود",
+
+  "TransferBalances.Menu.Title": "تحويل رصيد",
+  "TransferBalances.Page.Title": "تحويلات الرصيد",
+  "TransferBalances.Page.SubTitle": "تحويلات الرصيد ",
+  "TransferBalances.Label.key": "key",
+  "TransferBalances.Label.transferBalanceType": "نوع التحوبل",
+  "TransferBalances.Label.amount": "المبلغ",
+  "TransferBalances.Label.companyBalance": "رصيد الشركة",
+  "TransferBalances.Label.toBranch": "الي فرع",
+  "TransferBalances.Label.fromBranch": "من فرع",
+  "TransferBalances.Label.branchBalance": "رصيد الفرع",
+  "TransferBalances.Label.carBalance": "رصيد السيارة",
+  "TransferBalances.Label.fromCar": "من حساب السيارة",
+  "TransferBalances.Label.toCar": "الي حساب السيارة",
+
+  "TransferBalances.Validation.Message.branch.Required": "يرجي اختيار الفرع",
+  "TransferBalances.Validation.Message.car.Required": "يرجي اختيار السيارة",
+  "TransferBalances.Validation.Message.amount.Required": "يرجي ادخال المبلغ",
+  "TransferBalances.Validation.Message.transferBalanceType.Required": "الرجاء تحديد نوع  التحويل",
+
+  "TransferBalances.Section.GeneralInformation": "معلومات عامة",
+  "TransferBalances.Error.Get.Message": "حدث خطأ أثناء محاولة الحصول على قائمة محطات الوقود.",
+
+  "Api.TransferBalance.Add.Successful": "تم تحويل الرصيد بنجاح",
+
+  "CustomerDashboard.Title": "لوحة البيانات",
+  "CustomerDashboard.TotalCustomerBalance": "اجمالي رصيد العميل",
+  "CustomerDashboard.TotalCarBalance": "اجمالي رصيد السيارات",
+  "CustomerDashboard.CompanyBranchItem.Label.key": "Key",
+  "CustomerDashboard.CompanyBranchItem.Label.branchName": "اسم الفرع",
+  "CustomerDashboard.CompanyBranchItem.Label.branchBalance": "رصيد الفرع",
+  "CustomerDashboard.CompanySubscriptionItem.Label.key": "Key",
+  "CustomerDashboard.CompanySubscriptionItem.Label.startDate": "من تاريخ",
+  "CustomerDashboard.CompanySubscriptionItem.Label.endDate": "الي تاريخ",
+
+  "CustomerDashboard.Section.BranchesBalance": "ارصدة الفروع",
+  "CustomerDashboard.Section.Subscriptions": "الاشتراكات",
+
+  "AdminDashboard.Title": "لوحة البيانات",
+  "AdminDashboard.SubscriptionRequests": "طلبات الاشتراك",
+  "AdminDashboard.RechargeRequests": "طلبات الشحن",
+  "AdminDashboard.CarRequests": "طلبات تفعيل السيارات",
+  "AdminDashboard.CompanyListItem.Label.key": "Key",
+  "AdminDashboard.CompanyListItem.Label.name": "اسم الشركة",
+  "AdminDashboard.CompanyListItem.Label.balance": "رصيد الشركة (رصيد الشركة, رصيد الفروع, رصيد السيارات)",
+  "AdminDashboard.PetrolStationItem.Label.key": "Key",
+  "AdminDashboard.PetrolStationItem.Label.name": "اسم محطة الوقود",
+  "AdminDashboard.PetrolStationItem.Label.balance": "رصيد المحطة",
+
+  "AdminDashboard.Section.CompaniesBalance": "ارصدة الشركات",
+  "AdminDashboard.Section.PetrolStationsBalance": "ارصدة محطات الوقود",
+
+
+  "General.TransferBalanceType.CompanyToBranch": "شحن ارصدة الفروع",
+  "General.TransferBalanceType.BranchToCompany": "استعادة رصيد  الفرع الي الشركة",
+  "General.TransferBalanceType.BranchToCar": "شحن رصيد السيارة",
+  "General.TransferBalanceType.CarToBranch": "استعادة رصيد السيارة الي الفرع",
+  "General.TransferBalanceType.CarToCar": "تحويل رصيد سيارة الي سيارة",
+
+
+  "PetropayAccounts.Error.List.Message": "حدث خطأ أثناء محاولة الحصول على قائمة حسابات بتروباي",
+
   "General.Country.Egypt": "Egypt",
+
   "General.Region.Alexandria": "Alexandria",
   "General.Region.Aswan": "Aswan",
   "General.Region.Asyut": "Asyut",
@@ -676,6 +836,7 @@
   "General.Region.Sohag": "Sohag",
   "General.Region.SouthSinai": "South Sinai",
   "General.Region.Suez": "Suez",
+
   "General.Type.PETROLEUM": "البترول",
   "General.Type.TELECOMMUNICATIONS": "الاتصالات",
   "General.Type.INFORMATIONTECHNOLOGY": "تكنولوجيا المعلومات",
@@ -690,13 +851,16 @@
   "General.Type.THEMEDICALSECTOR": "القطاع الطبي",
   "General.Type.GOVERNMENTSECTOR": "القطاع الحكومي",
   "General.Type.OTHERS": "اخري",
+
   "General.PaymentMethod.Cash": "نقدي",
   "General.PaymentMethod.BankTransfer": "تحويل بنكي",
   "General.PaymentMethod.Check": "شيك بنكي",
   "General.PaymentMethod.Credit": "رصيد دائن",
+
   "General.SubscriptionType.Monthly": "شهري",
   "General.SubscriptionType.Quarterly": "ربع سنوي",
   "General.SubscriptionType.Yearly": "سنوي",
+
   "General.CarType.SEDAN": "ملاكي",
   "General.CarType.TAXI": "اجرة",
   "General.CarType.TRUCK": "نقل",
@@ -768,7 +932,8 @@
   "General.CarTypeOfFuel.92": "92",
   "General.CarTypeOfFuel.95": "95",
   "General.CarTypeOfFuel.80": "80",
-  "General.CarTypeOfFuel.Gas": "غاز"
+  "General.CarTypeOfFuel.Gas": "غاز",
+
+  "General.ConsumptionType.Limited": "Limited",
+  "General.ConsumptionType.Unlimited": "Unlimited"
 }
-
-

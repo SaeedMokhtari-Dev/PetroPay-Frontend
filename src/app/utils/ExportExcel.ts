@@ -39,7 +39,7 @@ function ExportExcel(column, dataSource, fileName = 'example') {
         });
         dataSourceArr.push(dataTemp);
     });
-    // debugger;
+    // 
     //  drawing table data
     dataSourceArr.forEach((item, index) => {
         // according to the data, create the corresponding number of rows

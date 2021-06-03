@@ -21,7 +21,7 @@ export default class ListCarViewModel {
 
     public async getCarList(companyId?: number)  {
         try {
-            debugger;
+            
             this.isProcessing = true;
 
             let request = new ListCarRequest(companyId);

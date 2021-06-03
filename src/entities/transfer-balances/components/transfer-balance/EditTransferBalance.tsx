@@ -125,7 +125,7 @@ const EditTransferBalance: React.FC<EditTransferBalanceProps> = inject(Stores.tr
         viewModel.addTransferBalanceRequest.amount = e;
     }
     function onOptionSelectChanged(e, option, propName, isFrom) {
-        debugger;
+        
         viewModel.addTransferBalanceRequest[`${propName}`] = e;
         console.log(option);
         if(isFrom){

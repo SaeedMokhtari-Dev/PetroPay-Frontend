@@ -62,7 +62,7 @@ const EditRechargeBalance: React.FC<EditRechargeBalanceProps> = inject(Stores.re
     {
         rechargeBalanceStore.onRechargeBalanceEditPageLoad();
         let rechargeBalanceIdParam = +match.params?.rechargeBalanceId;
-        debugger;
+        
         await rechargeBalanceStore.listPetropayAccountViewModel.getPetropayAccountList();
 
         if(rechargeBalanceIdParam)
