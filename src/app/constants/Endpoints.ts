@@ -15,6 +15,7 @@ export default
     apiCompanyGet: "/api/company/get",
     apiCompanyDetail: "/api/company/detail",
     apiCompanyDelete: "/api/company/delete",
+    apiCompanyList: "/api/company/list",
 
     apiPetroStationAdd: "/api/petro-station/add",
     apiPetroStationEdit: "/api/petro-station/edit",

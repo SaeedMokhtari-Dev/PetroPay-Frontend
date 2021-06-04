@@ -7,6 +7,7 @@ export default class RechargeBalanceItem implements IDeserialize
     /*rechargeId: number;*/
     rechageDate: string;
     companyId: number;
+    companyName: string;
     rechargeAmount: number;
     rechargePaymentMethod: string;
     bankName: string;

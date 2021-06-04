@@ -57,7 +57,7 @@ export default class EditRechargeBalanceViewModel
         }
         catch(e)
         {
-            this.errorMessage = i18next.t('RechargeBalancees.Error.Detail.Message');
+            this.errorMessage = i18next.t('RechargeBalances.Error.Detail.Message');
             log.error(e);
         }
         finally
@@ -72,7 +72,9 @@ export default class EditRechargeBalanceViewModel
             this.errorMessage = "";
             this.isProcessing = true;
 
-            request.companyId = UserContext.info.id;
+            if(UserContext.info.role === 1)
+                request.companyId = UserContext.info.id;
+
             let response = await AddRechargeBalanceHandler.add(request);
 
             if(response && response.success)
@@ -86,7 +88,7 @@ export default class EditRechargeBalanceViewModel
         }
         catch(e)
         {
-            this.errorMessage = i18next.t('RechargeBalancees.Error.Add.Message');
+            this.errorMessage = i18next.t('RechargeBalances.Error.Add.Message');
             log.error(e);
         }
         finally
@@ -114,7 +116,7 @@ export default class EditRechargeBalanceViewModel
         }
         catch(e)
         {
-            this.errorMessage = i18next.t('RechargeBalancees.Error.Edit.Message');
+            this.errorMessage = i18next.t('RechargeBalances.Error.Edit.Message');
             log.error(e);
         }
         finally

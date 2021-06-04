@@ -19,6 +19,7 @@ import Countries from "../../../../app/constants/Countries";
 import PaymentMethods from "../../../../app/constants/PaymentMethods";
 import moment from 'moment';
 import Constants from 'app/constants/Constants';
+import UserContext from "../../../../identity/contexts/UserContext";
 const {useEffect} = React;
 
 const { Option } = Select;
@@ -35,6 +36,7 @@ const EditRechargeBalance: React.FC<EditRechargeBalanceProps> = inject(Stores.re
 
     const [rechargeBalanceId, setRechargeBalanceId] = React.useState(0);
     const [petropayAccountOptions, setPetropayAccountOptions] = React.useState([]);
+    const [companyOptions, setCompanyOptions] = React.useState([]);
 
     const [form] = Form.useForm();
 
@@ -65,6 +67,7 @@ const EditRechargeBalance: React.FC<EditRechargeBalanceProps> = inject(Stores.re
         
         await rechargeBalanceStore.listPetropayAccountViewModel.getPetropayAccountList();
 
+
         if(rechargeBalanceIdParam)
         {
             await rechargeBalanceStore.editRechargeBalanceViewModel.getDetailRechargeBalance(rechargeBalanceIdParam);
@@ -80,6 +83,15 @@ const EditRechargeBalance: React.FC<EditRechargeBalanceProps> = inject(Stores.re
             petropayAccountOptions.push(<Option key={item.key} value={item.title}>{item.title}</Option>);
         }
         setPetropayAccountOptions(petropayAccountOptions);
+
+        if(UserContext.info.role === 100) {
+            await rechargeBalanceStore.listCompanyViewModel.getCompanyList();
+            let companyOptions = [];
+            for (let item of rechargeBalanceStore.listCompanyViewModel.listCompanyResponse.items) {
+                companyOptions.push(<Option key={item.key} value={item.key}>{item.title}</Option>);
+            }
+            setCompanyOptions(companyOptions);
+        }
         setRechargeBalanceId(rechargeBalanceIdParam);
         setDataFetched(true);
     }
@@ -190,6 +202,24 @@ const EditRechargeBalance: React.FC<EditRechargeBalanceProps> = inject(Stores.re
                   key={"rechargeBalanceForm"}
                  scrollToFirstError>
                 <Row gutter={[24, 16]}>
+                    {UserContext.info.role === 100 &&
+                    <Col span={8}>
+                        <Form.Item name="companyId" initialValue={viewModel?.detailRechargeBalanceResponse?.companyId}
+                                   key={"companyId"}
+                                   label={i18next.t("RechargeBalances.Label.companyId")}
+                                   rules={[
+                                       {
+                                           required: true,
+                                           message: i18next.t("RechargeBalances.Validation.Message.companyId.Required")
+                                       }
+                                   ]}>
+                            <Select style={{width: "100%", display:"block"}} defaultValue={viewModel?.detailRechargeBalanceResponse?.companyId}
+                                    showSearch={true} onChange={(e) => onSelectChanged(e, "companyId")}>
+                                {companyOptions}
+                            </Select>
+                        </Form.Item>
+                    </Col>
+                    }
                     <Col span={8}>
                 <Form.Item name="rechargeAmount" initialValue={viewModel?.detailRechargeBalanceResponse?.rechargeAmount}
                            key={"rechargeAmount"}

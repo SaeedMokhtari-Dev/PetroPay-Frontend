@@ -18,11 +18,11 @@ export default class ListPetropayAccountViewModel {
         makeAutoObservable(this);
     }
 
-    public async getPetropayAccountList()  {
+    public async getPetropayAccountList(justPaymentMethodShow: boolean = true)  {
         try {
             this.isProcessing = true;
 
-            let request = new ListPetropayAccountRequest();
+            let request = new ListPetropayAccountRequest(justPaymentMethodShow);
             let response = await ListPetropayAccountHandler.get(request);
 
             if (response && response.success) {

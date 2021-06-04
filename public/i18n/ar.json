@@ -316,7 +316,7 @@
   "Api.PetropayAccount.Id.Required": "Id is Required",
   "Api.PetropayAccount.FromPetroPayAccountId.Required": "يجب اختيار- من الحساب",
   "Api.PetropayAccount.ToPetroPayAccountId.Required": "يرجي اختيار -الي حساب",
-  "Api.PetroPayAccount.PetroPayAccounts.NotEqual": "لايمكن اختيار نفس الحساب في الجانبين.",
+  "Api.PetropayAccount.PetroPayAccounts.NotEqual": "لايمكن اختيار نفس الحساب في الجانبين.",
   "Api.PetropayAccount.Amount.Required": "يرجي اضافة المرجع",
   "Api.PetropayAccount.Reference.Required": "يرجي اضافة المرجع",
 

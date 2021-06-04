@@ -137,6 +137,7 @@
   "Companies.Error.Add.Message": "An error has occurred while trying to add new company.",
   "Companies.Error.Edit.Message": "An error has occurred while trying to edit company.",
   "Companies.Error.Delete.Message": "An error has occurred while trying to delete company.",
+  "Companies.Error.List.Message": "An error has occurred while trying to get company list.",
 
   "Bundles.Menu.Title": "Bundles",
   "Bundles.Page.Title": "Bundles",
@@ -317,7 +318,7 @@
   "Api.PetropayAccount.Id.Required": "Id is Required",
   "Api.PetropayAccount.FromPetroPayAccountId.Required": "From Account is Required",
   "Api.PetropayAccount.ToPetroPayAccountId.Required": "To Account is Required",
-  "Api.PetroPayAccount.PetroPayAccounts.NotEqual": "From Account and To Account cannot be equal.",
+  "Api.PetropayAccount.PetroPayAccounts.NotEqual": "From Account and To Account cannot be equal.",
   "Api.PetropayAccount.Amount.Required": "Amount is Required",
   "Api.PetropayAccount.Reference.Required": "Reference is Required",
 
@@ -451,7 +452,8 @@
   "RechargeBalances.Label.key": "key",
   "RechargeBalances.Label.rechargeId": "rechargeId",
   "RechargeBalances.Label.rechageDate": "Rechage Date",
-  "RechargeBalances.Label.companyId": "companyId",
+  "RechargeBalances.Label.companyId": "Company",
+  "RechargeBalances.Label.companyName": "Company",
   "RechargeBalances.Label.rechargeAmount": "Recharge Amount",
   "RechargeBalances.Label.rechargePaymentMethod": "Recharge Payment Method",
   "RechargeBalances.Label.bankName": "Bank Name",
@@ -467,6 +469,7 @@
 
   "RechargeBalances.Validation.Message.rechargeAmount.Required": "Please enter recharge amount",
   "RechargeBalances.Validation.Message.rechargePaymentMethod.Required": "Please enter recharge payment method",
+  "RechargeBalances.Validation.Message.companyId.Required": "Please enter recharge company",
 
   "Api.RechargeBalance.Add.Successful": "A new recharge balance request added successfully",
   "Api.RechargeBalance.Edit.Successful": "selected recharge balance request edited successfully",

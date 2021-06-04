@@ -58,7 +58,7 @@ export default
     transferBalance: "/app/transferBalance",
 
     //PetroPayAccount
-    paymentTransferAccount: "/app/pPetroPayAccount/payment",
+    paymentTransferAccount: "/app/petroPayAccount/payment",
 
     //Reports
     accountBalance: '/app/accountBalance',

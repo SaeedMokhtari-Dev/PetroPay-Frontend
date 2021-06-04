@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import {inject, observer} from "mobx-react";
-import { useHistory } from "react-router-dom";
 import "./RechargeBalanceList.scss";
 import Stores from "app/constants/Stores";
 
@@ -15,22 +14,17 @@ import {
 } from '@ant-design/icons';
 import i18next from "i18next";
 import RechargeBalanceColumns from "./RechargeBalanceColumns";
-import AddRechargeBalanceRequest from "../../handlers/add/AddRechargeBalanceRequest";
 import Routes from "../../../../app/constants/Routes";
 import NavigationService from "../../../../app/services/NavigationService";
 import GetRechargeBalanceRequest from "../../handlers/get/GetRechargeBalanceRequest";
 import RechargeBalanceStore from "../../stores/RechargeBalanceStore";
 import UserContext from "../../../../identity/contexts/UserContext";
 
-
 const { confirm } = Modal;
-
 
 interface RechargeBalanceListProps {
     rechargeBalanceStore?: RechargeBalanceStore
 }
-
-
 
 const RechargeBalanceList: React.FC<RechargeBalanceListProps> = inject(Stores.rechargeBalanceStore)(observer(({rechargeBalanceStore}) => {
     useEffect(() => {
@@ -48,6 +42,7 @@ const RechargeBalanceList: React.FC<RechargeBalanceListProps> = inject(Stores.re
             }
         }
     });
+    const companyColumn = {title: i18next.t("RechargeBalances.Label.companyName"), dataIndex: "companyName", key: "companyName", responsive: ['md']};
     const columns: any[] = [...RechargeBalanceColumns, {
         title: i18next.t("General.Column.Action"),
         dataIndex: 'operation',
@@ -82,6 +77,10 @@ const RechargeBalanceList: React.FC<RechargeBalanceListProps> = inject(Stores.re
             </div>
         )
     }];
+    if(UserContext.info.role == 100)
+    {
+        columns.unshift(companyColumn);
+    }
     async function showEditPage(e){
         //rechargeBalanceStore.editRechargeBalanceViewModel.key = e.key;
         if(e.key)
