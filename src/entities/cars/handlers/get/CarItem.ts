@@ -13,6 +13,7 @@ export default class CarItem implements IDeserialize
     consumptionValue: number;
     consumptionMethod: string;
     companyBarnchId: number;
+    CompanyBarnchName: string;
     carBalnce: number;
     saturday: boolean;
     sunday: boolean;

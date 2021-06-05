@@ -5,6 +5,7 @@ export default class CompanySubscriptionItem implements IDeserialize {
     key: number;
     startDate: string;
     endDate: string;
+    alarm: boolean;
 
     constructor() {
         makeAutoObservable(this);

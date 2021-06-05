@@ -360,10 +360,13 @@
 
 
   "Cars.Menu.Title": "Cars",
+  "Cars.Menu.Requested.Title": "Requested Cars",
   "Cars.Page.Title": "Cars",
   "Cars.Page.SubTitle": "This page is for define cars",
   "Cars.Label.key": "key",
   "Cars.Label.carId": "carId",
+  "Cars.Label.companyBarnchName": "Branch Name",
+  "Cars.Label.companyName": "Company Name",
   "Cars.Label.carIdNumber": "Car Plate",
   "Cars.Label.carIdText1E": "Plate English character",
   "Cars.Label.carIdText1A": "Plate Arabic  character",
@@ -452,8 +455,8 @@
   "RechargeBalances.Label.key": "key",
   "RechargeBalances.Label.rechargeId": "rechargeId",
   "RechargeBalances.Label.rechageDate": "Rechage Date",
-  "RechargeBalances.Label.companyId": "Company",
-  "RechargeBalances.Label.companyName": "Company",
+  "RechargeBalances.Label.companyId": "Customer #",
+  "RechargeBalances.Label.companyName": "Customer Name",
   "RechargeBalances.Label.rechargeAmount": "Recharge Amount",
   "RechargeBalances.Label.rechargePaymentMethod": "Recharge Payment Method",
   "RechargeBalances.Label.bankName": "Bank Name",
@@ -515,6 +518,8 @@
   "Subscriptions.CarAdd.Edit.HeaderText": "Car Add Subscription",
   "Subscriptions.Section.GeneralInformation": "General Information",
   "Subscriptions.Section.BundleInformation": "Bundle Information (Please select one Bundle)",
+  "Subscriptions.CarAdd.Source.Title": "Cars",
+  "Subscriptions.CarAdd.Target.Title": "Subscription Cars",
 
   "Subscriptions.Alert.BeCareful": "After you save this subscription, you cannot change it anymore, please be careful.",
 
@@ -778,6 +783,7 @@
 
   "CustomerDashboard.Title": "Customer Dashboard",
   "CustomerDashboard.TotalCustomerBalance": "Total Customer Balance",
+  "CustomerDashboard.TotalBranchBalance": "Total Branch Balance",
   "CustomerDashboard.TotalCarBalance": "Total Car Balance",
   "CustomerDashboard.CompanyBranchItem.Label.key": "Key",
   "CustomerDashboard.CompanyBranchItem.Label.branchName": "Branch Name",
@@ -785,6 +791,7 @@
   "CustomerDashboard.CompanySubscriptionItem.Label.key": "Key",
   "CustomerDashboard.CompanySubscriptionItem.Label.startDate": "Start Date",
   "CustomerDashboard.CompanySubscriptionItem.Label.endDate": "End Date",
+  "CustomerDashboard.CompanySubscriptionItem.Label.alarm": "Alarm",
 
   "CustomerDashboard.Section.BranchesBalance": "Branches Balance",
   "CustomerDashboard.Section.Subscriptions": "Subscriptions",

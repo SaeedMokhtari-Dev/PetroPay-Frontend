@@ -19,6 +19,7 @@ export default class GetCustomerViewModel {
     companySubscriptionItems: CompanySubscriptionItem[];
     totalCustomerBalance: number;
     totalCarBalance: number;
+    totalBranchBalance: number;
 
     constructor(public customerStore: CustomerStore) {
         makeAutoObservable(this);
@@ -37,6 +38,7 @@ export default class GetCustomerViewModel {
                 this.companySubscriptionItems = [];
                 this.companySubscriptionItems = result.companySubscriptionItems;
                 this.totalCarBalance = result.totalCarBalance;
+                this.totalBranchBalance = result.totalBranchBalance;
                 this.totalCustomerBalance = result.totalCustomerBalance;
             } else {
                 this.errorMessage = getLocalizedString(response.message);

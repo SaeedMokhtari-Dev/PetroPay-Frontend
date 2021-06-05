@@ -142,7 +142,7 @@ const EditStationUser: React.FC<EditStationUserProps> = inject(Stores.stationUse
                                }
                            ]}>
                     {/*<Input onChange={onChanged}/>*/}
-                    <MaskedInput mask="+2 111 111 11111" onChange={onMaskChanged}/>
+                    <MaskedInput className={"phone-number"} mask="+2 111 111 11111" onChange={onMaskChanged}/>
                 </Form.Item>
                     </Col>
                     <Divider>{i18next.t("Companies.Section.LoginInformation")}</Divider>

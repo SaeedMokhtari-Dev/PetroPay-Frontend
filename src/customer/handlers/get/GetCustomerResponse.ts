@@ -9,6 +9,7 @@ export default class GetCustomerResponse implements IDeserialize
     companyBranchItems: CompanyBranchItem[] = [];
     companySubscriptionItems: CompanySubscriptionItem[] = [];
     totalCustomerBalance: number;
+    totalBranchBalance: number;
     totalCarBalance: number;
 
     constructor() {

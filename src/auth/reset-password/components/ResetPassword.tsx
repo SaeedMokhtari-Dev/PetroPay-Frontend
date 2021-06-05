@@ -7,6 +7,8 @@ import i18next from "i18next";
 import {withTranslation} from "react-i18next";
 import Routes from "app/constants/Routes";
 import { Link } from "react-router-dom";
+import RoleTypeUtils from "../../../app/utils/RoleTypeUtils";
+
 
 interface ResetPasswordProps {
     authStore?: AuthStore
@@ -45,7 +47,6 @@ const ResetPassword: React.FC<ResetPasswordProps> = inject('authStore')(observer
     function onEmailChanged(e) {
         viewModel.email = e.target.value;
     }
-
     return (
         <div className="mainContent">
             <div className="signup-connect">
@@ -58,7 +59,7 @@ const ResetPassword: React.FC<ResetPasswordProps> = inject('authStore')(observer
                     <div>
                         <Alert message={viewModel.responseMessage} type="success"/>
                         <div className="link">
-                            <Link to={Routes.auth}>{i18next.t('ResetPassword.Link.BackToLogin')}</Link>
+                            <Link to={`/auth/${RoleTypeUtils.getRoleTypeRoute(authStore.resetPasswordViewModel.roleType)}`}>{i18next.t('ResetPassword.Link.BackToLogin')}</Link>
                         </div>
                     </div>
                 )}
@@ -79,7 +80,7 @@ const ResetPassword: React.FC<ResetPasswordProps> = inject('authStore')(observer
                             {i18next.t("ResetPassword.Button.ResetPassword")}
                         </Button>
                         <div className="link">
-                            <Link to={Routes.auth}>{i18next.t('ResetPassword.Link.BackToLogin')}</Link>
+                            <Link to={`/auth/${RoleTypeUtils.getRoleTypeRoute(authStore.resetPasswordViewModel.roleType)}`}>{i18next.t('ResetPassword.Link.BackToLogin')}</Link>
                         </div>
                     </Form>
                 )}

@@ -72,7 +72,7 @@ const SubscriptionList: React.FC<SubscriptionListProps> = inject(Stores.subscrip
                        </div>
                      )
                 }
-                {UserContext.info.role == 1 && record.subscriptionActive ?
+                {UserContext.info.role == 1 && record.subscriptionActive && !record.expired ?
                        <Link to={`/app/subscription/carAdd/${record.key}`}>
                            <Button type="default" icon={<CarOutlined/>}
                                    title={i18next.t("Subscriptions.Button.CarList")}/>

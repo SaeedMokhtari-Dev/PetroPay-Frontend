@@ -85,6 +85,10 @@ const BranchList: React.FC<BranchListProps> = inject(Stores.branchStore)(observe
                     <div>
                         <Button type="default" icon={<CarOutlined/>} onClick={() => showCarPage(record)}
                                 title={i18next.t("Branches.Button.CarList")}/>
+                        <Button type="primary" icon={<EditOutlined />} onClick={() => showEditPage(record)}
+                                title={i18next.t("General.Button.Edit")} />
+                        <Button type="primary" danger icon={<DeleteOutlined />} onClick={() => showDeleteConfirm(record)}
+                                title={i18next.t("General.Button.Delete")} />
                         {/*<Button type="primary" icon={<DollarOutlined/>} onClick={() => showChargeBalanceBranchModal(record)}
                                 title={i18next.t("Branches.Button.ChargeBalanceBranch")}/>*/}
                     </div>

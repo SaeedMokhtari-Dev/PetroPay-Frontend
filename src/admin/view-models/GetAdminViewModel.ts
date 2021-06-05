@@ -21,6 +21,9 @@ export default class GetAdminViewModel {
     rechargeRequests: number;
     carRequests: number;
 
+    sumCompaniesBalance: number;
+    sumPetrolStationsBalance: number;
+
     constructor(public customerStore: AdminStore) {
         makeAutoObservable(this);
 

@@ -128,7 +128,7 @@ const PetrolStationListList: React.FC<PetrolStationListListProps> = inject(Store
                           key={"searchForm"}
                           scrollToFirstError>
                         <Row gutter={[24, 16]}>
-                            {UserContext.info.role == 100 ?
+                            {UserContext.info.role === 100 || UserContext.info.role === 1 ?
                                 <Col span={8}>
                                     <Form.Item name="region" initialValue={viewModel?.getPetrolStationListsRequest?.region}
                                                key={"region"}

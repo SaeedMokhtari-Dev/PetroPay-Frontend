@@ -19,6 +19,7 @@ import ActiveCarHandler from "../handlers/active/ActiveCarHandler";
 export default class GetCarViewModel {
     columns: any[];
     carList: CarItem[];
+    carListExport: CarItem[];
     totalSize: number;
     isProcessing: boolean;
     errorMessage: string;
@@ -57,6 +58,27 @@ export default class GetCarViewModel {
         } catch (e) {
             this.errorMessage = i18next.t('Cars.Error.Get.Message');
             this.addedSuccessfully = false;
+            log.error(e);
+        } finally {
+            this.isProcessing = false;
+        }
+    }
+    public async getAllCarForExcel(getCarsRequest: GetCarRequest) {
+        try {
+            this.isProcessing = true;
+            getCarsRequest.exportToFile = true;
+            let response = await GetCarHandler.get(getCarsRequest);
+
+            if (response && response.success) {
+
+                let result = response.data;
+                let items = result.items;
+                this.carListExport = items;
+            } else {
+                this.errorMessage = getLocalizedString(response.message);
+            }
+        } catch (e) {
+            this.errorMessage = i18next.t('Cars.Error.Get.Message');
             log.error(e);
         } finally {
             this.isProcessing = false;

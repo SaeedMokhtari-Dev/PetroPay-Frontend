@@ -1,6 +1,8 @@
 export default
 [
     {title: "Cars.Label.key", dataIndex: "key", key: "key", responsive: ['sm']},
+    {title: "Cars.Label.companyName", dataIndex: "companyName", key: "companyName", responsive: ['md']},
+    {title: "Cars.Label.companyBarnchName", dataIndex: "companyBarnchName", key: "companyBarnchName", responsive: ['md']},
     {title: "Cars.Label.carIdNumber", dataIndex: "carIdNumber", key: "carIdNumber", responsive: ['md']},
     {title: "Cars.Label.carBalnce", dataIndex: "carBalnce", key: "carBalnce", responsive: ['md']},
     {title: "Cars.Label.carType", dataIndex: "carType", key: "carType", responsive: ['md']},

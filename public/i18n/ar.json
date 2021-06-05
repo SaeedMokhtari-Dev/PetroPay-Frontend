@@ -137,6 +137,7 @@
   "Companies.Error.Add.Message": "حدث خطأ أثناء محاولة إضافة شركة جديدة.",
   "Companies.Error.Edit.Message": "حدث خطأ أثناء محاولة تعديل  حساب الشركة.",
   "Companies.Error.Delete.Message": "حدث خطأ أثناء محاولة حذف بيانات الشركة.",
+  "Companies.Error.List.Message": "حدث خطأ أثناء محاولة الحصول على قائمة الشركات",
 
   "Bundles.Menu.Title": "الباقات",
   "Bundles.Page.Title": "اسعار الباقات",
@@ -450,6 +451,7 @@
   "RechargeBalances.Label.rechargeId": "rechargeId",
   "RechargeBalances.Label.rechageDate": "التاريخ",
   "RechargeBalances.Label.companyId": "رقم العميل",
+  "RechargeBalances.Label.companyName": "العميل",
   "RechargeBalances.Label.rechargeAmount": "مبلغ الشحن",
   "RechargeBalances.Label.rechargePaymentMethod": "طريقة الدفع",
   "RechargeBalances.Label.bankName": "اسم البنك",
@@ -465,6 +467,7 @@
 
   "RechargeBalances.Validation.Message.rechargeAmount.Required": "الرجاء ادخال المبلغ",
   "RechargeBalances.Validation.Message.rechargePaymentMethod.Required": "يرجي اختيار طريقة الدفع",
+  "RechargeBalances.Validation.Message.companyId.Required": "Please enter recharge company",
 
   "Api.RechargeBalance.Add.Successful": "تم تسجيل طلب شحن الرصيد بنجاح",
   "Api.RechargeBalance.Edit.Successful": "تم التعديل بنجاح",

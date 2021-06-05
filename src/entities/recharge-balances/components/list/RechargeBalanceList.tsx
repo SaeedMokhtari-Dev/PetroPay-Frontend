@@ -42,7 +42,10 @@ const RechargeBalanceList: React.FC<RechargeBalanceListProps> = inject(Stores.re
             }
         }
     });
-    const companyColumn = {title: i18next.t("RechargeBalances.Label.companyName"), dataIndex: "companyName", key: "companyName", responsive: ['md']};
+    const companyColumns = [
+        {title: i18next.t("RechargeBalances.Label.companyName"), dataIndex: "companyName", key: "companyName", responsive: ['md']},
+        {title: i18next.t("RechargeBalances.Label.companyId"), dataIndex: "companyId", key: "companyId", responsive: ['md']}
+    ];
     const columns: any[] = [...RechargeBalanceColumns, {
         title: i18next.t("General.Column.Action"),
         dataIndex: 'operation',
@@ -79,7 +82,10 @@ const RechargeBalanceList: React.FC<RechargeBalanceListProps> = inject(Stores.re
     }];
     if(UserContext.info.role == 100)
     {
-        columns.unshift(companyColumn);
+        companyColumns.forEach(w => {
+            columns.unshift(w);
+        });
+
     }
     async function showEditPage(e){
         //rechargeBalanceStore.editRechargeBalanceViewModel.key = e.key;

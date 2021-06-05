@@ -8,6 +8,7 @@ import {withTranslation} from "react-i18next";
 import Routes from "app/constants/Routes";
 import { Link, withRouter } from "react-router-dom";
 import { PasswordInput } from 'antd-password-input-strength';
+import RoleTypeUtils from "../../../app/utils/RoleTypeUtils";
 
 class ChangePasswordProps {
     authStore?: AuthStore;
@@ -34,6 +35,8 @@ const ChangePassword: React.FC<ChangePasswordProps> = inject('authStore')(observ
         authStore.onChangePasswordPageLoad();
 
         await authStore.changePasswordViewModel.validateResetPasswordToken(match.params.token);
+
+        authStore.changePasswordViewModel.roleType = +localStorage.getItem("roleType");
     }
 
     function onUnload()
@@ -78,7 +81,7 @@ const ChangePassword: React.FC<ChangePasswordProps> = inject('authStore')(observ
                         <div>
                             <Alert message={viewModel.errorMessage} type="error" />
                             <div className="link">
-                                <Link to={Routes.auth}>{i18next.t('ResetPassword.Link.BackToLogin')}</Link>
+                                <Link to={`/auth/${RoleTypeUtils.getRoleTypeRoute(authStore.changePasswordViewModel.roleType)}`}>{i18next.t('ResetPassword.Link.BackToLogin')}</Link>
                             </div>
                         </div>
                     :
@@ -123,7 +126,7 @@ const ChangePassword: React.FC<ChangePasswordProps> = inject('authStore')(observ
                             {i18next.t("ChangePassword.Button.ChangePassword")}
                         </Button>
                         <div className="link">
-                            <Link to={Routes.auth}>{i18next.t('ResetPassword.Link.BackToLogin')}</Link>
+                            <Link to={`/auth/${RoleTypeUtils.getRoleTypeRoute(authStore.changePasswordViewModel.roleType)}`}>{i18next.t('ResetPassword.Link.BackToLogin')}</Link>
                         </div>
                     </Form>
                 }

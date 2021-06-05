@@ -11,7 +11,7 @@ import {
 } from "antd";
 import {
     EditOutlined, DeleteOutlined, CheckOutlined, CloseOutlined,
-    ExclamationCircleOutlined, PlusCircleOutlined, CheckCircleOutlined, BarcodeOutlined
+    ExclamationCircleOutlined, PlusCircleOutlined, CheckCircleOutlined, BarcodeOutlined, FileExcelOutlined
 } from '@ant-design/icons';
 import i18next from "i18next";
 import CarColumns from "./CarColumns";
@@ -23,6 +23,7 @@ import CarStore from "../../stores/CarStore";
 import UserContext from "../../../../identity/contexts/UserContext";
 import ActiveCarRequest from "../../handlers/active/ActiveCarRequest";
 import AdminCarColumns from "./AdminCarColumns";
+import ExportExcel from "../../../../app/utils/ExportExcel";
 
 
 const { confirm } = Modal;
@@ -69,7 +70,7 @@ const CarList: React.FC<CarListProps> = inject(Stores.carStore)(observer(({carSt
                                 title={i18next.t("Cars.Button.ActiveAndNfcCode")} style={{ background: "green", borderColor: "white" }}/>
                     </div>
                 )}
-                {record.carWorkWithApproval && UserContext.info.role == 100 &&
+                {record.carWorkWithApproval &&
                 (
                     <div>
                         <Button type="primary" icon={<EditOutlined/>} onClick={() => showEditPage(record)}
@@ -143,6 +144,8 @@ const CarList: React.FC<CarListProps> = inject(Stores.carStore)(observer(({carSt
             branchIdParam = +match.params.companyBranchId;
             carStore.getCarViewModel.getCarsRequest.companyBranchId = branchIdParam;
         }
+        if(!branchIdParam && !companyIdParam)
+            carStore.getCarViewModel.getCarsRequest.needActivation = true;
         await carStore.getCarViewModel.getAllCar(carStore.getCarViewModel.getCarsRequest);
     }
 
@@ -183,6 +186,11 @@ const CarList: React.FC<CarListProps> = inject(Stores.carStore)(observer(({carSt
         viewModel.activeCarRequest = new ActiveCarRequest();
         setVisible(false);
     }
+    async function ExportToExcel(){
+        await viewModel.getAllCarForExcel(viewModel.getCarsRequest);
+        columns.pop();
+        ExportExcel(columns, viewModel?.carListExport, "Cars");
+    }
     return (
         <div>
             <PageHeader
@@ -195,6 +203,9 @@ const CarList: React.FC<CarListProps> = inject(Stores.carStore)(observer(({carSt
                             {i18next.t("General.Button.Add")}
                         </Button>
                     ,
+                    <Button key={"ExportExcel"} type="primary" loading={viewModel?.isProcessing} icon={<FileExcelOutlined />} onClick={ExportToExcel}>
+                        {i18next.t("General.Button.ExportExcel")}
+                    </Button>
                 ]}
             />
 

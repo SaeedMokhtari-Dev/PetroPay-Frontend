@@ -20,6 +20,7 @@ export default class ChangePasswordViewModel
     errorMessage: string;
     isTokenValid: boolean;
     isValidating: boolean;
+    roleType: number;
 
     constructor(public auth: AuthStore) {
         makeAutoObservable(this);

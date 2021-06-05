@@ -17,6 +17,7 @@ export default class SubscriptionItem implements IDeserialize
     subscriptionActive: boolean;
     paymentReferenceNumber: string;
     subscriptionDate: string;
+    expired: boolean;
 
     constructor() {
         makeAutoObservable(this);

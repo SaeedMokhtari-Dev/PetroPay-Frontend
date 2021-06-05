@@ -3,6 +3,7 @@ import LogoutRequest from "auth/common/handlers/logout/LogoutRequest";
 import ApiService from "app/services/ApiService";
 import NavigationService from "app/services/NavigationService";
 import Routes from "app/constants/Routes";
+import RoleTypeUtils from "../../../../app/utils/RoleTypeUtils";
 
 export default class LogoutHandler
 {
@@ -27,7 +28,13 @@ export default class LogoutHandler
         }
         else
         {
-            NavigationService.navigate(Routes.auth);
+            let roleType: number = +localStorage.getItem("roleType");
+            if(roleType) {
+                NavigationService.navigate(`/auth/${RoleTypeUtils.getRoleTypeRoute(roleType)}`);
+                localStorage.setItem("roleType", "");
+            }
+            else
+                NavigationService.navigate(Routes.auth);
         }
     }
 }

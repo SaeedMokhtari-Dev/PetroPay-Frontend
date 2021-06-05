@@ -205,7 +205,7 @@ const EditPetroStation: React.FC<EditPetroStationProps> = inject(Stores.petroSta
                            key={"stationPhone"}
                            label={i18next.t("PetroStations.Label.stationPhone")}>
                     {/*<Input onChange={onChanged}/>*/}
-                    <MaskedInput mask="+2 111 111 11111" onChange={onMaskChanged}/>
+                    <MaskedInput className={"phone-number"} mask="+2 111 111 11111" onChange={onMaskChanged}/>
                 </Form.Item>
                     </Col>
                     <Col span={8}>

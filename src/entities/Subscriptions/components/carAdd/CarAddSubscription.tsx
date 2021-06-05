@@ -184,7 +184,7 @@ const CarAddSubscription: React.FC<EditSubscriptionProps> = inject(Stores.subscr
                         <TableTransfer
                             dataSource={subscriptionStore.listCarViewModel?.listCarResponse?.items}
                             targetKeys={subscriptionCarIds}
-
+                            titles={[i18next.t("Subscriptions.CarAdd.Source.Title"), i18next.t("Subscriptions.CarAdd.Target.Title")]}
                             showSearch={true}
                             onChange={onChange}
                             filterOption={(inputValue, item) =>

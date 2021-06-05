@@ -38,7 +38,7 @@ export default class LoginViewModel
             if(response && response.success)
             {
                 await UserContext.initialize();
-
+                localStorage.setItem("roleType", this.roleType.toString());
                 NavigationService.navigate('/');
             }
             else
@@ -55,17 +55,6 @@ export default class LoginViewModel
         finally
         {
             this.isProcessing = false;
-        }
-    }
-    public getRoleTitle() {
-        switch (this.roleType){
-            case 1:
-                return "Customer";
-            case 10:
-                return "Supplier";
-            case 100:
-                return "Admin";
-
         }
     }
 }

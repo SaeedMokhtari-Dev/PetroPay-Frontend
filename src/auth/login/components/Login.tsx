@@ -10,6 +10,8 @@ import { Link } from "react-router-dom";
 import history from "../../../app/utils/History";
 import {useParams} from "react-router-dom";
 import { EyeInvisibleOutlined, EyeTwoTone, UserOutlined, LockOutlined } from '@ant-design/icons';
+import RoleTypeUtils from "../../../app/utils/RoleTypeUtils";
+import NavigationService from "../../../app/services/NavigationService";
 
 interface LoginProps {
     authStore?: AuthStore,
@@ -87,6 +89,10 @@ const Login: React.FC<LoginProps> = inject('authStore')(observer(({authStore, ma
         localStorage.setItem("currentLanguage", e.target.value);
         history.go(0);
     }
+    function resetPasswordPage(){
+        localStorage.setItem("roleType", viewModel.roleType.toString());
+        NavigationService.navigate(Routes.resetPassword);
+    }
     return (
         <div>
             {!viewModel?.roleType && (
@@ -138,7 +144,7 @@ const Login: React.FC<LoginProps> = inject('authStore')(observer(({authStore, ma
                         <img src="/images/petro-pay-logo.png" className="logo" alt="logo"/>
                     </div>
                     <div className="signup-classic">
-                        <h1>{i18next.t("General.HeaderMenu.User")} {i18next.t(`Authentication.RoleType.${viewModel?.getRoleTitle()}`)}</h1>
+                        <h1>{i18next.t("General.HeaderMenu.User")} {i18next.t(`Authentication.RoleType.${RoleTypeUtils.getRoleTypeTitle(viewModel?.roleType)}`)}</h1>
                         <Form layout="vertical" onFinish={onFinish} >
                             <Form.Item initialValue={viewModel.username} name="username" label={i18next.t("Authentication.Label.Username")} required={false}
                                        rules={[
@@ -170,7 +176,10 @@ const Login: React.FC<LoginProps> = inject('authStore')(observer(({authStore, ma
                                 {i18next.t("Authentication.Button.Login")}
                             </Button>
                             <div className="link">
-                                <Link to={Routes.resetPassword}>{i18next.t('Authentication.Link.ForgotPassword')}</Link>
+                                {/*<Link to={Routes.resetPassword}></Link>*/}
+                                <Button type="link" onClick={resetPasswordPage}>
+                                    {i18next.t('Authentication.Link.ForgotPassword')}
+                                </Button>
                             </div>
                         </Form>
                     </div>

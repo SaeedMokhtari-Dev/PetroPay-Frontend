@@ -3,8 +3,8 @@ export default
     auth: "/auth",
     login: "/auth/:roleType",
 
-    resetPassword: "/auth/reset-password",
-    changePassword: "/auth/change-password/:token",
+    resetPassword: "/auth/password/reset",
+    changePassword: "/auth/password/change/:token",
     unknown: "/unknown",
 
     app: "/app",

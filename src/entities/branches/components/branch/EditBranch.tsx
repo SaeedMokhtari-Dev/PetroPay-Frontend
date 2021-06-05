@@ -168,7 +168,7 @@ const EditBranch: React.FC<EditBranchProps> = inject(Stores.branchStore)(observe
                            key={"companyBranchAdminPhone"}
                            label={i18next.t("Branches.Label.companyBranchAdminPhone")}>
                     {/*<Input onChange={onChanged}/>*/}
-                    <MaskedInput mask="+2 111 111 11111" onChange={onMaskChanged}/>
+                    <MaskedInput className={"phone-number"} mask="+2 111 111 11111" onChange={onMaskChanged}/>
                 </Form.Item>
                     </Col>
                     <Col span={8}>
