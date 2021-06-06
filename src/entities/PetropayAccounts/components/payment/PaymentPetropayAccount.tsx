@@ -192,7 +192,7 @@ const PaymentPetropayAccount: React.FC<EditPetropayAccountProps> = inject(Stores
                                    message: i18next.t("PetropayAccounts.Validation.Message.reference.Required")
                                }
                            ]}>
-                    <Input type={"number"} onChange={onChanged}/>
+                    <Input maxLength={10} onChange={onChanged}/>
                 </Form.Item>
                     </Col>
                 </Row>

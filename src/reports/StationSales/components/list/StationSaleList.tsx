@@ -7,7 +7,7 @@ import Stores from "app/constants/Stores";
 import {
     Button, Collapse, Col, Row,
     Pagination, Input, Form,
-    Table, PageHeader, Space, DatePicker
+    Table, PageHeader, Space, DatePicker, Select
 } from "antd";
 import {
     FileExcelOutlined
@@ -18,6 +18,7 @@ import UserContext from "../../../../identity/contexts/UserContext";
 import StationSaleColumns from "./StationSaleColumns";
 import StationSaleStore from "../../stores/StationSaleStore";
 import ExportExcel from "../../../../app/utils/ExportExcel";
+import CarTypeOfFuels from "../../../../app/constants/CarTypeOfFuels";
 
 const { Panel } = Collapse;
 
@@ -43,6 +44,9 @@ const StationSaleList: React.FC<StationSaleListProps> = inject(Stores.stationSal
     });
 
     const columns: any[] = [...StationSaleColumns];
+
+    CarTypeOfFuels.forEach(w =>{ w.title = i18next.t(w.title) });
+    const carTypeOfFuelOptions = [...CarTypeOfFuels];
 
     useEffect(() => {
         onLoad();
@@ -105,7 +109,9 @@ const StationSaleList: React.FC<StationSaleListProps> = inject(Stores.stationSal
         await viewModel.getAllStationSale(viewModel.getStationSalesRequest, true);
         ExportExcel(columns, viewModel?.stationSaleExport, "StationSale");
     }
-
+    function onSelectChanged(e, propName){
+        viewModel.getStationSalesRequest[`${propName}`] = e;
+    }
     return (
         <div>
             <PageHeader
@@ -139,7 +145,8 @@ const StationSaleList: React.FC<StationSaleListProps> = inject(Stores.stationSal
                                 <Form.Item name="invoiceFuelType" initialValue={viewModel?.getStationSalesRequest?.invoiceFuelType}
                                            key={"invoiceFuelType"}
                                            label={i18next.t("StationSales.SearchPanel.Label.invoiceFuelType")}>
-                                    <Input onChange={onChanged}/>
+                                    {/*<Input onChange={onChanged}/>*/}
+                                    <Select options={carTypeOfFuelOptions} showSearch={true} onChange={(e) => onSelectChanged(e, "invoiceFuelType")} />
                                 </Form.Item>
                             </Col>
                             <Col span={8}>

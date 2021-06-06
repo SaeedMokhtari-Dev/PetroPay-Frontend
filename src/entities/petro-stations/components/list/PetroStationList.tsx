@@ -41,7 +41,7 @@ const PetroStationList: React.FC<PetroStationListProps> = inject(Stores.petroSta
 
     PetroStationColumns.forEach(w => {
        w.title = i18next.t(w.title);
-       if(w.key == "stationDiesel")
+       if(["stationDiesel", "stationServiceActive"].includes(w.key))
        {
            w["render"] = (w) => {
                return  w ? <CheckOutlined /> : <CloseOutlined />

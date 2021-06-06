@@ -121,11 +121,11 @@ const EditPetroStation: React.FC<EditPetroStationProps> = inject(Stores.petroSta
         else
             viewModel.addPetroStationRequest[`${e.target.id}`] = e.target.value.replace(/\s+/g, '');
     }
-    function onSwitchChange(e){
+    function onSwitchChange(e, propName){
         if(petroStationId)
-            viewModel.editPetroStationRequest.stationDiesel = e;
+            viewModel.editPetroStationRequest[`${propName}`] = e;
         else
-            viewModel.addPetroStationRequest.stationDiesel = e;
+            viewModel.addPetroStationRequest[`${propName}`] = e;
     }
     function onSelectChanged(e, propName){
 
@@ -235,7 +235,15 @@ const EditPetroStation: React.FC<EditPetroStationProps> = inject(Stores.petroSta
                                    key={"stationDiesel"}
                                    label={i18next.t("PetroStations.Label.stationDiesel")}
                         >
-                            <Switch onChange={onSwitchChange} defaultChecked={viewModel?.detailPetroStationResponse?.stationDiesel} />
+                            <Switch onChange={(e) => onSwitchChange(e, "stationDiesel")} defaultChecked={viewModel?.detailPetroStationResponse?.stationDiesel} />
+                        </Form.Item>
+                    </Col>
+                    <Col span={8}>
+                        <Form.Item name="stationServiceActive" initialValue={viewModel?.detailPetroStationResponse?.stationServiceActive}
+                                   key={"stationServiceActive"}
+                                   label={i18next.t("PetroStations.Label.stationServiceActive")}
+                        >
+                            <Switch onChange={(e) => onSwitchChange(e, "stationServiceActive")} defaultChecked={viewModel?.detailPetroStationResponse?.stationServiceActive} />
                         </Form.Item>
                     </Col>
                 {/*<Col span={8}>

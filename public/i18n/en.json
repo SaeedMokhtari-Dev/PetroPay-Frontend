@@ -253,6 +253,7 @@
   "PetroStations.Label.stationDiesel": "Diesel",
   "PetroStations.Label.stationBalance": "Balance",
   "PetroStations.Label.stationEmail": "Email Address",
+  "PetroStations.Label.stationServiceActive": "Station Service Active?",
 
   "PetroStations.Label.petroPayAccountId": "PaymentMethod",
   "PetroStations.Label.amount": "Amount",
@@ -942,6 +943,7 @@
   "General.CarBrand.Volvo": "Volvo",
 
   "General.CarTypeOfFuel.DIESEL": "DIESEL",
+  "General.CarTypeOfFuel.90": "90",
   "General.CarTypeOfFuel.92": "92",
   "General.CarTypeOfFuel.95": "95",
   "General.CarTypeOfFuel.80": "80",
