@@ -1,10 +1,10 @@
 import IDeserialize from "app/interfaces/deserialize";
 import {makeAutoObservable} from "mobx";
-import ServiceMasterListItem from "./ServiceMasterListItem";
+import PetroStationListItem from "./PetroStationListItem";
 
-export default class ListServiceMasterResponse implements IDeserialize
+export default class ListPetroStationResponse implements IDeserialize
 {
-    items: ServiceMasterListItem[] = [];
+    items: PetroStationListItem[];
 
     constructor() {
         makeAutoObservable(this);
@@ -14,7 +14,7 @@ export default class ListServiceMasterResponse implements IDeserialize
     {
         Object.assign(this, input);
 
-        this.items = this.items.map(x => new ServiceMasterListItem().deserialize(x));
+        this.items = this.items.map(x => new PetroStationListItem().deserialize(x));
 
         return this;
     }

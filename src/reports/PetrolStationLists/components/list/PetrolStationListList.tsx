@@ -103,8 +103,10 @@ const PetrolStationListList: React.FC<PetrolStationListListProps> = inject(Store
         form.resetFields();
     }
     async function ExportToExcel(){
+        viewModel.petrolStationListExport = [];
         await viewModel.getAllPetrolStationList(viewModel.getPetrolStationListsRequest, true);
-        ExportExcel(columns, viewModel?.petrolStationListExport, "PetrolStationList");
+        if(viewModel.petrolStationListExport && viewModel.petrolStationListExport?.length > 0)
+            ExportExcel(columns, viewModel?.petrolStationListExport, "PetrolStationList");
     }
 
     return (

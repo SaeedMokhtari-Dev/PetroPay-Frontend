@@ -12,7 +12,7 @@ export default class ListCarViewModel {
     
     isProcessing: boolean;
     errorMessage: string;
-    listCarResponse: ListCarResponse;
+    listCarResponse: ListCarResponse = new ListCarResponse();
 
 
     constructor() {

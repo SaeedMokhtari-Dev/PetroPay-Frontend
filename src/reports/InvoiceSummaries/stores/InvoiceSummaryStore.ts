@@ -4,6 +4,7 @@ import GetInvoiceSummaryViewModel from "../view-models/GetInvoiceSummaryViewMode
 import ListBranchViewModel from "../../../entities/branches/view-models/ListBranchViewModel";
 import ListCarViewModel from "../../../entities/cars/view-models/ListCarViewModel";
 import ListServiceMasterViewModel from "../../../entities/ServiceMasters/view-models/ListServiceMasterViewModel";
+import ListCompanyViewModel from "../../../entities/companies/view-models/ListCompanyViewModel";
 
 export default class InvoiceSummaryStore
 {
@@ -12,6 +13,7 @@ export default class InvoiceSummaryStore
     listBranchViewModel: ListBranchViewModel;
     listCarViewModel: ListCarViewModel;
     listServiceMasterViewModel: ListServiceMasterViewModel;
+    listCompanyViewModel: ListCompanyViewModel;
 
     constructor(public appStore: AppStore) {
         makeAutoObservable(this);
@@ -23,6 +25,7 @@ export default class InvoiceSummaryStore
         this.listBranchViewModel = new ListBranchViewModel();
         this.listCarViewModel = new ListCarViewModel();
         this.listServiceMasterViewModel = new ListServiceMasterViewModel();
+        this.listCompanyViewModel = new ListCompanyViewModel();
     }
 
     onInvoiceSummaryGetPageUnload()
@@ -31,6 +34,7 @@ export default class InvoiceSummaryStore
         this.listBranchViewModel = null;
         this.listCarViewModel = null;
         this.listServiceMasterViewModel = null;
+        this.listCompanyViewModel = null;
     }
 
 }

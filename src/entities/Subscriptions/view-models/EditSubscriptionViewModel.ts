@@ -138,6 +138,7 @@ export default class EditSubscriptionViewModel
         {
             this.errorMessage = "";
             this.isProcessing = true;
+            debugger;
 
             let response = await EditSubscriptionHandler.edit(request);
 

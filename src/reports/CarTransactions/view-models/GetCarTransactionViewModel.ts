@@ -9,6 +9,7 @@ import i18next from "i18next";
 import log from "loglevel";
 import {message} from "antd";
 import UserContext from "../../../identity/contexts/UserContext";
+import ObjectHelper from "../../../app/utils/ObjectHelper";
 
 export default class GetCarTransactionViewModel {
     columns: any[];
@@ -26,7 +27,12 @@ export default class GetCarTransactionViewModel {
 
     public async getAllCarTransaction(getCarTransactionsRequest: GetCarTransactionRequest, exportToFile: boolean = false) {
         try {
-            
+            this.errorMessage = "";
+            if(ObjectHelper.isNullOrEmptyWithDefaultExceptions(getCarTransactionsRequest, [])){
+                this.errorMessage = i18next.t("General.Search.AtLeastOne");
+                return;
+            }
+
             this.isProcessing = true;
             getCarTransactionsRequest.exportToFile = exportToFile;
             let response = await GetCarTransactionHandler.get(getCarTransactionsRequest);

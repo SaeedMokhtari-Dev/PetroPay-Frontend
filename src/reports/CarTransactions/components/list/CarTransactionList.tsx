@@ -7,7 +7,7 @@ import Stores from "app/constants/Stores";
 import {
     Button, Collapse, Col, Row,
     Pagination, Input, Form,
-    Table, PageHeader, Space, DatePicker, Select
+    Table, PageHeader, Space, DatePicker, Select, Alert
 } from "antd";
 import {
     FileExcelOutlined
@@ -30,6 +30,7 @@ const CarTransactionList: React.FC<CarTransactionListProps> = inject(Stores.carT
 
     const [carOptions, setCarOptions] = React.useState([]);
     const [branchOptions, setBranchOptions] = React.useState([]);
+    const [companyOptions, setCompanyOptions] = React.useState([]);
 
     const formItemLayout = {
         labelCol: {
@@ -61,8 +62,6 @@ const CarTransactionList: React.FC<CarTransactionListProps> = inject(Stores.carT
 
     async function onLoad() {
         carTransactionStore.onCarTransactionGetPageLoad();
-        await carTransactionStore.listBranchViewModel.getBranchList();
-        await carTransactionStore.listCarViewModel.getCarList();
         carTransactionStore.getCarTransactionViewModel.getCarTransactionsRequest = new GetCarTransactionRequest();
         carTransactionStore.getCarTransactionViewModel.getCarTransactionsRequest.pageSize = 20;
         carTransactionStore.getCarTransactionViewModel.getCarTransactionsRequest.pageIndex = 0;
@@ -70,19 +69,39 @@ const CarTransactionList: React.FC<CarTransactionListProps> = inject(Stores.carT
             carTransactionStore.getCarTransactionViewModel.getCarTransactionsRequest.companyId = UserContext.info.id;
         }
 
-        await carTransactionStore.getCarTransactionViewModel.getAllCarTransaction(carTransactionStore.getCarTransactionViewModel.getCarTransactionsRequest);
+        try {
+            if (UserContext.info.role === 100) {
+                await carTransactionStore.listCompanyViewModel.getCompanyList();
+                let companyOptions = [];
+                if (carTransactionStore.listCompanyViewModel) {
+                    for (let item of carTransactionStore.listCompanyViewModel.listCompanyResponse.items) {
+                        companyOptions.push(<Option key={item.key} value={item.key}>{item.title}</Option>);
+                    }
+                }
+                setCompanyOptions(companyOptions);
+            }
 
-        let carOptions = [];
-        for (let item of carTransactionStore.listCarViewModel.listCarResponse.items) {
-            carOptions.push(<Option key={item.key} value={item.carNumber}>{item.carNumber}</Option>);
-        }
-        setCarOptions(carOptions);
+            await carTransactionStore.listBranchViewModel.getBranchList();
+            await carTransactionStore.listCarViewModel.getCarList();
 
-        let branchOptions = [];
-        for (let item of carTransactionStore.listBranchViewModel.listBranchResponse.items) {
-            branchOptions.push(<Option key={item.key} value={item.key}>{item.title}</Option>);
+
+            //await carTransactionStore.getCarTransactionViewModel.getAllCarTransaction(carTransactionStore.getCarTransactionViewModel.getCarTransactionsRequest);
+
+            let carOptions = [];
+            for (let item of carTransactionStore.listCarViewModel.listCarResponse.items) {
+                carOptions.push(<Option key={item.key} value={item.carNumber}>{item.carNumber}</Option>);
+            }
+            setCarOptions(carOptions);
+
+            let branchOptions = [];
+            for (let item of carTransactionStore.listBranchViewModel.listBranchResponse.items) {
+                branchOptions.push(<Option key={item.key} value={item.key}>{item.title}</Option>);
+            }
+            setBranchOptions(branchOptions);
         }
-        setBranchOptions(branchOptions);
+        catch {
+
+        }
     }
 
     let viewModel = carTransactionStore.getCarTransactionViewModel;
@@ -125,8 +144,10 @@ const CarTransactionList: React.FC<CarTransactionListProps> = inject(Stores.carT
         form.resetFields();
     }
     async function ExportToExcel(){
+        viewModel.carTransactionExport = [];
         await viewModel.getAllCarTransaction(viewModel.getCarTransactionsRequest, true);
-        ExportExcel(columns, viewModel?.carTransactionExport, "CarTransaction");
+        if(viewModel.carTransactionExport && viewModel?.carTransactionExport?.length > 0)
+            ExportExcel(columns, viewModel?.carTransactionExport, "CarTransaction");
     }
     function onSelectChanged(e, propName){
         viewModel.getCarTransactionsRequest[`${propName}`] = e;
@@ -146,7 +167,7 @@ const CarTransactionList: React.FC<CarTransactionListProps> = inject(Stores.carT
                 ]}
             />
 
-            <Collapse>
+            <Collapse defaultActiveKey={['1']}>
                 <Panel header={i18next.t("General.SearchPanel.Text")}  key="1">
                     <Form {...formItemLayout} layout={"vertical"} onFinish={onFinish} form={form}
                           key={"searchForm"}
@@ -154,10 +175,14 @@ const CarTransactionList: React.FC<CarTransactionListProps> = inject(Stores.carT
                         <Row gutter={[24, 16]}>
                             {UserContext.info.role == 100 ?
                                 <Col span={8}>
-                                    <Form.Item name="companyName" initialValue={viewModel?.getCarTransactionsRequest?.companyName}
-                                               key={"companyName"}
+                                    <Form.Item name="companyId" initialValue={viewModel?.getCarTransactionsRequest?.companyId}
+                                               key={"companyId"}
                                                label={i18next.t("CarTransactions.SearchPanel.Label.companyName")}>
-                                        <Input onChange={onChanged}/>
+                                        {/*<Input onChange={onChanged}/>*/}
+                                        <Select style={{width: "100%", display:"block"}}
+                                                showSearch={true} onChange={(e) => onSelectChanged(e, "companyId")}>
+                                            {companyOptions}
+                                        </Select>
                                     </Form.Item>
                                 </Col>: ""}
                             <Col span={8}>
@@ -199,6 +224,11 @@ const CarTransactionList: React.FC<CarTransactionListProps> = inject(Stores.carT
                         </Row>
                         <PageHeader
                             ghost={false}
+                            subTitle={<div>
+                                {viewModel?.errorMessage &&
+                                <Alert message={viewModel?.errorMessage} type="error" />
+                                }
+                            </div>}
                             extra={[
                                 <Button type="primary" loading={viewModel.isProcessing} onClick={onReset} danger key="reset" size={"large"} htmlType="reset">
                                     {i18next.t("General.SearchPanel.ResetButton")}

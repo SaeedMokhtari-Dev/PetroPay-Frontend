@@ -14,6 +14,7 @@ export default class EditSubscriptionRequest
     subscriptionEndDate: string;
     subscriptionCost: number;
     paymentReferenceNumber: string;
+    subscriptionPaymentDocPhoto: string;
 
     constructor(
     ) {

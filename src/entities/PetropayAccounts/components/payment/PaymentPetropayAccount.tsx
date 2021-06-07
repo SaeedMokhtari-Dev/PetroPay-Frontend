@@ -179,7 +179,7 @@ const PaymentPetropayAccount: React.FC<EditPetropayAccountProps> = inject(Stores
                                 message: i18next.t("PetropayAccounts.Validation.Message.amount.Required")
                             }
                         ]}*/>
-                            <InputNumber min={1} max={fromBalance} style={{width: "100%"}} onChange={onAmountChanged} /> {/*max={fromBalance}*/}
+                            <InputNumber min={1} style={{width: "100%"}} onChange={onAmountChanged} /> {/*max={fromBalance}*/}
                         </Form.Item>
                     </Col>
                     <Col offset={8} span={8}>

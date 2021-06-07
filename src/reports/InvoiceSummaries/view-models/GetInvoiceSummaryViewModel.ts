@@ -9,6 +9,7 @@ import i18next from "i18next";
 import log from "loglevel";
 import {message} from "antd";
 import UserContext from "../../../identity/contexts/UserContext";
+import ObjectHelper from "../../../app/utils/ObjectHelper";
 
 export default class GetInvoiceSummaryViewModel {
     columns: any[];
@@ -18,7 +19,7 @@ export default class GetInvoiceSummaryViewModel {
     sumInvoiceAmount: number;
     isProcessing: boolean;
     errorMessage: string;
-    getInvoiceSummariesRequest: GetInvoiceSummaryRequest;
+    getInvoiceSummariesRequest: GetInvoiceSummaryRequest = new GetInvoiceSummaryRequest();
 
     constructor(public invoiceSummaryStore: InvoiceSummaryStore) {
         makeAutoObservable(this);
@@ -27,6 +28,11 @@ export default class GetInvoiceSummaryViewModel {
 
     public async getAllInvoiceSummary(getInvoiceSummariesRequest: GetInvoiceSummaryRequest, exportToFile: boolean = false) {
         try {
+            this.errorMessage = "";
+            if(ObjectHelper.isNullOrEmptyWithDefaultExceptions(getInvoiceSummariesRequest, [])){
+                this.errorMessage = i18next.t("General.Search.AtLeastOne");
+                return;
+            }
             this.isProcessing = true;
             if(exportToFile)
                 getInvoiceSummariesRequest.exportToFile = exportToFile;

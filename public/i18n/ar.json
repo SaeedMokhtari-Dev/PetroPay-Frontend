@@ -12,7 +12,7 @@
   "General.Confirm.Delete": "هل انت متأكد من الحذف؟",
   "General.Confirm.Active": "هل انت متأكد من التنشيط?",
   "General.Confirm.Accept": "هل أنت متأكد من الموافقة?",
-
+  "General.Search.AtLeastOne": "الرجاء تحديد عامل تصفية واحد على الأقل.",
 
   "General.HeaderMenu.User": "مرحبا ",
   "General.HeaderMenu.Profile": "الملف الشخصي",
@@ -178,6 +178,7 @@
   "Api.Auth.MinPasswordLengthError": "الحد الأدنى لطول كلمة المرور هو 8 أحرف",
   "Api.MinPasswordLengthError": "الحد الأدنى لطول كلمة المرور هو 8 أحرف ويجب أن تحتوي على رقم وحرف علوي",
   "Api.Username.Duplicate": "سبق استخدام اسم المستخدم هذا ، يرجى اختيار اسم مستخدم آخر",
+  "Api.Email.Duplicate": "تم استخدام هذا البريد الإلكتروني بالفعل ، يرجى اختيار بريد إلكتروني آخر.",
   "Api.NotEnoughBalance": "الرصيد لا يكفي ، يرجى شحن رصيدك ثم المحاولة مرة أخرى",
   "Api.Validate.IdRequired": "Id is Required",
 
@@ -504,6 +505,7 @@
   "Subscriptions.Label.subscriptionActive": "تفعيل الاشتراك",
   "Subscriptions.Label.paymentReferenceNumber": "الرقم المرجعي للسداد",
   "Subscriptions.Label.subscriptionDate": "التاريخ",
+  "Subscriptions.Label.subscriptionPaymentDocPhoto": "صورة مستند دفع الاشتراك",
 
   "Subscriptions.Label.branchName": "اسم الفرع",
   "Subscriptions.Label.carNumber": "رقم السيارة",

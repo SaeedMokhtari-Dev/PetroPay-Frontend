@@ -7,7 +7,7 @@ import Stores from "app/constants/Stores";
 import {
     Button, Collapse, Col, Row,
     Pagination, Input, Form,
-    Table, PageHeader, Space, DatePicker, Select
+    Table, PageHeader, Space, DatePicker, Select, Alert
 } from "antd";
 import {
     FolderViewOutlined,
@@ -31,6 +31,7 @@ interface InvoiceSummaryListProps {
 const InvoiceSummaryList: React.FC<InvoiceSummaryListProps> = inject(Stores.invoiceSummaryStore)(observer(({invoiceSummaryStore}) => {
     const [carOptions, setCarOptions] = React.useState([]);
     const [branchOptions, setBranchOptions] = React.useState([]);
+    const [companyOptions, setCompanyOptions] = React.useState([]);
     const [serviceMasterOptions, setServiceMasterOptions] = React.useState([]);
 
     const formItemLayout = {
@@ -57,7 +58,7 @@ const InvoiceSummaryList: React.FC<InvoiceSummaryListProps> = inject(Stores.invo
         fixed: 'right',
         render: (text, record) => (
             <div className="inline">
-                <Link to={`/app/invoiceDetail/${record.key}`}>
+                <Link to={`/app/invoiceDetail/${record.invoiceId}`}>
                     <Button type="default"  icon={<FolderViewOutlined />}
                             title={i18next.t("InvoiceSummaries.Button.InvoiceDetail")} style={{ background: "green", borderColor: "white" }}/>
                 </Link>
@@ -77,9 +78,6 @@ const InvoiceSummaryList: React.FC<InvoiceSummaryListProps> = inject(Stores.invo
 
     async function onLoad() {
         invoiceSummaryStore.onInvoiceSummaryGetPageLoad();
-        await invoiceSummaryStore.listBranchViewModel.getBranchList();
-        await invoiceSummaryStore.listCarViewModel.getCarList();
-        await invoiceSummaryStore.listServiceMasterViewModel.getServiceMasterList();
         invoiceSummaryStore.getInvoiceSummaryViewModel.getInvoiceSummariesRequest = new GetInvoiceSummaryRequest();
         invoiceSummaryStore.getInvoiceSummaryViewModel.getInvoiceSummariesRequest.pageSize = 20;
         invoiceSummaryStore.getInvoiceSummaryViewModel.getInvoiceSummariesRequest.pageIndex = 0;
@@ -87,25 +85,49 @@ const InvoiceSummaryList: React.FC<InvoiceSummaryListProps> = inject(Stores.invo
             invoiceSummaryStore.getInvoiceSummaryViewModel.getInvoiceSummariesRequest.companyId = UserContext.info.id;
         }
 
-        await invoiceSummaryStore.getInvoiceSummaryViewModel.getAllInvoiceSummary(invoiceSummaryStore.getInvoiceSummaryViewModel.getInvoiceSummariesRequest);
+        try {
+            if(UserContext.info.role === 100) {
+                await invoiceSummaryStore.listCompanyViewModel.getCompanyList();
+                let companyOptions = [];
+                if (invoiceSummaryStore.listCompanyViewModel) {
+                    for (let item of invoiceSummaryStore.listCompanyViewModel.listCompanyResponse.items) {
+                        companyOptions.push(<Option key={item.key} value={item.key}>{item.title}</Option>);
+                    }
+                }
+                setCompanyOptions(companyOptions);
+            }
+            await invoiceSummaryStore.listBranchViewModel.getBranchList();
+            let branchOptions = [];
+            if (invoiceSummaryStore.listBranchViewModel) {
+                for (let item of invoiceSummaryStore.listBranchViewModel.listBranchResponse.items) {
+                    branchOptions.push(<Option key={item.key} value={item.key}>{item.title}</Option>);
+                }
+            }
+            setBranchOptions(branchOptions);
 
-        let carOptions = [];
-        for (let item of invoiceSummaryStore.listCarViewModel.listCarResponse.items) {
-            carOptions.push(<Option key={item.key} value={item.carNumber}>{item.carNumber}</Option>);
-        }
-        setCarOptions(carOptions);
+            await invoiceSummaryStore.listCarViewModel.getCarList();
+            let carOptions = [];
+            if (invoiceSummaryStore.listCarViewModel) {
+                for (let item of invoiceSummaryStore.listCarViewModel.listCarResponse.items) {
+                    carOptions.push(<Option key={item.key} value={item.carNumber}>{item.carNumber}</Option>);
+                }
+            }
+            setCarOptions(carOptions);
 
-        let branchOptions = [];
-        for (let item of invoiceSummaryStore.listBranchViewModel.listBranchResponse.items) {
-            branchOptions.push(<Option key={item.key} value={item.key}>{item.title}</Option>);
-        }
-        setBranchOptions(branchOptions);
+            await invoiceSummaryStore.listServiceMasterViewModel.getServiceMasterList();
+            let serviceMasterOptions = [];
+            if (invoiceSummaryStore.listServiceMasterViewModel) {
+                for (let item of invoiceSummaryStore.listServiceMasterViewModel.listServiceMasterResponse.items) {
+                    serviceMasterOptions.push(<Option key={item.key} value={item.title}>{item.title}</Option>);
+                }
+            }
+            setServiceMasterOptions(serviceMasterOptions);
 
-        let serviceMasterOptions = [];
-        for (let item of invoiceSummaryStore.listServiceMasterViewModel.listServiceMasterResponse.items) {
-            serviceMasterOptions.push(<Option key={item.key} value={item.title}>{item.title}</Option>);
+            //await invoiceSummaryStore.getInvoiceSummaryViewModel.getAllInvoiceSummary(invoiceSummaryStore.getInvoiceSummaryViewModel.getInvoiceSummariesRequest);
         }
-        setServiceMasterOptions(serviceMasterOptions);
+        catch {
+
+        }
     }
 
     let viewModel = invoiceSummaryStore.getInvoiceSummaryViewModel;
@@ -114,6 +136,10 @@ const InvoiceSummaryList: React.FC<InvoiceSummaryListProps> = inject(Stores.invo
 
     function onUnload() {
         invoiceSummaryStore.onInvoiceSummaryGetPageUnload();
+        setServiceMasterOptions([]);
+        setCompanyOptions([]);
+        setBranchOptions([]);
+        setCarOptions([]);
     }
 
     async function pageIndexChanged(pageIndex, pageSize){
@@ -151,9 +177,12 @@ const InvoiceSummaryList: React.FC<InvoiceSummaryListProps> = inject(Stores.invo
         form.resetFields();
     }
     async function ExportToExcel(){
+        viewModel.invoiceSummaryExport = [];
         await viewModel.getAllInvoiceSummary(viewModel.getInvoiceSummariesRequest, true);
-        columns.pop();
-        ExportExcel(columns, viewModel?.invoiceSummaryExport, "InvoiceSummary");
+        if(viewModel.invoiceSummaryExport && viewModel.invoiceSummaryExport?.length > 0) {
+            columns.pop();
+            ExportExcel(columns, viewModel?.invoiceSummaryExport, "InvoiceSummary");
+        }
     }
 
     return (
@@ -171,7 +200,7 @@ const InvoiceSummaryList: React.FC<InvoiceSummaryListProps> = inject(Stores.invo
                 ]}
             />
 
-            <Collapse>
+            <Collapse defaultActiveKey={['1']}>
                 <Panel header={i18next.t("General.SearchPanel.Text")}  key="1">
                     <Form {...formItemLayout} layout={"vertical"} onFinish={onFinish} form={form}
                           key={"searchForm"}
@@ -179,10 +208,14 @@ const InvoiceSummaryList: React.FC<InvoiceSummaryListProps> = inject(Stores.invo
                         <Row gutter={[24, 16]}>
                             {UserContext.info.role == 100 ?
                                 <Col span={8}>
-                                    <Form.Item name="companyName" initialValue={viewModel?.getInvoiceSummariesRequest?.companyName}
-                                               key={"companyName"}
+                                    <Form.Item name="companyId" initialValue={viewModel?.getInvoiceSummariesRequest?.companyId}
+                                               key={"companyId"}
                                                label={i18next.t("InvoiceSummaries.SearchPanel.Label.companyName")}>
-                                        <Input onChange={onChanged}/>
+                                        {/*<Input onChange={onChanged}/>*/}
+                                        <Select style={{width: "100%", display:"block"}}
+                                                showSearch={true} onChange={(e) => onSelectChanged(e, "companyId")}>
+                                            {companyOptions}
+                                        </Select>
                                     </Form.Item>
                                 </Col>: ""}
                             {/*<Col span={8}>
@@ -246,6 +279,11 @@ const InvoiceSummaryList: React.FC<InvoiceSummaryListProps> = inject(Stores.invo
                         </Row>
                         <PageHeader
                             ghost={false}
+                            subTitle={<div>
+                                {viewModel?.errorMessage &&
+                                <Alert message={viewModel?.errorMessage} type="error" />
+                                }
+                            </div>}
                             extra={[
                                 <Button type="primary" loading={viewModel.isProcessing} onClick={onReset} danger key="reset" size={"large"} htmlType="reset">
                                     {i18next.t("General.SearchPanel.ResetButton")}
@@ -264,7 +302,7 @@ const InvoiceSummaryList: React.FC<InvoiceSummaryListProps> = inject(Stores.invo
                    summary={() => (
                        <Table.Summary.Row>
                            <Table.Summary.Cell index={0}>{i18next.t("General.Table.Total")}</Table.Summary.Cell>
-                           <Table.Summary.Cell colSpan={7} index={1}></Table.Summary.Cell>
+                           <Table.Summary.Cell colSpan={UserContext.info.role == 1 ? 6 : 7} index={1}></Table.Summary.Cell>
                            <Table.Summary.Cell index={5}>{viewModel?.sumInvoiceAmount?.toLocaleString()}</Table.Summary.Cell>
                            <Table.Summary.Cell colSpan={2} index={6}></Table.Summary.Cell>
                        </Table.Summary.Row>

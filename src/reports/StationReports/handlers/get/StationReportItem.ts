@@ -3,7 +3,7 @@ import {makeAutoObservable} from "mobx";
 
 export default class StationReportItem implements IDeserialize
 {
-    key: number;
+    key: string;
     invoiceId: number;
     companyBranchId: number;
     companyBranchName: string;

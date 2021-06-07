@@ -7,7 +7,7 @@ import Stores from "app/constants/Stores";
 import {
     Button, Collapse, Col, Row,
     Pagination, Input, Form,
-    Table, PageHeader, Space, DatePicker
+    Table, PageHeader, Space, DatePicker, Alert, Select
 } from "antd";
 import {
     FolderViewOutlined,
@@ -19,14 +19,18 @@ import UserContext from "../../../../identity/contexts/UserContext";
 import StationReportColumns from "./StationReportColumns";
 import StationReportStore from "../../stores/StationReportStore";
 import ExportExcel from "../../../../app/utils/ExportExcel";
+import {ReactComponent} from "*.svg";
 
 const { Panel } = Collapse;
+const { Option } = Select;
 
 interface StationReportListProps {
     stationReportStore?: StationReportStore
 }
 
 const StationReportList: React.FC<StationReportListProps> = inject(Stores.stationReportStore)(observer(({stationReportStore}) => {
+
+    const [petroStationOptions, setPetroStationOptions] = React.useState([]);
 
     const formItemLayout = {
         labelCol: {
@@ -74,7 +78,21 @@ const StationReportList: React.FC<StationReportListProps> = inject(Stores.statio
             stationReportStore.getStationReportViewModel.getStationReportsRequest.stationWorkerId = UserContext.info.id;
         }
 
-        await stationReportStore.getStationReportViewModel.getAllStationReport(stationReportStore.getStationReportViewModel.getStationReportsRequest);
+        try {
+            await stationReportStore.listPetroStationViewModel.getPetroStationList();
+            let petroStationOptions = [];
+            if (stationReportStore.listPetroStationViewModel) {
+                for (let item of stationReportStore.listPetroStationViewModel.listPetroStationResponse.items) {
+                    petroStationOptions.push(<Option key={item.key} value={item.key}>{item.title}</Option>);
+                }
+            }
+            setPetroStationOptions(petroStationOptions);
+        }
+        catch {
+
+        }
+
+        //await stationReportStore.getStationReportViewModel.getAllStationReport(stationReportStore.getStationReportViewModel.getStationReportsRequest);
     }
 
     let viewModel = stationReportStore.getStationReportViewModel;
@@ -117,9 +135,15 @@ const StationReportList: React.FC<StationReportListProps> = inject(Stores.statio
         form.resetFields();
     }
     async function ExportToExcel(){
+        viewModel.stationReportExport = [];
         await viewModel.getAllStationReport(viewModel.getStationReportsRequest, true);
-        columns.pop();
-        ExportExcel(columns, viewModel?.stationReportExport, "StationReport");
+        if(viewModel?.stationReportExport && viewModel?.stationReportExport.length > 0) {
+            columns.pop();
+            ExportExcel(columns, viewModel?.stationReportExport, "StationReport");
+        }
+    }
+    function onSelectChanged(e, propName){
+        viewModel.getStationReportsRequest[`${propName}`] = e;
     }
 
     return (
@@ -137,20 +161,32 @@ const StationReportList: React.FC<StationReportListProps> = inject(Stores.statio
                 ]}
             />
 
-            <Collapse>
+            <Collapse defaultActiveKey={['1']}>
                 <Panel header={i18next.t("General.SearchPanel.Text")}  key="1">
                     <Form {...formItemLayout} layout={"vertical"} onFinish={onFinish} form={form}
                           key={"searchForm"}
                           scrollToFirstError>
                         <Row gutter={[24, 16]}>
                             {UserContext.info.role == 100 ?
+                                <React.Fragment>
+                                <Col span={8}>
+                                    <Form.Item name="stationWorkerId" initialValue={viewModel?.getStationReportsRequest?.stationWorkerId}
+                                               key={"stationWorkerId"}
+                                               label={i18next.t("StationReports.SearchPanel.Label.stationWorkerId")}>
+                                        <Select style={{width: "100%", display:"block"}}
+                                                showSearch={true} onChange={(e) => onSelectChanged(e, "stationWorkerId")}>
+                                            {petroStationOptions}
+                                        </Select>
+                                    </Form.Item>
+                                </Col>
                                 <Col span={8}>
                                     <Form.Item name="stationWorkerFname" initialValue={viewModel?.getStationReportsRequest?.stationWorkerFname}
                                                key={"stationWorkerFname"}
                                                label={i18next.t("StationReports.SearchPanel.Label.stationWorkerFname")}>
                                         <Input onChange={onChanged}/>
                                     </Form.Item>
-                                </Col>: ""}
+                                </Col>
+                                </React.Fragment>: "" }
                             <Col span={8}>
                                 <Form.Item name="invoiceDataTimeFrom" initialValue={viewModel?.getStationReportsRequest?.invoiceDataTimeFrom}
                                            key={"invoiceDataTimeFrom"}
@@ -168,6 +204,11 @@ const StationReportList: React.FC<StationReportListProps> = inject(Stores.statio
                         </Row>
                         <PageHeader
                             ghost={false}
+                            subTitle={<div>
+                                {viewModel?.errorMessage &&
+                                <Alert message={viewModel?.errorMessage} type="error" />
+                                }
+                            </div>}
                             extra={[
                                 <Button type="primary" loading={viewModel.isProcessing} onClick={onReset} danger key="reset" size={"large"} htmlType="reset">
                                     {i18next.t("General.SearchPanel.ResetButton")}

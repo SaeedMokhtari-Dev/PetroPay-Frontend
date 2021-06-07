@@ -6,6 +6,7 @@ import GetStationReportHandler from "../handlers/get/GetStationReportHandler";
 import {getLocalizedString} from "../../../app/utils/Localization";
 import i18next from "i18next";
 import log from "loglevel";
+import ObjectHelper from "../../../app/utils/ObjectHelper";
 
 export default class GetStationReportViewModel {
     columns: any[];
@@ -23,6 +24,12 @@ export default class GetStationReportViewModel {
 
     public async getAllStationReport(getStationReportsRequest: GetStationReportRequest, exportToFile: boolean = false) {
         try {
+            this.errorMessage = "";
+            if(ObjectHelper.isNullOrEmptyWithDefaultExceptions(getStationReportsRequest, [])){
+                this.errorMessage = i18next.t("General.Search.AtLeastOne");
+                return;
+            }
+
             this.isProcessing = true;
             if(exportToFile)
                 getStationReportsRequest.exportToFile = exportToFile;

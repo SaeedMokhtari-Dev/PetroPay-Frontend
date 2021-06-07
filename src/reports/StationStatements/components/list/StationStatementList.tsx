@@ -7,7 +7,7 @@ import Stores from "app/constants/Stores";
 import {
     Button, Collapse, Col, Row,
     Pagination, Input, Form,
-    Table, PageHeader, Space, DatePicker
+    Table, PageHeader, Space, DatePicker, Alert, Select
 } from "antd";
 import {
     FileExcelOutlined
@@ -20,12 +20,15 @@ import StationStatementStore from "../../stores/StationStatementStore";
 import ExportExcel from "../../../../app/utils/ExportExcel";
 
 const { Panel } = Collapse;
+const { Option } = Select;
 
 interface StationStatementListProps {
     stationStatementStore?: StationStatementStore
 }
 
 const StationStatementList: React.FC<StationStatementListProps> = inject(Stores.stationStatementStore)(observer(({stationStatementStore}) => {
+
+    const [petroStationOptions, setPetroStationOptions] = React.useState([]);
 
     const formItemLayout = {
         labelCol: {
@@ -59,7 +62,20 @@ const StationStatementList: React.FC<StationStatementListProps> = inject(Stores.
             stationStatementStore.getStationStatementViewModel.getStationStatementsRequest.stationId = UserContext.info.id;
         }
 
-        await stationStatementStore.getStationStatementViewModel.getAllStationStatement(stationStatementStore.getStationStatementViewModel.getStationStatementsRequest);
+        try {
+            await stationStatementStore.listPetroStationViewModel.getPetroStationList();
+            let petroStationOptions = [];
+            if (stationStatementStore.listPetroStationViewModel) {
+                for (let item of stationStatementStore.listPetroStationViewModel.listPetroStationResponse.items) {
+                    petroStationOptions.push(<Option key={item.key} value={item.key}>{item.title}</Option>);
+                }
+            }
+            setPetroStationOptions(petroStationOptions);
+        }
+        catch {
+
+        }
+        //await stationStatementStore.getStationStatementViewModel.getAllStationStatement(stationStatementStore.getStationStatementViewModel.getStationStatementsRequest);
     }
 
     let viewModel = stationStatementStore.getStationStatementViewModel;
@@ -102,8 +118,13 @@ const StationStatementList: React.FC<StationStatementListProps> = inject(Stores.
         form.resetFields();
     }
     async function ExportToExcel(){
+        viewModel.stationStatementExport = [];
         await viewModel.getAllStationStatement(viewModel.getStationStatementsRequest, true);
-        ExportExcel(columns, viewModel?.stationStatementExport, "StationStatement");
+        if(viewModel.stationStatementExport && viewModel.stationStatementExport?.length > 0)
+            ExportExcel(columns, viewModel?.stationStatementExport, "StationStatement");
+    }
+    function onSelectChanged(e, propName){
+        viewModel.getStationStatementsRequest[`${propName}`] = e;
     }
 
     return (
@@ -121,7 +142,7 @@ const StationStatementList: React.FC<StationStatementListProps> = inject(Stores.
                 ]}
             />
 
-            <Collapse>
+            <Collapse defaultActiveKey={['1']}>
                 <Panel header={i18next.t("General.SearchPanel.Text")}  key="1">
                     <Form {...formItemLayout} layout={"vertical"} onFinish={onFinish} form={form}
                           key={"searchForm"}
@@ -129,10 +150,13 @@ const StationStatementList: React.FC<StationStatementListProps> = inject(Stores.
                         <Row gutter={[24, 16]}>
                             {UserContext.info.role == 100 ?
                                 <Col span={8}>
-                                    <Form.Item name="stationName" initialValue={viewModel?.getStationStatementsRequest?.stationName}
-                                               key={"stationName"}
-                                               label={i18next.t("StationStatements.SearchPanel.Label.stationName")}>
-                                        <Input onChange={onChanged}/>
+                                    <Form.Item name="stationId" initialValue={viewModel?.getStationStatementsRequest?.stationId}
+                                               key={"stationId"}
+                                               label={i18next.t("StationStatements.SearchPanel.Label.stationId")}>
+                                        <Select style={{width: "100%", display:"block"}}
+                                                showSearch={true} onChange={(e) => onSelectChanged(e, "stationId")}>
+                                            {petroStationOptions}
+                                        </Select>
                                     </Form.Item>
                                 </Col>: ""}
                             <Col span={8}>
@@ -152,6 +176,11 @@ const StationStatementList: React.FC<StationStatementListProps> = inject(Stores.
                         </Row>
                         <PageHeader
                             ghost={false}
+                            subTitle={<div>
+                                {viewModel?.errorMessage &&
+                                <Alert message={viewModel?.errorMessage} type="error" />
+                                }
+                            </div>}
                             extra={[
                                 <Button type="primary" loading={viewModel.isProcessing} onClick={onReset} danger key="reset" size={"large"} htmlType="reset">
                                     {i18next.t("General.SearchPanel.ResetButton")}

@@ -23,6 +23,7 @@ export default
     apiPetroStationDetail: "/api/petro-station/detail",
     apiPetroStationDelete: "/api/petro-station/delete",
     apiPetroStationPayment: "/api/petro-station/payment",
+    apiPetroStationList: "/api/petro-station/list",
 
     apiStationUserAdd: "/api/station-user/add",
     apiStationUserEdit: "/api/station-user/edit",

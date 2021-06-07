@@ -3,7 +3,7 @@ import {makeAutoObservable} from "mobx";
 
 export default class CarBalanceItem implements IDeserialize
 {
-    key: number;
+    key: string;
     companyId: number;
     companyName: string;
     companyBranchId: number;

@@ -5,13 +5,13 @@ import {
     Button, Col,
     DatePicker,
     Modal,
-    Divider, Form, Input, InputNumber, PageHeader, Radio, Row, Select, Skeleton, Space, Spin, Table
+    Divider, Form, Input, InputNumber, PageHeader, Radio, Row, Select, Skeleton, Space, Spin, Table, message, Upload
 } from "antd";
 import i18next from "i18next";
 import DetailSubscriptionResponse from "../../handlers/detail/DetailSubscriptionResponse";
 import AddSubscriptionRequest from "../../handlers/add/AddSubscriptionRequest";
 import {
-    ExclamationCircleOutlined, EyeInvisibleOutlined, EyeTwoTone
+    ExclamationCircleOutlined, EyeInvisibleOutlined, EyeTwoTone, PlusOutlined
 } from '@ant-design/icons';
 import history from "../../../../app/utils/History";
 import PaymentMethods from "../../../../app/constants/PaymentMethods";
@@ -36,7 +36,6 @@ const EditSubscription: React.FC<EditSubscriptionProps> = inject(Stores.subscrip
 
     const dateFormat = 'YYYY-MM-DD';
 
-
     const [subscriptionType, setSubscriptionType] = React.useState("");
     const [subscriptionCost, setSubscriptionCost] = React.useState(0);
     const [calculateButtonDisable, setCalculateButtonDisable] = React.useState(true);
@@ -50,6 +49,7 @@ const EditSubscription: React.FC<EditSubscriptionProps> = inject(Stores.subscrip
     const [carNumbersMaximum, setCarNumbersMaximum] = React.useState(0);
     const [payFromCompanyBalance, setPayFromCompanyBalance] = React.useState(true);
     const [petropayAccountOptions, setPetropayAccountOptions] = React.useState([]);
+    const [imageUrl, setImageUrl] = React.useState("");
 
     const [form] = Form.useForm();
 
@@ -75,6 +75,29 @@ const EditSubscription: React.FC<EditSubscriptionProps> = inject(Stores.subscrip
     SubscriptionTypes.forEach(w =>{ w.title = i18next.t(w.title) });
     const subscriptionTypeOptions = [...SubscriptionTypes];
 
+    const rowSelection = {
+        order: 2,
+        onChange: (selectedRowKeys: React.Key[]) => {
+            debugger;
+            console.log(`selectedRowKeys: ${selectedRowKeys}`);
+            try {
+                setBundleId(+selectedRowKeys[0]);
+                let bundle = subscriptionStore.listBundleViewModel?.bundleList?.find(w => w.key == +selectedRowKeys[0]);
+                /*rowSelection.selection = {
+                    key: bundle.key
+                };*/
+                setCarNumbersMinimum(bundle?.bundlesNumberFrom)
+                setCarNumbersMaximum(bundle?.bundlesNumberTo)
+                if (subscriptionId) {
+                    viewModel.editSubscriptionRequest.bundlesId = +selectedRowKeys[0];
+                } else {
+                    viewModel.addSubscriptionRequest.bundlesId = +selectedRowKeys[0];
+                }
+            }
+            catch {}
+        }
+    };
+
     useEffect(() => {
         onLoad();
         return onUnload;
@@ -88,6 +111,7 @@ const EditSubscription: React.FC<EditSubscriptionProps> = inject(Stores.subscrip
         await subscriptionStore.listPetropayAccountViewModel.getPetropayAccountList();
         let subscriptionIdParam = +match.params?.subscriptionId;
 
+        setSubscriptionId(subscriptionIdParam);
         if(subscriptionIdParam)
         {
             await subscriptionStore.editSubscriptionViewModel.getDetailSubscription(subscriptionIdParam);
@@ -99,22 +123,27 @@ const EditSubscription: React.FC<EditSubscriptionProps> = inject(Stores.subscrip
 
             setBundleId(subscriptionStore.editSubscriptionViewModel?.detailSubscriptionResponse?.bundlesId);
             setPayFromCompanyBalance(subscriptionStore.editSubscriptionViewModel?.detailSubscriptionResponse?.payFromCompanyBalance);
+            setImageUrl(subscriptionStore.editSubscriptionViewModel?.detailSubscriptionResponse?.subscriptionPaymentDocPhoto);
+            rowSelection.onChange([subscriptionStore.editSubscriptionViewModel?.detailSubscriptionResponse?.bundlesId]);
+            //rowSelection.selectedRowKeys.push(subscriptionStore.editSubscriptionViewModel?.detailSubscriptionResponse?.bundlesId);
         }
         else{
             subscriptionStore.editSubscriptionViewModel.addSubscriptionRequest = new AddSubscriptionRequest();
             subscriptionStore.editSubscriptionViewModel.detailSubscriptionResponse = new DetailSubscriptionResponse();
             setPayFromCompanyBalance(true);
         }
-        setSubscriptionId(subscriptionIdParam);
+
 
         
         let petropayAccountOptions = [];
         for (let item of subscriptionStore.listPetropayAccountViewModel.listPetropayAccountResponse.items) {
-            petropayAccountOptions.push(<Option key={item.key} value={item.key}>{item.title}</Option>);
+            petropayAccountOptions.push(<Option key={item.key} value={item.title}>{item.title}</Option>);
         }
         setPetropayAccountOptions(petropayAccountOptions);
 
         setDataFetched(true);
+
+        //
 
     }
 
@@ -132,7 +161,7 @@ const EditSubscription: React.FC<EditSubscriptionProps> = inject(Stores.subscrip
         }
         if(subscriptionId)
         {
-            if(!viewModel.editSubscriptionRequest.payFromCompanyBalance && !viewModel.editSubscriptionRequest.petropayAccountId){
+            if(!viewModel.editSubscriptionRequest.payFromCompanyBalance && !viewModel.editSubscriptionRequest.subscriptionPaymentMethod){
                 viewModel.errorMessage = i18next.t("Subscriptions.Validation.Message.subscriptionPaymentMethod.Required");
                 return;
             }
@@ -140,7 +169,7 @@ const EditSubscription: React.FC<EditSubscriptionProps> = inject(Stores.subscrip
         }
         else
         {
-            if(!viewModel.addSubscriptionRequest.payFromCompanyBalance && !viewModel.addSubscriptionRequest.petropayAccountId){
+            if(!viewModel.addSubscriptionRequest.payFromCompanyBalance && !viewModel.addSubscriptionRequest.subscriptionPaymentMethod){
                 viewModel.errorMessage = i18next.t("Subscriptions.Validation.Message.subscriptionPaymentMethod.Required");
                 return;
             }
@@ -216,22 +245,7 @@ const EditSubscription: React.FC<EditSubscriptionProps> = inject(Stores.subscrip
 
         setSubscriptionCost(result);
     }
-    const rowSelection = {
-        onChange: (selectedRowKeys: React.Key[], selectedRows: BundleItem[]) => {
-            
-            console.log(`selectedRowKeys: ${selectedRowKeys}`);
-            setBundleId(+selectedRowKeys[0]);
-            setCarNumbersMinimum(selectedRows[0]?.bundlesNumberFrom)
-            setCarNumbersMaximum(selectedRows[0]?.bundlesNumberTo)
-            if(subscriptionId)
-            {
-                viewModel.editSubscriptionRequest.bundlesId = bundleId;
-            }
-            else{
-                viewModel.addSubscriptionRequest.bundlesId = bundleId;
-            }
-        }
-    };
+
 
     function onNumberChanged(e){
         if(subscriptionId)
@@ -275,6 +289,57 @@ const EditSubscription: React.FC<EditSubscriptionProps> = inject(Stores.subscrip
         { label: i18next.t("Subscriptions.subscriptionPaymentMethod.PayFromCompanyBalance"), value: true },
         { label: i18next.t("Subscriptions.subscriptionPaymentMethod.SelectOtherPayment"), value: false }
     ];
+
+    function getBase64(img, callback) {
+        const reader = new FileReader();
+        reader.addEventListener('load', () => callback(reader.result));
+        reader.readAsDataURL(img);
+    }
+
+    function beforeUpload(file) {
+        viewModel.uploadLoading = true;
+        const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
+        if (!isJpgOrPng) {
+            message.error('You can only upload JPG/PNG file!');
+            viewModel.uploadLoading = false;
+            return false;
+        }
+        /*const isLt2M = file.size / 1024 / 1024 < 2;
+        if (!isLt2M) {
+            message.error('Image must smaller than 2MB!');
+            return false;
+        }*/
+        getBase64(file, imageUrl => {
+
+            viewModel.uploadLoading = false;
+            if(subscriptionId){
+                viewModel.editSubscriptionRequest.subscriptionPaymentDocPhoto = imageUrl;
+                setImageUrl(imageUrl);
+            }
+            else {
+                setImageUrl(imageUrl);
+                viewModel.addSubscriptionRequest.subscriptionPaymentDocPhoto = imageUrl;
+            }
+        });
+        return true;
+    }
+    const uploadButton = (
+        /*<div>
+        {!viewModel?.detailCompanyResponse?.companyCommercialPhoto &&
+            (*/
+        <div className={"btn-uploader"}>
+            {viewModel.uploadLoading ? <Spin /> : <PlusOutlined />}
+            <div style={{ marginTop: 8 }}>Upload</div>
+        </div>
+        /*  )
+      }
+      </div>*/
+    );
+    function customRequest(){
+
+        return true;
+    }
+
     return (
         <div>
             <PageHeader
@@ -289,7 +354,8 @@ const EditSubscription: React.FC<EditSubscriptionProps> = inject(Stores.subscrip
                  scrollToFirstError>
                 <Table dataSource={subscriptionStore.listBundleViewModel?.bundleList} columns={columns} loading={subscriptionStore.listBundleViewModel?.isProcessing}
                        bordered={true} pagination={false} scroll={{ x: 1500 }} sticky
-                        rowSelection={{type: 'radio', ...rowSelection}}/>
+                       rowKey = {record => record.key}
+                       rowSelection={{type: 'radio', ...rowSelection}}/>
 
                 <Divider>{i18next.t("Subscriptions.Section.GeneralInformation")}</Divider>
                 <Row gutter={[24, 16]}>
@@ -373,9 +439,9 @@ const EditSubscription: React.FC<EditSubscriptionProps> = inject(Stores.subscrip
                         </Radio.Group>
                         </Form.Item>
                         {!payFromCompanyBalance &&
-                        <Select style={{width: "100%", display:"block"}} defaultValue={viewModel?.detailSubscriptionResponse?.petropayAccountId}
-                                key={"petropayAccountId"}
-                                showSearch={true} onChange={(e) => onSelectChanged(e, "petropayAccountId")}>
+                        <Select style={{width: "100%", display:"block"}} defaultValue={viewModel?.detailSubscriptionResponse?.subscriptionPaymentMethod}
+                                key={"subscriptionPaymentMethod"}
+                                showSearch={true} onChange={(e) => onSelectChanged(e, "subscriptionPaymentMethod")}>
                             {petropayAccountOptions}
                         </Select>
                         }
@@ -388,6 +454,25 @@ const EditSubscription: React.FC<EditSubscriptionProps> = inject(Stores.subscrip
                             </div>
                             : ""
                         }
+                    </Col>
+                    <Divider>{i18next.t("Subscriptions.Label.subscriptionPaymentDocPhoto")}</Divider>
+                    <Col offset={8} span={8}>
+                        <Upload
+                            key={"uploader"}
+                            className={"avatar-uploader"}
+                            maxCount={1}
+                            beforeUpload={beforeUpload}
+                            customRequest= {customRequest}
+                            showUploadList={false}
+                        >
+                            {imageUrl ? (
+                                <div>
+                                    <img src={imageUrl} alt="logo"
+                                         style={{width: '100%', height: '150px'}}/>
+                                    <p>{i18next.t("General.Upload.ChangePhoto")}</p>
+                                </div>
+                            ) : uploadButton}
+                        </Upload>
                     </Col>
                 </Row>
                 <Divider></Divider>

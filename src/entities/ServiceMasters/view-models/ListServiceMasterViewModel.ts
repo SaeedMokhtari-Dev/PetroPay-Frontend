@@ -11,7 +11,7 @@ export default class ListServiceMasterViewModel {
     
     isProcessing: boolean;
     errorMessage: string;
-    listServiceMasterResponse: ListServiceMasterResponse;
+    listServiceMasterResponse: ListServiceMasterResponse = new ListServiceMasterResponse();
 
 
     constructor() {

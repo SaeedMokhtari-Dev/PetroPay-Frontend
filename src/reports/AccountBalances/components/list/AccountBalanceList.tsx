@@ -105,8 +105,10 @@ const AccountBalanceList: React.FC<AccountBalanceListProps> = inject(Stores.acco
         form.resetFields();
     }
     async function ExportToExcel(){
+        viewModel.accountBalanceExport = [];
         await viewModel.getAllAccountBalance(viewModel.getAccountBalancesRequest, true);
-        ExportExcel(columns, viewModel?.accountBalanceExport, "AccountBalance");
+        if(viewModel?.accountBalanceExport && viewModel?.accountBalanceExport?.length > 0)
+            ExportExcel(columns, viewModel?.accountBalanceExport, "AccountBalance");
     }
 
     return (

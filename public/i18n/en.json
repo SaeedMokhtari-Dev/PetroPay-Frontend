@@ -12,6 +12,7 @@
   "General.Confirm.Delete": "Are you sure to delete?",
   "General.Confirm.Active": "Are you sure to active?",
   "General.Confirm.Accept": "Are you sure to accept?",
+  "General.Search.AtLeastOne": "Please select at least one filter.",
 
 
   "General.HeaderMenu.User": "Hi",
@@ -178,6 +179,7 @@
   "Api.Auth.MinPasswordLengthError": "The minimum password length is 8 characters and must have at least a number, upper, lower and special character",
   "Api.MinPasswordLengthError": "The minimum password length is 8 characters and must have at least a number, upper, lower and special character",
   "Api.Username.Duplicate": "There has already used this username, please choose another username.",
+  "Api.Email.Duplicate": "There has already used this email, please choose another email.",
   "Api.NotEnoughBalance": "Balance is not enough, please charge your balance then try again.",
   "Api.Validate.IdRequired": "Id is Required",
 
@@ -506,6 +508,7 @@
   "Subscriptions.Label.subscriptionActive": "subscription Active",
   "Subscriptions.Label.paymentReferenceNumber": "payment Reference Number",
   "Subscriptions.Label.subscriptionDate": "subscription Date",
+  "Subscriptions.Label.subscriptionPaymentDocPhoto": "Subscription Payment Doc Photo",
 
   "Subscriptions.Label.branchName": "Branch Name",
   "Subscriptions.Label.carNumber": "Car Number",
@@ -658,7 +661,7 @@
   "StationReports.Label.paymentMethodName": "Payment Method Name",
   "StationReports.Label.invoiceDataTime": "Invoice Data Time",
 
-  "StationReports.SearchPanel.Label.stationWorkerId": "Station WorkerId",
+  "StationReports.SearchPanel.Label.stationWorkerId": "Petro Station",
   "StationReports.SearchPanel.Label.stationWorkerFname": "Station Worker Name",
   "StationReports.SearchPanel.Label.invoiceDataTimeFrom": "Invoice Data Time From",
   "StationReports.SearchPanel.Label.invoiceDataTimeTo": "Invoice Data Time To",
@@ -679,7 +682,7 @@
   "StationSales.Label.sumInvoiceDataTime": "Invoice Date",
 
 
-  "StationSales.SearchPanel.Label.stationWorkerId": "stationWorkerId",
+  "StationSales.SearchPanel.Label.stationWorkerId": "Petrol Station",
   "StationSales.SearchPanel.Label.stationWorkerFname": "Worker Name",
   "StationSales.SearchPanel.Label.invoiceFuelType": "Invoice Fuel Type",
   "StationSales.SearchPanel.Label.invoiceDataTimeFrom": "Invoice Date Time From",

@@ -6,6 +6,7 @@ import GetStationSaleHandler from "../handlers/get/GetStationSaleHandler";
 import {getLocalizedString} from "../../../app/utils/Localization";
 import i18next from "i18next";
 import log from "loglevel";
+import ObjectHelper from "../../../app/utils/ObjectHelper";
 
 export default class GetStationSaleViewModel {
     columns: any[];
@@ -23,6 +24,11 @@ export default class GetStationSaleViewModel {
 
     public async getAllStationSale(getStationSalesRequest: GetStationSaleRequest, exportToFile: boolean = false) {
         try {
+            this.errorMessage = "";
+            if(ObjectHelper.isNullOrEmptyWithDefaultExceptions(getStationSalesRequest, [])){
+                this.errorMessage = i18next.t("General.Search.AtLeastOne");
+                return;
+            }
             this.isProcessing = true;
             if(exportToFile)
                 getStationSalesRequest.exportToFile = exportToFile;

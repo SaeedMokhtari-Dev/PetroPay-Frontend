@@ -248,7 +248,7 @@ const EditCar: React.FC<EditCarProps> = inject(Stores.carStore)(observer(({carSt
         });
         return true;
     }
-    const regex = /[ء-ي]{1} [ء-ي]{1} [ء-ي]{1}/gm;
+    const regex = /[ء-ي]{1} [ء-ي]{1}( [ء-ي]{1})?/gm;
     const uploadButton = (
         /*<div>
         {!viewModel?.detailCompanyResponse?.companyCommercialPhoto &&

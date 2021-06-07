@@ -105,8 +105,10 @@ const CarBalanceList: React.FC<CarBalanceListProps> = inject(Stores.carBalanceSt
         form.resetFields();
     }
     async function ExportToExcel(){
+        viewModel.carBalanceExport = [];
         await viewModel.getAllCarBalance(viewModel.getCarBalancesRequest, true);
-        ExportExcel(columns, viewModel?.carBalanceExport, "CarBalance");
+        if(viewModel.carBalanceExport && viewModel.carBalanceExport?.length > 0)
+            ExportExcel(columns, viewModel?.carBalanceExport, "CarBalance");
     }
 
     return (
