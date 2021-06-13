@@ -100,21 +100,21 @@ const Login: React.FC<LoginProps> = inject('authStore')(observer(({authStore, ma
                     <div className={"role-type"}>
                         <Link to={"/auth/customer"}>
                             <img src="/images/customer.png" className="logo" alt="logo"/>
-                            <h2 style={{textAlign: "center"}}>
+                            <h3 style={{textAlign: "center"}}>
                                 {i18next.t("Authentication.RoleType.Customer")}
-                            </h2>
+                            </h3>
                         </Link>
                         <Link to={"/auth/petrol-station"}>
                             <img src="/images/petro-station.png" className="logo" alt="logo"/>
-                            <h2 style={{textAlign: "center"}}>
+                            <h3 style={{textAlign: "center"}}>
                                 {i18next.t("Authentication.RoleType.Supplier")}
-                            </h2>
+                            </h3>
                         </Link>
                         <Link to={"/auth/admin"}>
                             <img src="/images/admin.png" className="logo" alt="logo"/>
-                            <h2 style={{textAlign: "center"}}>
+                            <h3 style={{textAlign: "center"}}>
                                 {i18next.t("Authentication.RoleType.Admin")}
-                            </h2>
+                            </h3>
                         </Link>
                         {/*<Radio.Group onChange={onRoleTypeChanged} className={"radio-role"}>
                             <Radio  value={1}>

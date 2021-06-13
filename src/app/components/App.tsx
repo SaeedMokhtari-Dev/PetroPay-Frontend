@@ -50,6 +50,7 @@ import PetrolStationListList from "../../reports/PetrolStationLists/components/l
 import EditTransferBalance from "../../entities/transfer-balances/components/transfer-balance/EditTransferBalance";
 import PaymentPetroStation from "../../entities/petro-stations/components/payment/PaymentPetroStation";
 import PaymentPetropayAccount from "../../entities/PetropayAccounts/components/payment/PaymentPetropayAccount";
+import PetropayAccountList from "entities/PetropayAccounts/components/list/PetropayAccountList";
 
 const App: React.FC = () =>
 {
@@ -136,6 +137,7 @@ const App: React.FC = () =>
                                     <Route exact roles={[RoleType.admin]} path={Routes.accountBalance} component={AccountBalanceList} />
                                     <Route exact roles={[RoleType.admin]} path={Routes.petrolStationList} component={PetrolStationListList} />
                                     <Route exact roles={[RoleType.admin]} path={Routes.paymentPetroStation} component={PaymentPetroStation} />
+                                    <Route exact roles={[RoleType.admin]} path={Routes.petropayAccountList} component={PetropayAccountList} />
                                     <Route exact roles={[RoleType.admin]} path={Routes.paymentTransferAccount} component={PaymentPetropayAccount} />
 
                                     <Route component={NotFoundPage} />

@@ -241,6 +241,13 @@ const InvoiceSummaryList: React.FC<InvoiceSummaryListProps> = inject(Stores.invo
                                 </Form.Item>
                             </Col>
                             <Col span={8}>
+                                <Form.Item name="invoiceId" initialValue={viewModel?.getInvoiceSummariesRequest?.invoiceId}
+                                           key={"invoiceId"}
+                                           label={i18next.t("InvoiceSummaries.SearchPanel.Label.invoiceId")}>
+                                    <Input type={"number"} onChange={onChanged}/>
+                                </Form.Item>
+                            </Col>
+                            <Col span={8}>
                                 <Form.Item name="carIdNumber" initialValue={viewModel?.getInvoiceSummariesRequest?.carIdNumber}
                                            key={"carIdNumber"}
                                            label={i18next.t("InvoiceSummaries.SearchPanel.Label.carIdNumber")}>

@@ -211,7 +211,7 @@ const CarList: React.FC<CarListProps> = inject(Stores.carStore)(observer(({carSt
 
             <Table dataSource={viewModel?.carList} columns={columns} loading={viewModel?.isProcessing}
                    bordered={true} pagination={false} scroll={{ x: 1500 }} sticky
-                   rowClassName={(record, index) => (record.carWorkWithApproval ? "green" : "red")}
+                   rowClassName={(record, index) => (record.carNfcCode && record.carNfcCode.trim() !== '' && record.carNfcCode.trim() !== '0' ? "green" : "red")}
             />
             <br/>
             <Pagination

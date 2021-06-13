@@ -301,6 +301,14 @@
   "PetropayAccounts.Label.amount": "المبلغ",
   "PetropayAccounts.Label.reference": "المرجع",
 
+  "PetropayAccounts.Label.transId": "رقم المعاملة",
+  "PetropayAccounts.Label.transDate": "التاريخ",
+  "PetropayAccounts.Label.accountId": "رقم الحساب",
+  "PetropayAccounts.Label.accountName": "اسم الحساب",
+  "PetropayAccounts.Label.transDocument": "نوع المستند",
+  "PetropayAccounts.Label.transAmount": "المبلغ",
+  "PetropayAccounts.Label.transReference": "المرجع",
+
   "PetropayAccounts.Add.HeaderText": "اضافة حساب",
   "PetropayAccounts.Edit.HeaderText": "تعديل",
   "PetropayAccounts.Payment.HeaderText": "Payment PetroPay Account",
@@ -576,6 +584,7 @@
   "InvoiceSummaries.Label.invoiceAmount": "مبلغ الفاتورة",
   "InvoiceSummaries.Label.paymentMethodName": "طريقة الدفع",
 
+  "InvoiceSummaries.SearchPanel.Label.invoiceId": "رقم الفاتورة",
   "InvoiceSummaries.SearchPanel.Label.carIdNumber": "رقم السيارة",
   "InvoiceSummaries.SearchPanel.Label.companyBranchName": "الفرع",
   "InvoiceSummaries.SearchPanel.Label.invoiceDataTimeFrom": "من تاريخ",
@@ -657,6 +666,7 @@
   "StationReports.Label.paymentMethodName": "طريقة السداد",
   "StationReports.Label.invoiceDataTime": "التاريخ/الوقت",
 
+  "StationReports.SearchPanel.Label.invoiceId": "رقم الفاتورة",
   "StationReports.SearchPanel.Label.stationWorkerId": "رقم الموظف",
   "StationReports.SearchPanel.Label.stationWorkerFname": "اسم الموظف",
   "StationReports.SearchPanel.Label.invoiceDataTimeFrom": "من تاريخ",

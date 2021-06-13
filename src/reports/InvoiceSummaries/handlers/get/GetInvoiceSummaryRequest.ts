@@ -10,6 +10,7 @@ export default class GetInvoiceSummaryRequest
     invoiceDataTimeTo: string;
     serviceDescription: string;
     companyId: number;
+    invoiceId: number;
     companyName: string;
     pageIndex: number;
     pageSize: number;

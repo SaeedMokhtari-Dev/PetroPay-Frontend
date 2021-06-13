@@ -80,6 +80,7 @@ export default
     apiCarTransactionGet: "/api/car-transaction/get",
     apiPetrolStationListGet: "/api/petrol-station-list/get",
 
+    apiPetropayAccountGet: "/api/petropay-account/get",
     apiPetropayAccountList: "/api/petropay-account/list",
     apiPetropayAccountPayment: "/api/petropay-account/payment",
 

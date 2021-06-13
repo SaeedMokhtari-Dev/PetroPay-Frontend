@@ -464,6 +464,14 @@ const EditCar: React.FC<EditCarProps> = inject(Stores.carStore)(observer(({carSt
                             <Select options={carTypeOfFuelOptions} showSearch={true} onChange={(e) => onSelectChanged(e, "carTypeOfFuel")} />
                         </Form.Item>
                     </Col>
+
+                    <Col span={8}>
+                        <Form.Item name="carWorkWithApproval" initialValue={viewModel?.detailCarResponse?.carWorkWithApproval}
+                                   key={"carWorkWithApproval"}
+                                   label={i18next.t("Cars.Label.carWorkWithApproval")}>
+                            <Switch defaultChecked={viewModel?.detailCarResponse?.carWorkWithApproval} onChange={(e) => onSwitchChange(e, 'carWorkWithApproval')} />
+                        </Form.Item>
+                    </Col>
                     <Divider>{i18next.t("Cars.Section.DriverInformation")}</Divider>
                     <Col span={8}>
                         <Form.Item name="carDriverName" initialValue={viewModel?.detailCarResponse?.carDriverName}

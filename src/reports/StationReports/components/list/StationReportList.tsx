@@ -55,7 +55,7 @@ const StationReportList: React.FC<StationReportListProps> = inject(Stores.statio
         fixed: 'right',
         render: (text, record) => (
             <div className="inline">
-                <Link to={`/app/invoiceDetail/${record.key}`}>
+                <Link to={`/app/invoiceDetail/${record.invoiceId}`}>
                     <Button type="default"  icon={<FolderViewOutlined />}
                             title={i18next.t("StationReports.Button.InvoiceDetail")} style={{ background: "green", borderColor: "white" }}/>
                 </Link>
@@ -187,6 +187,13 @@ const StationReportList: React.FC<StationReportListProps> = inject(Stores.statio
                                     </Form.Item>
                                 </Col>
                                 </React.Fragment>: "" }
+                            <Col span={8}>
+                                <Form.Item name="invoiceId" initialValue={viewModel?.getStationReportsRequest?.invoiceId}
+                                           key={"invoiceId"}
+                                           label={i18next.t("StationReports.SearchPanel.Label.invoiceId")}>
+                                    <Input type={"number"} onChange={onChanged}/>
+                                </Form.Item>
+                            </Col>
                             <Col span={8}>
                                 <Form.Item name="invoiceDataTimeFrom" initialValue={viewModel?.getStationReportsRequest?.invoiceDataTimeFrom}
                                            key={"invoiceDataTimeFrom"}

@@ -58,6 +58,7 @@ export default
     transferBalance: "/app/transferBalance",
 
     //PetroPayAccount
+    petropayAccountList: "/app/petroPayAccount",
     paymentTransferAccount: "/app/petroPayAccount/payment",
 
     //Reports

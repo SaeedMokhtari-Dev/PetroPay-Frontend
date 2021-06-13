@@ -303,6 +303,15 @@
   "PetropayAccounts.Label.amount": "Amount",
   "PetropayAccounts.Label.reference": "Reference",
 
+  "PetropayAccounts.Label.transId": "transaction #",
+  "PetropayAccounts.Label.transDate": "Transaction Date",
+  "PetropayAccounts.Label.accountId": "account #",
+  "PetropayAccounts.Label.accountName": "Account Name",
+  "PetropayAccounts.Label.transDocument": "Transaction Document",
+  "PetropayAccounts.Label.transAmount": "Transaction Amount",
+  "PetropayAccounts.Label.transReference": "Transaction Reference",
+
+
   "PetropayAccounts.Add.HeaderText": "Add PetroPay Account",
   "PetropayAccounts.Edit.HeaderText": "Edit PetroPay Account with Id:",
   "PetropayAccounts.Payment.HeaderText": "Payment PetroPay Account",
@@ -580,6 +589,7 @@
   "InvoiceSummaries.Label.invoiceAmount": "Invoice Amount",
   "InvoiceSummaries.Label.paymentMethodName": "Payment Method",
 
+  "InvoiceSummaries.SearchPanel.Label.invoiceId": "Invoice #",
   "InvoiceSummaries.SearchPanel.Label.carIdNumber": "Car Id Number",
   "InvoiceSummaries.SearchPanel.Label.companyBranchName": "Branch Name",
   "InvoiceSummaries.SearchPanel.Label.invoiceDataTimeFrom": "Date From",
@@ -661,6 +671,7 @@
   "StationReports.Label.paymentMethodName": "Payment Method Name",
   "StationReports.Label.invoiceDataTime": "Invoice Data Time",
 
+  "StationReports.SearchPanel.Label.invoiceId": "Invoice #",
   "StationReports.SearchPanel.Label.stationWorkerId": "Petro Station",
   "StationReports.SearchPanel.Label.stationWorkerFname": "Station Worker Name",
   "StationReports.SearchPanel.Label.invoiceDataTimeFrom": "Invoice Data Time From",

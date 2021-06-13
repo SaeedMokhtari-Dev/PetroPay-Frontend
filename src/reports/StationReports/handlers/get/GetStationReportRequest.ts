@@ -2,6 +2,7 @@ import { makeAutoObservable } from "mobx";
 
 export default class GetStationReportRequest
 {
+    invoiceId: number;
     stationWorkerId: number;
     stationWorkerFname: string;
     invoiceDataTimeFrom: string;
