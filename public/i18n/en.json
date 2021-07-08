@@ -13,6 +13,7 @@
   "General.Confirm.Active": "Are you sure to active?",
   "General.Confirm.Accept": "Are you sure to accept?",
   "General.Search.AtLeastOne": "Please select at least one filter.",
+  "General.Image.LessThan2MB": "Image must smaller than 2MB!",
 
 
   "General.HeaderMenu.User": "Hi",
@@ -518,6 +519,8 @@
   "Subscriptions.Label.paymentReferenceNumber": "payment Reference Number",
   "Subscriptions.Label.subscriptionDate": "subscription Date",
   "Subscriptions.Label.subscriptionPaymentDocPhoto": "Subscription Payment Doc Photo",
+  "Subscriptions.Label.subscriptionEditDate": "Please select start date with a number for range of date",
+  "Subscriptions.Label.numberOfDateDiff": "Select the number Of months/years",
 
   "Subscriptions.Label.branchName": "Branch Name",
   "Subscriptions.Label.carNumber": "Car Number",
@@ -545,6 +548,7 @@
   "Subscriptions.Validation.Message.subscriptionPaymentMethod.Required": "Please enter Subscription Payment Method",
   "Subscriptions.Validation.Message.payFromCompany.Required": "Please select one of options",
   "Subscriptions.Validation.Message.subscriptionType.Required": "Please enter Subscription Type Method",
+  "Subscriptions.Validation.Message.numberOfDateDiff.Required": "Please enter Subscription Number Of Date Diff",
 
   "Subscriptions.Validation.Message.cannotAdd.MoreCar": "You cannot add more car than you subscribed.",
 
@@ -565,6 +569,9 @@
   "Api.Subscription.SubscriptionPaymentMethod.Required": "Subscription Payment Method is Required",
   "Api.Subscription.Id.Required": "Id is Required",
   "Api.Subscription.ActiveEntityDelete.NotAllowed": "Active Subscription Request cannot delete.",
+
+  "Api.Subscription.MoreThan1Month": "Monthly subscription range must be more than 1 month",
+  "Api.Subscription.MoreThan1Year": "Yearly subscription range must be more than 1 year",
 
   "Subscriptions.Error.Get.Message": "An error has occurred while trying to get subscriptions list.",
   "Subscriptions.Error.Detail.Message": "An error has occurred while trying to get subscription details.",
@@ -825,6 +832,41 @@
   "AdminDashboard.Section.CompaniesBalance": "Companies Balance",
   "AdminDashboard.Section.PetrolStationsBalance": "PetrolStations Balance",
 
+
+
+  "PromotionCoupons.Menu.Title": "PromotionCoupons",
+  "PromotionCoupons.Page.Title": "PromotionCoupons",
+  "PromotionCoupons.Page.SubTitle": "This page is for define promotion Coupons",
+  "PromotionCoupons.Label.key": "key",
+  "PromotionCoupons.Label.couponId": "coupon Id",
+  "PromotionCoupons.Label.couponCode": "coupon Code",
+  "PromotionCoupons.Label.couponDiscountValue": "coupon Discount Value (Percent)",
+  "PromotionCoupons.Label.couponActiveDate": "coupon Active Date",
+  "PromotionCoupons.Label.couponEndDate": "coupon End Date",
+  "PromotionCoupons.Label.couponActive": "coupon Active",
+  "PromotionCoupons.Label.userId": "user Id",
+  "PromotionCoupons.Label.userName": "user Name",
+
+  "PromotionCoupons.Add.HeaderText": "Add Promotion Coupon",
+  "PromotionCoupons.Edit.HeaderText": "Edit Promotion Coupon with Id:",
+  "PromotionCoupons.Section.GeneralInformation": "General Information",
+
+  "PromotionCoupons.Validation.Message.couponCode.Required": "Please enter promotion Coupon code",
+  "PromotionCoupons.Validation.Message.couponDiscountValue.Required": "Please enter promotion Coupon DiscountValue",
+  "PromotionCoupons.Validation.Message.couponActiveDate.Required": "Please enter promotion Coupon ActiveDate",
+  "PromotionCoupons.Validation.Message.couponEndDate.Required": "Please enter promotion Coupon EndDate",
+
+
+  "Api.PromotionCoupon.Add.Successful": "A new promotion Coupon added successfully",
+  "Api.PromotionCoupon.Edit.Successful": "selected promotion Coupon edited successfully",
+  "Api.PromotionCoupon.Deleted.Successful": "selected promotion Coupon deleted successfully",
+  "Api.PromotionCoupon.Id.Required": "Id is Required",
+
+  "PromotionCoupons.Error.Get.Message": "An error has occurred while trying to get promotion Coupons list.",
+  "PromotionCoupons.Error.Detail.Message": "An error has occurred while trying to get promotion Coupon details.",
+  "PromotionCoupons.Error.Add.Message": "An error has occurred while trying to add new promotion Coupon.",
+  "PromotionCoupons.Error.Edit.Message": "An error has occurred while trying to edit promotion Coupon.",
+  "PromotionCoupons.Error.Delete.Message": "An error has occurred while trying to delete promotion Coupon.",
 
   "General.TransferBalanceType.CompanyToBranch": "Recharge Branch Balance",
   "General.TransferBalanceType.BranchToCompany": "Refund Balance To Company (Branch To Company)",

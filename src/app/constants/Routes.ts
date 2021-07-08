@@ -61,6 +61,11 @@ export default
     petropayAccountList: "/app/petroPayAccount",
     paymentTransferAccount: "/app/petroPayAccount/payment",
 
+    //PromotionCoupon
+    promotionCoupon: "/app/promotionCoupon",
+    editPromotionCoupon: "/app/promotionCoupon/edit/:promotionCouponId",
+    addPromotionCoupon: "/app/promotionCoupon/add",
+
     //Reports
     accountBalance: '/app/accountBalance',
     invoiceSummary: '/app/invoiceSummary',

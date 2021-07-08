@@ -8,7 +8,7 @@ export default class EditSubscriptionRequest
     subscriptionPaymentMethod: string;
     payFromCompanyBalance: boolean;
     petropayAccountId: number;
-
+    numberOfDateDiff: number;
     subscriptionType: string;
     subscriptionStartDate: string;
     subscriptionEndDate: string;

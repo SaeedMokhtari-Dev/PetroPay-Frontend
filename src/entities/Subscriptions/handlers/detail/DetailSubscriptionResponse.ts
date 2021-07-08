@@ -11,7 +11,7 @@ export default class DetailSubscriptionResponse implements IDeserialize
     subscriptionPaymentMethod: string;
     payFromCompanyBalance: boolean;
     petropayAccountId: number;
-
+    numberOfDateDiff: number;
     subscriptionType: string;
     subscriptionStartDate: string;
     subscriptionEndDate: string;

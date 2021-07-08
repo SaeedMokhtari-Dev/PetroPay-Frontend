@@ -67,6 +67,7 @@ ReactDOM.render(
                       petrolStationListStore={appStore.petrolStationList}
                       transferBalanceStore={appStore.transferBalance}
                       petropayAccountStore={appStore.petropayAccount}
+                      promotionCouponStore={appStore.promotionCoupon}
             >
                 <App />
             </Provider>

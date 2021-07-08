@@ -22,6 +22,7 @@ import AccountBalanceStore from "../../reports/AccountBalances/stores/AccountBal
 import PetrolStationListStore from "../../reports/PetrolStationLists/stores/PetrolStationListStore";
 import TransferBalanceStore from "../../entities/transfer-balances/stores/TransferBalanceStore";
 import PetropayAccountStore from "../../entities/PetropayAccounts/stores/PetropayAccountStore";
+import PromotionCouponStore from "../../entities/promotion-coupons/stores/PromotionCouponStore";
 
 export class AppStore
 {
@@ -49,6 +50,7 @@ export class AppStore
     petrolStationList: PetrolStationListStore;
     transferBalance: TransferBalanceStore;
     petropayAccount: PetropayAccountStore;
+    promotionCoupon: PromotionCouponStore;
 
     constructor()
     {
@@ -76,5 +78,6 @@ export class AppStore
         this.petrolStationList = new PetrolStationListStore(this);
         this.transferBalance = new TransferBalanceStore(this);
         this.petropayAccount = new PetropayAccountStore(this);
+        this.promotionCoupon = new PromotionCouponStore(this);
     }
 }

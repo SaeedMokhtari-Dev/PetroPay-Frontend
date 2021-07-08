@@ -158,11 +158,12 @@ const EditCompany: React.FC<EditCompanyProps> = inject(Stores.companiesStore)(ob
             viewModel.uploadLoading = false;
             return false;
         }
-        /*const isLt2M = file.size / 1024 / 1024 < 2;
+        const isLt2M = file.size / 1024 / 1024 < 2;
         if (!isLt2M) {
-            message.error('Image must smaller than 2MB!');
+            message.error(i18next.t("General.Image.LessThan2MB"));
+            viewModel.uploadLoading = false;
             return false;
-        }*/
+        }
         getBase64(file, imageUrl => {
 
             viewModel.uploadLoading = false;

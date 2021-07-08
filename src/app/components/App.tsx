@@ -51,6 +51,8 @@ import EditTransferBalance from "../../entities/transfer-balances/components/tra
 import PaymentPetroStation from "../../entities/petro-stations/components/payment/PaymentPetroStation";
 import PaymentPetropayAccount from "../../entities/PetropayAccounts/components/payment/PaymentPetropayAccount";
 import PetropayAccountList from "entities/PetropayAccounts/components/list/PetropayAccountList";
+import EditPromotionCoupon from "../../entities/promotion-coupons/components/edit/EditPromotionCoupon";
+import PromotionCouponsList from "../../entities/promotion-coupons/components/list/PromotionCouponsList";
 
 const App: React.FC = () =>
 {
@@ -139,6 +141,12 @@ const App: React.FC = () =>
                                     <Route exact roles={[RoleType.admin]} path={Routes.paymentPetroStation} component={PaymentPetroStation} />
                                     <Route exact roles={[RoleType.admin]} path={Routes.petropayAccountList} component={PetropayAccountList} />
                                     <Route exact roles={[RoleType.admin]} path={Routes.paymentTransferAccount} component={PaymentPetropayAccount} />
+
+
+                                    <Route exact roles={[RoleType.admin]} path={Routes.promotionCoupon} component={PromotionCouponsList} />
+                                    <Route exact roles={[RoleType.admin]} path={Routes.editPromotionCoupon} component={EditPromotionCoupon} />
+                                    <Route exact roles={[RoleType.admin]} path={Routes.addPromotionCoupon} component={EditPromotionCoupon} />
+
 
                                     <Route component={NotFoundPage} />
                                 </Switch>

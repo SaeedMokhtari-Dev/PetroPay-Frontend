@@ -4,24 +4,21 @@ import Stores from "app/constants/Stores";
 import {
     Button, Col,
     DatePicker,
-    Modal,
-    Divider, Form, Input, InputNumber, PageHeader, Radio, Row, Select, Skeleton, Space, Spin, Table, message, Upload
+    Divider, Form, Input, InputNumber, PageHeader, Radio, Row, Select, Spin, Table, message, Upload
 } from "antd";
 import i18next from "i18next";
 import DetailSubscriptionResponse from "../../handlers/detail/DetailSubscriptionResponse";
 import AddSubscriptionRequest from "../../handlers/add/AddSubscriptionRequest";
 import {
-    ExclamationCircleOutlined, EyeInvisibleOutlined, EyeTwoTone, PlusOutlined
+    PlusOutlined
 } from '@ant-design/icons';
 import history from "../../../../app/utils/History";
-import PaymentMethods from "../../../../app/constants/PaymentMethods";
 import moment from 'moment';
 import SubscriptionTypes from 'app/constants/SubscriptionTypes';
 import SubscriptionStore from "../../stores/SubscriptionStore";
 import CalculateSubscriptionRequest from "../../handlers/calculate/CalculateSubscriptionRequest";
 import "./EditSubscription.scss";
 import BundlesColumns from "../../../bundles/components/list/BundlesColumns";
-import BundleItem from "../../../bundles/handlers/get/BundleItem";
 const {useEffect} = React;
 const { RangePicker } = DatePicker;
 const { Option } = Select;
@@ -34,13 +31,14 @@ interface EditSubscriptionProps {
 const EditSubscription: React.FC<EditSubscriptionProps> = inject(Stores.subscriptionStore)(observer(({subscriptionStore, match}) =>
 {
 
-    const dateFormat = 'YYYY-MM-DD';
+    const dateFormat = 'DD/MM/YYYY';
 
     const [subscriptionType, setSubscriptionType] = React.useState("");
     const [subscriptionCost, setSubscriptionCost] = React.useState(0);
     const [calculateButtonDisable, setCalculateButtonDisable] = React.useState(true);
-    const [startDatePickerDefault, setStartDatePickerDefault] = React.useState(moment());
-    const [endDatePickerDefault, setEndDatePickerDefault] = React.useState(moment());
+    /*const [startDatePickerDefault, setStartDatePickerDefault] = React.useState(moment());
+    const [endDatePickerDefault, setEndDatePickerDefault] = React.useState(moment());*/
+    const [subscriptionEndDate, setSubscriptionEndDate] = React.useState("");
     const [dataFetched, setDataFetched] = React.useState(false);
 
     const [subscriptionId, setSubscriptionId] = React.useState(0);
@@ -69,8 +67,6 @@ const EditSubscription: React.FC<EditSubscriptionProps> = inject(Stores.subscrip
     });
     const columns: any[] = [...BundlesColumns];
     columns.pop();
-    /*PaymentMethods.forEach(w =>{ w.title = i18next.t(w.title) });
-    const paymentMethodOptions = [...PaymentMethods];*/
 
     SubscriptionTypes.forEach(w =>{ w.title = i18next.t(w.title) });
     const subscriptionTypeOptions = [...SubscriptionTypes];
@@ -78,14 +74,12 @@ const EditSubscription: React.FC<EditSubscriptionProps> = inject(Stores.subscrip
     const rowSelection = {
         order: 2,
         onChange: (selectedRowKeys: React.Key[]) => {
-            debugger;
+
             console.log(`selectedRowKeys: ${selectedRowKeys}`);
             try {
                 setBundleId(+selectedRowKeys[0]);
                 let bundle = subscriptionStore.listBundleViewModel?.bundleList?.find(w => w.key == +selectedRowKeys[0]);
-                /*rowSelection.selection = {
-                    key: bundle.key
-                };*/
+
                 setCarNumbersMinimum(bundle?.bundlesNumberFrom)
                 setCarNumbersMaximum(bundle?.bundlesNumberTo)
                 if (subscriptionId) {
@@ -116,16 +110,17 @@ const EditSubscription: React.FC<EditSubscriptionProps> = inject(Stores.subscrip
         {
             await subscriptionStore.editSubscriptionViewModel.getDetailSubscription(subscriptionIdParam);
 
+
             setSubscriptionCost(subscriptionStore.editSubscriptionViewModel?.detailSubscriptionResponse?.subscriptionCost);
             setSubscriptionType(subscriptionStore.editSubscriptionViewModel?.detailSubscriptionResponse?.subscriptionType);
-            setStartDatePickerDefault(moment(subscriptionStore.editSubscriptionViewModel?.detailSubscriptionResponse?.subscriptionStartDate));
-            setEndDatePickerDefault(moment(subscriptionStore.editSubscriptionViewModel?.detailSubscriptionResponse?.subscriptionEndDate));
+            /*setStartDatePickerDefault(moment(subscriptionStore.editSubscriptionViewModel?.detailSubscriptionResponse?.subscriptionStartDate));
+            setEndDatePickerDefault(moment(subscriptionStore.editSubscriptionViewModel?.detailSubscriptionResponse?.subscriptionEndDate));*/
+            setSubscriptionEndDate(subscriptionStore.editSubscriptionViewModel?.detailSubscriptionResponse?.subscriptionEndDate);
 
             setBundleId(subscriptionStore.editSubscriptionViewModel?.detailSubscriptionResponse?.bundlesId);
             setPayFromCompanyBalance(subscriptionStore.editSubscriptionViewModel?.detailSubscriptionResponse?.payFromCompanyBalance);
             setImageUrl(subscriptionStore.editSubscriptionViewModel?.detailSubscriptionResponse?.subscriptionPaymentDocPhoto);
             rowSelection.onChange([subscriptionStore.editSubscriptionViewModel?.detailSubscriptionResponse?.bundlesId]);
-            //rowSelection.selectedRowKeys.push(subscriptionStore.editSubscriptionViewModel?.detailSubscriptionResponse?.bundlesId);
         }
         else{
             subscriptionStore.editSubscriptionViewModel.addSubscriptionRequest = new AddSubscriptionRequest();
@@ -133,8 +128,6 @@ const EditSubscription: React.FC<EditSubscriptionProps> = inject(Stores.subscrip
             setPayFromCompanyBalance(true);
         }
 
-
-        
         let petropayAccountOptions = [];
         for (let item of subscriptionStore.listPetropayAccountViewModel.listPetropayAccountResponse.items) {
             petropayAccountOptions.push(<Option key={item.key} value={item.title}>{item.title}</Option>);
@@ -142,9 +135,6 @@ const EditSubscription: React.FC<EditSubscriptionProps> = inject(Stores.subscrip
         setPetropayAccountOptions(petropayAccountOptions);
 
         setDataFetched(true);
-
-        //
-
     }
 
     let viewModel = subscriptionStore.editSubscriptionViewModel;
@@ -185,9 +175,9 @@ const EditSubscription: React.FC<EditSubscriptionProps> = inject(Stores.subscrip
     function onSelectChanged(e, propName){
 
         if(subscriptionId)
-            subscriptionStore.editSubscriptionViewModel.editSubscriptionRequest[`${propName}`] = e;
+            viewModel.editSubscriptionRequest[`${propName}`] = e;
         else
-            subscriptionStore.editSubscriptionViewModel.addSubscriptionRequest[`${propName}`] = e;
+            viewModel.addSubscriptionRequest[`${propName}`] = e;
 
         if(propName == "subscriptionType"){
             setSubscriptionType(e);
@@ -195,12 +185,13 @@ const EditSubscription: React.FC<EditSubscriptionProps> = inject(Stores.subscrip
     }
     function onChanged(e){
         if(subscriptionId)
-            subscriptionStore.editSubscriptionViewModel.editSubscriptionRequest[`${e.target.id}`] = e.target.value;
+            viewModel.editSubscriptionRequest[`${e.target.id}`] = e.target.value;
         else
-            subscriptionStore.editSubscriptionViewModel.addSubscriptionRequest[`${e.target.id}`] = e.target.value;
+            viewModel.addSubscriptionRequest[`${e.target.id}`] = e.target.value;
     }
     function disabledDate(current) {
         // Can not select days before today and today
+
         return current && current < moment().endOf('day');
     }
 
@@ -209,13 +200,42 @@ const EditSubscription: React.FC<EditSubscriptionProps> = inject(Stores.subscrip
         console.log(d);
         if(subscriptionId)
         {
-            subscriptionStore.editSubscriptionViewModel.editSubscriptionRequest.subscriptionStartDate = d[0];
-            subscriptionStore.editSubscriptionViewModel.editSubscriptionRequest.subscriptionEndDate = d[1];
+            viewModel.editSubscriptionRequest.subscriptionStartDate = d[0];
+            viewModel.editSubscriptionRequest.subscriptionEndDate = d[1];
         }
         else {
-            subscriptionStore.editSubscriptionViewModel.addSubscriptionRequest.subscriptionStartDate = d[0];
-            subscriptionStore.editSubscriptionViewModel.addSubscriptionRequest.subscriptionEndDate = d[1];
+            viewModel.addSubscriptionRequest.subscriptionStartDate = d[0];
+            viewModel.addSubscriptionRequest.subscriptionEndDate = d[1];
         }
+        setCalculateButtonDisable(false);
+    }
+    function onEditDatePickerChanged(e, d){
+        debugger;
+        console.log(e);
+        console.log(d);
+        if(subscriptionId) {
+            viewModel.editSubscriptionRequest.subscriptionStartDate = d;
+            viewModel.editSubscriptionRequest.subscriptionEndDate = moment(viewModel.editSubscriptionRequest.subscriptionStartDate, dateFormat)
+                .add(viewModel.editSubscriptionRequest.numberOfDateDiff,
+                viewModel.editSubscriptionRequest.subscriptionType === "Yearly" ? 'y' : 'M').format(dateFormat).toString();
+            viewModel.detailSubscriptionResponse.subscriptionEndDate = viewModel.editSubscriptionRequest.subscriptionEndDate;
+            setSubscriptionEndDate(viewModel.editSubscriptionRequest.subscriptionEndDate);
+        }
+        else{
+            viewModel.addSubscriptionRequest.subscriptionStartDate = d;
+            viewModel.addSubscriptionRequest.subscriptionEndDate = moment(viewModel.addSubscriptionRequest.subscriptionStartDate, dateFormat)
+                .add(viewModel.addSubscriptionRequest.numberOfDateDiff,
+                    viewModel.addSubscriptionRequest.subscriptionType === "Yearly" ? 'y' : 'M').format(dateFormat).toString();
+            viewModel.detailSubscriptionResponse.subscriptionEndDate = viewModel.addSubscriptionRequest.subscriptionEndDate;
+            setSubscriptionEndDate(viewModel.addSubscriptionRequest.subscriptionEndDate);
+        }
+        setCalculateButtonDisable(false);
+    }
+    function DateTimeChange(e){
+
+        viewModel.editSubscriptionRequest.subscriptionEndDate =
+            moment(viewModel.editSubscriptionRequest.subscriptionStartDate).add(e,
+                viewModel.editSubscriptionRequest.subscriptionType === "Yearly" ? 'y' : 'M').format(dateFormat).toString();
         setCalculateButtonDisable(false);
     }
     async function calculate(){
@@ -254,6 +274,32 @@ const EditSubscription: React.FC<EditSubscriptionProps> = inject(Stores.subscrip
         }
         else{
             viewModel.addSubscriptionRequest.subscriptionCarNumbers = e;
+        }
+    }
+    function onNumberOfDateDiffChanged(e){
+        debugger;
+        if(subscriptionId)
+        {
+            viewModel.editSubscriptionRequest.numberOfDateDiff = e;
+            if(viewModel.editSubscriptionRequest?.subscriptionStartDate)
+            {
+                viewModel.editSubscriptionRequest.subscriptionEndDate = moment(viewModel.editSubscriptionRequest.subscriptionStartDate, dateFormat)
+                    .add(e,
+                        viewModel.editSubscriptionRequest.subscriptionType === "Yearly" ? 'y' : 'M').format(dateFormat).toString();
+                viewModel.detailSubscriptionResponse.subscriptionEndDate = viewModel.editSubscriptionRequest.subscriptionEndDate;
+                setSubscriptionEndDate(viewModel.editSubscriptionRequest.subscriptionEndDate);
+            }
+        }
+        else{
+            viewModel.addSubscriptionRequest.numberOfDateDiff = e;
+            if(viewModel.addSubscriptionRequest?.subscriptionStartDate)
+            {
+                viewModel.addSubscriptionRequest.subscriptionEndDate = moment(viewModel.addSubscriptionRequest.subscriptionStartDate, dateFormat)
+                    .add(e,
+                        viewModel.addSubscriptionRequest.subscriptionType === "Yearly" ? 'y' : 'M').format(dateFormat).toString();
+                viewModel.detailSubscriptionResponse.subscriptionEndDate = viewModel.addSubscriptionRequest.subscriptionEndDate;
+                setSubscriptionEndDate(viewModel.addSubscriptionRequest.subscriptionEndDate);
+            }
         }
     }
     function onRadioChange(e){
@@ -304,11 +350,12 @@ const EditSubscription: React.FC<EditSubscriptionProps> = inject(Stores.subscrip
             viewModel.uploadLoading = false;
             return false;
         }
-        /*const isLt2M = file.size / 1024 / 1024 < 2;
+        const isLt2M = file.size / 1024 / 1024 < 2;
         if (!isLt2M) {
-            message.error('Image must smaller than 2MB!');
+            message.error(i18next.t("General.Image.LessThan2MB"));
+            viewModel.uploadLoading = false;
             return false;
-        }*/
+        }
         getBase64(file, imageUrl => {
 
             viewModel.uploadLoading = false;
@@ -372,19 +419,6 @@ const EditSubscription: React.FC<EditSubscriptionProps> = inject(Stores.subscrip
                             <InputNumber style={{width: "100%"}} min={carNumbersMinimum} max={carNumbersMaximum} onChange={(e) => onNumberChanged(e)}/>
                         </Form.Item>
                     </Col>
-                    {/*<Col span={8}>
-                <Form.Item name="subscriptionPaymentMethod" initialValue={viewModel?.detailSubscriptionResponse?.subscriptionPaymentMethod}
-                           key={"subscriptionPaymentMethod"}
-                           label={i18next.t("Subscriptions.Label.subscriptionPaymentMethod")}
-                           rules={[
-                               {
-                                   required: true,
-                                   message: i18next.t("Subscriptions.Validation.Message.subscriptionPaymentMethod.Required")
-                               }
-                           ]}>
-                    <Select options={paymentMethodOptions} showSearch={true} onChange={(e) => onSelectChanged(e, "subscriptionPaymentMethod")} />
-                </Form.Item>
-                    </Col>*/}
                     <Col span={8}>
                 <Form.Item name="paymentReferenceNumber" initialValue={viewModel?.detailSubscriptionResponse?.paymentReferenceNumber}
                            key={"paymentReferenceNumber"}
@@ -394,7 +428,7 @@ const EditSubscription: React.FC<EditSubscriptionProps> = inject(Stores.subscrip
                 </Form.Item>
                     </Col>
                     <Col span={8}></Col>
-                    <Col span={8}>
+                    <Col span={4}>
                 <Form.Item name="subscriptionType" initialValue={viewModel?.detailSubscriptionResponse?.subscriptionType}
                            key={"subscriptionType"}
                            label={i18next.t("Subscriptions.Label.subscriptionType")}
@@ -407,19 +441,71 @@ const EditSubscription: React.FC<EditSubscriptionProps> = inject(Stores.subscrip
                     <Select options={subscriptionTypeOptions} showSearch={true} onChange={(e) => onSelectChanged(e, "subscriptionType")} />
                 </Form.Item>
                     </Col>
-                    <Col span={8}>
-                    {subscriptionType == "Monthly" ?
-                        <RangePicker picker="month" disabledDate={disabledDate} format={dateFormat}
-                                onChange={(e, d) => onDatePickerChanged(e, d)} defaultValue={[startDatePickerDefault, endDatePickerDefault]}/>
-                         : ""
-                    }
-                    {subscriptionType == "Yearly" ?
-                        <RangePicker picker="year" disabledDate={disabledDate} format={dateFormat}
-                                onChange={(e, d) => onDatePickerChanged(e, d)} defaultValue={[startDatePickerDefault, endDatePickerDefault]}/>
-                        : ""
-                    }
+                    <Col span={6}>
+                        <Form.Item name="numberOfDateDiff" initialValue={viewModel?.detailSubscriptionResponse?.numberOfDateDiff}
+                                   key={"numberOfDateDiff"}
+                                   label={i18next.t("Subscriptions.Label.numberOfDateDiff")}
+                                   rules={[
+                                       {
+                                           required: true,
+                                           message: i18next.t("Subscriptions.Validation.Message.numberOfDateDiff.Required")
+                                       }
+                                   ]}>
+                            <InputNumber min={1} onChange={(e) => onNumberOfDateDiffChanged(e)} />
+                        </Form.Item>
                     </Col>
-                    <Col span={8}>
+                    <Col span={4}>
+                        <Form.Item name="subscriptionStartDate" initialValue={viewModel?.detailSubscriptionResponse?.subscriptionStartDate ? moment(viewModel.detailSubscriptionResponse.subscriptionStartDate, dateFormat): ""}
+                                   key={"subscriptionStartDate"}
+                                   label={i18next.t("Subscriptions.Label.subscriptionStartDate")}
+                                   rules={[
+                                       {
+                                           required: true,
+                                           message: i18next.t("Subscriptions.Validation.Message.subscriptionStartDate.Required")
+                                       }
+                                   ]}>
+                            <DatePicker disabledDate={disabledDate} format={dateFormat}
+                                        onChange={(e, d) => onEditDatePickerChanged(e, d)} />
+                        </Form.Item>
+                    </Col>
+                    <Col span={4}>
+                        <Form.Item name="subscriptionEndDate" initialValue={viewModel.detailSubscriptionResponse?.subscriptionEndDate}
+                                   key={"subscriptionEndDate"}
+                                   label={i18next.t("Subscriptions.Label.subscriptionEndDate")}>
+                            {/*<DatePicker disabledDate={disabledDate} format={dateFormat}
+                                        onChange={(e, d) => onEditDatePickerChanged(e, d)} defaultValue={moment(viewModel?.detailSubscriptionResponse?.subscriptionStartDate, dateFormat)}/>*/}
+                            {subscriptionEndDate}
+                        </Form.Item>
+                    </Col>
+                            {/*{!subscriptionId && subscriptionType == "Monthly" ?
+                                <RangePicker picker="month" disabledDate={disabledDate} format={dateFormat}
+                                        onChange={(e, d) => onDatePickerChanged(e, d)} defaultValue={[startDatePickerDefault, endDatePickerDefault]}/>
+                                 : ""
+                            }
+                            {!subscriptionId && subscriptionType == "Yearly" ?
+                                <RangePicker picker="year" disabledDate={disabledDate} format={dateFormat}
+                                        onChange={(e, d) => onDatePickerChanged(e, d)} defaultValue={[startDatePickerDefault, endDatePickerDefault]}/>
+                                : ""
+                            }*/}
+                        {/*{subscriptionId > 0 ?
+                            <React.Fragment>
+                                <label className="ant-form-item-required"
+                                       title={i18next.t("Subscriptions.Label.subscriptionEditDate")}>
+                                    {i18next.t("Subscriptions.Label.subscriptionEditDate")}
+                                </label>
+                                <p>
+                        <DatePicker disabledDate={disabledDate} format={dateFormat}
+                                     onChange={(e, d) => onEditDatePickerChanged(e, d)} defaultValue={startDatePickerDefault}/>
+                                       
+                                <InputNumber min={1} onChange={DateTimeChange} />
+                                       
+                                    {moment(viewModel?.editSubscriptionRequest?.subscriptionEndDate).format(dateFormat)}
+                                </p>
+                            </React.Fragment>
+                            : ""
+                        }*/}
+
+                    <Col span={4}>
                         <Button type="primary" loading={viewModel.calculating} size={"large"} disabled={calculateButtonDisable} onClick={calculate}>
                             {i18next.t("Subscriptions.Button.Calculate")}
                         </Button>

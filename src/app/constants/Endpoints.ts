@@ -88,6 +88,12 @@ export default
 
     apiTransferBalance: "/api/transfer-balance",
 
+    apiPromotionCouponAdd: "/api/promotion-coupon/add",
+    apiPromotionCouponEdit: "/api/promotion-coupon/edit",
+    apiPromotionCouponGet: "/api/promotion-coupon/get",
+    apiPromotionCouponDetail: "/api/promotion-coupon/detail",
+    apiPromotionCouponDelete: "/api/promotion-coupon/delete",
+
     apiDashboardCustomerGet: "/api/dashboard/customer",
     apiDashboardSupplierGet: "/api/dashboard/supplier",
     apiDashboardAdminGet: "/api/dashboard/admin",

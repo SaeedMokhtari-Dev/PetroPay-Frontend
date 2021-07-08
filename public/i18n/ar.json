@@ -13,6 +13,7 @@
   "General.Confirm.Active": "هل انت متأكد من التنشيط?",
   "General.Confirm.Accept": "هل أنت متأكد من الموافقة?",
   "General.Search.AtLeastOne": "الرجاء تحديد عامل تصفية واحد على الأقل.",
+  "General.Image.LessThan2MB": "يجب أن يكون حجم الصورة أصغر من 2 ميغا بايت!",
 
   "General.HeaderMenu.User": "مرحبا ",
   "General.HeaderMenu.Profile": "الملف الشخصي",
@@ -514,6 +515,8 @@
   "Subscriptions.Label.paymentReferenceNumber": "الرقم المرجعي للسداد",
   "Subscriptions.Label.subscriptionDate": "التاريخ",
   "Subscriptions.Label.subscriptionPaymentDocPhoto": "صورة مستند دفع الاشتراك",
+  "Subscriptions.Label.subscriptionEditDate": "الرجاء تحديد تاريخ البدء برقم لنطاق تاريخ",
+  "Subscriptions.Label.numberOfDateDiff": "number Of Date Diff",
 
   "Subscriptions.Label.branchName": "اسم الفرع",
   "Subscriptions.Label.carNumber": "رقم السيارة",
@@ -540,6 +543,7 @@
   "Subscriptions.Validation.Message.subscriptionPaymentMethod.Required": "يرجي ادخال طريقة الدفع",
   "Subscriptions.Validation.Message.payFromCompany.Required": "يرجي اختيار احد وسائل السداد",
   "Subscriptions.Validation.Message.subscriptionType.Required": "يرجي ادخال نوع الاشتراك",
+  "Subscriptions.Validation.Message.numberOfDateDiff.Required": "Please enter Subscription Number Of Date Diff",
 
   "Subscriptions.Validation.Message.cannotAdd.MoreCar": "لا يمكنك إضافة سيارة أكثر مما قمت بالاشتراك بة",
 
@@ -560,6 +564,9 @@
   "Api.Subscription.SubscriptionPaymentMethod.Required": "يرجي تحديد طريقة الدفع",
   "Api.Subscription.Id.Required": "Id is Required",
   "Api.Subscription.ActiveEntityDelete.NotAllowed": "لا يمكن حذف اشتراك مفعل",
+
+  "Api.Subscription.MoreThan1Month": "يجب أن يكون نطاق الاشتراك الشهري أكثر من شهر واحد",
+  "Api.Subscription.MoreThan1Year": "يجب أن يكون نطاق الاشتراك السنوي أكثر من عام واحد",
 
   "Subscriptions.Error.Get.Message": "حدث خطأ أثناء محاولة الحصول على قائمة الاشتراكات",
   "Subscriptions.Error.Detail.Message": "حدث خطأ أثناء محاولة الحصول على تفاصيل الاشتراك",
