@@ -27,4 +27,5 @@ export default {
     promotionCouponStore: 'promotionCouponStore',
     carConsumptionRateStore: 'carConsumptionRateStore',
     carKmConsumptionStore: 'carKmConsumptionStore',
+    carOdometerMaxStore: 'carOdometerMaxStore',
 }

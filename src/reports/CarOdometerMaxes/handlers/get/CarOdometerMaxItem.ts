@@ -1,17 +1,13 @@
 import IDeserialize from "../../../../app/interfaces/deserialize";
 import {makeAutoObservable} from "mobx";
 
-export default class CarKmConsumptionItem implements IDeserialize
+export default class CarOdometerMaxItem implements IDeserialize
 {
     key: string;
     carId: number;
     carIdNumber: string;
-    dateMin: string;
-    odometerValueMin: number;
-    dateMax: string;
-    odometerValueMax: number;
-    carOdometerConsumption: number;
-
+    odometerRecordDate: string;
+    odometerValue: number;
 
     constructor() {
         makeAutoObservable(this);

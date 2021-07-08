@@ -87,8 +87,11 @@ const Sidebar: React.FC<SidebarProps> = inject(Stores.pageStore)(observer(({page
             <Menu.Item key="carConsumptionRate" icon={<ShopOutlined />}>
                 <Link to={Routes.carConsumptionRate}>{i18next.t('CarConsumptionRates.Menu.Title')}</Link>
             </Menu.Item>
-            <Menu.Item key="CarKmConsumption" icon={<ShopOutlined />}>
+            <Menu.Item key="carKmConsumption" icon={<ShopOutlined />}>
                 <Link to={Routes.carKmConsumption}>{i18next.t('CarKmConsumptions.Menu.Title')}</Link>
+            </Menu.Item>
+            <Menu.Item key="carOdometerMax" icon={<ShopOutlined />}>
+                <Link to={Routes.carOdometerMax}>{i18next.t('CarOdometerMaxes.Menu.Title')}</Link>
             </Menu.Item>
         </SubMenu>
     </Menu>)

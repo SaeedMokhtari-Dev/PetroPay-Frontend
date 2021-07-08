@@ -78,4 +78,5 @@ export default
     petrolStationList: '/app/petrolStationLists',
     carConsumptionRate: '/app/carConsumptionRate',
     carKmConsumption: '/app/carKmConsumption',
+    carOdometerMax: '/app/carOdometerMax',
 }

@@ -70,6 +70,7 @@ ReactDOM.render(
                       promotionCouponStore={appStore.promotionCoupon}
                       carConsumptionRateStore={appStore.carConsumptionRate}
                       carKmConsumptionStore={appStore.carKmConsumption}
+                      carOdometerMaxStore={appStore.carOdometerMax}
             >
                 <App />
             </Provider>

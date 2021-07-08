@@ -901,6 +901,7 @@
   "CarKmConsumptions.Page.SubTitle": "Car Kilometer Consumptions report",
   "CarKmConsumptions.Label.key": "key",
   "CarKmConsumptions.Label.carId": "car Id",
+  "CarKmConsumptions.Label.carIdNumber": "car Id Number",
   "CarKmConsumptions.Label.dateMin": "date Min",
   "CarKmConsumptions.Label.odometerValueMin": "odometer Value Min",
   "CarKmConsumptions.Label.dateMax": "date Max",
@@ -915,6 +916,24 @@
   "CarKmConsumptions.SearchPanel.Label.companyName": "Company Name",
 
   "CarKmConsumptions.Error.Get.Message": "An error has occurred while trying to get Car Kilometer Consumptions list.",
+
+  "CarOdometerMaxes.Menu.Title": "Car Odometer Max",
+  "CarOdometerMaxes.Page.Title": "Car Odometer Max",
+  "CarOdometerMaxes.Page.SubTitle": "Car Odometer Max report",
+  "CarOdometerMaxes.Label.key": "key",
+  "CarOdometerMaxes.Label.carId": "carId",
+  "CarOdometerMaxes.Label.carIdNumber": "carIdNumber",
+  "CarOdometerMaxes.Label.odometerRecordDate": "odometerRecordDate",
+  "CarOdometerMaxes.Label.odometerValue": "odometerValue",
+
+  "CarOdometerMaxes.SearchPanel.Label.carId": "Car Id Number",
+  "CarOdometerMaxes.SearchPanel.Label.companyBranchName": "Company Branch Name",
+  "CarOdometerMaxes.SearchPanel.Label.transDateFrom": "Transaction Date From",
+  "CarOdometerMaxes.SearchPanel.Label.transDateTo": "Transaction Date To",
+  "CarOdometerMaxes.SearchPanel.Label.companyId": "companyId",
+  "CarOdometerMaxes.SearchPanel.Label.companyName": "Company Name",
+
+  "CarOdometerMaxes.Error.Get.Message": "An error has occurred while trying to get Car Odometer Max list.",
 
 
   "General.TransferBalanceType.CompanyToBranch": "Recharge Branch Balance",
