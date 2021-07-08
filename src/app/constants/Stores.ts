@@ -25,4 +25,5 @@ export default {
     transferBalanceStore: 'transferBalanceStore',
     petropayAccountStore: 'petropayAccountStore',
     promotionCouponStore: 'promotionCouponStore',
+    carConsumptionRateStore: 'carConsumptionRateStore',
 }

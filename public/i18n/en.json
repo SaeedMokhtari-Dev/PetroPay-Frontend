@@ -861,12 +861,41 @@
   "Api.PromotionCoupon.Edit.Successful": "selected promotion Coupon edited successfully",
   "Api.PromotionCoupon.Deleted.Successful": "selected promotion Coupon deleted successfully",
   "Api.PromotionCoupon.Id.Required": "Id is Required",
+  "Api.PromotionCoupon.StartDateShouldBeLessThanEndDate": "Start Date Should Be Less Than End Date",
 
   "PromotionCoupons.Error.Get.Message": "An error has occurred while trying to get promotion Coupons list.",
   "PromotionCoupons.Error.Detail.Message": "An error has occurred while trying to get promotion Coupon details.",
   "PromotionCoupons.Error.Add.Message": "An error has occurred while trying to add new promotion Coupon.",
   "PromotionCoupons.Error.Edit.Message": "An error has occurred while trying to edit promotion Coupon.",
   "PromotionCoupons.Error.Delete.Message": "An error has occurred while trying to delete promotion Coupon.",
+
+  "CarConsumptionRates.Menu.Title": "Car Consumption Rate",
+  "CarConsumptionRates.Page.Title": "Car Consumption Rate",
+  "CarConsumptionRates.Page.SubTitle": "Car Consumption Rate report",
+  "CarConsumptionRates.Label.key": "key",
+  "CarConsumptionRates.Label.companyId": "company Id",
+  "CarConsumptionRates.Label.companyBranchId": "company Branch Id",
+  "CarConsumptionRates.Label.companyBranchName": "company Branch Name",
+  "CarConsumptionRates.Label.carId": "car Id",
+  "CarConsumptionRates.Label.carIdNumber": "car Id Number",
+  "CarConsumptionRates.Label.carDriverName": "car Driver Name",
+  "CarConsumptionRates.Label.dateMin": "date Min",
+  "CarConsumptionRates.Label.dateMax": "date Max",
+  "CarConsumptionRates.Label.literConsumption": "liter Consumption",
+  "CarConsumptionRates.Label.amountConsumption": "amount Consumption",
+  "CarConsumptionRates.Label.kmConsumption": "km Consumption",
+  "CarConsumptionRates.Label.cunsumptionRate": "cunsumption Rate",
+
+
+  "CarConsumptionRates.SearchPanel.Label.carIdNumber": "Car Id Number",
+  "CarConsumptionRates.SearchPanel.Label.companyBranchName": "Company Branch Name",
+  "CarConsumptionRates.SearchPanel.Label.transDateFrom": "Transaction Date From",
+  "CarConsumptionRates.SearchPanel.Label.transDateTo": "Transaction Date To",
+  "CarConsumptionRates.SearchPanel.Label.companyId": "companyId",
+  "CarConsumptionRates.SearchPanel.Label.companyName": "Company Name",
+
+  "CarConsumptionRates.Error.Get.Message": "An error has occurred while trying to get Car Transaction list.",
+
 
   "General.TransferBalanceType.CompanyToBranch": "Recharge Branch Balance",
   "General.TransferBalanceType.BranchToCompany": "Refund Balance To Company (Branch To Company)",

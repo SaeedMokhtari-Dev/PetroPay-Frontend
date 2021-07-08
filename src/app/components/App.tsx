@@ -53,6 +53,7 @@ import PaymentPetropayAccount from "../../entities/PetropayAccounts/components/p
 import PetropayAccountList from "entities/PetropayAccounts/components/list/PetropayAccountList";
 import EditPromotionCoupon from "../../entities/promotion-coupons/components/edit/EditPromotionCoupon";
 import PromotionCouponsList from "../../entities/promotion-coupons/components/list/PromotionCouponsList";
+import CarConsumptionRateList from "../../reports/CarConsumptionRates/components/list/CarConsumptionRateList";
 
 const App: React.FC = () =>
 {
@@ -131,6 +132,7 @@ const App: React.FC = () =>
                                     <Route exact roles={[RoleType.customer]} path={Routes.invoiceDetail} component={InvoiceDetail} />
                                     <Route exact roles={[RoleType.customer]} path={Routes.carBalance} component={CarBalanceList} />
                                     <Route exact roles={[RoleType.customer]} path={Routes.carTransaction} component={CarTransactionList} />
+                                    <Route exact roles={[RoleType.customer]} path={Routes.carConsumptionRate} component={CarConsumptionRateList} />
 
                                     <Route exact roles={[RoleType.supplier]} path={Routes.stationReport} component={StationReportList} />
                                     <Route exact roles={[RoleType.supplier]} path={Routes.stationSale} component={StationSaleList} />

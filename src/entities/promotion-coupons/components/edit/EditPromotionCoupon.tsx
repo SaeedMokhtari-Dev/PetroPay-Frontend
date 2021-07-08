@@ -26,6 +26,7 @@ import {
 import history from "../../../../app/utils/History";
 import PromotionCouponStore from "../../stores/PromotionCouponStore";
 import moment from "moment";
+import Constants from "../../../../app/constants/Constants";
 const {useEffect} = React;
 
 interface EditPromotionCouponProps {
@@ -107,9 +108,9 @@ const EditPromotionCoupon: React.FC<EditPromotionCouponProps> = inject(Stores.pr
 
     function onDateChange(date, dateString, prop) {
         if(promotionCouponId)
-            promotionCouponStore.editPromotionCouponViewModel.editPromotionCouponRequest[`${prop}`] = date;
+            promotionCouponStore.editPromotionCouponViewModel.editPromotionCouponRequest[`${prop}`] = dateString;
         else
-            promotionCouponStore.editPromotionCouponViewModel.addPromotionCouponRequest[`${prop}`] = date;
+            promotionCouponStore.editPromotionCouponViewModel.addPromotionCouponRequest[`${prop}`] = dateString;
     }
 
     function onSwitchChange(e, propName){
@@ -131,6 +132,11 @@ const EditPromotionCoupon: React.FC<EditPromotionCouponProps> = inject(Stores.pr
         else {
             promotionCouponStore.editPromotionCouponViewModel.addPromotionCouponRequest.couponDiscountValue = e;
         }
+    }
+    function disabledDate(current) {
+        // Can not select days before today and today
+
+        return current && current < moment().endOf('day');
     }
     return (
         <div>
@@ -174,7 +180,7 @@ const EditPromotionCoupon: React.FC<EditPromotionCouponProps> = inject(Stores.pr
                     </Col>
 
                     <Col span={8}>
-                <Form.Item name="couponActiveDate" initialValue={viewModel?.detailPromotionCouponResponse?.couponActiveDate ? moment(viewModel.detailPromotionCouponResponse.couponActiveDate) : "" }
+                <Form.Item name="couponActiveDate" initialValue={viewModel?.detailPromotionCouponResponse?.couponActiveDate ? moment(viewModel.detailPromotionCouponResponse.couponActiveDate, Constants.dateFormat) : "" }
                            key={"couponActiveDate"}
                            label={i18next.t("PromotionCoupons.Label.couponActiveDate")}
                            rules={[
@@ -185,12 +191,12 @@ const EditPromotionCoupon: React.FC<EditPromotionCouponProps> = inject(Stores.pr
                            ]}
                            >
                     {/*<Input type={"number"} onChange={onChanged}/>*/}
-                    <DatePicker onChange={((date, dateString) => onDateChange(date, dateString, "couponActiveDate"))} />
+                    <DatePicker disabledDate={disabledDate} format={Constants.dateFormat} onChange={((date, dateString) => onDateChange(date, dateString, "couponActiveDate"))} />
                 </Form.Item>
                     </Col>
 
                     <Col span={8}>
-                <Form.Item name="couponEndDate" initialValue={viewModel?.detailPromotionCouponResponse?.couponEndDate ? moment(viewModel.detailPromotionCouponResponse.couponEndDate) : ""}
+                <Form.Item name="couponEndDate" initialValue={viewModel?.detailPromotionCouponResponse?.couponEndDate ? moment(viewModel.detailPromotionCouponResponse.couponEndDate, Constants.dateFormat) : ""}
                            key={"couponEndDate"}
                            label={i18next.t("PromotionCoupons.Label.couponEndDate")}
                            rules={[
@@ -201,7 +207,7 @@ const EditPromotionCoupon: React.FC<EditPromotionCouponProps> = inject(Stores.pr
                            ]}
                            >
                     {/*<Input type={"number"} onChange={onChanged}/>*/}
-                    <DatePicker onChange={((date, dateString) => onDateChange(date, dateString, "couponEndDate"))} />
+                    <DatePicker disabledDate={disabledDate} format={Constants.dateFormat} onChange={((date, dateString) => onDateChange(date, dateString, "couponEndDate"))} />
                 </Form.Item>
                     </Col>
 

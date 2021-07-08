@@ -23,6 +23,7 @@ import PetrolStationListStore from "../../reports/PetrolStationLists/stores/Petr
 import TransferBalanceStore from "../../entities/transfer-balances/stores/TransferBalanceStore";
 import PetropayAccountStore from "../../entities/PetropayAccounts/stores/PetropayAccountStore";
 import PromotionCouponStore from "../../entities/promotion-coupons/stores/PromotionCouponStore";
+import CarConsumptionRateStore from "../../reports/CarConsumptionRates/stores/CarConsumptionRateStore";
 
 export class AppStore
 {
@@ -51,6 +52,7 @@ export class AppStore
     transferBalance: TransferBalanceStore;
     petropayAccount: PetropayAccountStore;
     promotionCoupon: PromotionCouponStore;
+    carConsumptionRate: CarConsumptionRateStore;
 
     constructor()
     {
@@ -79,5 +81,6 @@ export class AppStore
         this.transferBalance = new TransferBalanceStore(this);
         this.petropayAccount = new PetropayAccountStore(this);
         this.promotionCoupon = new PromotionCouponStore(this);
+        this.carConsumptionRate = new CarConsumptionRateStore(this);
     }
 }

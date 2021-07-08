@@ -76,4 +76,5 @@ export default
     stationStatement: '/app/stationStatement',
     carTransaction: '/app/carTransaction',
     petrolStationList: '/app/petrolStationLists',
+    carConsumptionRate: '/app/carConsumptionRate',
 }

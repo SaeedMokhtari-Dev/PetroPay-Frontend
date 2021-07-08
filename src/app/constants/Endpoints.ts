@@ -79,6 +79,7 @@ export default
     apiStationStatementGet: "/api/station-statement/get",
     apiCarTransactionGet: "/api/car-transaction/get",
     apiPetrolStationListGet: "/api/petrol-station-list/get",
+    apiCarConsumptionRateGet: "/api/car-consumption-rate/get",
 
     apiPetropayAccountGet: "/api/petropay-account/get",
     apiPetropayAccountList: "/api/petropay-account/list",
