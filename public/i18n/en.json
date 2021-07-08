@@ -894,7 +894,27 @@
   "CarConsumptionRates.SearchPanel.Label.companyId": "companyId",
   "CarConsumptionRates.SearchPanel.Label.companyName": "Company Name",
 
-  "CarConsumptionRates.Error.Get.Message": "An error has occurred while trying to get Car Transaction list.",
+  "CarConsumptionRates.Error.Get.Message": "An error has occurred while trying to get Car Consumption Rate list.",
+
+  "CarKmConsumptions.Menu.Title": "Car Kilometer Consumptions",
+  "CarKmConsumptions.Page.Title": "Car Kilometer Consumptions",
+  "CarKmConsumptions.Page.SubTitle": "Car Kilometer Consumptions report",
+  "CarKmConsumptions.Label.key": "key",
+  "CarKmConsumptions.Label.carId": "car Id",
+  "CarKmConsumptions.Label.dateMin": "date Min",
+  "CarKmConsumptions.Label.odometerValueMin": "odometer Value Min",
+  "CarKmConsumptions.Label.dateMax": "date Max",
+  "CarKmConsumptions.Label.odometerValueMax": "odometer Value Max",
+  "CarKmConsumptions.Label.carOdometerConsumption": "car Odometer Consumption",
+
+  "CarKmConsumptions.SearchPanel.Label.carId": "Car Id Number",
+  "CarKmConsumptions.SearchPanel.Label.companyBranchName": "Company Branch Name",
+  "CarKmConsumptions.SearchPanel.Label.transDateFrom": "Transaction Date From",
+  "CarKmConsumptions.SearchPanel.Label.transDateTo": "Transaction Date To",
+  "CarKmConsumptions.SearchPanel.Label.companyId": "companyId",
+  "CarKmConsumptions.SearchPanel.Label.companyName": "Company Name",
+
+  "CarKmConsumptions.Error.Get.Message": "An error has occurred while trying to get Car Kilometer Consumptions list.",
 
 
   "General.TransferBalanceType.CompanyToBranch": "Recharge Branch Balance",

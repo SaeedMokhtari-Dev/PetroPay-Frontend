@@ -80,6 +80,10 @@ export default
     apiCarTransactionGet: "/api/car-transaction/get",
     apiPetrolStationListGet: "/api/petrol-station-list/get",
     apiCarConsumptionRateGet: "/api/car-consumption-rate/get",
+    apiCarKmConsumptionGet: "/api/car-km-consumption/get",
+    apiCarOdometerMaxGet: "/api/car-odometer-max/get",
+    apiCarOdometerMinGet: "/api/car-odometer-min/get",
+    apiOdometerBetweenDateGet: "/api/odometer-between-date/get",
 
     apiPetropayAccountGet: "/api/petropay-account/get",
     apiPetropayAccountList: "/api/petropay-account/list",

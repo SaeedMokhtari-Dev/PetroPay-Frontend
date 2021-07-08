@@ -26,4 +26,5 @@ export default {
     petropayAccountStore: 'petropayAccountStore',
     promotionCouponStore: 'promotionCouponStore',
     carConsumptionRateStore: 'carConsumptionRateStore',
+    carKmConsumptionStore: 'carKmConsumptionStore',
 }
