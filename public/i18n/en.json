@@ -921,10 +921,10 @@
   "CarOdometerMaxes.Page.Title": "Car Odometer Max",
   "CarOdometerMaxes.Page.SubTitle": "Car Odometer Max report",
   "CarOdometerMaxes.Label.key": "key",
-  "CarOdometerMaxes.Label.carId": "carId",
-  "CarOdometerMaxes.Label.carIdNumber": "carIdNumber",
-  "CarOdometerMaxes.Label.odometerRecordDate": "odometerRecordDate",
-  "CarOdometerMaxes.Label.odometerValue": "odometerValue",
+  "CarOdometerMaxes.Label.carId": "car Id",
+  "CarOdometerMaxes.Label.carIdNumber": "car Id Number",
+  "CarOdometerMaxes.Label.odometerRecordDate": "odometer Record Date",
+  "CarOdometerMaxes.Label.odometerValue": "odometer Value",
 
   "CarOdometerMaxes.SearchPanel.Label.carId": "Car Id Number",
   "CarOdometerMaxes.SearchPanel.Label.companyBranchName": "Company Branch Name",
@@ -934,6 +934,25 @@
   "CarOdometerMaxes.SearchPanel.Label.companyName": "Company Name",
 
   "CarOdometerMaxes.Error.Get.Message": "An error has occurred while trying to get Car Odometer Max list.",
+
+  "CarOdometerMins.Menu.Title": "Car Odometer Min",
+  "CarOdometerMins.Page.Title": "Car Odometer Min",
+  "CarOdometerMins.Page.SubTitle": "Car Odometer Min report",
+  "CarOdometerMins.Label.key": "key",
+  "CarOdometerMins.Label.carId": "car Id",
+  "CarOdometerMins.Label.carIdNumber": "car Id Number",
+  "CarOdometerMins.Label.odometerRecordDate": "odometer Record Date",
+  "CarOdometerMins.Label.odometerValue": "odometer Value",
+
+
+  "CarOdometerMins.SearchPanel.Label.carId": "Car Id Number",
+  "CarOdometerMins.SearchPanel.Label.companyBranchName": "Company Branch Name",
+  "CarOdometerMins.SearchPanel.Label.transDateFrom": "Transaction Date From",
+  "CarOdometerMins.SearchPanel.Label.transDateTo": "Transaction Date To",
+  "CarOdometerMins.SearchPanel.Label.companyId": "companyId",
+  "CarOdometerMins.SearchPanel.Label.companyName": "Company Name",
+
+  "CarOdometerMins.Error.Get.Message": "An error has occurred while trying to get Car Odometer Min list.",
 
 
   "General.TransferBalanceType.CompanyToBranch": "Recharge Branch Balance",

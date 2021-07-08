@@ -79,4 +79,5 @@ export default
     carConsumptionRate: '/app/carConsumptionRate',
     carKmConsumption: '/app/carKmConsumption',
     carOdometerMax: '/app/carOdometerMax',
+    carOdometerMin: '/app/carOdometerMin',
 }

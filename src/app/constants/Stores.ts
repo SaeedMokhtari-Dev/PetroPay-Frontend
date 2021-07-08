@@ -28,4 +28,5 @@ export default {
     carConsumptionRateStore: 'carConsumptionRateStore',
     carKmConsumptionStore: 'carKmConsumptionStore',
     carOdometerMaxStore: 'carOdometerMaxStore',
+    carOdometerMinStore: 'carOdometerMinStore',
 }

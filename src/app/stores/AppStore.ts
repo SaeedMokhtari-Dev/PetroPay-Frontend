@@ -26,6 +26,7 @@ import PromotionCouponStore from "../../entities/promotion-coupons/stores/Promot
 import CarConsumptionRateStore from "../../reports/CarConsumptionRates/stores/CarConsumptionRateStore";
 import CarKmConsumptionStore from "../../reports/CarKmConsumptions/stores/CarKmConsumptionStore";
 import CarOdometerMaxStore from "../../reports/CarOdometerMaxes/stores/CarOdometerMaxStore";
+import CarOdometerMinStore from "../../reports/CarOdometerMins/stores/CarOdometerMinStore";
 
 export class AppStore
 {
@@ -57,6 +58,7 @@ export class AppStore
     carConsumptionRate: CarConsumptionRateStore;
     carKmConsumption: CarKmConsumptionStore;
     carOdometerMax: CarOdometerMaxStore;
+    carOdometerMin: CarOdometerMinStore;
 
     constructor()
     {
@@ -88,5 +90,6 @@ export class AppStore
         this.carConsumptionRate = new CarConsumptionRateStore(this);
         this.carKmConsumption = new CarKmConsumptionStore(this);
         this.carOdometerMax = new CarOdometerMaxStore(this);
+        this.carOdometerMin = new CarOdometerMinStore(this);
     }
 }
