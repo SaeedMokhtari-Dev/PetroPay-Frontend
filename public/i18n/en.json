@@ -954,6 +954,26 @@
 
   "CarOdometerMins.Error.Get.Message": "An error has occurred while trying to get Car Odometer Min list.",
 
+  "OdometerBetweenDates.Menu.Title": "Odometer Between Date",
+  "OdometerBetweenDates.Page.Title": "Odometer Between Date",
+  "OdometerBetweenDates.Page.SubTitle": "Odometer Between Date report",
+  "OdometerBetweenDates.Label.key": "key",
+  "OdometerBetweenDates.Label.carId": "car Id",
+  "OdometerBetweenDates.Label.carIdNumber": "car Id Number",
+  "OdometerBetweenDates.Label.odometerRecordDate": "odometer Record Date",
+  "OdometerBetweenDates.Label.odometerValue": "odometer Value",
+  "OdometerBetweenDates.Label.odometerRecordId": "odometer Record Id",
+
+
+  "OdometerBetweenDates.SearchPanel.Label.carId": "Car Id Number",
+  "OdometerBetweenDates.SearchPanel.Label.companyBranchName": "Company Branch Name",
+  "OdometerBetweenDates.SearchPanel.Label.transDateFrom": "Transaction Date From",
+  "OdometerBetweenDates.SearchPanel.Label.transDateTo": "Transaction Date To",
+  "OdometerBetweenDates.SearchPanel.Label.companyId": "companyId",
+  "OdometerBetweenDates.SearchPanel.Label.companyName": "Company Name",
+
+  "OdometerBetweenDates.Error.Get.Message": "An error has occurred while trying to get Odometer Between Date list.",
+
 
   "General.TransferBalanceType.CompanyToBranch": "Recharge Branch Balance",
   "General.TransferBalanceType.BranchToCompany": "Refund Balance To Company (Branch To Company)",

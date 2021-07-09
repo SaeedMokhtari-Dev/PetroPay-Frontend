@@ -57,6 +57,7 @@ import CarConsumptionRateList from "../../reports/CarConsumptionRates/components
 import CarKmConsumptionList from "../../reports/CarKmConsumptions/components/list/CarKmConsumptionList";
 import CarOdometerMaxList from "../../reports/CarOdometerMaxes/components/list/CarOdometerMaxList";
 import CarOdometerMinList from "../../reports/CarOdometerMins/components/list/CarOdometerMinList";
+import OdometerBetweenDateList from "../../reports/OdometerBetweenDates/components/list/OdometerBetweenDateList";
 
 const App: React.FC = () =>
 {
@@ -139,6 +140,7 @@ const App: React.FC = () =>
                                     <Route exact roles={[RoleType.customer]} path={Routes.carKmConsumption} component={CarKmConsumptionList} />
                                     <Route exact roles={[RoleType.customer]} path={Routes.carOdometerMax} component={CarOdometerMaxList} />
                                     <Route exact roles={[RoleType.customer]} path={Routes.carOdometerMin} component={CarOdometerMinList} />
+                                    <Route exact roles={[RoleType.customer]} path={Routes.odometerBetweenDate} component={OdometerBetweenDateList} />
 
                                     <Route exact roles={[RoleType.supplier]} path={Routes.stationReport} component={StationReportList} />
                                     <Route exact roles={[RoleType.supplier]} path={Routes.stationSale} component={StationSaleList} />

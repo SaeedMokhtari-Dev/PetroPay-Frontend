@@ -27,6 +27,7 @@ import CarConsumptionRateStore from "../../reports/CarConsumptionRates/stores/Ca
 import CarKmConsumptionStore from "../../reports/CarKmConsumptions/stores/CarKmConsumptionStore";
 import CarOdometerMaxStore from "../../reports/CarOdometerMaxes/stores/CarOdometerMaxStore";
 import CarOdometerMinStore from "../../reports/CarOdometerMins/stores/CarOdometerMinStore";
+import OdometerBetweenDateStore from "../../reports/OdometerBetweenDates/stores/OdometerBetweenDateStore";
 
 export class AppStore
 {
@@ -59,6 +60,7 @@ export class AppStore
     carKmConsumption: CarKmConsumptionStore;
     carOdometerMax: CarOdometerMaxStore;
     carOdometerMin: CarOdometerMinStore;
+    odometerBetweenDate: OdometerBetweenDateStore;
 
     constructor()
     {
@@ -91,5 +93,6 @@ export class AppStore
         this.carKmConsumption = new CarKmConsumptionStore(this);
         this.carOdometerMax = new CarOdometerMaxStore(this);
         this.carOdometerMin = new CarOdometerMinStore(this);
+        this.odometerBetweenDate = new OdometerBetweenDateStore(this);
     }
 }

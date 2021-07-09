@@ -72,6 +72,7 @@ ReactDOM.render(
                       carKmConsumptionStore={appStore.carKmConsumption}
                       carOdometerMaxStore={appStore.carOdometerMax}
                       carOdometerMinStore={appStore.carOdometerMin}
+                      odometerBetweenDateStore={appStore.odometerBetweenDate}
             >
                 <App />
             </Provider>

@@ -80,4 +80,5 @@ export default
     carKmConsumption: '/app/carKmConsumption',
     carOdometerMax: '/app/carOdometerMax',
     carOdometerMin: '/app/carOdometerMin',
+    odometerBetweenDate: '/app/odometerBetweenDate',
 }
