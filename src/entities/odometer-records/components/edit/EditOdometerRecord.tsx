@@ -26,6 +26,7 @@ import OdometerRecordStore from "../../stores/OdometerRecordStore";
 import UserContext from "../../../../identity/contexts/UserContext";
 import moment from "moment";
 import Constants from "../../../../app/constants/Constants";
+import {formatDate} from "../../../../app/utils/DateHelper";
 
 const {useEffect} = React;
 const { Option } = Select;
@@ -72,6 +73,9 @@ const EditOdometerRecord: React.FC<EditOdometerRecordProps> = inject(Stores.odom
         else{
             odometerRecordStore.editOdometerRecordViewModel.addOdometerRecordRequest = new AddOdometerRecordRequest();
             odometerRecordStore.editOdometerRecordViewModel.detailOdometerRecordResponse = new DetailOdometerRecordResponse();
+            const nowDate = formatDate(new Date());
+            odometerRecordStore.editOdometerRecordViewModel.addOdometerRecordRequest.odometerRecordDate = nowDate;
+            odometerRecordStore.editOdometerRecordViewModel.detailOdometerRecordResponse.odometerRecordDate = nowDate;
         }
         if(UserContext.info.role === 100)
             await odometerRecordStore.listCarViewModel.getCarList(UserContext.info.id);
@@ -174,7 +178,7 @@ const EditOdometerRecord: React.FC<EditOdometerRecordProps> = inject(Stores.odom
                         </Form.Item>
                     </Col>
                     <Col span={8}>
-                        <Form.Item name="odometerRecordDate" initialValue={viewModel?.detailOdometerRecordResponse?.odometerRecordDate ? moment(viewModel.detailOdometerRecordResponse.odometerRecordDate, Constants.dateFormat) : "" }
+                        <Form.Item name="odometerRecordDate" initialValue={moment(viewModel.detailOdometerRecordResponse.odometerRecordDate, Constants.dateFormat)}
                                    key={"odometerRecordDate"}
                                    label={i18next.t("OdometerRecords.Label.odometerRecordDate")}
                                    rules={[
@@ -185,7 +189,7 @@ const EditOdometerRecord: React.FC<EditOdometerRecordProps> = inject(Stores.odom
                                    ]}
                         >
                             {/*<Input type={"number"} onChange={onChanged}/>*/}
-                            <DatePicker disabledDate={disabledDate} format={Constants.dateFormat} onChange={((date, dateString) => onDateChange(date, dateString, "odometerRecordDate"))} />
+                            <DatePicker format={Constants.dateFormat} onChange={((date, dateString) => onDateChange(date, dateString, "odometerRecordDate"))} />
                         </Form.Item>
                     </Col>
 
