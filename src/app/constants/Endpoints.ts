@@ -81,6 +81,14 @@ export default
     apiOdometerRecordDetail: "/api/odometer-record/detail",
     apiOdometerRecordDelete: "/api/odometer-record/delete",
 
+    apiMenuAdd: "/api/menu/add",
+    apiMenuEdit: "/api/menu/edit",
+    apiMenuGet: "/api/menu/get",
+    apiMenuDetail: "/api/menu/detail",
+    apiMenuDelete: "/api/menu/delete",
+    apiMenuList: "/api/menu/list",
+    apiMenuActive: "/api/menu/active",
+
     apiAccountBalanceGet: "/api/account-balance/get",
     apiInvoiceSummaryGet: "/api/invoice-summary/get",
     apiInvoiceDetailGet: "/api/invoice-detail/get",

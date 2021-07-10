@@ -40,7 +40,7 @@ const PetrolStationListList: React.FC<PetrolStationListListProps> = inject(Store
     const [form] = Form.useForm();
     PetrolStationListColumns.forEach(w => {
        w.title = i18next.t(w.title);
-        if(w.key == "stationDiesel")
+        if(w.key === "stationDiesel")
         {
             w["render"] = (w) => {
                 return  w ? <CheckOutlined /> : <CloseOutlined />

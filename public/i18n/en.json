@@ -14,6 +14,7 @@
   "General.Confirm.Accept": "Are you sure to accept?",
   "General.Search.AtLeastOne": "Please select at least one filter.",
   "General.Image.LessThan2MB": "Image must smaller than 2MB!",
+  "General.Image.JustImage": "You can only upload JPG/PNG file!",
 
 
   "General.HeaderMenu.User": "Hi",
@@ -870,6 +871,44 @@
   "PromotionCoupons.Error.Add.Message": "An error has occurred while trying to add new promotion Coupon.",
   "PromotionCoupons.Error.Edit.Message": "An error has occurred while trying to edit promotion Coupon.",
   "PromotionCoupons.Error.Delete.Message": "An error has occurred while trying to delete promotion Coupon.",
+
+
+  "Menus.Menu.Title": "Menus",
+  "Menus.Page.Title": "Menus",
+  "Menus.Page.SubTitle": "This page is for define menus",
+  "Menus.Label.key": "key",
+  "Menus.Label.menuId": "menu Id",
+  "Menus.Label.enTitle": "english Title",
+  "Menus.Label.arTitle": "arabic Title",
+  "Menus.Label.createdAt": "created At",
+  "Menus.Label.urlRoute": "url Route",
+  "Menus.Label.displayOrder": "display Order",
+  "Menus.Label.isActive": "is Active?",
+  "Menus.Label.parentId": "parent menu",
+  "Menus.Label.parentTitleAr": "parent Title Arabic",
+  "Menus.Label.parentTitleEn": "parent Title English",
+
+
+  "Menus.Add.HeaderText": "Add Menu",
+  "Menus.Edit.HeaderText": "Edit Menu with Id:",
+  "Menus.Section.GeneralInformation": "General Information",
+
+  "Menus.Validation.Message.enTitle.Required": "Please enter english Title",
+  "Menus.Validation.Message.arTitle.Required": "Please enter arabic Title",
+  "Menus.Validation.Message.urlRoute.Required": "Please enter menu url Route",
+  "Menus.Validation.Message.displayOrder.Required": "Please enter menu display Order",
+
+
+  "Api.Menu.Add.Successful": "A new menu added successfully",
+  "Api.Menu.Edit.Successful": "selected menu edited successfully",
+  "Api.Menu.Deleted.Successful": "selected menu deleted successfully",
+  "Api.Menu.Id.Required": "Id is Required",
+
+  "Menus.Error.Get.Message": "An error has occurred while trying to get menus list.",
+  "Menus.Error.Detail.Message": "An error has occurred while trying to get menu details.",
+  "Menus.Error.Add.Message": "An error has occurred while trying to add new menu.",
+  "Menus.Error.Edit.Message": "An error has occurred while trying to edit menu.",
+  "Menus.Error.Delete.Message": "An error has occurred while trying to delete menu.",
 
   "AppSettings.Menu.Title": "AppSettings",
   "AppSettings.Page.Title": "AppSettings",

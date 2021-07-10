@@ -346,7 +346,7 @@ const EditSubscription: React.FC<EditSubscriptionProps> = inject(Stores.subscrip
         viewModel.uploadLoading = true;
         const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
         if (!isJpgOrPng) {
-            message.error('You can only upload JPG/PNG file!');
+            message.error(i18next.t("General.Image.JustImage"));
             viewModel.uploadLoading = false;
             return false;
         }

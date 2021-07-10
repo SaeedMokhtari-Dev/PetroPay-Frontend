@@ -61,6 +61,8 @@ import OdometerBetweenDateList from "../../reports/OdometerBetweenDates/componen
 import EditAppSetting from "../../entities/app-settings/components/edit/EditAppSetting";
 import OdometerRecordsList from "../../entities/odometer-records/components/list/OdometerRecordsList";
 import EditOdometerRecord from "../../entities/odometer-records/components/edit/EditOdometerRecord";
+import MenusList from "../../entities/menus/components/list/MenusList";
+import EditMenu from "../../entities/menus/components/edit/EditMenu";
 
 const App: React.FC = () =>
 {
@@ -147,6 +149,10 @@ const App: React.FC = () =>
                                     <Route exact roles={[RoleType.customer]} path={Routes.odometerRecord} component={OdometerRecordsList} />
                                     <Route exact roles={[RoleType.customer]} path={Routes.editOdometerRecord} component={EditOdometerRecord} />
                                     <Route exact roles={[RoleType.customer]} path={Routes.addOdometerRecord} component={EditOdometerRecord} />
+
+                                    <Route exact roles={[RoleType.admin]} path={Routes.menu} component={MenusList} />
+                                    <Route exact roles={[RoleType.admin]} path={Routes.editMenu} component={EditMenu} />
+                                    <Route exact roles={[RoleType.admin]} path={Routes.addMenu} component={EditMenu} />
 
                                     {/* Reports */}
                                     <Route exact roles={[RoleType.customer]} path={Routes.invoiceSummary} component={InvoiceSummaryList} />

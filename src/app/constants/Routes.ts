@@ -74,6 +74,11 @@ export default
     editOdometerRecord: "/app/odometerRecord/edit/:odometerRecordId",
     addOdometerRecord: "/app/odometerRecord/add",
 
+    //Menu
+    menu: "/app/menu",
+    editMenu: "/app/menu/edit/:menuId",
+    addMenu: "/app/menu/add",
+
     //Reports
     accountBalance: '/app/accountBalance',
     invoiceSummary: '/app/invoiceSummary',

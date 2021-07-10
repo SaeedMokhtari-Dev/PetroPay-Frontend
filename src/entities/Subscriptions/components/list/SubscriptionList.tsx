@@ -37,7 +37,7 @@ interface SubscriptionListProps {
 const SubscriptionList: React.FC<SubscriptionListProps> = inject(Stores.subscriptionStore)(observer(({subscriptionStore}) => {
     SubscriptionColumns.forEach(w => {
        w.title = i18next.t(w.title);
-        if(w.key == "subscriptionActive")
+        if(w.key === "subscriptionActive")
         {
             w["render"] = (w) => {
                 return  w ? <CheckOutlined /> : <CloseOutlined />

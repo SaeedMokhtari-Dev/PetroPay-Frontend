@@ -75,6 +75,7 @@ ReactDOM.render(
                       odometerBetweenDateStore={appStore.odometerBetweenDate}
                       appSettingStore={appStore.appSetting}
                       odometerRecordStore={appStore.odometerRecord}
+                      menuStore={appStore.menu}
             >
                 <App />
             </Provider>

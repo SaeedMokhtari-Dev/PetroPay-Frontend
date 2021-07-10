@@ -30,6 +30,7 @@ import CarOdometerMinStore from "../../reports/CarOdometerMins/stores/CarOdomete
 import OdometerBetweenDateStore from "../../reports/OdometerBetweenDates/stores/OdometerBetweenDateStore";
 import AppSettingStore from "../../entities/app-settings/stores/AppSettingStore";
 import OdometerRecordStore from "../../entities/odometer-records/stores/OdometerRecordStore";
+import MenuStore from "../../entities/menus/stores/MenuStore";
 
 export class AppStore
 {
@@ -65,6 +66,7 @@ export class AppStore
     odometerBetweenDate: OdometerBetweenDateStore;
     appSetting: AppSettingStore;
     odometerRecord: OdometerRecordStore;
+    menu: MenuStore;
 
     constructor()
     {
@@ -100,5 +102,6 @@ export class AppStore
         this.odometerBetweenDate = new OdometerBetweenDateStore(this);
         this.appSetting = new AppSettingStore(this);
         this.odometerRecord = new OdometerRecordStore(this);
+        this.menu = new MenuStore(this);
     }
 }

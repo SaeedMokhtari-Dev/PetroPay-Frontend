@@ -56,7 +56,7 @@ const BranchList: React.FC<BranchListProps> = inject(Stores.branchStore)(observe
 
     BranchColumns.forEach(w => {
        w.title = i18next.t(w.title);
-       if(w.key == "companyBranchActiva")
+       if(w.key === "companyBranchActiva")
        {
            w["render"] = (w) => {
                return  w ? <CheckOutlined /> : <CloseOutlined />

@@ -35,7 +35,7 @@ const RechargeBalanceList: React.FC<RechargeBalanceListProps> = inject(Stores.re
 
     RechargeBalanceColumns.forEach(w => {
        w.title = i18next.t(w.title);
-        if(w.key == "rechargeRequstConfirmed")
+        if(w.key === "rechargeRequstConfirmed")
         {
             w["render"] = (w) => {
                 return  w ? <CheckOutlined /> : <CloseOutlined />
