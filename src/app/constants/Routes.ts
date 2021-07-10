@@ -79,6 +79,11 @@ export default
     editMenu: "/app/menu/edit/:menuId",
     addMenu: "/app/menu/add",
 
+    //Employee
+    employee: "/app/employee",
+    editEmployee: "/app/employee/edit/:employeeId",
+    addEmployee: "/app/employee/add",
+
     //Reports
     accountBalance: '/app/accountBalance',
     invoiceSummary: '/app/invoiceSummary',

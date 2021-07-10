@@ -33,4 +33,5 @@ export default {
     appSettingStore: 'appSettingStore',
     odometerRecordStore: 'odometerRecordStore',
     menuStore: 'menuStore',
+    employeeStore: 'employeeStore',
 }

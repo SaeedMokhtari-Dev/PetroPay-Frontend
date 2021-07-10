@@ -76,6 +76,7 @@ ReactDOM.render(
                       appSettingStore={appStore.appSetting}
                       odometerRecordStore={appStore.odometerRecord}
                       menuStore={appStore.menu}
+                      employeeStore={appStore.employee}
             >
                 <App />
             </Provider>

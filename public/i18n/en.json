@@ -910,6 +910,34 @@
   "Menus.Error.Edit.Message": "An error has occurred while trying to edit menu.",
   "Menus.Error.Delete.Message": "An error has occurred while trying to delete menu.",
 
+
+  "Emplyees.Menu.Title": "Employees",
+  "Emplyees.Page.Title": "Employees",
+  "Emplyees.Page.SubTitle": "This page is for define employees",
+  "Emplyees.Label.key": "key",
+  "Emplyees.Label.emplyeeId": "employee Id",
+  "Emplyees.Label.emplyeeName": "employee Name",
+  "Emplyees.Label.emplyeePhone": "employee Phone",
+  "Emplyees.Label.emplyeeEmail": "employee Email",
+  "Emplyees.Label.emplyeeCode": "employee Code",
+  "Emplyees.Label.emplyeeUserName": "employee User Name",
+  "Emplyees.Label.emplyeeStatus": "employee Status",
+
+  "Emplyees.Add.HeaderText": "Add Employee",
+  "Emplyees.Edit.HeaderText": "Edit Employee with Id:",
+  "Emplyees.Section.GeneralInformation": "General Information",
+
+  "Api.Emplyee.Add.Successful": "A new employee added successfully",
+  "Api.Emplyee.Edit.Successful": "selected employee edited successfully",
+  "Api.Emplyee.Deleted.Successful": "selected employee deleted successfully",
+  "Api.Emplyee.Id.Required": "Id is Required",
+
+  "Emplyees.Error.Get.Message": "An error has occurred while trying to get employees list.",
+  "Emplyees.Error.Detail.Message": "An error has occurred while trying to get employee details.",
+  "Emplyees.Error.Add.Message": "An error has occurred while trying to add new employee.",
+  "Emplyees.Error.Edit.Message": "An error has occurred while trying to edit employee.",
+  "Emplyees.Error.Delete.Message": "An error has occurred while trying to delete employee.",
+
   "AppSettings.Menu.Title": "AppSettings",
   "AppSettings.Page.Title": "AppSettings",
   "AppSettings.Page.SubTitle": "This page is for define App Settings",

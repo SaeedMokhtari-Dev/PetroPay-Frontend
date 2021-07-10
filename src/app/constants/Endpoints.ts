@@ -89,6 +89,14 @@ export default
     apiMenuList: "/api/menu/list",
     apiMenuActive: "/api/menu/active",
 
+    apiEmployeeAdd: "/api/employee/add",
+    apiEmployeeEdit: "/api/employee/edit",
+    apiEmployeeGet: "/api/employee/get",
+    apiEmployeeDetail: "/api/employee/detail",
+    apiEmployeeDelete: "/api/employee/delete",
+    apiEmployeeList: "/api/employee/list",
+    apiEmployeeActive: "/api/employee/active",
+
     apiAccountBalanceGet: "/api/account-balance/get",
     apiInvoiceSummaryGet: "/api/invoice-summary/get",
     apiInvoiceDetailGet: "/api/invoice-detail/get",

@@ -65,6 +65,9 @@ const Sidebar: React.FC<SidebarProps> = inject(Stores.pageStore)(observer(({page
         <Menu.Item key="menu" icon={<CarOutlined />}>
             <Link to={Routes.menu}>{i18next.t('Menus.Menu.Title')}</Link>
         </Menu.Item>
+        <Menu.Item key="employee" icon={<CarOutlined />}>
+            <Link to={Routes.employee}>{i18next.t('Emplyees.Menu.Title')}</Link>
+        </Menu.Item>
         <SubMenu key="reports" icon={<ReadOutlined />} title={i18next.t('General.Menu.Reports')}>
             <Menu.Item key="accountBalance" icon={<DollarOutlined />}>
                 <Link to={Routes.accountBalance}>{i18next.t('AccountBalances.Menu.Title')}</Link>
