@@ -69,6 +69,11 @@ export default
     //AppSetting
     appSetting: "/app/appSetting",
 
+    //OdometerRecord
+    odometerRecord: "/app/odometerRecord",
+    editOdometerRecord: "/app/odometerRecord/edit/:odometerRecordId",
+    addOdometerRecord: "/app/odometerRecord/add",
+
     //Reports
     accountBalance: '/app/accountBalance',
     invoiceSummary: '/app/invoiceSummary',

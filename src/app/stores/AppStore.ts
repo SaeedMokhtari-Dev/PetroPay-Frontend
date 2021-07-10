@@ -29,6 +29,7 @@ import CarOdometerMaxStore from "../../reports/CarOdometerMaxes/stores/CarOdomet
 import CarOdometerMinStore from "../../reports/CarOdometerMins/stores/CarOdometerMinStore";
 import OdometerBetweenDateStore from "../../reports/OdometerBetweenDates/stores/OdometerBetweenDateStore";
 import AppSettingStore from "../../entities/app-settings/stores/AppSettingStore";
+import OdometerRecordStore from "../../entities/odometer-records/stores/OdometerRecordStore";
 
 export class AppStore
 {
@@ -63,6 +64,7 @@ export class AppStore
     carOdometerMin: CarOdometerMinStore;
     odometerBetweenDate: OdometerBetweenDateStore;
     appSetting: AppSettingStore;
+    odometerRecord: OdometerRecordStore;
 
     constructor()
     {
@@ -97,5 +99,6 @@ export class AppStore
         this.carOdometerMin = new CarOdometerMinStore(this);
         this.odometerBetweenDate = new OdometerBetweenDateStore(this);
         this.appSetting = new AppSettingStore(this);
+        this.odometerRecord = new OdometerRecordStore(this);
     }
 }

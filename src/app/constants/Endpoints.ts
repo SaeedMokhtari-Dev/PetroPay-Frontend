@@ -75,6 +75,12 @@ export default
     apiAppSettingDetail: "/api/app-setting/detail",
     apiAppSettingDelete: "/api/app-setting/delete",
 
+    apiOdometerRecordAdd: "/api/odometer-record/add",
+    apiOdometerRecordEdit: "/api/odometer-record/edit",
+    apiOdometerRecordGet: "/api/odometer-record/get",
+    apiOdometerRecordDetail: "/api/odometer-record/detail",
+    apiOdometerRecordDelete: "/api/odometer-record/delete",
+
     apiAccountBalanceGet: "/api/account-balance/get",
     apiInvoiceSummaryGet: "/api/invoice-summary/get",
     apiInvoiceDetailGet: "/api/invoice-detail/get",

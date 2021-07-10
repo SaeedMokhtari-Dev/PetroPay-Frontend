@@ -1011,6 +1011,35 @@
 
   "OdometerBetweenDates.Error.Get.Message": "An error has occurred while trying to get Odometer Between Date list.",
 
+  "OdometerRecords.Menu.Title": "Odometer Records",
+  "OdometerRecords.Page.Title": "Odometer Records",
+  "OdometerRecords.Page.SubTitle": "This page is for define Odometer Records",
+  "OdometerRecords.Label.key": "key",
+  "OdometerRecords.Label.odometerRecordId": "odometer Record Id",
+  "OdometerRecords.Label.carId": "car Id",
+  "OdometerRecords.Label.carIdNumber": "car Id Number",
+  "OdometerRecords.Label.odometerRecordDate": "odometer Record Date",
+  "OdometerRecords.Label.odometerValue": "odometer Value",
+
+  "OdometerRecords.Add.HeaderText": "Add Odometer Record",
+  "OdometerRecords.Edit.HeaderText": "Edit Odometer Record with Id:",
+  "OdometerRecords.Section.GeneralInformation": "General Information",
+
+  "OdometerRecords.Validation.Message.carId.Required": "Please enter Odometer Record car",
+  "OdometerRecords.Validation.Message.odometerRecordDate.Required": "Please enter Odometer Record odometer Record Date",
+  "OdometerRecords.Validation.Message.odometerValue.Required": "Please enter Odometer Record odometer Value",
+
+  "Api.OdometerRecord.Add.Successful": "A new Odometer Record added successfully",
+  "Api.OdometerRecord.Edit.Successful": "selected Odometer Record edited successfully",
+  "Api.OdometerRecord.Deleted.Successful": "selected Odometer Record deleted successfully",
+  "Api.OdometerRecord.Id.Required": "Id is Required",
+
+  "OdometerRecords.Error.Get.Message": "An error has occurred while trying to get Odometer Records list.",
+  "OdometerRecords.Error.Detail.Message": "An error has occurred while trying to get Odometer Record details.",
+  "OdometerRecords.Error.Add.Message": "An error has occurred while trying to add new Odometer Records",
+  "OdometerRecords.Error.Edit.Message": "An error has occurred while trying to edit Odometer Records",
+  "OdometerRecords.Error.Delete.Message": "An error has occurred while trying to delete Odometer Records",
+
 
   "General.TransferBalanceType.CompanyToBranch": "Recharge Branch Balance",
   "General.TransferBalanceType.BranchToCompany": "Refund Balance To Company (Branch To Company)",

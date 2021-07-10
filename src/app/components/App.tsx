@@ -59,6 +59,8 @@ import CarOdometerMaxList from "../../reports/CarOdometerMaxes/components/list/C
 import CarOdometerMinList from "../../reports/CarOdometerMins/components/list/CarOdometerMinList";
 import OdometerBetweenDateList from "../../reports/OdometerBetweenDates/components/list/OdometerBetweenDateList";
 import EditAppSetting from "../../entities/app-settings/components/edit/EditAppSetting";
+import OdometerRecordsList from "../../entities/odometer-records/components/list/OdometerRecordsList";
+import EditOdometerRecord from "../../entities/odometer-records/components/edit/EditOdometerRecord";
 
 const App: React.FC = () =>
 {
@@ -134,6 +136,18 @@ const App: React.FC = () =>
                                     <Route exact roles={[RoleType.customer]} path={Routes.carAddSubscription} component={CarAddSubscription} />
                                     <Route exact roles={[RoleType.customer]} path={Routes.transferBalance} component={EditTransferBalance} />
 
+                                    <Route exact roles={[RoleType.admin]} path={Routes.promotionCoupon} component={PromotionCouponsList} />
+                                    <Route exact roles={[RoleType.admin]} path={Routes.editPromotionCoupon} component={EditPromotionCoupon} />
+                                    <Route exact roles={[RoleType.admin]} path={Routes.addPromotionCoupon} component={EditPromotionCoupon} />
+
+                                    <Route exact roles={[RoleType.admin]} path={Routes.paymentPetroStation} component={PaymentPetroStation} />
+                                    <Route exact roles={[RoleType.admin]} path={Routes.petropayAccountList} component={PetropayAccountList} />
+                                    <Route exact roles={[RoleType.admin]} path={Routes.paymentTransferAccount} component={PaymentPetropayAccount} />
+
+                                    <Route exact roles={[RoleType.customer]} path={Routes.odometerRecord} component={OdometerRecordsList} />
+                                    <Route exact roles={[RoleType.customer]} path={Routes.editOdometerRecord} component={EditOdometerRecord} />
+                                    <Route exact roles={[RoleType.customer]} path={Routes.addOdometerRecord} component={EditOdometerRecord} />
+
                                     {/* Reports */}
                                     <Route exact roles={[RoleType.customer]} path={Routes.invoiceSummary} component={InvoiceSummaryList} />
                                     <Route exact roles={[RoleType.customer]} path={Routes.invoiceDetail} component={InvoiceDetail} />
@@ -151,14 +165,8 @@ const App: React.FC = () =>
 
                                     <Route exact roles={[RoleType.admin]} path={Routes.accountBalance} component={AccountBalanceList} />
                                     <Route exact roles={[RoleType.admin]} path={Routes.petrolStationList} component={PetrolStationListList} />
-                                    <Route exact roles={[RoleType.admin]} path={Routes.paymentPetroStation} component={PaymentPetroStation} />
-                                    <Route exact roles={[RoleType.admin]} path={Routes.petropayAccountList} component={PetropayAccountList} />
-                                    <Route exact roles={[RoleType.admin]} path={Routes.paymentTransferAccount} component={PaymentPetropayAccount} />
 
 
-                                    <Route exact roles={[RoleType.admin]} path={Routes.promotionCoupon} component={PromotionCouponsList} />
-                                    <Route exact roles={[RoleType.admin]} path={Routes.editPromotionCoupon} component={EditPromotionCoupon} />
-                                    <Route exact roles={[RoleType.admin]} path={Routes.addPromotionCoupon} component={EditPromotionCoupon} />
 
 
                                     <Route component={NotFoundPage} />

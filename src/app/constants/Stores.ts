@@ -31,4 +31,5 @@ export default {
     carOdometerMinStore: 'carOdometerMinStore',
     odometerBetweenDateStore: 'odometerBetweenDateStore',
     appSettingStore: 'appSettingStore',
+    odometerRecordStore: 'odometerRecordStore',
 }

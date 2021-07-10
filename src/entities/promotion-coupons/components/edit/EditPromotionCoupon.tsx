@@ -101,36 +101,36 @@ const EditPromotionCoupon: React.FC<EditPromotionCouponProps> = inject(Stores.pr
     }
     function onChanged(e){
         if(promotionCouponId)
-            promotionCouponStore.editPromotionCouponViewModel.editPromotionCouponRequest[`${e.target.id}`] = e.target.value;
+            viewModel.editPromotionCouponRequest[`${e.target.id}`] = e.target.value;
         else
-            promotionCouponStore.editPromotionCouponViewModel.addPromotionCouponRequest[`${e.target.id}`] = e.target.value;
+            viewModel.addPromotionCouponRequest[`${e.target.id}`] = e.target.value;
     }
 
     function onDateChange(date, dateString, prop) {
         if(promotionCouponId)
-            promotionCouponStore.editPromotionCouponViewModel.editPromotionCouponRequest[`${prop}`] = dateString;
+            viewModel.editPromotionCouponRequest[`${prop}`] = dateString;
         else
-            promotionCouponStore.editPromotionCouponViewModel.addPromotionCouponRequest[`${prop}`] = dateString;
+            viewModel.addPromotionCouponRequest[`${prop}`] = dateString;
     }
 
     function onSwitchChange(e, propName){
 
         if(promotionCouponId) {
-            promotionCouponStore.editPromotionCouponViewModel.editPromotionCouponRequest[`${propName}`] = e;
-            promotionCouponStore.editPromotionCouponViewModel.detailPromotionCouponResponse[`${propName}`] = e;
+            viewModel.editPromotionCouponRequest[`${propName}`] = e;
+            viewModel.detailPromotionCouponResponse[`${propName}`] = e;
         }
         else {
-            promotionCouponStore.editPromotionCouponViewModel.addPromotionCouponRequest[`${propName}`] = e;
-            promotionCouponStore.editPromotionCouponViewModel.detailPromotionCouponResponse[`${propName}`] = e;
+            viewModel.addPromotionCouponRequest[`${propName}`] = e;
+            viewModel.detailPromotionCouponResponse[`${propName}`] = e;
         }
     }
     function onCouponDiscountValueChanged(e){
 
         if(promotionCouponId) {
-            promotionCouponStore.editPromotionCouponViewModel.editPromotionCouponRequest.couponDiscountValue = e;
+            viewModel.editPromotionCouponRequest.couponDiscountValue = e;
         }
         else {
-            promotionCouponStore.editPromotionCouponViewModel.addPromotionCouponRequest.couponDiscountValue = e;
+            viewModel.addPromotionCouponRequest.couponDiscountValue = e;
         }
     }
     function disabledDate(current) {
