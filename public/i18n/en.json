@@ -446,6 +446,7 @@
   "Cars.Validation.Message.carDriverPassword.Required": "Please enter car driver password",
   "Cars.Validation.Message.carDriverPassword.Valid": "The minimum password length is 8 characters and must have at least a number, upper, lower and special character",
   "Cars.Validation.Message.carDriverConfirmationCode.4MinLength": "Please at least 4 number.",
+  "Cars.Validation.Message.carDriverConfirmationCode.Required": "Please enter Car Driver Confirmation Code",
 
   "Api.Car.Add.Successful": "A new car added successfully",
   "Api.Car.Edit.Successful": "selected car edited successfully",

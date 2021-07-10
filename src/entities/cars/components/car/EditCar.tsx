@@ -521,7 +521,12 @@ const EditCar: React.FC<EditCarProps> = inject(Stores.carStore)(observer(({carSt
                                    key={"carDriverConfirmationCode"}
                                    label={i18next.t("Cars.Label.carDriverConfirmationCode")}
                                    rules={[
-                                       { min: 4, message: i18next.t("Cars.Validation.Message.carDriverConfirmationCode.4MinLength") }
+                                       { min: 4, message: i18next.t("Cars.Validation.Message.carDriverConfirmationCode.4MinLength") },
+
+                                               {
+                                                   required: true,
+                                                   message: i18next.t("Cars.Validation.Message.carDriverConfirmationCode.Required")
+                                               }
                                    ]}
                         >
                             <Input type={"number"} onChange={onChanged}/>
