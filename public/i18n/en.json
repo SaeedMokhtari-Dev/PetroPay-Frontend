@@ -414,6 +414,7 @@
   "Cars.Label.carApprovedOneTime": "car Approved One Time",
   "Cars.Label.workAllDays": "work AllDays",
   "Cars.Label.carNfcCode": "car Nfc Code",
+  "Cars.Label.carOdometerRecordRequired": "car Odometer Record Required",
 
   "Cars.Add.HeaderText": "Add Car",
   "Cars.Edit.HeaderText": "Edit Car with Id:",

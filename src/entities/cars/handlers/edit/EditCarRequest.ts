@@ -38,7 +38,7 @@ export default class EditCarRequest
     carApprovedOneTime: boolean;
     workAllDays: boolean;
     carNfcCode: string;
-
+    carOdometerRecordRequired: boolean;
 
     constructor(
     ) {

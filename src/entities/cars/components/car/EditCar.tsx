@@ -510,6 +510,13 @@ const EditCar: React.FC<EditCarProps> = inject(Stores.carStore)(observer(({carSt
                         </Form.Item>
                     </Col>
                     <Col span={8}>
+                        <Form.Item name="carOdometerRecordRequired" initialValue={viewModel?.detailCarResponse?.carOdometerRecordRequired}
+                                   key={"carOdometerRecordRequired"}
+                                   label={i18next.t("Cars.Label.carOdometerRecordRequired")}>
+                            <Switch onChange={(e) => onSwitchChange(e, 'carOdometerRecordRequired')} defaultChecked={viewModel?.detailCarResponse?.carOdometerRecordRequired} />
+                        </Form.Item>
+                    </Col>
+                    <Col span={8}>
                         <Form.Item name="carDriverConfirmationCode" initialValue={viewModel?.detailCarResponse?.carDriverConfirmationCode}
                                    key={"carDriverConfirmationCode"}
                                    label={i18next.t("Cars.Label.carDriverConfirmationCode")}
