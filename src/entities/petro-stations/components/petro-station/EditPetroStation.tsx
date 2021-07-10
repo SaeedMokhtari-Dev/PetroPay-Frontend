@@ -246,6 +246,14 @@ const EditPetroStation: React.FC<EditPetroStationProps> = inject(Stores.petroSta
                             <Switch onChange={(e) => onSwitchChange(e, "stationServiceActive")} defaultChecked={viewModel?.detailPetroStationResponse?.stationServiceActive} />
                         </Form.Item>
                     </Col>
+                    <Col span={8}>
+                        <Form.Item name="stationServiceDeposit" initialValue={viewModel?.detailPetroStationResponse?.stationServiceDeposit}
+                                   key={"stationServiceDeposit"}
+                                   label={i18next.t("PetroStations.Label.stationServiceDeposit")}
+                        >
+                            <Switch onChange={(e) => onSwitchChange(e, "stationServiceDeposit")} defaultChecked={viewModel?.detailPetroStationResponse?.stationServiceDeposit} />
+                        </Form.Item>
+                    </Col>
                 {/*<Col span={8}>
                     <Form.Item name="stationBalance" initialValue={viewModel?.detailPetroStationResponse?.stationBalance}
                                key={"stationBalance"}

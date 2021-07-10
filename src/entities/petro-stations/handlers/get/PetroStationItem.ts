@@ -20,7 +20,7 @@ export default class PetroStationItem implements IDeserialize
     stationBalance: number;
     stationEmail: number;
     stationServiceActive: boolean;
-
+    stationServiceDeposit: boolean;
 
     constructor() {
         makeAutoObservable(this);

@@ -19,6 +19,7 @@ export default class DetailPetroStationResponse implements IDeserialize
     stationBalance: number;
     stationEmail: number;
     stationServiceActive: boolean;
+    stationServiceDeposit: boolean;
 
     deserialize(input: any): this
     {

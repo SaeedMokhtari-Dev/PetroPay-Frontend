@@ -18,6 +18,7 @@ export default class EditPetroStationRequest
     stationBalance: number;
     stationEmail: number;
     stationServiceActive: boolean;
+    stationServiceDeposit: boolean;
 
     constructor(
     ) {

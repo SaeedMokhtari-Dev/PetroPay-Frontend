@@ -257,6 +257,7 @@
   "PetroStations.Label.stationBalance": "Balance",
   "PetroStations.Label.stationEmail": "Email Address",
   "PetroStations.Label.stationServiceActive": "Station Service Active?",
+  "PetroStations.Label.stationServiceDeposit": "station Service Deposit?",
 
   "PetroStations.Label.petroPayAccountId": "PaymentMethod",
   "PetroStations.Label.amount": "Amount",

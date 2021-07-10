@@ -17,6 +17,7 @@ export default class AddPetroStationRequest
     stationBalance: number;
     stationEmail: number;
     stationServiceActive: boolean;
+    stationServiceDeposit: boolean;
 
     constructor(
     ) {

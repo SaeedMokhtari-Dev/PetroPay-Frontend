@@ -14,6 +14,7 @@ export default
     {title: "PetroStations.Label.stationNameAr", dataIndex: "stationNameAr", key: "stationNameAr", responsive: ['md']},
     {title: "PetroStations.Label.stationDiesel", dataIndex: "stationDiesel", key: "stationDiesel", responsive: ['md']},
     {title: "PetroStations.Label.stationBalance", dataIndex: "stationBalance", key: "stationBalance", responsive: ['md']},
-    {title: "PetroStations.Label.stationServiceActive", dataIndex: "stationServiceActive", key: "stationServiceActive", responsive: ['md']}
+    {title: "PetroStations.Label.stationServiceActive", dataIndex: "stationServiceActive", key: "stationServiceActive", responsive: ['md']},
+    {title: "PetroStations.Label.stationServiceDeposit", dataIndex: "stationServiceDeposit", key: "stationServiceDeposit", responsive: ['md']}
 ]
 
