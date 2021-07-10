@@ -66,6 +66,9 @@ export default
     editPromotionCoupon: "/app/promotionCoupon/edit/:promotionCouponId",
     addPromotionCoupon: "/app/promotionCoupon/add",
 
+    //AppSetting
+    appSetting: "/app/appSetting",
+
     //Reports
     accountBalance: '/app/accountBalance',
     invoiceSummary: '/app/invoiceSummary',

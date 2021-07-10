@@ -58,6 +58,7 @@ import CarKmConsumptionList from "../../reports/CarKmConsumptions/components/lis
 import CarOdometerMaxList from "../../reports/CarOdometerMaxes/components/list/CarOdometerMaxList";
 import CarOdometerMinList from "../../reports/CarOdometerMins/components/list/CarOdometerMinList";
 import OdometerBetweenDateList from "../../reports/OdometerBetweenDates/components/list/OdometerBetweenDateList";
+import EditAppSetting from "../../entities/app-settings/components/edit/EditAppSetting";
 
 const App: React.FC = () =>
 {
@@ -106,6 +107,8 @@ const App: React.FC = () =>
                                     <Route exact roles={[RoleType.admin]} path={Routes.petroStation} component={PetroStationList} />
                                     <Route exact roles={[RoleType.admin]} path={Routes.addPetroStation} component={EditPetroStation} />
                                     <Route exact roles={[RoleType.admin]} path={Routes.editPetroStation} component={EditPetroStation} />
+
+                                    <Route exact roles={[RoleType.admin]} path={Routes.appSetting} component={EditAppSetting} />
 
                                     <Route exact roles={[RoleType.customer]} path={Routes.branch} component={BranchList} />
                                     <Route exact roles={[RoleType.customer]} path={Routes.branchList} component={BranchList} />

@@ -833,7 +833,6 @@
   "AdminDashboard.Section.PetrolStationsBalance": "PetrolStations Balance",
 
 
-
   "PromotionCoupons.Menu.Title": "PromotionCoupons",
   "PromotionCoupons.Page.Title": "PromotionCoupons",
   "PromotionCoupons.Page.SubTitle": "This page is for define promotion Coupons",
@@ -868,6 +867,43 @@
   "PromotionCoupons.Error.Add.Message": "An error has occurred while trying to add new promotion Coupon.",
   "PromotionCoupons.Error.Edit.Message": "An error has occurred while trying to edit promotion Coupon.",
   "PromotionCoupons.Error.Delete.Message": "An error has occurred while trying to delete promotion Coupon.",
+
+  "AppSettings.Menu.Title": "AppSettings",
+  "AppSettings.Page.Title": "AppSettings",
+  "AppSettings.Page.SubTitle": "This page is for define App Settings",
+  "AppSettings.Label.companyNameEn": "company Name English",
+  "AppSettings.Label.companyNameAr": "company Name Arabic",
+  "AppSettings.Label.companyAddress": "company Address",
+  "AppSettings.Label.companyEmail": "company Email",
+  "AppSettings.Label.companyCommercialRecordNumber": "company Commercial Record Number",
+  "AppSettings.Label.companyVatTaxNumber": "company Vat Tax Number",
+  "AppSettings.Label.companyVatRate": "company Vat Rate",
+  "AppSettings.Label.comapnyTaxRecordNumber": "comapny Tax Record Number",
+  "AppSettings.Label.companyLogo": "company Logo",
+  "AppSettings.Label.companyStampImage": "company Stamp Image",
+  "AppSettings.Label.comapnyTaxRate": "comapny Tax Rate",
+
+  "AppSettings.Add.HeaderText": "Add App Setting",
+  "AppSettings.Edit.HeaderText": "Edit App Setting",
+  "AppSettings.Section.GeneralInformation": "General Information",
+
+  "AppSettings.Validation.Message.companyNameEn.Required": "Please enter App Setting company Name English",
+  "AppSettings.Validation.Message.companyNameAr.Required": "Please enter App Setting company Name Arabic",
+  "AppSettings.Validation.Message.companyAddress.Required": "Please enter App Setting company Address",
+  "AppSettings.Validation.Message.companyEmail.Required": "Please enter App Setting company Email",
+  "AppSettings.Validation.Message.companyVatRate.Required": "Please enter App Setting company Vat Rate",
+  "AppSettings.Validation.Message.comapnyTaxRate.Required": "Please enter App Setting company Tax Rate",
+
+  "Api.AppSetting.Add.Successful": "A new App Setting added successfully",
+  "Api.AppSetting.Edit.Successful": "selected App Setting edited successfully",
+  "Api.AppSetting.Deleted.Successful": "selected App Setting deleted successfully",
+  "Api.AppSetting.Id.Required": "Id is Required",
+
+  "AppSettings.Error.Get.Message": "An error has occurred while trying to get App Settings list.",
+  "AppSettings.Error.Detail.Message": "An error has occurred while trying to get App Setting details.",
+  "AppSettings.Error.Add.Message": "An error has occurred while trying to add new App Setting.",
+  "AppSettings.Error.Edit.Message": "An error has occurred while trying to edit App Setting.",
+  "AppSettings.Error.Delete.Message": "An error has occurred while trying to delete App Setting.",
 
   "CarConsumptionRates.Menu.Title": "Car Consumption Rate",
   "CarConsumptionRates.Page.Title": "Car Consumption Rate",

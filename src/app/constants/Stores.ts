@@ -30,4 +30,5 @@ export default {
     carOdometerMaxStore: 'carOdometerMaxStore',
     carOdometerMinStore: 'carOdometerMinStore',
     odometerBetweenDateStore: 'odometerBetweenDateStore',
+    appSettingStore: 'appSettingStore',
 }
