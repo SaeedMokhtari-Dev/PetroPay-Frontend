@@ -29,6 +29,7 @@ import AppSettingStore from "../../stores/AppSettingStore";
 import moment from "moment";
 import Constants from "../../../../app/constants/Constants";
 import ImageConstants from "../../../../app/constants/ImageConstants";
+import MaskedInput from "antd-mask-input";
 const {useEffect} = React;
 
 interface EditAppSettingProps {
@@ -101,15 +102,22 @@ const EditAppSetting: React.FC<EditAppSettingProps> = inject(Stores.appSettingSt
     }
     function onChanged(e){
         if(isEdit)
-            appSettingStore.editAppSettingViewModel.editAppSettingRequest[`${e.target.id}`] = e.target.value;
+            viewModel.editAppSettingRequest[`${e.target.id}`] = e.target.value;
         else
-            appSettingStore.editAppSettingViewModel.addAppSettingRequest[`${e.target.id}`] = e.target.value;
+            viewModel.addAppSettingRequest[`${e.target.id}`] = e.target.value;
     }
     function onNumberChanged(e, propName){
         if(isEdit)
-            appSettingStore.editAppSettingViewModel.editAppSettingRequest[`${propName}`] = e;
+            viewModel.editAppSettingRequest[`${propName}`] = e;
         else
-            appSettingStore.editAppSettingViewModel.addAppSettingRequest[`${propName}`] = e;
+            viewModel.addAppSettingRequest[`${propName}`] = e;
+    }
+
+    function onMaskChanged(e) {
+        if(isEdit)
+            viewModel.editAppSettingRequest[`${e.target.id}`] = e.target.value.replace(/\s+/g, '');
+        else
+            viewModel.addAppSettingRequest[`${e.target.id}`] = e.target.value.replace(/\s+/g, '');
     }
     function getBase64(img, callback) {
         const reader = new FileReader();
@@ -170,6 +178,7 @@ const EditAppSetting: React.FC<EditAppSettingProps> = inject(Stores.appSettingSt
 
         return current && current < moment().endOf('day');
     }
+
     return (
         <div>
             <PageHeader
@@ -241,6 +250,13 @@ const EditAppSetting: React.FC<EditAppSettingProps> = inject(Stores.appSettingSt
                                    key={"companyCommercialRecordNumber"}
                                    label={i18next.t("AppSettings.Label.companyCommercialRecordNumber")}>
                             <Input onChange={onChanged}/>
+                        </Form.Item>
+                    </Col>
+                    <Col span={8}>
+                        <Form.Item name="comapnyPhoneNumber" initialValue={viewModel?.detailAppSettingResponse?.comapnyPhoneNumber}
+                                   key={"comapnyPhoneNumber"}
+                                   label={i18next.t("AppSettings.Label.comapnyPhoneNumber")}>
+                            <MaskedInput className={"phone-number"} mask="+2 111 111 11111" onChange={onMaskChanged}/>
                         </Form.Item>
                     </Col>
                     <Col span={8}>

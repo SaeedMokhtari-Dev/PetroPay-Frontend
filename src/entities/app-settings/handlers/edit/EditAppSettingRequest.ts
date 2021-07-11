@@ -13,7 +13,7 @@ export default class EditAppSettingRequest
     companyLogo: string;
     companyStampImage: string;
     comapnyTaxRate: number;
-
+    comapnyPhoneNumber: string;
 
     constructor(
     ) {
