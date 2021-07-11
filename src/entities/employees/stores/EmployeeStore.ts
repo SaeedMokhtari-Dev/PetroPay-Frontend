@@ -2,11 +2,18 @@ import {AppStore} from "app/stores/AppStore";
 import {makeAutoObservable} from "mobx";
 import EditEmployeeViewModel from "../view-models/EditEmployeeViewModel";
 import GetEmployeeViewModel from "../view-models/GetEmployeeViewModel";
+import ListMenuViewModel from "../../menus/view-models/ListMenuViewModel";
+import TreeMenuViewModel from "../../menus/view-models/TreeMenuViewModel";
+import EditEmployeeMenuViewModel from "../view-models/EditEmployeeMenuViewModel";
 
 export default class EmployeeStore
 {
     getEmployeeViewModel: GetEmployeeViewModel;
     editEmployeeViewModel: EditEmployeeViewModel;
+
+    treeMenuViewModel: TreeMenuViewModel;
+    editEmployeeMenuViewModel: EditEmployeeMenuViewModel;
+
     constructor(public appStore: AppStore) {
         makeAutoObservable(this);
     }
@@ -21,14 +28,16 @@ export default class EmployeeStore
         this.getEmployeeViewModel = null;
     }
 
-    onEmployeeEditPageLoad()
+    onEmployeeMenuEditPageLoad()
     {
-        this.editEmployeeViewModel = new EditEmployeeViewModel(this);
+        this.editEmployeeMenuViewModel = new EditEmployeeMenuViewModel(this);
+        this.treeMenuViewModel = new TreeMenuViewModel();
     }
 
-    onEmployeeEditPageUnload()
+    onEmployeeMenuEditPageUnLoad()
     {
-        this.editEmployeeViewModel = null;
+        this.editEmployeeMenuViewModel = null;
+        this.treeMenuViewModel = null;
     }
 
 }

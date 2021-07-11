@@ -84,6 +84,8 @@ export default
     editEmployee: "/app/employee/edit/:employeeId",
     addEmployee: "/app/employee/add",
 
+    employeeMenu: "/app/employeeMenu/:employeeId",
+
     //Reports
     accountBalance: '/app/accountBalance',
     invoiceSummary: '/app/invoiceSummary',

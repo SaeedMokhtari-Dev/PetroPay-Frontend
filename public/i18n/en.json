@@ -6,6 +6,7 @@
   "General.Button.Edit": "Edit",
   "General.Button.Delete": "Delete",
   "General.Button.ExportExcel": "Excel",
+  "General.Button.Accessibility": "Accessibility",
   "General.Column.Action": "Actions",
   "General.Add.SaveButton": "Save",
   "General.Add.CancelButton": "Cancel",
@@ -909,6 +910,7 @@
   "Menus.Error.Add.Message": "An error has occurred while trying to add new menu.",
   "Menus.Error.Edit.Message": "An error has occurred while trying to edit menu.",
   "Menus.Error.Delete.Message": "An error has occurred while trying to delete menu.",
+  "Menus.Error.Tree.Message": "An error has occurred while trying to get tree menu.",
 
 
   "Emplyees.Menu.Title": "Employees",
@@ -937,6 +939,16 @@
   "Emplyees.Error.Add.Message": "An error has occurred while trying to add new employee.",
   "Emplyees.Error.Edit.Message": "An error has occurred while trying to edit employee.",
   "Emplyees.Error.Delete.Message": "An error has occurred while trying to delete employee.",
+
+  "EmployeeMenus.Edit.HeaderText": "Accessibility Page",
+  "EmployeeMenus.Section.GeneralInformation": "Please select the menus that this admin needs.",
+  "EmployeeMenus.menuIds.required": "Please select at least one menu.",
+
+  "EmployeeMenus.Error.Detail.Message": "An error has occurred while trying to get Employee Menus details.",
+  "EmployeeMenus.Error.Add.Message": "An error has occurred while trying to add Employee Menus.",
+
+  "Api.EmployeeMenu.Add.Successful": "Accessibility created successfully",
+  "Api.EmployeeMenu.Id.Required": "Employee Id is Required",
 
   "AppSettings.Menu.Title": "AppSettings",
   "AppSettings.Page.Title": "AppSettings",

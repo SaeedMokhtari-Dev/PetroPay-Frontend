@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import {inject, observer} from "mobx-react";
-import { useHistory } from "react-router-dom";
 import "./EmployeesList.scss";
 import Stores from "app/constants/Stores";
 import EmployeeStore from "entities/employees/stores/EmployeeStore";
@@ -10,16 +9,16 @@ import {
     Table, Modal, PageHeader
 } from "antd";
 import {
-    EditOutlined, DeleteOutlined,
+    SecurityScanOutlined, DeleteOutlined,
     ExclamationCircleOutlined, PlusCircleOutlined
 } from '@ant-design/icons';
 import i18next from "i18next";
 import EmployeesColumns from "./EmployeesColumns";
-import AddEmployeeRequest from "../../handlers/add/AddEmployeeRequest";
 import Routes from "../../../../app/constants/Routes";
 import NavigationService from "../../../../app/services/NavigationService";
 import GetEmployeeRequest from "../../handlers/get/GetEmployeeRequest";
-
+import { Link } from "react-router-dom";
+import {getEmployeeMenuRoute} from "../../../../app/utils/RouteHelper";
 
 const { confirm } = Modal;
 
@@ -47,9 +46,12 @@ const EmployeesList: React.FC<EmployeesSidebarProps> = inject(Stores.employeeSto
         fixed: 'right',
         render: (text, record) => (
             <div className="inline">
+                <Link to={getEmployeeMenuRoute(record.key)}>
+                    <Button type="primary" icon={<SecurityScanOutlined />}
+                            title={i18next.t("General.Button.Accessibility")} />
+                </Link>
 
-                    {/*<Button type="primary" icon={<EditOutlined />} onClick={() => showEditPage(record)}
-                            title={i18next.t("General.Button.Edit")} />
+                    {/*
                 <Button type="primary" danger icon={<DeleteOutlined />} onClick={() => showDeleteConfirm(record)}
                         title={i18next.t("General.Button.Delete")} />*/}
             </div>

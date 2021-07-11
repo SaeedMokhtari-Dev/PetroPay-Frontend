@@ -4,3 +4,7 @@ export function getCompanyRoute(companyId: any = null): string
 {
     return Routes.company.replace('/:companyId?', companyId ? `/${companyId}` : '');
 }
+export function getEmployeeMenuRoute(employeeId: any = null): string
+{
+    return Routes.employeeMenu.replace('/:employeeId', employeeId ? `/${employeeId}` : '');
+}
