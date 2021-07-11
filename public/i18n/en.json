@@ -114,11 +114,16 @@
   "Companies.Label.companyAdminPhone": "Admin Phone",
   "Companies.Label.companyAdminEmail": "Admin Email",
   "Companies.Label.companyBalnce": "Balance",
+  "Companies.Label.companyVatNumber": "Company Vat Number",
+  "Companies.Label.companyVatPhoto": "Company Vat Photo",
+  "Companies.Label.companyTaxNumber": "Company Tax Number",
+  "Companies.Label.companyTaxPhoto": "Company Tax Photo",
 
   "Companies.Add.HeaderText": "Add Company",
   "Companies.Edit.HeaderText": "Edit Company with Id:",
   "Companies.Section.GeneralInformation": "General Information",
   "Companies.Section.LoginInformation": "Login Information",
+  "Companies.Section.TaxAndVat": "Tax And Vat",
   "Companies.Button.Branches": "Branches",
 
   "Companies.Validation.Message.companyName.Required": "Please enter company name",

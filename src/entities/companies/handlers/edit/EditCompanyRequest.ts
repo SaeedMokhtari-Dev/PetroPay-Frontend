@@ -19,6 +19,11 @@ export default class EditCompanyRequest
     companyAdminEmail: string;
     companyBalnce: number;
 
+    companyVatNumber: string;
+    companyVatPhoto: string;
+    companyTaxNumber: string;
+    companyTaxPhoto: string;
+
     constructor(
     ) {
         makeAutoObservable(this);

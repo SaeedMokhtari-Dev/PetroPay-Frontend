@@ -3,7 +3,22 @@ import {inject, observer} from "mobx-react";
 import Stores from "app/constants/Stores";
 import CompaniesStore from "entities/companies/stores/CompaniesStore";
 import {useParams} from "react-router-dom";
-import {Button, Col, Divider, Form, Input, message, Modal, PageHeader, Radio, Row, Spin, Upload, Select} from "antd";
+import {
+    Button,
+    Col,
+    Divider,
+    Form,
+    Input,
+    message,
+    Modal,
+    PageHeader,
+    Radio,
+    Row,
+    Spin,
+    Upload,
+    Select,
+    Image
+} from "antd";
 import i18next from "i18next";
 import EditCompanyRequest from "../../handlers/edit/EditCompanyRequest";
 import DetailCompanyResponse from "../../handlers/detail/DetailCompanyResponse";
@@ -18,6 +33,7 @@ import Types from "../../../../app/constants/Types";
 import Countries from "../../../../app/constants/Countries";
 import Regions from "../../../../app/constants/Regions";
 import MaskedInput from "antd-mask-input";
+import ImageConstants from "../../../../app/constants/ImageConstants";
 const {useEffect} = React;
 
 const { Option } = Select;
@@ -149,8 +165,14 @@ const EditCompany: React.FC<EditCompanyProps> = inject(Stores.companiesStore)(ob
         reader.addEventListener('load', () => callback(reader.result));
         reader.readAsDataURL(img);
     }
+    const toBase64 = file => new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = error => reject(error);
+    });
 
-    function beforeUpload(file) {
+    async function beforeUpload(file, propName) : Promise<boolean> {
         viewModel.uploadLoading = true;
         const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
         if (!isJpgOrPng) {
@@ -164,19 +186,17 @@ const EditCompany: React.FC<EditCompanyProps> = inject(Stores.companiesStore)(ob
             viewModel.uploadLoading = false;
             return false;
         }
-        getBase64(file, imageUrl => {
-
-            viewModel.uploadLoading = false;
-            if(companyId){
-                viewModel.editCompanyRequest.companyCommercialPhoto = imageUrl;
-                setImageUrl(imageUrl);
-                viewModel.editCompanyRequest.IsCompanyCommercialPhotoChanged = true;
-            }
-            else {
-                setImageUrl(imageUrl);
-                viewModel.addCompanyRequest.companyCommercialPhoto = imageUrl;
-            }
-        });
+        let imageUrl = await toBase64(file);
+        viewModel.detailCompanyResponse[`${propName}`] = imageUrl;
+        if(companyId)
+        {
+            viewModel.editCompanyRequest[`${propName}`] = imageUrl;
+            viewModel.editCompanyRequest[`Is${propName}`] = true;
+        }
+        else{
+            viewModel.addCompanyRequest[`${propName}`] = imageUrl;
+        }
+        viewModel.uploadLoading = false;
         return true;
     }
     const uploadButton = (
@@ -401,22 +421,90 @@ const EditCompany: React.FC<EditCompanyProps> = inject(Stores.companiesStore)(ob
                     </Col>
                     <Divider>{i18next.t("Companies.Label.companyCommercialPhoto")}</Divider>
                     <Col offset={8} span={8}>
+                        <Form.Item name="companyCommercialPhoto" initialValue={viewModel?.detailCompanyResponse?.companyCommercialPhoto}
+                                   key={"companyCommercialPhoto"}>
                             <Upload
-                                key={"uploader"}
+                                key={"companyCommercialPhoto"}
                                 className={"avatar-uploader"}
                                 maxCount={1}
-                                beforeUpload={beforeUpload}
-                                customRequest= {customRequest}
+                                beforeUpload={async (file) => {await beforeUpload(file, "companyCommercialPhoto")}}
+                                customRequest={customRequest}
                                 showUploadList={false}
                             >
-                                {imageUrl ? (
+                                {viewModel?.detailCompanyResponse?.companyCommercialPhoto ? (
                                     <div>
-                                        <img src={imageUrl} alt="logo"
-                                             style={{width: '100%', height: '150px'}}/>
+                                        <Image src={viewModel?.detailCompanyResponse?.companyCommercialPhoto}
+                                               fallback={ImageConstants.fallbackImage}
+                                               alt="companyCommercialPhoto"
+                                               style={{width: '100%', height: '150px'}}/>
                                         <p>{i18next.t("General.Upload.ChangePhoto")}</p>
                                     </div>
-                                    ) : uploadButton}
+                                ) : uploadButton}
                             </Upload>
+                        </Form.Item>
+                    </Col>
+                    <Divider>{i18next.t("Companies.Section.TaxAndVat")}</Divider>
+                    <Col span={8}>
+                        <Form.Item name="companyVatNumber" initialValue={viewModel?.detailCompanyResponse?.companyVatNumber}
+                                   key={"companyVatNumber"}
+                                   label={i18next.t("Companies.Label.companyVatNumber")}>
+                            <Input onChange={onChanged}/>
+                        </Form.Item>
+                    </Col>
+                    <Col span={12}>
+                        <Form.Item name="companyVatPhoto" initialValue={viewModel?.detailCompanyResponse?.companyVatPhoto}
+                                   key={"companyVatPhoto"}
+                                   label={i18next.t("Companies.Label.companyVatPhoto")}>
+                            <Upload
+                                key={"companyVatPhoto"}
+                                className={"avatar-uploader"}
+                                maxCount={1}
+                                beforeUpload={async (file) => {await beforeUpload(file, "companyVatPhoto")}}
+                                customRequest={customRequest}
+                                showUploadList={false}
+                            >
+                                {viewModel?.detailCompanyResponse?.companyVatPhoto ? (
+                                    <div>
+                                        <Image src={viewModel?.detailCompanyResponse?.companyVatPhoto}
+                                               fallback={ImageConstants.fallbackImage}
+                                               alt="companyVatPhoto"
+                                               style={{width: '100%', height: '150px'}}/>
+                                        <p>{i18next.t("General.Upload.ChangePhoto")}</p>
+                                    </div>
+                                ) : uploadButton}
+                            </Upload>
+                        </Form.Item>
+                    </Col>
+                    <Col span={8}>
+                        <Form.Item name="companyTaxNumber" initialValue={viewModel?.detailCompanyResponse?.companyTaxNumber}
+                                   key={"companyTaxNumber"}
+                                   label={i18next.t("Companies.Label.companyTaxNumber")}>
+                            <Input onChange={onChanged}/>
+                        </Form.Item>
+                    </Col>
+                    <Col span={12}>
+                        <Form.Item name="companyTaxPhoto" initialValue={viewModel?.detailCompanyResponse?.companyTaxPhoto}
+                                   key={"companyTaxPhoto"}
+                                   label={i18next.t("Companies.Label.companyTaxPhoto")}>
+                            <Upload
+                                key={"companyTaxPhoto"}
+                                className={"avatar-uploader"}
+                                maxCount={1}
+                                beforeUpload={async (file) => {await beforeUpload(file, "companyTaxPhoto")}}
+                                customRequest={customRequest}
+                                showUploadList={false}
+                            >
+                                {viewModel?.detailCompanyResponse?.companyTaxPhoto ? (
+                                    <div>
+                                        <Image src={viewModel?.detailCompanyResponse?.companyTaxPhoto}
+                                               fallback={ImageConstants.fallbackImage}
+                                               alt="companyTaxPhoto"
+                                               style={{width: '100%', height: '150px'}}/>
+                                        <p>{i18next.t("General.Upload.ChangePhoto")}</p>
+                                    </div>
+                                ) : uploadButton}
+                            </Upload>
+                        </Form.Item>
                     </Col>
                 </Row>
                 <Divider></Divider>

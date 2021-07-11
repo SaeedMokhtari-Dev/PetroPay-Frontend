@@ -18,6 +18,11 @@ export default class DetailCompanyResponse implements IDeserialize
     companyAdminEmail: string;
     companyBalnce: number;
 
+    companyVatNumber: string;
+    companyVatPhoto: string;
+    companyTaxNumber: string;
+    companyTaxPhoto: string;
+
     deserialize(input: any): this
     {
         Object.assign(this, input);
