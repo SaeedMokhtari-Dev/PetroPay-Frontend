@@ -210,7 +210,7 @@ const EditSubscription: React.FC<EditSubscriptionProps> = inject(Stores.subscrip
         setCalculateButtonDisable(false);
     }
     function onEditDatePickerChanged(e, d){
-        debugger;
+        
         console.log(e);
         console.log(d);
         if(subscriptionId) {
@@ -277,7 +277,7 @@ const EditSubscription: React.FC<EditSubscriptionProps> = inject(Stores.subscrip
         }
     }
     function onNumberOfDateDiffChanged(e){
-        debugger;
+        
         if(subscriptionId)
         {
             viewModel.editSubscriptionRequest.numberOfDateDiff = e;

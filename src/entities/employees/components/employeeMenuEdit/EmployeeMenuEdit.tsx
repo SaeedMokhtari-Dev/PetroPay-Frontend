@@ -70,7 +70,7 @@ const EmployeeMenuEdit: React.FC<EditEmployeeMenuProps> = inject(Stores.employee
         else{
             NavigationService.goBack();
         }
-        debugger;
+        
         let treeData = [];
         for (let item of employeeStore.treeMenuViewModel.treeMenuResponse) {
             let data = {
@@ -99,15 +99,15 @@ const EmployeeMenuEdit: React.FC<EditEmployeeMenuProps> = inject(Stores.employee
 
     async function onFinish(values: any) {
         viewModel.errorMessage = "";
-        if(viewModel.addEmployeeMenuRequest?.menuIds?.length === 0)
+        /*if(viewModel.addEmployeeMenuRequest?.menuIds?.length === 0)
             viewModel.errorMessage = i18next.t("EmployeeMenus.menuIds.required");
-        else
+        else*/
             await viewModel.addEmployeeMenu(viewModel.addEmployeeMenuRequest);
         if(!viewModel.errorMessage)
             history.goBack();
     };
     function onChange(value) {
-        debugger;
+        
         console.log('onChange ', value);
         viewModel.detailEmployeeMenuResponse.menuIds = value;
         viewModel.addEmployeeMenuRequest.menuIds = value;

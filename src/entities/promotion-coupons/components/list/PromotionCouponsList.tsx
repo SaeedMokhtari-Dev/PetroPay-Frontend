@@ -62,7 +62,7 @@ const PromotionCouponsList: React.FC<PromotionCouponsSidebarProps> = inject(Stor
     }];
     async function showEditPage(e){
         //promotionCouponStore.editPromotionCouponViewModel.key = e.key;
-        debugger;
+        
         if(e.key)
         {
             //await promotionCouponStore.editPromotionCouponViewModel.getDetailPromotionCoupon(e.key);

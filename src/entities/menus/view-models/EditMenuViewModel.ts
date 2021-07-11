@@ -94,7 +94,7 @@ export default class EditMenuViewModel
     {
         try
         {
-            debugger;
+            
             this.errorMessage = "";
             this.isProcessing = true;
 

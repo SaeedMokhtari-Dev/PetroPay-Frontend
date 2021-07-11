@@ -100,6 +100,7 @@ export default
 
     apiEmployeeMenuAdd: "/api/employee-menu/add",
     apiEmployeeMenuDetail: "/api/employee-menu/detail",
+    apiEmployeeMenuTree: "/api/employee-menu/tree",
 
     apiAccountBalanceGet: "/api/account-balance/get",
     apiInvoiceSummaryGet: "/api/invoice-summary/get",

@@ -25,6 +25,7 @@ interface SidebarProps {
 
 const Sidebar: React.FC<SidebarProps> = inject(Stores.pageStore)(observer(({pageStore, children}) =>
 {
+    const [dataFetched, setDataFetched] = React.useState(false);
     useEffect(() => {
         onLoad();
 
@@ -168,10 +169,19 @@ const Sidebar: React.FC<SidebarProps> = inject(Stores.pageStore)(observer(({page
         </SubMenu>
     </Menu>)
     async function onLoad() {
+        
+        if(UserContext.info.role == RoleType.admin){
+            pageStore.onSidebarPageLoad();
+            await pageStore.treeEmployeeMenuViewModel?.getEmployeeMenuTree(UserContext.info.id);setDataFetched(true);
+            setDataFetched(true);
+        }
     }
 
     function onUnload() {
-        //companiesStore.onCompaniesSidebarPageUnload();
+        if(UserContext.info.role == RoleType.admin) {
+            pageStore.onSidebarPageUnLoad();
+
+        }
     }
 
     function toggle() {
@@ -185,7 +195,36 @@ const Sidebar: React.FC<SidebarProps> = inject(Stores.pageStore)(observer(({page
             </div>
             {UserContext.info.role == RoleType.customer ? customerMenu : ""}
             {UserContext.info.role == RoleType.supplier ? supplierMenu : ""}
-            {UserContext.info.role == RoleType.admin ? adminMenu : ""}
+            {UserContext.info.role == RoleType.admin ?
+                (
+                    dataFetched ?
+                    <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
+                        {pageStore.treeEmployeeMenuViewModel.treeEmployeeMenuResponse.map((parent, index) => {
+                            return parent.items?.length > 0 ?
+                                <SubMenu key={parent.key} title={localStorage.getItem("currentLanguage") === 'en' ? parent.enTitle : parent.arTitle}>
+                                    {
+                                        parent.items.map((child, i) => {
+                                            return <Menu.Item key={child.key}>
+                                                <Link to={child.urlRoute}>
+                                                    {localStorage.getItem("currentLanguage") === 'en' ? child.enTitle : child.arTitle}
+                                                </Link>
+                                            </Menu.Item>
+                                        })
+                                    }
+                                </SubMenu>
+                            :
+                                (<Menu.Item key={parent.key}>
+                                    <Link to={parent.urlRoute}>
+                                        {localStorage.getItem("currentLanguage") === 'en' ? parent.enTitle : parent.arTitle}
+                                    </Link>
+                                </Menu.Item>)
+                        })}
+                    </Menu>
+                        :
+                        ""
+                )
+
+                : ""}
         </Sider>
     )
 }));

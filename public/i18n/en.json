@@ -946,6 +946,7 @@
 
   "EmployeeMenus.Error.Detail.Message": "An error has occurred while trying to get Employee Menus details.",
   "EmployeeMenus.Error.Add.Message": "An error has occurred while trying to add Employee Menus.",
+  "EmployeeMenus.Error.Tree.Message": "An error has occurred while trying to get Employee Menus Tree.",
 
   "Api.EmployeeMenu.Add.Successful": "Accessibility created successfully",
   "Api.EmployeeMenu.Id.Required": "Employee Id is Required",
