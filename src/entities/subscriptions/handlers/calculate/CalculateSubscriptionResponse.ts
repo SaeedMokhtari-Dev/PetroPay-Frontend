@@ -2,8 +2,15 @@ import IDeserialize from "app/interfaces/deserialize";
 
 export default class CalculateSubscriptionResponse implements IDeserialize
 {
-    public bundlesId: number;
-    public subscriptionCost: number;
+    bundlesId: number;
+    subTotal: number;
+    discount: number;
+    taxRate: number;
+    tax: number;
+    vatRate: number;
+    vat: number;
+    couponId: number;
+    subscriptionCost: number;
 
     deserialize(input: any): this
     {

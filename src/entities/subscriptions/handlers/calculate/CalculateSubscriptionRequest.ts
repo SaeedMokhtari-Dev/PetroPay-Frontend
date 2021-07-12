@@ -7,6 +7,7 @@ export default class CalculateSubscriptionRequest
     public subscriptionType: string;
     public subscriptionStartDate: string;
     public subscriptionEndDate: string;
+    public couponCode: string;
 
     constructor(
     ) {

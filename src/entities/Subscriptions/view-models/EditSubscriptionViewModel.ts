@@ -161,9 +161,9 @@ export default class EditSubscriptionViewModel
             this.isProcessing = false;
         }
     }
-    public async calculateCost(request: CalculateSubscriptionRequest, subscriptionId?: number): Promise<number>
+    public async calculateCost(request: CalculateSubscriptionRequest, subscriptionId?: number): Promise<CalculateSubscriptionResponse>
     {
-        let subscriptionCost = 0;
+        let result = new CalculateSubscriptionResponse();
         try
         {
             this.errorMessage = "";
@@ -173,16 +173,16 @@ export default class EditSubscriptionViewModel
 
             if(response && response.success)
             {
-                let result = new CalculateSubscriptionResponse().deserialize(response.data);
+                result = new CalculateSubscriptionResponse().deserialize(response.data);
                 if(subscriptionId){
                     this.editSubscriptionRequest.subscriptionCost = result.subscriptionCost;
                     this.editSubscriptionRequest.bundlesId = result.bundlesId;
-                    subscriptionCost = result.subscriptionCost;
+                    //subscriptionCost = result.subscriptionCost;
                 }
                 else{
                     this.addSubscriptionRequest.subscriptionCost = result.subscriptionCost;
                     this.addSubscriptionRequest.bundlesId = result.bundlesId;
-                    subscriptionCost = result.subscriptionCost;
+                    //subscriptionCost = result.subscriptionCost;
                 }
             }
             else{
@@ -198,6 +198,7 @@ export default class EditSubscriptionViewModel
         {
             this.calculating = false;
         }
-        return subscriptionCost;
+        debugger;
+        return result;
     }
 }

@@ -15,6 +15,7 @@ export default class AddSubscriptionRequest
     subscriptionCost: number;
     paymentReferenceNumber: string;
     subscriptionPaymentDocPhoto: string;
+    couponCode: string;
 
     constructor(
     ) {

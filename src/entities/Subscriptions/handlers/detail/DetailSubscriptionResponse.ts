@@ -20,6 +20,7 @@ export default class DetailSubscriptionResponse implements IDeserialize
     paymentReferenceNumber: string;
     subscriptionDate: string;
     subscriptionPaymentDocPhoto: string;
+    couponCode: string;
 
     subscriptionCars: SubscriptionCar[];
 

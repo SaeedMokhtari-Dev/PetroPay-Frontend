@@ -4,7 +4,7 @@ import Stores from "app/constants/Stores";
 import {
     Button, Col,
     DatePicker,
-    Divider, Form, Input, InputNumber, PageHeader, Radio, Row, Select, Spin, Table, message, Upload
+    Divider, Form, Input, InputNumber, PageHeader, Radio, Row, Select, Spin, Table, message, Upload, Descriptions
 } from "antd";
 import i18next from "i18next";
 import DetailSubscriptionResponse from "../../handlers/detail/DetailSubscriptionResponse";
@@ -19,6 +19,7 @@ import SubscriptionStore from "../../stores/SubscriptionStore";
 import CalculateSubscriptionRequest from "../../handlers/calculate/CalculateSubscriptionRequest";
 import "./EditSubscription.scss";
 import BundlesColumns from "../../../bundles/components/list/BundlesColumns";
+import CalculateSubscriptionResponse from "../../handlers/calculate/CalculateSubscriptionResponse";
 const {useEffect} = React;
 const { RangePicker } = DatePicker;
 const { Option } = Select;
@@ -34,10 +35,8 @@ const EditSubscription: React.FC<EditSubscriptionProps> = inject(Stores.subscrip
     const dateFormat = 'DD/MM/YYYY';
 
     const [subscriptionType, setSubscriptionType] = React.useState("");
-    const [subscriptionCost, setSubscriptionCost] = React.useState(0);
+    const [subscriptionCost, setSubscriptionCost] = React.useState(new CalculateSubscriptionResponse());
     const [calculateButtonDisable, setCalculateButtonDisable] = React.useState(true);
-    /*const [startDatePickerDefault, setStartDatePickerDefault] = React.useState(moment());
-    const [endDatePickerDefault, setEndDatePickerDefault] = React.useState(moment());*/
     const [subscriptionEndDate, setSubscriptionEndDate] = React.useState("");
     const [dataFetched, setDataFetched] = React.useState(false);
 
@@ -110,11 +109,8 @@ const EditSubscription: React.FC<EditSubscriptionProps> = inject(Stores.subscrip
         {
             await subscriptionStore.editSubscriptionViewModel.getDetailSubscription(subscriptionIdParam);
 
-
-            setSubscriptionCost(subscriptionStore.editSubscriptionViewModel?.detailSubscriptionResponse?.subscriptionCost);
+            //setSubscriptionCost(subscriptionStore.editSubscriptionViewModel?.detailSubscriptionResponse?.subscriptionCost);
             setSubscriptionType(subscriptionStore.editSubscriptionViewModel?.detailSubscriptionResponse?.subscriptionType);
-            /*setStartDatePickerDefault(moment(subscriptionStore.editSubscriptionViewModel?.detailSubscriptionResponse?.subscriptionStartDate));
-            setEndDatePickerDefault(moment(subscriptionStore.editSubscriptionViewModel?.detailSubscriptionResponse?.subscriptionEndDate));*/
             setSubscriptionEndDate(subscriptionStore.editSubscriptionViewModel?.detailSubscriptionResponse?.subscriptionEndDate);
 
             setBundleId(subscriptionStore.editSubscriptionViewModel?.detailSubscriptionResponse?.bundlesId);
@@ -188,6 +184,9 @@ const EditSubscription: React.FC<EditSubscriptionProps> = inject(Stores.subscrip
             viewModel.editSubscriptionRequest[`${e.target.id}`] = e.target.value;
         else
             viewModel.addSubscriptionRequest[`${e.target.id}`] = e.target.value;
+
+        if(e.target.id === "couponCode")
+            setCalculateButtonDisable(false);
     }
     function disabledDate(current) {
         // Can not select days before today and today
@@ -239,7 +238,7 @@ const EditSubscription: React.FC<EditSubscriptionProps> = inject(Stores.subscrip
         setCalculateButtonDisable(false);
     }
     async function calculate(){
-        setSubscriptionCost(0);
+        setSubscriptionCost(new CalculateSubscriptionResponse());
         if(!bundleId)
         {
             viewModel.errorMessage = i18next.t("Subscriptions.Validation.Message.bundlesId.Required");
@@ -253,14 +252,16 @@ const EditSubscription: React.FC<EditSubscriptionProps> = inject(Stores.subscrip
             request.subscriptionType = viewModel.editSubscriptionRequest.subscriptionType;
             request.subscriptionStartDate = viewModel.editSubscriptionRequest.subscriptionStartDate;
             request.subscriptionEndDate = viewModel.editSubscriptionRequest.subscriptionEndDate;
+            request.couponCode = viewModel.editSubscriptionRequest.couponCode;
         }
         else {
             request.subscriptionCarNumbers = viewModel.addSubscriptionRequest.subscriptionCarNumbers;
             request.subscriptionType = viewModel.addSubscriptionRequest.subscriptionType;
             request.subscriptionStartDate = viewModel.addSubscriptionRequest.subscriptionStartDate;
             request.subscriptionEndDate = viewModel.addSubscriptionRequest.subscriptionEndDate;
+            request.couponCode = viewModel.addSubscriptionRequest.couponCode;
         }
-
+        debugger;
         let result = await viewModel.calculateCost(request, subscriptionId);
 
         setSubscriptionCost(result);
@@ -455,7 +456,8 @@ const EditSubscription: React.FC<EditSubscriptionProps> = inject(Stores.subscrip
                         </Form.Item>
                     </Col>
                     <Col span={4}>
-                        <Form.Item name="subscriptionStartDate" initialValue={viewModel?.detailSubscriptionResponse?.subscriptionStartDate ? moment(viewModel.detailSubscriptionResponse.subscriptionStartDate, dateFormat): ""}
+                        <Form.Item name="subscriptionStartDate" initialValue={viewModel?.detailSubscriptionResponse?.subscriptionStartDate
+                            ? moment(viewModel.detailSubscriptionResponse.subscriptionStartDate, dateFormat): ""}
                                    key={"subscriptionStartDate"}
                                    label={i18next.t("Subscriptions.Label.subscriptionStartDate")}
                                    rules={[
@@ -468,49 +470,27 @@ const EditSubscription: React.FC<EditSubscriptionProps> = inject(Stores.subscrip
                                         onChange={(e, d) => onEditDatePickerChanged(e, d)} />
                         </Form.Item>
                     </Col>
-                    <Col span={4}>
+                    <Col span={8}>
                         <Form.Item name="subscriptionEndDate" initialValue={viewModel.detailSubscriptionResponse?.subscriptionEndDate}
                                    key={"subscriptionEndDate"}
                                    label={i18next.t("Subscriptions.Label.subscriptionEndDate")}>
-                            {/*<DatePicker disabledDate={disabledDate} format={dateFormat}
-                                        onChange={(e, d) => onEditDatePickerChanged(e, d)} defaultValue={moment(viewModel?.detailSubscriptionResponse?.subscriptionStartDate, dateFormat)}/>*/}
                             {subscriptionEndDate}
                         </Form.Item>
                     </Col>
-                            {/*{!subscriptionId && subscriptionType == "Monthly" ?
-                                <RangePicker picker="month" disabledDate={disabledDate} format={dateFormat}
-                                        onChange={(e, d) => onDatePickerChanged(e, d)} defaultValue={[startDatePickerDefault, endDatePickerDefault]}/>
-                                 : ""
-                            }
-                            {!subscriptionId && subscriptionType == "Yearly" ?
-                                <RangePicker picker="year" disabledDate={disabledDate} format={dateFormat}
-                                        onChange={(e, d) => onDatePickerChanged(e, d)} defaultValue={[startDatePickerDefault, endDatePickerDefault]}/>
-                                : ""
-                            }*/}
-                        {/*{subscriptionId > 0 ?
-                            <React.Fragment>
-                                <label className="ant-form-item-required"
-                                       title={i18next.t("Subscriptions.Label.subscriptionEditDate")}>
-                                    {i18next.t("Subscriptions.Label.subscriptionEditDate")}
-                                </label>
-                                <p>
-                        <DatePicker disabledDate={disabledDate} format={dateFormat}
-                                     onChange={(e, d) => onEditDatePickerChanged(e, d)} defaultValue={startDatePickerDefault}/>
-                                       
-                                <InputNumber min={1} onChange={DateTimeChange} />
-                                       
-                                    {moment(viewModel?.editSubscriptionRequest?.subscriptionEndDate).format(dateFormat)}
-                                </p>
-                            </React.Fragment>
-                            : ""
-                        }*/}
-
-                    <Col span={4}>
+                    <Col span={8}>
+                        <Form.Item name="couponCode" initialValue={viewModel?.detailSubscriptionResponse?.couponCode}
+                                   key={"couponCode"}
+                                   label={i18next.t("Subscriptions.Label.couponCode")}
+                        >
+                            <Input maxLength={10} onChange={onChanged}/>
+                        </Form.Item>
+                    </Col>
+                    <Col span={8}>
                         <Button type="primary" loading={viewModel.calculating} size={"large"} disabled={calculateButtonDisable} onClick={calculate}>
                             {i18next.t("Subscriptions.Button.Calculate")}
                         </Button>
                     </Col>
-                    <Col span={8}>
+                    <Col span={9}>
                         <Form.Item name="payFromCompanyBalance" initialValue={viewModel?.detailSubscriptionResponse?.payFromCompanyBalance}
                                    key={"payFromCompanyBalance"}
                                    label={i18next.t("Subscriptions.Label.subscriptionPaymentMethod")}
@@ -520,9 +500,9 @@ const EditSubscription: React.FC<EditSubscriptionProps> = inject(Stores.subscrip
                                            message: i18next.t("Subscriptions.Validation.Message.payFromCompany.Required")
                                        }
                                    ]}>
-                        <Radio.Group key={"payFromCompanyBalance"} options={options}  onChange={onRadioChange}
-                                     defaultValue={viewModel?.detailSubscriptionResponse?.payFromCompanyBalance}>
-                        </Radio.Group>
+                            <Radio.Group key={"payFromCompanyBalance"} options={options}  onChange={onRadioChange}
+                                         defaultValue={viewModel?.detailSubscriptionResponse?.payFromCompanyBalance}>
+                            </Radio.Group>
                         </Form.Item>
                         {!payFromCompanyBalance &&
                         <Select style={{width: "100%", display:"block"}} defaultValue={viewModel?.detailSubscriptionResponse?.subscriptionPaymentMethod}
@@ -532,15 +512,35 @@ const EditSubscription: React.FC<EditSubscriptionProps> = inject(Stores.subscrip
                         </Select>
                         }
                     </Col>
-                    <Col span={8}>
-                        {subscriptionCost ?
-                            <div>
-                                <h2>{i18next.t("Subscriptions.Label.subscriptionCost")}</h2>
-                                <h2>{subscriptionCost.toLocaleString()}</h2>
-                            </div>
+                    <Col offset={7} span={8}>
+                        {subscriptionCost.subscriptionCost ?
+                            <Descriptions title={i18next.t("Subscriptions.Invoice")} bordered>
+                                <Descriptions.Item label={i18next.t("Subscriptions.Invoice.subTotal")} span={3}>
+                                    {subscriptionCost.subTotal} $
+                                </Descriptions.Item>
+                                <Descriptions.Item label={i18next.t("Subscriptions.Invoice.discount")} span={3}>
+                                    {subscriptionCost.discount} $
+                                </Descriptions.Item>
+                                <Descriptions.Item label={i18next.t("Subscriptions.Invoice.taxRate")} span={3}>
+                                    {subscriptionCost.taxRate} %
+                                </Descriptions.Item>
+                                <Descriptions.Item label={i18next.t("Subscriptions.Invoice.tax")} span={3}>
+                                    {subscriptionCost.tax} $
+                                </Descriptions.Item>
+                                <Descriptions.Item label={i18next.t("Subscriptions.Invoice.vatRate")} span={3}>
+                                    {subscriptionCost.vatRate} %
+                                </Descriptions.Item>
+                                <Descriptions.Item label={i18next.t("Subscriptions.Invoice.vat")} span={3}>
+                                    {subscriptionCost.vat} $
+                                </Descriptions.Item>
+                                <Descriptions.Item label={i18next.t("Subscriptions.Invoice.total")} span={3}>
+                                    {subscriptionCost.subscriptionCost} $
+                                </Descriptions.Item>
+                            </Descriptions>
                             : ""
                         }
                     </Col>
+
                     <Divider>{i18next.t("Subscriptions.Label.subscriptionPaymentDocPhoto")}</Divider>
                     <Col offset={8} span={8}>
                         <Upload
