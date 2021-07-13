@@ -253,6 +253,7 @@ const EditSubscription: React.FC<EditSubscriptionProps> = inject(Stores.subscrip
             request.subscriptionStartDate = viewModel.editSubscriptionRequest.subscriptionStartDate;
             request.subscriptionEndDate = viewModel.editSubscriptionRequest.subscriptionEndDate;
             request.couponCode = viewModel.editSubscriptionRequest.couponCode;
+            request.numberOfDateDiff = viewModel.editSubscriptionRequest.numberOfDateDiff;
         }
         else {
             request.subscriptionCarNumbers = viewModel.addSubscriptionRequest.subscriptionCarNumbers;
@@ -260,6 +261,7 @@ const EditSubscription: React.FC<EditSubscriptionProps> = inject(Stores.subscrip
             request.subscriptionStartDate = viewModel.addSubscriptionRequest.subscriptionStartDate;
             request.subscriptionEndDate = viewModel.addSubscriptionRequest.subscriptionEndDate;
             request.couponCode = viewModel.addSubscriptionRequest.couponCode;
+            request.numberOfDateDiff = viewModel.addSubscriptionRequest.numberOfDateDiff;
         }
         debugger;
         let result = await viewModel.calculateCost(request, subscriptionId);

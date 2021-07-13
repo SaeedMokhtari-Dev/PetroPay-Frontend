@@ -40,7 +40,8 @@ export default class CarItem implements IDeserialize
     carApprovedOneTime: boolean;
     workAllDays: boolean;
     carNfcCode: string;
-
+    carOdometerRecordRequired: boolean;
+    timeToOdometerRecord: boolean;
 
     constructor() {
         makeAutoObservable(this);

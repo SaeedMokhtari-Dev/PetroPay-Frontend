@@ -7,11 +7,11 @@ import Stores from "app/constants/Stores";
 import {
     Button,
     Pagination,
-    Table, Modal, PageHeader, Input
+    Table, Modal, PageHeader, Input, Badge
 } from "antd";
 import {
     EditOutlined, DeleteOutlined, CheckOutlined, CloseOutlined,
-    ExclamationCircleOutlined, PlusCircleOutlined, CheckCircleOutlined, BarcodeOutlined, FileExcelOutlined
+    ExclamationCircleOutlined, PlusCircleOutlined, ClockCircleOutlined, BarcodeOutlined, FileExcelOutlined
 } from '@ant-design/icons';
 import i18next from "i18next";
 import CarColumns from "./CarColumns";
@@ -24,6 +24,7 @@ import UserContext from "../../../../identity/contexts/UserContext";
 import ActiveCarRequest from "../../handlers/active/ActiveCarRequest";
 import AdminCarColumns from "./AdminCarColumns";
 import ExportExcel from "../../../../app/utils/ExportExcel";
+import { Link } from "react-router-dom";
 
 
 const { confirm } = Modal;
@@ -52,6 +53,14 @@ const CarList: React.FC<CarListProps> = inject(Stores.carStore)(observer(({carSt
                return  w ? <CheckOutlined /> : <CloseOutlined />
            }
        }
+       if(w.key === "timeToOdometerRecord"){
+           w["render"] = (w) => {
+               return  w &&
+                   <Link to={Routes.odometerRecord}>
+                        <ClockCircleOutlined />
+                   </Link>
+           }
+       }
     });
     AdminCarColumns.forEach(w => {
         w.title = i18next.t(w.title);
@@ -65,29 +74,29 @@ const CarList: React.FC<CarListProps> = inject(Stores.carStore)(observer(({carSt
             <div className="inline">
                 {UserContext.info.role == 100 &&
                 (
-                    <div>
+                    <React.Fragment>
                         <Button type="default"  icon={<BarcodeOutlined />} onClick={() => showActivation(record)}
                                 title={i18next.t("Cars.Button.ActiveAndNfcCode")} style={{ background: "green", borderColor: "white" }}/>
-                    </div>
+                    </React.Fragment>
                 )}
                 {record.carWorkWithApproval &&
                 (
-                    <div>
+                    <React.Fragment>
                         <Button type="primary" icon={<EditOutlined/>} onClick={() => showEditPage(record)}
                                 title={i18next.t("General.Button.Edit")}/>
                             <Button type="primary" danger icon={<DeleteOutlined />} onClick={() => showDeleteConfirm(record)}
                             title={i18next.t("General.Button.Delete")} />
-                    </div>
+                    </React.Fragment>
                     )
                 }
                 {!record.carWorkWithApproval &&
                 (
-                    <div>
+                    <React.Fragment>
                         <Button type="primary" icon={<EditOutlined/>} onClick={() => showEditPage(record)}
                                 title={i18next.t("General.Button.Edit")}/>
                             <Button type="primary" danger icon={<DeleteOutlined />} onClick={() => showDeleteConfirm(record)}
                             title={i18next.t("General.Button.Delete")} />
-                    </div>
+                    </React.Fragment>
                     )
                 }
             </div>

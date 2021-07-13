@@ -8,6 +8,7 @@ export default class CarListItem implements IDeserialize
     branchName: string;
     disabled: boolean;
     balance: number;
+    carOdometerRecordRequired: boolean;
 
     constructor() {
         makeAutoObservable(this);

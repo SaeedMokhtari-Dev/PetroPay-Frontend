@@ -83,8 +83,9 @@ const EditOdometerRecord: React.FC<EditOdometerRecordProps> = inject(Stores.odom
             await odometerRecordStore.listCarViewModel.getCarList();
 
         let carOptions = [];
-        for (let item of odometerRecordStore.listCarViewModel.listCarResponse.items) {
-            carOptions.push(<Option key={item.key} value={item.key} balance={item.balance}>{item.carNumber}</Option>);
+        const cars = odometerRecordStore.listCarViewModel?.listCarResponse?.items?.filter(w => w.carOdometerRecordRequired);
+        for (let item of cars) {
+            carOptions.push(<Option key={item.key} value={item.key}>{item.carNumber}</Option>);
         }
 
         setCarOptions(carOptions);

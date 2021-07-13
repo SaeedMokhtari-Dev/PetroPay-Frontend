@@ -423,6 +423,7 @@
   "Cars.Label.workAllDays": "work AllDays",
   "Cars.Label.carNfcCode": "car Nfc Code",
   "Cars.Label.carOdometerRecordRequired": "car Odometer Record Required",
+  "Cars.Label.timeToOdometerRecord": "Odometer",
 
   "Cars.Add.HeaderText": "Add Car",
   "Cars.Edit.HeaderText": "Edit Car with Id:",
@@ -810,9 +811,9 @@
 
   "AccountBalances.Error.Get.Message": "An error has occurred while trying to get account balance list.",
 
-  "PetrolStationList.Menu.Title": "Service Sites",
-  "PetrolStationList.Page.Title": "Service Sites",
-  "PetrolStationList.Page.SubTitle": "Service Sites report",
+  "PetrolStationLists.Menu.Title": "Service Sites",
+  "PetrolStationLists.Page.Title": "Service Sites",
+  "PetrolStationLists.Page.SubTitle": "Service Sites report",
   "PetrolStationLists.Label.key": "key",
   "PetrolStationLists.Label.stationLucationName": "Region",
   "PetrolStationLists.Label.stationName": "Station Name",
@@ -879,8 +880,8 @@
   "AdminDashboard.Section.PetrolStationsBalance": "PetrolStations Balance",
 
 
-  "PromotionCoupons.Menu.Title": "PromotionCoupons",
-  "PromotionCoupons.Page.Title": "PromotionCoupons",
+  "PromotionCoupons.Menu.Title": "Promotion Coupons",
+  "PromotionCoupons.Page.Title": "Promotion Coupons",
   "PromotionCoupons.Page.SubTitle": "This page is for define promotion Coupons",
   "PromotionCoupons.Label.key": "key",
   "PromotionCoupons.Label.couponId": "coupon Id",

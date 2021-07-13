@@ -1,5 +1,6 @@
 export default
 [
+    {title: "Cars.Label.timeToOdometerRecord", dataIndex: "timeToOdometerRecord", key: "timeToOdometerRecord", responsive: ['sm']},
     {title: "Cars.Label.key", dataIndex: "key", key: "key", responsive: ['sm']},
     {title: "Cars.Label.companyBarnchName", dataIndex: "companyBarnchName", key: "companyBarnchName", responsive: ['md']},
     {title: "Cars.Label.carIdNumber", dataIndex: "carIdNumber", key: "carIdNumber", responsive: ['md']},
@@ -10,6 +11,7 @@ export default
     {title: "Cars.Label.carBrand", dataIndex: "carBrand", key: "carBrand", responsive: ['md']},
     {title: "Cars.Label.carDriverName", dataIndex: "carDriverName", key: "carDriverName", responsive: ['md']},
     {title: "Cars.Label.carDriverActive", dataIndex: "carDriverActive", key: "carDriverActive", responsive: ['sm']},
+
 
     /*{title: "Cars.Label.carIdText1E", dataIndex: "carIdText1E", key: "carIdText1E", width: "100px"},
     {title: "Cars.Label.carIdText1A", dataIndex: "carIdText1A", key: "carIdText1A", width: "100px"},
