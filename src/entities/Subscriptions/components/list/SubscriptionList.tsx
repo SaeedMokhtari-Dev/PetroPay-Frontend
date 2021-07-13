@@ -14,7 +14,7 @@ import {
 } from "antd";
 import {
     EditOutlined, DeleteOutlined, CheckOutlined, CloseOutlined,
-    ExclamationCircleOutlined, PlusCircleOutlined, CheckCircleOutlined, CarOutlined
+    ExclamationCircleOutlined, PlusCircleOutlined, CheckCircleOutlined, CarOutlined, BookOutlined
 } from '@ant-design/icons';
 import i18next from "i18next";
 import AddSubscriptionRequest from "../../handlers/add/AddSubscriptionRequest";
@@ -24,6 +24,7 @@ import GetSubscriptionRequest from "../../handlers/get/GetSubscriptionRequest";
 import UserContext from "../../../../identity/contexts/UserContext";
 import SubscriptionStore from 'entities/Subscriptions/stores/SubscriptionStore';
 import SubscriptionColumns from "./SubscriptionColumns";
+import {getSubscriptionInvoiceRoute} from "../../../../app/utils/RouteHelper";
 
 
 const { confirm } = Modal;
@@ -56,20 +57,20 @@ const SubscriptionList: React.FC<SubscriptionListProps> = inject(Stores.subscrip
             <div className="inline">
                 {UserContext.info.role == 100 && (!record.subscriptionActive) &&
                 (
-                    <div>
+                    <React.Fragment>
                         <Button type="default"  icon={<CheckCircleOutlined />} onClick={() => showActivation(record)}
                                 title={i18next.t("Subscriptions.Button.AcceptRequest")} style={{ background: "green", borderColor: "white" }}/>
-                    </div>
+                    </React.Fragment>
                 )}
                 {!record.subscriptionActive &&
                     (
-                       <div>
+                       <React.Fragment>
                            <Button type="primary" icon={<EditOutlined/>} onClick={() => showEditPage(record)}
                                    title={i18next.t("General.Button.Edit")}/>
                            <Button type="primary" danger icon={<DeleteOutlined/>}
                            onClick={() => showDeleteConfirm(record)}
                            title={i18next.t("General.Button.Delete")}/>
-                       </div>
+                       </React.Fragment>
                      )
                 }
                 {UserContext.info.role == 1 && record.subscriptionActive && !record.expired ?
@@ -78,6 +79,15 @@ const SubscriptionList: React.FC<SubscriptionListProps> = inject(Stores.subscrip
                                    title={i18next.t("Subscriptions.Button.CarList")}/>
                        </Link>
                     : ""
+                }
+
+                {record.subscriptionInvoiceNumber &&
+                (
+                    <Link to={getSubscriptionInvoiceRoute(record.subscriptionInvoiceNumber)}>
+                        <Button type="dashed" icon={<BookOutlined />}
+                                title={i18next.t("Subscriptions.Invoice")}/>
+                    </Link>
+                )
                 }
             </div>
         )

@@ -8,3 +8,7 @@ export function getEmployeeMenuRoute(employeeId: any = null): string
 {
     return Routes.employeeMenu.replace('/:employeeId', employeeId ? `/${employeeId}` : '');
 }
+export function getSubscriptionInvoiceRoute(invoiceNumber: any = null): string
+{
+    return Routes.subscriptionInvoice.replace('/:invoiceNumber', invoiceNumber ? `/${invoiceNumber}` : '');
+}

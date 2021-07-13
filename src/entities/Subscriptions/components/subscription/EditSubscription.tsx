@@ -515,25 +515,25 @@ const EditSubscription: React.FC<EditSubscriptionProps> = inject(Stores.subscrip
                     <Col offset={7} span={8}>
                         {subscriptionCost.subscriptionCost ?
                             <Descriptions title={i18next.t("Subscriptions.Invoice")} bordered>
-                                <Descriptions.Item label={i18next.t("Subscriptions.Invoice.subTotal")} span={3}>
+                                <Descriptions.Item label={i18next.t("Subscriptions.Invoice.Label.subTotal")} span={3}>
                                     {subscriptionCost.subTotal} $
                                 </Descriptions.Item>
-                                <Descriptions.Item label={i18next.t("Subscriptions.Invoice.discount")} span={3}>
+                                <Descriptions.Item label={i18next.t("Subscriptions.Invoice.Label.discount")} span={3}>
                                     {subscriptionCost.discount} $
                                 </Descriptions.Item>
-                                <Descriptions.Item label={i18next.t("Subscriptions.Invoice.taxRate")} span={3}>
+                                <Descriptions.Item label={i18next.t("Subscriptions.Invoice.Label.taxRate")} span={3}>
                                     {subscriptionCost.taxRate} %
                                 </Descriptions.Item>
-                                <Descriptions.Item label={i18next.t("Subscriptions.Invoice.tax")} span={3}>
+                                <Descriptions.Item label={i18next.t("Subscriptions.Invoice.Label.tax")} span={3}>
                                     {subscriptionCost.tax} $
                                 </Descriptions.Item>
-                                <Descriptions.Item label={i18next.t("Subscriptions.Invoice.vatRate")} span={3}>
+                                <Descriptions.Item label={i18next.t("Subscriptions.Invoice.Label.vatRate")} span={3}>
                                     {subscriptionCost.vatRate} %
                                 </Descriptions.Item>
-                                <Descriptions.Item label={i18next.t("Subscriptions.Invoice.vat")} span={3}>
+                                <Descriptions.Item label={i18next.t("Subscriptions.Invoice.Label.vat")} span={3}>
                                     {subscriptionCost.vat} $
                                 </Descriptions.Item>
-                                <Descriptions.Item label={i18next.t("Subscriptions.Invoice.total")} span={3}>
+                                <Descriptions.Item label={i18next.t("Subscriptions.Invoice.Label.total")} span={3}>
                                     {subscriptionCost.subscriptionCost} $
                                 </Descriptions.Item>
                             </Descriptions>

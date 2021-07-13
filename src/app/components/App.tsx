@@ -65,6 +65,7 @@ import MenusList from "../../entities/menus/components/list/MenusList";
 import EditMenu from "../../entities/menus/components/edit/EditMenu";
 import EmployeesList from "../../entities/employees/components/list/EmployeesList";
 import EmployeeMenuEdit from "../../entities/employees/components/employeeMenuEdit/EmployeeMenuEdit";
+import SubscriptionInvoice from "entities/Subscriptions/components/invoice/SubscriptionInvoice";
 
 const App: React.FC = () =>
 {
@@ -138,6 +139,8 @@ const App: React.FC = () =>
                                     <Route exact roles={[RoleType.customer]} path={Routes.editSubscription} component={EditSubscription} />
                                     <Route exact roles={[RoleType.customer]} path={Routes.addSubscription} component={EditSubscription} />
                                     <Route exact roles={[RoleType.customer]} path={Routes.carAddSubscription} component={CarAddSubscription} />
+                                    <Route exact roles={[RoleType.customer]} path={Routes.subscriptionInvoice} component={SubscriptionInvoice} />
+
                                     <Route exact roles={[RoleType.customer]} path={Routes.transferBalance} component={EditTransferBalance} />
 
                                     <Route exact roles={[RoleType.admin]} path={Routes.promotionCoupon} component={PromotionCouponsList} />

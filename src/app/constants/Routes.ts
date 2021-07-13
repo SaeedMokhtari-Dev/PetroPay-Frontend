@@ -36,6 +36,8 @@ export default
     editSubscription: "/app/subscription/edit/:subscriptionId",
     carAddSubscription: "/app/subscription/carAdd/:subscriptionId",
     addSubscription: "/app/subscription/add",
+    subscriptionInvoice: "/app/subscription/invoice/:invoiceNumber",
+
 
     // Branch
     branch: "/app/branch",

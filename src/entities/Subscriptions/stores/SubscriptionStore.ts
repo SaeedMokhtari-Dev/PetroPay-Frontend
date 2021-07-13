@@ -5,6 +5,8 @@ import GetSubscriptionViewModel from "../view-models/GetSubscriptionViewModel";
 import ListBundleViewModel from "../../bundles/view-models/ListBundleViewModel";
 import ListPetropayAccountViewModel from "../../PetropayAccounts/view-models/ListPetropayAccountViewModel";
 import ListCarViewModel from "../../cars/view-models/ListCarViewModel";
+import SubscriptionInvoice from "../components/invoice/SubscriptionInvoice";
+import InvoiceSubscriptionViewModel from "../view-models/InvoiceSubscriptionViewModel";
 
 
 export default class SubscriptionStore
@@ -15,8 +17,19 @@ export default class SubscriptionStore
     listPetropayAccountViewModel: ListPetropayAccountViewModel;
     listCarViewModel: ListCarViewModel;
 
+    invoiceSubscriptionViewModel: InvoiceSubscriptionViewModel;
     constructor(public appStore: AppStore) {
         makeAutoObservable(this);
+    }
+
+    onSubscriptionInvoicePageLoad()
+    {
+        this.invoiceSubscriptionViewModel = new InvoiceSubscriptionViewModel();
+    }
+
+    onSubscriptionInvoicePageUnload()
+    {
+        this.invoiceSubscriptionViewModel = null;
     }
 
     onSubscriptionGetPageLoad()

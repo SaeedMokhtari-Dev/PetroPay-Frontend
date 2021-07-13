@@ -69,6 +69,7 @@ export default
     apiSubscriptionActive: "/api/subscription/active",
     apiSubscriptionCalculate: "/api/subscription/calculate",
     apiSubscriptionCarAdd: "/api/subscription/car-add",
+    apiSubscriptionInvoice: "/api/subscription/invoice",
 
     apiAppSettingAdd: "/api/app-setting/add",
     apiAppSettingEdit: "/api/app-setting/edit",
