@@ -117,6 +117,7 @@ export default
     apiCarOdometerMaxGet: "/api/car-odometer-max/get",
     apiCarOdometerMinGet: "/api/car-odometer-min/get",
     apiOdometerBetweenDateGet: "/api/odometer-between-date/get",
+    apiOdometerHistoryGet: "/api/odometer-history/get",
 
     apiPetropayAccountGet: "/api/petropay-account/get",
     apiPetropayAccountList: "/api/petropay-account/list",

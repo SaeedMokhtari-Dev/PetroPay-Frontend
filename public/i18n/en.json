@@ -1166,6 +1166,30 @@
   "OdometerRecords.Error.Edit.Message": "An error has occurred while trying to edit Odometer Records",
   "OdometerRecords.Error.Delete.Message": "An error has occurred while trying to delete Odometer Records",
 
+  "OdometerHistories.Menu.Title": "Odometer History",
+  "OdometerHistories.Page.Title": "Odometer History",
+  "OdometerHistories.Page.SubTitle": "Odometer History report",
+  "OdometerHistories.Label.key": "key",
+  "OdometerHistories.Label.companyId": "company Id",
+  "OdometerHistories.Label.companyName": "company Name",
+  "OdometerHistories.Label.companyBranchId": "company Branch Id",
+  "OdometerHistories.Label.companyBranchName": "company Branch Name",
+  "OdometerHistories.Label.carId": "car Id",
+  "OdometerHistories.Label.carIdNumber": "car Id Number",
+  "OdometerHistories.Label.carTypeOfFuel": "car Type Of Fuel",
+  "OdometerHistories.Label.carDriverName": "car Driver Name",
+  "OdometerHistories.Label.odometerRecordDate": "odometer Record Date",
+  "OdometerHistories.Label.odometerValue": "odometer Value",
+
+  "OdometerHistories.SearchPanel.Label.carIdNumber": "Car Id Number",
+  "OdometerHistories.SearchPanel.Label.companyBranchName": "Company Branch Name",
+  "OdometerHistories.SearchPanel.Label.transDateFrom": "Transaction Date From",
+  "OdometerHistories.SearchPanel.Label.transDateTo": "Transaction Date To",
+  "OdometerHistories.SearchPanel.Label.companyId": "companyId",
+  "OdometerHistories.SearchPanel.Label.companyName": "Company Name",
+
+  "OdometerHistories.Error.Get.Message": "An error has occurred while trying to get Odometer History list.",
+
 
   "General.TransferBalanceType.CompanyToBranch": "Recharge Branch Balance",
   "General.TransferBalanceType.BranchToCompany": "Refund Balance To Company (Branch To Company)",

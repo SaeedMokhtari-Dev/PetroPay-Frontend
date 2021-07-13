@@ -34,4 +34,5 @@ export default {
     odometerRecordStore: 'odometerRecordStore',
     menuStore: 'menuStore',
     employeeStore: 'employeeStore',
+    odometerHistoryStore: 'odometerHistoryStore',
 }

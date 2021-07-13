@@ -103,4 +103,5 @@ export default
     carOdometerMax: '/app/carOdometerMax',
     carOdometerMin: '/app/carOdometerMin',
     odometerBetweenDate: '/app/odometerBetweenDate',
+    odometerHistory: '/app/odometerHistory',
 }

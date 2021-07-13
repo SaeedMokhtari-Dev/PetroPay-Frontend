@@ -66,6 +66,7 @@ import EditMenu from "../../entities/menus/components/edit/EditMenu";
 import EmployeesList from "../../entities/employees/components/list/EmployeesList";
 import EmployeeMenuEdit from "../../entities/employees/components/employeeMenuEdit/EmployeeMenuEdit";
 import SubscriptionInvoice from "entities/Subscriptions/components/invoice/SubscriptionInvoice";
+import OdometerHistoryList from "../../reports/OdometerHistories/components/list/OdometerHistoryList";
 
 const App: React.FC = () =>
 {
@@ -172,6 +173,7 @@ const App: React.FC = () =>
                                     <Route exact roles={[RoleType.customer]} path={Routes.carOdometerMax} component={CarOdometerMaxList} />
                                     <Route exact roles={[RoleType.customer]} path={Routes.carOdometerMin} component={CarOdometerMinList} />
                                     <Route exact roles={[RoleType.customer]} path={Routes.odometerBetweenDate} component={OdometerBetweenDateList} />
+                                    <Route exact roles={[RoleType.customer]} path={Routes.odometerHistory} component={OdometerHistoryList} />
 
                                     <Route exact roles={[RoleType.supplier]} path={Routes.stationReport} component={StationReportList} />
                                     <Route exact roles={[RoleType.supplier]} path={Routes.stationSale} component={StationSaleList} />

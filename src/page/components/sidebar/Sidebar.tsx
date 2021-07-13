@@ -109,6 +109,9 @@ const Sidebar: React.FC<SidebarProps> = inject(Stores.pageStore)(observer(({page
             <Menu.Item key="odometerBetweenDate" icon={<ShopOutlined />}>
                 <Link to={Routes.odometerBetweenDate}>{i18next.t('OdometerBetweenDates.Menu.Title')}</Link>
             </Menu.Item>
+            <Menu.Item key="odometerHistory" icon={<ShopOutlined />}>
+                <Link to={Routes.odometerHistory}>{i18next.t('odometerHistories.Menu.Title')}</Link>
+            </Menu.Item>
         </SubMenu>
     </Menu>)
     const customerMenu= (<Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
@@ -145,6 +148,24 @@ const Sidebar: React.FC<SidebarProps> = inject(Stores.pageStore)(observer(({page
             </Menu.Item>
             <Menu.Item key="petrolStationList" icon={<ShopOutlined />}>
                 <Link to={Routes.petrolStationList}>{i18next.t('PetrolStationLists.Menu.Title')}</Link>
+            </Menu.Item>
+            <Menu.Item key="carConsumptionRate" icon={<ShopOutlined />}>
+                <Link to={Routes.carConsumptionRate}>{i18next.t('CarConsumptionRates.Menu.Title')}</Link>
+            </Menu.Item>
+            <Menu.Item key="carKmConsumption" icon={<ShopOutlined />}>
+                <Link to={Routes.carKmConsumption}>{i18next.t('CarKmConsumptions.Menu.Title')}</Link>
+            </Menu.Item>
+            <Menu.Item key="carOdometerMax" icon={<ShopOutlined />}>
+                <Link to={Routes.carOdometerMax}>{i18next.t('CarOdometerMaxes.Menu.Title')}</Link>
+            </Menu.Item>
+            <Menu.Item key="carOdometerMin" icon={<ShopOutlined />}>
+                <Link to={Routes.carOdometerMin}>{i18next.t('CarOdometerMins.Menu.Title')}</Link>
+            </Menu.Item>
+            <Menu.Item key="odometerBetweenDate" icon={<ShopOutlined />}>
+                <Link to={Routes.odometerBetweenDate}>{i18next.t('OdometerBetweenDates.Menu.Title')}</Link>
+            </Menu.Item>
+            <Menu.Item key="odometerHistory" icon={<ShopOutlined />}>
+                <Link to={Routes.odometerHistory}>{i18next.t('OdometerHistories.Menu.Title')}</Link>
             </Menu.Item>
         </SubMenu>
     </Menu>)

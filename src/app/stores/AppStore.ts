@@ -32,6 +32,7 @@ import AppSettingStore from "../../entities/app-settings/stores/AppSettingStore"
 import OdometerRecordStore from "../../entities/odometer-records/stores/OdometerRecordStore";
 import MenuStore from "../../entities/menus/stores/MenuStore";
 import EmployeeStore from "../../entities/employees/stores/EmployeeStore";
+import OdometerHistoryStore from "../../reports/OdometerHistories/stores/OdometerHistoryStore";
 
 export class AppStore
 {
@@ -69,6 +70,7 @@ export class AppStore
     odometerRecord: OdometerRecordStore;
     menu: MenuStore;
     employee: EmployeeStore;
+    odometerHistory: OdometerHistoryStore;
 
     constructor()
     {
@@ -106,5 +108,6 @@ export class AppStore
         this.odometerRecord = new OdometerRecordStore(this);
         this.menu = new MenuStore(this);
         this.employee = new EmployeeStore(this);
+        this.odometerHistory = new OdometerHistoryStore(this);
     }
 }
