@@ -1157,6 +1157,8 @@
   "Api.OdometerRecord.Edit.Successful": "selected Odometer Record edited successfully",
   "Api.OdometerRecord.Deleted.Successful": "selected Odometer Record deleted successfully",
   "Api.OdometerRecord.Id.Required": "Id is Required",
+  "Api.OdometerRecord.AtLeastOneMonth": "New record should be have at least one month difference from the previous record.",
+  "Api.OdometerRecord.NewRecordShouldBeGreaterThanPreviousRecord": "New Record Value Should Be Greater Than Previous Record Value.",
 
   "OdometerRecords.Error.Get.Message": "An error has occurred while trying to get Odometer Records list.",
   "OdometerRecords.Error.Detail.Message": "An error has occurred while trying to get Odometer Record details.",
