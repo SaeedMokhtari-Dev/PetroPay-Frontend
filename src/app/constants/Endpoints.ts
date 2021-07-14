@@ -133,6 +133,15 @@ export default
     apiPromotionCouponDetail: "/api/promotion-coupon/detail",
     apiPromotionCouponDelete: "/api/promotion-coupon/delete",
 
+
+    apiNewCustomerAdd: "/api/new-customer/add",
+    apiNewCustomerEdit: "/api/new-customer/edit",
+    apiNewCustomerGet: "/api/new-customer/get",
+    apiNewCustomerDetail: "/api/new-customer/detail",
+    apiNewCustomerDelete: "/api/new-customer/delete",
+    apiNewCustomerList: "/api/new-customer/list",
+    apiNewCustomerActive: "/api/new-customer/active",
+
     apiDashboardCustomerGet: "/api/dashboard/customer",
     apiDashboardSupplierGet: "/api/dashboard/supplier",
     apiDashboardAdminGet: "/api/dashboard/admin",

@@ -8,6 +8,7 @@ export default class CalculateSubscriptionRequest
     public subscriptionStartDate: string;
     public subscriptionEndDate: string;
     public couponCode: string;
+    public numberOfDateDiff: number;
 
     constructor(
     ) {

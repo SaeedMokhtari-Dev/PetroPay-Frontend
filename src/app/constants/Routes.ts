@@ -88,6 +88,12 @@ export default
 
     employeeMenu: "/app/employeeMenu/:employeeId",
 
+    //NewCustomer
+    newCustomer: "/app/newCustomer",
+    editNewCustomer: "/app/newCustomer/edit/:newCustomerId",
+    addNewCustomer: "/app/newCustomer/add",
+
+
     //Reports
     accountBalance: '/app/accountBalance',
     invoiceSummary: '/app/invoiceSummary',

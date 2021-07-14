@@ -67,6 +67,7 @@ import EmployeesList from "../../entities/employees/components/list/EmployeesLis
 import EmployeeMenuEdit from "../../entities/employees/components/employeeMenuEdit/EmployeeMenuEdit";
 import SubscriptionInvoice from "entities/Subscriptions/components/invoice/SubscriptionInvoice";
 import OdometerHistoryList from "../../reports/OdometerHistories/components/list/OdometerHistoryList";
+import NewCustomersList from "../../entities/new-customers/components/list/NewCustomersList";
 
 const App: React.FC = () =>
 {
@@ -181,6 +182,8 @@ const App: React.FC = () =>
 
                                     <Route exact roles={[RoleType.admin]} path={Routes.accountBalance} component={AccountBalanceList} />
                                     <Route exact roles={[RoleType.admin]} path={Routes.petrolStationList} component={PetrolStationListList} />
+
+                                    <Route exact roles={[RoleType.admin]} path={Routes.newCustomer} component={NewCustomersList} />
 
 
 
