@@ -1,12 +1,27 @@
 import React from 'react';
 import {inject, observer} from "mobx-react";
 import Stores from "app/constants/Stores";
-import {Button, Col, Divider, Form, Input, InputNumber, message, PageHeader, Radio, Row, Spin, Upload} from "antd";
+import {
+    Button,
+    Col,
+    Divider,
+    Form,
+    Input,
+    InputNumber,
+    message,
+    PageHeader,
+    Radio,
+    Row,
+    Spin,
+    Switch,
+    Upload
+} from "antd";
 import i18next from "i18next";
 import DetailNewCustomerResponse from "../../handlers/detail/DetailNewCustomerResponse";
 import AddNewCustomerRequest from "../../handlers/add/AddNewCustomerRequest";
 import history from "../../../../app/utils/History";
 import NewCustomerStore from "../../stores/NewCustomerStore";
+import MaskedInput from "antd-mask-input";
 const {useEffect} = React;
 
 interface EditNewCustomerProps {
@@ -81,11 +96,28 @@ const EditNewCustomer: React.FC<EditNewCustomerProps> = inject(Stores.newCustome
     }
     function onChanged(e){
         if(newCustomerId)
-            newCustomerStore.editNewCustomerViewModel.editNewCustomerRequest[`${e.target.id}`] = e.target.value;
+            viewModel.editNewCustomerRequest[`${e.target.id}`] = e.target.value;
         else
-            newCustomerStore.editNewCustomerViewModel.addNewCustomerRequest[`${e.target.id}`] = e.target.value;
+            viewModel.addNewCustomerRequest[`${e.target.id}`] = e.target.value;
     }
 
+    function onMaskChanged(e) {
+        if(newCustomerId)
+            viewModel.editNewCustomerRequest[`${e.target.id}`] = e.target.value.replace(/\s+/g, '');
+        else
+            viewModel.addNewCustomerRequest[`${e.target.id}`] = e.target.value.replace(/\s+/g, '');
+    }
+    function onSwitchChange(e, propName){
+
+        if(newCustomerId) {
+            viewModel.editNewCustomerRequest[`${propName}`] = e;
+            viewModel.detailNewCustomerResponse[`${propName}`] = e;
+        }
+        else {
+            viewModel.addNewCustomerRequest[`${propName}`] = e;
+            viewModel.detailNewCustomerResponse[`${propName}`] = e;
+        }
+    }
     return (
         <div>
             <PageHeader
@@ -100,55 +132,63 @@ const EditNewCustomer: React.FC<EditNewCustomerProps> = inject(Stores.newCustome
                   key={"newCustomerForm"}
                  scrollToFirstError>
                 <Row gutter={[24, 16]}>
-                    {/*<Col span={8}>
-                <Form.Item name="newCustomersNumberFrom" initialValue={viewModel?.detailNewCustomerResponse?.newCustomersNumberFrom}
-                           key={"newCustomersNumberFrom"}
-                           label={i18next.t("NewCustomers.Label.newCustomersNumberFrom")}
+                    <Col span={8}>
+                <Form.Item name="custName" initialValue={viewModel?.detailNewCustomerResponse?.custName}
+                           key={"custName"}
+                           label={i18next.t("NewCustomers.Label.custName")}
                            rules={[
                                {
                                    required: true,
-                                   message: i18next.t("NewCustomers.Validation.Message.newCustomersNumberFrom.Required")
+                                   message: i18next.t("NewCustomers.Validation.Message.custName.Required")
                                }
                            ]}>
-                    <Input type={"number"} onChange={onChanged}/>
+                    <Input onChange={onChanged}/>
                 </Form.Item>
                     </Col>
                     <Col span={8}>
-                <Form.Item name="newCustomersNumberTo" initialValue={viewModel?.detailNewCustomerResponse?.newCustomersNumberTo}
-                           key={"newCustomersNumberTo"}
-                           label={i18next.t("NewCustomers.Label.newCustomersNumberTo")}
+                <Form.Item name="custCompany" initialValue={viewModel?.detailNewCustomerResponse?.custCompany}
+                           key={"custCompany"}
+                           label={i18next.t("NewCustomers.Label.custCompany")}
                            rules={[
                                {
                                    required: true,
-                                   message: i18next.t("NewCustomers.Validation.Message.newCustomersNumberTo.Required")
+                                   message: i18next.t("NewCustomers.Validation.Message.custCompany.Required")
                                }
                            ]}>
-                    <Input type={"number"} onChange={onChanged}/>
+                    <Input onChange={onChanged}/>
                 </Form.Item>
                     </Col>
 
                     <Col span={8}>
-                <Form.Item name="newCustomersFeesYearly" initialValue={viewModel?.detailNewCustomerResponse?.newCustomersFeesYearly}
-                           key={"newCustomersFeesYearly"}
-                           label={i18next.t("NewCustomers.Label.newCustomersFeesYearly")}
+                <Form.Item name="custEmail" initialValue={viewModel?.detailNewCustomerResponse?.custEmail}
+                           key={"custEmail"}
+                           label={i18next.t("NewCustomers.Label.custEmail")}
                            >
-                    <Input type={"number"} onChange={onChanged}/>
+                    <Input type={"email"} onChange={onChanged}/>
                 </Form.Item>
                     </Col>
                     <Col span={8}>
-                <Form.Item name="newCustomersFeesMonthly" initialValue={viewModel?.detailNewCustomerResponse?.newCustomersFeesMonthly}
-                           key={"newCustomersFeesMonthly"}
-                           label={i18next.t("NewCustomers.Label.newCustomersFeesMonthly")}>
-                    <Input type={"number"} onChange={onChanged}/>
+                        <Form.Item name="custPhoneNumber" initialValue={viewModel?.detailNewCustomerResponse?.custPhoneNumber}
+                                   key={"custPhoneNumber"}
+                                   label={i18next.t("Cars.Label.custPhoneNumber")}>
+                            {/*<Input onChange={onChanged}/>*/}
+                            <MaskedInput className={"phone-number"} mask="+2 111 111 11111" onChange={onMaskChanged}/>
+                        </Form.Item>
+                    </Col>
+                    <Col span={8}>
+                <Form.Item name="custAddress" initialValue={viewModel?.detailNewCustomerResponse?.custAddress}
+                           key={"custAddress"}
+                           label={i18next.t("NewCustomers.Label.custAddress")}>
+                    <Input onChange={onChanged}/>
                 </Form.Item>
                     </Col>
                     <Col span={8}>
-                <Form.Item name="newCustomersNfcCost" initialValue={viewModel?.detailNewCustomerResponse?.newCustomersNfcCost}
-                           key={"newCustomersNfcCost"}
-                           label={i18next.t("NewCustomers.Label.newCustomersNfcCost")}>
-                    <Input type={"number"} onChange={onChanged}/>
+                <Form.Item name="custReqStatus" initialValue={viewModel?.detailNewCustomerResponse?.custReqStatus}
+                           key={"custReqStatus"}
+                           label={i18next.t("NewCustomers.Label.custReqStatus")}>
+                    <Switch defaultChecked={viewModel?.detailNewCustomerResponse?.custReqStatus} onChange={(e) => onSwitchChange(e, 'isActive')} />
                 </Form.Item>
-                    </Col>*/}
+                    </Col>
                 </Row>
                 <Divider></Divider>
                 {viewModel.errorMessage && (

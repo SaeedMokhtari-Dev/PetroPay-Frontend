@@ -9,8 +9,6 @@ export default class EditNewCustomerRequest
     custPhoneNumber: string;
     custAddress: string;
     custReqStatus: boolean;
-    cutReqDatetime: string;
-
 
     constructor(
     ) {

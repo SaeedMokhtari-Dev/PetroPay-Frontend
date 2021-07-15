@@ -53,10 +53,10 @@ const NewCustomersList: React.FC<NewCustomersSidebarProps> = inject(Stores.newCu
                         title={i18next.t("Subscriptions.Button.AcceptRequest")}
                         style={{background: "green", borderColor: "white"}}/>
                 }
-                    {/*<Button type="primary" icon={<EditOutlined />} onClick={() => showEditPage(record)}
+                    <Button type="primary" icon={<EditOutlined />} onClick={() => showEditPage(record)}
                             title={i18next.t("General.Button.Edit")} />
                 <Button type="primary" danger icon={<DeleteOutlined />} onClick={() => showDeleteConfirm(record)}
-                        title={i18next.t("General.Button.Delete")} />*/}
+                        title={i18next.t("General.Button.Delete")} />
             </div>
         )
     }];
@@ -137,12 +137,12 @@ const NewCustomersList: React.FC<NewCustomersSidebarProps> = inject(Stores.newCu
                 onBack={() => window.history.back()}
                 title={i18next.t("NewCustomers.Page.Title")}
                 subTitle={i18next.t("NewCustomers.Page.SubTitle")}
-                /*extra={[
+                extra={[
                         <Button key={"Add"} type="primary" icon={<PlusCircleOutlined />} onClick={showEditPage}>
                             {i18next.t("General.Button.Add")}
                         </Button>
                     ,
-                ]}*/
+                ]}
             />
 
             <Table dataSource={viewModel?.newCustomerList} columns={columns} loading={viewModel?.isProcessing}
