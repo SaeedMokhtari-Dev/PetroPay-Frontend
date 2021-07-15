@@ -13,6 +13,7 @@
   "General.Confirm.Delete": "Are you sure to delete?",
   "General.Confirm.Active": "Are you sure to active?",
   "General.Confirm.Accept": "Are you sure to accept?",
+  "General.Confirm.Reject": "Are you sure to reject?",
   "General.Search.AtLeastOne": "Please select at least one filter.",
   "General.Image.LessThan2MB": "Image must smaller than 2MB!",
   "General.Image.JustImage": "You can only upload JPG/PNG file!",
@@ -587,6 +588,7 @@
   "Subscriptions.Alert.BeCareful": "After you save this subscription, you cannot change it anymore, please be careful.",
 
   "Subscriptions.Button.AcceptRequest": "Accept Request",
+  "Subscriptions.Button.RejectRequest": "Reject Request",
   "Subscriptions.Button.Calculate": "Calculate cost",
   "Subscriptions.Button.CarList": "Cars",
 
@@ -602,7 +604,8 @@
   "Api.Subscription.Add.Successful": "A new subscription request added successfully",
   "Api.Subscription.Edit.Successful": "selected subscription request edited successfully",
   "Api.Subscription.Deleted.Successful": "selected subscription request deleted successfully",
-  "Api.Subscription.Activated.Successful": "selected subscription activated successfully",
+  "Api.Subscription.Activated.Successful": "selected subscription request activated successfully",
+  "Api.Subscription.Rejected.Successful": "selected subscription request rejected successfully",
   "Api.Subscription.CarsAdded.Successful": "selected cars added successfully",
   "Api.Subscription.SubscriptionCarAdd.NotAllowed": "You cannot add more car than you subscribed.",
 
@@ -616,6 +619,7 @@
   "Api.Subscription.SubscriptionPaymentMethod.Required": "Subscription Payment Method is Required",
   "Api.Subscription.Id.Required": "Id is Required",
   "Api.Subscription.ActiveEntityDelete.NotAllowed": "Active Subscription Request cannot delete.",
+  "Api.Subscription.ActiveEntityReject.NotAllowed": "Active Subscription Request cannot reject.",
 
   "Api.Subscription.MoreThan1Month": "Monthly subscription range must be more than 1 month",
   "Api.Subscription.MoreThan1Year": "Yearly subscription range must be more than 1 year",
@@ -625,6 +629,7 @@
   "Subscriptions.Error.Add.Message": "An error has occurred while trying to add new subscription.",
   "Subscriptions.Error.Edit.Message": "An error has occurred while trying to edit subscription.",
   "Subscriptions.Error.Delete.Message": "An error has occurred while trying to delete subscription.",
+  "Subscriptions.Error.Reject.Message": "An error has occurred while trying to reject subscription.",
   "Subscriptions.Error.Calculate.Message": "An error has occurred while trying to calculate subscription.",
 
   "InvoiceSummaries.Menu.Title": "Invoice Summaries",

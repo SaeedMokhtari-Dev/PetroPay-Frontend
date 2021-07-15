@@ -14,6 +14,8 @@ import {message} from "antd";
 import UserContext from "../../../identity/contexts/UserContext";
 import ActiveSubscriptionHandler from "../handlers/active/ActiveSubscriptionHandler";
 import ActiveSubscriptionRequest from "../handlers/active/ActiveSubscriptionRequest";
+import RejectSubscriptionRequest from "../handlers/reject/RejectSubscriptionRequest";
+import RejectSubscriptionHandler from "../handlers/reject/RejectSubscriptionHandler";
 
 export default class GetSubscriptionViewModel {
     columns: any[];
@@ -117,6 +119,41 @@ export default class GetSubscriptionViewModel {
         catch(e)
         {
             this.errorMessage = i18next.t('Subscriptions.Error.Active.Message');
+            message.error(this.errorMessage);
+            log.error(e);
+        }
+        finally
+        {
+            this.isProcessing = false;
+        }
+    }
+
+    public async rejectSubscription(key: number)
+    {
+        try
+        {
+
+            this.errorMessage = "";
+            let request = new RejectSubscriptionRequest();
+            request.subscriptionId = key;
+            let response = await RejectSubscriptionHandler.reject(request);
+
+            if(response && response.success)
+            {
+                message.success(getLocalizedString(response.message));
+                if(UserContext.info.role == 100)
+                    await this.getAllSubscription(new GetSubscriptionRequest(this.pageSize, this.pageIndex));
+                else if(UserContext.info.role == 1)
+                    await this.getAllSubscription(new GetSubscriptionRequest(this.pageSize, this.pageIndex, UserContext.info.id));
+            }
+            else{
+                this.errorMessage = getLocalizedString(response.message);
+                message.error(this.errorMessage);
+            }
+        }
+        catch(e)
+        {
+            this.errorMessage = i18next.t('Subscriptions.Error.Reject.Message');
             message.error(this.errorMessage);
             log.error(e);
         }

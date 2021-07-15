@@ -70,6 +70,7 @@ export default
     apiSubscriptionCalculate: "/api/subscription/calculate",
     apiSubscriptionCarAdd: "/api/subscription/car-add",
     apiSubscriptionInvoice: "/api/subscription/invoice",
+    apiSubscriptionReject: "/api/subscription/reject",
 
     apiAppSettingAdd: "/api/app-setting/add",
     apiAppSettingEdit: "/api/app-setting/edit",

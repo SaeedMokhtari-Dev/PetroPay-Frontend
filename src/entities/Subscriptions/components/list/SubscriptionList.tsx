@@ -10,10 +10,10 @@ import Stores from "app/constants/Stores";
 import {
     Button,
     Pagination,
-    Table, Modal, PageHeader
+    Table, Modal, PageHeader, Badge, Tag
 } from "antd";
 import {
-    EditOutlined, DeleteOutlined, CheckOutlined, CloseOutlined,
+    EditOutlined, DeleteOutlined, CheckOutlined, CloseOutlined, StopOutlined,
     ExclamationCircleOutlined, PlusCircleOutlined, CheckCircleOutlined, CarOutlined, BookOutlined
 } from '@ant-design/icons';
 import i18next from "i18next";
@@ -55,14 +55,14 @@ const SubscriptionList: React.FC<SubscriptionListProps> = inject(Stores.subscrip
         fixed: 'right',
         render: (text, record) => (
             <div className="inline">
-                {UserContext.info.role == 100 && (!record.subscriptionActive) &&
+                {!record.rejected && UserContext.info.role == 100 && (!record.subscriptionActive) &&
                 (
                     <React.Fragment>
                         <Button type="default"  icon={<CheckCircleOutlined />} onClick={() => showActivation(record)}
                                 title={i18next.t("Subscriptions.Button.AcceptRequest")} style={{ background: "green", borderColor: "white" }}/>
                     </React.Fragment>
                 )}
-                {!record.subscriptionActive &&
+                {!record.rejected && !record.subscriptionActive &&
                     (
                        <React.Fragment>
                            <Button type="primary" icon={<EditOutlined/>} onClick={() => showEditPage(record)}
@@ -70,10 +70,12 @@ const SubscriptionList: React.FC<SubscriptionListProps> = inject(Stores.subscrip
                            <Button type="primary" danger icon={<DeleteOutlined/>}
                            onClick={() => showDeleteConfirm(record)}
                            title={i18next.t("General.Button.Delete")}/>
+                           <Button type="primary" danger icon={<StopOutlined />} onClick={() => showRejection(record)}
+                                   title={i18next.t("Subscriptions.Button.RejectRequest")}/>
                        </React.Fragment>
                      )
                 }
-                {UserContext.info.role == 1 && record.subscriptionActive && !record.expired ?
+                {!record.rejected && UserContext.info.role == 1 && record.subscriptionActive && !record.expired ?
                        <Link to={`/app/subscription/carAdd/${record.key}`}>
                            <Button type="default" icon={<CarOutlined/>}
                                    title={i18next.t("Subscriptions.Button.CarList")}/>
@@ -81,12 +83,18 @@ const SubscriptionList: React.FC<SubscriptionListProps> = inject(Stores.subscrip
                     : ""
                 }
 
-                {record.subscriptionInvoiceNumber &&
+                {!record.rejected && record.subscriptionInvoiceNumber &&
                 (
                     <Link to={getSubscriptionInvoiceRoute(record.subscriptionInvoiceNumber)}>
                         <Button type="dashed" icon={<BookOutlined />}
                                 title={i18next.t("Subscriptions.Invoice")}/>
                     </Link>
+                )
+                }
+
+                {record.rejected &&
+                (
+                    <Tag color="red">Rejected</Tag>
                 )
                 }
             </div>
@@ -158,6 +166,18 @@ const SubscriptionList: React.FC<SubscriptionListProps> = inject(Stores.subscrip
             onCancel() {},
         });
     }
+    async function showRejection(e) {
+        console.log(e.key);
+        confirm({
+            title: i18next.t("General.Confirm.Reject"),
+            icon: <ExclamationCircleOutlined />,
+            async onOk() {
+                console.log(e.key);
+                await onReject(e.key);
+            },
+            onCancel() {},
+        });
+    }
 
 
     async function onDelete(key: number){
@@ -166,6 +186,9 @@ const SubscriptionList: React.FC<SubscriptionListProps> = inject(Stores.subscrip
 
     async function onActive(key: number){
         await viewModel.activeSubscription(key);
+    }
+    async function onReject(key: number){
+        await viewModel.rejectSubscription(key);
     }
 
     function onUnload() {
