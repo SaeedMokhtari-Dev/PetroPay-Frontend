@@ -6,6 +6,8 @@ export default class BranchListItem implements IDeserialize
     key: string;
     title: string;
     balance: number;
+    companyId: number;
+    companyName: string;
 
     constructor() {
         makeAutoObservable(this);

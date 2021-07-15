@@ -151,6 +151,29 @@ const OdometerHistoryList: React.FC<OdometerHistoryListProps> = inject(Stores.od
     }
     function onSelectChanged(e, propName){
         viewModel.getOdometerHistoriesRequest[`${propName}`] = e;
+        if(propName === "companyId") {
+            let carOptions = [];
+            const filteredCars = odometerHistoryStore.listCarViewModel.listCarResponse.items.filter(w => w.companyId == e);
+            for (let item of filteredCars) {
+                carOptions.push(<Option key={item.key} value={item.carNumber}>{item.carNumber}</Option>);
+            }
+            setCarOptions(carOptions);
+
+            let branchOptions = [];
+            const filteredBranches = odometerHistoryStore.listBranchViewModel.listBranchResponse.items.filter(w => w.companyId == e);
+            for (let item of filteredBranches) {
+                branchOptions.push(<Option key={item.key} value={item.key}>{item.title}</Option>);
+            }
+            setBranchOptions(branchOptions);
+        }
+        if(propName === "companyBranchId") {
+            let carOptions = [];
+            const filteredCars = odometerHistoryStore.listCarViewModel.listCarResponse.items.filter(w => w.branchId == e);
+            for (let item of filteredCars) {
+                carOptions.push(<Option key={item.key} value={item.carNumber}>{item.carNumber}</Option>);
+            }
+            setCarOptions(carOptions);
+        }
     }
     return (
         <div>

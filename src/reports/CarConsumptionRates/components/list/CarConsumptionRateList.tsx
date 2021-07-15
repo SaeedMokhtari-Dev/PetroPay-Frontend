@@ -151,6 +151,29 @@ const CarConsumptionRateList: React.FC<CarConsumptionRateListProps> = inject(Sto
     }
     function onSelectChanged(e, propName){
         viewModel.getCarConsumptionRatesRequest[`${propName}`] = e;
+        if(propName === "companyId") {
+            let carOptions = [];
+            const filteredCars = carConsumptionRateStore.listCarViewModel.listCarResponse.items.filter(w => w.companyId == e);
+            for (let item of filteredCars) {
+                carOptions.push(<Option key={item.key} value={item.carNumber}>{item.carNumber}</Option>);
+            }
+            setCarOptions(carOptions);
+
+            let branchOptions = [];
+            const filteredBranches = carConsumptionRateStore.listBranchViewModel.listBranchResponse.items.filter(w => w.companyId == e);
+            for (let item of filteredBranches) {
+                branchOptions.push(<Option key={item.key} value={item.key}>{item.title}</Option>);
+            }
+            setBranchOptions(branchOptions);
+        }
+        if(propName === "companyBranchId") {
+            let carOptions = [];
+            const filteredCars = carConsumptionRateStore.listCarViewModel.listCarResponse.items.filter(w => w.branchId == e);
+            for (let item of filteredCars) {
+                carOptions.push(<Option key={item.key} value={item.carNumber}>{item.carNumber}</Option>);
+            }
+            setCarOptions(carOptions);
+        }
     }
     return (
         <div>

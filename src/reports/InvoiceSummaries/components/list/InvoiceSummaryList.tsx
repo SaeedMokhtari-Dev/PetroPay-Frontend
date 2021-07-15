@@ -157,6 +157,29 @@ const InvoiceSummaryList: React.FC<InvoiceSummaryListProps> = inject(Stores.invo
     }
     function onSelectChanged(e, propName){
         viewModel.getInvoiceSummariesRequest[`${propName}`] = e;
+        if(propName === "companyId") {
+            let carOptions = [];
+            const filteredCars = invoiceSummaryStore.listCarViewModel.listCarResponse.items.filter(w => w.companyId == e);
+            for (let item of filteredCars) {
+                carOptions.push(<Option key={item.key} value={item.carNumber}>{item.carNumber}</Option>);
+            }
+            setCarOptions(carOptions);
+
+            let branchOptions = [];
+            const filteredBranches = invoiceSummaryStore.listBranchViewModel.listBranchResponse.items.filter(w => w.companyId == e);
+            for (let item of filteredBranches) {
+                branchOptions.push(<Option key={item.key} value={item.key}>{item.title}</Option>);
+            }
+            setBranchOptions(branchOptions);
+        }
+        if(propName === "companyBranchId") {
+            let carOptions = [];
+            const filteredCars = invoiceSummaryStore.listCarViewModel.listCarResponse.items.filter(w => w.branchId == e);
+            for (let item of filteredCars) {
+                carOptions.push(<Option key={item.key} value={item.carNumber}>{item.carNumber}</Option>);
+            }
+            setCarOptions(carOptions);
+        }
     }
     function onDateChange(date, dateString, prop) {
         viewModel.getInvoiceSummariesRequest[`${prop}`] = dateString;
@@ -241,13 +264,6 @@ const InvoiceSummaryList: React.FC<InvoiceSummaryListProps> = inject(Stores.invo
                                 </Form.Item>
                             </Col>
                             <Col span={8}>
-                                <Form.Item name="invoiceId" initialValue={viewModel?.getInvoiceSummariesRequest?.invoiceId}
-                                           key={"invoiceId"}
-                                           label={i18next.t("InvoiceSummaries.SearchPanel.Label.invoiceId")}>
-                                    <Input type={"number"} onChange={onChanged}/>
-                                </Form.Item>
-                            </Col>
-                            <Col span={8}>
                                 <Form.Item name="carIdNumber" initialValue={viewModel?.getInvoiceSummariesRequest?.carIdNumber}
                                            key={"carIdNumber"}
                                            label={i18next.t("InvoiceSummaries.SearchPanel.Label.carIdNumber")}>
@@ -258,6 +274,14 @@ const InvoiceSummaryList: React.FC<InvoiceSummaryListProps> = inject(Stores.invo
                                     </Select>
                                 </Form.Item>
                             </Col>
+                            <Col span={8}>
+                                <Form.Item name="invoiceId" initialValue={viewModel?.getInvoiceSummariesRequest?.invoiceId}
+                                           key={"invoiceId"}
+                                           label={i18next.t("InvoiceSummaries.SearchPanel.Label.invoiceId")}>
+                                    <Input type={"number"} onChange={onChanged}/>
+                                </Form.Item>
+                            </Col>
+
                             <Col span={8}>
                                 <Form.Item name="serviceDescription" initialValue={viewModel?.getInvoiceSummariesRequest?.serviceDescription}
                                            key={"serviceDescription"}

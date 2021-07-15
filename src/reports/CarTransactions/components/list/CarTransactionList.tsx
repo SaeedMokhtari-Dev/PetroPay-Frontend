@@ -151,6 +151,29 @@ const CarTransactionList: React.FC<CarTransactionListProps> = inject(Stores.carT
     }
     function onSelectChanged(e, propName){
         viewModel.getCarTransactionsRequest[`${propName}`] = e;
+        if(propName === "companyId") {
+            let carOptions = [];
+            const filteredCars = carTransactionStore.listCarViewModel.listCarResponse.items.filter(w => w.companyId == e);
+            for (let item of filteredCars) {
+                carOptions.push(<Option key={item.key} value={item.carNumber}>{item.carNumber}</Option>);
+            }
+            setCarOptions(carOptions);
+
+            let branchOptions = [];
+            const filteredBranches = carTransactionStore.listBranchViewModel.listBranchResponse.items.filter(w => w.companyId == e);
+            for (let item of filteredBranches) {
+                branchOptions.push(<Option key={item.key} value={item.key}>{item.title}</Option>);
+            }
+            setBranchOptions(branchOptions);
+        }
+        if(propName === "companyBranchId") {
+            let carOptions = [];
+            const filteredCars = carTransactionStore.listCarViewModel.listCarResponse.items.filter(w => w.branchId == e);
+            for (let item of filteredCars) {
+                carOptions.push(<Option key={item.key} value={item.carNumber}>{item.carNumber}</Option>);
+            }
+            setCarOptions(carOptions);
+        }
     }
     return (
         <div>

@@ -5,11 +5,13 @@ export default class CarListItem implements IDeserialize
 {
     key: number;
     carNumber: string;
+    branchId: number;
     branchName: string;
     disabled: boolean;
     balance: number;
     carOdometerRecordRequired: boolean;
-
+    companyId: number;
+    companyName: string;
     constructor() {
         makeAutoObservable(this);
     }
