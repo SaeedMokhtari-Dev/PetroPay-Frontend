@@ -5,8 +5,6 @@ export default class GetOdometerHistoryRequest
     carIdNumber: string;
     companyBranchId: number;
     companyBranchName: string;
-    /*transDateFrom: string;
-    transDateTo: string;*/
     companyId: number;
     /*companyName: string;*/
     exportToFile: boolean;

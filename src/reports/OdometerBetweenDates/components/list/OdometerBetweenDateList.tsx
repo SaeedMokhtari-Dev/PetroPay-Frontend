@@ -18,6 +18,7 @@ import UserContext from "../../../../identity/contexts/UserContext";
 import OdometerBetweenDateColumns from "./OdometerBetweenDateColumns";
 import OdometerBetweenDateStore from "../../stores/OdometerBetweenDateStore";
 import ExportExcel from "../../../../app/utils/ExportExcel";
+import Constants from "../../../../app/constants/Constants";
 
 const { Panel } = Collapse;
 const { Option } = Select;
@@ -207,20 +208,20 @@ const OdometerBetweenDateList: React.FC<OdometerBetweenDateListProps> = inject(S
                                     </Select>
                                 </Form.Item>
                             </Col>
-                           {/* <Col span={8}>
-                                <Form.Item name="transDateFrom" initialValue={viewModel?.getOdometerBetweenDatesRequest?.transDateFrom}
-                                           key={"transDateFrom"}
-                                           label={i18next.t("OdometerBetweenDates.SearchPanel.Label.transDateFrom")}>
-                                    <DatePicker onChange={((date, dateString) => onDateChange(date, dateString, "transDateFrom"))} />
+                            <Col span={8}>
+                                <Form.Item name="dateTimeFrom" initialValue={viewModel?.getOdometerBetweenDatesRequest?.dateTimeFrom}
+                                           key={"dateTimeFrom"}
+                                           label={i18next.t("OdometerBetweenDates.SearchPanel.Label.dateTimeFrom")}>
+                                    <DatePicker format={Constants.dateFormat} onChange={((date, dateString) => onDateChange(date, dateString, "dateTimeFrom"))} />
                                 </Form.Item>
                             </Col>
                             <Col span={8}>
-                                <Form.Item name="transDateTo" initialValue={viewModel?.getOdometerBetweenDatesRequest?.transDateTo}
-                                           key={"transDateTo"}
-                                           label={i18next.t("OdometerBetweenDates.SearchPanel.Label.transDateTo")}>
-                                    <DatePicker onChange={((date, dateString) => onDateChange(date, dateString, "transDateTo"))} />
+                                <Form.Item name="dateTimeTo" initialValue={viewModel?.getOdometerBetweenDatesRequest?.dateTimeTo}
+                                           key={"dateTimeTo"}
+                                           label={i18next.t("OdometerBetweenDates.SearchPanel.Label.dateTimeTo")}>
+                                    <DatePicker format={Constants.dateFormat} onChange={((date, dateString) => onDateChange(date, dateString, "dateTimeTo"))} />
                                 </Form.Item>
-                            </Col>*/}
+                            </Col>
                         </Row>
                         <PageHeader
                             ghost={false}

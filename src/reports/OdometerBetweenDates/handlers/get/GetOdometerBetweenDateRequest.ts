@@ -3,6 +3,8 @@ import { makeAutoObservable } from "mobx";
 export default class GetOdometerBetweenDateRequest
 {
     carId?: number;
+    dateTimeFrom: string;
+    dateTimeTo: string;
     /*carIdNumber: string;
     companyBranchId: number;
     companyBranchName: string;*/

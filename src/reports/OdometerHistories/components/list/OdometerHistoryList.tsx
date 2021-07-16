@@ -18,6 +18,7 @@ import UserContext from "../../../../identity/contexts/UserContext";
 import OdometerHistoryColumns from "./OdometerHistoryColumns";
 import OdometerHistoryStore from "../../stores/OdometerHistoryStore";
 import ExportExcel from "../../../../app/utils/ExportExcel";
+import Constants from "../../../../app/constants/Constants";
 
 const { Panel } = Collapse;
 const { Option } = Select;
@@ -230,20 +231,6 @@ const OdometerHistoryList: React.FC<OdometerHistoryListProps> = inject(Stores.od
                                     </Select>
                                 </Form.Item>
                             </Col>
-                           {/* <Col span={8}>
-                                <Form.Item name="transDateFrom" initialValue={viewModel?.getOdometerHistoriesRequest?.transDateFrom}
-                                           key={"transDateFrom"}
-                                           label={i18next.t("OdometerHistories.SearchPanel.Label.transDateFrom")}>
-                                    <DatePicker onChange={((date, dateString) => onDateChange(date, dateString, "transDateFrom"))} />
-                                </Form.Item>
-                            </Col>
-                            <Col span={8}>
-                                <Form.Item name="transDateTo" initialValue={viewModel?.getOdometerHistoriesRequest?.transDateTo}
-                                           key={"transDateTo"}
-                                           label={i18next.t("OdometerHistories.SearchPanel.Label.transDateTo")}>
-                                    <DatePicker onChange={((date, dateString) => onDateChange(date, dateString, "transDateTo"))} />
-                                </Form.Item>
-                            </Col>*/}
                         </Row>
                         <PageHeader
                             ghost={false}
