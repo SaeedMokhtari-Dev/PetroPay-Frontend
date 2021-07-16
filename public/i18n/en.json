@@ -17,6 +17,7 @@
   "General.Search.AtLeastOne": "Please select at least one filter.",
   "General.Image.LessThan2MB": "Image must smaller than 2MB!",
   "General.Image.JustImage": "You can only upload JPG/PNG file!",
+  "General.Currency.Symbol": "E£",
 
 
   "General.HeaderMenu.User": "Hi",

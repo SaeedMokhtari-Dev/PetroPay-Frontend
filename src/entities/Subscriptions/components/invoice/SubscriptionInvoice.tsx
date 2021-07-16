@@ -126,13 +126,13 @@ const SubscriptionInvoice: React.FC<SubscriptionInvoiceProps> = inject(Stores.su
                                             {viewModel.invoiceSubscriptionResponse?.serviceDescription ?? "Service Description"}
                                         </td>
                                         <td>
-                                            {viewModel.invoiceSubscriptionResponse?.unitCost} $
+                                            {viewModel.invoiceSubscriptionResponse?.unitCost} {i18next.t("General.Currency.Symbol")}
                                         </td>
                                         <td>
                                             {viewModel.invoiceSubscriptionResponse?.quantity}
                                         </td>
                                         <td>
-                                            {viewModel.invoiceSubscriptionResponse?.amount} $
+                                            {viewModel.invoiceSubscriptionResponse?.amount} {i18next.t("General.Currency.Symbol")}
                                         </td>
                                     </tr>
                                 </tbody>
@@ -149,30 +149,30 @@ const SubscriptionInvoice: React.FC<SubscriptionInvoiceProps> = inject(Stores.su
                             </Descriptions>
                             <br/>
                             <Statistic valueStyle={{ color: "blue", fontSize: "40px" }} title={i18next.t("Subscriptions.Invoice.Label.invoiceTotal")}
-                                       suffix="$" value={viewModel.invoiceSubscriptionResponse?.total} />
+                                       suffix={i18next.t("General.Currency.Symbol")} value={viewModel.invoiceSubscriptionResponse?.total} />
                         </Col>
                         <Col offset={3} span={8}>
                             <Descriptions title={i18next.t("Subscriptions.Invoice")} bordered>
                                 <Descriptions.Item label={i18next.t("Subscriptions.Invoice.Label.subTotal")} span={3}>
-                                    {viewModel.invoiceSubscriptionResponse?.subTotal} $
+                                    {viewModel.invoiceSubscriptionResponse?.subTotal}  {i18next.t("General.Currency.Symbol")}
                                 </Descriptions.Item>
                                 <Descriptions.Item label={i18next.t("Subscriptions.Invoice.Label.discount")} span={3}>
-                                    {viewModel.invoiceSubscriptionResponse?.discount} $
+                                    {viewModel.invoiceSubscriptionResponse?.discount}  {i18next.t("General.Currency.Symbol")}
                                 </Descriptions.Item>
                                 <Descriptions.Item label={i18next.t("Subscriptions.Invoice.Label.taxRate")} span={3}>
                                     {viewModel.invoiceSubscriptionResponse?.taxRate} %
                                 </Descriptions.Item>
                                 <Descriptions.Item label={i18next.t("Subscriptions.Invoice.Label.tax")} span={3}>
-                                    {viewModel.invoiceSubscriptionResponse?.tax} $
+                                    {viewModel.invoiceSubscriptionResponse?.tax}  {i18next.t("General.Currency.Symbol")}
                                 </Descriptions.Item>
                                 <Descriptions.Item label={i18next.t("Subscriptions.Invoice.Label.vatRate")} span={3}>
                                     {viewModel.invoiceSubscriptionResponse?.vatRate} %
                                 </Descriptions.Item>
                                 <Descriptions.Item label={i18next.t("Subscriptions.Invoice.Label.vat")} span={3}>
-                                    {viewModel.invoiceSubscriptionResponse?.vat} $
+                                    {viewModel.invoiceSubscriptionResponse?.vat}  {i18next.t("General.Currency.Symbol")}
                                 </Descriptions.Item>
                                 <Descriptions.Item label={i18next.t("Subscriptions.Invoice.Label.total")} span={3}>
-                                    {viewModel.invoiceSubscriptionResponse?.total} $
+                                    {viewModel.invoiceSubscriptionResponse?.total}  {i18next.t("General.Currency.Symbol")}
                                 </Descriptions.Item>
                             </Descriptions>
                         </Col>

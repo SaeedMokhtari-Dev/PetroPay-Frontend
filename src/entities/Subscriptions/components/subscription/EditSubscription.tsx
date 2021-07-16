@@ -518,25 +518,25 @@ const EditSubscription: React.FC<EditSubscriptionProps> = inject(Stores.subscrip
                         {subscriptionCost.subscriptionCost ?
                             <Descriptions title={i18next.t("Subscriptions.Invoice")} bordered>
                                 <Descriptions.Item label={i18next.t("Subscriptions.Invoice.Label.subTotal")} span={3}>
-                                    {subscriptionCost.subTotal} $
+                                    {subscriptionCost.subTotal}  {i18next.t("General.Currency.Symbol")}
                                 </Descriptions.Item>
                                 <Descriptions.Item label={i18next.t("Subscriptions.Invoice.Label.discount")} span={3}>
-                                    {subscriptionCost.discount} $
+                                    {subscriptionCost.discount}  {i18next.t("General.Currency.Symbol")}
                                 </Descriptions.Item>
                                 <Descriptions.Item label={i18next.t("Subscriptions.Invoice.Label.taxRate")} span={3}>
                                     {subscriptionCost.taxRate} %
                                 </Descriptions.Item>
                                 <Descriptions.Item label={i18next.t("Subscriptions.Invoice.Label.tax")} span={3}>
-                                    {subscriptionCost.tax} $
+                                    {subscriptionCost.tax}  {i18next.t("General.Currency.Symbol")}
                                 </Descriptions.Item>
                                 <Descriptions.Item label={i18next.t("Subscriptions.Invoice.Label.vatRate")} span={3}>
                                     {subscriptionCost.vatRate} %
                                 </Descriptions.Item>
                                 <Descriptions.Item label={i18next.t("Subscriptions.Invoice.Label.vat")} span={3}>
-                                    {subscriptionCost.vat} $
+                                    {subscriptionCost.vat}  {i18next.t("General.Currency.Symbol")}
                                 </Descriptions.Item>
                                 <Descriptions.Item label={i18next.t("Subscriptions.Invoice.Label.total")} span={3}>
-                                    {subscriptionCost.subscriptionCost} $
+                                    {subscriptionCost.subscriptionCost}  {i18next.t("General.Currency.Symbol")}
                                 </Descriptions.Item>
                             </Descriptions>
                             : ""
