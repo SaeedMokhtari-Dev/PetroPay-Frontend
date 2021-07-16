@@ -191,7 +191,7 @@ const EditPromotionCoupon: React.FC<EditPromotionCouponProps> = inject(Stores.pr
                            ]}
                            >
                     {/*<Input type={"number"} onChange={onChanged}/>*/}
-                    <DatePicker disabledDate={disabledDate} format={Constants.dateFormat} onChange={((date, dateString) => onDateChange(date, dateString, "couponActiveDate"))} />
+                    <DatePicker format={Constants.dateFormat} onChange={((date, dateString) => onDateChange(date, dateString, "couponActiveDate"))} />
                 </Form.Item>
                     </Col>
 
@@ -207,7 +207,7 @@ const EditPromotionCoupon: React.FC<EditPromotionCouponProps> = inject(Stores.pr
                            ]}
                            >
                     {/*<Input type={"number"} onChange={onChanged}/>*/}
-                    <DatePicker disabledDate={disabledDate} format={Constants.dateFormat} onChange={((date, dateString) => onDateChange(date, dateString, "couponEndDate"))} />
+                    <DatePicker format={Constants.dateFormat} onChange={((date, dateString) => onDateChange(date, dateString, "couponEndDate"))} />
                 </Form.Item>
                     </Col>
 

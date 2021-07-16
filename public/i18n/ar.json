@@ -16,6 +16,7 @@
   "General.Search.AtLeastOne": "الرجاء تحديد عامل تصفية واحد على الأقل.",
   "General.Image.LessThan2MB": "يجب أن يكون حجم الصورة أصغر من 2 ميغا بايت!",
   "General.Image.JustImage": "يمكن فقط تحميل ملفات بصيغة JPG/PNG ",
+  "General.Currency.Symbol": "ج. م",
 
   "General.HeaderMenu.User": "مرحبا ",
   "General.HeaderMenu.Profile": "الملف الشخصي",
