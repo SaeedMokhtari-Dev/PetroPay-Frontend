@@ -551,6 +551,7 @@
   "Subscriptions.Invoice.Label.customerAddress": "عنوان العميل",
 
   "Subscriptions.Invoice.Label.serviceDescription": "الوصف",
+  "Subscriptions.Invoice.Label.serviceDescriptionValue": "خدمات بتروباي",
   "Subscriptions.Invoice.Label.unitCost": "تكلفة الوحدة",
   "Subscriptions.Invoice.Label.quantity": "QTY/HR الكمية",
   "Subscriptions.Invoice.Label.amount": "القيمة",

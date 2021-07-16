@@ -556,6 +556,7 @@
   "Subscriptions.Invoice.Label.customerAddress": "Customer Address",
 
   "Subscriptions.Invoice.Label.serviceDescription": "DESCRIPTION",
+  "Subscriptions.Invoice.Label.serviceDescriptionValue": "Petropay service",
   "Subscriptions.Invoice.Label.unitCost": "UNIT COST",
   "Subscriptions.Invoice.Label.quantity": "QTY/HR Rate",
   "Subscriptions.Invoice.Label.amount": "AMOUNT",
