@@ -27,6 +27,15 @@ export default class EmployeeStore
     {
         this.getEmployeeViewModel = null;
     }
+    onEmployeeEditPageLoad()
+    {
+        this.editEmployeeViewModel = new EditEmployeeViewModel(this);
+    }
+
+    onEmployeeEditPageUnload()
+    {
+        this.editEmployeeViewModel = null;
+    }
 
     onEmployeeMenuEditPageLoad()
     {

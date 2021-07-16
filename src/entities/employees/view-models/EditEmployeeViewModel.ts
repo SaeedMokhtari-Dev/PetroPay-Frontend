@@ -1,7 +1,5 @@
-import EmployeesStore from "entities/employees/stores/EmployeeStore";
 import {makeAutoObservable} from "mobx";
 import DetailEmployeeResponse from "../handlers/detail/DetailEmployeeResponse";
-import GetEmployeeHandler from "../handlers/get/GetEmployeeHandler";
 import {getLocalizedString} from "../../../app/utils/Localization";
 import i18next from "i18next";
 import log from "loglevel";
@@ -11,8 +9,9 @@ import AddEmployeeRequest from "../handlers/add/AddEmployeeRequest";
 import EditEmployeeRequest from "../handlers/edit/EditEmployeeRequest";
 import AddEmployeeHandler from "../handlers/add/AddEmployeeHandler";
 import {message} from "antd";
-import GetEmployeeRequest from "../handlers/get/GetEmployeeRequest";
+
 import EditEmployeeHandler from "../handlers/edit/EditEmployeeHandler";
+import EmployeeStore from "entities/employees/stores/EmployeeStore";
 
 export default class EditEmployeeViewModel
 {
@@ -25,7 +24,7 @@ export default class EditEmployeeViewModel
     addEmployeeRequest: AddEmployeeRequest;
     editEmployeeRequest: EditEmployeeRequest;
 
-    constructor(public employeesStore: EmployeesStore) {
+    constructor(public employeeStore: EmployeeStore) {
         makeAutoObservable(this);
     }
     public async getDetailEmployee(employeeId: number)

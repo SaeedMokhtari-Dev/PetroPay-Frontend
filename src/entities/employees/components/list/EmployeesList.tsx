@@ -10,7 +10,7 @@ import {
 } from "antd";
 import {
     SecurityScanOutlined, DeleteOutlined,
-    ExclamationCircleOutlined, PlusCircleOutlined
+    ExclamationCircleOutlined, PlusCircleOutlined, EditOutlined
 } from '@ant-design/icons';
 import i18next from "i18next";
 import EmployeesColumns from "./EmployeesColumns";
@@ -18,7 +18,7 @@ import Routes from "../../../../app/constants/Routes";
 import NavigationService from "../../../../app/services/NavigationService";
 import GetEmployeeRequest from "../../handlers/get/GetEmployeeRequest";
 import { Link } from "react-router-dom";
-import {getEmployeeMenuRoute} from "../../../../app/utils/RouteHelper";
+import {getEmployeeEditRoute, getEmployeeMenuRoute} from "../../../../app/utils/RouteHelper";
 
 const { confirm } = Modal;
 
@@ -47,13 +47,15 @@ const EmployeesList: React.FC<EmployeesSidebarProps> = inject(Stores.employeeSto
         render: (text, record) => (
             <div className="inline">
                 <Link to={getEmployeeMenuRoute(record.key)}>
-                    <Button type="primary" icon={<SecurityScanOutlined />}
+                    <Button type="dashed" icon={<SecurityScanOutlined />}
                             title={i18next.t("General.Button.Accessibility")} />
                 </Link>
-
-                    {/*
+                <Link to={getEmployeeEditRoute(record.key)}>
+                    <Button type="primary" icon={<EditOutlined />}
+                            title={i18next.t("General.Button.Edit")} />
+                </Link>
                 <Button type="primary" danger icon={<DeleteOutlined />} onClick={() => showDeleteConfirm(record)}
-                        title={i18next.t("General.Button.Delete")} />*/}
+                        title={i18next.t("General.Button.Delete")} />
             </div>
         )
     }];
@@ -117,14 +119,16 @@ const EmployeesList: React.FC<EmployeesSidebarProps> = inject(Stores.employeeSto
             <PageHeader
                 ghost={false}
                 onBack={() => window.history.back()}
-                title={i18next.t("Emplyees.Page.Title")}
-                subTitle={i18next.t("Emplyees.Page.SubTitle")}
-               /* extra={[
-                        <Button key={"Add"} type="primary" icon={<PlusCircleOutlined />} onClick={showEditPage}>
+                title={i18next.t("Employees.Page.Title")}
+                subTitle={i18next.t("Employees.Page.SubTitle")}
+                extra={[
+                    <Link to={Routes.addEmployee}>
+                        <Button key={"Add"} type="primary" icon={<PlusCircleOutlined />} >
                             {i18next.t("General.Button.Add")}
                         </Button>
+                    </Link>
                     ,
-                ]}*/
+                ]}
             />
 
             <Table dataSource={viewModel?.employeeList} columns={columns} loading={viewModel?.isProcessing}

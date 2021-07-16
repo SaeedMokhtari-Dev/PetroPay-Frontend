@@ -2,12 +2,15 @@ import IDeserialize from "app/interfaces/deserialize";
 
 export default class DetailEmployeeResponse implements IDeserialize
 {
-    employeesId: number;
-    employeesNumberFrom: number;
-    employeesNumberTo: number;
-    employeesFeesMonthly: number;
-    employeesFeesYearly: number;
-    employeesNfcCost: number;
+    emplyeeId: number;
+    emplyeeName: string;
+    emplyeePhone: string;
+    emplyeeEmail: string;
+    emplyeeCode: string;
+    emplyeeUserName: string;
+    emplyeePassword: string;
+    emplyeeStatus: string;
+    emplyeePhoto: string;
 
     deserialize(input: any): this
     {

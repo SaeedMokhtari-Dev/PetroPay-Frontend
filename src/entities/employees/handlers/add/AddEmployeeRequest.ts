@@ -2,11 +2,15 @@ import {makeAutoObservable} from "mobx";
 
 export default class AddEmployeeRequest
 {
-    employeesNumberFrom: number;
-    employeesNumberTo: number;
-    employeesFeesMonthly: number;
-    employeesFeesYearly: number;
-    employeesNfcCost: number;
+    emplyeeName: string;
+    emplyeePhone: string;
+    emplyeeEmail: string;
+    emplyeeCode: string;
+    emplyeeUserName: string;
+    emplyeePassword: string;
+    emplyeeStatus: string;
+    emplyeePhoto: string;
+
 
     constructor(
     ) {
