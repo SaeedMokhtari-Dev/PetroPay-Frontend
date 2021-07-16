@@ -199,7 +199,7 @@ const EditBranch: React.FC<EditBranchProps> = inject(Stores.branchStore)(observe
                                            pattern: /^\S*$/,
                                            message: i18next.t("Branches.Validation.Message.companyBranchAdminUserName.Valid"),
                                        }]}>
-                            <Input onChange={onChanged}/>
+                            <Input onChange={onChanged} autoComplete={"new-username"}/>
                         </Form.Item>
                     </Col>
                     <Col span={8}>
@@ -216,7 +216,7 @@ const EditBranch: React.FC<EditBranchProps> = inject(Stores.branchStore)(observe
                                            message: i18next.t("Branches.Validation.Message.companyBranchAdminUserPassword.Valid"),
                                        }
                                    ]}>
-                            <PasswordInput
+                            <PasswordInput inputProps={{autoComplete: "new-password"}}
                                 onChange={onChanged}
                             />
                         </Form.Item>

@@ -159,7 +159,7 @@ const EditStationUser: React.FC<EditStationUserProps> = inject(Stores.stationUse
                                    pattern: /^\S*$/,
                                    message: i18next.t("StationUsers.Validation.Message.stationUserName.Valid"),
                                }]}>
-                    <Input onChange={onChanged}/>
+                    <Input onChange={onChanged}  autoComplete={"new-username"}/>
                 </Form.Item>
                     </Col>
                     <Col span={8}>
@@ -176,7 +176,7 @@ const EditStationUser: React.FC<EditStationUserProps> = inject(Stores.stationUse
                                            message: i18next.t("StationUsers.Validation.Message.stationUserPassword.Valid"),
                                        }
                                    ]}>
-                            <PasswordInput
+                            <PasswordInput inputProps={{autoComplete: "new-password"}}
                                 onChange={onChanged}
                             />
                         </Form.Item>

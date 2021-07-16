@@ -602,7 +602,7 @@ const EditCar: React.FC<EditCarProps> = inject(Stores.carStore)(observer(({carSt
                                            pattern: /^\S*$/,
                                            message: i18next.t("Cars.Validation.Message.carDriverUserName.Valid"),
                                        }]}>
-                            <Input onChange={onChanged}/>
+                            <Input onChange={onChanged} autoComplete={"new-username"}/>
                         </Form.Item>
                     </Col>
                     <Col span={8}>
@@ -619,7 +619,7 @@ const EditCar: React.FC<EditCarProps> = inject(Stores.carStore)(observer(({carSt
                                            message: i18next.t("Cars.Validation.Message.carDriverPassword.Valid"),
                                        }
                                    ]}>
-                            <PasswordInput
+                            <PasswordInput inputProps={{autoComplete: "new-password"}}
                                 onChange={onChanged}
                             />
                         </Form.Item>

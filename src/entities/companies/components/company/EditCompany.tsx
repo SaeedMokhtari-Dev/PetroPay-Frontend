@@ -398,7 +398,7 @@ const EditCompany: React.FC<EditCompanyProps> = inject(Stores.companiesStore)(ob
                                            message: i18next.t("Companies.Validation.Message.companyAdminUserName.Valid"),
                                        }
                                    ]}>
-                            <Input onChange={onChanged}/>
+                            <Input onChange={onChanged}  autoComplete={"new-username"}/>
                         </Form.Item>
                     </Col>
                     <Col span={8}>
@@ -415,7 +415,7 @@ const EditCompany: React.FC<EditCompanyProps> = inject(Stores.companiesStore)(ob
                                            message: i18next.t("Companies.Validation.Message.companyAdminUserPassword.Valid"),
                                        }
                                    ]}>
-                            <PasswordInput
+                            <PasswordInput inputProps={{autoComplete: "new-password"}}
                                 onChange={onChanged}></PasswordInput>
                         </Form.Item>
                     </Col>

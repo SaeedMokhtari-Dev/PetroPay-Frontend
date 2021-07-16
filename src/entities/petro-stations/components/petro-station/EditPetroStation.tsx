@@ -293,7 +293,7 @@ const EditPetroStation: React.FC<EditPetroStationProps> = inject(Stores.petroSta
                                            pattern: /^\S*$/,
                                            message: i18next.t("PetroStations.Validation.Message.stationUserName.Valid"),
                                        }]}>
-                            <Input onChange={onChanged}/>
+                            <Input onChange={onChanged}  autoComplete={"new-username"}/>
                         </Form.Item>
                     </Col>
                     <Col span={8}>
@@ -310,7 +310,7 @@ const EditPetroStation: React.FC<EditPetroStationProps> = inject(Stores.petroSta
                                            message: i18next.t("PetroStations.Validation.Message.stationPassword.Valid"),
                                        }*/
                                    ]}>
-                            <PasswordInput
+                            <PasswordInput inputProps={{autoComplete: "new-password"}}
                                 onChange={onChanged}
                             />
                         </Form.Item>
