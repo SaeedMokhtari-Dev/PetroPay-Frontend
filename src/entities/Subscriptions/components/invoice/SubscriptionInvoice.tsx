@@ -4,13 +4,19 @@ import "./SubscriptionInvoice.scss";
 import Stores from "app/constants/Stores";
 
 import {
+    Button,
     Col, Descriptions, Image,
     PageHeader, Row, Spin, Statistic
 } from "antd";
+import {
+    PrinterOutlined
+} from '@ant-design/icons';
 import i18next from "i18next";
 import SubscriptionStore from 'entities/Subscriptions/stores/SubscriptionStore';
 import NavigationService from "../../../../app/services/NavigationService";
 import ImageConstants from "../../../../app/constants/ImageConstants";
+import { Link } from "react-router-dom";
+import ApiService from "../../../../app/services/ApiService";
 
 interface SubscriptionInvoiceProps {
     subscriptionStore?: SubscriptionStore
@@ -19,6 +25,7 @@ interface SubscriptionInvoiceProps {
 
 const SubscriptionInvoice: React.FC<SubscriptionInvoiceProps> = inject(Stores.subscriptionStore)(observer(({subscriptionStore, match}) => {
     const [dataFetched, setDataFetched] = React.useState(false);
+    const [invoiceId, setInvoiceNumber] = React.useState(0);
 
     useEffect(() => {
         onLoad();
@@ -32,6 +39,7 @@ const SubscriptionInvoice: React.FC<SubscriptionInvoiceProps> = inject(Stores.su
         let invoiceIdParam = +match.params?.invoiceNumber;
         if(invoiceIdParam){
             subscriptionStore.invoiceSubscriptionViewModel?.getInvoiceSubscription(invoiceIdParam);
+            setInvoiceNumber(invoiceIdParam);
         }
         else {
             NavigationService.goBack();
@@ -46,6 +54,9 @@ const SubscriptionInvoice: React.FC<SubscriptionInvoiceProps> = inject(Stores.su
     function onUnload() {
         subscriptionStore.onSubscriptionInvoicePageUnload();
         //subscriptionStore.onSubscriptionEditPageUnload();
+    }
+    async function print(){
+        await ApiService.get(`/api/subscription/invoice-pdf/${invoiceId}`, true);
     }
     return (
         <div>
@@ -177,6 +188,7 @@ const SubscriptionInvoice: React.FC<SubscriptionInvoiceProps> = inject(Stores.su
                             </Descriptions>
                         </Col>
                     </Row>
+
                 </React.Fragment>
                 :
                 <Row gutter={[24, 16]}>
@@ -185,7 +197,9 @@ const SubscriptionInvoice: React.FC<SubscriptionInvoiceProps> = inject(Stores.su
                     </Col>
                 </Row>
             }
-
+            <Row>
+               <Button onClick={print} type={"primary"} icon={<PrinterOutlined />}></Button>
+            </Row>
         </div>
     )
 }));
