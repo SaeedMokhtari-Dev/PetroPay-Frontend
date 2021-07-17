@@ -13,6 +13,7 @@
   "General.Confirm.Delete": "هل انت متأكد من الحذف؟",
   "General.Confirm.Active": "هل انت متأكد من التنشيط?",
   "General.Confirm.Accept": "هل أنت متأكد من الموافقة?",
+  "*General.Confirm.Reject": "Are you sure to reject?",
   "General.Search.AtLeastOne": "الرجاء تحديد عامل تصفية واحد على الأقل.",
   "General.Image.LessThan2MB": "يجب أن يكون حجم الصورة أصغر من 2 ميغا بايت!",
   "General.Image.JustImage": "يمكن فقط تحميل ملفات بصيغة JPG/PNG ",
@@ -43,6 +44,10 @@
   "Dashboard.Admin.Title": "لوحة التحكم المدير",
   "Dashboard.Supplier.Title": "لوحة تحكم محطة الوقود",
   "Dashboard.Customer.Title": "لوحة تحكم العملاء",
+
+  "*SupplierDashboard.stationBalance": "Station Balance",
+  "*SupplierDashboard.stationBonusBalance": "Station Bonus Balance",
+  "*Supplier.Error.Get.Message": "An error has occurred while trying to get supplier dashboard data.",
 
   "Authentication.Label.PetroPay": "بتروباي",
   "Authentication.Label.Authentication": "تسجيل  الدخول",
@@ -264,6 +269,9 @@
   "PetroStations.Label.stationEmail": "البريد الالكتروني",
   "PetroStations.Label.stationServiceActive": "تفعيل الخدمة?",
   "PetroStations.Label.stationServiceDeposit": "التمويل باستخدام رصيد مسبق?",
+  "*PetroStations.Label.stationChangeOilService": "station Change Oil Service",
+  "*PetroStations.Label.stationCarWashingService": "station Car Washing Service",
+  "*PetroStations.Label.stationChangeTireService": "station Change Tire Service",
 
   "PetroStations.Label.petroPayAccountId": "طريقة السداد",
   "PetroStations.Label.amount": "المبلغ",
@@ -583,6 +591,7 @@
   "Subscriptions.Alert.BeCareful": "بعد حفظ هذا الاشتراك ، لا يمكنك تغييره بعد الآن ، يرجى توخي الحذر",
 
   "Subscriptions.Button.AcceptRequest": "الطلب مقبول ",
+  "*Subscriptions.Button.RejectRequest": "Reject Request",
   "Subscriptions.Button.Calculate": "حساب التكلفة",
   "Subscriptions.Button.CarList": "السيارات",
 
@@ -599,6 +608,7 @@
   "Api.Subscription.Edit.Successful": "تم التعديل بنجاح",
   "Api.Subscription.Deleted.Successful": "تم الحذف بنجاح",
   "Api.Subscription.Activated.Successful": "تم تفعيل الاشتراك بنجاح",
+  "*Api.Subscription.Rejected.Successful": "selected subscription request rejected successfully",
   "Api.Subscription.CarsAdded.Successful": "تم ضافة السيارة بنجاح",
   "Api.Subscription.SubscriptionCarAdd.NotAllowed": "لا يمكنك إضافة سيارة أكثر مما قمت بالاشتراك بة",
 
@@ -612,6 +622,7 @@
   "Api.Subscription.SubscriptionPaymentMethod.Required": "يرجي تحديد طريقة الدفع",
   "Api.Subscription.Id.Required": "Id is Required",
   "Api.Subscription.ActiveEntityDelete.NotAllowed": "لا يمكن حذف اشتراك مفعل",
+  "*Api.Subscription.ActiveEntityReject.NotAllowed": "Active Subscription Request cannot reject.",
 
   "Api.Subscription.MoreThan1Month": "يجب أن يكون نطاق الاشتراك الشهري أكثر من شهر واحد",
   "Api.Subscription.MoreThan1Year": "يجب أن يكون نطاق الاشتراك السنوي أكثر من عام واحد",
@@ -621,6 +632,7 @@
   "Subscriptions.Error.Add.Message": "حدث خطأ أثناء محاولة إضافة اشتراك جديد",
   "Subscriptions.Error.Edit.Message": "حدث خطأ أثناء محاولة تعديل الاشتراك",
   "Subscriptions.Error.Delete.Message": "حدث خطأ أثناء محاولة حذف الاشتراك",
+  "*Subscriptions.Error.Reject.Message": "An error has occurred while trying to reject subscription.",
   "Subscriptions.Error.Calculate.Message": "حدث خطأ أثناء محاولة حساب الاشتراك",
 
   "InvoiceSummaries.Menu.Title": " الفواتير",
@@ -950,32 +962,39 @@
   "Menus.Error.Tree.Message": "حدث خطأ أثناء محاولة الحصول على القائمة",
 
 
-  "Emplyees.Menu.Title": "الموظفين",
-  "Emplyees.Page.Title": "الموظفين",
-  "Emplyees.Page.SubTitle": "هذه الصفحة لتعريف الموظفين",
-  "Emplyees.Label.key": "key",
-  "Emplyees.Label.emplyeeId": "رقم الموظف",
-  "Emplyees.Label.emplyeeName": "اسم الموظف",
-  "Emplyees.Label.emplyeePhone": "رقم الهاتف",
-  "Emplyees.Label.emplyeeEmail": "البريد الاكتروني",
-  "Emplyees.Label.emplyeeCode": "الرقم الوظيفي ",
-  "Emplyees.Label.emplyeeUserName": "اسم المستخدم",
-  "Emplyees.Label.emplyeeStatus": "حالة الموظف",
+  "Employees.Menu.Title": "الموظفين",
+  "Employees.Page.Title": "الموظفين",
+  "Employees.Page.SubTitle": "هذه الصفحة لتعريف الموظفين",
+  "Employees.Label.key": "key",
+  "Employees.Label.emplyeeId": "رقم الموظف",
+  "Employees.Label.emplyeeName": "اسم الموظف",
+  "Employees.Label.emplyeePhone": "رقم الهاتف",
+  "Employees.Label.emplyeeEmail": "البريد الاكتروني",
+  "Employees.Label.emplyeeCode": "الرقم الوظيفي ",
+  "Employees.Label.emplyeeUserName": "اسم المستخدم",
+  "Employees.Label.emplyeeStatus": "حالة الموظف",
+  "*Employees.Label.emplyeePassword": "employee Password",
+  "*Employees.Label.emplyeePhoto": "employee Photo",
 
-  "Emplyees.Add.HeaderText": "اضافة موظف",
-  "Emplyees.Edit.HeaderText": "تعديل:",
-  "Emplyees.Section.GeneralInformation": "معلومات عامة",
+  "Employees.Add.HeaderText": "اضافة موظف",
+  "Employees.Edit.HeaderText": "تعديل:",
+  "Employees.Section.GeneralInformation": "معلومات عامة",
 
-  "Api.Emplyee.Add.Successful": "تمت إضافة موظف جديد بنجاح",
-  "Api.Emplyee.Edit.Successful": "تم التعديل بنجاح",
-  "Api.Emplyee.Deleted.Successful": "تم الحذف بنجاح",
-  "Api.Emplyee.Id.Required": "Id is Required",
+  "*Employees.Validation.Message.emplyeeName.Required": "Please enter employee Name",
+  "*Employees.Validation.Message.emplyeePhone.Required": "Please enter employee Phone",
+  "*Employees.Validation.Message.emplyeeUserName.Required": "Please enter employee username",
+  "*Employees.Validation.Message.emplyeePassword.Required": "Please enter employee password",
 
-  "Emplyees.Error.Get.Message": "حدث خطأ أثناء محاولة الحصول على قائمة الموظفين",
-  "Emplyees.Error.Detail.Message": "حدث خطأ أثناء محاولة الحصول على تفاصيل الموظف",
-  "Emplyees.Error.Add.Message": "حدث خطأ أثناء محاولة إضافة موظف جديد",
-  "Emplyees.Error.Edit.Message": "حدث خطأ أثناء محاولة تحرير الموظف",
-  "Emplyees.Error.Delete.Message": "حدث خطأ أثناء محاولة حذف الموظف",
+  "Api.Employee.Add.Successful": "تمت إضافة موظف جديد بنجاح",
+  "Api.Employee.Edit.Successful": "تم التعديل بنجاح",
+  "Api.Employee.Deleted.Successful": "تم الحذف بنجاح",
+  "Api.Employee.Id.Required": "Id is Required",
+
+  "Employees.Error.Get.Message": "حدث خطأ أثناء محاولة الحصول على قائمة الموظفين",
+  "Employees.Error.Detail.Message": "حدث خطأ أثناء محاولة الحصول على تفاصيل الموظف",
+  "Employees.Error.Add.Message": "حدث خطأ أثناء محاولة إضافة موظف جديد",
+  "Employees.Error.Edit.Message": "حدث خطأ أثناء محاولة تحرير الموظف",
+  "Employees.Error.Delete.Message": "حدث خطأ أثناء محاولة حذف الموظف",
 
   "EmployeeMenus.Edit.HeaderText": "الصلاحيات",
   "EmployeeMenus.Section.GeneralInformation": "الرجاء تحديد القوائم التي يحتاجها هذا المسؤول",
@@ -987,6 +1006,9 @@
 
   "Api.EmployeeMenu.Add.Successful": "تم إنشاء المسئوليات بنجاح",
   "Api.EmployeeMenu.Id.Required": "رقم الموظف مطلوب",
+
+  "*Employee.Active": "Active",
+  "*Employee.Deactivate": "Deactivate",
 
   "AppSettings.Menu.Title": "اعدادات البرنامج",
   "AppSettings.Page.Title": "اعدادات البرنامج",

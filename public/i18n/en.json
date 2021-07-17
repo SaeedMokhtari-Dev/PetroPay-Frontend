@@ -46,6 +46,10 @@
   "Dashboard.Supplier.Title": "Supplier Dashboard",
   "Dashboard.Customer.Title": "Customer Dashboard",
 
+  "SupplierDashboard.stationBalance": "Station Balance",
+  "SupplierDashboard.stationBonusBalance": "Station Bonus Balance",
+  "Supplier.Error.Get.Message": "An error has occurred while trying to get supplier dashboard data.",
+
   "Authentication.Label.PetroPay": "PetroPay",
   "Authentication.Label.Authentication": "Authentication",
   "Authentication.Validation.Message.RoleType.Required": "Please enter your User Type",
@@ -267,6 +271,9 @@
   "PetroStations.Label.stationEmail": "Email Address",
   "PetroStations.Label.stationServiceActive": "Station Service Active?",
   "PetroStations.Label.stationServiceDeposit": "station Service Deposit?",
+  "PetroStations.Label.stationChangeOilService": "station Change Oil Service",
+  "PetroStations.Label.stationCarWashingService": "station Car Washing Service",
+  "PetroStations.Label.stationChangeTireService": "station Change Tire Service",
 
   "PetroStations.Label.petroPayAccountId": "PaymentMethod",
   "PetroStations.Label.amount": "Amount",

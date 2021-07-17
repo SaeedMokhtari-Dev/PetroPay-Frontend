@@ -254,13 +254,30 @@ const EditPetroStation: React.FC<EditPetroStationProps> = inject(Stores.petroSta
                             <Switch onChange={(e) => onSwitchChange(e, "stationServiceDeposit")} defaultChecked={viewModel?.detailPetroStationResponse?.stationServiceDeposit} />
                         </Form.Item>
                     </Col>
-                {/*<Col span={8}>
-                    <Form.Item name="stationBalance" initialValue={viewModel?.detailPetroStationResponse?.stationBalance}
-                               key={"stationBalance"}
-                               label={i18next.t("PetroStations.Label.stationBalance")}>
-                        <Input type={"number"} onChange={onChanged}/>
-                    </Form.Item>
-                </Col>*/}
+                    <Col span={8}>
+                        <Form.Item name="stationChangeOilService" initialValue={viewModel?.detailPetroStationResponse?.stationChangeOilService}
+                                   key={"stationChangeOilService"}
+                                   label={i18next.t("PetroStations.Label.stationChangeOilService")}
+                        >
+                            <Switch onChange={(e) => onSwitchChange(e, "stationChangeOilService")} defaultChecked={viewModel?.detailPetroStationResponse?.stationChangeOilService} />
+                        </Form.Item>
+                    </Col>
+                    <Col span={8}>
+                        <Form.Item name="stationCarWashingService" initialValue={viewModel?.detailPetroStationResponse?.stationCarWashingService}
+                                   key={"stationCarWashingService"}
+                                   label={i18next.t("PetroStations.Label.stationCarWashingService")}
+                        >
+                            <Switch onChange={(e) => onSwitchChange(e, "stationCarWashingService")} defaultChecked={viewModel?.detailPetroStationResponse?.stationCarWashingService} />
+                        </Form.Item>
+                    </Col>
+                    <Col span={8}>
+                        <Form.Item name="stationChangeTireService" initialValue={viewModel?.detailPetroStationResponse?.stationChangeTireService}
+                                   key={"stationChangeTireService"}
+                                   label={i18next.t("PetroStations.Label.stationChangeTireService")}
+                        >
+                            <Switch onChange={(e) => onSwitchChange(e, "stationChangeTireService")} defaultChecked={viewModel?.detailPetroStationResponse?.stationChangeTireService} />
+                        </Form.Item>
+                    </Col>
 
                     <Col span={8}>
                         <Form.Item name="stationEmail" initialValue={viewModel?.detailPetroStationResponse?.stationEmail}
