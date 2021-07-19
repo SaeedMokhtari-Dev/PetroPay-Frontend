@@ -20,6 +20,7 @@ export default class GetOdometerRecordViewModel {
     errorMessage: string;
     pageIndex: number;
     pageSize: number;
+    companyId: number;
 
     constructor(public odometerRecordsStore: OdometerRecordStore) {
         makeAutoObservable(this);
@@ -30,7 +31,6 @@ export default class GetOdometerRecordViewModel {
         try {
             this.isProcessing = true;
             let response = await GetOdometerRecordHandler.get(getOdometerRecordsRequest);
-
 
             if (response && response.success) {
 

@@ -14,21 +14,17 @@ import {
 } from '@ant-design/icons';
 import i18next from "i18next";
 import OdometerRecordsColumns from "./OdometerRecordsColumns";
-import AddOdometerRecordRequest from "../../handlers/add/AddOdometerRecordRequest";
 import Routes from "../../../../app/constants/Routes";
 import NavigationService from "../../../../app/services/NavigationService";
 import GetOdometerRecordRequest from "../../handlers/get/GetOdometerRecordRequest";
 import OdometerRecordStore from "../../stores/OdometerRecordStore";
-
+import UserContext from "../../../../identity/contexts/UserContext";
 
 const { confirm } = Modal;
-
 
 interface OdometerRecordsSidebarProps {
     odometerRecordStore?: OdometerRecordStore
 }
-
-
 
 const OdometerRecordsList: React.FC<OdometerRecordsSidebarProps> = inject(Stores.odometerRecordStore)(observer(({odometerRecordStore}) => {
     useEffect(() => {
@@ -79,20 +75,24 @@ const OdometerRecordsList: React.FC<OdometerRecordsSidebarProps> = inject(Stores
             onCancel() {},
         });
     }
+    async function onLoad() {
+        odometerRecordStore.onOdometerRecordGetPageLoad();
+        //odometerRecordStore.onOdometerRecordEditPageLoad();
+        odometerRecordStore.getOdometerRecordViewModel.pageIndex = 0;
+        odometerRecordStore.getOdometerRecordViewModel.pageSize = 20;
+
+        if(UserContext.info.role === 1)
+            odometerRecordStore.getOdometerRecordViewModel.companyId = UserContext.info.id;
+        await odometerRecordStore.getOdometerRecordViewModel.getAllOdometerRecords(
+            new GetOdometerRecordRequest(20, 0, odometerRecordStore.getOdometerRecordViewModel.companyId));
+    }
+
     let viewModel = odometerRecordStore.getOdometerRecordViewModel;
 
     if (!viewModel) return;
 
     async function onDelete(key: number){
         await viewModel.deleteOdometerRecord(key);
-    }
-
-    async function onLoad() {
-        odometerRecordStore.onOdometerRecordGetPageLoad();
-        //odometerRecordStore.onOdometerRecordEditPageLoad();
-        odometerRecordStore.getOdometerRecordViewModel.pageIndex = 0;
-        odometerRecordStore.getOdometerRecordViewModel.pageSize = 20;
-        await odometerRecordStore.getOdometerRecordViewModel.getAllOdometerRecords(new GetOdometerRecordRequest(20, 0));
     }
 
     function onUnload() {
@@ -103,12 +103,15 @@ const OdometerRecordsList: React.FC<OdometerRecordsSidebarProps> = inject(Stores
     async function pageIndexChanged(pageIndex, pageSize){
         viewModel.pageIndex = pageIndex - 1;
         viewModel.pageSize = pageSize;
-        await odometerRecordStore.getOdometerRecordViewModel.getAllOdometerRecords(new GetOdometerRecordRequest(pageSize, pageIndex - 1));
+
+        await odometerRecordStore.getOdometerRecordViewModel.getAllOdometerRecords(
+            new GetOdometerRecordRequest(pageSize, pageIndex - 1, viewModel.companyId));
     }
     async function pageSizeChanged(current, pageSize){
         viewModel.pageIndex = 0;
         viewModel.pageSize = pageSize;
-        await odometerRecordStore.getOdometerRecordViewModel.getAllOdometerRecords(new GetOdometerRecordRequest(pageSize, 0));
+        await odometerRecordStore.getOdometerRecordViewModel.getAllOdometerRecords(
+            new GetOdometerRecordRequest(pageSize, 0, viewModel.companyId));
     }
     return (
         <div>
