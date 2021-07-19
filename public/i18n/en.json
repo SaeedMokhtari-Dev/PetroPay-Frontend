@@ -1113,6 +1113,8 @@
   "CarConsumptionRates.SearchPanel.Label.transDateTo": "Transaction Date To",
   "CarConsumptionRates.SearchPanel.Label.companyId": "companyId",
   "CarConsumptionRates.SearchPanel.Label.companyName": "Company Name",
+  "CarConsumptionRates.SearchPanel.Label.dateFrom": "Date From",
+  "CarConsumptionRates.SearchPanel.Label.dateTo": "Date To",
 
   "CarConsumptionRates.Error.Get.Message": "An error has occurred while trying to get Car Consumption Rate list.",
 

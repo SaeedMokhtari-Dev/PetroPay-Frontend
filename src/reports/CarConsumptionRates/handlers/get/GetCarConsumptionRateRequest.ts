@@ -9,6 +9,8 @@ export default class GetCarConsumptionRateRequest
     transDateTo: string;*/
     companyId: number;
     /*companyName: string;*/
+    dateFrom: string;
+    dateTo: string;
     exportToFile: boolean;
 
     pageIndex: number;

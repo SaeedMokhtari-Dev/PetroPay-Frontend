@@ -13,7 +13,7 @@
   "General.Confirm.Delete": "هل انت متأكد من الحذف؟",
   "General.Confirm.Active": "هل انت متأكد من التنشيط?",
   "General.Confirm.Accept": "هل أنت متأكد من الموافقة?",
-  "*General.Confirm.Reject": "Are you sure to reject?",
+  "General.Confirm.Reject": "هل انت متاكد من رفض الطلب?",
   "General.Search.AtLeastOne": "الرجاء تحديد عامل تصفية واحد على الأقل.",
   "General.Image.LessThan2MB": "يجب أن يكون حجم الصورة أصغر من 2 ميغا بايت!",
   "General.Image.JustImage": "يمكن فقط تحميل ملفات بصيغة JPG/PNG ",
@@ -45,9 +45,9 @@
   "Dashboard.Supplier.Title": "لوحة تحكم محطة الوقود",
   "Dashboard.Customer.Title": "لوحة تحكم العملاء",
 
-  "*SupplierDashboard.stationBalance": "Station Balance",
-  "*SupplierDashboard.stationBonusBalance": "Station Bonus Balance",
-  "*Supplier.Error.Get.Message": "An error has occurred while trying to get supplier dashboard data.",
+  "SupplierDashboard.stationBalance": "رصيد المحطة",
+  "SupplierDashboard.stationBonusBalance": "رصيد برنامج المكافات",
+  "Supplier.Error.Get.Message": "حدث خطأ ",
 
   "Authentication.Label.PetroPay": "بتروباي",
   "Authentication.Label.Authentication": "تسجيل  الدخول",
@@ -269,9 +269,9 @@
   "PetroStations.Label.stationEmail": "البريد الالكتروني",
   "PetroStations.Label.stationServiceActive": "تفعيل الخدمة?",
   "PetroStations.Label.stationServiceDeposit": "التمويل باستخدام رصيد مسبق?",
-  "*PetroStations.Label.stationChangeOilService": "station Change Oil Service",
-  "*PetroStations.Label.stationCarWashingService": "station Car Washing Service",
-  "*PetroStations.Label.stationChangeTireService": "station Change Tire Service",
+  "PetroStations.Label.stationChangeOilService": "خدمة تغير الزيت",
+  "PetroStations.Label.stationCarWashingService": "خدمة غسيل السيارات",
+  "PetroStations.Label.stationChangeTireService": "خدمة تغير الاطارات",
 
   "PetroStations.Label.petroPayAccountId": "طريقة السداد",
   "PetroStations.Label.amount": "المبلغ",
@@ -591,7 +591,7 @@
   "Subscriptions.Alert.BeCareful": "بعد حفظ هذا الاشتراك ، لا يمكنك تغييره بعد الآن ، يرجى توخي الحذر",
 
   "Subscriptions.Button.AcceptRequest": "الطلب مقبول ",
-  "*Subscriptions.Button.RejectRequest": "Reject Request",
+  "Subscriptions.Button.RejectRequest": "الطلب مرفوض",
   "Subscriptions.Button.Calculate": "حساب التكلفة",
   "Subscriptions.Button.CarList": "السيارات",
 
@@ -608,7 +608,7 @@
   "Api.Subscription.Edit.Successful": "تم التعديل بنجاح",
   "Api.Subscription.Deleted.Successful": "تم الحذف بنجاح",
   "Api.Subscription.Activated.Successful": "تم تفعيل الاشتراك بنجاح",
-  "*Api.Subscription.Rejected.Successful": "selected subscription request rejected successfully",
+  "Api.Subscription.Rejected.Successful": "تم رفض الطلب بنجاح",
   "Api.Subscription.CarsAdded.Successful": "تم ضافة السيارة بنجاح",
   "Api.Subscription.SubscriptionCarAdd.NotAllowed": "لا يمكنك إضافة سيارة أكثر مما قمت بالاشتراك بة",
 
@@ -622,7 +622,7 @@
   "Api.Subscription.SubscriptionPaymentMethod.Required": "يرجي تحديد طريقة الدفع",
   "Api.Subscription.Id.Required": "Id is Required",
   "Api.Subscription.ActiveEntityDelete.NotAllowed": "لا يمكن حذف اشتراك مفعل",
-  "*Api.Subscription.ActiveEntityReject.NotAllowed": "Active Subscription Request cannot reject.",
+  "Api.Subscription.ActiveEntityReject.NotAllowed": "الطلب مفعل لا يمكن الرفض او التغير",
 
   "Api.Subscription.MoreThan1Month": "يجب أن يكون نطاق الاشتراك الشهري أكثر من شهر واحد",
   "Api.Subscription.MoreThan1Year": "يجب أن يكون نطاق الاشتراك السنوي أكثر من عام واحد",
@@ -632,7 +632,7 @@
   "Subscriptions.Error.Add.Message": "حدث خطأ أثناء محاولة إضافة اشتراك جديد",
   "Subscriptions.Error.Edit.Message": "حدث خطأ أثناء محاولة تعديل الاشتراك",
   "Subscriptions.Error.Delete.Message": "حدث خطأ أثناء محاولة حذف الاشتراك",
-  "*Subscriptions.Error.Reject.Message": "An error has occurred while trying to reject subscription.",
+  "Subscriptions.Error.Reject.Message": "حدث خطأ اثناء رفض الطلب",
   "Subscriptions.Error.Calculate.Message": "حدث خطأ أثناء محاولة حساب الاشتراك",
 
   "InvoiceSummaries.Menu.Title": " الفواتير",
@@ -973,17 +973,17 @@
   "Employees.Label.emplyeeCode": "الرقم الوظيفي ",
   "Employees.Label.emplyeeUserName": "اسم المستخدم",
   "Employees.Label.emplyeeStatus": "حالة الموظف",
-  "*Employees.Label.emplyeePassword": "employee Password",
-  "*Employees.Label.emplyeePhoto": "employee Photo",
+  "Employees.Label.emplyeePassword": "كلمة المرور",
+  "Employees.Label.emplyeePhoto": "صورة الموظف",
 
   "Employees.Add.HeaderText": "اضافة موظف",
   "Employees.Edit.HeaderText": "تعديل:",
   "Employees.Section.GeneralInformation": "معلومات عامة",
 
-  "*Employees.Validation.Message.emplyeeName.Required": "Please enter employee Name",
-  "*Employees.Validation.Message.emplyeePhone.Required": "Please enter employee Phone",
-  "*Employees.Validation.Message.emplyeeUserName.Required": "Please enter employee username",
-  "*Employees.Validation.Message.emplyeePassword.Required": "Please enter employee password",
+  "Employees.Validation.Message.emplyeeName.Required": "يرجي ادخال اسم الموظف",
+  "Employees.Validation.Message.emplyeePhone.Required": "يرجي ادخال رقم التليفون",
+  "Employees.Validation.Message.emplyeeUserName.Required": "يرجي ادخال اسم المستخدم",
+  "Employees.Validation.Message.emplyeePassword.Required": "يرجي ادخال كلمة المرور",
 
   "Api.Employee.Add.Successful": "تمت إضافة موظف جديد بنجاح",
   "Api.Employee.Edit.Successful": "تم التعديل بنجاح",
@@ -1007,8 +1007,8 @@
   "Api.EmployeeMenu.Add.Successful": "تم إنشاء المسئوليات بنجاح",
   "Api.EmployeeMenu.Id.Required": "رقم الموظف مطلوب",
 
-  "*Employee.Active": "Active",
-  "*Employee.Deactivate": "Deactivate",
+  "Employee.Active": "نشط",
+  "Employee.Deactivate": "غير نشط",
 
   "AppSettings.Menu.Title": "اعدادات البرنامج",
   "AppSettings.Page.Title": "اعدادات البرنامج",
@@ -1192,7 +1192,7 @@
   "OdometerRecords.Page.SubTitle": "هذه الصفحة لتسجيل قراءات  عداد المسافات",
   "OdometerRecords.Label.key": "key",
   "OdometerRecords.Label.odometerRecordId": "رقم السجل",
-  "OdometerRecords.Label.carId": "رقم الملف",
+  "OdometerRecords.Label.carId": "رقم السيارة",
   "OdometerRecords.Label.carIdNumber": "رقم اللوحة",
   "OdometerRecords.Label.odometerRecordDate": "تاريخ التسجيل",
   "OdometerRecords.Label.odometerValue": "قيمة القراءة",
@@ -1226,7 +1226,7 @@
   "OdometerHistories.Label.companyName": "اسم الشركة",
   "OdometerHistories.Label.companyBranchId": "رقم الفرع",
   "OdometerHistories.Label.companyBranchName": "اسم الفرع",
-  "OdometerHistories.Label.carId": "رقم الملف",
+  "OdometerHistories.Label.carId": "رقم السيارة",
   "OdometerHistories.Label.carIdNumber": "رقم اللوحة",
   "OdometerHistories.Label.carTypeOfFuel": "نوع الوقود",
   "OdometerHistories.Label.carDriverName": "اسم السائق",

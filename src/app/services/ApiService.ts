@@ -116,7 +116,7 @@ export default class ApiService
         return ApiResponse.error(message, statusCode ?? -1);
     }
 
-    private static async postPrivate(endpoint: string, body: any, authorized: boolean) : Promise<Response>
+    public static async postPrivate(endpoint: string, body: any, authorized: boolean) : Promise<Response>
     {
         try
         {

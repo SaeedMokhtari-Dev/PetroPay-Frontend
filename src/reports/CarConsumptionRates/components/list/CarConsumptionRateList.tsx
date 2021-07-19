@@ -18,6 +18,7 @@ import UserContext from "../../../../identity/contexts/UserContext";
 import CarConsumptionRateColumns from "./CarConsumptionRateColumns";
 import CarConsumptionRateStore from "../../stores/CarConsumptionRateStore";
 import ExportExcel from "../../../../app/utils/ExportExcel";
+import Constants from "../../../../app/constants/Constants";
 
 const { Panel } = Collapse;
 const { Option } = Select;
@@ -219,7 +220,7 @@ const CarConsumptionRateList: React.FC<CarConsumptionRateListProps> = inject(Sto
                                     </Select>
                                 </Form.Item>
                             </Col>
-                            <Col span={8}>
+                            <Col span={9}>
                                 <Form.Item name="carIdNumber" initialValue={viewModel?.getCarConsumptionRatesRequest?.carIdNumber}
                                            key={"carIdNumber"}
                                            label={i18next.t("CarConsumptionRates.SearchPanel.Label.carIdNumber")}>
@@ -230,20 +231,20 @@ const CarConsumptionRateList: React.FC<CarConsumptionRateListProps> = inject(Sto
                                     </Select>
                                 </Form.Item>
                             </Col>
-                           {/* <Col span={8}>
-                                <Form.Item name="transDateFrom" initialValue={viewModel?.getCarConsumptionRatesRequest?.transDateFrom}
-                                           key={"transDateFrom"}
-                                           label={i18next.t("CarConsumptionRates.SearchPanel.Label.transDateFrom")}>
-                                    <DatePicker onChange={((date, dateString) => onDateChange(date, dateString, "transDateFrom"))} />
+                            <Col span={8}>
+                                <Form.Item name="dateFrom" initialValue={viewModel?.getCarConsumptionRatesRequest?.dateFrom}
+                                           key={"dateFrom"}
+                                           label={i18next.t("CarConsumptionRates.SearchPanel.Label.dateFrom")}>
+                                    <DatePicker format={Constants.dateFormat} onChange={((date, dateString) => onDateChange(date, dateString, "dateFrom"))} />
                                 </Form.Item>
                             </Col>
                             <Col span={8}>
-                                <Form.Item name="transDateTo" initialValue={viewModel?.getCarConsumptionRatesRequest?.transDateTo}
-                                           key={"transDateTo"}
-                                           label={i18next.t("CarConsumptionRates.SearchPanel.Label.transDateTo")}>
-                                    <DatePicker onChange={((date, dateString) => onDateChange(date, dateString, "transDateTo"))} />
+                                <Form.Item name="dateTo" initialValue={viewModel?.getCarConsumptionRatesRequest?.dateTo}
+                                           key={"dateTo"}
+                                           label={i18next.t("CarConsumptionRates.SearchPanel.Label.dateTo")}>
+                                    <DatePicker format={Constants.dateFormat} onChange={((date, dateString) => onDateChange(date, dateString, "dateTo"))} />
                                 </Form.Item>
-                            </Col>*/}
+                            </Col>
                         </Row>
                         <PageHeader
                             ghost={false}

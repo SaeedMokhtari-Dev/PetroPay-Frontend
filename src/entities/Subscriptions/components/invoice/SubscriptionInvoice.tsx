@@ -15,8 +15,8 @@ import i18next from "i18next";
 import SubscriptionStore from 'entities/Subscriptions/stores/SubscriptionStore';
 import NavigationService from "../../../../app/services/NavigationService";
 import ImageConstants from "../../../../app/constants/ImageConstants";
-import { Link } from "react-router-dom";
 import ApiService from "../../../../app/services/ApiService";
+
 
 interface SubscriptionInvoiceProps {
     subscriptionStore?: SubscriptionStore
@@ -56,7 +56,25 @@ const SubscriptionInvoice: React.FC<SubscriptionInvoiceProps> = inject(Stores.su
         //subscriptionStore.onSubscriptionEditPageUnload();
     }
     async function print(){
-        await ApiService.get(`/api/subscription/invoice-pdf/${invoiceId}`, true);
+        debugger;
+        let response = await ApiService.postPrivate(`/api/subscription/invoice-pdf/${invoiceId}`, null,true);
+
+        if(!response)
+        {
+            return ;
+        }
+
+        response.body.getReader().read().then(res => {
+            debugger;
+            const data = new Blob([res.value], {type: 'application/pdf'});
+            const pdfURL = window.URL.createObjectURL(data);
+            let tempLink = document.createElement('a');
+            tempLink.href = pdfURL;
+            tempLink.setAttribute('download', 'invoice.pdf');
+            tempLink.click();
+        })
+
+
     }
     return (
         <div>
