@@ -422,15 +422,8 @@ const EditSubscription: React.FC<EditSubscriptionProps> = inject(Stores.subscrip
                             <InputNumber style={{width: "100%"}} min={carNumbersMinimum} max={carNumbersMaximum} onChange={(e) => onNumberChanged(e)}/>
                         </Form.Item>
                     </Col>
-                    <Col span={8}>
-                <Form.Item name="paymentReferenceNumber" initialValue={viewModel?.detailSubscriptionResponse?.paymentReferenceNumber}
-                           key={"paymentReferenceNumber"}
-                           label={i18next.t("Subscriptions.Label.paymentReferenceNumber")}
-                           >
-                    <Input onChange={onChanged}/>
-                </Form.Item>
-                    </Col>
-                    <Col span={8}></Col>
+
+                    <Col span={16}></Col>
                     <Col span={4}>
                 <Form.Item name="subscriptionType" initialValue={viewModel?.detailSubscriptionResponse?.subscriptionType}
                            key={"subscriptionType"}
@@ -513,6 +506,20 @@ const EditSubscription: React.FC<EditSubscriptionProps> = inject(Stores.subscrip
                             {petropayAccountOptions}
                         </Select>
                         }
+                        <br />
+                        <Form.Item name="paymentReferenceNumber" initialValue={viewModel?.detailSubscriptionResponse?.paymentReferenceNumber}
+                                   key={"paymentReferenceNumber"}
+                                   label={i18next.t("Subscriptions.Label.paymentReferenceNumber")}
+                                   rules={[
+                                       {
+                                           required: !payFromCompanyBalance,
+                                           message: i18next.t("Subscriptions.Validation.Message.paymentReferenceNumber.Required")
+                                       }
+                                   ]}
+
+                        >
+                            <Input onChange={onChanged}/>
+                        </Form.Item>
                     </Col>
                     <Col offset={7} span={8}>
                         {subscriptionCost.subscriptionCost ?
@@ -542,7 +549,9 @@ const EditSubscription: React.FC<EditSubscriptionProps> = inject(Stores.subscrip
                             : ""
                         }
                     </Col>
+                    {/*<Col span={8}>
 
+                    </Col>*/}
                     <Divider>{i18next.t("Subscriptions.Label.subscriptionPaymentDocPhoto")}</Divider>
                     <Col offset={8} span={8}>
                         <Upload

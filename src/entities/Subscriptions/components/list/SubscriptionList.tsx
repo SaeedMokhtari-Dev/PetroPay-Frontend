@@ -17,7 +17,6 @@ import {
     ExclamationCircleOutlined, PlusCircleOutlined, CheckCircleOutlined, CarOutlined, BookOutlined
 } from '@ant-design/icons';
 import i18next from "i18next";
-import AddSubscriptionRequest from "../../handlers/add/AddSubscriptionRequest";
 import Routes from "../../../../app/constants/Routes";
 import NavigationService from "../../../../app/services/NavigationService";
 import GetSubscriptionRequest from "../../handlers/get/GetSubscriptionRequest";
@@ -70,10 +69,12 @@ const SubscriptionList: React.FC<SubscriptionListProps> = inject(Stores.subscrip
                            <Button type="primary" danger icon={<DeleteOutlined/>}
                            onClick={() => showDeleteConfirm(record)}
                            title={i18next.t("General.Button.Delete")}/>
-                           <Button type="primary" danger icon={<StopOutlined />} onClick={() => showRejection(record)}
-                                   title={i18next.t("Subscriptions.Button.RejectRequest")}/>
                        </React.Fragment>
                      )
+                }
+                {!record.rejected && UserContext.info.role == 100 && !record.subscriptionActive &&
+                    <Button type="primary" danger icon={<StopOutlined/>} onClick={() => showRejection(record)}
+                            title={i18next.t("Subscriptions.Button.RejectRequest")}/>
                 }
                 {!record.rejected && UserContext.info.role == 1 && record.subscriptionActive && !record.expired ?
                        <Link to={`/app/subscription/carAdd/${record.key}`}>

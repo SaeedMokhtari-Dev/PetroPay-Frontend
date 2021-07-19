@@ -607,6 +607,8 @@
   "Subscriptions.Validation.Message.payFromCompany.Required": "Please select one of options",
   "Subscriptions.Validation.Message.subscriptionType.Required": "Please enter Subscription Type Method",
   "Subscriptions.Validation.Message.numberOfDateDiff.Required": "Please enter Subscription Number Of Date Diff",
+  "Subscriptions.Validation.Message.paymentReferenceNumber.Required": "Please enter Subscription Payment Reference Number",
+  "Subscriptions.Validation.Message.subscriptionStartDate.Required": "Please enter Subscription Start Date",
 
   "Subscriptions.Validation.Message.cannotAdd.MoreCar": "You cannot add more car than you subscribed.",
 
