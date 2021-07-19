@@ -7,7 +7,7 @@ import Stores from "app/constants/Stores";
 import {
     Button, Collapse, Col, Row,
     Pagination, Input, Form,
-    Table, PageHeader, Space, DatePicker, Select, Alert
+    Table, PageHeader, Space, DatePicker, Select, Alert, Spin
 } from "antd";
 import {
     FolderViewOutlined,
@@ -20,6 +20,7 @@ import InvoiceSummaryColumns from "./InvoiceSummaryColumns";
 import InvoiceSummaryStore from "../../stores/InvoiceSummaryStore";
 
 import ExportExcel from "../../../../app/utils/ExportExcel";
+import Constants from "../../../../app/constants/Constants";
 
 const { Panel } = Collapse;
 const { Option } = Select;
@@ -29,6 +30,7 @@ interface InvoiceSummaryListProps {
 }
 
 const InvoiceSummaryList: React.FC<InvoiceSummaryListProps> = inject(Stores.invoiceSummaryStore)(observer(({invoiceSummaryStore}) => {
+    const [dataFetched, setDataFetched] = React.useState(false);
     const [carOptions, setCarOptions] = React.useState([]);
     const [branchOptions, setBranchOptions] = React.useState([]);
     const [companyOptions, setCompanyOptions] = React.useState([]);
@@ -123,6 +125,7 @@ const InvoiceSummaryList: React.FC<InvoiceSummaryListProps> = inject(Stores.invo
             }
             setServiceMasterOptions(serviceMasterOptions);
 
+            setDataFetched(true);
             //await invoiceSummaryStore.getInvoiceSummaryViewModel.getAllInvoiceSummary(invoiceSummaryStore.getInvoiceSummaryViewModel.getInvoiceSummariesRequest);
         }
         catch {
@@ -228,6 +231,8 @@ const InvoiceSummaryList: React.FC<InvoiceSummaryListProps> = inject(Stores.invo
                     <Form {...formItemLayout} layout={"vertical"} onFinish={onFinish} form={form}
                           key={"searchForm"}
                           scrollToFirstError>
+                        <div>
+                        {dataFetched ?
                         <Row gutter={[24, 16]}>
                             {UserContext.info.role == 100 ?
                                 <Col span={8}>
@@ -297,17 +302,24 @@ const InvoiceSummaryList: React.FC<InvoiceSummaryListProps> = inject(Stores.invo
                                 <Form.Item name="invoiceDataTimeFrom" initialValue={viewModel?.getInvoiceSummariesRequest?.invoiceDataTimeFrom}
                                            key={"invoiceDataTimeFrom"}
                                            label={i18next.t("InvoiceSummaries.SearchPanel.Label.invoiceDataTimeFrom")}>
-                                    <DatePicker onChange={((date, dateString) => onDateChange(date, dateString, "invoiceDataTimeFrom"))} />
+                                    <DatePicker format={Constants.dateFormat} onChange={((date, dateString) => onDateChange(date, dateString, "invoiceDataTimeFrom"))} />
                                 </Form.Item>
                             </Col>
                             <Col span={8}>
                                 <Form.Item name="invoiceDataTimeTo" initialValue={viewModel?.getInvoiceSummariesRequest?.invoiceDataTimeTo}
                                            key={"invoiceDataTimeTo"}
                                            label={i18next.t("InvoiceSummaries.SearchPanel.Label.invoiceDataTimeTo")}>
-                                    <DatePicker onChange={((date, dateString) => onDateChange(date, dateString, "invoiceDataTimeTo"))} />
+                                    <DatePicker format={Constants.dateFormat} onChange={((date, dateString) => onDateChange(date, dateString, "invoiceDataTimeTo"))} />
                                 </Form.Item>
                             </Col>
-                        </Row>
+                                </Row>
+                                    :
+                                    <Row gutter={[24, 16]}>
+                                        <Col offset={11} span={8}>
+                                            <Spin className={"spine"} size="large" />
+                                        </Col>
+                                    </Row>}
+                            </div>
                         <PageHeader
                             ghost={false}
                             subTitle={<div>

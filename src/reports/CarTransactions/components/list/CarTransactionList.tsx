@@ -7,7 +7,7 @@ import Stores from "app/constants/Stores";
 import {
     Button, Collapse, Col, Row,
     Pagination, Input, Form,
-    Table, PageHeader, Space, DatePicker, Select, Alert
+    Table, PageHeader, Space, DatePicker, Select, Alert, Spin
 } from "antd";
 import {
     FileExcelOutlined
@@ -28,6 +28,7 @@ interface CarTransactionListProps {
 
 const CarTransactionList: React.FC<CarTransactionListProps> = inject(Stores.carTransactionStore)(observer(({carTransactionStore}) => {
 
+    const [dataFetched, setDataFetched] = React.useState(false);
     const [carOptions, setCarOptions] = React.useState([]);
     const [branchOptions, setBranchOptions] = React.useState([]);
     const [companyOptions, setCompanyOptions] = React.useState([]);
@@ -98,6 +99,8 @@ const CarTransactionList: React.FC<CarTransactionListProps> = inject(Stores.carT
                 branchOptions.push(<Option key={item.key} value={item.key}>{item.title}</Option>);
             }
             setBranchOptions(branchOptions);
+
+            setDataFetched(true);
         }
         catch {
 
@@ -195,56 +198,72 @@ const CarTransactionList: React.FC<CarTransactionListProps> = inject(Stores.carT
                     <Form {...formItemLayout} layout={"vertical"} onFinish={onFinish} form={form}
                           key={"searchForm"}
                           scrollToFirstError>
-                        <Row gutter={[24, 16]}>
-                            {UserContext.info.role == 100 ?
+                        {dataFetched ?
+                            <Row gutter={[24, 16]}>
+                                {UserContext.info.role == 100 ?
+                                    <Col span={8}>
+                                        <Form.Item name="companyId"
+                                                   initialValue={viewModel?.getCarTransactionsRequest?.companyId}
+                                                   key={"companyId"}
+                                                   label={i18next.t("CarTransactions.SearchPanel.Label.companyName")}>
+                                            {/*<Input onChange={onChanged}/>*/}
+                                            <Select style={{width: "100%", display: "block"}}
+                                                    showSearch={true} onChange={(e) => onSelectChanged(e, "companyId")}>
+                                                {companyOptions}
+                                            </Select>
+                                        </Form.Item>
+                                    </Col> : ""}
                                 <Col span={8}>
-                                    <Form.Item name="companyId" initialValue={viewModel?.getCarTransactionsRequest?.companyId}
-                                               key={"companyId"}
-                                               label={i18next.t("CarTransactions.SearchPanel.Label.companyName")}>
+                                    <Form.Item name="companyBranchName"
+                                               initialValue={viewModel?.getCarTransactionsRequest?.companyBranchName}
+                                               key={"companyBranchName"}
+                                               label={i18next.t("CarTransactions.SearchPanel.Label.companyBranchName")}>
                                         {/*<Input onChange={onChanged}/>*/}
-                                        <Select style={{width: "100%", display:"block"}}
-                                                showSearch={true} onChange={(e) => onSelectChanged(e, "companyId")}>
-                                            {companyOptions}
+                                        <Select style={{width: "100%", display: "block"}}
+                                                showSearch={true}
+                                                onChange={(e) => onSelectChanged(e, "companyBranchId")}>
+                                            {branchOptions}
                                         </Select>
                                     </Form.Item>
-                                </Col>: ""}
-                            <Col span={8}>
-                                <Form.Item name="companyBranchName" initialValue={viewModel?.getCarTransactionsRequest?.companyBranchName}
-                                           key={"companyBranchName"}
-                                           label={i18next.t("CarTransactions.SearchPanel.Label.companyBranchName")}>
-                                    {/*<Input onChange={onChanged}/>*/}
-                                    <Select style={{width: "100%", display:"block"}}
-                                            showSearch={true} onChange={(e) => onSelectChanged(e, "companyBranchId")}>
-                                        {branchOptions}
-                                    </Select>
-                                </Form.Item>
-                            </Col>
-                            <Col span={8}>
-                                <Form.Item name="carIdNumber" initialValue={viewModel?.getCarTransactionsRequest?.carIdNumber}
-                                           key={"carIdNumber"}
-                                           label={i18next.t("CarTransactions.SearchPanel.Label.carIdNumber")}>
-                                    {/*<Input onChange={onChanged}/>*/}
-                                    <Select style={{width: "100%", display:"block"}}
-                                            showSearch={true} onChange={(e) => onSelectChanged(e, "carIdNumber")}>
-                                        {carOptions}
-                                    </Select>
-                                </Form.Item>
-                            </Col>
-                            <Col span={8}>
-                                <Form.Item name="transDateFrom" initialValue={viewModel?.getCarTransactionsRequest?.transDateFrom}
-                                           key={"transDateFrom"}
-                                           label={i18next.t("CarTransactions.SearchPanel.Label.transDateFrom")}>
-                                    <DatePicker onChange={((date, dateString) => onDateChange(date, dateString, "transDateFrom"))} />
-                                </Form.Item>
-                            </Col>
-                            <Col span={8}>
-                                <Form.Item name="transDateTo" initialValue={viewModel?.getCarTransactionsRequest?.transDateTo}
-                                           key={"transDateTo"}
-                                           label={i18next.t("CarTransactions.SearchPanel.Label.transDateTo")}>
-                                    <DatePicker onChange={((date, dateString) => onDateChange(date, dateString, "transDateTo"))} />
-                                </Form.Item>
-                            </Col>
-                        </Row>
+                                </Col>
+                                <Col span={8}>
+                                    <Form.Item name="carIdNumber"
+                                               initialValue={viewModel?.getCarTransactionsRequest?.carIdNumber}
+                                               key={"carIdNumber"}
+                                               label={i18next.t("CarTransactions.SearchPanel.Label.carIdNumber")}>
+                                        {/*<Input onChange={onChanged}/>*/}
+                                        <Select style={{width: "100%", display: "block"}}
+                                                showSearch={true} onChange={(e) => onSelectChanged(e, "carIdNumber")}>
+                                            {carOptions}
+                                        </Select>
+                                    </Form.Item>
+                                </Col>
+                                <Col span={8}>
+                                    <Form.Item name="transDateFrom"
+                                               initialValue={viewModel?.getCarTransactionsRequest?.transDateFrom}
+                                               key={"transDateFrom"}
+                                               label={i18next.t("CarTransactions.SearchPanel.Label.transDateFrom")}>
+                                        <DatePicker
+                                            onChange={((date, dateString) => onDateChange(date, dateString, "transDateFrom"))}/>
+                                    </Form.Item>
+                                </Col>
+                                <Col span={8}>
+                                    <Form.Item name="transDateTo"
+                                               initialValue={viewModel?.getCarTransactionsRequest?.transDateTo}
+                                               key={"transDateTo"}
+                                               label={i18next.t("CarTransactions.SearchPanel.Label.transDateTo")}>
+                                        <DatePicker
+                                            onChange={((date, dateString) => onDateChange(date, dateString, "transDateTo"))}/>
+                                    </Form.Item>
+                                </Col>
+                            </Row>
+                            :
+                            <Row gutter={[24, 16]}>
+                                <Col offset={11} span={8}>
+                                    <Spin className={"spine"} size="large"/>
+                                </Col>
+                            </Row>
+                        }
                         <PageHeader
                             ghost={false}
                             subTitle={<div>

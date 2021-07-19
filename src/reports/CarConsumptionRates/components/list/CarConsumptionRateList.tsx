@@ -7,7 +7,7 @@ import Stores from "app/constants/Stores";
 import {
     Button, Collapse, Col, Row,
     Pagination, Input, Form,
-    Table, PageHeader, Space, DatePicker, Select, Alert
+    Table, PageHeader, Space, DatePicker, Select, Alert, Spin
 } from "antd";
 import {
     FileExcelOutlined
@@ -29,6 +29,7 @@ interface CarConsumptionRateListProps {
 
 const CarConsumptionRateList: React.FC<CarConsumptionRateListProps> = inject(Stores.carConsumptionRateStore)(observer(({carConsumptionRateStore}) => {
 
+    const [dataFetched, setDataFetched] = React.useState(false);
     const [carOptions, setCarOptions] = React.useState([]);
     const [branchOptions, setBranchOptions] = React.useState([]);
     const [companyOptions, setCompanyOptions] = React.useState([]);
@@ -99,6 +100,8 @@ const CarConsumptionRateList: React.FC<CarConsumptionRateListProps> = inject(Sto
                 branchOptions.push(<Option key={item.key} value={item.key}>{item.title}</Option>);
             }
             setBranchOptions(branchOptions);
+
+            setDataFetched(true);
         }
         catch {
 
@@ -196,6 +199,7 @@ const CarConsumptionRateList: React.FC<CarConsumptionRateListProps> = inject(Sto
                     <Form {...formItemLayout} layout={"vertical"} onFinish={onFinish} form={form}
                           key={"searchForm"}
                           scrollToFirstError>
+                        {dataFetched ?
                         <Row gutter={[24, 16]}>
                             {UserContext.info.role == 100 ?
                                 <Col span={8}>
@@ -220,7 +224,7 @@ const CarConsumptionRateList: React.FC<CarConsumptionRateListProps> = inject(Sto
                                     </Select>
                                 </Form.Item>
                             </Col>
-                            <Col span={9}>
+                            <Col span={8}>
                                 <Form.Item name="carIdNumber" initialValue={viewModel?.getCarConsumptionRatesRequest?.carIdNumber}
                                            key={"carIdNumber"}
                                            label={i18next.t("CarConsumptionRates.SearchPanel.Label.carIdNumber")}>
@@ -238,7 +242,7 @@ const CarConsumptionRateList: React.FC<CarConsumptionRateListProps> = inject(Sto
                                     <DatePicker format={Constants.dateFormat} onChange={((date, dateString) => onDateChange(date, dateString, "dateFrom"))} />
                                 </Form.Item>
                             </Col>
-                            <Col span={8}>
+                            <Col span={9}>
                                 <Form.Item name="dateTo" initialValue={viewModel?.getCarConsumptionRatesRequest?.dateTo}
                                            key={"dateTo"}
                                            label={i18next.t("CarConsumptionRates.SearchPanel.Label.dateTo")}>
@@ -246,6 +250,13 @@ const CarConsumptionRateList: React.FC<CarConsumptionRateListProps> = inject(Sto
                                 </Form.Item>
                             </Col>
                         </Row>
+                            :
+                            <Row gutter={[24, 16]}>
+                                <Col offset={11} span={8}>
+                                    <Spin className={"spine"} size="large" />
+                                </Col>
+                            </Row>
+                        }
                         <PageHeader
                             ghost={false}
                             subTitle={<div>

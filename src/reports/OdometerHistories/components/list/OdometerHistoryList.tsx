@@ -7,7 +7,7 @@ import Stores from "app/constants/Stores";
 import {
     Button, Collapse, Col, Row,
     Pagination, Input, Form,
-    Table, PageHeader, Space, DatePicker, Select, Alert
+    Table, PageHeader, Space, DatePicker, Select, Alert, Spin
 } from "antd";
 import {
     FileExcelOutlined
@@ -28,7 +28,7 @@ interface OdometerHistoryListProps {
 }
 
 const OdometerHistoryList: React.FC<OdometerHistoryListProps> = inject(Stores.odometerHistoryStore)(observer(({odometerHistoryStore}) => {
-
+    const [dataFetched, setDataFetched] = React.useState(false);
     const [carOptions, setCarOptions] = React.useState([]);
     const [branchOptions, setBranchOptions] = React.useState([]);
     const [companyOptions, setCompanyOptions] = React.useState([]);
@@ -99,6 +99,8 @@ const OdometerHistoryList: React.FC<OdometerHistoryListProps> = inject(Stores.od
                 branchOptions.push(<Option key={item.key} value={item.key}>{item.title}</Option>);
             }
             setBranchOptions(branchOptions);
+
+            setDataFetched(true);
         }
         catch {
 
@@ -196,42 +198,54 @@ const OdometerHistoryList: React.FC<OdometerHistoryListProps> = inject(Stores.od
                     <Form {...formItemLayout} layout={"vertical"} onFinish={onFinish} form={form}
                           key={"searchForm"}
                           scrollToFirstError>
-                        <Row gutter={[24, 16]}>
-                            {UserContext.info.role == 100 ?
+                        {dataFetched ?
+                            <Row gutter={[24, 16]}>
+                                {UserContext.info.role == 100 ?
+                                    <Col span={8}>
+                                        <Form.Item name="companyId"
+                                                   initialValue={viewModel?.getOdometerHistoriesRequest?.companyId}
+                                                   key={"companyId"}
+                                                   label={i18next.t("OdometerHistories.SearchPanel.Label.companyName")}>
+                                            {/*<Input onChange={onChanged}/>*/}
+                                            <Select style={{width: "100%", display: "block"}}
+                                                    showSearch={true} onChange={(e) => onSelectChanged(e, "companyId")}>
+                                                {companyOptions}
+                                            </Select>
+                                        </Form.Item>
+                                    </Col> : ""}
                                 <Col span={8}>
-                                    <Form.Item name="companyId" initialValue={viewModel?.getOdometerHistoriesRequest?.companyId}
-                                               key={"companyId"}
-                                               label={i18next.t("OdometerHistories.SearchPanel.Label.companyName")}>
+                                    <Form.Item name="companyBranchName"
+                                               initialValue={viewModel?.getOdometerHistoriesRequest?.companyBranchName}
+                                               key={"companyBranchName"}
+                                               label={i18next.t("OdometerHistories.SearchPanel.Label.companyBranchName")}>
                                         {/*<Input onChange={onChanged}/>*/}
-                                        <Select style={{width: "100%", display:"block"}}
-                                                showSearch={true} onChange={(e) => onSelectChanged(e, "companyId")}>
-                                            {companyOptions}
+                                        <Select style={{width: "100%", display: "block"}}
+                                                showSearch={true}
+                                                onChange={(e) => onSelectChanged(e, "companyBranchId")}>
+                                            {branchOptions}
                                         </Select>
                                     </Form.Item>
-                                </Col>: ""}
-                            <Col span={8}>
-                                <Form.Item name="companyBranchName" initialValue={viewModel?.getOdometerHistoriesRequest?.companyBranchName}
-                                           key={"companyBranchName"}
-                                           label={i18next.t("OdometerHistories.SearchPanel.Label.companyBranchName")}>
-                                    {/*<Input onChange={onChanged}/>*/}
-                                    <Select style={{width: "100%", display:"block"}}
-                                            showSearch={true} onChange={(e) => onSelectChanged(e, "companyBranchId")}>
-                                        {branchOptions}
-                                    </Select>
-                                </Form.Item>
-                            </Col>
-                            <Col span={8}>
-                                <Form.Item name="carIdNumber" initialValue={viewModel?.getOdometerHistoriesRequest?.carIdNumber}
-                                           key={"carIdNumber"}
-                                           label={i18next.t("OdometerHistories.SearchPanel.Label.carIdNumber")}>
-                                    {/*<Input onChange={onChanged}/>*/}
-                                    <Select style={{width: "100%", display:"block"}}
-                                            showSearch={true} onChange={(e) => onSelectChanged(e, "carIdNumber")}>
-                                        {carOptions}
-                                    </Select>
-                                </Form.Item>
-                            </Col>
-                        </Row>
+                                </Col>
+                                <Col span={8}>
+                                    <Form.Item name="carIdNumber"
+                                               initialValue={viewModel?.getOdometerHistoriesRequest?.carIdNumber}
+                                               key={"carIdNumber"}
+                                               label={i18next.t("OdometerHistories.SearchPanel.Label.carIdNumber")}>
+                                        {/*<Input onChange={onChanged}/>*/}
+                                        <Select style={{width: "100%", display: "block"}}
+                                                showSearch={true} onChange={(e) => onSelectChanged(e, "carIdNumber")}>
+                                            {carOptions}
+                                        </Select>
+                                    </Form.Item>
+                                </Col>
+                            </Row>
+                            :
+                            <Row gutter={[24, 16]}>
+                                <Col offset={11} span={8}>
+                                    <Spin className={"spine"} size="large"/>
+                                </Col>
+                            </Row>
+                        }
                         <PageHeader
                             ghost={false}
                             subTitle={<div>
