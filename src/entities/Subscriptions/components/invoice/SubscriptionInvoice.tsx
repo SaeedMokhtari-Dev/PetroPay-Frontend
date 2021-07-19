@@ -64,9 +64,8 @@ const SubscriptionInvoice: React.FC<SubscriptionInvoiceProps> = inject(Stores.su
             return ;
         }
 
-        response.body.getReader().read().then(res => {
-            debugger;
-            const data = new Blob([res.value], {type: 'application/pdf'});
+        response.arrayBuffer().then(res => {
+            const data = new Blob([res], {type: 'application/pdf'});
             const pdfURL = window.URL.createObjectURL(data);
             let tempLink = document.createElement('a');
             tempLink.href = pdfURL;
