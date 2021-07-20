@@ -243,7 +243,7 @@ const CarOdometerMinList: React.FC<CarOdometerMinListProps> = inject(Stores.carO
             </Collapse>
             <br/>
             <Table dataSource={viewModel?.carOdometerMinList} columns={columns} loading={viewModel?.isProcessing}
-                   bordered={true} pagination={false} scroll={{ x: 1500 }} sticky />
+                   bordered={true} pagination={false} sticky />
             <br/>
             <Pagination
                 total={viewModel?.totalSize}

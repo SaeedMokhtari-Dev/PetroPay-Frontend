@@ -1,7 +1,7 @@
 export default
 [
     {title: "Cars.Label.timeToOdometerRecord", dataIndex: "timeToOdometerRecord", key: "timeToOdometerRecord", responsive: ['sm']},
-    {title: "Cars.Label.key", dataIndex: "key", key: "key", responsive: ['sm']},
+    {title: "Cars.Label.key", dataIndex: "key", key: "key", width: "100px"},
     {title: "Cars.Label.companyBarnchName", dataIndex: "companyBarnchName", key: "companyBarnchName", responsive: ['md']},
     {title: "Cars.Label.carIdNumber", dataIndex: "carIdNumber", key: "carIdNumber", responsive: ['md']},
     {title: "Cars.Label.consumptionValue", dataIndex: "consumptionValue", key: "consumptionValue", responsive: ['md']},

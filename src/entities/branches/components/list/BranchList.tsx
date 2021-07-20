@@ -225,7 +225,7 @@ const BranchList: React.FC<BranchListProps> = inject(Stores.branchStore)(observe
             />
 
             <Table dataSource={viewModel?.branchList} columns={columns} loading={viewModel?.isProcessing}
-                   bordered={true} pagination={false} scroll={{ x: 1500 }} sticky
+                   bordered={true} pagination={false} sticky
                    rowClassName={(record, index) => (record.companyBranchActiva ? "green" : "red")}/>
             <br/>
             <Pagination

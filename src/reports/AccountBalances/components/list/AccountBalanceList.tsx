@@ -192,7 +192,7 @@ const AccountBalanceList: React.FC<AccountBalanceListProps> = inject(Stores.acco
             </Collapse>
             <br/>*/}
             <Table dataSource={viewModel?.accountBalanceList} columns={columns} loading={viewModel?.isProcessing}
-                   bordered={true} pagination={false} scroll={{ x: 1500 }} sticky />
+                   bordered={true} pagination={false} sticky />
             <br/>
             <Pagination
                 total={viewModel?.totalSize}

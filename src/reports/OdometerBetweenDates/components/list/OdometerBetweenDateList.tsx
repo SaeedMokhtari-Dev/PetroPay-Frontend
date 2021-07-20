@@ -244,7 +244,7 @@ const OdometerBetweenDateList: React.FC<OdometerBetweenDateListProps> = inject(S
             </Collapse>
             <br/>
             <Table dataSource={viewModel?.odometerBetweenDateList} columns={columns} loading={viewModel?.isProcessing}
-                   bordered={true} pagination={false} scroll={{ x: 1500 }} sticky />
+                   bordered={true} pagination={false} sticky />
             <br/>
             <Pagination
                 total={viewModel?.totalSize}

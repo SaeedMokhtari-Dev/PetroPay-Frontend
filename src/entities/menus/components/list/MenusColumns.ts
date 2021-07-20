@@ -1,6 +1,6 @@
 export default
 [
-    {title: "Menus.Label.key", dataIndex: "key", key: "key", responsive: ['md']},
+    {title: "Menus.Label.key", dataIndex: "key", key: "key", width: "100px"},
     {title: "Menus.Label.enTitle", dataIndex: "enTitle", key: "enTitle", responsive: ['md']},
     {title: "Menus.Label.arTitle", dataIndex: "arTitle", key: "arTitle", responsive: ['md']},
     {title: "Menus.Label.createdAt", dataIndex: "createdAt", key: "createdAt", responsive: ['md']},

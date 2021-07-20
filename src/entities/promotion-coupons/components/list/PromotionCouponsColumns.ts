@@ -1,6 +1,6 @@
 export default
 [
-    {title: "PromotionCoupons.Label.key", dataIndex: "key", key: "key", responsive: ['md']},
+    {title: "PromotionCoupons.Label.key", dataIndex: "key", key: "key", width: "100px"},
     {title: "PromotionCoupons.Label.couponCode", dataIndex: "couponCode", key: "couponCode", responsive: ['md']},
     {title: "PromotionCoupons.Label.couponDiscountValue", dataIndex: "couponDiscountValue", key: "couponDiscountValue", responsive: ['md']},
     {title: "PromotionCoupons.Label.couponActiveDate", dataIndex: "couponActiveDate", key: "couponActiveDate", responsive: ['md']},

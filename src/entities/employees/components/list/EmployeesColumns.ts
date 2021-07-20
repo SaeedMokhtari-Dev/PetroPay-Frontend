@@ -1,6 +1,6 @@
 export default
 [
-    {title: "Employees.Label.key", dataIndex: "key", key: "key", responsive: ['md']},
+    {title: "Employees.Label.key", dataIndex: "key", key: "key", width: "100px"},
     /*{title: "Employees.Label.emplyeeId", dataIndex: "emplyeeId", key: "emplyeeId", responsive: ['md']},*/
     {title: "Employees.Label.emplyeeName", dataIndex: "emplyeeName", key: "emplyeeName", responsive: ['md']},
     {title: "Employees.Label.emplyeePhone", dataIndex: "emplyeePhone", key: "emplyeePhone", responsive: ['md']},

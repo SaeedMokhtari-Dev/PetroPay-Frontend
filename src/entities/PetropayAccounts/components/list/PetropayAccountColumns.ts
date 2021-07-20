@@ -1,7 +1,7 @@
 export default
 [
     /*{title: "PetropayAccounts.Label.key", dataIndex: "key", key: "key", responsive: ['md']},*/
-    {title: "PetropayAccounts.Label.transId", dataIndex: "transId", key: "transId", responsive: ['md']},
+    {title: "PetropayAccounts.Label.transId", dataIndex: "transId", key: "transId", width: "120px"},
     {title: "PetropayAccounts.Label.transDate", dataIndex: "transDate", key: "transDate", responsive: ['md']},
     /*{title: "PetropayAccounts.Label.accountId", dataIndex: "accountId", key: "accountId", responsive: ['md']},*/
     {title: "PetropayAccounts.Label.accountName", dataIndex: "accountName", key: "accountName", responsive: ['md']},

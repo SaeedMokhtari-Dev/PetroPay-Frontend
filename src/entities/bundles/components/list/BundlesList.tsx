@@ -44,7 +44,7 @@ const BundlesList: React.FC<BundlesSidebarProps> = inject(Stores.bundlesStore)(o
         title: i18next.t("General.Column.Action"),
         dataIndex: 'operation',
         key: 'action',
-        fixed: 'right',
+        width: "100px",
         render: (text, record) => (
             <div className="inline">
 
@@ -126,7 +126,7 @@ const BundlesList: React.FC<BundlesSidebarProps> = inject(Stores.bundlesStore)(o
             />
 
             <Table dataSource={viewModel?.bundleList} columns={columns} loading={viewModel?.isProcessing}
-                   bordered={true} pagination={false} scroll={{ x: 1500 }} sticky/>
+                   bordered={true} pagination={false} sticky/>
             <br/>
             <Pagination
                 total={viewModel?.totalSize}

@@ -155,7 +155,7 @@ const PetrolStationListList: React.FC<PetrolStationListListProps> = inject(Store
             </Collapse>
             <br/>
             <Table dataSource={viewModel?.petrolStationListList} columns={columns} loading={viewModel?.isProcessing}
-                   bordered={true} pagination={false} scroll={{ x: 1500 }} sticky />
+                   bordered={true} pagination={false}  sticky />
             <br/>
             <Pagination
                 total={viewModel?.totalSize}

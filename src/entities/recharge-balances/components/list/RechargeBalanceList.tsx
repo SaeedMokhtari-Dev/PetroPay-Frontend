@@ -44,7 +44,7 @@ const RechargeBalanceList: React.FC<RechargeBalanceListProps> = inject(Stores.re
     });
     const companyColumns = [
         {title: i18next.t("RechargeBalances.Label.companyName"), dataIndex: "companyName", key: "companyName", responsive: ['md']},
-        {title: i18next.t("RechargeBalances.Label.companyId"), dataIndex: "companyId", key: "companyId", responsive: ['md']}
+        {title: i18next.t("RechargeBalances.Label.companyId"), dataIndex: "companyId", key: "companyId", width: "100px"}
     ];
     const columns: any[] = [...RechargeBalanceColumns, {
         title: i18next.t("General.Column.Action"),
