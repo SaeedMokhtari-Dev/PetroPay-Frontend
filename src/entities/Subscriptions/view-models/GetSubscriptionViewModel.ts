@@ -28,6 +28,7 @@ export default class GetSubscriptionViewModel {
 
     addSubscriptionRequest: AddSubscriptionRequest = new AddSubscriptionRequest();
     addedSuccessfully: boolean;
+    getSubscriptionsRequest: GetSubscriptionRequest = new GetSubscriptionRequest();
 
     constructor(public subscriptionStore: SubscriptionStore) {
         makeAutoObservable(this);
@@ -72,10 +73,12 @@ export default class GetSubscriptionViewModel {
             if(response && response.success)
             {
                 message.success(getLocalizedString(response.message));
-                if(UserContext.info.role == 100)
-                    await this.getAllSubscription(new GetSubscriptionRequest(this.pageSize, this.pageIndex));
-                else if(UserContext.info.role == 1)
-                    await this.getAllSubscription(new GetSubscriptionRequest(this.pageSize, this.pageIndex, UserContext.info.id));
+                this.getSubscriptionsRequest = new GetSubscriptionRequest();
+                this.getSubscriptionsRequest.pageIndex = this.pageIndex;
+                this.getSubscriptionsRequest.pageSize = this.pageSize;
+                if(UserContext.info.role == 1)
+                    this.getSubscriptionsRequest.companyId = UserContext.info.id;
+                await this.getAllSubscription(this.getSubscriptionsRequest);
             }
             else{
                 this.errorMessage = getLocalizedString(response.message);
@@ -106,10 +109,12 @@ export default class GetSubscriptionViewModel {
             if(response && response.success)
             {
                 message.success(getLocalizedString(response.message));
-                if(UserContext.info.role == 100)
-                    await this.getAllSubscription(new GetSubscriptionRequest(this.pageSize, this.pageIndex));
-                else if(UserContext.info.role == 1)
-                    await this.getAllSubscription(new GetSubscriptionRequest(this.pageSize, this.pageIndex, UserContext.info.id));
+                this.getSubscriptionsRequest = new GetSubscriptionRequest();
+                this.getSubscriptionsRequest.pageIndex = this.pageIndex;
+                this.getSubscriptionsRequest.pageSize = this.pageSize;
+                if(UserContext.info.role == 1)
+                    this.getSubscriptionsRequest.companyId = UserContext.info.id;
+                await this.getAllSubscription(this.getSubscriptionsRequest);
             }
             else{
                 this.errorMessage = getLocalizedString(response.message);
@@ -141,10 +146,12 @@ export default class GetSubscriptionViewModel {
             if(response && response.success)
             {
                 message.success(getLocalizedString(response.message));
-                if(UserContext.info.role == 100)
-                    await this.getAllSubscription(new GetSubscriptionRequest(this.pageSize, this.pageIndex));
-                else if(UserContext.info.role == 1)
-                    await this.getAllSubscription(new GetSubscriptionRequest(this.pageSize, this.pageIndex, UserContext.info.id));
+                this.getSubscriptionsRequest = new GetSubscriptionRequest();
+                this.getSubscriptionsRequest.pageIndex = this.pageIndex;
+                this.getSubscriptionsRequest.pageSize = this.pageSize;
+                if(UserContext.info.role == 1)
+                    this.getSubscriptionsRequest.companyId = UserContext.info.id;
+                await this.getAllSubscription(this.getSubscriptionsRequest);
             }
             else{
                 this.errorMessage = getLocalizedString(response.message);

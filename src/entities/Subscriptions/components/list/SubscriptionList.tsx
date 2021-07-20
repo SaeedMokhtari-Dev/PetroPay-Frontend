@@ -1,16 +1,13 @@
 import React, {useEffect, useState} from 'react';
 import {inject, observer} from "mobx-react";
-import { BrowserRouter as Router,
-    Switch,
-    Route,
-    Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./SubscriptionList.scss";
 import Stores from "app/constants/Stores";
 
 import {
     Button,
     Pagination,
-    Table, Modal, PageHeader, Badge, Tag
+    Table, Modal, PageHeader, Badge, Tag, Form, Row, Col, Select, Input, DatePicker, Spin, Alert, Collapse
 } from "antd";
 import {
     EditOutlined, DeleteOutlined, CheckOutlined, CloseOutlined, StopOutlined,
@@ -24,9 +21,12 @@ import UserContext from "../../../../identity/contexts/UserContext";
 import SubscriptionStore from 'entities/Subscriptions/stores/SubscriptionStore';
 import SubscriptionColumns from "./SubscriptionColumns";
 import {getSubscriptionInvoiceRoute} from "../../../../app/utils/RouteHelper";
+import Constants from "../../../../app/constants/Constants";
+import SubscriptionStatus from "../../../../app/constants/SubscriptionStatus";
 
-
+const { Panel } = Collapse;
 const { confirm } = Modal;
+const { Option } = Select;
 
 interface SubscriptionListProps {
     subscriptionStore?: SubscriptionStore
@@ -35,6 +35,21 @@ interface SubscriptionListProps {
 
 
 const SubscriptionList: React.FC<SubscriptionListProps> = inject(Stores.subscriptionStore)(observer(({subscriptionStore}) => {
+
+    const [subscriptionStatusOptions, setSubscriptionStatusOptions] = React.useState([]);
+    const formItemLayout = {
+        labelCol: {
+            xs: { span: 24 },
+            sm: { span: 24 },
+        },
+        wrapperCol: {
+            xs: { span: 24 },
+            sm: { span: 24 },
+        },
+    };
+    const [form] = Form.useForm();
+
+
     SubscriptionColumns.forEach(w => {
        w.title = i18next.t(w.title);
         if(w.key === "subscriptionActive")
@@ -44,7 +59,6 @@ const SubscriptionList: React.FC<SubscriptionListProps> = inject(Stores.subscrip
             }
         }
     });
-
 
     let columns: any[] = [...SubscriptionColumns,
         {
@@ -118,13 +132,20 @@ const SubscriptionList: React.FC<SubscriptionListProps> = inject(Stores.subscrip
         subscriptionStore.getSubscriptionViewModel.pageIndex = 0;
         subscriptionStore.getSubscriptionViewModel.pageSize = 20;
 
-        if(UserContext.info.role == 100) {
-            await subscriptionStore.getSubscriptionViewModel.getAllSubscription(new GetSubscriptionRequest(
-                20, 0));
+        subscriptionStore.getSubscriptionViewModel.getSubscriptionsRequest.pageIndex = 0;
+        subscriptionStore.getSubscriptionViewModel.getSubscriptionsRequest.pageSize = 20;
+        if(UserContext.info.role == 1)
+            subscriptionStore.getSubscriptionViewModel.getSubscriptionsRequest.companyId = UserContext.info.id;
+
+        await subscriptionStore.getSubscriptionViewModel.getAllSubscription(
+            subscriptionStore.getSubscriptionViewModel.getSubscriptionsRequest
+        );
+
+        let subscriptionStatusOptions = [];
+        for (let item of SubscriptionStatus) {
+            subscriptionStatusOptions.push(<Option key={item.value} value={item.value}>{i18next.t(item.title)}</Option>);
         }
-        else if(UserContext.info.role == 1)
-            await subscriptionStore.getSubscriptionViewModel.getAllSubscription(new GetSubscriptionRequest(
-                20, 0, UserContext.info.id));
+        setSubscriptionStatusOptions(subscriptionStatusOptions);
     }
 
     let viewModel = subscriptionStore.getSubscriptionViewModel;
@@ -198,24 +219,35 @@ const SubscriptionList: React.FC<SubscriptionListProps> = inject(Stores.subscrip
     }
 
     async function pageIndexChanged(pageIndex, pageSize){
-        viewModel.pageIndex = pageIndex - 1;
-        viewModel.pageSize = pageSize;
-        if(UserContext.info.role == 100)
-            await subscriptionStore.getSubscriptionViewModel.getAllSubscription(new GetSubscriptionRequest(
-                pageSize, pageIndex - 1));
-        else if(UserContext.info.role == 1)
-            await subscriptionStore.getSubscriptionViewModel.getAllSubscription(new GetSubscriptionRequest(
-                pageSize, pageIndex - 1, UserContext.info.id));
+        viewModel.getSubscriptionsRequest.pageSize = pageSize;
+        viewModel.getSubscriptionsRequest.pageIndex = pageIndex - 1;
+        await viewModel.getAllSubscription(viewModel.getSubscriptionsRequest);
     }
     async function pageSizeChanged(current, pageSize){
-        viewModel.pageIndex = 0;
-        viewModel.pageSize = pageSize;
-        if(UserContext.info.role == 100)
-            await subscriptionStore.getSubscriptionViewModel.getAllSubscription(new GetSubscriptionRequest(
-                pageSize, 0));
-        else if(UserContext.info.role == 1)
-            await subscriptionStore.getSubscriptionViewModel.getAllSubscription(new GetSubscriptionRequest(
-                pageSize, 0, UserContext.info.id));
+        viewModel.getSubscriptionsRequest.pageSize = pageSize;
+        viewModel.getSubscriptionsRequest.pageIndex = 0;
+        await viewModel.getAllSubscription(viewModel.getSubscriptionsRequest);
+    }
+    async function onFinish(values: any) {
+        viewModel.getSubscriptionsRequest.pageIndex = 0;
+        await viewModel.getAllSubscription(viewModel.getSubscriptionsRequest);
+    }
+    async function onReset(){
+        const pageSize = viewModel.getSubscriptionsRequest.pageSize;
+        viewModel.getSubscriptionsRequest = new GetSubscriptionRequest();
+        viewModel.getSubscriptionsRequest.pageIndex = 0;
+        viewModel.getSubscriptionsRequest.pageSize = pageSize;
+        if(UserContext.info.role == 1){
+            viewModel.getSubscriptionsRequest.companyId = UserContext.info.id;
+        }
+        await viewModel.getAllSubscription(viewModel.getSubscriptionsRequest);
+        form.resetFields();
+    }
+    function onSelectChanged(e, propName){
+        viewModel.getSubscriptionsRequest[`${propName}`] = e;
+    }
+    function onDateChange(date, dateString, prop) {
+        viewModel.getSubscriptionsRequest[`${prop}`] = dateString;
     }
     return (
         <div>
@@ -231,7 +263,57 @@ const SubscriptionList: React.FC<SubscriptionListProps> = inject(Stores.subscrip
                     ,
                 ]}
             />
+            <Collapse defaultActiveKey={['1']}>
+                <Panel header={i18next.t("General.SearchPanel.Text")}  key="1">
+                    <Form {...formItemLayout} layout={"vertical"} onFinish={onFinish} form={form}
+                          key={"searchForm"}
+                          scrollToFirstError>
+                        <Row gutter={[24, 16]}>
+                            <Col span={8}>
+                                <Form.Item name="status"
+                                           key={"status"}
+                                           label={i18next.t("Subscriptions.SearchPanel.Label.status")}>
+                                    <Select onChange={(e) => onSelectChanged(e, "status")} allowClear={true}>
+                                        {subscriptionStatusOptions}
+                                    </Select>
+                                </Form.Item>
+                            </Col>
+                            <Col span={8}>
+                                <Form.Item name="dateFrom"
+                                           key={"dateFrom"}
+                                           label={i18next.t("Subscriptions.SearchPanel.Label.dateFrom")}>
+                                    <DatePicker format={Constants.dateFormat} onChange={((date, dateString) => onDateChange(date, dateString, "dateFrom"))} />
+                                </Form.Item>
+                            </Col>
+                            <Col span={8}>
+                                <Form.Item name="dateTo"
+                                           key={"dateTo"}
+                                           label={i18next.t("Subscriptions.SearchPanel.Label.dateTo")}>
+                                    <DatePicker format={Constants.dateFormat} onChange={((date, dateString) => onDateChange(date, dateString, "dateTo"))} />
+                                </Form.Item>
+                            </Col>
+                        </Row>
 
+                        <PageHeader
+                            ghost={false}
+                            subTitle={<div>
+                                {viewModel?.errorMessage &&
+                                <Alert message={viewModel?.errorMessage} type="error" />
+                                }
+                            </div>}
+                            extra={[
+                                <Button type="primary" loading={viewModel.isProcessing} onClick={onReset} danger key="reset" size={"large"} htmlType="reset">
+                                    {i18next.t("General.SearchPanel.ResetButton")}
+                                </Button>,
+                                <Button type="primary" loading={viewModel.isProcessing} key="submit" size={"large"} htmlType="submit">
+                                    {i18next.t("General.SearchPanel.SearchButton")}
+                                </Button>
+                            ]}
+                        />
+                    </Form>
+                </Panel>
+            </Collapse>
+            <br/>
             <Table dataSource={viewModel?.subscriptionList} columns={columns} loading={viewModel?.isProcessing}
                    bordered={true} pagination={false} scroll={{ x: 1500 }} sticky
                    rowClassName={(record, index) => (record.subscriptionActive ? "green" : "red")}/>

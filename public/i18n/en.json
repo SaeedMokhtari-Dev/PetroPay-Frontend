@@ -585,6 +585,13 @@
   "Subscriptions.subscriptionPaymentMethod.PayFromCompanyBalance": "Pay From Company Balance",
   "Subscriptions.subscriptionPaymentMethod.SelectOtherPayment": "Select Other Payment",
 
+  "Subscriptions.SubscriptionStatus.Accepted": "Accepted",
+  "Subscriptions.SubscriptionStatus.Rejected": "Rejected",
+  "Subscriptions.SubscriptionStatus.Pending": "Pending",
+
+  "Subscriptions.SearchPanel.Label.status": "Subscription Status",
+  "Subscriptions.SearchPanel.Label.dateFrom": "Subscription Date From",
+  "Subscriptions.SearchPanel.Label.dateTo": "Subscription Date To",
 
   "Subscriptions.Add.HeaderText": "Add Subscription",
   "Subscriptions.Edit.HeaderText": "Edit Subscription with Id:",

@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {inject, observer} from "mobx-react";
-import "./SubscriptionInvoice.scss";
+import "./SubscriptionDetail.scss";
 import Stores from "app/constants/Stores";
 
 import {
@@ -16,7 +16,6 @@ import SubscriptionStore from 'entities/Subscriptions/stores/SubscriptionStore';
 import NavigationService from "../../../../app/services/NavigationService";
 import ImageConstants from "../../../../app/constants/ImageConstants";
 import ApiService from "../../../../app/services/ApiService";
-import {set} from "mobx";
 
 
 interface SubscriptionInvoiceProps {
@@ -24,10 +23,9 @@ interface SubscriptionInvoiceProps {
     match?: any;
 }
 
-const SubscriptionInvoice: React.FC<SubscriptionInvoiceProps> = inject(Stores.subscriptionStore)(observer(({subscriptionStore, match}) => {
+const SubscriptionDetail: React.FC<SubscriptionInvoiceProps> = inject(Stores.subscriptionStore)(observer(({subscriptionStore, match}) => {
     const [dataFetched, setDataFetched] = React.useState(false);
     const [invoiceId, setInvoiceNumber] = React.useState(0);
-    const [exportPdfLoading, setExportPdfLoading] = React.useState(false);
 
     useEffect(() => {
         onLoad();
@@ -59,27 +57,21 @@ const SubscriptionInvoice: React.FC<SubscriptionInvoiceProps> = inject(Stores.su
     }
     async function print(){
         debugger;
-        setExportPdfLoading(true);
-        try {
-            let response = await ApiService.postPrivate(`/api/subscription/invoice-pdf/${invoiceId}`, null, true);
+        let response = await ApiService.postPrivate(`/api/subscription/invoice-pdf/${invoiceId}`, null,true);
 
-            if (!response) {
-                return;
-            }
+        if(!response)
+        {
+            return ;
+        }
 
-            response.arrayBuffer().then(res => {
-                const data = new Blob([res], {type: 'application/pdf'});
-                const pdfURL = window.URL.createObjectURL(data);
-                let tempLink = document.createElement('a');
-                tempLink.href = pdfURL;
-                tempLink.setAttribute('download', 'invoice.pdf');
-                tempLink.click();
-                setExportPdfLoading(false);
-            });
-        }
-        catch{
-            setExportPdfLoading(false);
-        }
+        response.arrayBuffer().then(res => {
+            const data = new Blob([res], {type: 'application/pdf'});
+            const pdfURL = window.URL.createObjectURL(data);
+            let tempLink = document.createElement('a');
+            tempLink.href = pdfURL;
+            tempLink.setAttribute('download', 'invoice.pdf');
+            tempLink.click();
+        })
 
 
     }
@@ -223,13 +215,13 @@ const SubscriptionInvoice: React.FC<SubscriptionInvoiceProps> = inject(Stores.su
                 </Row>
             }
             <Row>
-               <Button onClick={print} loading={exportPdfLoading} type={"primary"} icon={<PrinterOutlined />}></Button>
+               <Button onClick={print} type={"primary"} icon={<PrinterOutlined />}></Button>
             </Row>
         </div>
     )
 }));
 
 
-export default SubscriptionInvoice;
+export default SubscriptionDetail;
 
 
