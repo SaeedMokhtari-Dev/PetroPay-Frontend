@@ -595,6 +595,7 @@
 
   "Subscriptions.Add.HeaderText": "Add Subscription",
   "Subscriptions.Edit.HeaderText": "Edit Subscription with Id:",
+  "Subscriptions.Detail.HeaderText": "Detail Of Subscription with Id:",
   "Subscriptions.CarAdd.Edit.HeaderText": "Car Add Subscription",
   "Subscriptions.Section.GeneralInformation": "General Information",
   "Subscriptions.Section.BundleInformation": "Bundle Information (Please select one Bundle)",
@@ -607,6 +608,7 @@
   "Subscriptions.Button.RejectRequest": "Reject Request",
   "Subscriptions.Button.Calculate": "Calculate cost",
   "Subscriptions.Button.CarList": "Cars",
+  "Subscriptions.Button.Details": "Details",
 
   "Subscriptions.Validation.Message.bundlesId.Required": "Please select an bundle.",
   "Subscriptions.Validation.Message.subscriptionCarNumbers.Required": "Please enter Subscription Car Numbers",

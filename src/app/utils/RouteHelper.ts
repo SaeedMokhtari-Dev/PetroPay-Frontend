@@ -16,3 +16,7 @@ export function getSubscriptionInvoiceRoute(invoiceNumber: any = null): string
 {
     return Routes.subscriptionInvoice.replace('/:invoiceNumber', invoiceNumber ? `/${invoiceNumber}` : '');
 }
+export function getSubscriptionDetailRoute(subscriptionId: any = null): string
+{
+    return Routes.detailSubscription.replace('/:subscriptionId', subscriptionId ? `/${subscriptionId}` : '');
+}

@@ -10,7 +10,7 @@ import {
     Table, Modal, PageHeader, Badge, Tag, Form, Row, Col, Select, Input, DatePicker, Spin, Alert, Collapse
 } from "antd";
 import {
-    EditOutlined, DeleteOutlined, CheckOutlined, CloseOutlined, StopOutlined,
+    EditOutlined, DeleteOutlined, CheckOutlined, CloseOutlined, StopOutlined, EyeOutlined,
     ExclamationCircleOutlined, PlusCircleOutlined, CheckCircleOutlined, CarOutlined, BookOutlined
 } from '@ant-design/icons';
 import i18next from "i18next";
@@ -20,7 +20,7 @@ import GetSubscriptionRequest from "../../handlers/get/GetSubscriptionRequest";
 import UserContext from "../../../../identity/contexts/UserContext";
 import SubscriptionStore from 'entities/Subscriptions/stores/SubscriptionStore';
 import SubscriptionColumns from "./SubscriptionColumns";
-import {getSubscriptionInvoiceRoute} from "../../../../app/utils/RouteHelper";
+import {getSubscriptionDetailRoute, getSubscriptionInvoiceRoute} from "../../../../app/utils/RouteHelper";
 import Constants from "../../../../app/constants/Constants";
 import SubscriptionStatus from "../../../../app/constants/SubscriptionStatus";
 
@@ -68,12 +68,14 @@ const SubscriptionList: React.FC<SubscriptionListProps> = inject(Stores.subscrip
         fixed: 'right',
         render: (text, record) => (
             <div className="inline">
+                <Link to={getSubscriptionDetailRoute(record.key)}>
+                <Button type="primary"  icon={<EyeOutlined />}
+                        title={i18next.t("Subscriptions.Button.Details")}/>
+                </Link>
                 {!record.rejected && UserContext.info.role == 100 && (!record.subscriptionActive) &&
                 (
-                    <React.Fragment>
-                        <Button type="default"  icon={<CheckCircleOutlined />} onClick={() => showActivation(record)}
-                                title={i18next.t("Subscriptions.Button.AcceptRequest")} style={{ background: "green", borderColor: "white" }}/>
-                    </React.Fragment>
+                    <Button type="default"  icon={<CheckCircleOutlined />} onClick={() => showActivation(record)}
+                            title={i18next.t("Subscriptions.Button.AcceptRequest")} style={{ background: "green", borderColor: "white" }}/>
                 )}
                 {!record.rejected && !record.subscriptionActive &&
                     (

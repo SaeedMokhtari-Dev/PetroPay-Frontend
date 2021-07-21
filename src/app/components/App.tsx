@@ -70,6 +70,7 @@ import OdometerHistoryList from "../../reports/OdometerHistories/components/list
 import NewCustomersList from "../../entities/new-customers/components/list/NewCustomersList";
 import EditNewCustomer from "../../entities/new-customers/components/edit/EditNewCustomer";
 import EditEmployee from "../../entities/employees/components/edit/EditEmployee";
+import SubscriptionDetail from "../../entities/Subscriptions/components/detail/SubscriptionDetail";
 
 const App: React.FC = () =>
 {
@@ -142,6 +143,7 @@ const App: React.FC = () =>
                                     <Route exact roles={[RoleType.customer]} path={Routes.subscription} component={SubscriptionList} />
                                     <Route exact roles={[RoleType.customer]} path={Routes.editSubscription} component={EditSubscription} />
                                     <Route exact roles={[RoleType.customer]} path={Routes.addSubscription} component={EditSubscription} />
+                                    <Route exact roles={[RoleType.customer]} path={Routes.detailSubscription} component={SubscriptionDetail} />
                                     <Route exact roles={[RoleType.customer]} path={Routes.carAddSubscription} component={CarAddSubscription} />
                                     <Route exact roles={[RoleType.customer]} path={Routes.subscriptionInvoice} component={SubscriptionInvoice} />
 

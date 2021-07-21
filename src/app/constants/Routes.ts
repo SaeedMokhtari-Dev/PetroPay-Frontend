@@ -34,6 +34,7 @@ export default
     // Subscription
     subscription: "/app/subscription",
     editSubscription: "/app/subscription/edit/:subscriptionId",
+    detailSubscription: "/app/subscription/detail/:subscriptionId",
     carAddSubscription: "/app/subscription/carAdd/:subscriptionId",
     addSubscription: "/app/subscription/add",
     subscriptionInvoice: "/app/subscription/invoice/:invoiceNumber",
