@@ -29,6 +29,7 @@ export default
     // RechargeBalance
     rechargeBalance: "/app/rechargeBalance",
     editRechargeBalance: "/app/rechargeBalance/edit/:rechargeBalanceId",
+    detailRechargeBalance: "/app/rechargeBalance/detail/:rechargeBalanceId",
     addRechargeBalance: "/app/rechargeBalance/add",
 
     // Subscription

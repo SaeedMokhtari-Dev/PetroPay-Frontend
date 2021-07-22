@@ -14,6 +14,7 @@ import {message} from "antd";
 import UserContext from "../../../identity/contexts/UserContext";
 import ConfirmRechargeBalanceHandler from "../handlers/confirm/ConfirmRechargeBalanceHandler";
 import ConfirmRechargeBalanceRequest from "../handlers/confirm/ConfirmRechargeBalanceRequest";
+import GetSubscriptionRequest from "../../Subscriptions/handlers/get/GetSubscriptionRequest";
 
 export default class GetRechargeBalanceViewModel {
     columns: any[];
@@ -26,6 +27,7 @@ export default class GetRechargeBalanceViewModel {
 
     addRechargeBalanceRequest: AddRechargeBalanceRequest = new AddRechargeBalanceRequest();
     addedSuccessfully: boolean;
+    getRechargeBalancesRequest: GetRechargeBalanceRequest = new GetRechargeBalanceRequest();
 
     constructor(public rechargeBalanceStore: RechargeBalanceStore) {
         makeAutoObservable(this);
@@ -70,10 +72,13 @@ export default class GetRechargeBalanceViewModel {
             if(response && response.success)
             {
                 message.success(getLocalizedString(response.message));
-                if(UserContext.info.role == 100)
-                    await this.getAllRechargeBalance(new GetRechargeBalanceRequest(this.pageSize, this.pageIndex));
-                else if(UserContext.info.role == 1)
-                    await this.getAllRechargeBalance(new GetRechargeBalanceRequest(this.pageSize, this.pageIndex, UserContext.info.id));
+                this.getRechargeBalancesRequest = new GetRechargeBalanceRequest();
+                this.getRechargeBalancesRequest.pageIndex = this.pageIndex;
+                this.getRechargeBalancesRequest.pageSize = this.pageSize;
+                if(UserContext.info.role == 1)
+                    this.getRechargeBalancesRequest.companyId = UserContext.info.id;
+                await this.getAllRechargeBalance(this.getRechargeBalancesRequest);
+
             }
             else{
                 this.errorMessage = getLocalizedString(response.message);
@@ -104,10 +109,13 @@ export default class GetRechargeBalanceViewModel {
             if(response && response.success)
             {
                 message.success(getLocalizedString(response.message));
-                if(UserContext.info.role == 100)
-                    await this.getAllRechargeBalance(new GetRechargeBalanceRequest(this.pageSize, this.pageIndex));
-                else if(UserContext.info.role == 1)
-                    await this.getAllRechargeBalance(new GetRechargeBalanceRequest(this.pageSize, this.pageIndex, UserContext.info.id));
+                this.getRechargeBalancesRequest = new GetSubscriptionRequest();
+                this.getRechargeBalancesRequest.pageIndex = this.pageIndex;
+                this.getRechargeBalancesRequest.pageSize = this.pageSize;
+                if(UserContext.info.role == 1)
+                    this.getRechargeBalancesRequest.companyId = UserContext.info.id;
+                await this.getAllRechargeBalance(this.getRechargeBalancesRequest);
+
             }
             else{
                 this.errorMessage = getLocalizedString(response.message);

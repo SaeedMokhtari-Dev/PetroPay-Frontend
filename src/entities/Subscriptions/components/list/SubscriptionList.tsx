@@ -20,7 +20,11 @@ import GetSubscriptionRequest from "../../handlers/get/GetSubscriptionRequest";
 import UserContext from "../../../../identity/contexts/UserContext";
 import SubscriptionStore from 'entities/Subscriptions/stores/SubscriptionStore';
 import SubscriptionColumns from "./SubscriptionColumns";
-import {getSubscriptionDetailRoute, getSubscriptionInvoiceRoute} from "../../../../app/utils/RouteHelper";
+import {
+    getRechargeBalanceDetailRoute,
+    getSubscriptionDetailRoute,
+    getSubscriptionInvoiceRoute
+} from "../../../../app/utils/RouteHelper";
 import Constants from "../../../../app/constants/Constants";
 import SubscriptionStatus from "../../../../app/constants/SubscriptionStatus";
 
@@ -69,8 +73,8 @@ const SubscriptionList: React.FC<SubscriptionListProps> = inject(Stores.subscrip
         render: (text, record) => (
             <div className="inline">
                 <Link to={getSubscriptionDetailRoute(record.key)}>
-                <Button type="primary"  icon={<EyeOutlined />}
-                        title={i18next.t("Subscriptions.Button.Details")}/>
+                    <Button type="primary"  icon={<EyeOutlined />}
+                            title={i18next.t("Subscriptions.Button.Details")}/>
                 </Link>
                 {!record.rejected && UserContext.info.role == 100 && (!record.subscriptionActive) &&
                 (

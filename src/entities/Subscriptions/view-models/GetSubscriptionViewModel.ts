@@ -40,7 +40,6 @@ export default class GetSubscriptionViewModel {
             this.isProcessing = true;
             let response = await GetSubscriptionHandler.get(getSubscriptionsRequest);
 
-
             if (response && response.success) {
 
                 let result = response.data;

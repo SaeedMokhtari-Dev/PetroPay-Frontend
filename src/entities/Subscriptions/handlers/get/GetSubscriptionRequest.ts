@@ -5,7 +5,7 @@ export default class GetSubscriptionRequest
     companyId: number;
     dateFrom: string;
     dateTo: string;
-    status: string;
+    status: number;
 
     constructor(
 

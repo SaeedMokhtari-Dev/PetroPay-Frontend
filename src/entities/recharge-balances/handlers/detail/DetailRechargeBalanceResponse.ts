@@ -6,6 +6,7 @@ export default class DetailRechargeBalanceResponse implements IDeserialize
     rechargeId: number;
     rechageDate: string;
     companyId: number;
+    companyName: string;
     rechargeAmount: number;
     rechargePaymentMethod: string;
     bankName: string;

@@ -20,3 +20,8 @@ export function getSubscriptionDetailRoute(subscriptionId: any = null): string
 {
     return Routes.detailSubscription.replace('/:subscriptionId', subscriptionId ? `/${subscriptionId}` : '');
 }
+
+export function getRechargeBalanceDetailRoute(rechargeBalanceId: any = null): string
+{
+    return Routes.detailRechargeBalance.replace('/:rechargeBalanceId', rechargeBalanceId ? `/${rechargeBalanceId}` : '');
+}

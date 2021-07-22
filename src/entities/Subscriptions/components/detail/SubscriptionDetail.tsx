@@ -19,12 +19,12 @@ import ImageConstants from "../../../../app/constants/ImageConstants";
 import ApiService from "../../../../app/services/ApiService";
 
 
-interface SubscriptionInvoiceProps {
+interface SubscriptionProps {
     subscriptionStore?: SubscriptionStore
     match?: any;
 }
 
-const SubscriptionDetail: React.FC<SubscriptionInvoiceProps> = inject(Stores.subscriptionStore)(observer(({subscriptionStore, match}) => {
+const SubscriptionDetail: React.FC<SubscriptionProps> = inject(Stores.subscriptionStore)(observer(({subscriptionStore, match}) => {
     const [dataFetched, setDataFetched] = React.useState(false);
 
     useEffect(() => {

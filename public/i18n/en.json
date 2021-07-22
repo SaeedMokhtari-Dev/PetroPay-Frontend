@@ -500,12 +500,21 @@
 
   "RechargeBalances.Add.HeaderText": "Add Recharge Balance",
   "RechargeBalances.Edit.HeaderText": "Edit Recharge Balance with Id:",
+  "RechargeBalances.Detail.HeaderText": "Detail Recharge Balance with Id:",
   "RechargeBalances.Section.GeneralInformation": "General Information",
   "RechargeBalances.Button.ConfirmRequest": "Confirm Request",
+  "RechargeBalances.Button.Details": "Details",
 
   "RechargeBalances.Validation.Message.rechargeAmount.Required": "Please enter recharge amount",
   "RechargeBalances.Validation.Message.rechargePaymentMethod.Required": "Please enter recharge payment method",
   "RechargeBalances.Validation.Message.companyId.Required": "Please enter recharge company",
+
+  "RechargeBalances.RechargeStatus.Accepted": "Accepted",
+  "RechargeBalances.RechargeStatus.NotAccepted": "Not Accepted",
+
+  "RechargeBalances.SearchPanel.Label.dateFrom": "From Date",
+  "RechargeBalances.SearchPanel.Label.dateTo": "To Date",
+  "RechargeBalances.SearchPanel.Label.status": "Status",
 
   "Api.RechargeBalance.Add.Successful": "A new recharge balance request added successfully",
   "Api.RechargeBalance.Edit.Successful": "selected recharge balance request edited successfully",

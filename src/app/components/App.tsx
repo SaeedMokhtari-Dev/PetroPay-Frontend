@@ -71,6 +71,7 @@ import NewCustomersList from "../../entities/new-customers/components/list/NewCu
 import EditNewCustomer from "../../entities/new-customers/components/edit/EditNewCustomer";
 import EditEmployee from "../../entities/employees/components/edit/EditEmployee";
 import SubscriptionDetail from "../../entities/Subscriptions/components/detail/SubscriptionDetail";
+import RechargeBalanceDetail from "../../entities/recharge-balances/components/detail/RechargeBalanceDetail";
 
 const App: React.FC = () =>
 {
@@ -138,6 +139,7 @@ const App: React.FC = () =>
 
                                     <Route exact roles={[RoleType.customer]} path={Routes.rechargeBalance} component={RechargeBalanceList} />
                                     <Route exact roles={[RoleType.customer]} path={Routes.editRechargeBalance} component={EditRechargeBalance} />
+                                    <Route exact roles={[RoleType.customer]} path={Routes.detailRechargeBalance} component={RechargeBalanceDetail} />
                                     <Route exact roles={[RoleType.customer]} path={Routes.addRechargeBalance} component={EditRechargeBalance} />
 
                                     <Route exact roles={[RoleType.customer]} path={Routes.subscription} component={SubscriptionList} />

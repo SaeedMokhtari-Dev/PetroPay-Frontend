@@ -1,9 +1,13 @@
 export default class GetRechargeBalanceRequest
 {
+    pageSize: number;
+    pageIndex: number;
+    companyId: number;
+    dateFrom: string;
+    dateTo: string;
+    status: number;
+
     constructor(
-        public pageSize: number,
-        public pageIndex: number,
-        public companyId?: number
     ) {
     }
 }
