@@ -6,11 +6,11 @@ import Stores from "app/constants/Stores";
 import {
     Button,
     Pagination,
-    Table, Modal, PageHeader
+    Table, Modal, PageHeader, Form, Collapse, Row, Col, Select, DatePicker, Alert
 } from "antd";
 import {
     EditOutlined, DeleteOutlined,
-    ExclamationCircleOutlined, PlusCircleOutlined, BranchesOutlined
+    ExclamationCircleOutlined, PlusCircleOutlined, BranchesOutlined, FileExcelOutlined
 } from '@ant-design/icons';
 import GetPetropayAccountsRequest from "../../handlers/get/GetPetropayAccountsRequest";
 import i18next from "i18next";
@@ -18,7 +18,12 @@ import PetropayAccountsColumns from "./PetropayAccountColumns";
 import Routes from "../../../../app/constants/Routes";
 import { Link } from "react-router-dom";
 import PetropayAccountStore from "../../stores/PetropayAccountStore";
+import Constants from "../../../../app/constants/Constants";
+import GetSubscriptionRequest from "../../../Subscriptions/handlers/get/GetSubscriptionRequest";
+import UserContext from "../../../../identity/contexts/UserContext";
+import ExportExcel from "../../../../app/utils/ExportExcel";
 
+const { Panel } = Collapse;
 const { confirm } = Modal;
 
 
@@ -27,6 +32,17 @@ interface PetropayAccountsSidebarProps {
 }
 
 const PetropayAccountList: React.FC<PetropayAccountsSidebarProps> = inject(Stores.petropayAccountStore)(observer(({petropayAccountStore}) => {
+    const formItemLayout = {
+        labelCol: {
+            xs: { span: 24 },
+            sm: { span: 24 },
+        },
+        wrapperCol: {
+            xs: { span: 24 },
+            sm: { span: 24 },
+        },
+    };
+    const [form] = Form.useForm();
 
     PetropayAccountsColumns.forEach(w => {
         w.title = i18next.t(w.title)
@@ -41,10 +57,10 @@ const PetropayAccountList: React.FC<PetropayAccountsSidebarProps> = inject(Store
 
     async function onLoad() {
         petropayAccountStore.onPetropayAccountGetPageLoad();
-        //petropayAccountStore.onPetropayAccountEditPageLoad();
-        petropayAccountStore.getPetropayAccountViewModel.pageIndex = 0;
-        petropayAccountStore.getPetropayAccountViewModel.pageSize = 20;
-        await petropayAccountStore.getPetropayAccountViewModel.getAllPetropayAccounts(new GetPetropayAccountsRequest(20, 0));
+        debugger;
+        petropayAccountStore.getPetropayAccountViewModel.getPetropayAccountsRequest.pageIndex = 0;
+        petropayAccountStore.getPetropayAccountViewModel.getPetropayAccountsRequest.pageSize = 20;
+        await petropayAccountStore.getPetropayAccountViewModel.getAllPetropayAccounts(petropayAccountStore.getPetropayAccountViewModel.getPetropayAccountsRequest);
     }
 
     let viewModel = petropayAccountStore.getPetropayAccountViewModel;
@@ -56,14 +72,36 @@ const PetropayAccountList: React.FC<PetropayAccountsSidebarProps> = inject(Store
     }
 
     async function pageIndexChanged(pageIndex, pageSize){
-        viewModel.pageIndex = pageIndex - 1;
-        viewModel.pageSize = pageSize;
-        await petropayAccountStore.getPetropayAccountViewModel.getAllPetropayAccounts(new GetPetropayAccountsRequest(pageSize, pageIndex - 1));
+        viewModel.getPetropayAccountsRequest.pageIndex = pageIndex - 1;
+        viewModel.getPetropayAccountsRequest.pageSize = pageSize;
+        await viewModel.getAllPetropayAccounts(viewModel.getPetropayAccountsRequest);
     }
     async function pageSizeChanged(current, pageSize){
-        viewModel.pageIndex = 0;
-        viewModel.pageSize = pageSize;
-        await petropayAccountStore.getPetropayAccountViewModel.getAllPetropayAccounts(new GetPetropayAccountsRequest(pageSize, 0));
+        viewModel.getPetropayAccountsRequest.pageIndex = 0;
+        viewModel.getPetropayAccountsRequest.pageSize = pageSize;
+        await viewModel.getAllPetropayAccounts(viewModel.getPetropayAccountsRequest);
+    }
+    async function onFinish(values: any) {
+        viewModel.getPetropayAccountsRequest.pageIndex = 0;
+        await viewModel.getAllPetropayAccounts(viewModel.getPetropayAccountsRequest);
+    }
+    async function onReset(){
+        const pageSize = viewModel.getPetropayAccountsRequest.pageSize;
+        viewModel.getPetropayAccountsRequest = new GetPetropayAccountsRequest();
+        viewModel.getPetropayAccountsRequest.pageIndex = 0;
+        viewModel.getPetropayAccountsRequest.pageSize = pageSize;
+        await viewModel.getAllPetropayAccounts(viewModel.getPetropayAccountsRequest);
+        form.resetFields();
+    }
+    function onDateChange(date, dateString, prop) {
+        viewModel.getPetropayAccountsRequest[`${prop}`] = dateString;
+    }
+
+    async function ExportToExcel(){
+        viewModel.petropayAccountExport = [];
+        await viewModel.getAllPetropayAccounts(viewModel.getPetropayAccountsRequest, true);
+        if(viewModel.petropayAccountExport && viewModel?.petropayAccountExport?.length > 0)
+            ExportExcel(columns, viewModel?.petropayAccountExport, "petropayAccount");
     }
     return (
         <div>
@@ -77,10 +115,55 @@ const PetropayAccountList: React.FC<PetropayAccountsSidebarProps> = inject(Store
                         <Button key={"Add"} type="primary" icon={<PlusCircleOutlined />} >
                             {i18next.t("General.Button.Add")}
                         </Button>
-                    </Link>
+                    </Link>,
+                    <Button key={"ExportExcel"} type="primary" loading={viewModel?.isProcessing}
+                            icon={<FileExcelOutlined />} onClick={ExportToExcel}>
+                        {i18next.t("General.Button.ExportExcel")}
+                    </Button>
                 ]}
             />
+            <Collapse defaultActiveKey={['1']}>
+                <Panel header={i18next.t("General.SearchPanel.Text")}  key="1">
+                    <Form {...formItemLayout} layout={"vertical"} onFinish={onFinish} form={form}
+                          key={"searchForm"}
+                          scrollToFirstError>
+                        <Row gutter={[24, 16]}>
+                            <Col span={8}>
+                                <Form.Item name="dateFrom"
+                                           key={"dateFrom"}
+                                           label={i18next.t("PetropayAccounts.SearchPanel.Label.dateFrom")}>
+                                    <DatePicker format={Constants.dateFormat} onChange={((date, dateString) => onDateChange(date, dateString, "dateFrom"))} />
+                                </Form.Item>
+                            </Col>
+                            <Col span={8}>
+                                <Form.Item name="dateTo"
+                                           key={"dateTo"}
+                                           label={i18next.t("PetropayAccounts.SearchPanel.Label.dateTo")}>
+                                    <DatePicker format={Constants.dateFormat} onChange={((date, dateString) => onDateChange(date, dateString, "dateTo"))} />
+                                </Form.Item>
+                            </Col>
+                        </Row>
 
+                        <PageHeader
+                            ghost={false}
+                            subTitle={<div>
+                                {viewModel?.errorMessage &&
+                                <Alert message={viewModel?.errorMessage} type="error" />
+                                }
+                            </div>}
+                            extra={[
+                                <Button type="primary" loading={viewModel.isProcessing} onClick={onReset} danger key="reset" size={"large"} htmlType="reset">
+                                    {i18next.t("General.SearchPanel.ResetButton")}
+                                </Button>,
+                                <Button type="primary" loading={viewModel.isProcessing} key="submit" size={"large"} htmlType="submit">
+                                    {i18next.t("General.SearchPanel.SearchButton")}
+                                </Button>
+                            ]}
+                        />
+                    </Form>
+                </Panel>
+            </Collapse>
+            <br/>
             <Table dataSource={viewModel?.petropayAccountList} columns={columns} loading={viewModel?.isProcessing}
                    bordered={true} pagination={false} sticky/>
             <br/>

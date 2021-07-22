@@ -1280,6 +1280,8 @@
 
 
   "PetropayAccounts.Error.List.Message": "An error has occurred while trying to get Petropay Account list.",
+  "PetropayAccounts.SearchPanel.Label.dateFrom": "Date From",
+  "PetropayAccounts.SearchPanel.Label.dateTo": "Date To",
 
   "General.Country.Egypt": "Egypt",
 
