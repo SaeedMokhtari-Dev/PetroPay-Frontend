@@ -909,6 +909,7 @@
   "AdminDashboard.PetrolStationItem.Label.key": "Key",
   "AdminDashboard.PetrolStationItem.Label.name": "Petrol Station Name",
   "AdminDashboard.PetrolStationItem.Label.balance": "PetrolStation Balance",
+  "AdminDashboard.PetrolStationItem.Label.bonus": "Bonus",
 
   "AdminDashboard.Section.CompaniesBalance": "Companies Balance",
   "AdminDashboard.Section.PetrolStationsBalance": "PetrolStations Balance",
@@ -1112,6 +1113,8 @@
   "NewCustomers.Error.Edit.Message": "An error has occurred while trying to edit customer.",
   "NewCustomers.Error.Delete.Message": "An error has occurred while trying to delete customer.",
   "NewCustomers.Error.Active.Message": "An error has occurred while trying to active customer.",
+
+  "CarTypeMasters.Error.List.Message": "An error has occurred while trying to get CarTypeMasters list.",
 
   "CarConsumptionRates.Menu.Title": "Car Consumption Rate",
   "CarConsumptionRates.Page.Title": "Car Consumption Rate",

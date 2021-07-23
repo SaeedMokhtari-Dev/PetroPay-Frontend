@@ -5,6 +5,7 @@ export default class PetrolStationItem implements IDeserialize {
     key: number;
     name: string;
     balance: number;
+    bonus: number;
 
     constructor() {
         makeAutoObservable(this);

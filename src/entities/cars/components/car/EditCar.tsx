@@ -41,6 +41,8 @@ const EditCar: React.FC<EditCarProps> = inject(Stores.carStore)(observer(({carSt
     const [switchChecked, setSwitchChecked] = React.useState(false);
     const [carIdNumberValue, setCarIdNumberValue] = React.useState("");
     const [children, setChildren] = React.useState([]);
+    const [carTypeOptions, setCarTypeOptions] = React.useState([]);
+
 
     const [form] = Form.useForm();
 
@@ -55,8 +57,8 @@ const EditCar: React.FC<EditCarProps> = inject(Stores.carStore)(observer(({carSt
         },
     };
 
-    CarTypes.forEach(w =>{ w.title = i18next.t(w.title) });
-    const carTypeOptions = [...CarTypes];
+    /*CarTypes.forEach(w =>{ w.title = i18next.t(w.title) });
+    const carTypeOptions = [...CarTypes];*/
 
     ConsumptionMethods.forEach(w =>{ w.title = i18next.t(w.title) });
     const consumptionMethodOptions = [...ConsumptionMethods];
@@ -101,8 +103,16 @@ const EditCar: React.FC<EditCarProps> = inject(Stores.carStore)(observer(({carSt
         for (let item of listBranchViewModel.listBranchResponse.items) {
             children.push(<Option key={item.key} value={item.key}>{item.title}</Option>);
         }
-
         setChildren(children);
+
+        await carStore.listCarTypeMasterViewModel.getCarTypeMasterList();
+        debugger;
+        let carTypes = [];
+        for (let item of carStore.listCarTypeMasterViewModel?.listCarTypeMasterResponse?.items) {
+            carTypes.push(<Option key={item.key} value={item.title}>{item.title}</Option>);
+        }
+        setCarTypeOptions(carTypes);
+
         setCarId(carIdParam);
         setDataFetched(true);
     }
@@ -409,7 +419,9 @@ const EditCar: React.FC<EditCarProps> = inject(Stores.carStore)(observer(({carSt
                                            message: i18next.t("Cars.Validation.Message.carType.Required")
                                        }
                                    ]}>
-                            <Select options={carTypeOptions} showSearch={true} onChange={(e) => onSelectChanged(e, "carType")} />
+                            <Select showSearch={true} onChange={(e) => onSelectChanged(e, "carType")}>
+                                {carTypeOptions}
+                            </Select>
                         </Form.Item>
                     </Col>
                     <Col span={8}>

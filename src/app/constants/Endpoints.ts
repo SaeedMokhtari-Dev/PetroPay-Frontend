@@ -143,6 +143,8 @@ export default
     apiNewCustomerList: "/api/new-customer/list",
     apiNewCustomerActive: "/api/new-customer/active",
 
+    apiCarTypeMasterList: "/api/car-type-master/list",
+
     apiDashboardCustomerGet: "/api/dashboard/customer",
     apiDashboardSupplierGet: "/api/dashboard/supplier",
     apiDashboardAdminGet: "/api/dashboard/admin",
