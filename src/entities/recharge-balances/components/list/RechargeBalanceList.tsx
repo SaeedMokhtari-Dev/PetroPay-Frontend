@@ -152,8 +152,6 @@ const RechargeBalanceList: React.FC<RechargeBalanceListProps> = inject(Stores.re
     async function onLoad() {
         rechargeBalanceStore.onRechargeBalanceGetPageLoad();
         //rechargeBalanceStore.onRechargeBalanceEditPageLoad();
-        rechargeBalanceStore.getRechargeBalanceViewModel.pageIndex = 0;
-        rechargeBalanceStore.getRechargeBalanceViewModel.pageSize = 20;
         rechargeBalanceStore.getRechargeBalanceViewModel.getRechargeBalancesRequest.pageIndex = 0;
         rechargeBalanceStore.getRechargeBalanceViewModel.getRechargeBalancesRequest.pageSize = 20;
         if(UserContext.info.role == 1)

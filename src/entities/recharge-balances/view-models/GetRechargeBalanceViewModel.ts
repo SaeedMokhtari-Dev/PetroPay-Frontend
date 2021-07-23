@@ -22,8 +22,6 @@ export default class GetRechargeBalanceViewModel {
     totalSize: number;
     isProcessing: boolean;
     errorMessage: string;
-    pageIndex: number;
-    pageSize: number;
 
     addRechargeBalanceRequest: AddRechargeBalanceRequest = new AddRechargeBalanceRequest();
     addedSuccessfully: boolean;
@@ -72,9 +70,6 @@ export default class GetRechargeBalanceViewModel {
             if(response && response.success)
             {
                 message.success(getLocalizedString(response.message));
-                this.getRechargeBalancesRequest = new GetRechargeBalanceRequest();
-                this.getRechargeBalancesRequest.pageIndex = this.pageIndex;
-                this.getRechargeBalancesRequest.pageSize = this.pageSize;
                 if(UserContext.info.role == 1)
                     this.getRechargeBalancesRequest.companyId = UserContext.info.id;
                 await this.getAllRechargeBalance(this.getRechargeBalancesRequest);
@@ -109,9 +104,6 @@ export default class GetRechargeBalanceViewModel {
             if(response && response.success)
             {
                 message.success(getLocalizedString(response.message));
-                this.getRechargeBalancesRequest = new GetSubscriptionRequest();
-                this.getRechargeBalancesRequest.pageIndex = this.pageIndex;
-                this.getRechargeBalancesRequest.pageSize = this.pageSize;
                 if(UserContext.info.role == 1)
                     this.getRechargeBalancesRequest.companyId = UserContext.info.id;
                 await this.getAllRechargeBalance(this.getRechargeBalancesRequest);

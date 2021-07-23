@@ -20,7 +20,9 @@ export default class ListNewCustomerViewModel {
     public async getAllNewCustomers() {
         try {
             this.isProcessing = true;
-            const getNewCustomersRequest: GetNewCustomerRequest = new GetNewCustomerRequest(10000, 0);
+
+            const getNewCustomersRequest: GetNewCustomerRequest = new GetNewCustomerRequest();
+            getNewCustomersRequest.exportToFile = true;
 
             let response = await GetNewCustomerHandler.get(getNewCustomersRequest);
 

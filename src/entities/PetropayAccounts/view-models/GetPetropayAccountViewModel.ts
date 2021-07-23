@@ -56,6 +56,7 @@ export default class GetPetropayAccountViewModel {
             this.errorMessage = i18next.t('PetropayAccounts.Error.Get.Message');
             log.error(e);
         } finally {
+            getPetropayAccountsRequest.exportToFile = false;
             this.isProcessing = false;
         }
     }

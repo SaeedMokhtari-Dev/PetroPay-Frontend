@@ -16,20 +16,24 @@ import ActiveNewCustomerHandler from "../handlers/active/ActiveNewCustomerHandle
 export default class GetNewCustomerViewModel {
     columns: any[];
     newCustomerList: NewCustomerItem[];
+    newCustomerExport: NewCustomerItem[];
     totalSize: number;
     isProcessing: boolean;
     errorMessage: string;
     pageIndex: number;
     pageSize: number;
 
+    getNewCustomersRequest: GetNewCustomerRequest = new GetNewCustomerRequest();
+
     constructor(public newCustomerStore: NewCustomerStore) {
         makeAutoObservable(this);
 
     }
 
-    public async getAllNewCustomers(getNewCustomersRequest: GetNewCustomerRequest) {
+    public async getAllNewCustomers(getNewCustomersRequest: GetNewCustomerRequest, exportToFile: boolean = false) {
         try {
             this.isProcessing = true;
+            getNewCustomersRequest.exportToFile = exportToFile;
             let response = await GetNewCustomerHandler.get(getNewCustomersRequest);
 
 
@@ -37,15 +41,21 @@ export default class GetNewCustomerViewModel {
 
                 let result = response.data;
                 let items = result.items;
-                this.newCustomerList = items;
-                this.totalSize = result.totalCount;
+                if(exportToFile)
+                    this.newCustomerExport = items;
+                else {
+                    this.newCustomerList = items;
+                    this.totalSize = result.totalCount;
+                }
             } else {
                 this.errorMessage = getLocalizedString(response.message);
             }
         } catch (e) {
             this.errorMessage = i18next.t('NewCustomers.Error.Get.Message');
             log.error(e);
+            getNewCustomersRequest.exportToFile = false;
         } finally {
+            getNewCustomersRequest.exportToFile = false;
             this.isProcessing = false;
         }
     }
@@ -62,7 +72,7 @@ export default class GetNewCustomerViewModel {
             if(response && response.success)
             {
                 message.success(getLocalizedString(response.message));
-                await this.getAllNewCustomers(new GetNewCustomerRequest(this.pageSize, this.pageIndex));
+                await this.getAllNewCustomers(this.getNewCustomersRequest);
             }
             else{
                 this.errorMessage = getLocalizedString(response.message);
@@ -93,7 +103,7 @@ export default class GetNewCustomerViewModel {
             if(response && response.success)
             {
                 message.success(getLocalizedString(response.message));
-                await this.getAllNewCustomers(new GetNewCustomerRequest(this.pageSize, this.pageIndex));
+                await this.getAllNewCustomers(this.getNewCustomersRequest);
             }
             else{
                 this.errorMessage = getLocalizedString(response.message);

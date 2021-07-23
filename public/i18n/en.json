@@ -1090,6 +1090,10 @@
   "NewCustomers.Label.custReqStatus": "Customer ReqStatus",
   "NewCustomers.Label.cutReqDatetime": "Customer Request Datetime",
 
+  "NewCustomers.SearchPanel.Label.status": "Status",
+  "NewCustomers.SearchPanel.Label.dateFrom": "Date From",
+  "NewCustomers.SearchPanel.Label.dateTo": "Date To",
+
   "NewCustomers.Add.HeaderText": "Add NewCustomer",
   "NewCustomers.Edit.HeaderText": "Edit NewCustomer with Id:",
   "NewCustomers.Section.GeneralInformation": "General Information",
