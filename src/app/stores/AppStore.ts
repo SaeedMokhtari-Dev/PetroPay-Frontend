@@ -34,6 +34,7 @@ import MenuStore from "../../entities/menus/stores/MenuStore";
 import EmployeeStore from "../../entities/employees/stores/EmployeeStore";
 import OdometerHistoryStore from "../../reports/OdometerHistories/stores/OdometerHistoryStore";
 import NewCustomerStore from "../../entities/new-customers/stores/NewCustomerStore";
+import TransferBonusStore from "../../entities/TransferBonuses/stores/TransferBonusStore";
 
 export class AppStore
 {
@@ -73,6 +74,7 @@ export class AppStore
     employee: EmployeeStore;
     odometerHistory: OdometerHistoryStore;
     newCustomer: NewCustomerStore;
+    transferBonus: TransferBonusStore;
 
     constructor()
     {
@@ -112,5 +114,6 @@ export class AppStore
         this.employee = new EmployeeStore(this);
         this.odometerHistory = new OdometerHistoryStore(this);
         this.newCustomer = new NewCustomerStore(this);
+        this.transferBonus = new TransferBonusStore(this);
     }
 }

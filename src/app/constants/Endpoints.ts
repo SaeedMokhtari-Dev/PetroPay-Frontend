@@ -145,6 +145,9 @@ export default
 
     apiCarTypeMasterList: "/api/car-type-master/list",
 
+    apiTransferBonusGet: "/api/transfer-bonus/get",
+    apiTransferBonusAdd: "/api/transfer-bonus/add",
+
     apiDashboardCustomerGet: "/api/dashboard/customer",
     apiDashboardSupplierGet: "/api/dashboard/supplier",
     apiDashboardAdminGet: "/api/dashboard/admin",

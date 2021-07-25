@@ -349,6 +349,47 @@
   "Api.PetropayAccount.Amount.Required": "يرجي اضافة المرجع",
   "Api.PetropayAccount.Reference.Required": "يرجي اضافة المرجع",
 
+  "TransferBonuses.Menu.Title": "تحويل النقاط و الحوافز",
+  "TransferBonuses.Page.Title": "تحويل النقاط و الحوافز",
+  "TransferBonuses.Page.SubTitle": "هذه الصفحة لتعريف  النقاط و الحوافز",
+  "TransferBonuses.Label.key": "رقم",
+  "TransferBonuses.Label.stationBonus": "حوافز و مكافاءت المحطة",
+
+  "TransferBonuses.Label.stationId": "محطة الوقود",
+  "TransferBonuses.Label.amount": "النقاط",
+  "TransferBonuses.Label.calcBalance": "المبلغ",
+
+  "TransferBonuses.Label.transId": "العملية #",
+  "TransferBonuses.Label.transDate": "تاريخ العملية",
+  "TransferBonuses.Label.accountId": "الحساب #",
+  "TransferBonuses.Label.accountName": "اسم الحساب",
+  "TransferBonuses.Label.transDocument": "بيان العملية",
+  "TransferBonuses.Label.transAmount": "القيمة",
+  "TransferBonuses.Label.transReference": "المرجع",
+
+  "TransferBonuses.Add.HeaderText": "تحويل النقاط و الحوافز",
+  "TransferBonuses.Edit.HeaderText": "تعديل",
+  "TransferBonuses.Payment.HeaderText": "دفع النقاط و الحوافز",
+  "TransferBonuses.Section.GeneralInformation": "معلومات عامة",
+
+  "TransferBonuses.Button.Payment": "ايصال الدفع",
+
+  "TransferBonuses.Validation.Message.fromPetroPayAccountId.Required": "يرجي اختيار الحساب",
+  "TransferBonuses.Validation.Message.toPetroPayAccountId.Required": "يرجي اختيار الحساب",
+  "TransferBonuses.Validation.Message.amount.Required": "يرجي ادخال المبلغ",
+  "TransferBonuses.Validation.Message.reference.Required": "يرجي ادخال المرجع",
+
+  "Api.TransferBonus.Add.Successful": "تم الاضافة بنجاح",
+  "Api.TransferBonus.Edit.Successful": "تم التعديل بنجاح",
+  "Api.TransferBonus.Deleted.Successful": " تم الحذف بنجاح ",
+  "Api.TransferBonus.Id.Required": "Id is Required",
+  "Api.TransferBonus.FromPetroPayAccountId.Required": "From Account is Required",
+  "Api.TransferBonus.ToPetroPayAccountId.Required": "To Account is Required",
+  "Api.TransferBonus.PetroPayAccounts.NotEqual": "From Account and To Account cannot be equal.",
+  "Api.TransferBonus.Amount.Required": "Amount is Required",
+  "Api.TransferBonus.Reference.Required": "Reference is Required",
+
+
   "StationUsers.Menu.Title": "موظفي المحطة",
   "StationUsers.Page.Title": "موظفي المحطة",
   "StationUsers.Page.SubTitle": "هذه الصفة لتعريف موظفي  محطة الوقود",
@@ -496,12 +537,21 @@
 
   "RechargeBalances.Add.HeaderText": "شحن الرصيد",
   "RechargeBalances.Edit.HeaderText": "تعديل شحن الرصيد:",
+  "RechargeBalances.Detail.HeaderText": "تفاصيل الطلب",
   "RechargeBalances.Section.GeneralInformation": "معلومات عامة",
   "RechargeBalances.Button.ConfirmRequest": "تأكيد الطلب",
+  "RechargeBalances.Button.Details": "التفاصيل",
 
   "RechargeBalances.Validation.Message.rechargeAmount.Required": "الرجاء ادخال المبلغ",
   "RechargeBalances.Validation.Message.rechargePaymentMethod.Required": "يرجي اختيار طريقة الدفع",
   "RechargeBalances.Validation.Message.companyId.Required": "يرجي ادخال اسم الشركة",
+
+  "RechargeBalances.RechargeStatus.Accepted": "مقبول",
+  "RechargeBalances.RechargeStatus.NotAccepted": "مرفوض",
+
+  "RechargeBalances.SearchPanel.Label.dateFrom": "من تاريخ",
+  "RechargeBalances.SearchPanel.Label.dateTo": "الي تاريخ",
+  "RechargeBalances.SearchPanel.Label.status": "الحالة",
 
   "Api.RechargeBalance.Add.Successful": "تم تسجيل طلب شحن الرصيد بنجاح",
   "Api.RechargeBalance.Edit.Successful": "تم التعديل بنجاح",
@@ -580,8 +630,17 @@
   "Subscriptions.subscriptionPaymentMethod.PayFromCompanyBalance": "السداد من رصيد الشركة",
   "Subscriptions.subscriptionPaymentMethod.SelectOtherPayment": "اختيار طريقة سداد اخري",
 
+  "Subscriptions.SubscriptionStatus.Accepted": "مقبول",
+  "Subscriptions.SubscriptionStatus.Rejected": "مرفوض",
+  "Subscriptions.SubscriptionStatus.Pending": "قيد الاجراء",
+
+  "Subscriptions.SearchPanel.Label.status": "حالة طلب الاشتراك",
+  "Subscriptions.SearchPanel.Label.dateFrom": "من تاريخ",
+  "Subscriptions.SearchPanel.Label.dateTo": "الي تاريخ",
+
   "Subscriptions.Add.HeaderText": "اضافة اشتراك",
   "Subscriptions.Edit.HeaderText": "تعديل اشتراك",
+  "Subscriptions.Detail.HeaderText": "تفاصيل طلب الاشتراك:",
   "Subscriptions.CarAdd.Edit.HeaderText": "اضافة السيارات الي الخدمة",
   "Subscriptions.Section.GeneralInformation": "معلومات عامة",
   "Subscriptions.Section.BundleInformation": "Bundle Information (يرجي اختيار الباقة)",
@@ -594,6 +653,7 @@
   "Subscriptions.Button.RejectRequest": "الطلب مرفوض",
   "Subscriptions.Button.Calculate": "حساب التكلفة",
   "Subscriptions.Button.CarList": "السيارات",
+  "Subscriptions.Button.Details": "التفاصيل",
 
   "Subscriptions.Validation.Message.bundlesId.Required": "يرجي اختيار الباقة",
   "Subscriptions.Validation.Message.subscriptionCarNumbers.Required": "يرجي ادخال عدد السيارات المطلوبة للاشتراك",
@@ -601,6 +661,8 @@
   "Subscriptions.Validation.Message.payFromCompany.Required": "يرجي اختيار احد وسائل السداد",
   "Subscriptions.Validation.Message.subscriptionType.Required": "يرجي ادخال نوع الاشتراك",
   "Subscriptions.Validation.Message.numberOfDateDiff.Required": "Please enter Subscription Number Of Date Diff",
+  "Subscriptions.Validation.Message.paymentReferenceNumber.Required": "يرجي ادخال مرجع السداد",
+  "Subscriptions.Validation.Message.subscriptionStartDate.Required": "يرجي تحديد تاريخ بداية الاشتراك",
 
   "Subscriptions.Validation.Message.cannotAdd.MoreCar": "لا يمكنك إضافة سيارة أكثر مما قمت بالاشتراك بة",
 
@@ -1063,6 +1125,10 @@
   "NewCustomers.Label.custReqStatus": "حالة الطلب",
   "NewCustomers.Label.cutReqDatetime": "تاريخ الطلب",
 
+  "NewCustomers.SearchPanel.Label.status": "الحالة",
+  "NewCustomers.SearchPanel.Label.dateFrom": "من تاريخ",
+  "NewCustomers.SearchPanel.Label.dateTo": "الي تاريخ",
+
   "NewCustomers.Add.HeaderText": "اضافة طلب",
   "NewCustomers.Edit.HeaderText": "تعديل",
   "NewCustomers.Section.GeneralInformation": "معلومات عامة",
@@ -1081,6 +1147,8 @@
   "NewCustomers.Error.Edit.Message": "حدث خطأ أثناء محاولة التعديل ",
   "NewCustomers.Error.Delete.Message": "حدث خطأ أثناء محاولة حذف الطلب ",
   "NewCustomers.Error.Active.Message": "حدث خطأ أثناء محاولة اغلاق طلب العميل",
+
+  "CarTypeMasters.Error.List.Message": "An error has occurred while trying to get CarTypeMasters list.",
 
   "CarConsumptionRates.Menu.Title": "معدل استهلاك السيارة",
   "CarConsumptionRates.Page.Title": "معدل استهلاك السيارة",
@@ -1106,6 +1174,8 @@
   "CarConsumptionRates.SearchPanel.Label.transDateTo": "الي تاريخ",
   "CarConsumptionRates.SearchPanel.Label.companyId": "رقم الشركة",
   "CarConsumptionRates.SearchPanel.Label.companyName": "اسم الشركة",
+  "CarConsumptionRates.SearchPanel.Label.dateFrom": "من تاريخ",
+  "CarConsumptionRates.SearchPanel.Label.dateTo": "الي تاريخ",
 
   "CarConsumptionRates.Error.Get.Message": "حدث خطأ أثناء محاولة الحصول على قائمة معدل استهلاك السيارة",
 
@@ -1250,6 +1320,8 @@
 
 
   "PetropayAccounts.Error.List.Message": "حدث خطأ أثناء محاولة الحصول على قائمة حسابات بتروباي",
+  "PetropayAccounts.SearchPanel.Label.dateFrom": "Date From",
+  "PetropayAccounts.SearchPanel.Label.dateTo": "Date To",
 
   "General.Country.Egypt": "Egypt",
 

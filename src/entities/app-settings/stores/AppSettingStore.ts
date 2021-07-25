@@ -11,7 +11,7 @@ export default class AppSettingStore
 
     onAppSettingEditPageLoad()
     {
-        this.editAppSettingViewModel = new EditAppSettingViewModel(this);
+        this.editAppSettingViewModel = new EditAppSettingViewModel();
     }
 
     onAppSettingEditPageUnload()

@@ -36,4 +36,5 @@ export default {
     employeeStore: 'employeeStore',
     odometerHistoryStore: 'odometerHistoryStore',
     newCustomerStore: 'newCustomerStore',
+    transferBonusStore: 'transferBonusStore',
 }

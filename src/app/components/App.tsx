@@ -72,6 +72,8 @@ import EditNewCustomer from "../../entities/new-customers/components/edit/EditNe
 import EditEmployee from "../../entities/employees/components/edit/EditEmployee";
 import SubscriptionDetail from "../../entities/Subscriptions/components/detail/SubscriptionDetail";
 import RechargeBalanceDetail from "../../entities/recharge-balances/components/detail/RechargeBalanceDetail";
+import TransferBonusList from "../../entities/TransferBonuses/components/list/TransferBonusList";
+import AddTransferBonus from "../../entities/TransferBonuses/components/add/AddTransferBonus";
 
 const App: React.FC = () =>
 {
@@ -131,6 +133,9 @@ const App: React.FC = () =>
                                     <Route exact roles={[RoleType.supplier]} path={Routes.stationUser} component={StationUserList} />
                                     <Route exact roles={[RoleType.supplier]} path={Routes.editStationUser} component={EditStationUser} />
                                     <Route exact roles={[RoleType.supplier]} path={Routes.addStationUser} component={EditStationUser} />
+
+                                    <Route exact roles={[RoleType.supplier]} path={Routes.transferBonus} component={TransferBonusList} />
+                                    <Route exact roles={[RoleType.supplier]} path={Routes.addTransferBonus} component={AddTransferBonus} />
 
                                     <Route exact roles={[RoleType.customer]} path={Routes.car} component={CarList} />
                                     <Route exact roles={[RoleType.customer]} path={Routes.branchCars} component={CarList} />

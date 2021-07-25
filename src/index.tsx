@@ -79,6 +79,7 @@ ReactDOM.render(
                       employeeStore={appStore.employee}
                       odometerHistoryStore={appStore.odometerHistory}
                       newCustomerStore={appStore.newCustomer}
+                      transferBonusStore={appStore.transferBonus}
             >
                 <App />
             </Provider>

@@ -40,7 +40,6 @@ export default
     addSubscription: "/app/subscription/add",
     subscriptionInvoice: "/app/subscription/invoice/:invoiceNumber",
 
-
     // Branch
     branch: "/app/branch",
     branchList: "/app/branch/:companyId",
@@ -95,6 +94,9 @@ export default
     editNewCustomer: "/app/newCustomer/edit/:newCustomerId",
     addNewCustomer: "/app/newCustomer/add",
 
+    //TransferBonus
+    transferBonus: "/app/transferBonus",
+    addTransferBonus: "/app/transferBonus/add",
 
     //Reports
     accountBalance: '/app/accountBalance',

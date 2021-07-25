@@ -176,6 +176,9 @@ const Sidebar: React.FC<SidebarProps> = inject(Stores.pageStore)(observer(({page
         <Menu.Item key="stationUser" icon={<ShopOutlined />}>
             <Link to={Routes.stationUser}>{i18next.t('StationUsers.Menu.Title')}</Link>
         </Menu.Item>
+        <Menu.Item key="transferBonus" icon={<ShopOutlined />}>
+            <Link to={Routes.transferBonus}>{i18next.t('TransferBonuses.Menu.Title')}</Link>
+        </Menu.Item>
         <SubMenu key="reports" icon={<ReadOutlined />} title={i18next.t('General.Menu.Reports')}>
             <Menu.Item key="stationReport" icon={<BookOutlined />}>
                 <Link to={Routes.stationReport}>{i18next.t('StationReports.Menu.Title')}</Link>
@@ -186,14 +189,13 @@ const Sidebar: React.FC<SidebarProps> = inject(Stores.pageStore)(observer(({page
             <Menu.Item key="stationStatement" icon={<ShopOutlined />}>
                 <Link to={Routes.stationStatement}>{i18next.t('StationStatements.Menu.Title')}</Link>
             </Menu.Item>
-
         </SubMenu>
     </Menu>)
     async function onLoad() {
         
         if(UserContext.info.role == RoleType.admin){
             pageStore.onSidebarPageLoad();
-            await pageStore.treeEmployeeMenuViewModel?.getEmployeeMenuTree(UserContext.info.id);setDataFetched(true);
+            await pageStore.treeEmployeeMenuViewModel?.getEmployeeMenuTree(UserContext.info.id);
             setDataFetched(true);
         }
     }

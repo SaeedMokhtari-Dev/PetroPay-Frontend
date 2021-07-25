@@ -353,6 +353,47 @@
   "Api.PetropayAccount.Reference.Required": "Reference is Required",
 
 
+  "TransferBonuses.Menu.Title": "Transfer Bonus",
+  "TransferBonuses.Page.Title": "Transfer Bonus",
+  "TransferBonuses.Page.SubTitle": "This page is for define Transfer Bonus",
+  "TransferBonuses.Label.key": "key",
+  "TransferBonuses.Label.stationBonus": "Station Bonus",
+
+  "TransferBonuses.Label.stationId": "Petro Stations",
+  "TransferBonuses.Label.amount": "Points",
+  "TransferBonuses.Label.calcBalance": "Money",
+
+  "TransferBonuses.Label.transId": "transaction #",
+  "TransferBonuses.Label.transDate": "Transaction Date",
+  "TransferBonuses.Label.accountId": "account #",
+  "TransferBonuses.Label.accountName": "Account Name",
+  "TransferBonuses.Label.transDocument": "Transaction Document",
+  "TransferBonuses.Label.transAmount": "Transaction Amount",
+  "TransferBonuses.Label.transReference": "Transaction Reference",
+
+  "TransferBonuses.Add.HeaderText": "Add Transfer Bonus",
+  "TransferBonuses.Edit.HeaderText": "Edit Transfer Bonus with Id:",
+  "TransferBonuses.Payment.HeaderText": "Payment Transfer Bonus",
+  "TransferBonuses.Section.GeneralInformation": "General Information",
+
+  "TransferBonuses.Button.Payment": "Payment Receipt Transaction",
+
+  "TransferBonuses.Validation.Message.fromPetroPayAccountId.Required": "Please select a from account",
+  "TransferBonuses.Validation.Message.toPetroPayAccountId.Required": "Please select a to account",
+  "TransferBonuses.Validation.Message.amount.Required": "Please enter Amount",
+  "TransferBonuses.Validation.Message.reference.Required": "Please enter Reference",
+
+  "Api.TransferBonus.Add.Successful": "A new Transfer Bonus added successfully",
+  "Api.TransferBonus.Edit.Successful": "selected Petrol Station edited successfully",
+  "Api.TransferBonus.Deleted.Successful": "selected Petrol Station deleted successfully",
+  "Api.TransferBonus.Id.Required": "Id is Required",
+  "Api.TransferBonus.FromPetroPayAccountId.Required": "From Account is Required",
+  "Api.TransferBonus.ToPetroPayAccountId.Required": "To Account is Required",
+  "Api.TransferBonus.PetroPayAccounts.NotEqual": "From Account and To Account cannot be equal.",
+  "Api.TransferBonus.Amount.Required": "Amount is Required",
+  "Api.TransferBonus.Reference.Required": "Reference is Required",
+
+
   "StationUsers.Menu.Title": "Station Users",
   "StationUsers.Page.Title": "Station Users",
   "StationUsers.Page.SubTitle": "This page is for define stationUsers",

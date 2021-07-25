@@ -14,6 +14,7 @@ export default class DetailAppSettingResponse implements IDeserialize
     companyStampImage: string;
     comapnyTaxRate: number;
     comapnyPhoneNumber: string;
+    bonusMoneyRate: number;
 
     deserialize(input: any): this
     {

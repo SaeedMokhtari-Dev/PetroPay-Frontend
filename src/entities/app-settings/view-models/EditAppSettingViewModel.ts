@@ -10,7 +10,6 @@ import EditAppSettingRequest from "../handlers/edit/EditAppSettingRequest";
 import AddAppSettingHandler from "../handlers/add/AddAppSettingHandler";
 import {message} from "antd";
 import EditAppSettingHandler from "../handlers/edit/EditAppSettingHandler";
-import AppSettingStore from "../stores/AppSettingStore";
 
 export default class EditAppSettingViewModel
 {
@@ -23,7 +22,7 @@ export default class EditAppSettingViewModel
     addAppSettingRequest: AddAppSettingRequest;
     editAppSettingRequest: EditAppSettingRequest;
 
-    constructor(public appSettingsStore: AppSettingStore) {
+    constructor() {
         makeAutoObservable(this);
     }
     public async getDetailAppSetting()
