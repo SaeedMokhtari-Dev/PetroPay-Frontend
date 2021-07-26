@@ -153,7 +153,7 @@ const RechargeBalanceList: React.FC<RechargeBalanceListProps> = inject(Stores.re
         rechargeBalanceStore.onRechargeBalanceGetPageLoad();
         //rechargeBalanceStore.onRechargeBalanceEditPageLoad();
         rechargeBalanceStore.getRechargeBalanceViewModel.getRechargeBalancesRequest.pageIndex = 0;
-        rechargeBalanceStore.getRechargeBalanceViewModel.getRechargeBalancesRequest.pageSize = 20;
+        rechargeBalanceStore.getRechargeBalanceViewModel.getRechargeBalancesRequest.pageSize = 10;
         if(UserContext.info.role == 1)
             rechargeBalanceStore.getRechargeBalanceViewModel.getRechargeBalancesRequest.companyId = UserContext.info.id;
 
