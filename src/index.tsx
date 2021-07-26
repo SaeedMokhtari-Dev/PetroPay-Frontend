@@ -81,6 +81,7 @@ ReactDOM.render(
                       newCustomerStore={appStore.newCustomer}
                       transferBonusStore={appStore.transferBonus}
                       customerStatementStore={appStore.customerStatement}
+                      companyBranchStatementStore={appStore.companyBranchStatement}
             >
                 <App />
             </Provider>

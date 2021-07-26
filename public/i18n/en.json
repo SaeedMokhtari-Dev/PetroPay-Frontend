@@ -1351,6 +1351,26 @@
 
   "CustomerStatements.Error.Get.Message": "An error has occurred while trying to get Customer Statement list.",
 
+  "CompanyBranchStatements.Menu.Title": "Company Branch Statement",
+  "CompanyBranchStatements.Page.Title": "Company Branch Statement",
+  "CompanyBranchStatements.Page.SubTitle": "Company Branch Statement report",
+  "CompanyBranchStatements.Label.key": "key",
+  "CompanyBranchStatements.Label.transactionDateTime": "Transaction Date Time",
+  "CompanyBranchStatements.Label.accountId": "Account #",
+  "CompanyBranchStatements.Label.companyId": "Company #",
+  "CompanyBranchStatements.Label.companyName": "Company Name",
+  "CompanyBranchStatements.Label.companyBranchId": "Company Branch #",
+  "CompanyBranchStatements.Label.companyBranchName": "Company Branch Name",
+  "CompanyBranchStatements.Label.sumTransAmount": "Sum Transaction Amount",
+  "CompanyBranchStatements.Label.transDocument": "Trans Document",
+
+  "CompanyBranchStatements.SearchPanel.Label.dateFrom": "Date From",
+  "CompanyBranchStatements.SearchPanel.Label.dateTo": "Date To",
+  "CompanyBranchStatements.SearchPanel.Label.companyId": "company",
+  "CompanyBranchStatements.SearchPanel.Label.branchId": "branch",
+
+  "CompanyBranchStatements.Error.Get.Message": "An error has occurred while trying to get Company Branch Statement list.",
+
   "General.Country.Egypt": "Egypt",
 
   "General.Region.Alexandria": "Alexandria",

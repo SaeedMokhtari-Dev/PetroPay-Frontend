@@ -140,6 +140,7 @@ const SubscriptionList: React.FC<SubscriptionListProps> = inject(Stores.subscrip
 
         subscriptionStore.getSubscriptionViewModel.getSubscriptionsRequest.pageIndex = 0;
         subscriptionStore.getSubscriptionViewModel.getSubscriptionsRequest.pageSize = 10;
+        subscriptionStore.getSubscriptionViewModel.getSubscriptionsRequest.status = 3;
         if(UserContext.info.role == 1)
             subscriptionStore.getSubscriptionViewModel.getSubscriptionsRequest.companyId = UserContext.info.id;
 

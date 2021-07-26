@@ -38,4 +38,5 @@ export default {
     newCustomerStore: 'newCustomerStore',
     transferBonusStore: 'transferBonusStore',
     customerStatementStore: 'customerStatementStore',
+    companyBranchStatementStore: 'companyBranchStatementStore',
 }

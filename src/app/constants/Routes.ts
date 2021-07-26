@@ -115,4 +115,5 @@ export default
     odometerBetweenDate: '/app/odometerBetweenDate',
     odometerHistory: '/app/odometerHistory',
     customerStatement: '/app/customerStatement',
+    companyBranchStatement: '/app/companyBranchStatement',
 }

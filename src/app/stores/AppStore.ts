@@ -36,6 +36,7 @@ import OdometerHistoryStore from "../../reports/OdometerHistories/stores/Odomete
 import NewCustomerStore from "../../entities/new-customers/stores/NewCustomerStore";
 import TransferBonusStore from "../../entities/TransferBonuses/stores/TransferBonusStore";
 import CustomerStatementStore from "../../reports/CustomerStatements/stores/CustomerStatementStore";
+import CompanyBranchStatementStore from "../../reports/CompanyBranchStatements/stores/CompanyBranchStatementStore";
 
 export class AppStore
 {
@@ -77,6 +78,7 @@ export class AppStore
     newCustomer: NewCustomerStore;
     transferBonus: TransferBonusStore;
     customerStatement: CustomerStatementStore;
+    companyBranchStatement: CompanyBranchStatementStore;
 
     constructor()
     {
@@ -118,5 +120,6 @@ export class AppStore
         this.newCustomer = new NewCustomerStore(this);
         this.transferBonus = new TransferBonusStore(this);
         this.customerStatement = new CustomerStatementStore(this);
+        this.companyBranchStatement = new CompanyBranchStatementStore(this);
     }
 }
