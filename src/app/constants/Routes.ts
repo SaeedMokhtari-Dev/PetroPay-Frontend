@@ -114,4 +114,5 @@ export default
     carOdometerMin: '/app/carOdometerMin',
     odometerBetweenDate: '/app/odometerBetweenDate',
     odometerHistory: '/app/odometerHistory',
+    customerStatement: '/app/customerStatement',
 }

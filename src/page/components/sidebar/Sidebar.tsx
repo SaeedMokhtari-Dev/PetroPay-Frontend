@@ -167,6 +167,9 @@ const Sidebar: React.FC<SidebarProps> = inject(Stores.pageStore)(observer(({page
             <Menu.Item key="odometerHistory" icon={<ShopOutlined />}>
                 <Link to={Routes.odometerHistory}>{i18next.t('OdometerHistories.Menu.Title')}</Link>
             </Menu.Item>
+            <Menu.Item key="customerStatements" icon={<ShopOutlined />}>
+                <Link to={Routes.customerStatement}>{i18next.t('CustomerStatements.Menu.Title')}</Link>
+            </Menu.Item>
         </SubMenu>
     </Menu>)
     const supplierMenu= (<Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">

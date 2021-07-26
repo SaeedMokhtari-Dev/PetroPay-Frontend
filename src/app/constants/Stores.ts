@@ -37,4 +37,5 @@ export default {
     odometerHistoryStore: 'odometerHistoryStore',
     newCustomerStore: 'newCustomerStore',
     transferBonusStore: 'transferBonusStore',
+    customerStatementStore: 'customerStatementStore',
 }

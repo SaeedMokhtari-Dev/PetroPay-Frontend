@@ -1332,6 +1332,25 @@
   "PetropayAccounts.SearchPanel.Label.dateFrom": "Date From",
   "PetropayAccounts.SearchPanel.Label.dateTo": "Date To",
 
+
+  "CustomerStatements.Menu.Title": "Customer Statement",
+  "CustomerStatements.Page.Title": "Customer Statement",
+  "CustomerStatements.Page.SubTitle": "Customer Statement report",
+  "CustomerStatements.Label.key": "key",
+  "CustomerStatements.Label.transactionDataTime": "Transaction Date Time",
+  "CustomerStatements.Label.accountId": "account Id",
+  "CustomerStatements.Label.companyId": "company Id",
+  "CustomerStatements.Label.companyName": "company Name",
+  "CustomerStatements.Label.transDocument": "trans Document",
+  "CustomerStatements.Label.sumTransAmount": "sum Transaction Amount",
+  "CustomerStatements.Label.accountName": "Account Name",
+
+  "CustomerStatements.SearchPanel.Label.dateFrom": "Date From",
+  "CustomerStatements.SearchPanel.Label.dateTo": "Date To",
+  "CustomerStatements.SearchPanel.Label.companyId": "company",
+
+  "CustomerStatements.Error.Get.Message": "An error has occurred while trying to get Customer Statement list.",
+
   "General.Country.Egypt": "Egypt",
 
   "General.Region.Alexandria": "Alexandria",

@@ -74,6 +74,7 @@ import SubscriptionDetail from "../../entities/Subscriptions/components/detail/S
 import RechargeBalanceDetail from "../../entities/recharge-balances/components/detail/RechargeBalanceDetail";
 import TransferBonusList from "../../entities/TransferBonuses/components/list/TransferBonusList";
 import AddTransferBonus from "../../entities/TransferBonuses/components/add/AddTransferBonus";
+import CustomerStatementList from "../../reports/CustomerStatements/components/list/CustomerStatementList";
 
 const App: React.FC = () =>
 {
@@ -188,6 +189,7 @@ const App: React.FC = () =>
                                     <Route exact roles={[RoleType.customer]} path={Routes.carOdometerMin} component={CarOdometerMinList} />
                                     <Route exact roles={[RoleType.customer]} path={Routes.odometerBetweenDate} component={OdometerBetweenDateList} />
                                     <Route exact roles={[RoleType.customer]} path={Routes.odometerHistory} component={OdometerHistoryList} />
+                                    <Route exact roles={[RoleType.customer]} path={Routes.customerStatement} component={CustomerStatementList} />
 
                                     <Route exact roles={[RoleType.supplier]} path={Routes.stationReport} component={StationReportList} />
                                     <Route exact roles={[RoleType.supplier]} path={Routes.stationSale} component={StationSaleList} />
