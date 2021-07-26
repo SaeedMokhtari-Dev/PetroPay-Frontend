@@ -59,7 +59,7 @@ const TransferBonusList: React.FC<TransferBonusesSidebarProps> = inject(Stores.t
         transferBonusStore.onTransferBonusGetPageLoad();
         debugger;
         transferBonusStore.getTransferBonusViewModel.getTransferBonusesRequest.pageIndex = 0;
-        transferBonusStore.getTransferBonusViewModel.getTransferBonusesRequest.pageSize = 20;
+        transferBonusStore.getTransferBonusViewModel.getTransferBonusesRequest.pageSize = 10;
         await transferBonusStore.getTransferBonusViewModel.getAllTransferBonuses(transferBonusStore.getTransferBonusViewModel.getTransferBonusesRequest);
     }
 
