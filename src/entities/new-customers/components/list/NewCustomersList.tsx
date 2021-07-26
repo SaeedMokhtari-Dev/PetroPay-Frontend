@@ -111,6 +111,7 @@ const NewCustomersList: React.FC<NewCustomersSidebarProps> = inject(Stores.newCu
         newCustomerStore.getNewCustomerViewModel.pageSize = 20;
         newCustomerStore.getNewCustomerViewModel.getNewCustomersRequest.pageIndex = 0;
         newCustomerStore.getNewCustomerViewModel.getNewCustomersRequest.pageSize = 20;
+        newCustomerStore.getNewCustomerViewModel.getNewCustomersRequest.status = 2;
 
         await newCustomerStore.getNewCustomerViewModel.getAllNewCustomers(
             newCustomerStore.getNewCustomerViewModel.getNewCustomersRequest
