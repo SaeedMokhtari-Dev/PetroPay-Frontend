@@ -5,6 +5,7 @@ export default class GetPetropayAccountsRequest
 
     dateFrom: string;
     dateTo: string;
+    petropayAccountId: number;
     exportToFile: boolean;
 
     constructor(

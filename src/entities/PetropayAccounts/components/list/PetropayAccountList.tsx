@@ -6,7 +6,7 @@ import Stores from "app/constants/Stores";
 import {
     Button,
     Pagination,
-    Table, Modal, PageHeader, Form, Collapse, Row, Col, Select, DatePicker, Alert
+    Table, Modal, PageHeader, Form, Collapse, Row, Col, Select, DatePicker, Alert, Spin
 } from "antd";
 import {
     EditOutlined, DeleteOutlined,
@@ -19,12 +19,12 @@ import Routes from "../../../../app/constants/Routes";
 import { Link } from "react-router-dom";
 import PetropayAccountStore from "../../stores/PetropayAccountStore";
 import Constants from "../../../../app/constants/Constants";
-import GetSubscriptionRequest from "../../../Subscriptions/handlers/get/GetSubscriptionRequest";
-import UserContext from "../../../../identity/contexts/UserContext";
 import ExportExcel from "../../../../app/utils/ExportExcel";
+import {set} from "mobx";
 
 const { Panel } = Collapse;
 const { confirm } = Modal;
+const { Option } = Select;
 
 
 interface PetropayAccountsSidebarProps {
@@ -32,6 +32,8 @@ interface PetropayAccountsSidebarProps {
 }
 
 const PetropayAccountList: React.FC<PetropayAccountsSidebarProps> = inject(Stores.petropayAccountStore)(observer(({petropayAccountStore}) => {
+    const [petropayAccountOptions, setPetropayAccountOptions] = React.useState([]);
+    const [dataFetched, setDataFetched] = React.useState(false);
     const formItemLayout = {
         labelCol: {
             xs: { span: 24 },
@@ -59,8 +61,19 @@ const PetropayAccountList: React.FC<PetropayAccountsSidebarProps> = inject(Store
         petropayAccountStore.onPetropayAccountGetPageLoad();
         debugger;
         petropayAccountStore.getPetropayAccountViewModel.getPetropayAccountsRequest.pageIndex = 0;
-        petropayAccountStore.getPetropayAccountViewModel.getPetropayAccountsRequest.pageSize = 20;
+        petropayAccountStore.getPetropayAccountViewModel.getPetropayAccountsRequest.pageSize = 10;
         await petropayAccountStore.getPetropayAccountViewModel.getAllPetropayAccounts(petropayAccountStore.getPetropayAccountViewModel.getPetropayAccountsRequest);
+
+        await petropayAccountStore.listPetropayAccountViewModel.getPetropayAccountList(false);
+
+        let petropayAccountOptions = [];
+        debugger;
+        for (let item of petropayAccountStore.listPetropayAccountViewModel?.listPetropayAccountResponse?.items) {
+            petropayAccountOptions.push(<Option key={item.key} value={item.accountId} balance={item.balance}>{item.title}</Option>);
+        }
+        setPetropayAccountOptions(petropayAccountOptions);
+
+        setDataFetched(true);
     }
 
     let viewModel = petropayAccountStore.getPetropayAccountViewModel;
@@ -96,7 +109,9 @@ const PetropayAccountList: React.FC<PetropayAccountsSidebarProps> = inject(Store
     function onDateChange(date, dateString, prop) {
         viewModel.getPetropayAccountsRequest[`${prop}`] = dateString;
     }
-
+    function onOptionSelectChanged(e, option, propName) {
+        viewModel.getPetropayAccountsRequest[`${propName}`] = e;
+    }
     async function ExportToExcel(){
         viewModel.petropayAccountExport = [];
         await viewModel.getAllPetropayAccounts(viewModel.getPetropayAccountsRequest, true);
@@ -127,7 +142,17 @@ const PetropayAccountList: React.FC<PetropayAccountsSidebarProps> = inject(Store
                     <Form {...formItemLayout} layout={"vertical"} onFinish={onFinish} form={form}
                           key={"searchForm"}
                           scrollToFirstError>
+                        {dataFetched ?
                         <Row gutter={[24, 16]}>
+                            <Col span={8}>
+                                <Form.Item name="petropayAccountId"
+                                           key={"petropayAccountId"}
+                                           label={i18next.t("PetropayAccounts.SearchPanel.Label.petropayAccountId")}>
+                                    <Select showSearch={true} allowClear={true} onChange={(e, option) => onOptionSelectChanged(e, option, "petropayAccountId")} >
+                                        {petropayAccountOptions}
+                                    </Select>
+                                </Form.Item>
+                            </Col>
                             <Col span={8}>
                                 <Form.Item name="dateFrom"
                                            key={"dateFrom"}
@@ -143,7 +168,12 @@ const PetropayAccountList: React.FC<PetropayAccountsSidebarProps> = inject(Store
                                 </Form.Item>
                             </Col>
                         </Row>
-
+                            :
+                            <Row gutter={[24, 16]}>
+                                <Col offset={11} span={8}>
+                                    <Spin className={"spine"} size="large" />
+                                </Col>
+                            </Row>}
                         <PageHeader
                             ghost={false}
                             subTitle={<div>

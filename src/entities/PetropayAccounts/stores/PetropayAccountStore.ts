@@ -17,11 +17,13 @@ export default class PetropayAccountStore
     onPetropayAccountGetPageLoad()
     {
         this.getPetropayAccountViewModel = new GetPetropayAccountViewModel(this);
+        this.listPetropayAccountViewModel = new ListPetropayAccountViewModel();
     }
 
     onPetropayAccountGetPageUnload()
     {
         this.getPetropayAccountViewModel = null;
+        this.listPetropayAccountViewModel = null;
     }
 
     onPetropayAccountPaymentPageLoad()

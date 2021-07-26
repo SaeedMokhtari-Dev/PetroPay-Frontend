@@ -6,6 +6,7 @@ export default class PetropayAccountListItem implements IDeserialize
     key: string;
     title: string;
     balance: string;
+    accountId: number;
 
     constructor() {
         makeAutoObservable(this);

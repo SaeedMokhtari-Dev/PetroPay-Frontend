@@ -329,6 +329,7 @@
   "PetropayAccounts.Label.transAmount": "Transaction Amount",
   "PetropayAccounts.Label.transReference": "Transaction Reference",
 
+  "PetropayAccounts.SearchPanel.Label.petropayAccountId": "Account Name",
 
   "PetropayAccounts.Add.HeaderText": "Add PetroPay Account",
   "PetropayAccounts.Edit.HeaderText": "Edit PetroPay Account with Id:",

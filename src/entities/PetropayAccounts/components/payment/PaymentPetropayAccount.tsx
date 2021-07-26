@@ -62,10 +62,6 @@ const PaymentPetropayAccount: React.FC<EditPetropayAccountProps> = inject(Stores
         petropayAccountStore.onPetropayAccountPaymentPageLoad();
 
         await petropayAccountStore.listPetropayAccountViewModel.getPetropayAccountList(false);
-        //let petropayAccountIdParam = +match.params?.petropayAccountId;
-
-        /*if(!petropayAccountIdParam)
-            history.goBack();*/
 
         let petropayAccountOptions = [];
         for (let item of petropayAccountStore.listPetropayAccountViewModel.listPetropayAccountResponse.items) {
