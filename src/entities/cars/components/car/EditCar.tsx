@@ -42,6 +42,8 @@ const EditCar: React.FC<EditCarProps> = inject(Stores.carStore)(observer(({carSt
     const [carIdNumberValue, setCarIdNumberValue] = React.useState("");
     const [children, setChildren] = React.useState([]);
     const [carTypeOptions, setCarTypeOptions] = React.useState([]);
+    const [carBrandOptions, setCarBrandOptions] = React.useState([]);
+    const [carModelOptions, setCarModelOptions] = React.useState([]);
 
 
     const [form] = Form.useForm();
@@ -63,8 +65,8 @@ const EditCar: React.FC<EditCarProps> = inject(Stores.carStore)(observer(({carSt
     ConsumptionMethods.forEach(w =>{ w.title = i18next.t(w.title) });
     const consumptionMethodOptions = [...ConsumptionMethods];
 
-    CarBrands.forEach(w =>{ w.title = i18next.t(w.title) });
-    const carBrandOptions = [...CarBrands];
+    /*CarBrands.forEach(w =>{ w.title = i18next.t(w.title) });
+    const carBrandOptions = [...CarBrands];*/
 
     CarTypeOfFuels.forEach(w =>{ w.title = i18next.t(w.title) });
     const carTypeOfFuelOptions = [...CarTypeOfFuels];
@@ -113,6 +115,28 @@ const EditCar: React.FC<EditCarProps> = inject(Stores.carStore)(observer(({carSt
         }
         setCarTypeOptions(carTypes);
 
+        await carStore.listCarBrandMasterViewModel.getCarBrandMasterList();
+        debugger;
+        let carBrands = [];
+        for (let item of carStore.listCarBrandMasterViewModel?.listCarBrandMasterResponse?.items) {
+            if(localStorage.getItem("currentLanguage") === 'en')
+                carBrands.push(<Option key={item.key} value={item.titleEn}>{item.titleEn}</Option>);
+            else
+                carBrands.push(<Option key={item.key} value={item.titleAr}>{item.titleAr}</Option>);
+        }
+        setCarBrandOptions(carBrands);
+
+        await carStore.listCarModelMasterViewModel.getCarModelMasterList();
+        debugger;
+        let carModels = [];
+        for (let item of carStore.listCarModelMasterViewModel?.listCarModelMasterResponse?.items) {
+            if(localStorage.getItem("currentLanguage") === 'en')
+                carModels.push(<Option key={item.key} value={item.titleEn}>{item.titleEn}</Option>);
+            else
+                carModels.push(<Option key={item.key} value={item.titleAr}>{item.titleAr}</Option>);
+        }
+        setCarModelOptions(carModels);
+
         setCarId(carIdParam);
         setDataFetched(true);
     }
@@ -153,6 +177,20 @@ const EditCar: React.FC<EditCarProps> = inject(Stores.carStore)(observer(({carSt
             carStore.editCarViewModel.editCarRequest[`${propName}`] = e;
         else
             carStore.editCarViewModel.addCarRequest[`${propName}`] = e;
+
+        if(propName === "carBrand")
+        {
+            debugger;
+            const filtered = carStore.listCarModelMasterViewModel?.listCarModelMasterResponse?.items?.filter(w => w.brandId == e);
+            let carModels = [];
+            for (let item of filtered) {
+                if(localStorage.getItem("currentLanguage") === 'en')
+                    carModels.push(<Option key={item.key} value={item.titleEn}>{item.titleEn}</Option>);
+                else
+                    carModels.push(<Option key={item.key} value={item.titleAr}>{item.titleAr}</Option>);
+            }
+            setCarModelOptions(carModels);
+        }
     }
     function onMaskChanged(e) {
         if(carId)
@@ -434,7 +472,10 @@ const EditCar: React.FC<EditCarProps> = inject(Stores.carStore)(observer(({carSt
                                            message: i18next.t("Cars.Validation.Message.carBrand.Required")
                                        }
                                    ]}>
-                            <Select options={carBrandOptions} showSearch={true} onChange={(e) => onSelectChanged(e, "carBrand")} />
+                            <Select showSearch={true} onChange={(e) => onSelectChanged(e, "carBrand")} >
+                                {carBrandOptions}
+                            </Select>
+
                         </Form.Item>
                     </Col>
                     <Col span={8}>
@@ -447,7 +488,10 @@ const EditCar: React.FC<EditCarProps> = inject(Stores.carStore)(observer(({carSt
                                            message: i18next.t("Cars.Validation.Message.carModel.Required")
                                        }
                                    ]}>
-                            <Input onChange={onChanged}/>
+
+                            <Select showSearch={true} onChange={(e) => onSelectChanged(e, "carModel")} >
+                                {carModelOptions}
+                            </Select>
                         </Form.Item>
                     </Col>
                     <Col span={8}>

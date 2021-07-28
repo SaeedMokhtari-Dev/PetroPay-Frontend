@@ -57,7 +57,7 @@ const CustomerStatementList: React.FC<CustomerStatementListProps> = inject(Store
     async function onLoad() {
         customerStatementStore.onCustomerStatementGetPageLoad();
         customerStatementStore.getCustomerStatementViewModel.getCustomerStatementsRequest = new GetCustomerStatementRequest();
-        customerStatementStore.getCustomerStatementViewModel.getCustomerStatementsRequest.pageSize = 20;
+        customerStatementStore.getCustomerStatementViewModel.getCustomerStatementsRequest.pageSize = 10;
         customerStatementStore.getCustomerStatementViewModel.getCustomerStatementsRequest.pageIndex = 0;
         if(UserContext.info.role == 1){
             customerStatementStore.getCustomerStatementViewModel.getCustomerStatementsRequest.companyId = UserContext.info.id;

@@ -146,6 +146,8 @@ export default
     apiNewCustomerActive: "/api/new-customer/active",
 
     apiCarTypeMasterList: "/api/car-type-master/list",
+    apiCarModelMasterList: "/api/car-model-master/list",
+    apiCarBrandMasterList: "/api/car-brand-master/list",
 
     apiTransferBonusGet: "/api/transfer-bonus/get",
     apiTransferBonusAdd: "/api/transfer-bonus/add",

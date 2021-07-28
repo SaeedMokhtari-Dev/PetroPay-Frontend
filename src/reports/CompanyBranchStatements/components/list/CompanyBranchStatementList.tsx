@@ -58,7 +58,7 @@ const CompanyBranchStatementList: React.FC<CompanyBranchStatementListProps> = in
     async function onLoad() {
         companyBranchStatementStore.onCompanyBranchStatementGetPageLoad();
         companyBranchStatementStore.getCompanyBranchStatementViewModel.getCompanyBranchStatementsRequest = new GetCompanyBranchStatementRequest();
-        companyBranchStatementStore.getCompanyBranchStatementViewModel.getCompanyBranchStatementsRequest.pageSize = 20;
+        companyBranchStatementStore.getCompanyBranchStatementViewModel.getCompanyBranchStatementsRequest.pageSize = 10;
         companyBranchStatementStore.getCompanyBranchStatementViewModel.getCompanyBranchStatementsRequest.pageIndex = 0;
         if(UserContext.info.role == 1){
             companyBranchStatementStore.getCompanyBranchStatementViewModel.getCompanyBranchStatementsRequest.companyId = UserContext.info.id;

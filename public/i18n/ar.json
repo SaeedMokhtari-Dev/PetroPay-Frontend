@@ -327,6 +327,8 @@
   "PetropayAccounts.Label.transAmount": "المبلغ",
   "PetropayAccounts.Label.transReference": "المرجع",
 
+  "PetropayAccounts.SearchPanel.Label.petropayAccountId": "اسم الحساب",
+
   "PetropayAccounts.Add.HeaderText": "اضافة حساب",
   "PetropayAccounts.Edit.HeaderText": "تعديل",
   "PetropayAccounts.Payment.HeaderText": "Payment PetroPay Account",
@@ -945,6 +947,7 @@
   "AdminDashboard.PetrolStationItem.Label.key": "Key",
   "AdminDashboard.PetrolStationItem.Label.name": "اسم محطة الوقود",
   "AdminDashboard.PetrolStationItem.Label.balance": "رصيد المحطة",
+  "AdminDashboard.PetrolStationItem.Label.bonus": "الحوافز",
 
   "AdminDashboard.Section.CompaniesBalance": "ارصدة الشركات",
   "AdminDashboard.Section.PetrolStationsBalance": "ارصدة محطات الوقود",
@@ -1320,8 +1323,47 @@
 
 
   "PetropayAccounts.Error.List.Message": "حدث خطأ أثناء محاولة الحصول على قائمة حسابات بتروباي",
-  "PetropayAccounts.SearchPanel.Label.dateFrom": "Date From",
-  "PetropayAccounts.SearchPanel.Label.dateTo": "Date To",
+  "PetropayAccounts.SearchPanel.Label.dateFrom": "من تاريخ",
+  "PetropayAccounts.SearchPanel.Label.dateTo": "الي تاريخ",
+
+
+  "CustomerStatements.Menu.Title": "كشف حساب العميل",
+  "CustomerStatements.Page.Title": "كشف حساب العميل",
+  "CustomerStatements.Page.SubTitle": "تقرير كشف حساب العميل",
+  "CustomerStatements.Label.key": "key",
+  "CustomerStatements.Label.transactionDataTime": "تاريخ المعاملة",
+  "CustomerStatements.Label.accountId": "رقم الحساب",
+  "CustomerStatements.Label.companyId": "رقم الشركة",
+  "CustomerStatements.Label.companyName": "اسم الشركة",
+  "CustomerStatements.Label.transDocument": "بيان المعاملة",
+  "CustomerStatements.Label.sumTransAmount": "القيمة",
+  "CustomerStatements.Label.accountName": "اسم الحساب",
+
+  "CustomerStatements.SearchPanel.Label.dateFrom": "من تاريخ",
+  "CustomerStatements.SearchPanel.Label.dateTo": "الي تاريخ",
+  "CustomerStatements.SearchPanel.Label.companyId": "الشركة",
+
+  "CustomerStatements.Error.Get.Message": "حدث خطأ أثناء محاولة الحصول على قائمة كشف حساب العميل.",
+
+  "CompanyBranchStatements.Menu.Title": "كشف حساب الفروع",
+  "CompanyBranchStatements.Page.Title": "كشف حساب الفروع",
+  "CompanyBranchStatements.Page.SubTitle": "تقرير كشف حساب الفروع",
+  "CompanyBranchStatements.Label.key": "key",
+  "CompanyBranchStatements.Label.transactionDateTime": "تاريخ المعاملة",
+  "CompanyBranchStatements.Label.accountId": "رقم الحساب",
+  "CompanyBranchStatements.Label.companyId": "رقم الشركة",
+  "CompanyBranchStatements.Label.companyName": "اسم الشركة",
+  "CompanyBranchStatements.Label.companyBranchId": "رقم الفرع",
+  "CompanyBranchStatements.Label.companyBranchName": "اسم الفرع",
+  "CompanyBranchStatements.Label.sumTransAmount": "القيمة",
+  "CompanyBranchStatements.Label.transDocument": "بيان المعاملة",
+
+  "CompanyBranchStatements.SearchPanel.Label.dateFrom": "من تاريخ ",
+  "CompanyBranchStatements.SearchPanel.Label.dateTo": "الي تاريخ",
+  "CompanyBranchStatements.SearchPanel.Label.companyId": "الشركة",
+  "CompanyBranchStatements.SearchPanel.Label.branchId": "الفرع",
+
+  "CompanyBranchStatements.Error.Get.Message": "حدث خطأ أثناء محاولة الحصول على قائمة كشف حساب فرع الشركة.",
 
   "General.Country.Egypt": "Egypt",
 
