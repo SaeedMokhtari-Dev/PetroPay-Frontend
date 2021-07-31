@@ -177,11 +177,18 @@ const EditCar: React.FC<EditCarProps> = inject(Stores.carStore)(observer(({carSt
             carStore.editCarViewModel.editCarRequest[`${propName}`] = e;
         else
             carStore.editCarViewModel.addCarRequest[`${propName}`] = e;
+    }
+    function onBrandChanged(e, option, propName){
+
+        if(carId)
+            carStore.editCarViewModel.editCarRequest[`${propName}`] = e;
+        else
+            carStore.editCarViewModel.addCarRequest[`${propName}`] = e;
 
         if(propName === "carBrand")
         {
             debugger;
-            const filtered = carStore.listCarModelMasterViewModel?.listCarModelMasterResponse?.items?.filter(w => w.brandId == e);
+            const filtered = carStore.listCarModelMasterViewModel?.listCarModelMasterResponse?.items?.filter(w => w.brandId == +option.key);
             let carModels = [];
             for (let item of filtered) {
                 if(localStorage.getItem("currentLanguage") === 'en')
@@ -472,7 +479,7 @@ const EditCar: React.FC<EditCarProps> = inject(Stores.carStore)(observer(({carSt
                                            message: i18next.t("Cars.Validation.Message.carBrand.Required")
                                        }
                                    ]}>
-                            <Select showSearch={true} onChange={(e) => onSelectChanged(e, "carBrand")} >
+                            <Select showSearch={true} onChange={(e, option) => onBrandChanged(e, option, "carBrand")} >
                                 {carBrandOptions}
                             </Select>
 
