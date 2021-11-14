@@ -23,6 +23,8 @@ export default class DetailPetroStationResponse implements IDeserialize
     stationChangeOilService: boolean;
     stationCarWashingService: boolean;
     stationChangeTireService: boolean;
+    petrolCompanyId: number;
+    petrolCompanyName: string;
 
     deserialize(input: any): this
     {

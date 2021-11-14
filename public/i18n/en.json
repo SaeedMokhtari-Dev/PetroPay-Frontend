@@ -254,6 +254,7 @@
   "PetroStations.Page.Title": "Petrol Stations",
   "PetroStations.Page.SubTitle": "This page is for define Petrol Stations",
   "PetroStations.Label.key": "key",
+  "PetroStations.Label.petrolCompanyName": "Petrol Company",
   "PetroStations.Label.stationId": "Station Id",
   "PetroStations.Label.stationName": "Name",
   "PetroStations.Label.stationAddress": "Address",
@@ -286,6 +287,7 @@
 
   "PetroStations.Button.Payment": "Payment Receipt Transaction",
 
+  "PetroStations.Validation.Message.petrolCompanyId.Required": "Please select petrol company",
   "PetroStations.Validation.Message.stationName.Required": "Please enter station name",
   "PetroStations.Validation.Message.stationAddress.Required": "Please enter station address",
   "PetroStations.Validation.Message.stationLucationName.Required": "Please enter station Location Name",
@@ -460,7 +462,7 @@
   "Cars.Label.carModel": "car Model",
   "Cars.Label.carModelYear": "car Model Year",
   "Cars.Label.carTypeOfFuel": "car Type Of Fuel",
-  "Cars.Label.carNeedPlatePhoto": "car Need Plate Photo",
+  "Cars.Label.carNeedPlatePhoto": "Show Car Photo",
   "Cars.Label.carDriverName": "car Driver Name",
   "Cars.Label.carDriverPhoneNumber": "car Driver Phone Number",
   "Cars.Label.carDriverUserName": "car Driver User Name",
@@ -594,6 +596,9 @@
   "Subscriptions.Label.subscriptionEditDate": "Please select start date with a number for range of date",
   "Subscriptions.Label.numberOfDateDiff": "Select the number Of months/years",
   "Subscriptions.Label.couponCode": "Coupon Code",
+  "Subscriptions.Label.carId":"Car #",
+  "Subscriptions.Label.invoiced":"Invoiced",
+  
 
   "Subscriptions.Invoice.Page.Title": "Subscription Invoice",
   "Subscriptions.Invoice": "Invoice",
@@ -704,6 +709,60 @@
   "Subscriptions.Error.Reject.Message": "An error has occurred while trying to reject subscription.",
   "Subscriptions.Error.Calculate.Message": "An error has occurred while trying to calculate subscription.",
 
+
+  "PetrolCompanies.Menu.Title": "Petrol Companies",
+  "PetrolCompanies.Page.Title": "Petrol Companies",
+  "PetrolCompanies.Page.SubTitle": "This page is for define petrolCompanies",
+  "PetrolCompanies.Label.key": "key",
+  "PetrolCompanies.Label.petrolCompanyId": "petrol Company Id",
+  "PetrolCompanies.Label.petrolCompanyName": "Name",
+  "PetrolCompanies.Label.petrolCompanyCommercialNumber": "Commercial Number",
+  "PetrolCompanies.Label.petrolCompanyCommercialPhoto": "Commercial Photo",
+  "PetrolCompanies.Label.petrolCompanyType": "Type",
+  "PetrolCompanies.Label.petrolCompanyAdminUserName": "Admin User Name",
+  "PetrolCompanies.Label.petrolCompanyAdminUserPassword": "Admin User Password",
+  "PetrolCompanies.Label.petrolCompanyCountry": "Country",
+  "PetrolCompanies.Label.petrolCompanyRegion": "Region",
+  "PetrolCompanies.Label.petrolCompanyAddress": "Address",
+  "PetrolCompanies.Label.petrolCompanyAdminName": "Admin Name",
+  "PetrolCompanies.Label.petrolCompanyAdminPosition": "Admin Position",
+  "PetrolCompanies.Label.petrolCompanyAdminPhone": "Admin Phone",
+  "PetrolCompanies.Label.petrolCompanyAdminEmail": "Admin Email",
+  "PetrolCompanies.Label.petrolCompanyBalnce": "Balance",
+  "PetrolCompanies.Label.petrolCompanyVatNumber": "Petrol Company Vat Number",
+  "PetrolCompanies.Label.petrolCompanyVatPhoto": "Petrol Company Vat Photo",
+  "PetrolCompanies.Label.petrolCompanyTaxNumber": "Petrol Company Tax Number",
+  "PetrolCompanies.Label.petrolCompanyTaxPhoto": "Petrol Company Tax Photo",
+
+  "PetrolCompanies.Add.HeaderText": "Add Petrol Company",
+  "PetrolCompanies.Edit.HeaderText": "Edit Petrol Company with Id:",
+  "PetrolCompanies.Section.GeneralInformation": "General Information",
+  "PetrolCompanies.Section.LoginInformation": "Login Information",
+  "PetrolCompanies.Section.TaxAndVat": "Tax And Vat",
+  "PetrolCompanies.Button.Branches": "Branches",
+
+  "PetrolCompanies.Validation.Message.petrolCompanyName.Required": "Please enter petrol company name",
+  "PetrolCompanies.Validation.Message.petrolCompanyCommercialNumber.Required": "Please enter commercial number",
+  "PetrolCompanies.Validation.Message.petrolCompanyType.Required": "Please enter petrol company type",
+  "PetrolCompanies.Validation.Message.petrolCompanyAdminEmail.Required": "Please enter petrol company admin email",
+  "PetrolCompanies.Validation.Message.petrolCompanyAdminUserName.Required": "Please enter petrol company admin username",
+  "PetrolCompanies.Validation.Message.petrolCompanyAdminUserName.Valid": "Please enter a valid Username",
+  "PetrolCompanies.Validation.Message.petrolCompanyAdminUserPassword.Required": "Please enter petrol company admin password",
+  "PetrolCompanies.Validation.Message.petrolCompanyAdminUserPassword.Valid": "The minimum password length is 8 characters and must have at least a number, upper, lower and special character",
+
+  "Api.PetrolCompany.Add.Successful": "A new petrol company added successfully",
+  "Api.PetrolCompany.Edit.Successful": "selected petrol company edited successfully",
+  "Api.PetrolCompany.Deleted.Successful": "selected petrol company deleted successfully",
+  "Api.PetrolCompany.Id.Required": "Id is Required",
+
+
+  "PetrolCompanies.Error.Get.Message": "An error has occurred while trying to get petrolCompanies list.",
+  "PetrolCompanies.Error.Detail.Message": "An error has occurred while trying to get petrolCompany details.",
+  "PetrolCompanies.Error.Add.Message": "An error has occurred while trying to add new petrolCompany.",
+  "PetrolCompanies.Error.Edit.Message": "An error has occurred while trying to edit petrolCompany.",
+  "PetrolCompanies.Error.Delete.Message": "An error has occurred while trying to delete petrolCompany.",
+  "PetrolCompanies.Error.List.Message": "An error has occurred while trying to get petrolCompany list.",
+
   "InvoiceSummaries.Menu.Title": "Invoice Summaries",
   "InvoiceSummaries.Page.Title": "Invoice Summaries",
   "InvoiceSummaries.Page.SubTitle": "Invoice Summaries report",
@@ -781,6 +840,7 @@
   "CarBalances.Label.carIdNumber": "Car Id Number",
   "CarBalances.Label.carDriverName": "Car Driver Name",
   "CarBalances.Label.consumptionValue": "Consumption Value",
+  "CarBalances.Label.car_fuel_km_cap": "Fuel KM Cap",
   "CarBalances.Label.carBalnce": "Car Balnce",
   "CarBalances.Label.carId": "Car Id",
   "CarBalances.Label.subscriptionStartDate": "Subscription Start Date",
@@ -824,6 +884,7 @@
   "StationSales.Label.sumInvoiceFuelConsumptionLiter": "Invoice Fuel Consumption Liter",
   "StationSales.Label.invoiceFuelType": "Invoice Fuel Type",
   "StationSales.Label.sumInvoiceDataTime": "Invoice Date",
+  "StationSales.Label.sum_InvoiceBonusPoints":"Bonus Points",
 
 
   "StationSales.SearchPanel.Label.stationWorkerId": "Petrol Station",
@@ -845,6 +906,8 @@
   "StationStatements.Label.sumTransAmount": "Transaction Amount",
   "StationStatements.Label.accountName": "Account Name",
   "StationStatements.Label.stationId": "Station Id",
+  "StationStatements.Label.trans_reference": "Note",
+
 
   "StationStatements.SearchPanel.Label.stationId": "station Id",
   "StationStatements.SearchPanel.Label.stationName": "Station Name",
@@ -1496,7 +1559,6 @@
   "General.CarBrand.Volvo": "Volvo",
 
   "General.CarTypeOfFuel.DIESEL": "DIESEL",
-  "General.CarTypeOfFuel.90": "90",
   "General.CarTypeOfFuel.92": "92",
   "General.CarTypeOfFuel.95": "95",
   "General.CarTypeOfFuel.80": "80",

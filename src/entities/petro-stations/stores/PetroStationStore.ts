@@ -4,6 +4,7 @@ import EditPetroStationViewModel from "../view-models/EditPetroStationViewModel"
 import GetPetroStationViewModel from "../view-models/GetPetroStationViewModel";
 import PaymentPetroStationViewModel from "../view-models/PaymentPetroStationViewModel";
 import ListPetropayAccountViewModel from "../../PetropayAccounts/view-models/ListPetropayAccountViewModel";
+import ListPetrolCompanyViewModel from "../../petrol-companies/view-models/ListPetrolCompanyViewModel";
 
 export default class PetroStationStore
 {
@@ -11,6 +12,7 @@ export default class PetroStationStore
     editPetroStationViewModel: EditPetroStationViewModel;
     paymentPetroStationViewModel: PaymentPetroStationViewModel;
     listPetropayAccountViewModel: ListPetropayAccountViewModel;
+    listPetrolCompanyViewModel: ListPetrolCompanyViewModel;
 
     constructor(public appStore: AppStore) {
         makeAutoObservable(this);
@@ -29,11 +31,13 @@ export default class PetroStationStore
     onPetroStationEditPageLoad()
     {
         this.editPetroStationViewModel = new EditPetroStationViewModel(this);
+        this.listPetrolCompanyViewModel = new ListPetrolCompanyViewModel();
     }
 
     onPetroStationEditPageUnload()
     {
         this.editPetroStationViewModel = null;
+        this.listPetrolCompanyViewModel = null;
     }
 
     onPetroStationPaymentPageLoad()

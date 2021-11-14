@@ -43,6 +43,7 @@ const EditPetroStation: React.FC<EditPetroStationProps> = inject(Stores.petroSta
     const [dataFetched, setDataFetched] = React.useState(false);
     const [petroStationId, setPetroStationId] = React.useState(0);
     const [regionOptions, setRegionOptions] = React.useState([]);
+    const [petrolCompanies, setPetrolCompanies] = React.useState([]);
 
     const [form] = Form.useForm();
 
@@ -76,6 +77,14 @@ const EditPetroStation: React.FC<EditPetroStationProps> = inject(Stores.petroSta
             petroStationStore.editPetroStationViewModel.addPetroStationRequest = new AddPetroStationRequest();
             petroStationStore.editPetroStationViewModel.detailPetroStationResponse = new DetailPetroStationResponse();
         }
+
+        await petroStationStore.listPetrolCompanyViewModel.getPetrolCompanyList();
+        let petrolCompanies = [];
+        for (let item of petroStationStore.listPetrolCompanyViewModel.listPetrolCompanyResponse.items) {
+            petrolCompanies.push(<Option key={item.key} value={item.key}>{item.title}</Option>);
+        }
+        setPetrolCompanies(petrolCompanies);
+
 
         let regionsOptions = [];
         for (let item of Regions) {
@@ -149,6 +158,23 @@ const EditPetroStation: React.FC<EditPetroStationProps> = inject(Stores.petroSta
                   key={"petroStationForm"}
                  scrollToFirstError>
                 <Row gutter={[24, 16]}>
+                    <Col span={8}>
+                        <Form.Item name="petrolCompanyId" initialValue={viewModel?.detailPetroStationResponse?.petrolCompanyId}
+                                   key={"petrolCompanyId"}
+                                   label={i18next.t("PetroStations.Label.petrolCompanyId")}
+                                   rules={[
+                                       {
+                                           required: true,
+                                           message: i18next.t("PetroStations.Validation.Message.petrolCompanyId.Required")
+                                       }
+                                   ]}>
+                            {/*<Input onChange={onChanged}/>*/}
+                            <Select showSearch={true} onChange={(e) => onSelectChanged(e, "petrolCompanyId")} >
+                                {petrolCompanies}
+                            </Select>
+
+                        </Form.Item>
+                    </Col>
                     <Col span={8}>
                 <Form.Item name="stationName" initialValue={viewModel?.detailPetroStationResponse?.stationName}
                            key={"stationName"}

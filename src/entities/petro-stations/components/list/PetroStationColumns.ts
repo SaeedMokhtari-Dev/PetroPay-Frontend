@@ -1,6 +1,7 @@
 export default
 [
     {title: "PetroStations.Label.key", dataIndex: "key", key: "key", responsive: ['md']},
+    {title: "PetroStations.Label.petrolCompanyName", dataIndex: "petrolCompanyName", key: "petrolCompanyName", responsive: ['md']},
     {title: "PetroStations.Label.stationName", dataIndex: "stationName", key: "stationName", responsive: ['md']},
     /*{title: "PetroStations.Label.stationAddress", dataIndex: "stationAddress", key: "stationAddress", responsive: ['md']},*/
     {title: "PetroStations.Label.stationLucationName", dataIndex: "stationLucationName", key: "stationLucationName", responsive: ['md']},

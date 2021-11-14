@@ -15,6 +15,11 @@ export default
     editCompany: "/app/company/edit/:companyId",
     addCompany: "/app/company/add",
 
+    // PetrolCompany
+    petrolCompany: "/app/petrolCompany",
+    editPetrolCompany: "/app/petrolCompany/edit/:petrolCompanyId",
+    addPetrolCompany: "/app/petrolCompany/add",
+
     // PetroStation
     petroStation: "/app/petroStation",
     editPetroStation: "/app/petroStation/edit/:petroStationId",

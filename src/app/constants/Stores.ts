@@ -6,6 +6,7 @@ export default {
     supplierStore: 'supplierStore',
     adminStore: 'adminStore',
     companiesStore: 'companiesStore',
+    petrolCompaniesStore: 'petrolCompaniesStore',
     bundlesStore: 'bundlesStore',
     branchStore: 'branchStore',
     petroStationStore: 'petroStationStore',

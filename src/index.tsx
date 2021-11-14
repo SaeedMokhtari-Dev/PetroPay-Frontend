@@ -51,6 +51,7 @@ ReactDOM.render(
                       companiesStore={appStore.companies}
                       bundlesStore={appStore.bundles}
                       branchStore={appStore.branch}
+                      petrolCompaniesStore={appStore.petrolCompanies}
                       petroStationStore={appStore.petroStation}
                       stationUserStore={appStore.stationUser}
                       carStore={appStore.car}

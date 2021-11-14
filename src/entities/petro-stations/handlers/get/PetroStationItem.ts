@@ -21,6 +21,8 @@ export default class PetroStationItem implements IDeserialize
     stationEmail: number;
     stationServiceActive: boolean;
     stationServiceDeposit: boolean;
+    petrolCompanyId: number;
+    petrolCompanyName: string;
 
     constructor() {
         makeAutoObservable(this);

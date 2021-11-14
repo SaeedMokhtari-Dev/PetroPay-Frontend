@@ -37,6 +37,7 @@ import NewCustomerStore from "../../entities/new-customers/stores/NewCustomerSto
 import TransferBonusStore from "../../entities/TransferBonuses/stores/TransferBonusStore";
 import CustomerStatementStore from "../../reports/CustomerStatements/stores/CustomerStatementStore";
 import CompanyBranchStatementStore from "../../reports/CompanyBranchStatements/stores/CompanyBranchStatementStore";
+import PetrolCompaniesStore from "../../entities/petrol-companies/stores/PetrolCompaniesStore";
 
 export class AppStore
 {
@@ -46,6 +47,7 @@ export class AppStore
     admin: AdminStore;
     supplier: SupplierStore;
     companies: CompaniesStore;
+    petrolCompanies: PetrolCompaniesStore;
     bundles: BundlesStore;
     branch: BranchStore;
     petroStation: PetroStationStore;
@@ -88,6 +90,7 @@ export class AppStore
         this.admin = new AdminStore(this);
         this.supplier = new SupplierStore(this);
         this.companies = new CompaniesStore(this);
+        this.petrolCompanies = new PetrolCompaniesStore(this);
         this.bundles = new BundlesStore(this);
         this.branch = new BranchStore(this);
         this.petroStation = new PetroStationStore(this);

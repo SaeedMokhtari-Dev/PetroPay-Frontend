@@ -77,6 +77,8 @@ import AddTransferBonus from "../../entities/TransferBonuses/components/add/AddT
 import CustomerStatementList from "../../reports/CustomerStatements/components/list/CustomerStatementList";
 import CompanyBranchStatementList
     from "../../reports/CompanyBranchStatements/components/list/CompanyBranchStatementList";
+import PetrolCompaniesList from "../../entities/petrol-companies/components/list/PetrolCompaniesList";
+import EditPetrolCompany from "../../entities/petrol-companies/components/company/EditPetrolCompany";
 
 const App: React.FC = () =>
 {
@@ -117,6 +119,10 @@ const App: React.FC = () =>
                                     <Route exact roles={[RoleType.admin]} path={Routes.company} component={CompaniesList} />
                                     <Route exact roles={[RoleType.admin]} path={Routes.editCompany} component={EditCompany} />
                                     <Route exact roles={[RoleType.admin]} path={Routes.addCompany} component={EditCompany} />
+
+                                    <Route exact roles={[RoleType.admin]} path={Routes.petrolCompany} component={PetrolCompaniesList} />
+                                    <Route exact roles={[RoleType.admin]} path={Routes.editPetrolCompany} component={EditPetrolCompany} />
+                                    <Route exact roles={[RoleType.admin]} path={Routes.addPetrolCompany} component={EditPetrolCompany} />
 
                                     <Route exact roles={[RoleType.admin]} path={Routes.bundle} component={BundlesList} />
                                     <Route exact roles={[RoleType.admin]} path={Routes.editBundle} component={EditBundle} />

@@ -22,6 +22,7 @@ export default class EditPetroStationRequest
     stationChangeOilService: boolean;
     stationCarWashingService: boolean;
     stationChangeTireService: boolean;
+    petrolCompanyId: number;
 
     constructor(
     ) {
