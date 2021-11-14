@@ -516,6 +516,20 @@ const EditCar: React.FC<EditCarProps> = inject(Stores.carStore)(observer(({carSt
                     </Col>
 
                     <Col span={8}>
+                        <Form.Item name="carFuelKmCap" initialValue={viewModel?.detailCarResponse?.carFuelKmCap}
+                                   key={"carFuelKmCap"}
+                                   label={i18next.t("Cars.Label.carFuelKmCap")}
+                                   rules={[
+                                       {
+                                           required: true,
+                                           message: i18next.t("Cars.Validation.Message.carFuelKmCap.Required")
+                                       }
+                                   ]}>
+                            <Input type={"number"} onChange={onChanged}/>
+                        </Form.Item>
+                    </Col>
+
+                    <Col span={8}>
                         <Form.Item name="carTypeOfFuel" initialValue={viewModel?.detailCarResponse?.carTypeOfFuel}
                                    key={"carTypeOfFuel"}
                                    label={i18next.t("Cars.Label.carTypeOfFuel")}

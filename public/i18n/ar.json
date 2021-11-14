@@ -472,6 +472,7 @@
   "Cars.Label.carNfcCode": "كود NFC",
   "Cars.Label.carOdometerRecordRequired": "تسجيل عداد الكيلومترات",
   "Cars.Label.timeToOdometerRecord": "تسجيل",
+  "Cars.Label.carFuelKmCap": "Car Fuel Km Cap",
 
   "Cars.Add.HeaderText": "اضافة سيارة",
   "Cars.Edit.HeaderText": "تعديل بيانات السيارة",
@@ -802,6 +803,8 @@
   "StationReports.SearchPanel.Label.stationWorkerFname": "اسم الموظف",
   "StationReports.SearchPanel.Label.invoiceDataTimeFrom": "من تاريخ",
   "StationReports.SearchPanel.Label.invoiceDataTimeTo": "الي تاريخ",
+  "StationReports.SearchPanel.Label.serviceArDescription": "نوع الخدمة",
+  "StationReports.SearchPanel.Label.paymentMethodName": "طريقة السداد",
 
   "StationReports.Button.InvoiceDetail": "تفاصيل الفاتورة",
 

@@ -28,10 +28,10 @@ export default class GetCarConsumptionRateViewModel {
     public async getAllCarConsumptionRate(getCarConsumptionRatesRequest: GetCarConsumptionRateRequest, exportToFile: boolean = false) {
         try {
             this.errorMessage = "";
-            if(ObjectHelper.isNullOrEmptyWithDefaultExceptions(getCarConsumptionRatesRequest, [])){
+            /*if(ObjectHelper.isNullOrEmptyWithDefaultExceptions(getCarConsumptionRatesRequest, [])){
                 this.errorMessage = i18next.t("General.Search.AtLeastOne");
                 return;
-            }
+            }*/
 
             this.isProcessing = true;
             getCarConsumptionRatesRequest.exportToFile = exportToFile;

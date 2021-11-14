@@ -39,7 +39,7 @@ export default class AddCarRequest
     workAllDays: boolean;
     carNfcCode: string;
     carOdometerRecordRequired: boolean;
-
+    carFuelKmCap: number;
 
     constructor(
     ) {

@@ -475,6 +475,7 @@
   "Cars.Label.carNfcCode": "car Nfc Code",
   "Cars.Label.carOdometerRecordRequired": "car Odometer Record Required",
   "Cars.Label.timeToOdometerRecord": "Odometer",
+  "Cars.Label.carFuelKmCap": "Car Fuel Km Cap",
 
   "Cars.Add.HeaderText": "Add Car",
   "Cars.Edit.HeaderText": "Edit Car with Id:",
@@ -806,6 +807,8 @@
   "StationReports.SearchPanel.Label.stationWorkerFname": "Station Worker Name",
   "StationReports.SearchPanel.Label.invoiceDataTimeFrom": "Invoice Data Time From",
   "StationReports.SearchPanel.Label.invoiceDataTimeTo": "Invoice Data Time To",
+  "StationReports.SearchPanel.Label.serviceArDescription": "service Description (AR)",
+  "StationReports.SearchPanel.Label.paymentMethodName": "Payment Method Name",
 
   "StationReports.Button.InvoiceDetail": "Invoice Detail",
 

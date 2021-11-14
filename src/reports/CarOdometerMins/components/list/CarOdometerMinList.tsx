@@ -201,7 +201,7 @@ const CarOdometerMinList: React.FC<CarOdometerMinListProps> = inject(Stores.carO
                                            key={"carId"}
                                            label={i18next.t("CarOdometerMins.SearchPanel.Label.carId")}>
                                     {/*<Input onChange={onChanged}/>*/}
-                                    <Select style={{width: "100%", display:"block"}}
+                                    <Select style={{width: "100%", display:"block"}} allowClear={true}
                                             showSearch={true} onChange={(e) => onSelectChanged(e, "carId")}>
                                         {carOptions}
                                     </Select>

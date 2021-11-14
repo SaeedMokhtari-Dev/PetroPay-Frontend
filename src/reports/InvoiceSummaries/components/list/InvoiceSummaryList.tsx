@@ -240,7 +240,7 @@ const InvoiceSummaryList: React.FC<InvoiceSummaryListProps> = inject(Stores.invo
                                                key={"companyId"}
                                                label={i18next.t("InvoiceSummaries.SearchPanel.Label.companyName")}>
                                         {/*<Input onChange={onChanged}/>*/}
-                                        <Select style={{width: "100%", display:"block"}}
+                                        <Select style={{width: "100%", display:"block"}} allowClear={true}
                                                 showSearch={true} onChange={(e) => onSelectChanged(e, "companyId")}>
                                             {companyOptions}
                                         </Select>
@@ -262,7 +262,7 @@ const InvoiceSummaryList: React.FC<InvoiceSummaryListProps> = inject(Stores.invo
                                            key={"companyBranchId"}
                                            label={i18next.t("InvoiceSummaries.SearchPanel.Label.companyBranchName")}>
                                     {/*<Input onChange={onChanged} />*/}
-                                    <Select style={{width: "100%", display:"block"}}
+                                    <Select style={{width: "100%", display:"block"}} allowClear={true}
                                             showSearch={true} onChange={(e) => onSelectChanged(e, "companyBranchId")}>
                                         {branchOptions}
                                     </Select>
@@ -273,7 +273,7 @@ const InvoiceSummaryList: React.FC<InvoiceSummaryListProps> = inject(Stores.invo
                                            key={"carIdNumber"}
                                            label={i18next.t("InvoiceSummaries.SearchPanel.Label.carIdNumber")}>
                                     {/*<Input onChange={onChanged}/>*/}
-                                    <Select style={{width: "100%", display:"block"}}
+                                    <Select style={{width: "100%", display:"block"}} allowClear={true}
                                             showSearch={true} onChange={(e) => onSelectChanged(e, "carIdNumber")}>
                                         {carOptions}
                                     </Select>
@@ -292,7 +292,7 @@ const InvoiceSummaryList: React.FC<InvoiceSummaryListProps> = inject(Stores.invo
                                            key={"serviceDescription"}
                                            label={i18next.t("InvoiceSummaries.SearchPanel.Label.serviceDescription")}>
                                     {/*<Input onChange={onChanged}/>*/}
-                                    <Select style={{width: "100%", display:"block"}}
+                                    <Select style={{width: "100%", display:"block"}} allowClear={true}
                                             showSearch={true} onChange={(e) => onSelectChanged(e, "serviceDescription")}>
                                         {serviceMasterOptions}
                                     </Select>

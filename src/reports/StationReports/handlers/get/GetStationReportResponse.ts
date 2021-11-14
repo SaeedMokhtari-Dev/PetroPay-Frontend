@@ -6,6 +6,7 @@ export default class GetStationReportResponse implements IDeserialize
 {
     items: StationReportItem[] = [];
     totalCount: number;
+    sumInvoiceAmount: number;
 
     constructor() {
         makeAutoObservable(this);

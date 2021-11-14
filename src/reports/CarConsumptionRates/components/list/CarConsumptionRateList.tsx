@@ -133,8 +133,14 @@ const CarConsumptionRateList: React.FC<CarConsumptionRateListProps> = inject(Sto
         viewModel.getCarConsumptionRatesRequest[`${prop}`] = dateString;
     }
     async function onFinish(values: any) {
+        viewModel.errorMessage = "";
         viewModel.getCarConsumptionRatesRequest.pageIndex = 0;
-        await viewModel.getAllCarConsumptionRate(viewModel.getCarConsumptionRatesRequest);
+        if(viewModel.getCarConsumptionRatesRequest.dateFrom && !viewModel.getCarConsumptionRatesRequest.dateTo)
+            viewModel.errorMessage = "Please enter date to";
+        if(!viewModel.getCarConsumptionRatesRequest.dateFrom && viewModel.getCarConsumptionRatesRequest.dateTo)
+            viewModel.errorMessage = "Please enter date from";
+        if(!viewModel.errorMessage)
+            await viewModel.getAllCarConsumptionRate(viewModel.getCarConsumptionRatesRequest);
     }
     async function onReset(){
         const pageSize = viewModel.getCarConsumptionRatesRequest.pageSize;
@@ -207,7 +213,7 @@ const CarConsumptionRateList: React.FC<CarConsumptionRateListProps> = inject(Sto
                                                key={"companyId"}
                                                label={i18next.t("CarConsumptionRates.SearchPanel.Label.companyName")}>
                                         {/*<Input onChange={onChanged}/>*/}
-                                        <Select style={{width: "100%", display:"block"}}
+                                        <Select style={{width: "100%", display:"block"}} allowClear={true}
                                                 showSearch={true} onChange={(e) => onSelectChanged(e, "companyId")}>
                                             {companyOptions}
                                         </Select>
@@ -218,7 +224,7 @@ const CarConsumptionRateList: React.FC<CarConsumptionRateListProps> = inject(Sto
                                            key={"companyBranchName"}
                                            label={i18next.t("CarConsumptionRates.SearchPanel.Label.companyBranchName")}>
                                     {/*<Input onChange={onChanged}/>*/}
-                                    <Select style={{width: "100%", display:"block"}}
+                                    <Select style={{width: "100%", display:"block"}} allowClear={true}
                                             showSearch={true} onChange={(e) => onSelectChanged(e, "companyBranchId")}>
                                         {branchOptions}
                                     </Select>
@@ -229,7 +235,7 @@ const CarConsumptionRateList: React.FC<CarConsumptionRateListProps> = inject(Sto
                                            key={"carIdNumber"}
                                            label={i18next.t("CarConsumptionRates.SearchPanel.Label.carIdNumber")}>
                                     {/*<Input onChange={onChanged}/>*/}
-                                    <Select style={{width: "100%", display:"block"}}
+                                    <Select style={{width: "100%", display:"block"}} allowClear={true}
                                             showSearch={true} onChange={(e) => onSelectChanged(e, "carIdNumber")}>
                                         {carOptions}
                                     </Select>

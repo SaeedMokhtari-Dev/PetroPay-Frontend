@@ -153,7 +153,7 @@ const StationStatementList: React.FC<StationStatementListProps> = inject(Stores.
                                     <Form.Item name="stationId" initialValue={viewModel?.getStationStatementsRequest?.stationId}
                                                key={"stationId"}
                                                label={i18next.t("StationStatements.SearchPanel.Label.stationId")}>
-                                        <Select style={{width: "100%", display:"block"}}
+                                        <Select style={{width: "100%", display:"block"}} allowClear={true}
                                                 showSearch={true} onChange={(e) => onSelectChanged(e, "stationId")}>
                                             {petroStationOptions}
                                         </Select>
@@ -195,7 +195,15 @@ const StationStatementList: React.FC<StationStatementListProps> = inject(Stores.
             </Collapse>
             <br/>
             <Table dataSource={viewModel?.stationStatementList} columns={columns} loading={viewModel?.isProcessing}
-                   bordered={true} pagination={false} sticky />
+                   bordered={true} pagination={false} sticky
+                   summary={() => (
+                       <Table.Summary.Row>
+                           <Table.Summary.Cell index={0}>{i18next.t("General.Table.Total")}</Table.Summary.Cell>
+                           <Table.Summary.Cell colSpan={3} index={1}></Table.Summary.Cell>
+                           <Table.Summary.Cell index={5}>{viewModel?.sumTransAmount?.toLocaleString()}</Table.Summary.Cell>
+                           <Table.Summary.Cell index={6}></Table.Summary.Cell>
+                       </Table.Summary.Row>
+                   )}/>
             <br/>
             <Pagination
                 total={viewModel?.totalSize}

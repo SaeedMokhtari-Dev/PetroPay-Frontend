@@ -6,6 +6,7 @@ export default class GetStationStatementResponse implements IDeserialize
 {
     items: StationStatementItem[] = [];
     totalCount: number;
+    sumTransAmount: number;
 
     constructor() {
         makeAutoObservable(this);

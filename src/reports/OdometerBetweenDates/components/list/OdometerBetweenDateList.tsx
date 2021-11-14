@@ -202,7 +202,7 @@ const OdometerBetweenDateList: React.FC<OdometerBetweenDateListProps> = inject(S
                                            key={"carId"}
                                            label={i18next.t("OdometerBetweenDates.SearchPanel.Label.carId")}>
                                     {/*<Input onChange={onChanged}/>*/}
-                                    <Select style={{width: "100%", display:"block"}}
+                                    <Select style={{width: "100%", display:"block"}} allowClear={true}
                                             showSearch={true} onChange={(e) => onSelectChanged(e, "carId")}>
                                         {carOptions}
                                     </Select>

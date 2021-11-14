@@ -157,7 +157,7 @@ const CustomerStatementList: React.FC<CustomerStatementListProps> = inject(Store
                                     <Form.Item name="companyId" initialValue={viewModel?.getCustomerStatementsRequest?.companyId}
                                                key={"companyId"}
                                                label={i18next.t("CustomerStatements.SearchPanel.Label.companyId")}>
-                                        <Select style={{width: "100%", display:"block"}}
+                                        <Select style={{width: "100%", display:"block"}} allowClear={true}
                                                 showSearch={true} onChange={(e) => onSelectChanged(e, "companyId")}>
                                             {companyOptions}
                                         </Select>

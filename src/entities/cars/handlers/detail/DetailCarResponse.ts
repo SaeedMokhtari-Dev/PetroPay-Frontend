@@ -39,6 +39,7 @@ export default class DetailCarResponse implements IDeserialize
     workAllDays: boolean;
     carNfcCode: string;
     carOdometerRecordRequired: boolean;
+    carFuelKmCap: number;
 
     deserialize(input: any): this
     {

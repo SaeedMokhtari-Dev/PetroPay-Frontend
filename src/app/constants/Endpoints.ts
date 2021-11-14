@@ -30,6 +30,7 @@ export default
     apiStationUserGet: "/api/station-user/get",
     apiStationUserDetail: "/api/station-user/detail",
     apiStationUserDelete: "/api/station-user/delete",
+    apiStationUserList: "/api/station-user/list",
 
     apiBranchAdd: "/api/branch/add",
     apiBranchEdit: "/api/branch/edit",

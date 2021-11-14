@@ -30,6 +30,7 @@ interface StationSaleListProps {
 const StationSaleList: React.FC<StationSaleListProps> = inject(Stores.stationSaleStore)(observer(({stationSaleStore}) => {
 
     const [petroStationOptions, setPetroStationOptions] = React.useState([]);
+    const [stationUserOptions, setStationUserOptions] = React.useState([]);
 
     const formItemLayout = {
         labelCol: {
@@ -62,8 +63,8 @@ const StationSaleList: React.FC<StationSaleListProps> = inject(Stores.stationSal
         stationSaleStore.getStationSaleViewModel.getStationSalesRequest = new GetStationSaleRequest();
         stationSaleStore.getStationSaleViewModel.getStationSalesRequest.pageSize = 20;
         stationSaleStore.getStationSaleViewModel.getStationSalesRequest.pageIndex = 0;
-        if(UserContext.info.role == 10){
-            stationSaleStore.getStationSaleViewModel.getStationSalesRequest.stationWorkerId = UserContext.info.id;
+        if(UserContext.info.role === 10){
+            stationSaleStore.getStationSaleViewModel.getStationSalesRequest.stationId = UserContext.info.id;
         }
 
         try {
@@ -75,6 +76,20 @@ const StationSaleList: React.FC<StationSaleListProps> = inject(Stores.stationSal
                 }
             }
             setPetroStationOptions(petroStationOptions);
+
+            await stationSaleStore.listStationUserViewModel.getStationUserList();
+            let stationUserOptions = [];
+            if (stationSaleStore.listStationUserViewModel) {
+                if(stationSaleStore.listStationUserViewModel.listStationUserResponse.items) {
+                    let items = stationSaleStore.listStationUserViewModel.listStationUserResponse.items;
+                    if(UserContext.info.role === 10)
+                        items = items.filter(w => w.stationId === UserContext.info.id);
+                    for (let item of items) {
+                        stationUserOptions.push(<Option key={item.key} value={item.key}>{item.title}</Option>);
+                    }
+                }
+            }
+            setStationUserOptions(stationUserOptions);
         }
         catch {
 
@@ -116,7 +131,7 @@ const StationSaleList: React.FC<StationSaleListProps> = inject(Stores.stationSal
         viewModel.getStationSalesRequest.pageIndex = 0;
         viewModel.getStationSalesRequest.pageSize = pageSize;
         if(UserContext.info.role == 10){
-            stationSaleStore.getStationSaleViewModel.getStationSalesRequest.stationWorkerId = UserContext.info.id;
+            stationSaleStore.getStationSaleViewModel.getStationSalesRequest.stationId = UserContext.info.id;
         }
         await viewModel.getAllStationSale(viewModel.getStationSalesRequest);
         form.resetFields();
@@ -129,6 +144,17 @@ const StationSaleList: React.FC<StationSaleListProps> = inject(Stores.stationSal
     }
     function onSelectChanged(e, propName){
         viewModel.getStationSalesRequest[`${propName}`] = e;
+
+        if(propName === "stationId") {
+            const filteredStationUsers = stationSaleStore.listStationUserViewModel.listStationUserResponse.items.filter(w => w.stationId == e);
+            let stationUserOptions = [];
+            if (stationSaleStore.listStationUserViewModel) {
+                for (let item of filteredStationUsers) {
+                    stationUserOptions.push(<Option key={item.key} value={item.key}>{item.title}</Option>);
+                }
+            }
+            setStationUserOptions(stationUserOptions);
+        }
     }
     return (
         <div>
@@ -154,23 +180,26 @@ const StationSaleList: React.FC<StationSaleListProps> = inject(Stores.stationSal
                             {UserContext.info.role == 100 ?
                                 <React.Fragment>
                                 <Col span={8}>
-                                    <Form.Item name="stationWorkerId" initialValue={viewModel?.getStationSalesRequest?.stationWorkerId}
+                                    <Form.Item name="stationWorkerId"
                                                key={"stationWorkerId"}
                                                label={i18next.t("StationSales.SearchPanel.Label.stationWorkerId")}>
-                                        <Select style={{width: "100%", display:"block"}}
-                                                showSearch={true} onChange={(e) => onSelectChanged(e, "stationWorkerId")}>
+                                        <Select style={{width: "100%", display:"block"}} allowClear={true}
+                                                showSearch={true} onChange={(e) => onSelectChanged(e, "stationId")}>
                                             {petroStationOptions}
                                         </Select>
                                     </Form.Item>
                                 </Col>
-                                <Col span={8}>
-                                    <Form.Item name="stationWorkerFname" initialValue={viewModel?.getStationSalesRequest?.stationWorkerFname}
-                                               key={"stationWorkerFname"}
-                                               label={i18next.t("StationSales.SearchPanel.Label.stationWorkerFname")}>
-                                        <Input onChange={onChanged}/>
-                                    </Form.Item>
-                                </Col>
                                 </React.Fragment>: ""}
+                            <Col span={8}>
+                                <Form.Item name="stationWorkerFname"
+                                           key={"stationWorkerFname"}
+                                           label={i18next.t("StationSales.SearchPanel.Label.stationWorkerFname")}>
+                                    <Select style={{width: "100%", display:"block"}} allowClear={true}
+                                            showSearch={true} onChange={(e) => onSelectChanged(e, "stationWorkerId")}>
+                                        {stationUserOptions}
+                                    </Select>
+                                </Form.Item>
+                            </Col>
                             <Col span={8}>
                                 <Form.Item name="invoiceFuelType" initialValue={viewModel?.getStationSalesRequest?.invoiceFuelType}
                                            key={"invoiceFuelType"}
@@ -215,7 +244,14 @@ const StationSaleList: React.FC<StationSaleListProps> = inject(Stores.stationSal
             </Collapse>
             <br/>
             <Table dataSource={viewModel?.stationSaleList} columns={columns} loading={viewModel?.isProcessing}
-                   bordered={true} pagination={false} sticky />
+                   bordered={true} pagination={false} sticky
+                   summary={() => (
+                       <Table.Summary.Row>
+                           <Table.Summary.Cell index={0}>{i18next.t("General.Table.Total")}</Table.Summary.Cell>
+                           <Table.Summary.Cell index={5}>{viewModel?.sumInvoiceAmount?.toLocaleString()}</Table.Summary.Cell>
+                           <Table.Summary.Cell colSpan={3} index={6}></Table.Summary.Cell>
+                       </Table.Summary.Row>
+                   )}/>
             <br/>
             <Pagination
                 total={viewModel?.totalSize}

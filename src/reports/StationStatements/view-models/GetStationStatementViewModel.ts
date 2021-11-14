@@ -13,6 +13,7 @@ export default class GetStationStatementViewModel {
     stationStatementList: StationStatementItem[];
     stationStatementExport: StationStatementItem[];
     totalSize: number;
+    sumTransAmount: number;
     isProcessing: boolean;
     errorMessage: string;
     getStationStatementsRequest: GetStationStatementRequest;
@@ -44,6 +45,7 @@ export default class GetStationStatementViewModel {
                 else{
                     this.stationStatementList = items;
                     this.totalSize = result.totalCount;
+                    this.sumTransAmount = result.sumTransAmount;
                 }
             } else {
                 this.errorMessage = getLocalizedString(response.message);

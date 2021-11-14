@@ -173,7 +173,7 @@ const CompanyBranchStatementList: React.FC<CompanyBranchStatementListProps> = in
                                     <Form.Item name="companyId" initialValue={viewModel?.getCompanyBranchStatementsRequest?.companyId}
                                                key={"companyId"}
                                                label={i18next.t("CompanyBranchStatements.SearchPanel.Label.companyId")}>
-                                        <Select style={{width: "100%", display:"block"}}
+                                        <Select style={{width: "100%", display:"block"}} allowClear={true}
                                                 showSearch={true} onChange={(e) => onSelectChanged(e, "companyId")}>
                                             {companyOptions}
                                         </Select>
@@ -184,7 +184,7 @@ const CompanyBranchStatementList: React.FC<CompanyBranchStatementListProps> = in
                                            key={"branchId"}
                                            label={i18next.t("CompanyBranchStatements.SearchPanel.Label.branchId")}>
                                     {/*<Input onChange={onChanged}/>*/}
-                                    <Select style={{width: "100%", display:"block"}}
+                                    <Select style={{width: "100%", display:"block"}} allowClear={true}
                                             showSearch={true} onChange={(e) => onSelectChanged(e, "branchId")}>
                                         {branchOptions}
                                     </Select>
