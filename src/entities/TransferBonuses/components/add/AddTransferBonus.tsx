@@ -33,9 +33,11 @@ const AddTransferBonus: React.FC<EditTransferBonusProps> = inject(Stores.transfe
 {
     const [dataFetched, setDataFetched] = React.useState(false);
     const [stationBonus, setStationBonus] = React.useState(0);
+    const [stationUserBonus, setStationUserBonus] = React.useState(0);
     const [rate, setRate] = React.useState(0);
     const [calcBalance, setCalcBalance] = React.useState(0);
     const [stationOptions, setStationOptions] = React.useState([]);
+    const [stationUsersOptions, setStationUsersOptions] = React.useState([]);
 
     const [form] = Form.useForm();
 
@@ -68,8 +70,9 @@ const AddTransferBonus: React.FC<EditTransferBonusProps> = inject(Stores.transfe
         if(UserContext.info.role === 10){
             transferBonusStore.addTransferBonusViewModel.addTransferBonusRequest.stationId = UserContext.info.id;
             const petro = transferBonusStore.listPetroStationViewModel.listPetroStationResponse?.items?.find(w => w.key === UserContext.info.id);
-            debugger;
             setStationBonus(petro.bonus);
+
+            await transferBonusStore.listStationUserViewModel.getStationUserList(transferBonusStore.addTransferBonusViewModel.addTransferBonusRequest.stationId);
         }
         else {
             let stationOptions = [];
@@ -78,7 +81,22 @@ const AddTransferBonus: React.FC<EditTransferBonusProps> = inject(Stores.transfe
                                                   bonus={item.bonus}>{item.title}</Option>);
             }
             setStationOptions(stationOptions);
+            await transferBonusStore.listStationUserViewModel.getStationUserList();
         }
+
+
+        let stationUserOptions = [];
+        for (let item of transferBonusStore.listStationUserViewModel.listStationUserResponse.items) {
+            stationUserOptions.push(<Option key={item.key} value={item.key}
+                                            bonus={item.workerBonusBalance}>{item.title}</Option>);
+        }
+        setStationUsersOptions(stationUserOptions);
+
+        transferBonusStore.addTransferBonusViewModel.addTransferBonusRequest.stationId = UserContext.info.id;
+        const petro = transferBonusStore.listPetroStationViewModel.listPetroStationResponse?.items?.find(w => w.key === UserContext.info.id);
+
+        setStationBonus(petro.bonus);
+
         await transferBonusStore.editAppSettingViewModel.getDetailAppSetting();
         setRate(transferBonusStore.editAppSettingViewModel?.detailAppSettingResponse?.bonusMoneyRate ?? 0);
         setDataFetched(true);
@@ -109,7 +127,21 @@ const AddTransferBonus: React.FC<EditTransferBonusProps> = inject(Stores.transfe
         
         viewModel.addTransferBonusRequest[`${propName}`] = e;
         console.log(option);
-        setStationBonus(+option.bonus);
+        debugger;
+        if(propName === "stationId") {
+            setStationBonus(+option.bonus);
+            let stationUsers = transferBonusStore.listStationUserViewModel.listStationUserResponse.items;
+            let stationUserOptions = [];
+            for (let item of stationUsers.filter(w => w.stationId === +e)) {
+                stationUserOptions.push(<Option key={item.key} value={item.key}
+                                                bonus={item.workerBonusBalance}>{item.title}</Option>);
+            }
+            setStationUsersOptions(stationUserOptions);
+            viewModel.addTransferBonusRequest[`${propName}`] = 0;
+        }
+        if(propName === "stationWorkerId")
+            setStationUserBonus(+option.bonus);
+
     }
     return (
         <div>
@@ -150,7 +182,32 @@ const AddTransferBonus: React.FC<EditTransferBonusProps> = inject(Stores.transfe
                             <h4>{stationBonus?.toLocaleString()}</h4>
                         </Form.Item>
                     </Col>
+
                     <Col offset={8} span={8}>
+                        <Form.Item name="stationWorkerId" initialValue={viewModel?.addTransferBonusRequest?.stationWorkerId}
+                                   key={"stationWorkerId"}
+                                   label={i18next.t("TransferBonuses.Label.stationWorkerId")}
+                                   rules={[
+                                       {
+                                           required: true,
+                                           message: i18next.t("TransferBonuses.Validation.Message.stationWorkerId.Required")
+                                       }
+                                   ]}>
+                            <Select showSearch={true}
+                                    onChange={(e, option) => onOptionSelectChanged(e, option, "stationWorkerId")}>
+                                {stationUsersOptions}
+                            </Select>
+                        </Form.Item>
+                    </Col>
+
+                    <Col offset={8} span={8}>
+                        <Form.Item name="stationUserBonus"
+                                   key={"stationUserBonus"}
+                                   label={i18next.t("TransferBonuses.Label.stationUserBonus")}>
+                            <h4>{stationUserBonus?.toLocaleString()}</h4>
+                        </Form.Item>
+                    </Col>
+                        <Col offset={8} span={8}>
                         <Form.Item name="amount"
                                    key={"amount"}
                                    label={i18next.t("TransferBonuses.Label.amount")}

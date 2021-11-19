@@ -60,9 +60,8 @@ const CompanyBranchStatementList: React.FC<CompanyBranchStatementListProps> = in
         companyBranchStatementStore.getCompanyBranchStatementViewModel.getCompanyBranchStatementsRequest = new GetCompanyBranchStatementRequest();
         companyBranchStatementStore.getCompanyBranchStatementViewModel.getCompanyBranchStatementsRequest.pageSize = 10;
         companyBranchStatementStore.getCompanyBranchStatementViewModel.getCompanyBranchStatementsRequest.pageIndex = 0;
-        if(UserContext.info.role == 1){
-            companyBranchStatementStore.getCompanyBranchStatementViewModel.getCompanyBranchStatementsRequest.companyId = UserContext.info.id;
-        }
+        companyBranchStatementStore.getCompanyBranchStatementViewModel.getCompanyBranchStatementsRequest.companyId = UserContext.info.role === 1 ? UserContext.info.id : undefined;
+        companyBranchStatementStore.getCompanyBranchStatementViewModel.getCompanyBranchStatementsRequest.branchId = UserContext.info.role === 5 ? UserContext.info.id : undefined;
 
         await companyBranchStatementStore.getCompanyBranchStatementViewModel.getAllCompanyBranchStatement(companyBranchStatementStore.getCompanyBranchStatementViewModel.getCompanyBranchStatementsRequest);
 
@@ -77,13 +76,14 @@ const CompanyBranchStatementList: React.FC<CompanyBranchStatementListProps> = in
                 }
                 setCompanyOptions(companyOptions);
             }
-
-            await companyBranchStatementStore.listBranchViewModel.getBranchList();
-            let branchOptions = [];
-            for (let item of companyBranchStatementStore.listBranchViewModel.listBranchResponse.items) {
-                branchOptions.push(<Option key={item.key} value={item.key}>{item.title}</Option>);
+            if(UserContext.info.role === 1) {
+                await companyBranchStatementStore.listBranchViewModel.getBranchList();
+                let branchOptions = [];
+                for (let item of companyBranchStatementStore.listBranchViewModel.listBranchResponse.items) {
+                    branchOptions.push(<Option key={item.key} value={item.key}>{item.title}</Option>);
+                }
+                setBranchOptions(branchOptions);
             }
-            setBranchOptions(branchOptions);
         }
         catch {
 
@@ -179,6 +179,7 @@ const CompanyBranchStatementList: React.FC<CompanyBranchStatementListProps> = in
                                         </Select>
                                     </Form.Item>
                                 </Col>: ""}
+                            {UserContext.info.role === 1 ?
                             <Col span={8}>
                                 <Form.Item name="branchId" initialValue={viewModel?.getCompanyBranchStatementsRequest?.branchId}
                                            key={"branchId"}
@@ -189,7 +190,7 @@ const CompanyBranchStatementList: React.FC<CompanyBranchStatementListProps> = in
                                         {branchOptions}
                                     </Select>
                                 </Form.Item>
-                            </Col>
+                            </Col> : ""}
                             <Col span={9}>
                                 <Form.Item name="dateFrom" initialValue={viewModel?.getCompanyBranchStatementsRequest?.dateFrom}
                                            key={"dateFrom"}

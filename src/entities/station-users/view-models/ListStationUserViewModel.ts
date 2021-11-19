@@ -18,11 +18,11 @@ export default class ListStationUserViewModel {
         makeAutoObservable(this);
     }
 
-    public async getStationUserList()  {
+    public async getStationUserList(petrolStationId?: number)  {
         try {
             this.isProcessing = true;
 
-            let request = new ListStationUserRequest();
+            let request = new ListStationUserRequest(petrolStationId);
             let response = await ListStationUserHandler.get(request);
 
             if (response && response.success) {

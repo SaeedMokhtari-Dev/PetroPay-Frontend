@@ -2,7 +2,7 @@ import React from 'react';
 import {inject, observer} from "mobx-react";
 import Stores from "app/constants/Stores";
 import {
-    Button,
+    Button, Checkbox,
     Col,
     DatePicker,
     Divider,
@@ -138,6 +138,13 @@ const EditPromotionCoupon: React.FC<EditPromotionCouponProps> = inject(Stores.pr
 
         return current && current < moment().endOf('day');
     }
+
+    function onCheckboxChange(e){
+        if(promotionCouponId)
+            viewModel.editPromotionCouponRequest[`${e.target.id}`] = e.target.checked;
+        else
+            viewModel.addPromotionCouponRequest[`${e.target.id}`] = e.target.checked;
+    }
     return (
         <div>
             <PageHeader
@@ -219,6 +226,35 @@ const EditPromotionCoupon: React.FC<EditPromotionCouponProps> = inject(Stores.pr
                     {/*<Input type={"number"} onChange={onChanged}/>*/}
                     <Switch onChange={(e) => onSwitchChange(e, 'couponActive')} defaultChecked={viewModel?.detailPromotionCouponResponse?.couponActive} />
                 </Form.Item>
+                    </Col>
+                    <Divider>{i18next.t("PromotionCoupons.Section.Limitations")}</Divider>
+                    <Col span={8}>
+                        <Form.Item name="couponForAllCustomer" initialValue={viewModel?.detailPromotionCouponResponse?.couponForAllCustomer}
+                                   key={"couponForAllCustomer"}
+                                   label={i18next.t("StationUsers.Label.couponForAllCustomer")}>
+                            <Checkbox onChange={onCheckboxChange} defaultChecked={viewModel?.detailPromotionCouponResponse?.couponForAllCustomer} />
+                        </Form.Item>
+                    </Col>
+                    <Col span={8}>
+                        <Form.Item name="couponForMonthly" initialValue={viewModel?.detailPromotionCouponResponse?.couponForMonthly}
+                                   key={"couponForMonthly"}
+                                   label={i18next.t("StationUsers.Label.couponForMonthly")}>
+                            <Checkbox onChange={onCheckboxChange} defaultChecked={viewModel?.detailPromotionCouponResponse?.couponForMonthly} />
+                        </Form.Item>
+                    </Col>
+                    <Col span={8}>
+                        <Form.Item name="couponForQuarterly" initialValue={viewModel?.detailPromotionCouponResponse?.couponForQuarterly}
+                                   key={"couponForQuarterly"}
+                                   label={i18next.t("StationUsers.Label.couponForQuarterly")}>
+                            <Checkbox onChange={onCheckboxChange} defaultChecked={viewModel?.detailPromotionCouponResponse?.couponForQuarterly} />
+                        </Form.Item>
+                    </Col>
+                    <Col span={8}>
+                        <Form.Item name="couponForYearly" initialValue={viewModel?.detailPromotionCouponResponse?.couponForYearly}
+                                   key={"couponForYearly"}
+                                   label={i18next.t("StationUsers.Label.couponForYearly")}>
+                            <Checkbox onChange={onCheckboxChange} defaultChecked={viewModel?.detailPromotionCouponResponse?.couponForYearly} />
+                        </Form.Item>
                     </Col>
 
                 </Row>

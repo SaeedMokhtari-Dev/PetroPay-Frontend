@@ -114,8 +114,8 @@ const PetrolStationListList: React.FC<PetrolStationListListProps> = inject(Store
             <PageHeader
                 ghost={false}
                 onBack={() => window.history.back()}
-                title={i18next.t("PetrolStationList.Page.Title")}
-                subTitle={i18next.t("PetrolStationList.Page.SubTitle")}
+                title={i18next.t("PetrolStationLists.Page.Title")}
+                subTitle={i18next.t("PetrolStationLists.Page.SubTitle")}
                 extra={[
                     <Button key={"ExportExcel"} type="primary" loading={viewModel?.isProcessing} icon={<FileExcelOutlined />} onClick={ExportToExcel}>
                         {i18next.t("General.Button.ExportExcel")}
@@ -130,7 +130,7 @@ const PetrolStationListList: React.FC<PetrolStationListListProps> = inject(Store
                           key={"searchForm"}
                           scrollToFirstError>
                         <Row gutter={[24, 16]}>
-                            {UserContext.info.role === 100 || UserContext.info.role === 1 ?
+                            {UserContext.info.role === 100 || UserContext.info.role === 1 || UserContext.info.role === 5 ?
                                 <Col span={8}>
                                     <Form.Item name="region" initialValue={viewModel?.getPetrolStationListsRequest?.region}
                                                key={"region"}

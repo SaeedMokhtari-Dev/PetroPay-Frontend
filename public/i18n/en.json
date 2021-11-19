@@ -19,7 +19,6 @@
   "General.Image.JustImage": "You can only upload JPG/PNG file!",
   "General.Currency.Symbol": "E£",
 
-
   "General.HeaderMenu.User": "Hi",
   "General.HeaderMenu.Profile": "Profile",
   "General.HeaderMenu.ChangePassword": "Change Password",
@@ -60,6 +59,9 @@
   "Authentication.RoleType.Customer": "Customer",
   "Authentication.RoleType.Supplier": "Petrol Station",
   "Authentication.RoleType.Admin": "Admin",
+  "Authentication.Label.MainAccount": "Main Account",
+  "Authentication.Label.BranchAccount": "Branch Account",
+  "Authentication.Label.StationAccount": "Station Account",
   "Authentication.Label.Email": "Email Address",
   "Authentication.Label.Username": "Username",
   "Authentication.Label.Password": "Password",
@@ -222,7 +224,6 @@
   "Branches.Button.ChargeBalanceBranch": "Charge Branch Balance",
   "Branches.Button.Charge": "Charge",
 
-
   "Branches.Validation.Message.companyBranchName.Required": "Please enter branch name",
   "Branches.Validation.Message.companyBranchNumberOfcar.Required": "Please enter branch number of car",
   "Branches.Validation.Message.companyBranchAddress.Required": "Please enter branch address",
@@ -240,6 +241,7 @@
   "Api.Branch.Activated.Successful": "selected branch activated successfully",
   "Api.Branch.BalanceIncreased.Successful": "selected branch balance increased successfully",
   "Api.Branch.CompanyId.Required": "CompanyId is Required",
+  "Api.Branch.CompanyBranchId.Required": "Company Branch Id is Required",
   "Api.Branch.Id.Required": "Id is Required",
   "Api.Branch.IncreaseAmount.Required": "Increase Amount is Required",
   "Api.Branch.IncreaseAmountCannotBeMoreThanBalance": "Increase Amount Cannot Be More Than Company Balance.",
@@ -355,7 +357,6 @@
   "Api.PetropayAccount.Amount.Required": "Amount is Required",
   "Api.PetropayAccount.Reference.Required": "Reference is Required",
 
-
   "TransferBonuses.Menu.Title": "Transfer Bonus",
   "TransferBonuses.Page.Title": "Transfer Bonus",
   "TransferBonuses.Page.SubTitle": "This page is for define Transfer Bonus",
@@ -363,6 +364,7 @@
   "TransferBonuses.Label.stationBonus": "Station Bonus",
 
   "TransferBonuses.Label.stationId": "Petro Stations",
+  "TransferBonuses.Label.stationUserBonus": "Station User Bonus",
   "TransferBonuses.Label.amount": "Points",
   "TransferBonuses.Label.calcBalance": "Money",
 
@@ -373,6 +375,7 @@
   "TransferBonuses.Label.transDocument": "Transaction Document",
   "TransferBonuses.Label.transAmount": "Transaction Amount",
   "TransferBonuses.Label.transReference": "Transaction Reference",
+  "TransferBonuses.Label.stationWorkerId": "Station User",
 
   "TransferBonuses.Add.HeaderText": "Add Transfer Bonus",
   "TransferBonuses.Edit.HeaderText": "Edit Transfer Bonus with Id:",
@@ -385,6 +388,7 @@
   "TransferBonuses.Validation.Message.toPetroPayAccountId.Required": "Please select a to account",
   "TransferBonuses.Validation.Message.amount.Required": "Please enter Amount",
   "TransferBonuses.Validation.Message.reference.Required": "Please enter Reference",
+  "TransferBonuses.Validation.Message.stationWorkerId.Required": "Please select Station User",
 
   "Api.TransferBonus.Add.Successful": "A new Transfer Bonus added successfully",
   "Api.TransferBonus.Edit.Successful": "selected Petrol Station edited successfully",
@@ -407,11 +411,22 @@
   "StationUsers.Label.stationUserName": "User Name",
   "StationUsers.Label.stationUserPassword": "Password",
   "StationUsers.Label.stationId": "stationId",
-
+  "StationUsers.Label.accessStationBalance": "accessStationBalance",
+  "StationUsers.Label.accessBonusTransfer": "accessBonusTransfer",
+  "StationUsers.Label.accessStationBonusBalance": "accessStationBonusBalance",
+  "StationUsers.Label.accessAppReport": "accessAppReport",
+  "StationUsers.Label.accessFuelingApp": "accessFuelingApp",
+  "StationUsers.Label.accessChangeOilApp": "accessChangeOilApp",
+  "StationUsers.Label.accessCarWasherApp": "accessCarWasherApp",
+  "StationUsers.Label.accessChangeTyreApp": "accessChangeTyreApp",
+  "StationUsers.Label.accessTemp1": "accessTemp1",
+  "StationUsers.Label.accessTemp2": "accessTemp2",
+  "StationUsers.Label.accessTemp3": "accessTemp3",
 
   "StationUsers.Add.HeaderText": "Add StationUser",
   "StationUsers.Edit.HeaderText": "Edit StationUser with Id:",
   "StationUsers.Section.GeneralInformation": "General Information",
+  "StationUsers.Section.Accesses": "Accesses",
 
   "StationUsers.Validation.Message.stationWorkerFname.Required": "Please enter station Worker Fname",
   "StationUsers.Validation.Message.stationWorkerPhone.Required": "Please enter station Worker Phone",
@@ -598,6 +613,7 @@
   "Subscriptions.Label.couponCode": "Coupon Code",
   "Subscriptions.Label.carId":"Car #",
   "Subscriptions.Label.invoiced":"Invoiced",
+  "Subscriptions.Label.invalidCouponCode": "This coupon code is not valid.",
   
 
   "Subscriptions.Invoice.Page.Title": "Subscription Invoice",
@@ -1035,10 +1051,17 @@
   "PromotionCoupons.Label.couponActive": "coupon Active",
   "PromotionCoupons.Label.userId": "user Id",
   "PromotionCoupons.Label.userName": "user Name",
+  "PromotionCoupons.Label.companyId": "companyId",
+  "PromotionCoupons.Label.couponForAllCustomer": "couponForAllCustomer",
+  "PromotionCoupons.Label.couponForMonthly": "couponForMonthly",
+  "PromotionCoupons.Label.couponForQuarterly": "couponForQuarterly",
+  "PromotionCoupons.Label.couponForYearly": "couponForYearly",
+
 
   "PromotionCoupons.Add.HeaderText": "Add Promotion Coupon",
   "PromotionCoupons.Edit.HeaderText": "Edit Promotion Coupon with Id:",
   "PromotionCoupons.Section.GeneralInformation": "General Information",
+  "PromotionCoupons.Section.Limitations": "Limitations",
 
   "PromotionCoupons.Validation.Message.couponCode.Required": "Please enter promotion Coupon code",
   "PromotionCoupons.Validation.Message.couponDiscountValue.Required": "Please enter promotion Coupon DiscountValue",
@@ -1324,8 +1347,8 @@
 
   "OdometerBetweenDates.SearchPanel.Label.carId": "Car Id Number",
   "OdometerBetweenDates.SearchPanel.Label.companyBranchName": "Company Branch Name",
-  "OdometerBetweenDates.SearchPanel.Label.transDateFrom": "Transaction Date From",
-  "OdometerBetweenDates.SearchPanel.Label.transDateTo": "Transaction Date To",
+  "OdometerBetweenDates.SearchPanel.Label.dateTimeFrom": "Date From",
+  "OdometerBetweenDates.SearchPanel.Label.dateTimeTo": "Date To",
   "OdometerBetweenDates.SearchPanel.Label.companyId": "companyId",
   "OdometerBetweenDates.SearchPanel.Label.companyName": "Company Name",
 

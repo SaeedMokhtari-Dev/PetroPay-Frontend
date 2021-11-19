@@ -8,6 +8,12 @@ export default class EditPromotionCouponRequest
     couponActiveDate: string;
     couponEndDate: string;
     couponActive: boolean;
+    companyId: number;
+    couponForAllCustomer: boolean;
+    couponForMonthly: boolean;
+    couponForQuarterly: boolean;
+    couponForYearly: boolean;
+
 
     constructor(
     ) {

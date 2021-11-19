@@ -3,6 +3,7 @@ import {makeAutoObservable} from "mobx";
 export default class AddTransferBonusRequest
 {
     stationId: number;
+    stationWorkerId: number;
     amount: number;
 
     constructor(

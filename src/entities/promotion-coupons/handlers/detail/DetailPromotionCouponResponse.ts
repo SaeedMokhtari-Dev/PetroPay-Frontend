@@ -10,6 +10,12 @@ export default class DetailPromotionCouponResponse implements IDeserialize
     couponActive: boolean;
     userId: number;
     userName: string;
+    companyId: number;
+    couponForAllCustomer: boolean;
+    couponForMonthly: boolean;
+    couponForQuarterly: boolean;
+    couponForYearly: boolean;
+
 
     deserialize(input: any): this
     {

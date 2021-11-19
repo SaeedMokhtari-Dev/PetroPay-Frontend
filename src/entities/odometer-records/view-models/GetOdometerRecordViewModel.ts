@@ -21,6 +21,7 @@ export default class GetOdometerRecordViewModel {
     pageIndex: number;
     pageSize: number;
     companyId: number;
+    branchId: number;
 
     constructor(public odometerRecordsStore: OdometerRecordStore) {
         makeAutoObservable(this);

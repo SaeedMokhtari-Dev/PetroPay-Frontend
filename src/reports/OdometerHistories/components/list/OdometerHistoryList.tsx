@@ -81,24 +81,32 @@ const OdometerHistoryList: React.FC<OdometerHistoryListProps> = inject(Stores.od
                 }
                 setCompanyOptions(companyOptions);
             }
+            if(UserContext.info.role === 1) {
+                await odometerHistoryStore.listBranchViewModel.getBranchList();
+                let branchOptions = [];
+                for (let item of odometerHistoryStore.listBranchViewModel.listBranchResponse.items) {
+                    branchOptions.push(<Option key={item.key} value={item.key}>{item.title}</Option>);
+                }
+                setBranchOptions(branchOptions);
+            }
 
-            await odometerHistoryStore.listBranchViewModel.getBranchList();
             await odometerHistoryStore.listCarViewModel.getCarList();
 
-
-            //await odometerHistoryStore.getOdometerHistoryViewModel.getAllOdometerHistory(odometerHistoryStore.getOdometerHistoryViewModel.getOdometerHistoriesRequest);
-
             let carOptions = [];
-            for (let item of odometerHistoryStore.listCarViewModel.listCarResponse.items) {
-                carOptions.push(<Option key={item.key} value={item.carNumber}>{item.carNumber}</Option>);
+            if(UserContext.info.role !== 5) {
+                for (let item of odometerHistoryStore.listCarViewModel.listCarResponse.items) {
+                    carOptions.push(<Option key={item.key} value={item.carNumber}>{item.carNumber}</Option>);
+                }
+            }
+            else{
+                const filteredCars = odometerHistoryStore.listCarViewModel.listCarResponse.items.filter(w => w.branchId == UserContext.info.id);
+                for (let item of filteredCars) {
+                    carOptions.push(<Option key={item.key} value={item.carNumber}>{item.carNumber}</Option>);
+                }
             }
             setCarOptions(carOptions);
 
-            let branchOptions = [];
-            for (let item of odometerHistoryStore.listBranchViewModel.listBranchResponse.items) {
-                branchOptions.push(<Option key={item.key} value={item.key}>{item.title}</Option>);
-            }
-            setBranchOptions(branchOptions);
+
 
             setDataFetched(true);
         }
@@ -213,6 +221,7 @@ const OdometerHistoryList: React.FC<OdometerHistoryListProps> = inject(Stores.od
                                             </Select>
                                         </Form.Item>
                                     </Col> : ""}
+                                {UserContext.info.role === 1 ?
                                 <Col span={8}>
                                     <Form.Item name="companyBranchName"
                                                initialValue={viewModel?.getOdometerHistoriesRequest?.companyBranchName}
@@ -225,7 +234,7 @@ const OdometerHistoryList: React.FC<OdometerHistoryListProps> = inject(Stores.od
                                             {branchOptions}
                                         </Select>
                                     </Form.Item>
-                                </Col>
+                                </Col> : ""}
                                 <Col span={8}>
                                     <Form.Item name="carIdNumber"
                                                initialValue={viewModel?.getOdometerHistoriesRequest?.carIdNumber}

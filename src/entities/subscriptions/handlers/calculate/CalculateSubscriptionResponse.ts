@@ -5,6 +5,7 @@ export default class CalculateSubscriptionResponse implements IDeserialize
     bundlesId: number;
     subTotal: number;
     discount: number;
+    validDiscount: boolean;
     taxRate: number;
     tax: number;
     vatRate: number;

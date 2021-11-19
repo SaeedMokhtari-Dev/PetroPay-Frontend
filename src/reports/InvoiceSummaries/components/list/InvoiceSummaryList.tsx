@@ -83,9 +83,9 @@ const InvoiceSummaryList: React.FC<InvoiceSummaryListProps> = inject(Stores.invo
         invoiceSummaryStore.getInvoiceSummaryViewModel.getInvoiceSummariesRequest = new GetInvoiceSummaryRequest();
         invoiceSummaryStore.getInvoiceSummaryViewModel.getInvoiceSummariesRequest.pageSize = 20;
         invoiceSummaryStore.getInvoiceSummaryViewModel.getInvoiceSummariesRequest.pageIndex = 0;
-        if(UserContext.info.role == 1){
-            invoiceSummaryStore.getInvoiceSummaryViewModel.getInvoiceSummariesRequest.companyId = UserContext.info.id;
-        }
+        invoiceSummaryStore.getInvoiceSummaryViewModel.getInvoiceSummariesRequest.companyId = UserContext.info.role === 1 ? UserContext.info.id : undefined;
+        invoiceSummaryStore.getInvoiceSummaryViewModel.getInvoiceSummariesRequest.companyBranchId = UserContext.info.role === 5 ? UserContext.info.id : undefined;
+
 
         try {
             if(UserContext.info.role === 100) {
@@ -98,20 +98,30 @@ const InvoiceSummaryList: React.FC<InvoiceSummaryListProps> = inject(Stores.invo
                 }
                 setCompanyOptions(companyOptions);
             }
-            await invoiceSummaryStore.listBranchViewModel.getBranchList();
-            let branchOptions = [];
-            if (invoiceSummaryStore.listBranchViewModel) {
-                for (let item of invoiceSummaryStore.listBranchViewModel.listBranchResponse.items) {
-                    branchOptions.push(<Option key={item.key} value={item.key}>{item.title}</Option>);
+            if(UserContext.info.role === 1) {
+                await invoiceSummaryStore.listBranchViewModel.getBranchList();
+                let branchOptions = [];
+                if (invoiceSummaryStore.listBranchViewModel) {
+                    for (let item of invoiceSummaryStore.listBranchViewModel.listBranchResponse.items) {
+                        branchOptions.push(<Option key={item.key} value={item.key}>{item.title}</Option>);
+                    }
                 }
+                setBranchOptions(branchOptions);
             }
-            setBranchOptions(branchOptions);
 
             await invoiceSummaryStore.listCarViewModel.getCarList();
             let carOptions = [];
             if (invoiceSummaryStore.listCarViewModel) {
-                for (let item of invoiceSummaryStore.listCarViewModel.listCarResponse.items) {
-                    carOptions.push(<Option key={item.key} value={item.carNumber}>{item.carNumber}</Option>);
+                if(UserContext.info.role !== 5) {
+                    for (let item of invoiceSummaryStore.listCarViewModel.listCarResponse.items) {
+                        carOptions.push(<Option key={item.key} value={item.carNumber}>{item.carNumber}</Option>);
+                    }
+                }
+                else{
+                    const filteredCars = invoiceSummaryStore.listCarViewModel.listCarResponse.items.filter(w => w.branchId == UserContext.info.id);
+                    for (let item of filteredCars) {
+                        carOptions.push(<Option key={item.key} value={item.carNumber}>{item.carNumber}</Option>);
+                    }
                 }
             }
             setCarOptions(carOptions);
@@ -158,7 +168,9 @@ const InvoiceSummaryList: React.FC<InvoiceSummaryListProps> = inject(Stores.invo
     function onChanged(e){
         viewModel.getInvoiceSummariesRequest[`${e.target.id}`] = e.target.value;
     }
+
     function onSelectChanged(e, propName){
+        debugger;
         viewModel.getInvoiceSummariesRequest[`${propName}`] = e;
         if(propName === "companyId") {
             let carOptions = [];
@@ -234,7 +246,7 @@ const InvoiceSummaryList: React.FC<InvoiceSummaryListProps> = inject(Stores.invo
                         <div>
                         {dataFetched ?
                         <Row gutter={[24, 16]}>
-                            {UserContext.info.role == 100 ?
+                            {UserContext.info.role === 100 ?
                                 <Col span={8}>
                                     <Form.Item name="companyId" initialValue={viewModel?.getInvoiceSummariesRequest?.companyId}
                                                key={"companyId"}
@@ -257,6 +269,7 @@ const InvoiceSummaryList: React.FC<InvoiceSummaryListProps> = inject(Stores.invo
                                     </Select>
                                 </Form.Item>
                             </Col>*/}
+                            {UserContext.info.role === 1 ?
                             <Col span={8}>
                                 <Form.Item name="companyBranchId" initialValue={viewModel?.getInvoiceSummariesRequest?.companyBranchId}
                                            key={"companyBranchId"}
@@ -267,7 +280,7 @@ const InvoiceSummaryList: React.FC<InvoiceSummaryListProps> = inject(Stores.invo
                                         {branchOptions}
                                     </Select>
                                 </Form.Item>
-                            </Col>
+                            </Col> : "" }
                             <Col span={8}>
                                 <Form.Item name="carIdNumber" initialValue={viewModel?.getInvoiceSummariesRequest?.carIdNumber}
                                            key={"carIdNumber"}

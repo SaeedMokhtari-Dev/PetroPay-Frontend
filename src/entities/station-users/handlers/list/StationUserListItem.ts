@@ -6,6 +6,7 @@ export default class StationUserListItem implements IDeserialize
     key: string;
     title: string;
     stationId: number;
+    workerBonusBalance: number;
 
     constructor() {
         makeAutoObservable(this);

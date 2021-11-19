@@ -4,6 +4,7 @@ import AddTransferBonusViewModel from "../view-models/AddTransferBonusViewModel"
 import GetTransferBonusViewModel from "../view-models/GetTransferBonusViewModel";
 import ListPetroStationViewModel from "../../petro-stations/view-models/ListPetroStationViewModel";
 import EditAppSettingViewModel from "../../app-settings/view-models/EditAppSettingViewModel";
+import ListStationUserViewModel from "../../station-users/view-models/ListStationUserViewModel";
 
 export default class TransferBonusStore
 {
@@ -11,7 +12,7 @@ export default class TransferBonusStore
     getTransferBonusViewModel: GetTransferBonusViewModel;
     listPetroStationViewModel: ListPetroStationViewModel;
     editAppSettingViewModel: EditAppSettingViewModel;
-
+    listStationUserViewModel: ListStationUserViewModel;
     constructor(public appStore: AppStore) {
         makeAutoObservable(this);
     }
@@ -31,6 +32,7 @@ export default class TransferBonusStore
         this.addTransferBonusViewModel = new AddTransferBonusViewModel(this);
         this.listPetroStationViewModel = new ListPetroStationViewModel();
         this.editAppSettingViewModel = new EditAppSettingViewModel();
+        this.listStationUserViewModel = new ListStationUserViewModel();
     }
 
     onTransferBonusAddPageUnload()
@@ -38,6 +40,7 @@ export default class TransferBonusStore
         this.addTransferBonusViewModel = null;
         this.listPetroStationViewModel = null;
         this.editAppSettingViewModel = null;
+        this.listStationUserViewModel = null;
     }
 
 }

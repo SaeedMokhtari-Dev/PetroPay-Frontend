@@ -66,9 +66,9 @@ const CarTransactionList: React.FC<CarTransactionListProps> = inject(Stores.carT
         carTransactionStore.getCarTransactionViewModel.getCarTransactionsRequest = new GetCarTransactionRequest();
         carTransactionStore.getCarTransactionViewModel.getCarTransactionsRequest.pageSize = 20;
         carTransactionStore.getCarTransactionViewModel.getCarTransactionsRequest.pageIndex = 0;
-        if(UserContext.info.role == 1){
-            carTransactionStore.getCarTransactionViewModel.getCarTransactionsRequest.companyId = UserContext.info.id;
-        }
+
+        carTransactionStore.getCarTransactionViewModel.getCarTransactionsRequest.companyId = UserContext.info.role === 1 ? UserContext.info.id : undefined;
+        carTransactionStore.getCarTransactionViewModel.getCarTransactionsRequest.companyBranchId = UserContext.info.role === 5 ? UserContext.info.id : undefined;
 
         try {
             if (UserContext.info.role === 100) {
@@ -81,24 +81,34 @@ const CarTransactionList: React.FC<CarTransactionListProps> = inject(Stores.carT
                 }
                 setCompanyOptions(companyOptions);
             }
+            if(UserContext.info.role === 1) {
+                await carTransactionStore.listBranchViewModel.getBranchList();
+                let branchOptions = [];
+                for (let item of carTransactionStore.listBranchViewModel.listBranchResponse.items) {
+                    branchOptions.push(<Option key={item.key} value={item.key}>{item.title}</Option>);
+                }
+                setBranchOptions(branchOptions);
+            }
 
-            await carTransactionStore.listBranchViewModel.getBranchList();
             await carTransactionStore.listCarViewModel.getCarList();
-
-
-            //await carTransactionStore.getCarTransactionViewModel.getAllCarTransaction(carTransactionStore.getCarTransactionViewModel.getCarTransactionsRequest);
-
             let carOptions = [];
-            for (let item of carTransactionStore.listCarViewModel.listCarResponse.items) {
-                carOptions.push(<Option key={item.key} value={item.carNumber}>{item.carNumber}</Option>);
+            if(carTransactionStore.listCompanyViewModel) {
+                debugger;
+                if(UserContext.info.role !== 5) {
+                    for (let item of carTransactionStore.listCarViewModel.listCarResponse.items) {
+                        carOptions.push(<Option key={item.key} value={item.carNumber}>{item.carNumber}</Option>);
+                    }
+                }
+                else{
+                    const filteredCars = carTransactionStore.listCarViewModel.listCarResponse.items.filter(w => w.branchId == UserContext.info.id);
+                    for (let item of filteredCars) {
+                        carOptions.push(<Option key={item.key} value={item.carNumber}>{item.carNumber}</Option>);
+                    }
+                }
             }
             setCarOptions(carOptions);
 
-            let branchOptions = [];
-            for (let item of carTransactionStore.listBranchViewModel.listBranchResponse.items) {
-                branchOptions.push(<Option key={item.key} value={item.key}>{item.title}</Option>);
-            }
-            setBranchOptions(branchOptions);
+
 
             setDataFetched(true);
         }
@@ -213,6 +223,7 @@ const CarTransactionList: React.FC<CarTransactionListProps> = inject(Stores.carT
                                             </Select>
                                         </Form.Item>
                                     </Col> : ""}
+                                {UserContext.info.role === 1 ?
                                 <Col span={8}>
                                     <Form.Item name="companyBranchName"
                                                initialValue={viewModel?.getCarTransactionsRequest?.companyBranchName}
@@ -225,7 +236,7 @@ const CarTransactionList: React.FC<CarTransactionListProps> = inject(Stores.carT
                                             {branchOptions}
                                         </Select>
                                     </Form.Item>
-                                </Col>
+                                </Col> : "" }
                                 <Col span={8}>
                                     <Form.Item name="carIdNumber"
                                                initialValue={viewModel?.getCarTransactionsRequest?.carIdNumber}

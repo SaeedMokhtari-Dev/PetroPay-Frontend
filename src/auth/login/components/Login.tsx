@@ -34,13 +34,19 @@ const Login: React.FC<LoginProps> = inject('authStore')(observer(({authStore, ma
         authStore.onLoginPageLoad();
         
         if(params?.roleType){
-            if(match.params.roleType.toLowerCase() == 'customer'){
+            if(match.params.roleType.toLowerCase() === 'customer'){
                 authStore.loginViewModel.roleType = 1;
             }
-            if(match.params.roleType.toLowerCase() == 'petrol-station'){
+            /*if(match.params.roleType.toLowerCase() === 'customer-branch'){
+                authStore.loginViewModel.roleType = 5;
+            }*/
+            if(match.params.roleType.toLowerCase() === 'petrol-station'){
                 authStore.loginViewModel.roleType = 10;
             }
-            if(match.params.roleType.toLowerCase() == 'admin'){
+            /*if(match.params.roleType.toLowerCase() === 'petrol-station-branch'){
+                authStore.loginViewModel.roleType = 15;
+            }*/
+            if(match.params.roleType.toLowerCase() === 'admin'){
                 authStore.loginViewModel.roleType = 100;
             }
         }
@@ -146,6 +152,25 @@ const Login: React.FC<LoginProps> = inject('authStore')(observer(({authStore, ma
                     <div className="signup-classic">
                         <h1>{i18next.t("General.HeaderMenu.User")} {i18next.t(`Authentication.RoleType.${RoleTypeUtils.getRoleTypeTitle(viewModel?.roleType)}`)}</h1>
                         <Form layout="vertical" onFinish={onFinish} >
+                            <Form.Item initialValue={viewModel.roleType} name="roleType" label="" required={false}
+                                       rules={[
+                                           {
+                                               required: true,
+                                               message: i18next.t("Authentication.Validation.Message.RoleType.Required")
+                                           }
+                                       ]}>
+                                {viewModel.roleType < 9 ?
+                                    <Radio.Group onChange={onRoleTypeChanged} value={1}>
+                                        <Radio value={1}>{i18next.t("Authentication.Label.MainAccount")}</Radio>
+                                        <Radio value={5}>{i18next.t("Authentication.Label.BranchAccount")}</Radio>
+                                    </Radio.Group>
+                                    :
+                                    <Radio.Group onChange={onRoleTypeChanged} value={10}>
+                                    <Radio value={10}>{i18next.t("Authentication.Label.MainAccount")}</Radio>
+                                    <Radio value={15}>{i18next.t("Authentication.Label.StationAccount")}</Radio>
+                                    </Radio.Group>
+                                    }
+                            </Form.Item>
                             <Form.Item initialValue={viewModel.username} name="username" label={i18next.t("Authentication.Label.Username")} required={false}
                                        rules={[
                                            {

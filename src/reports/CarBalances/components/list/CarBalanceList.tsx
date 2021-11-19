@@ -58,8 +58,11 @@ const CarBalanceList: React.FC<CarBalanceListProps> = inject(Stores.carBalanceSt
         carBalanceStore.getCarBalanceViewModel.getCarBalancesRequest = new GetCarBalanceRequest();
         carBalanceStore.getCarBalanceViewModel.getCarBalancesRequest.pageSize = 20;
         carBalanceStore.getCarBalanceViewModel.getCarBalancesRequest.pageIndex = 0;
-        if(UserContext.info.role == 1){
+        if(UserContext.info.role === 1){
             carBalanceStore.getCarBalanceViewModel.getCarBalancesRequest.companyId = UserContext.info.id;
+        }
+        if(UserContext.info.role === 5){
+            carBalanceStore.getCarBalanceViewModel.getCarBalancesRequest.companyBranchId = UserContext.info.id;
         }
 
         await carBalanceStore.getCarBalanceViewModel.getAllCarBalance(carBalanceStore.getCarBalanceViewModel.getCarBalancesRequest);

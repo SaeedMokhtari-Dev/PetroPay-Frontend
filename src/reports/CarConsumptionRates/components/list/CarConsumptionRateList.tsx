@@ -67,10 +67,8 @@ const CarConsumptionRateList: React.FC<CarConsumptionRateListProps> = inject(Sto
         carConsumptionRateStore.getCarConsumptionRateViewModel.getCarConsumptionRatesRequest = new GetCarConsumptionRateRequest();
         carConsumptionRateStore.getCarConsumptionRateViewModel.getCarConsumptionRatesRequest.pageSize = 20;
         carConsumptionRateStore.getCarConsumptionRateViewModel.getCarConsumptionRatesRequest.pageIndex = 0;
-        if(UserContext.info.role == 1){
-            carConsumptionRateStore.getCarConsumptionRateViewModel.getCarConsumptionRatesRequest.companyId = UserContext.info.id;
-        }
-
+        carConsumptionRateStore.getCarConsumptionRateViewModel.getCarConsumptionRatesRequest.companyId = UserContext.info.role === 1 ? UserContext.info.id : undefined;
+        carConsumptionRateStore.getCarConsumptionRateViewModel.getCarConsumptionRatesRequest.companyBranchId = UserContext.info.role === 5 ? UserContext.info.id : undefined;
         try {
             if (UserContext.info.role === 100) {
                 await carConsumptionRateStore.listCompanyViewModel.getCompanyList();
@@ -83,23 +81,33 @@ const CarConsumptionRateList: React.FC<CarConsumptionRateListProps> = inject(Sto
                 setCompanyOptions(companyOptions);
             }
 
-            await carConsumptionRateStore.listBranchViewModel.getBranchList();
+            if(UserContext.info.role === 1) {
+                await carConsumptionRateStore.listBranchViewModel.getBranchList();
+                let branchOptions = [];
+                for (let item of carConsumptionRateStore.listBranchViewModel.listBranchResponse.items) {
+                    branchOptions.push(<Option key={item.key} value={item.key}>{item.title}</Option>);
+                }
+                setBranchOptions(branchOptions);
+            }
+
+
             await carConsumptionRateStore.listCarViewModel.getCarList();
-
-
-            //await carConsumptionRateStore.getCarConsumptionRateViewModel.getAllCarConsumptionRate(carConsumptionRateStore.getCarConsumptionRateViewModel.getCarConsumptionRatesRequest);
-
             let carOptions = [];
-            for (let item of carConsumptionRateStore.listCarViewModel.listCarResponse.items) {
-                carOptions.push(<Option key={item.key} value={item.carNumber}>{item.carNumber}</Option>);
+            if (carConsumptionRateStore.listCarViewModel) {
+                if(UserContext.info.role !== 5) {
+                    for (let item of carConsumptionRateStore.listCarViewModel.listCarResponse.items) {
+                        carOptions.push(<Option key={item.key} value={item.carNumber}>{item.carNumber}</Option>);
+                    }
+                }
+                else {
+                    const filteredCars = carConsumptionRateStore.listCarViewModel.listCarResponse.items.filter(w => w.branchId == UserContext.info.id);
+                    for (let item of filteredCars) {
+                        carOptions.push(<Option key={item.key} value={item.carNumber}>{item.carNumber}</Option>);
+                    }
+                }
+                setCarOptions(carOptions);
             }
-            setCarOptions(carOptions);
 
-            let branchOptions = [];
-            for (let item of carConsumptionRateStore.listBranchViewModel.listBranchResponse.items) {
-                branchOptions.push(<Option key={item.key} value={item.key}>{item.title}</Option>);
-            }
-            setBranchOptions(branchOptions);
 
             setDataFetched(true);
         }
@@ -219,6 +227,7 @@ const CarConsumptionRateList: React.FC<CarConsumptionRateListProps> = inject(Sto
                                         </Select>
                                     </Form.Item>
                                 </Col>: ""}
+                            {UserContext.info.role === 1 ?
                             <Col span={8}>
                                 <Form.Item name="companyBranchName" initialValue={viewModel?.getCarConsumptionRatesRequest?.companyBranchName}
                                            key={"companyBranchName"}
@@ -229,7 +238,7 @@ const CarConsumptionRateList: React.FC<CarConsumptionRateListProps> = inject(Sto
                                         {branchOptions}
                                     </Select>
                                 </Form.Item>
-                            </Col>
+                            </Col> : ""}
                             <Col span={8}>
                                 <Form.Item name="carIdNumber" initialValue={viewModel?.getCarConsumptionRatesRequest?.carIdNumber}
                                            key={"carIdNumber"}

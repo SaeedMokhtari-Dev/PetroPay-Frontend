@@ -402,11 +402,23 @@
   "StationUsers.Label.stationUserName": "اسم المستخدم",
   "StationUsers.Label.stationUserPassword": "كلمة المرور",
   "StationUsers.Label.stationId": "stationId",
+  "StationUsers.Label.accessStationBalance": "accessStationBalance",
+  "StationUsers.Label.accessBonusTransfer": "accessBonusTransfer",
+  "StationUsers.Label.accessStationBonusBalance": "accessStationBonusBalance",
+  "StationUsers.Label.accessAppReport": "accessAppReport",
+  "StationUsers.Label.accessFuelingApp": "accessFuelingApp",
+  "StationUsers.Label.accessChangeOilApp": "accessChangeOilApp",
+  "StationUsers.Label.accessCarWasherApp": "accessCarWasherApp",
+  "StationUsers.Label.accessChangeTyreApp": "accessChangeTyreApp",
+  "StationUsers.Label.accessTemp1": "accessTemp1",
+  "StationUsers.Label.accessTemp2": "accessTemp2",
+  "StationUsers.Label.accessTemp3": "accessTemp3",
 
 
   "StationUsers.Add.HeaderText": "اضافة موظف جديد",
   "StationUsers.Edit.HeaderText": "تعديل حساب الموظف",
   "StationUsers.Section.GeneralInformation": "معلومات عامة",
+  "StationUsers.Section.Accesses": "Accesses",
 
   "StationUsers.Validation.Message.stationWorkerFname.Required": "يرجي الدخال اسم الموظف",
   "StationUsers.Validation.Message.stationWorkerPhone.Required": "يرجي ادخال رقم الهاتف",

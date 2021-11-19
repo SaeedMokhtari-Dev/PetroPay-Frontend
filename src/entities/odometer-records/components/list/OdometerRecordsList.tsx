@@ -83,8 +83,11 @@ const OdometerRecordsList: React.FC<OdometerRecordsSidebarProps> = inject(Stores
 
         if(UserContext.info.role === 1)
             odometerRecordStore.getOdometerRecordViewModel.companyId = UserContext.info.id;
+        if(UserContext.info.role === 5)
+            odometerRecordStore.getOdometerRecordViewModel.branchId = UserContext.info.id;
         await odometerRecordStore.getOdometerRecordViewModel.getAllOdometerRecords(
-            new GetOdometerRecordRequest(20, 0, odometerRecordStore.getOdometerRecordViewModel.companyId));
+            new GetOdometerRecordRequest(20, 0, odometerRecordStore.getOdometerRecordViewModel.companyId
+            , odometerRecordStore.getOdometerRecordViewModel.branchId));
     }
 
     let viewModel = odometerRecordStore.getOdometerRecordViewModel;

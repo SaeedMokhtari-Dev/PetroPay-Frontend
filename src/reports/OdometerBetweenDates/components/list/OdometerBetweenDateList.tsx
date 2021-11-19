@@ -89,8 +89,16 @@ const OdometerBetweenDateList: React.FC<OdometerBetweenDateListProps> = inject(S
             //await odometerBetweenDateStore.getOdometerBetweenDateViewModel.getAllOdometerBetweenDate(odometerBetweenDateStore.getOdometerBetweenDateViewModel.getOdometerBetweenDatesRequest);
 
             let carOptions = [];
-            for (let item of odometerBetweenDateStore.listCarViewModel.listCarResponse.items) {
-                carOptions.push(<Option key={item.key} value={item.key}>{item.carNumber}</Option>);
+            if(UserContext.info.role !== 5) {
+                for (let item of odometerBetweenDateStore.listCarViewModel.listCarResponse.items) {
+                    carOptions.push(<Option key={item.key} value={item.key}>{item.carNumber}</Option>);
+                }
+            }
+            else{
+                const filteredCars = odometerBetweenDateStore.listCarViewModel.listCarResponse.items.filter(w => w.branchId == UserContext.info.id);
+                for (let item of filteredCars) {
+                    carOptions.push(<Option key={item.key} value={item.carNumber}>{item.carNumber}</Option>);
+                }
             }
             setCarOptions(carOptions);
 

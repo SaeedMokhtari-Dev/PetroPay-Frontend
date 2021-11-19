@@ -15,6 +15,7 @@ import i18next from "i18next";
 import GetCompaniesRequest from "../../../entities/companies/handlers/get/GetCompaniesRequest";
 import UserContext from "../../../identity/contexts/UserContext";
 import RoleType from "../../../identity/constants/RoleType";
+import {getBranchCarsRoute} from "../../../app/utils/RouteHelper";
 
 const { Sider } = Layout;
 const { SubMenu } = Menu;
@@ -175,6 +176,55 @@ const Sidebar: React.FC<SidebarProps> = inject(Stores.pageStore)(observer(({page
             </Menu.Item>
         </SubMenu>
     </Menu>)
+    const customerBranchMenu= (<Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
+        <Menu.Item key="app" icon={<DashboardOutlined />}>
+            <Link to={Routes.app}>{i18next.t('Dashboard.Menu.Title')}</Link>
+        </Menu.Item>
+        <Menu.Item key="car" icon={<CarOutlined />}>
+            <Link to={getBranchCarsRoute(UserContext.info.id)}>{i18next.t('Cars.Menu.Title')}</Link>
+        </Menu.Item>
+        <Menu.Item key="odometerRecord" icon={<ShoppingOutlined />}>
+            <Link to={Routes.odometerRecord}>{i18next.t('OdometerRecords.Menu.Title')}</Link>
+        </Menu.Item>
+        <SubMenu key="reports" icon={<ReadOutlined />} title={i18next.t('General.Menu.Reports')}>
+            <Menu.Item key="invoiceSummary" icon={<BookOutlined />}>
+                <Link to={Routes.invoiceSummary}>{i18next.t('InvoiceSummaries.Menu.Title')}</Link>
+            </Menu.Item>
+            <Menu.Item key="carBalance" icon={<DollarOutlined />}>
+                <Link to={Routes.carBalance}>{i18next.t('CarBalances.Menu.Title')}</Link>
+            </Menu.Item>
+            <Menu.Item key="carTransaction" icon={<CarOutlined />}>
+                <Link to={Routes.carTransaction}>{i18next.t('CarTransactions.Menu.Title')}</Link>
+            </Menu.Item>
+            <Menu.Item key="petrolStationList" icon={<ShopOutlined />}>
+                <Link to={Routes.petrolStationList}>{i18next.t('PetrolStationLists.Menu.Title')}</Link>
+            </Menu.Item>
+            <Menu.Item key="carConsumptionRate" icon={<ShopOutlined />}>
+                <Link to={Routes.carConsumptionRate}>{i18next.t('CarConsumptionRates.Menu.Title')}</Link>
+            </Menu.Item>
+            <Menu.Item key="carKmConsumption" icon={<ShopOutlined />}>
+                <Link to={Routes.carKmConsumption}>{i18next.t('CarKmConsumptions.Menu.Title')}</Link>
+            </Menu.Item>
+            {/*<Menu.Item key="carOdometerMax" icon={<ShopOutlined />}>
+                <Link to={Routes.carOdometerMax}>{i18next.t('CarOdometerMaxes.Menu.Title')}</Link>
+            </Menu.Item>
+            <Menu.Item key="carOdometerMin" icon={<ShopOutlined />}>
+                <Link to={Routes.carOdometerMin}>{i18next.t('CarOdometerMins.Menu.Title')}</Link>
+            </Menu.Item>*/}
+            <Menu.Item key="odometerBetweenDate" icon={<ShopOutlined />}>
+                <Link to={Routes.odometerBetweenDate}>{i18next.t('OdometerBetweenDates.Menu.Title')}</Link>
+            </Menu.Item>
+            <Menu.Item key="odometerHistory" icon={<ShopOutlined />}>
+                <Link to={Routes.odometerHistory}>{i18next.t('OdometerHistories.Menu.Title')}</Link>
+            </Menu.Item>
+            <Menu.Item key="customerStatements" icon={<ShopOutlined />}>
+                <Link to={Routes.customerStatement}>{i18next.t('CustomerStatements.Menu.Title')}</Link>
+            </Menu.Item>
+            <Menu.Item key="companyBranchStatements" icon={<ShopOutlined />}>
+                <Link to={Routes.companyBranchStatement}>{i18next.t('CompanyBranchStatements.Menu.Title')}</Link>
+            </Menu.Item>
+        </SubMenu>
+    </Menu>)
     const supplierMenu= (<Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
         <Menu.Item key="app" icon={<DashboardOutlined />}>
             <Link to={Routes.app}>{i18next.t('Dashboard.Menu.Title')}</Link>
@@ -184,6 +234,25 @@ const Sidebar: React.FC<SidebarProps> = inject(Stores.pageStore)(observer(({page
         </Menu.Item>
         <Menu.Item key="transferBonus" icon={<ShopOutlined />}>
             <Link to={Routes.transferBonus}>{i18next.t('TransferBonuses.Menu.Title')}</Link>
+        </Menu.Item>
+        <SubMenu key="reports" icon={<ReadOutlined />} title={i18next.t('General.Menu.Reports')}>
+            <Menu.Item key="stationReport" icon={<BookOutlined />}>
+                <Link to={Routes.stationReport}>{i18next.t('StationReports.Menu.Title')}</Link>
+            </Menu.Item>
+            <Menu.Item key="stationSale" icon={<DollarOutlined />}>
+                <Link to={Routes.stationSale}>{i18next.t('StationSales.Menu.Title')}</Link>
+            </Menu.Item>
+            <Menu.Item key="stationStatement" icon={<ShopOutlined />}>
+                <Link to={Routes.stationStatement}>{i18next.t('StationStatements.Menu.Title')}</Link>
+            </Menu.Item>
+        </SubMenu>
+    </Menu>)
+    const supplierBranchMenu= (<Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
+        <Menu.Item key="app" icon={<DashboardOutlined />}>
+            <Link to={Routes.app}>{i18next.t('Dashboard.Menu.Title')}</Link>
+        </Menu.Item>
+        <Menu.Item key="stationUser" icon={<ShopOutlined />}>
+            <Link to={Routes.stationUser}>{i18next.t('StationUsers.Menu.Title')}</Link>
         </Menu.Item>
         <SubMenu key="reports" icon={<ReadOutlined />} title={i18next.t('General.Menu.Reports')}>
             <Menu.Item key="stationReport" icon={<BookOutlined />}>
@@ -223,7 +292,9 @@ const Sidebar: React.FC<SidebarProps> = inject(Stores.pageStore)(observer(({page
                 <img src="/images/petro-pay-logo.png" hidden={pageStore?.isSidebarCollapsed} width={150} height={100} alt="logo"/>
             </div>
             {UserContext.info.role == RoleType.customer ? customerMenu : ""}
+            {UserContext.info.role == RoleType.customerBranch ? customerBranchMenu : ""}
             {UserContext.info.role == RoleType.supplier ? supplierMenu : ""}
+            {UserContext.info.role == RoleType.supplierBranch ? supplierBranchMenu : ""}
             {UserContext.info.role == RoleType.admin ?
                 (
                     dataFetched ?

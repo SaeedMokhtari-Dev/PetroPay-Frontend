@@ -25,3 +25,8 @@ export function getRechargeBalanceDetailRoute(rechargeBalanceId: any = null): st
 {
     return Routes.detailRechargeBalance.replace('/:rechargeBalanceId', rechargeBalanceId ? `/${rechargeBalanceId}` : '');
 }
+export function getBranchCarsRoute(branchId: any = null): string
+{
+    return Routes.branchCars.replace('/:companyBranchId', branchId ? `/${branchId}` : '');
+}
+

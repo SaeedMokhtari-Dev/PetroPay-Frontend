@@ -2,7 +2,21 @@ import React from 'react';
 import {inject, observer} from "mobx-react";
 import Stores from "app/constants/Stores";
 import {useParams} from "react-router-dom";
-import {Button, Col, Divider, Form, Input, InputNumber, message, Modal, PageHeader, Radio, Row, Spin} from "antd";
+import {
+    Button,
+    Checkbox,
+    Col,
+    Divider,
+    Form,
+    Input,
+    InputNumber,
+    message,
+    Modal,
+    PageHeader,
+    Radio,
+    Row,
+    Spin
+} from "antd";
 import i18next from "i18next";
 import EditStationUserRequest from "../../handlers/edit/EditStationUserRequest";
 import DetailStationUserResponse from "../../handlers/detail/DetailStationUserResponse";
@@ -87,15 +101,21 @@ const EditStationUser: React.FC<EditStationUserProps> = inject(Stores.stationUse
     }
     function onChanged(e){
         if(stationUserId)
-            stationUserStore.editStationUserViewModel.editStationUserRequest[`${e.target.id}`] = e.target.value;
+            viewModel.editStationUserRequest[`${e.target.id}`] = e.target.value;
         else
-            stationUserStore.editStationUserViewModel.addStationUserRequest[`${e.target.id}`] = e.target.value;
+            viewModel.addStationUserRequest[`${e.target.id}`] = e.target.value;
     }
     function onMaskChanged(e){
         if(stationUserId)
-            stationUserStore.editStationUserViewModel.editStationUserRequest[`${e.target.id}`] = e.target.value.replace(/\s+/g, '');
+            viewModel.editStationUserRequest[`${e.target.id}`] = e.target.value.replace(/\s+/g, '');
         else
-            stationUserStore.editStationUserViewModel.addStationUserRequest[`${e.target.id}`] = e.target.value.replace(/\s+/g, '');
+            viewModel.addStationUserRequest[`${e.target.id}`] = e.target.value.replace(/\s+/g, '');
+    }
+    function onCheckboxChange(e){
+        if(stationUserId)
+            viewModel.editStationUserRequest[`${e.target.id}`] = e.target.checked;
+        else
+            viewModel.addStationUserRequest[`${e.target.id}`] = e.target.checked;
     }
     /*function onSwitchChange(e){
         if(stationUserId)
@@ -145,6 +165,81 @@ const EditStationUser: React.FC<EditStationUserProps> = inject(Stores.stationUse
                     <MaskedInput className={"phone-number"} mask="+2 111 111 11111" onChange={onMaskChanged}/>
                 </Form.Item>
                     </Col>
+
+                    <Divider>{i18next.t("StationUsers.Section.Accesses")}</Divider>
+
+                    <Col span={8}>
+                        <Form.Item name="accessStationBalance" initialValue={viewModel?.detailStationUserResponse?.accessStationBalance}
+                                   key={"accessStationBalance"}
+                                   label={i18next.t("StationUsers.Label.accessStationBalance")}>
+                            <Checkbox onChange={onCheckboxChange} defaultChecked={viewModel?.detailStationUserResponse?.accessStationBalance} />
+                        </Form.Item>
+                    </Col>
+
+                    <Col span={8}>
+                        <Form.Item name="accessAppReport" initialValue={viewModel?.detailStationUserResponse?.accessAppReport}
+                                   key={"accessAppReport"}
+                                   label={i18next.t("StationUsers.Label.accessAppReport")}>
+                            <Checkbox onChange={onCheckboxChange} defaultChecked={viewModel?.detailStationUserResponse?.accessAppReport} />
+                        </Form.Item>
+                    </Col>
+
+                    <Col span={8}>
+                        <Form.Item name="accessFuelingApp" initialValue={viewModel?.detailStationUserResponse?.accessFuelingApp}
+                                   key={"accessFuelingApp"}
+                                   label={i18next.t("StationUsers.Label.accessFuelingApp")}>
+                            <Checkbox onChange={onCheckboxChange} defaultChecked={viewModel?.detailStationUserResponse?.accessFuelingApp} />
+                        </Form.Item>
+                    </Col>
+
+                    <Col span={8}>
+                        <Form.Item name="accessChangeOilApp" initialValue={viewModel?.detailStationUserResponse?.accessChangeOilApp}
+                                   key={"accessChangeOilApp"}
+                                   label={i18next.t("StationUsers.Label.accessChangeOilApp")}>
+                            <Checkbox onChange={onCheckboxChange} defaultChecked={viewModel?.detailStationUserResponse?.accessChangeOilApp} />
+                        </Form.Item>
+                    </Col>
+
+                    <Col span={8}>
+                        <Form.Item name="accessCarWasherApp" initialValue={viewModel?.detailStationUserResponse?.accessCarWasherApp}
+                                   key={"accessCarWasherApp"}
+                                   label={i18next.t("StationUsers.Label.accessCarWasherApp")}>
+                            <Checkbox onChange={onCheckboxChange} defaultChecked={viewModel?.detailStationUserResponse?.accessCarWasherApp} />
+                        </Form.Item>
+                    </Col>
+
+                    <Col span={8}>
+                        <Form.Item name="accessChangeTyreApp" initialValue={viewModel?.detailStationUserResponse?.accessChangeTyreApp}
+                                   key={"accessChangeTyreApp"}
+                                   label={i18next.t("StationUsers.Label.accessChangeTyreApp")}>
+                            <Checkbox onChange={onCheckboxChange} defaultChecked={viewModel?.detailStationUserResponse?.accessChangeTyreApp} />
+                        </Form.Item>
+                    </Col>
+
+                    <Col span={8}>
+                        <Form.Item name="accessTemp1" initialValue={viewModel?.detailStationUserResponse?.accessTemp1}
+                                   key={"accessTemp1"}
+                                   label={i18next.t("StationUsers.Label.accessTemp1")}>
+                            <Checkbox onChange={onCheckboxChange} defaultChecked={viewModel?.detailStationUserResponse?.accessTemp1} />
+                        </Form.Item>
+                    </Col>
+
+                    <Col span={8}>
+                        <Form.Item name="accessTemp2" initialValue={viewModel?.detailStationUserResponse?.accessTemp2}
+                                   key={"accessTemp2"}
+                                   label={i18next.t("StationUsers.Label.accessTemp2")}>
+                            <Checkbox onChange={onCheckboxChange} defaultChecked={viewModel?.detailStationUserResponse?.accessTemp2} />
+                        </Form.Item>
+                    </Col>
+
+                    <Col span={8}>
+                        <Form.Item name="accessTemp3" initialValue={viewModel?.detailStationUserResponse?.accessTemp3}
+                                   key={"accessTemp3"}
+                                   label={i18next.t("StationUsers.Label.accessTemp3")}>
+                            <Checkbox onChange={onCheckboxChange} defaultChecked={viewModel?.detailStationUserResponse?.accessTemp3} />
+                        </Form.Item>
+                    </Col>
+
                     <Divider>{i18next.t("Companies.Section.LoginInformation")}</Divider>
                     <Col span={8}>
                 <Form.Item name="stationUserName" initialValue={viewModel?.detailStationUserResponse?.stationUserName}

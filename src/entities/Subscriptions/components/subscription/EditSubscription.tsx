@@ -4,7 +4,7 @@ import Stores from "app/constants/Stores";
 import {
     Button, Col,
     DatePicker,
-    Divider, Form, Input, InputNumber, PageHeader, Radio, Row, Select, Spin, Table, message, Upload, Descriptions
+    Divider, Form, Input, InputNumber, PageHeader, Radio, Row, Select, Spin, Table, message, Upload, Descriptions, Alert
 } from "antd";
 import i18next from "i18next";
 import DetailSubscriptionResponse from "../../handlers/detail/DetailSubscriptionResponse";
@@ -180,10 +180,13 @@ const EditSubscription: React.FC<EditSubscriptionProps> = inject(Stores.subscrip
         }
     }
     function onChanged(e){
+        debugger;
         if(subscriptionId)
             viewModel.editSubscriptionRequest[`${e.target.id}`] = e.target.value;
         else
             viewModel.addSubscriptionRequest[`${e.target.id}`] = e.target.value;
+
+        viewModel.detailSubscriptionResponse[`${e.target.id}`] = e.target.value;
 
         if(e.target.id === "couponCode")
             setCalculateButtonDisable(false);
@@ -244,6 +247,7 @@ const EditSubscription: React.FC<EditSubscriptionProps> = inject(Stores.subscrip
             viewModel.errorMessage = i18next.t("Subscriptions.Validation.Message.bundlesId.Required");
             return;
         }
+        debugger;
 
         let request: CalculateSubscriptionRequest = new CalculateSubscriptionRequest();
         request.bundlesId = bundleId;
@@ -479,6 +483,9 @@ const EditSubscription: React.FC<EditSubscriptionProps> = inject(Stores.subscrip
                         >
                             <Input maxLength={10} onChange={onChanged}/>
                         </Form.Item>
+                        {(viewModel?.detailSubscriptionResponse?.couponCode) !== "" && subscriptionCost?.validDiscount === false ?
+                            <Alert message={i18next.t("Subscriptions.Label.invalidCouponCode")} type="error" /> : ""
+                        }
                     </Col>
                     <Col span={8}>
                         <Button type="primary" loading={viewModel.calculating} size={"large"} disabled={calculateButtonDisable} onClick={calculate}>

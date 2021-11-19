@@ -9,6 +9,7 @@ export default class GetCarBalanceRequest
     serviceDescription: string;
     companyId: number;
     companyName: string;
+    companyBranchId: number;
     pageIndex: number;
     pageSize: number;
     exportToFile: boolean;

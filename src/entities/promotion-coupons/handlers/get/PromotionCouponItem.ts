@@ -11,6 +11,11 @@ export default class PromotionCouponItem implements IDeserialize
     couponActive: boolean;
     userId: number;
     userName: string;
+    companyId: number;
+    couponForAllCustomer: boolean;
+    couponForMonthly: boolean;
+    couponForQuarterly: boolean;
+    couponForYearly: boolean;
 
     constructor() {
         makeAutoObservable(this);

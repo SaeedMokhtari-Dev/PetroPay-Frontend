@@ -88,8 +88,16 @@ const CarKmConsumptionList: React.FC<CarKmConsumptionListProps> = inject(Stores.
             //await carKmConsumptionStore.getCarKmConsumptionViewModel.getAllCarKmConsumption(carKmConsumptionStore.getCarKmConsumptionViewModel.getCarKmConsumptionsRequest);
 
             let carOptions = [];
-            for (let item of carKmConsumptionStore.listCarViewModel.listCarResponse.items) {
-                carOptions.push(<Option key={item.key} value={item.key}>{item.carNumber}</Option>);
+            if(UserContext.info.role !== 5) {
+                for (let item of carKmConsumptionStore.listCarViewModel.listCarResponse.items) {
+                    carOptions.push(<Option key={item.key} value={item.key}>{item.carNumber}</Option>);
+                }
+            }
+            else{
+                const filteredCars = carKmConsumptionStore.listCarViewModel.listCarResponse.items.filter(w => w.branchId == UserContext.info.id);
+                for (let item of filteredCars) {
+                    carOptions.push(<Option key={item.key} value={item.carNumber}>{item.carNumber}</Option>);
+                }
             }
             setCarOptions(carOptions);
 
