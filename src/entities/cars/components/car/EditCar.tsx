@@ -44,6 +44,7 @@ const EditCar: React.FC<EditCarProps> = inject(Stores.carStore)(observer(({carSt
     const [carTypeOptions, setCarTypeOptions] = React.useState([]);
     const [carBrandOptions, setCarBrandOptions] = React.useState([]);
     const [carModelOptions, setCarModelOptions] = React.useState([]);
+    const [petrolPriceOptions, setPetrolPriceOptions] = React.useState([]);
 
 
     const [form] = Form.useForm();
@@ -68,8 +69,8 @@ const EditCar: React.FC<EditCarProps> = inject(Stores.carStore)(observer(({carSt
     /*CarBrands.forEach(w =>{ w.title = i18next.t(w.title) });
     const carBrandOptions = [...CarBrands];*/
 
-    CarTypeOfFuels.forEach(w =>{ w.title = i18next.t(w.title) });
-    const carTypeOfFuelOptions = [...CarTypeOfFuels];
+    /*CarTypeOfFuels.forEach(w =>{ w.title = i18next.t(w.title) });
+    const carTypeOfFuelOptions = [...CarTypeOfFuels];*/
 
     ConsumptionTypes.forEach(w =>{ w.title = i18next.t(w.title) });
     const consumptionTypeOptions = [...ConsumptionTypes];
@@ -83,9 +84,10 @@ const EditCar: React.FC<EditCarProps> = inject(Stores.carStore)(observer(({carSt
     {
         
         carStore.onCarEditPageLoad();
+        debugger;
         let carIdParam = +match.params?.carId;
-        let listBranchViewModel: ListBranchViewModel = new ListBranchViewModel();
-        await listBranchViewModel.getBranchList(UserContext.info.id);
+        /*if(UserContext.info.role === 1)*/
+
         if(carIdParam)
         {
             await carStore.editCarViewModel.getDetailCar(carIdParam);
@@ -96,19 +98,20 @@ const EditCar: React.FC<EditCarProps> = inject(Stores.carStore)(observer(({carSt
         else{
             carStore.editCarViewModel.addCarRequest = new AddCarRequest();
             carStore.editCarViewModel.detailCarResponse = new DetailCarResponse();
-            if(match.params?.companyBranchId) {
-                carStore.editCarViewModel.addCarRequest.companyBarnchId = +match.params.companyBranchId;
+            if(match.params?.companyBranchId) carStore.editCarViewModel.addCarRequest.companyBarnchId = +match.params.companyBranchId;
+            if(UserContext.info.role === 5) carStore.editCarViewModel.addCarRequest.companyBarnchId = UserContext.info.id;
+        }
+
+        if(UserContext.info.role === 1) {
+            await carStore.listBranchViewModel.getBranchList(UserContext.info.id);
+            let children = [];
+            for (let item of carStore.listBranchViewModel.listBranchResponse.items) {
+                children.push(<Option key={item.key} value={item.key}>{item.title}</Option>);
             }
+            setChildren(children);
         }
-        
-        let children = [];
-        for (let item of listBranchViewModel.listBranchResponse.items) {
-            children.push(<Option key={item.key} value={item.key}>{item.title}</Option>);
-        }
-        setChildren(children);
 
         await carStore.listCarTypeMasterViewModel.getCarTypeMasterList();
-        debugger;
         let carTypes = [];
         for (let item of carStore.listCarTypeMasterViewModel?.listCarTypeMasterResponse?.items) {
             carTypes.push(<Option key={item.key} value={item.title}>{item.title}</Option>);
@@ -116,7 +119,6 @@ const EditCar: React.FC<EditCarProps> = inject(Stores.carStore)(observer(({carSt
         setCarTypeOptions(carTypes);
 
         await carStore.listCarBrandMasterViewModel.getCarBrandMasterList();
-        debugger;
         let carBrands = [];
         for (let item of carStore.listCarBrandMasterViewModel?.listCarBrandMasterResponse?.items) {
             if(localStorage.getItem("currentLanguage") === 'en')
@@ -127,7 +129,6 @@ const EditCar: React.FC<EditCarProps> = inject(Stores.carStore)(observer(({carSt
         setCarBrandOptions(carBrands);
 
         await carStore.listCarModelMasterViewModel.getCarModelMasterList();
-        debugger;
         let carModels = [];
         for (let item of carStore.listCarModelMasterViewModel?.listCarModelMasterResponse?.items) {
             if(localStorage.getItem("currentLanguage") === 'en')
@@ -136,6 +137,13 @@ const EditCar: React.FC<EditCarProps> = inject(Stores.carStore)(observer(({carSt
                 carModels.push(<Option key={item.key} value={item.titleAr}>{item.titleAr}</Option>);
         }
         setCarModelOptions(carModels);
+
+        await carStore.listPetrolPriceViewModel.getPetrolPriceList();
+        let petrolPrices = [];
+        for (let item of carStore.listPetrolPriceViewModel?.listPetrolPriceResponse?.items) {
+            petrolPrices.push(<Option key={item.key} value={item.petrolPriceType}>{item.petrolPriceType}</Option>);
+        }
+        setPetrolPriceOptions(petrolPrices);
 
         setCarId(carIdParam);
         setDataFetched(true);
@@ -333,12 +341,13 @@ const EditCar: React.FC<EditCarProps> = inject(Stores.carStore)(observer(({carSt
                 title={carId ? `${i18next.t("Cars.Edit.HeaderText")} ${carId}` : i18next.t("Cars.Add.HeaderText")}
             />
 
-            <Divider>{i18next.t("Cars.Section.GeneralInformation")}</Divider>
+            {/*<Divider>{i18next.t("Cars.Section.GeneralInformation")}</Divider>*/}
             {dataFetched ?
             <Form {...formItemLayout} layout={"vertical"} onFinish={onFinish} form={form}
                   key={"carForm"}
                  scrollToFirstError>
                 <Row gutter={[24, 16]}>
+                    {UserContext.info.role === 1 ?
                     <Col span={8}>
                         <Form.Item name="companyBarnchId" initialValue={viewModel?.detailCarResponse?.companyBarnchId}
                                    key={"companyBarnchId"}
@@ -357,6 +366,7 @@ const EditCar: React.FC<EditCarProps> = inject(Stores.carStore)(observer(({carSt
                             </Select>
                         </Form.Item>
                     </Col>
+                        : "" }
                     <Divider>{i18next.t("Cars.Section.CarInformation")}</Divider>
                     <Col span={6}>
                         <Form.Item name="carIdNumber1E" initialValue={viewModel?.detailCarResponse?.carIdNumber1E}
@@ -539,7 +549,10 @@ const EditCar: React.FC<EditCarProps> = inject(Stores.carStore)(observer(({carSt
                                            message: i18next.t("Cars.Validation.Message.carTypeOfFuel.Required")
                                        }
                                    ]}>
-                            <Select options={carTypeOfFuelOptions} showSearch={true} onChange={(e) => onSelectChanged(e, "carTypeOfFuel")} />
+                            {/*<Select options={carTypeOfFuelOptions} showSearch={true} onChange={(e) => onSelectChanged(e, "carTypeOfFuel")} />*/}
+                            <Select showSearch={true} onChange={(e) => onSelectChanged(e, "carTypeOfFuel")} >
+                                {petrolPriceOptions}
+                            </Select>
                         </Form.Item>
                     </Col>
 

@@ -64,6 +64,7 @@ export default
 
     //TransferBalance
     transferBalance: "/app/transferBalance",
+    transferBalanceCarBatch: "/app/transferBalanceCarBatch",
 
     //PetroPayAccount
     petropayAccountList: "/app/petroPayAccount",

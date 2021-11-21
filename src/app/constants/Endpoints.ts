@@ -137,6 +137,7 @@ export default
     apiServiceMasterList: "/api/service-master/list",
 
     apiTransferBalance: "/api/transfer-balance",
+    apiTransferBalanceCarBatch: "/api/transfer-balance/car-batch",
 
     apiPromotionCouponAdd: "/api/promotion-coupon/add",
     apiPromotionCouponEdit: "/api/promotion-coupon/edit",
@@ -156,6 +157,7 @@ export default
     apiCarTypeMasterList: "/api/car-type-master/list",
     apiCarModelMasterList: "/api/car-model-master/list",
     apiCarBrandMasterList: "/api/car-brand-master/list",
+    apiPetrolPriceList: "/api/petrol-price/list",
 
     apiTransferBonusGet: "/api/transfer-bonus/get",
     apiTransferBonusAdd: "/api/transfer-bonus/add",

@@ -22,8 +22,8 @@ export default class InvoiceSubscriptionViewModel {
         try {
             
             this.isProcessing = true;
-
-            let request = new InvoiceSubscriptionRequest(subscriptionInvoiceId);
+            debugger;
+            let request = new InvoiceSubscriptionRequest(subscriptionInvoiceId.toString());
             let response = await InvoiceSubscriptionHandler.detail(request);
 
             if (response && response.success) {

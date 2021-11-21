@@ -30,6 +30,7 @@ import PetroStationStore from "../../stores/PetroStationStore";
 import { PasswordInput } from 'antd-password-input-strength';
 import MaskedInput from "antd-mask-input";
 import Regions from "../../../../app/constants/Regions";
+import UserContext from "../../../../identity/contexts/UserContext";
 const {useEffect} = React;
 const { Option } = Select;
 
@@ -78,12 +79,18 @@ const EditPetroStation: React.FC<EditPetroStationProps> = inject(Stores.petroSta
             petroStationStore.editPetroStationViewModel.detailPetroStationResponse = new DetailPetroStationResponse();
         }
 
-        await petroStationStore.listPetrolCompanyViewModel.getPetrolCompanyList();
-        let petrolCompanies = [];
-        for (let item of petroStationStore.listPetrolCompanyViewModel.listPetrolCompanyResponse.items) {
-            petrolCompanies.push(<Option key={item.key} value={item.key}>{item.title}</Option>);
+        if(UserContext.info.role !== 10) {
+            await petroStationStore.listPetrolCompanyViewModel.getPetrolCompanyList();
+            let petrolCompanies = [];
+            for (let item of petroStationStore.listPetrolCompanyViewModel.listPetrolCompanyResponse.items) {
+                petrolCompanies.push(<Option key={item.key} value={item.key}>{item.title}</Option>);
+            }
+            setPetrolCompanies(petrolCompanies);
         }
-        setPetrolCompanies(petrolCompanies);
+        else{
+            if(petroStationStore?.editPetroStationViewModel?.detailPetroStationResponse)
+                petroStationStore.editPetroStationViewModel.detailPetroStationResponse.petrolCompanyId = UserContext.info.id;
+        }
 
 
         let regionsOptions = [];
@@ -158,6 +165,7 @@ const EditPetroStation: React.FC<EditPetroStationProps> = inject(Stores.petroSta
                   key={"petroStationForm"}
                  scrollToFirstError>
                 <Row gutter={[24, 16]}>
+                    {UserContext.info.role === 100 ?
                     <Col span={8}>
                         <Form.Item name="petrolCompanyId" initialValue={viewModel?.detailPetroStationResponse?.petrolCompanyId}
                                    key={"petrolCompanyId"}
@@ -174,7 +182,7 @@ const EditPetroStation: React.FC<EditPetroStationProps> = inject(Stores.petroSta
                             </Select>
 
                         </Form.Item>
-                    </Col>
+                    </Col> : ""}
                     <Col span={8}>
                 <Form.Item name="stationName" initialValue={viewModel?.detailPetroStationResponse?.stationName}
                            key={"stationName"}

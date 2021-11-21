@@ -256,6 +256,7 @@
   "PetroStations.Page.Title": "Petrol Stations",
   "PetroStations.Page.SubTitle": "This page is for define Petrol Stations",
   "PetroStations.Label.key": "key",
+  "PetroStations.Label.petrolCompanyId": "Petrol Company",
   "PetroStations.Label.petrolCompanyName": "Petrol Company",
   "PetroStations.Label.stationId": "Station Id",
   "PetroStations.Label.stationName": "Name",
@@ -525,6 +526,7 @@
   "Cars.Validation.Message.carDriverPassword.Valid": "The minimum password length is 8 characters and must have at least a number, upper, lower and special character",
   "Cars.Validation.Message.carDriverConfirmationCode.4MinLength": "Please at least 4 number.",
   "Cars.Validation.Message.carDriverConfirmationCode.Required": "Please enter Car Driver Confirmation Code",
+  "Cars.Validation.Message.carFuelKmCap.Required": "Please enter Car Fuel Km Cap",
 
   "Api.Car.Add.Successful": "A new car added successfully",
   "Api.Car.Edit.Successful": "selected car edited successfully",
@@ -794,6 +796,7 @@
   "InvoiceSummaries.Label.invoiceFuelConsumptionLiter": "Fuel Consumption Liter",
   "InvoiceSummaries.Label.invoiceAmount": "Invoice Amount",
   "InvoiceSummaries.Label.paymentMethodName": "Payment Method",
+  "InvoiceSummaries.Label.invoiceOdometer": "Invoice Odometer",
 
   "InvoiceSummaries.SearchPanel.Label.invoiceId": "Invoice #",
   "InvoiceSummaries.SearchPanel.Label.carIdNumber": "Car Id Number",
@@ -1003,10 +1006,24 @@
   "TransferBalances.Validation.Message.amount.Required": "Please enter an Amount.",
   "TransferBalances.Validation.Message.transferBalanceType.Required": "Please select a Transfer BalanceType.",
 
+
   "TransferBalances.Section.GeneralInformation": "GeneralInformation",
   "TransferBalances.Error.Get.Message": "An error has occurred while trying to get petrol station list.",
 
   "Api.TransferBalance.Add.Successful": "Balance transferred successfully",
+
+  "TransferBalances.CarBatch.Edit.HeaderText": "Recharge Car Balance Batch",
+  "TransferBalances.CarBatch.Source.Title": "Source",
+  "TransferBalances.CarBatch.Target.Title": "Target",
+  "TransferBalances.Label.branchName": "Branch Name",
+  "TransferBalances.Label.carNumber": "Car Number",
+  "TransferBalances.Label.consumptionValue": "Car Consumption Value",
+  "TransferBalances.Label.newBalance": "New Balance",
+
+  "TransferBalances.Button.autoRecharge": "Auto Recharge",
+
+  "TransferBalances.Validation.Message.amount.Negative": "Recharge Amount cannot be negative",
+
 
   "CustomerDashboard.Title": "Customer Dashboard",
   "CustomerDashboard.TotalCustomerBalance": "Total Customer Balance",
@@ -1246,6 +1263,7 @@
   "NewCustomers.Error.Active.Message": "An error has occurred while trying to active customer.",
 
   "CarTypeMasters.Error.List.Message": "An error has occurred while trying to get CarTypeMasters list.",
+  "PetrolPrices.Error.List.Message": "An error has occurred while trying to get PetrolPrices list.",
 
   "CarConsumptionRates.Menu.Title": "Car Consumption Rate",
   "CarConsumptionRates.Page.Title": "Car Consumption Rate",

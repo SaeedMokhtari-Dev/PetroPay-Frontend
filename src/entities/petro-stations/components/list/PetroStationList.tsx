@@ -105,7 +105,7 @@ const PetroStationList: React.FC<PetroStationListProps> = inject(Stores.petroSta
         petroStationStore.getPetroStationViewModel.pageIndex = 0;
         petroStationStore.getPetroStationViewModel.pageSize = 20;
         await petroStationStore.getPetroStationViewModel.getAllPetroStation(new GetPetroStationRequest(
-            20, 0));
+            20, 0, (UserContext.info.role === 15 ? UserContext.info.id : null)));
     }
 
     function onUnload() {
@@ -117,13 +117,13 @@ const PetroStationList: React.FC<PetroStationListProps> = inject(Stores.petroSta
         viewModel.pageIndex = pageIndex - 1;
         viewModel.pageSize = pageSize;
         await petroStationStore.getPetroStationViewModel.getAllPetroStation(new GetPetroStationRequest(
-            pageSize, pageIndex - 1));
+            pageSize, pageIndex - 1, (UserContext.info.role === 15 ? UserContext.info.id : null)));
     }
     async function pageSizeChanged(current, pageSize){
         viewModel.pageIndex = 0;
         viewModel.pageSize = pageSize;
         await petroStationStore.getPetroStationViewModel.getAllPetroStation(new GetPetroStationRequest(
-            pageSize, 0));
+            pageSize, 0, (UserContext.info.role === 15 ? UserContext.info.id : null)));
     }
     return (
         <div>
@@ -133,9 +133,9 @@ const PetroStationList: React.FC<PetroStationListProps> = inject(Stores.petroSta
                 title={i18next.t("PetroStations.Page.Title")}
                 subTitle={i18next.t("PetroStations.Page.SubTitle")}
                 extra={[
-                        <Button key={"Add"} type="primary" icon={<PlusCircleOutlined />} onClick={showEditPage}>
+                    UserContext.info.role === 100 ? <Button key={"Add"} type="primary" icon={<PlusCircleOutlined />} onClick={showEditPage}>
                             {i18next.t("General.Button.Add")}
-                        </Button>
+                        </Button> : ""
                     ,
                 ]}
             />

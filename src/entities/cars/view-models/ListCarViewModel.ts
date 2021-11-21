@@ -19,12 +19,12 @@ export default class ListCarViewModel {
         makeAutoObservable(this);
     }
 
-    public async getCarList(companyId?: number)  {
+    public async getCarList(companyId?: number, branchId?: number)  {
         try {
             
             this.isProcessing = true;
 
-            let request = new ListCarRequest(companyId);
+            let request = new ListCarRequest(companyId, branchId);
             let response = await ListCarHandler.get(request);
 
             if (response && response.success) {

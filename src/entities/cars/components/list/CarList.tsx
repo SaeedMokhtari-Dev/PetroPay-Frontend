@@ -144,7 +144,7 @@ const CarList: React.FC<CarListProps> = inject(Stores.carStore)(observer(({carSt
         carStore.getCarViewModel.getCarsRequest.pageSize = 20;
 
         let companyIdParam = 0;
-        if(UserContext.info.role == 1){
+        if(UserContext.info.role === 1){
             companyIdParam = UserContext.info.id;
             carStore.getCarViewModel.getCarsRequest.CompanyId = companyIdParam;
         }

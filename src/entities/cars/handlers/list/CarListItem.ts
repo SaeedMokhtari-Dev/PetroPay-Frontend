@@ -12,6 +12,10 @@ export default class CarListItem implements IDeserialize
     carOdometerRecordRequired: boolean;
     companyId: number;
     companyName: string;
+    consumptionValue: number;
+    newBalance: number;
+    amount: number;
+
     constructor() {
         makeAutoObservable(this);
     }

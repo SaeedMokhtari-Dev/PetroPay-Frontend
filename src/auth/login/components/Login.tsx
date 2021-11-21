@@ -152,6 +152,7 @@ const Login: React.FC<LoginProps> = inject('authStore')(observer(({authStore, ma
                     <div className="signup-classic">
                         <h1>{i18next.t("General.HeaderMenu.User")} {i18next.t(`Authentication.RoleType.${RoleTypeUtils.getRoleTypeTitle(viewModel?.roleType)}`)}</h1>
                         <Form layout="vertical" onFinish={onFinish} >
+                            {viewModel.roleType < 100 ?
                             <Form.Item initialValue={viewModel.roleType} name="roleType" label="" required={false}
                                        rules={[
                                            {
@@ -170,7 +171,7 @@ const Login: React.FC<LoginProps> = inject('authStore')(observer(({authStore, ma
                                     <Radio value={15}>{i18next.t("Authentication.Label.StationAccount")}</Radio>
                                     </Radio.Group>
                                     }
-                            </Form.Item>
+                            </Form.Item> : "" }
                             <Form.Item initialValue={viewModel.username} name="username" label={i18next.t("Authentication.Label.Username")} required={false}
                                        rules={[
                                            {

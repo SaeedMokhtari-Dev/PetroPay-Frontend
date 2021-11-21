@@ -360,7 +360,7 @@ const InvoiceSummaryList: React.FC<InvoiceSummaryListProps> = inject(Stores.invo
                            <Table.Summary.Cell index={0}>{i18next.t("General.Table.Total")}</Table.Summary.Cell>
                            <Table.Summary.Cell colSpan={UserContext.info.role == 1 ? 6 : 7} index={1}></Table.Summary.Cell>
                            <Table.Summary.Cell index={5}>{viewModel?.sumInvoiceAmount?.toLocaleString()}</Table.Summary.Cell>
-                           <Table.Summary.Cell colSpan={2} index={6}></Table.Summary.Cell>
+                           <Table.Summary.Cell colSpan={1} index={6}></Table.Summary.Cell>
                        </Table.Summary.Row>
                    )} />
             <br/>

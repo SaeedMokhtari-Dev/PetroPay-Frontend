@@ -79,6 +79,7 @@ import CompanyBranchStatementList
     from "../../reports/CompanyBranchStatements/components/list/CompanyBranchStatementList";
 import PetrolCompaniesList from "../../entities/petrol-companies/components/list/PetrolCompaniesList";
 import EditPetrolCompany from "../../entities/petrol-companies/components/company/EditPetrolCompany";
+import CarBatchTransferBalance from "../../entities/transfer-balances/components/carBatch/CarBatchTransferBalance";
 
 const App: React.FC = () =>
 {
@@ -164,6 +165,7 @@ const App: React.FC = () =>
                                     <Route exact roles={[RoleType.customer]} path={Routes.subscriptionInvoice} component={SubscriptionInvoice} />
 
                                     <Route exact roles={[RoleType.customer]} path={Routes.transferBalance} component={EditTransferBalance} />
+                                    <Route exact roles={[RoleType.customer]} path={Routes.transferBalanceCarBatch} component={CarBatchTransferBalance} />
 
                                     <Route exact roles={[RoleType.admin]} path={Routes.promotionCoupon} component={PromotionCouponsList} />
                                     <Route exact roles={[RoleType.admin]} path={Routes.editPromotionCoupon} component={EditPromotionCoupon} />
