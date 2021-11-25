@@ -14,6 +14,7 @@ export default class GetStationSaleViewModel {
     stationSaleExport: StationSaleItem[];
     totalSize: number;
     sumInvoiceAmount: number;
+    sumInvoiceBonusPoints: number;
     isProcessing: boolean;
     errorMessage: string;
     getStationSalesRequest: GetStationSaleRequest;
@@ -45,6 +46,7 @@ export default class GetStationSaleViewModel {
                     this.stationSaleList = items;
                     this.totalSize = result.totalCount;
                     this.sumInvoiceAmount = result.sumInvoiceAmount;
+                    this.sumInvoiceBonusPoints = result.sumInvoiceBonusPoints;
                 }
             } else {
                 this.errorMessage = getLocalizedString(response.message);

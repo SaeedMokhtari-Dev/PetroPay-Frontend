@@ -6,6 +6,7 @@ import GetSupplierRequest from "../handlers/get/GetSupplierRequest";
 import GetSupplierHandler from "../handlers/get/GetSupplierHandler";
 import SupplierStore from "../stores/SupplierStore";
 import {getLocalizedString} from "../../app/utils/Localization";
+import PetroStationItem from "../handlers/get/PetroStationItem";
 
 export default class GetSupplierViewModel {
     isProcessing: boolean;
@@ -15,6 +16,7 @@ export default class GetSupplierViewModel {
 
     stationBalance: number;
     stationBonusBalance: number;
+    petroStationItems: PetroStationItem[] = [];
 
     constructor(public supplierStore: SupplierStore) {
         makeAutoObservable(this);
@@ -30,6 +32,7 @@ export default class GetSupplierViewModel {
                 let result = response.data;
                 this.stationBalance = result.stationBalance;
                 this.stationBonusBalance = result.stationBonusBalance;
+                this.petroStationItems = result.petroStationItems;
             } else {
                 this.errorMessage = getLocalizedString(response.message);
             }

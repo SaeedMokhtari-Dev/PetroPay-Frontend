@@ -63,75 +63,78 @@ const ChangePassword: React.FC<ChangePasswordProps> = inject('authStore')(observ
 
 
     return (
-        <div className="mainContent">
-            <div className="signup-connect">
-                <img src="/images/petro-pay-logo.png" className="logo" alt="logo"/>
-            </div>
-            <div className="signup-classic">
-                <h2>
-                {i18next.t("ChangePassword.Label.ChangePassword")}
-                </h2>
-                {viewModel.isValidating ?
-                    <div className='token-validate-loader'>
-                        <Spin size="large" />
-                        <p>{i18next.t('ChangePassword.Token.Validation.Message')}</p>
-                    </div>
-                    :
-                    !viewModel.isTokenValid ?
-                        <div>
-                            <Alert message={viewModel.errorMessage} type="error" />
+        <div>
+            <div className="mainContent">
+                <div className="signup-connect">
+                    <img src="/images/petro-pay-logo.png" className="logo" alt="logo"/>
+                </div>
+                <div className="signup-classic">
+                    <h1>
+                    {i18next.t("ChangePassword.Label.ChangePassword")}
+                    </h1>
+                    {viewModel.isValidating ?
+                        <div className='token-validate-loader'>
+                            <Spin size="large" />
+                            <p>{i18next.t('ChangePassword.Token.Validation.Message')}</p>
+                        </div>
+                        :
+                        !viewModel.isTokenValid ?
+                            <div>
+                                <Alert message={viewModel.errorMessage} type="error" />
+                                <div className="link">
+                                    <Link to={`/auth/${RoleTypeUtils.getRoleTypeRoute(authStore.changePasswordViewModel.roleType)}`}>{i18next.t('ResetPassword.Link.BackToLogin')}</Link>
+                                </div>
+                            </div>
+                        :
+                        <Form layout="vertical" onFinish={onFinish} >
+                            <Form.Item initialValue={viewModel.newPassword} name="newPassword"
+                                       label={i18next.t("ChangePassword.Label.NewPassword")} required={false}
+                                       rules={[
+                                           {
+                                               required: true,
+                                               message: i18next.t("ChangePassword.Validation.Message.NewPassword.Required")
+                                           },
+                                           {
+                                               pattern: /^.*(?=.{8,})((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/g,
+                                               message: i18next.t("Companies.Validation.Message.companyAdminUserPassword.Valid"),
+                                           }
+                                       ]}>
+                                <PasswordInput onChange={onNewPasswordChanged}/>
+                            </Form.Item>
+                            <Form.Item initialValue={viewModel.confirmPassword} name="confirmPassword"
+                                       label={i18next.t("ChangePassword.Label.ConfirmPassword")} required={false}
+                                       dependencies={['password']}
+                                       rules={[
+                                           {
+                                               required: true,
+                                               message: i18next.t("ChangePassword.Validation.Message.ConfirmPassword.Required")
+                                           },
+                                           ({ getFieldValue }) => ({
+                                               validator(_, value) {
+                                                   if (!value || getFieldValue('newPassword') === value) {
+                                                       return Promise.resolve();
+                                                   }
+                                                   return Promise.reject(new Error('The two passwords that you entered do not match!'));
+                                               },
+                                           }),
+                                       ]}>
+                                <PasswordInput onChange={onConfirmPasswordChanged}/>
+                            </Form.Item>
+                            {viewModel.errorMessage && (
+                                <div className='response-error-msg'>{viewModel.errorMessage}</div>
+                            )}
+                            <Button type="primary" loading={viewModel.isProcessing} htmlType="submit">
+                                {i18next.t("ChangePassword.Button.ChangePassword")}
+                            </Button>
                             <div className="link">
                                 <Link to={`/auth/${RoleTypeUtils.getRoleTypeRoute(authStore.changePasswordViewModel.roleType)}`}>{i18next.t('ResetPassword.Link.BackToLogin')}</Link>
                             </div>
-                        </div>
-                    :
-                    <Form layout="vertical" onFinish={onFinish} >
-                        <Form.Item initialValue={viewModel.newPassword} name="newPassword"
-                                   label={i18next.t("ChangePassword.Label.NewPassword")} required={false}
-                                   rules={[
-                                       {
-                                           required: true,
-                                           message: i18next.t("ChangePassword.Validation.Message.NewPassword.Required")
-                                       },
-                                       {
-                                           pattern: /^.*(?=.{8,})((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/g,
-                                           message: i18next.t("Companies.Validation.Message.companyAdminUserPassword.Valid"),
-                                       }
-                                   ]}>
-                            <PasswordInput onChange={onNewPasswordChanged}/>
-                        </Form.Item>
-                        <Form.Item initialValue={viewModel.confirmPassword} name="confirmPassword"
-                                   label={i18next.t("ChangePassword.Label.ConfirmPassword")} required={false}
-                                   dependencies={['password']}
-                                   rules={[
-                                       {
-                                           required: true,
-                                           message: i18next.t("ChangePassword.Validation.Message.ConfirmPassword.Required")
-                                       },
-                                       ({ getFieldValue }) => ({
-                                           validator(_, value) {
-                                               if (!value || getFieldValue('newPassword') === value) {
-                                                   return Promise.resolve();
-                                               }
-                                               return Promise.reject(new Error('The two passwords that you entered do not match!'));
-                                           },
-                                       }),
-                                   ]}>
-                            <PasswordInput onChange={onConfirmPasswordChanged}/>
-                        </Form.Item>
-                        {viewModel.errorMessage && (
-                            <div className='response-error-msg'>{viewModel.errorMessage}</div>
-                        )}
-                        <Button type="primary" loading={viewModel.isProcessing} htmlType="submit">
-                            {i18next.t("ChangePassword.Button.ChangePassword")}
-                        </Button>
-                        <div className="link">
-                            <Link to={`/auth/${RoleTypeUtils.getRoleTypeRoute(authStore.changePasswordViewModel.roleType)}`}>{i18next.t('ResetPassword.Link.BackToLogin')}</Link>
-                        </div>
-                    </Form>
-                }
+                        </Form>
+                    }
 
+                </div>
             </div>
+            <div className={"auth-background"}><img src="/images/App_background.jpg" alt="logo" /></div>
         </div>
     );
 }));

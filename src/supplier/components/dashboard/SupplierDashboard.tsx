@@ -6,7 +6,8 @@ import i18next from "i18next";
 import GetCustomerRequest from "../../../customer/handlers/get/GetCustomerRequest";
 import UserContext from "../../../identity/contexts/UserContext";
 import GetSupplierRequest from "../../handlers/get/GetSupplierRequest";
-import {Col, Descriptions, Row, Spin} from "antd";
+import {Col, Descriptions, Divider, Row, Spin, Table} from "antd";
+import SupplierDashboardColumns from "./SupplierDashboardColumns";
 
 interface DashboardProps {
     supplierStore?: SupplierStore
@@ -15,6 +16,11 @@ interface DashboardProps {
 const SupplierDashboard: React.FC<DashboardProps> = inject(Stores.supplierStore)(observer(({supplierStore}) =>
 {
     const [dataFetched, setDataFetched] = React.useState(false);
+
+    SupplierDashboardColumns.forEach(w => {
+        w.title = i18next.t(w.title);
+    });
+    const columns: any[] = [...SupplierDashboardColumns];
 
     useEffect(() => {
         onLoad();
@@ -25,7 +31,10 @@ const SupplierDashboard: React.FC<DashboardProps> = inject(Stores.supplierStore)
     async function onLoad() {
         supplierStore.onSupplierGetPageLoad();
         supplierStore.getSupplierViewModel.getSupplierRequest = new GetSupplierRequest();
-        supplierStore.getSupplierViewModel.getSupplierRequest.supplierId = UserContext.info.id;
+        if(UserContext.info.role === 10)
+            supplierStore.getSupplierViewModel.getSupplierRequest.supplierId = UserContext.info.id;
+        if(UserContext.info.role === 15)
+            supplierStore.getSupplierViewModel.getSupplierRequest.supplierBranchId = UserContext.info.id;
         await supplierStore.getSupplierViewModel.getDashboardData(supplierStore.getSupplierViewModel.getSupplierRequest);
 
         setDataFetched(true);
@@ -46,6 +55,12 @@ const SupplierDashboard: React.FC<DashboardProps> = inject(Stores.supplierStore)
                         <Descriptions.Item label={i18next.t("SupplierDashboard.stationBalance")}>{viewModel?.stationBalance?.toLocaleString()}</Descriptions.Item>
                         <Descriptions.Item label={i18next.t("SupplierDashboard.stationBonusBalance")}>{viewModel?.stationBonusBalance?.toLocaleString()}</Descriptions.Item>
                     </Descriptions>
+                    <br/>
+                    <Divider>{i18next.t("SupplierDashboard.Section.Stations")}</Divider>
+                    <br/>
+                    <Table dataSource={viewModel?.petroStationItems} columns={columns} loading={viewModel?.isProcessing}
+                           bordered={true} pagination={false} sticky/>
+
                 </div>
                     :
                     <Row gutter={[24, 16]}>

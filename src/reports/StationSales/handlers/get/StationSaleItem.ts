@@ -10,6 +10,7 @@ export default class StationSaleItem implements IDeserialize
     sumInvoiceFuelConsumptionLiter: number;
     invoiceFuelType: string;
     sumInvoiceDataTime: string;
+    sumInvoiceBonusPoints: number;
 
     constructor() {
         makeAutoObservable(this);

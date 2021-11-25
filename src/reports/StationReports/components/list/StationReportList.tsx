@@ -20,6 +20,7 @@ import StationReportColumns from "./StationReportColumns";
 import StationReportStore from "../../stores/StationReportStore";
 import ExportExcel from "../../../../app/utils/ExportExcel";
 import {ReactComponent} from "*.svg";
+import StationPaymentMethods from "../../../../app/constants/StationPaymentMethods";
 
 const { Panel } = Collapse;
 const { Option } = Select;
@@ -32,6 +33,8 @@ const StationReportList: React.FC<StationReportListProps> = inject(Stores.statio
 
     const [petroStationOptions, setPetroStationOptions] = React.useState([]);
     const [stationUserOptions, setStationUserOptions] = React.useState([]);
+    const [servicesOptions, setServiceOptions] = React.useState([]);
+    const [paymentMethodsOptions, setPaymentMethodOptions] = React.useState([]);
 
     const formItemLayout = {
         labelCol: {
@@ -102,6 +105,24 @@ const StationReportList: React.FC<StationReportListProps> = inject(Stores.statio
                 }
             }
             setStationUserOptions(stationUserOptions);
+
+            await stationReportStore.listServiceMasterViewModel.getServiceMasterList();
+            let servicesOptions = [];
+            if (stationReportStore.listServiceMasterViewModel) {
+                if(stationReportStore.listServiceMasterViewModel.listServiceMasterResponse.items) {
+                    let items = stationReportStore.listServiceMasterViewModel.listServiceMasterResponse.items;
+                    for (let item of items) {
+                        servicesOptions.push(<Option key={item.key} value={item.key}>{item.title}</Option>);
+                    }
+                }
+            }
+            setServiceOptions(servicesOptions);
+
+            let paymentMethodsOptions = [];
+            for (let item of StationPaymentMethods) {
+                paymentMethodsOptions.push(<Option key={item.value} value={item.value}>{i18next.t(item.title)}</Option>);
+            }
+            setPaymentMethodOptions(paymentMethodsOptions);
         }
         catch {
 
@@ -223,11 +244,21 @@ const StationReportList: React.FC<StationReportListProps> = inject(Stores.statio
                                     <Input type={"number"} onChange={onChanged}/>
                                 </Form.Item>
                             </Col>
-                            <Col span={8}>
+                            {/*<Col span={8}>
                                 <Form.Item name="serviceArDescription" initialValue={viewModel?.getStationReportsRequest?.serviceArDescription}
                                            key={"serviceArDescription"}
                                            label={i18next.t("StationReports.SearchPanel.Label.serviceArDescription")}>
                                     <Input onChange={onChanged}/>
+                                </Form.Item>
+                            </Col>*/}
+                            <Col span={8}>
+                                <Form.Item name="serviceId"
+                                           key={"serviceId"}
+                                           label={i18next.t("StationReports.SearchPanel.Label.serviceId")}>
+                                    <Select style={{width: "100%", display:"block"}} allowClear={true}
+                                            showSearch={true} onChange={(e) => onSelectChanged(e, "serviceId")}>
+                                        {servicesOptions}
+                                    </Select>
                                 </Form.Item>
                             </Col>
 
@@ -250,7 +281,11 @@ const StationReportList: React.FC<StationReportListProps> = inject(Stores.statio
                                 <Form.Item name="paymentMethodName" initialValue={viewModel?.getStationReportsRequest?.paymentMethodName}
                                            key={"paymentMethodName"}
                                            label={i18next.t("StationReports.SearchPanel.Label.paymentMethodName")}>
-                                    <Input onChange={onChanged}/>
+                                    {/*<Input onChange={onChanged}/>*/}
+                                    <Select style={{width: "100%", display:"block"}} allowClear={true}
+                                            showSearch={true} onChange={(e) => onSelectChanged(e, "paymentMethodName")}>
+                                        {paymentMethodsOptions}
+                                    </Select>
                                 </Form.Item>
                             </Col>
                         </Row>

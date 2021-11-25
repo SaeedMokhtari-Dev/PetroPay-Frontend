@@ -47,6 +47,7 @@
 
   "SupplierDashboard.stationBalance": "Station Balance",
   "SupplierDashboard.stationBonusBalance": "Station Bonus Balance",
+  "SupplierDashboard.Section.Stations": "Stations List",
   "Supplier.Error.Get.Message": "An error has occurred while trying to get supplier dashboard data.",
 
   "Authentication.Label.PetroPay": "PetroPay",
@@ -278,6 +279,7 @@
   "PetroStations.Label.stationChangeOilService": "station Change Oil Service",
   "PetroStations.Label.stationCarWashingService": "station Car Washing Service",
   "PetroStations.Label.stationChangeTireService": "station Change Tire Service",
+  "PetroStations.Label.stationBonusBalance": "Station Bonus Balance",
 
   "PetroStations.Label.petroPayAccountId": "PaymentMethod",
   "PetroStations.Label.amount": "Amount",
@@ -616,7 +618,6 @@
   "Subscriptions.Label.carId":"Car #",
   "Subscriptions.Label.invoiced":"Invoiced",
   "Subscriptions.Label.invalidCouponCode": "This coupon code is not valid.",
-  
 
   "Subscriptions.Invoice.Page.Title": "Subscription Invoice",
   "Subscriptions.Invoice": "Invoice",
@@ -882,6 +883,7 @@
   "StationReports.Label.invoiceDataTime": "Invoice Data Time",
 
   "StationReports.SearchPanel.Label.invoiceId": "Invoice #",
+  "StationReports.SearchPanel.Label.serviceId": "Service",
   "StationReports.SearchPanel.Label.stationWorkerId": "Petro Station",
   "StationReports.SearchPanel.Label.stationWorkerFname": "Station Worker Name",
   "StationReports.SearchPanel.Label.invoiceDataTimeFrom": "Invoice Data Time From",
@@ -903,7 +905,7 @@
   "StationSales.Label.sumInvoiceFuelConsumptionLiter": "Invoice Fuel Consumption Liter",
   "StationSales.Label.invoiceFuelType": "Invoice Fuel Type",
   "StationSales.Label.sumInvoiceDataTime": "Invoice Date",
-  "StationSales.Label.sum_InvoiceBonusPoints":"Bonus Points",
+  "StationSales.Label.sumInvoiceBonusPoints":"Bonus Points",
 
 
   "StationSales.SearchPanel.Label.stationWorkerId": "Petrol Station",
@@ -1024,7 +1026,6 @@
 
   "TransferBalances.Validation.Message.amount.Negative": "Recharge Amount cannot be negative",
 
-
   "CustomerDashboard.Title": "Customer Dashboard",
   "CustomerDashboard.TotalCustomerBalance": "Total Customer Balance",
   "CustomerDashboard.TotalBranchBalance": "Total Branch Balance",
@@ -1073,7 +1074,6 @@
   "PromotionCoupons.Label.couponForMonthly": "couponForMonthly",
   "PromotionCoupons.Label.couponForQuarterly": "couponForQuarterly",
   "PromotionCoupons.Label.couponForYearly": "couponForYearly",
-
 
   "PromotionCoupons.Add.HeaderText": "Add Promotion Coupon",
   "PromotionCoupons.Edit.HeaderText": "Edit Promotion Coupon with Id:",
@@ -1527,6 +1527,7 @@
   "General.PaymentMethod.BankTransfer": "Bank Transfer",
   "General.PaymentMethod.Check": "Check",
   "General.PaymentMethod.Credit": "Credit",
+  "General.PaymentMethod.CarBalance": "Car Balance",
 
   "General.SubscriptionType.Monthly": "Monthly",
   "General.SubscriptionType.Quarterly": "Quarterly",

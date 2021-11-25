@@ -211,6 +211,7 @@ const Login: React.FC<LoginProps> = inject('authStore')(observer(({authStore, ma
                     </div>
                 </div>
             )}
+            <div className={"auth-background"}><img src="/images/App_background.jpg" alt="logo" /></div>
         </div>
     );
 }));

@@ -31,6 +31,7 @@ const StationSaleList: React.FC<StationSaleListProps> = inject(Stores.stationSal
 
     const [petroStationOptions, setPetroStationOptions] = React.useState([]);
     const [stationUserOptions, setStationUserOptions] = React.useState([]);
+    const [invoiceFuelTypesOptions, setInvoiceFuelTypeOptions] = React.useState([]);
 
     const formItemLayout = {
         labelCol: {
@@ -90,6 +91,18 @@ const StationSaleList: React.FC<StationSaleListProps> = inject(Stores.stationSal
                 }
             }
             setStationUserOptions(stationUserOptions);
+
+            await stationSaleStore.listPetrolPriceViewModel.getPetrolPriceList();
+            let invoiceFuelTypesOptions = [];
+            if (stationSaleStore.listPetrolPriceViewModel) {
+                if(stationSaleStore.listPetrolPriceViewModel.listPetrolPriceResponse.items) {
+                    let items = stationSaleStore.listPetrolPriceViewModel.listPetrolPriceResponse.items;
+                    for (let item of items) {
+                        invoiceFuelTypesOptions.push(<Option key={item.key} value={item.petrolPriceType}>{item.petrolPriceType}</Option>);
+                    }
+                }
+            }
+            setInvoiceFuelTypeOptions(invoiceFuelTypesOptions);
         }
         catch {
 
@@ -205,7 +218,9 @@ const StationSaleList: React.FC<StationSaleListProps> = inject(Stores.stationSal
                                            key={"invoiceFuelType"}
                                            label={i18next.t("StationSales.SearchPanel.Label.invoiceFuelType")}>
                                     {/*<Input onChange={onChanged}/>*/}
-                                    <Select options={carTypeOfFuelOptions} showSearch={true} onChange={(e) => onSelectChanged(e, "invoiceFuelType")} />
+                                    <Select showSearch={true} onChange={(e) => onSelectChanged(e, "invoiceFuelType")} >
+                                        {invoiceFuelTypesOptions}
+                                    </Select>
                                 </Form.Item>
                             </Col>
                             <Col span={8}>
@@ -250,6 +265,7 @@ const StationSaleList: React.FC<StationSaleListProps> = inject(Stores.stationSal
                            <Table.Summary.Cell index={0}>{i18next.t("General.Table.Total")}</Table.Summary.Cell>
                            <Table.Summary.Cell index={5}>{viewModel?.sumInvoiceAmount?.toLocaleString()}</Table.Summary.Cell>
                            <Table.Summary.Cell colSpan={3} index={6}></Table.Summary.Cell>
+                           <Table.Summary.Cell index={6}>{viewModel?.sumInvoiceBonusPoints?.toLocaleString()}</Table.Summary.Cell>
                        </Table.Summary.Row>
                    )}/>
             <br/>

@@ -43,7 +43,10 @@ const CustomerDashboard: React.FC<DashboardProps> = inject(Stores.customerStore)
     async function onLoad() {
         customerStore.onCustomerGetPageLoad();
         customerStore.getCustomerViewModel.getCustomerRequest = new GetCustomerRequest();
-        customerStore.getCustomerViewModel.getCustomerRequest.companyId = UserContext.info.id;
+        if(UserContext.info.role === 1)
+            customerStore.getCustomerViewModel.getCustomerRequest.companyId = UserContext.info.id;
+        if(UserContext.info.role === 5)
+            customerStore.getCustomerViewModel.getCustomerRequest.companyBranchId = UserContext.info.id;
         await customerStore.getCustomerViewModel.getDashboardData(customerStore.getCustomerViewModel.getCustomerRequest);
 
         setDataFetched(true);
@@ -67,11 +70,15 @@ const CustomerDashboard: React.FC<DashboardProps> = inject(Stores.customerStore)
                     <Descriptions.Item label={i18next.t("CustomerDashboard.TotalCarBalance")}>{viewModel?.totalCarBalance?.toLocaleString()}</Descriptions.Item>
                 </Descriptions>
                 <br />
-                <Divider>{i18next.t("CustomerDashboard.Section.BranchesBalance")}</Divider>
-                <br/>
-                <Table dataSource={viewModel?.companyBranchItems} columns={branchColumns} loading={viewModel?.isProcessing}
-                       bordered={true} pagination={false} />
-                <br/>
+                {UserContext.info.role === 1 ?
+                    <React.Fragment>
+                        <Divider>{i18next.t("CustomerDashboard.Section.BranchesBalance")}</Divider>
+                        <br/>
+                        <Table dataSource={viewModel?.companyBranchItems} columns={branchColumns} loading={viewModel?.isProcessing}
+                               bordered={true} pagination={false} />
+                        <br/>
+                    </React.Fragment>
+                    : "" }
                 <Divider>{i18next.t("CustomerDashboard.Section.Subscriptions")}</Divider>
                 <br/>
                 <Table dataSource={viewModel?.companySubscriptionItems} columns={subscriptionColumns} loading={viewModel?.isProcessing}

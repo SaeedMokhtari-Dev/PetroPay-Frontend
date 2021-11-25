@@ -48,43 +48,46 @@ const ResetPassword: React.FC<ResetPasswordProps> = inject('authStore')(observer
         viewModel.email = e.target.value;
     }
     return (
-        <div className="mainContent">
-            <div className="signup-connect">
-                <img src="/images/petro-pay-logo.png" className="logo" alt="logo"/>
-            </div>
-            <div className="signup-classic">
-                <h2>{i18next.t("ResetPassword.Label.ResetPassword")}</h2>
+        <div>
+            <div className="mainContent">
+                <div className="signup-connect">
+                    <img src="/images/petro-pay-logo.png" className="logo" alt="logo"/>
+                </div>
+                <div className="signup-classic">
+                    <h1>{i18next.t("ResetPassword.Label.ResetPassword")}</h1>
 
-                {viewModel.responseMessage && (
-                    <div>
-                        <Alert message={viewModel.responseMessage} type="success"/>
-                        <div className="link">
-                            <Link to={`/auth/${RoleTypeUtils.getRoleTypeRoute(authStore.resetPasswordViewModel.roleType)}`}>{i18next.t('ResetPassword.Link.BackToLogin')}</Link>
+                    {viewModel.responseMessage && (
+                        <div>
+                            <Alert message={viewModel.responseMessage} type="success"/>
+                            <div className="link">
+                                <Link to={`/auth/${RoleTypeUtils.getRoleTypeRoute(authStore.resetPasswordViewModel.roleType)}`}>{i18next.t('ResetPassword.Link.BackToLogin')}</Link>
+                            </div>
                         </div>
-                    </div>
-                )}
-                {!viewModel.responseMessage && (
-                    <Form layout="vertical" onFinish={onFinish}>
-                        <Form.Item initialValue={viewModel.email} name="email"
-                                   label={i18next.t("Authentication.Label.Email")} required={false}
-                                   rules={[
-                                       {
-                                           required: true,
-                                           message: i18next.t("Authentication.Validation.Message.Email.Required"),
-                                           type: 'email'
-                                       }
-                                   ]}>
-                            <Input onChange={onEmailChanged} className="text-input"/>
-                        </Form.Item>
-                        <Button type="primary" loading={viewModel.isProcessing} htmlType="submit">
-                            {i18next.t("ResetPassword.Button.ResetPassword")}
-                        </Button>
-                        <div className="link">
-                            <Link to={`/auth/${RoleTypeUtils.getRoleTypeRoute(authStore.resetPasswordViewModel.roleType)}`}>{i18next.t('ResetPassword.Link.BackToLogin')}</Link>
-                        </div>
-                    </Form>
-                )}
+                    )}
+                    {!viewModel.responseMessage && (
+                        <Form layout="vertical" onFinish={onFinish}>
+                            <Form.Item initialValue={viewModel.email} name="email"
+                                       label={i18next.t("Authentication.Label.Email")} required={false}
+                                       rules={[
+                                           {
+                                               required: true,
+                                               message: i18next.t("Authentication.Validation.Message.Email.Required"),
+                                               type: 'email'
+                                           }
+                                       ]}>
+                                <Input onChange={onEmailChanged} className="text-input"/>
+                            </Form.Item>
+                            <Button type="primary" loading={viewModel.isProcessing} htmlType="submit">
+                                {i18next.t("ResetPassword.Button.ResetPassword")}
+                            </Button>
+                            <div className="link">
+                                <Link to={`/auth/${RoleTypeUtils.getRoleTypeRoute(authStore.resetPasswordViewModel.roleType)}`}>{i18next.t('ResetPassword.Link.BackToLogin')}</Link>
+                            </div>
+                        </Form>
+                    )}
+                </div>
             </div>
+            <div className={"auth-background"}><img src="/images/App_background.jpg" alt="logo" /></div>
         </div>
     );
 }));

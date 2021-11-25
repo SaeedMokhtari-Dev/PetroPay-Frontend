@@ -47,6 +47,7 @@
 
   "SupplierDashboard.stationBalance": "رصيد المحطة",
   "SupplierDashboard.stationBonusBalance": "رصيد برنامج المكافات",
+  "*SupplierDashboard.Section.Stations": "Stations List",
   "Supplier.Error.Get.Message": "حدث خطأ ",
 
   "Authentication.Label.PetroPay": "بتروباي",
@@ -59,6 +60,9 @@
   "Authentication.RoleType.Customer": "عملاء",
   "Authentication.RoleType.Supplier": "محطة وقود",
   "Authentication.RoleType.Admin": "المدير",
+  "*Authentication.Label.MainAccount": "Main Account",
+  "*Authentication.Label.BranchAccount": "Branch Account",
+  "*Authentication.Label.StationAccount": "Station Account",
   "Authentication.Label.Email": "البريد الالكتروني",
   "Authentication.Label.Username": "اسم المستخدم",
   "Authentication.Label.Password": "كلمة المرور ",
@@ -238,6 +242,7 @@
   "Api.Branch.Activated.Successful": "تم تنشيط حساب الفرع بنجاع",
   "Api.Branch.BalanceIncreased.Successful": "تمت زيادة رصيد الفرع المحدد بنجاح",
   "Api.Branch.CompanyId.Required": "رقم العميل مطلوب",
+  "*Api.Branch.CompanyBranchId.Required": "Company Branch Id is Required",
   "Api.Branch.Id.Required": "رقم الفرع مطلوب",
   "Api.Branch.IncreaseAmount.Required": "يجب ادخال مبلغ الشحن",
   "Api.Branch.IncreaseAmountCannotBeMoreThanBalance": "لا يمكن أن يكون مبلغ الشحن  أكبر من رصيد الشركة",
@@ -252,6 +257,8 @@
   "PetroStations.Page.Title": "محطة الوقود",
   "PetroStations.Page.SubTitle": " صفحة تعريف محطات الوقود",
   "PetroStations.Label.key": "key",
+  "*PetroStations.Label.petrolCompanyId": "Petrol Company",
+  "*PetroStations.Label.petrolCompanyName": "Petrol Company",
   "PetroStations.Label.stationId": "رقم المحطة",
   "PetroStations.Label.stationName": "الاسم",
   "PetroStations.Label.stationAddress": "العنوان",
@@ -272,6 +279,7 @@
   "PetroStations.Label.stationChangeOilService": "خدمة تغير الزيت",
   "PetroStations.Label.stationCarWashingService": "خدمة غسيل السيارات",
   "PetroStations.Label.stationChangeTireService": "خدمة تغير الاطارات",
+  "*PetroStations.Label.stationBonusBalance": "Station Bonus Balance",
 
   "PetroStations.Label.petroPayAccountId": "طريقة السداد",
   "PetroStations.Label.amount": "المبلغ",
@@ -284,6 +292,7 @@
 
   "PetroStations.Button.Payment": "ايصال السداد",
 
+  "*PetroStations.Validation.Message.petrolCompanyId.Required": "Please select petrol company",
   "PetroStations.Validation.Message.stationName.Required": "يرجي ادخال اسم المحطة",
   "PetroStations.Validation.Message.stationAddress.Required": "يرجي ادخال عنوان المحطة",
   "PetroStations.Validation.Message.stationLucationName.Required": "يرجي ادخال المنطقة ",
@@ -358,6 +367,7 @@
   "TransferBonuses.Label.stationBonus": "حوافز و مكافاءت المحطة",
 
   "TransferBonuses.Label.stationId": "محطة الوقود",
+  "*TransferBonuses.Label.stationUserBonus": "Station User Bonus",
   "TransferBonuses.Label.amount": "النقاط",
   "TransferBonuses.Label.calcBalance": "المبلغ",
 
@@ -368,6 +378,7 @@
   "TransferBonuses.Label.transDocument": "بيان العملية",
   "TransferBonuses.Label.transAmount": "القيمة",
   "TransferBonuses.Label.transReference": "المرجع",
+  "*TransferBonuses.Label.stationWorkerId": "Station User",
 
   "TransferBonuses.Add.HeaderText": "تحويل النقاط و الحوافز",
   "TransferBonuses.Edit.HeaderText": "تعديل",
@@ -380,6 +391,7 @@
   "TransferBonuses.Validation.Message.toPetroPayAccountId.Required": "يرجي اختيار الحساب",
   "TransferBonuses.Validation.Message.amount.Required": "يرجي ادخال المبلغ",
   "TransferBonuses.Validation.Message.reference.Required": "يرجي ادخال المرجع",
+  "*TransferBonuses.Validation.Message.stationWorkerId.Required": "Please select Station User",
 
   "Api.TransferBonus.Add.Successful": "تم الاضافة بنجاح",
   "Api.TransferBonus.Edit.Successful": "تم التعديل بنجاح",
@@ -517,6 +529,7 @@
   "Cars.Validation.Message.carDriverPassword.Valid": "لحد الأدنى لطول كلمة المرور هو 8 أحرف ويجب أن تحتوي على الأقل على رقم وحرف علوي وسفلي و رمز خاص",
   "Cars.Validation.Message.carDriverConfirmationCode.4MinLength": "كود التموين لابد من ان يكون اكثر من 4 ارقام",
   "Cars.Validation.Message.carDriverConfirmationCode.Required": "برجاء ادخال كود التاكيد للسائق",
+  "*Cars.Validation.Message.carFuelKmCap.Required": "Please enter Car Fuel Km Cap",
 
   "Api.Car.Add.Successful": "تم اضافة السيارة بنجاح",
   "Api.Car.Edit.Successful": "تم التعديل بنجاح",
@@ -605,6 +618,7 @@
   "Subscriptions.Label.couponCode": "رقم الكوبون",
   "Subscriptions.Label.carId":"رقم السيارة",
   "Subscriptions.Label.invoiced":"مفوتر",
+  "*Subscriptions.Label.invalidCouponCode": "This coupon code is not valid.",
 
   "Subscriptions.Invoice.Page.Title": "فاتورة الاشتراك",
   "Subscriptions.Invoice": "الفاتورة",
@@ -714,6 +728,59 @@
   "Subscriptions.Error.Reject.Message": "حدث خطأ اثناء رفض الطلب",
   "Subscriptions.Error.Calculate.Message": "حدث خطأ أثناء محاولة حساب الاشتراك",
 
+  "*PetrolCompanies.Menu.Title": "Petrol Companies",
+  "*PetrolCompanies.Page.Title": "Petrol Companies",
+  "*PetrolCompanies.Page.SubTitle": "This page is for define petrolCompanies",
+  "*PetrolCompanies.Label.key": "key",
+  "*PetrolCompanies.Label.petrolCompanyId": "petrol Company Id",
+  "*PetrolCompanies.Label.petrolCompanyName": "Name",
+  "*PetrolCompanies.Label.petrolCompanyCommercialNumber": "Commercial Number",
+  "*PetrolCompanies.Label.petrolCompanyCommercialPhoto": "Commercial Photo",
+  "*PetrolCompanies.Label.petrolCompanyType": "Type",
+  "*PetrolCompanies.Label.petrolCompanyAdminUserName": "Admin User Name",
+  "*PetrolCompanies.Label.petrolCompanyAdminUserPassword": "Admin User Password",
+  "*PetrolCompanies.Label.petrolCompanyCountry": "Country",
+  "*PetrolCompanies.Label.petrolCompanyRegion": "Region",
+  "*PetrolCompanies.Label.petrolCompanyAddress": "Address",
+  "*PetrolCompanies.Label.petrolCompanyAdminName": "Admin Name",
+  "*PetrolCompanies.Label.petrolCompanyAdminPosition": "Admin Position",
+  "*PetrolCompanies.Label.petrolCompanyAdminPhone": "Admin Phone",
+  "*PetrolCompanies.Label.petrolCompanyAdminEmail": "Admin Email",
+  "*PetrolCompanies.Label.petrolCompanyBalnce": "Balance",
+  "*PetrolCompanies.Label.petrolCompanyVatNumber": "Petrol Company Vat Number",
+  "*PetrolCompanies.Label.petrolCompanyVatPhoto": "Petrol Company Vat Photo",
+  "*PetrolCompanies.Label.petrolCompanyTaxNumber": "Petrol Company Tax Number",
+  "*PetrolCompanies.Label.petrolCompanyTaxPhoto": "Petrol Company Tax Photo",
+
+  "*PetrolCompanies.Add.HeaderText": "Add Petrol Company",
+  "*PetrolCompanies.Edit.HeaderText": "Edit Petrol Company with Id:",
+  "*PetrolCompanies.Section.GeneralInformation": "General Information",
+  "*PetrolCompanies.Section.LoginInformation": "Login Information",
+  "*PetrolCompanies.Section.TaxAndVat": "Tax And Vat",
+  "*PetrolCompanies.Button.Branches": "Branches",
+
+  "*PetrolCompanies.Validation.Message.petrolCompanyName.Required": "Please enter petrol company name",
+  "*PetrolCompanies.Validation.Message.petrolCompanyCommercialNumber.Required": "Please enter commercial number",
+  "*PetrolCompanies.Validation.Message.petrolCompanyType.Required": "Please enter petrol company type",
+  "*PetrolCompanies.Validation.Message.petrolCompanyAdminEmail.Required": "Please enter petrol company admin email",
+  "*PetrolCompanies.Validation.Message.petrolCompanyAdminUserName.Required": "Please enter petrol company admin username",
+  "*PetrolCompanies.Validation.Message.petrolCompanyAdminUserName.Valid": "Please enter a valid Username",
+  "*PetrolCompanies.Validation.Message.petrolCompanyAdminUserPassword.Required": "Please enter petrol company admin password",
+  "*PetrolCompanies.Validation.Message.petrolCompanyAdminUserPassword.Valid": "The minimum password length is 8 characters and must have at least a number, upper, lower and special character",
+
+  "*Api.PetrolCompany.Add.Successful": "A new petrol company added successfully",
+  "*Api.PetrolCompany.Edit.Successful": "selected petrol company edited successfully",
+  "*Api.PetrolCompany.Deleted.Successful": "selected petrol company deleted successfully",
+  "*Api.PetrolCompany.Id.Required": "Id is Required",
+
+
+  "*PetrolCompanies.Error.Get.Message": "An error has occurred while trying to get petrolCompanies list.",
+  "*PetrolCompanies.Error.Detail.Message": "An error has occurred while trying to get petrolCompany details.",
+  "*PetrolCompanies.Error.Add.Message": "An error has occurred while trying to add new petrolCompany.",
+  "*PetrolCompanies.Error.Edit.Message": "An error has occurred while trying to edit petrolCompany.",
+  "*PetrolCompanies.Error.Delete.Message": "An error has occurred while trying to delete petrolCompany.",
+  "*PetrolCompanies.Error.List.Message": "An error has occurred while trying to get petrolCompany list.",
+
   "InvoiceSummaries.Menu.Title": " الفواتير",
   "InvoiceSummaries.Page.Title": "الفواتير",
   "InvoiceSummaries.Page.SubTitle": "تقرير ملخص الفواتير",
@@ -729,6 +796,7 @@
   "InvoiceSummaries.Label.invoiceFuelConsumptionLiter": "عدد اللترات",
   "InvoiceSummaries.Label.invoiceAmount": "مبلغ الفاتورة",
   "InvoiceSummaries.Label.paymentMethodName": "طريقة الدفع",
+  "*InvoiceSummaries.Label.invoiceOdometer": "Invoice Odometer",
 
   "InvoiceSummaries.SearchPanel.Label.invoiceId": "رقم الفاتورة",
   "InvoiceSummaries.SearchPanel.Label.carIdNumber": "رقم السيارة",
@@ -814,6 +882,7 @@
   "StationReports.Label.invoiceDataTime": "التاريخ/الوقت",
 
   "StationReports.SearchPanel.Label.invoiceId": "رقم الفاتورة",
+  "*StationReports.SearchPanel.Label.serviceId": "Service",
   "StationReports.SearchPanel.Label.stationWorkerId": "رقم الموظف",
   "StationReports.SearchPanel.Label.stationWorkerFname": "اسم الموظف",
   "StationReports.SearchPanel.Label.invoiceDataTimeFrom": "من تاريخ",
@@ -835,7 +904,7 @@
   "StationSales.Label.sumInvoiceFuelConsumptionLiter": "عدد الترات المباعة",
   "StationSales.Label.invoiceFuelType": "نوع الوقود",
   "StationSales.Label.sumInvoiceDataTime": "تاريخ الفاتورة",
-  "StationSales.Label.sum_InvoiceBonusPoints":"النقاط و المكافأت",
+  "StationSales.Label.sumInvoiceBonusPoints":"النقاط و المكافأت",
 
 
   "StationSales.SearchPanel.Label.stationWorkerId": "اسم المحطة",
@@ -942,6 +1011,18 @@
 
   "Api.TransferBalance.Add.Successful": "تم تحويل الرصيد بنجاح",
 
+  "*TransferBalances.CarBatch.Edit.HeaderText": "Recharge Car Balance Batch",
+  "*TransferBalances.CarBatch.Source.Title": "Source",
+  "*TransferBalances.CarBatch.Target.Title": "Target",
+  "*TransferBalances.Label.branchName": "Branch Name",
+  "*TransferBalances.Label.carNumber": "Car Number",
+  "*TransferBalances.Label.consumptionValue": "Car Consumption Value",
+  "*TransferBalances.Label.newBalance": "New Balance",
+
+  "*TransferBalances.Button.autoRecharge": "Auto Recharge",
+
+  "*TransferBalances.Validation.Message.amount.Negative": "Recharge Amount cannot be negative",
+
   "CustomerDashboard.Title": "لوحة البيانات",
   "CustomerDashboard.TotalCustomerBalance": "اجمالي رصيد العميل",
   "CustomerDashboard.TotalBranchBalance": "اجمالي رصيد الفرع",
@@ -984,10 +1065,16 @@
   "PromotionCoupons.Label.couponActive": "تفعيل الكوبون",
   "PromotionCoupons.Label.userId": "رقم المستخدم",
   "PromotionCoupons.Label.userName": "اسم المستخدم",
+  "*PromotionCoupons.Label.companyId": "companyId",
+  "*PromotionCoupons.Label.couponForAllCustomer": "couponForAllCustomer",
+  "*PromotionCoupons.Label.couponForMonthly": "couponForMonthly",
+  "*PromotionCoupons.Label.couponForQuarterly": "couponForQuarterly",
+  "*PromotionCoupons.Label.couponForYearly": "couponForYearly",
 
   "PromotionCoupons.Add.HeaderText": "اضافة كوبون",
   "PromotionCoupons.Edit.HeaderText": "التعديل :",
   "PromotionCoupons.Section.GeneralInformation": "معلومات عامة",
+  "*PromotionCoupons.Section.Limitations": "Limitations",
 
   "PromotionCoupons.Validation.Message.couponCode.Required": "يرجي ادخال كود الكوبون",
   "PromotionCoupons.Validation.Message.couponDiscountValue.Required": "برجي ادخال قيمة الخصم",
@@ -1172,6 +1259,7 @@
   "NewCustomers.Error.Active.Message": "حدث خطأ أثناء محاولة اغلاق طلب العميل",
 
   "CarTypeMasters.Error.List.Message": "An error has occurred while trying to get CarTypeMasters list.",
+  "*PetrolPrices.Error.List.Message": "An error has occurred while trying to get PetrolPrices list.",
 
   "CarConsumptionRates.Menu.Title": "معدل استهلاك السيارة",
   "CarConsumptionRates.Page.Title": "معدل استهلاك السيارة",
@@ -1434,6 +1522,7 @@
   "General.PaymentMethod.BankTransfer": "تحويل بنكي",
   "General.PaymentMethod.Check": "شيك بنكي",
   "General.PaymentMethod.Credit": "رصيد دائن",
+  "*General.PaymentMethod.CarBalance": "Car Balance",
 
   "General.SubscriptionType.Monthly": "شهري",
   "General.SubscriptionType.Quarterly": "ربع سنوي",

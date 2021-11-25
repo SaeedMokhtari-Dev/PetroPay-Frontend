@@ -5,6 +5,7 @@ export default class GetStationReportRequest
     invoiceId: number;
     stationId: number;
     stationWorkerId: number;
+    serviceId: number;
     stationWorkerFname: string;
     invoiceDataTimeFrom: string;
     invoiceDataTimeTo: string;

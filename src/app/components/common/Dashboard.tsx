@@ -11,9 +11,9 @@ const Dashboard: React.FC = observer(({}) =>
 {
     if(!UserContext.info) return null;
 
-    if(UserContext.info.role == RoleType.customer) return <CustomerDashboard />
-    if(UserContext.info.role == RoleType.supplier) return <SupplierDashboard />
-    if(UserContext.info.role == RoleType.admin) return <AdminDashboard />
+    if(UserContext.info.role === RoleType.customer || UserContext.info.role === RoleType.customerBranch) return <CustomerDashboard />
+    if(UserContext.info.role === RoleType.supplier || UserContext.info.role === RoleType.supplierBranch) return <SupplierDashboard />
+    if(UserContext.info.role === RoleType.admin) return <AdminDashboard />
 });
 
 export default Dashboard;
