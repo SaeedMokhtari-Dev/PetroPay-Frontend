@@ -198,7 +198,7 @@ export default class EditSubscriptionViewModel
         {
             this.calculating = false;
         }
-        debugger;
+        
         return result;
     }
 }

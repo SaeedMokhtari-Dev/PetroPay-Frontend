@@ -30,7 +30,7 @@ const { confirm } = Modal;
 
 
 interface BranchListProps {
-    branchStore?: BranchStore
+    branchStore?: BranchStore;
     match?: any;
 }
 

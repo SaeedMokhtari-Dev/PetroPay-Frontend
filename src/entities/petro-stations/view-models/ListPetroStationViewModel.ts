@@ -17,11 +17,11 @@ export default class ListPetroStationViewModel {
         makeAutoObservable(this);
     }
 
-    public async getPetroStationList()  {
+    public async getPetroStationList(petrolCompanyId?: number, petrolStationId?: number)  {
         try {
             this.isProcessing = true;
 
-            let request = new ListPetroStationRequest();
+            let request = new ListPetroStationRequest(petrolCompanyId, petrolStationId);
             let response = await ListPetroStationHandler.get(request);
 
             if (response && response.success) {

@@ -130,6 +130,7 @@ const App: React.FC = () =>
                                     <Route exact roles={[RoleType.admin]} path={Routes.addBundle} component={EditBundle} />
 
                                     <Route exact roles={[RoleType.admin]} path={Routes.petroStation} component={PetroStationList} />
+                                    <Route exact roles={[RoleType.admin]} path={Routes.petroStationList} component={PetroStationList} />
                                     <Route exact roles={[RoleType.admin]} path={Routes.addPetroStation} component={EditPetroStation} />
                                     <Route exact roles={[RoleType.admin]} path={Routes.editPetroStation} component={EditPetroStation} />
 

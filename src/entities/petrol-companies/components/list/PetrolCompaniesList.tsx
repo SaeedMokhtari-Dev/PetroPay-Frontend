@@ -47,10 +47,10 @@ const PetrolCompaniesList: React.FC<PetrolCompaniesSidebarProps> = inject(Stores
         fixed: 'right',
         render: (text, record) => (
             <div className="inline">
-                {/*<Link to={`/app/branch/${record.key}`} title={i18next.t("PetrolCompanies.Button.Branches")}>
+                <Link to={`/app/petroStation/${record.key}/list`} title={i18next.t("PetrolCompanies.Button.Branches")}>
                     <Button type="default" icon={<BranchesOutlined />}
                             title={i18next.t("PetrolCompanies.Button.Branches")} />
-                </Link>*/}
+                </Link>
                 <Button type="primary" icon={<EditOutlined />} onClick={() => showEditPage(record)}
                         title={i18next.t("General.Button.Edit")} />
                 <Button type="primary" danger icon={<DeleteOutlined />} onClick={() => showDeleteConfirm(record)}

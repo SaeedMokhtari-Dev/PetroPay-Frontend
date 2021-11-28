@@ -2,6 +2,7 @@ import IDeserialize from "../../../app/interfaces/deserialize";
 import {makeAutoObservable} from "mobx";
 
 export default class PetroStationItem implements IDeserialize {
+    key: number;
     stationBalance: number;
     stationBonusBalance: number;
     name: string;

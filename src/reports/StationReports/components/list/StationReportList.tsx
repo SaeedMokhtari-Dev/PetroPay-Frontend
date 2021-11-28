@@ -78,12 +78,12 @@ const StationReportList: React.FC<StationReportListProps> = inject(Stores.statio
         stationReportStore.getStationReportViewModel.getStationReportsRequest = new GetStationReportRequest();
         stationReportStore.getStationReportViewModel.getStationReportsRequest.pageSize = 20;
         stationReportStore.getStationReportViewModel.getStationReportsRequest.pageIndex = 0;
-        if(UserContext.info.role == 10){
+        if(UserContext.info.role === 10){
             stationReportStore.getStationReportViewModel.getStationReportsRequest.stationId = UserContext.info.id;
         }
 
         try {
-            await stationReportStore.listPetroStationViewModel.getPetroStationList();
+            await stationReportStore.listPetroStationViewModel.getPetroStationList(stationReportStore.getStationReportViewModel.getStationReportsRequest.stationId);
             let petroStationOptions = [];
             if (stationReportStore.listPetroStationViewModel) {
                 for (let item of stationReportStore.listPetroStationViewModel.listPetroStationResponse.items) {
@@ -214,7 +214,7 @@ const StationReportList: React.FC<StationReportListProps> = inject(Stores.statio
                           key={"searchForm"}
                           scrollToFirstError>
                         <Row gutter={[24, 16]}>
-                            {UserContext.info.role == 100 ?
+                            {[10, 100].includes(UserContext.info.role)  ?
                                 <React.Fragment>
                                 <Col span={8}>
                                     <Form.Item name="stationWorkerId"

@@ -59,7 +59,7 @@ const PetropayAccountList: React.FC<PetropayAccountsSidebarProps> = inject(Store
 
     async function onLoad() {
         petropayAccountStore.onPetropayAccountGetPageLoad();
-        debugger;
+        
         petropayAccountStore.getPetropayAccountViewModel.getPetropayAccountsRequest.pageIndex = 0;
         petropayAccountStore.getPetropayAccountViewModel.getPetropayAccountsRequest.pageSize = 10;
         await petropayAccountStore.getPetropayAccountViewModel.getAllPetropayAccounts(petropayAccountStore.getPetropayAccountViewModel.getPetropayAccountsRequest);
@@ -67,7 +67,7 @@ const PetropayAccountList: React.FC<PetropayAccountsSidebarProps> = inject(Store
         await petropayAccountStore.listPetropayAccountViewModel.getPetropayAccountList(false);
 
         let petropayAccountOptions = [];
-        debugger;
+        
         for (let item of petropayAccountStore.listPetropayAccountViewModel?.listPetropayAccountResponse?.items) {
             petropayAccountOptions.push(<Option key={item.key} value={item.accountId} balance={item.balance}>{item.title}</Option>);
         }

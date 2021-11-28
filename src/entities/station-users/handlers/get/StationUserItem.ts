@@ -10,6 +10,7 @@ export default class StationUserItem implements IDeserialize
     stationUserName: string;
     stationUserPassword: string;
     stationId: number;
+    stationName: string;
     accessStationBalance: boolean;
     accessBonusTransfer: boolean;
     accessStationBonusBalance: boolean;

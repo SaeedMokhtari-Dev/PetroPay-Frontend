@@ -145,12 +145,12 @@ const Login: React.FC<LoginProps> = inject('authStore')(observer(({authStore, ma
                     </div>
                 </div>)}
             {viewModel?.roleType && (
-                <div className={"mainContent"}>
-                    <div className="signup-connect">
+                <div>
+                    <div className="logo-section">
                         <img src="/images/petro-pay-logo.png" className="logo" alt="logo"/>
                     </div>
-                    <div className="signup-classic">
-                        <h1>{i18next.t("General.HeaderMenu.User")} {i18next.t(`Authentication.RoleType.${RoleTypeUtils.getRoleTypeTitle(viewModel?.roleType)}`)}</h1>
+                    <div className="login-section">
+                        <h2>{i18next.t("General.HeaderMenu.User")} {i18next.t(`Authentication.RoleType.${RoleTypeUtils.getRoleTypeTitle(viewModel?.roleType)}`)}</h2>
                         <Form layout="vertical" onFinish={onFinish} >
                             {viewModel.roleType < 100 ?
                             <Form.Item initialValue={viewModel.roleType} name="roleType" label="" required={false}

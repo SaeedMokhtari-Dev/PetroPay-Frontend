@@ -2,10 +2,8 @@ import React from 'react';
 import {inject, observer} from "mobx-react";
 import Stores from "app/constants/Stores";
 import CarStore from "entities/cars/stores/CarStore";
-import {useParams} from "react-router-dom";
 import {Button, Col, Divider, Form, Input, Image, message, Select, PageHeader, Radio, Row, Spin, Switch, Upload} from "antd";
 import i18next from "i18next";
-import EditCarRequest from "../../handlers/edit/EditCarRequest";
 import DetailCarResponse from "../../handlers/detail/DetailCarResponse";
 import AddCarRequest from "../../handlers/add/AddCarRequest";
 import {
@@ -13,13 +11,8 @@ import {
 } from '@ant-design/icons';
 import history from "../../../../app/utils/History";
 import { PasswordInput } from 'antd-password-input-strength';
-import Types from "../../../../app/constants/Types";
-import CarTypes from "../../../../app/constants/CarTypes";
 import ConsumptionMethods from "../../../../app/constants/ConsumptionMethods";
-import CarBrands from "../../../../app/constants/CarBrands";
-import CarTypeOfFuels from "../../../../app/constants/CarTypeOfFuels";
 import MaskedInput from 'antd-mask-input'
-import ListBranchViewModel from "../../../branches/view-models/ListBranchViewModel";
 import UserContext from "../../../../identity/contexts/UserContext";
 import ConsumptionTypes from "../../../../app/constants/ConsumptionTypes";
 
@@ -84,7 +77,7 @@ const EditCar: React.FC<EditCarProps> = inject(Stores.carStore)(observer(({carSt
     {
         
         carStore.onCarEditPageLoad();
-        debugger;
+        
         let carIdParam = +match.params?.carId;
         /*if(UserContext.info.role === 1)*/
 
@@ -195,7 +188,7 @@ const EditCar: React.FC<EditCarProps> = inject(Stores.carStore)(observer(({carSt
 
         if(propName === "carBrand")
         {
-            debugger;
+            
             const filtered = carStore.listCarModelMasterViewModel?.listCarModelMasterResponse?.items?.filter(w => w.brandId == +option.key);
             let carModels = [];
             for (let item of filtered) {

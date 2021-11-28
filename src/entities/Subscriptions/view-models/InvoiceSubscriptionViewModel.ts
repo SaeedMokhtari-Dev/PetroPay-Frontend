@@ -22,7 +22,7 @@ export default class InvoiceSubscriptionViewModel {
         try {
             
             this.isProcessing = true;
-            debugger;
+            
             let request = new InvoiceSubscriptionRequest(subscriptionInvoiceId.toString());
             let response = await InvoiceSubscriptionHandler.detail(request);
 

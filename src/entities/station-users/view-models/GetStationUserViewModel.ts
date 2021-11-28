@@ -22,8 +22,8 @@ export default class GetStationUserViewModel {
     pageIndex: number;
     pageSize: number;
 
-    addStationUserRequest: AddStationUserRequest = new AddStationUserRequest();
     addedSuccessfully: boolean;
+    getStationUsersRequest: GetStationUserRequest = new GetStationUserRequest();
 
     constructor(public stationUserStore: StationUserStore) {
         makeAutoObservable(this);
@@ -68,7 +68,16 @@ export default class GetStationUserViewModel {
             if(response && response.success)
             {
                 message.success(getLocalizedString(response.message));
-                await this.getAllStationUser(new GetStationUserRequest(UserContext.info.id, this.pageSize, this.pageIndex));
+                let request = new GetStationUserRequest();
+                request.pageIndex = this.pageIndex;
+                request.pageSize = this.pageSize;
+                if(UserContext.info.role === 10)
+                    request.stationCompanyId = UserContext.info.id;
+
+                if(UserContext.info.role === 15)
+                    request.stationId = UserContext.info.id;
+
+                await this.getAllStationUser(request);
             }
             else{
                 this.errorMessage = getLocalizedString(response.message);

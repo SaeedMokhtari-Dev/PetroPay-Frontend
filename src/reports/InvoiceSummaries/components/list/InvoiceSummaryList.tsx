@@ -170,7 +170,7 @@ const InvoiceSummaryList: React.FC<InvoiceSummaryListProps> = inject(Stores.invo
     }
 
     function onSelectChanged(e, propName){
-        debugger;
+        
         viewModel.getInvoiceSummariesRequest[`${propName}`] = e;
         if(propName === "companyId") {
             let carOptions = [];

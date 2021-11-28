@@ -31,6 +31,8 @@ import CarBatchTransferBalanceRightColumns from "./CarBatchTransferBalanceRightC
 import CarBatchTransferBalanceRequest from "../../handlers/carBatch/CarBatchTransferBalanceRequest";
 const {useEffect} = React;
 
+const { Option } = Select;
+
 
 interface EditTransferBalanceProps {
     transferBalanceStore?: TransferBalanceStore;
@@ -129,7 +131,9 @@ const CarBatchTransferBalance: React.FC<EditTransferBalanceProps> = inject(Store
 {
 
     const [dataFetched, setDataFetched] = React.useState(false);
+    const [branchDataFetched, setBranchDataFetched] = React.useState(false);
     const [transferBalanceCarIds, setTransferBalanceCarIds] = React.useState([]);
+    const [branchOptions, setBranchOptions] = React.useState([]);
     const [totalAmount, setTotalAmount] = React.useState(0);
 
 
@@ -141,7 +145,6 @@ const CarBatchTransferBalance: React.FC<EditTransferBalanceProps> = inject(Store
     CarBatchTransferBalanceRightColumns.forEach(w => {
         w.title = i18next.t(w.title);
     });
-
 
     let leftColumns: any[] = [...CarBatchTransferBalanceColumns];
     let rightColumns: any[] = [...CarBatchTransferBalanceRightColumns];
@@ -164,12 +167,24 @@ const CarBatchTransferBalance: React.FC<EditTransferBalanceProps> = inject(Store
     async function onLoad()
     {
         transferBalanceStore.onCarBatchTransferBalancePageLoad();
-        await transferBalanceStore.detailBranchViewModel.getDetailBranch(UserContext.info.id);
-        await transferBalanceStore.listCarViewModel.getCarList(null, UserContext.info.id);
         transferBalanceStore.carBatchTransferBalanceViewModel.carBatchTransferBalanceRequest = new CarBatchTransferBalanceRequest();
-        transferBalanceStore.carBatchTransferBalanceViewModel.carBatchTransferBalanceRequest.branchId = UserContext.info.id;
+        if(UserContext.info.role === 5) {
+            await transferBalanceStore.detailBranchViewModel.getDetailBranch(UserContext.info.id);
+            await transferBalanceStore.listCarViewModel.getCarList(null, UserContext.info.id);
+            transferBalanceStore.carBatchTransferBalanceViewModel.carBatchTransferBalanceRequest.branchId = UserContext.info.id;
+            setDataFetched(true);
+        }
+        if(UserContext.info.role === 1){
+            await transferBalanceStore.listBranchViewModel.getBranchList(UserContext.info.id);
+            let branches = [];
+            for (let item of transferBalanceStore.listBranchViewModel?.listBranchResponse?.items) {
+                branches.push(<Option key={item.key} value={item.key}>{item.title}</Option>);
+            }
+            setBranchOptions(branches);
+            setBranchDataFetched(true);
+        }
 
-        setDataFetched(true);
+
     }
 
     let viewModel = transferBalanceStore.carBatchTransferBalanceViewModel;
@@ -177,7 +192,7 @@ const CarBatchTransferBalance: React.FC<EditTransferBalanceProps> = inject(Store
     if(!viewModel) return;
 
     async function onFinish() {
-        debugger;
+        
         await viewModel.carBatchTransferBalance(viewModel.carBatchTransferBalanceRequest);
         if(!viewModel.errorMessage)
             history.goBack();
@@ -201,7 +216,7 @@ const CarBatchTransferBalance: React.FC<EditTransferBalanceProps> = inject(Store
         };
     });
     function handleSave(row){
-        debugger;
+        
         const amount: number = +row.amount;
         if(amount <= 0) {
             return;
@@ -276,11 +291,19 @@ const CarBatchTransferBalance: React.FC<EditTransferBalanceProps> = inject(Store
                             summary={() => (
                                 <Table.Summary.Row style={{backgroundColor: "yellow"}}>
                                     <Table.Summary.Cell index={0}>{i18next.t("General.Table.Total")}</Table.Summary.Cell>
-                                    <Table.Summary.Cell colSpan={2} index={1}></Table.Summary.Cell>
+                                    <Table.Summary.Cell colSpan={3} index={1}></Table.Summary.Cell>
                                     <Table.Summary.Cell index={5}>{totalAmount}</Table.Summary.Cell>
                                     <Table.Summary.Cell index={6}></Table.Summary.Cell>
                                 </Table.Summary.Row>
                             )}
+                            style={{ pointerEvents: listDisabled ? 'none' : null }}
+                            rowSelection={rowSelection}
+                            onRow={({ key, disabled: itemDisabled }) => ({
+                                onClick: () => {
+                                    if (itemDisabled || listDisabled) return;
+                                    onItemSelect(key, !listSelectedKeys.includes(key));
+                                },
+                            })}
                         /> }
                     </div>
                 );
@@ -289,7 +312,7 @@ const CarBatchTransferBalance: React.FC<EditTransferBalanceProps> = inject(Store
     );
     function onChange(nextTargetKeys) {
         viewModel.errorMessage = "";
-        debugger;
+        
         setTransferBalanceCarIds(nextTargetKeys);
 
         let currentKeys = viewModel.carBatchTransferBalanceRequest.carAmounts.map(w => w.carId);
@@ -301,13 +324,24 @@ const CarBatchTransferBalance: React.FC<EditTransferBalanceProps> = inject(Store
             })
         }
 
-    };
+    }
+    async function onBranchSelectChanged(e){
+        if(window.confirm(i18next.t("TransferBalances.Alert.branchSelect"))) {
+            viewModel.carBatchTransferBalanceRequest.branchId = e;
+            await transferBalanceStore.detailBranchViewModel.getDetailBranch(e);
+            await transferBalanceStore.listCarViewModel.getCarList(null, e);
+            setDataFetched(true);
+        }
+    }
     function autoRecharge() {
         transferBalanceCarIds.forEach(w => {
-            debugger;
+            
             let car = transferBalanceStore.listCarViewModel.listCarResponse.items.find(e => e.key === w);
-            let amount = car.balance - car.consumptionValue;
-            if(amount <= 0) return;
+            let amount = car.consumptionValue - car.balance;
+            if(amount <= 0){
+                car.amount = 0;
+                return;
+            }
             car.amount = amount;
             handleSave(car);
         });
@@ -321,7 +355,28 @@ const CarBatchTransferBalance: React.FC<EditTransferBalanceProps> = inject(Store
                 title={i18next.t("TransferBalances.CarBatch.Edit.HeaderText")}
             />
             <Divider>{i18next.t("TransferBalances.Section.GeneralInformation")}</Divider>
-            {dataFetched ?
+            {branchDataFetched && !viewModel.carBatchTransferBalanceRequest.branchId ?
+                <Col span={8}>
+                    <Form.Item name="branchId" initialValue={viewModel?.carBatchTransferBalanceRequest?.branchId}
+                               key={"branchId"}
+                               label={i18next.t("TransferBalances.Label.branchName")}
+                               rules={[
+                                   {
+                                       required: true,
+                                       message: i18next.t("TransferBalances.Validation.Message.branchId.Required")
+                                   }
+                               ]}>
+                        <Select
+                            style={{ width: "100%" }}
+                            onChange={onBranchSelectChanged}
+                        >
+                            {branchOptions}
+                        </Select>
+                    </Form.Item>
+                </Col>
+                : ""
+            }
+            {dataFetched && viewModel.carBatchTransferBalanceRequest.branchId ?
             <Form {...formItemLayout} layout={"vertical"} onFinish={onFinish} form={form}
                   key={"transferBalanceForm"}
                  scrollToFirstError>
@@ -345,8 +400,7 @@ const CarBatchTransferBalance: React.FC<EditTransferBalanceProps> = inject(Store
                             filterOption={(inputValue, item) =>
                                 item.carNumber.indexOf(inputValue) !== -1 || item.branchName.indexOf(inputValue) !== -1
                             }
-                            oneWay
-                        />
+                            />
                     </Col>
                 </Row>
                 <Divider></Divider>
@@ -364,13 +418,14 @@ const CarBatchTransferBalance: React.FC<EditTransferBalanceProps> = inject(Store
 
             </Form>
             :
-                <div>
+                ""
+                /*<div>
                     <Row gutter={[24, 16]}>
                         <Col offset={11} span={8}>
                             <Spin className={"spine"} size="large" />
                         </Col>
                     </Row>
-                </div>
+                </div>*/
                 }
         </div>
     )

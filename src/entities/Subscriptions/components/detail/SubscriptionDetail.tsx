@@ -35,7 +35,7 @@ const SubscriptionDetail: React.FC<SubscriptionProps> = inject(Stores.subscripti
 
     async function onLoad() {
         subscriptionStore.onSubscriptionEditPageLoad();
-        debugger;
+        
         let subscriptionIdParam = +match.params?.subscriptionId;
         if(subscriptionIdParam){
             await subscriptionStore.editSubscriptionViewModel.getDetailSubscription(subscriptionIdParam);

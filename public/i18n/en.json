@@ -18,6 +18,7 @@
   "General.Image.LessThan2MB": "Image must smaller than 2MB!",
   "General.Image.JustImage": "You can only upload JPG/PNG file!",
   "General.Currency.Symbol": "E£",
+  "General.List.NullSelect": "Please select",
 
   "General.HeaderMenu.User": "Hi",
   "General.HeaderMenu.Profile": "Profile",
@@ -414,6 +415,7 @@
   "StationUsers.Label.stationUserName": "User Name",
   "StationUsers.Label.stationUserPassword": "Password",
   "StationUsers.Label.stationId": "stationId",
+  "StationUsers.Label.stationName": "Station Name",
   "StationUsers.Label.accessStationBalance": "accessStationBalance",
   "StationUsers.Label.accessBonusTransfer": "accessBonusTransfer",
   "StationUsers.Label.accessStationBonusBalance": "accessStationBonusBalance",
@@ -425,6 +427,7 @@
   "StationUsers.Label.accessTemp1": "accessTemp1",
   "StationUsers.Label.accessTemp2": "accessTemp2",
   "StationUsers.Label.accessTemp3": "accessTemp3",
+
 
   "StationUsers.Add.HeaderText": "Add StationUser",
   "StationUsers.Edit.HeaderText": "Edit StationUser with Id:",
@@ -1013,7 +1016,9 @@
   "TransferBalances.Error.Get.Message": "An error has occurred while trying to get petrol station list.",
 
   "Api.TransferBalance.Add.Successful": "Balance transferred successfully",
+  "TransferBalances.Validation.Message.amount.Required": "Please enter an Amount.",
 
+  "TransferBalances.CarBatch.Menu.Title": "Recharge Car Balance Batch",
   "TransferBalances.CarBatch.Edit.HeaderText": "Recharge Car Balance Batch",
   "TransferBalances.CarBatch.Source.Title": "Source",
   "TransferBalances.CarBatch.Target.Title": "Target",
@@ -1022,6 +1027,7 @@
   "TransferBalances.Label.consumptionValue": "Car Consumption Value",
   "TransferBalances.Label.newBalance": "New Balance",
 
+  "TransferBalances.Alert.branchSelect": "Are you sure to select this branch?",
   "TransferBalances.Button.autoRecharge": "Auto Recharge",
 
   "TransferBalances.Validation.Message.amount.Negative": "Recharge Amount cannot be negative",
@@ -1070,6 +1076,7 @@
   "PromotionCoupons.Label.userId": "user Id",
   "PromotionCoupons.Label.userName": "user Name",
   "PromotionCoupons.Label.companyId": "companyId",
+  "PromotionCoupons.Label.companyName": "companyName",
   "PromotionCoupons.Label.couponForAllCustomer": "couponForAllCustomer",
   "PromotionCoupons.Label.couponForMonthly": "couponForMonthly",
   "PromotionCoupons.Label.couponForQuarterly": "couponForQuarterly",

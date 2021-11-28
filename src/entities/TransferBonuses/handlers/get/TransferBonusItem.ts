@@ -12,7 +12,6 @@ export default class TransferBonusItem implements IDeserialize
     transAmount: number;
     transReference: string;
 
-
     constructor() {
         makeAutoObservable(this);
     }

@@ -1,7 +1,6 @@
 import React from 'react';
 import {inject, observer} from "mobx-react";
 import Stores from "app/constants/Stores";
-import {useParams} from "react-router-dom";
 import {
     Button,
     Col,
@@ -9,22 +8,14 @@ import {
     Spin,
     Form,
     Input,
-    InputNumber,
-    message,
-    Modal,
     PageHeader,
-    Radio,
     Row,
     Switch,
     Select
 } from "antd";
 import i18next from "i18next";
-import EditPetroStationRequest from "../../handlers/edit/EditPetroStationRequest";
 import DetailPetroStationResponse from "../../handlers/detail/DetailPetroStationResponse";
 import AddPetroStationRequest from "../../handlers/add/AddPetroStationRequest";
-import {
-    PlusOutlined, EyeInvisibleOutlined, EyeTwoTone
-} from '@ant-design/icons';
 import history from "../../../../app/utils/History";
 import PetroStationStore from "../../stores/PetroStationStore";
 import { PasswordInput } from 'antd-password-input-strength';
@@ -79,7 +70,7 @@ const EditPetroStation: React.FC<EditPetroStationProps> = inject(Stores.petroSta
             petroStationStore.editPetroStationViewModel.detailPetroStationResponse = new DetailPetroStationResponse();
         }
 
-        if(UserContext.info.role !== 10) {
+        if(UserContext.info.role === 100) {
             await petroStationStore.listPetrolCompanyViewModel.getPetrolCompanyList();
             let petrolCompanies = [];
             for (let item of petroStationStore.listPetrolCompanyViewModel.listPetrolCompanyResponse.items) {
@@ -166,6 +157,7 @@ const EditPetroStation: React.FC<EditPetroStationProps> = inject(Stores.petroSta
                  scrollToFirstError>
                 <Row gutter={[24, 16]}>
                     {UserContext.info.role === 100 ?
+                        <React.Fragment>
                     <Col span={8}>
                         <Form.Item name="petrolCompanyId" initialValue={viewModel?.detailPetroStationResponse?.petrolCompanyId}
                                    key={"petrolCompanyId"}
@@ -182,7 +174,7 @@ const EditPetroStation: React.FC<EditPetroStationProps> = inject(Stores.petroSta
                             </Select>
 
                         </Form.Item>
-                    </Col> : ""}
+                    </Col>
                     <Col span={8}>
                 <Form.Item name="stationName" initialValue={viewModel?.detailPetroStationResponse?.stationName}
                            key={"stationName"}
@@ -330,6 +322,8 @@ const EditPetroStation: React.FC<EditPetroStationProps> = inject(Stores.petroSta
                             <Input type={"email"} onChange={onChanged}/>
                         </Form.Item>
                     </Col>
+                        </React.Fragment>
+                        : ""}
                     <Divider>{i18next.t("Companies.Section.LoginInformation")}</Divider>
                     <Col span={8}>
                         <Form.Item name="stationUserName" initialValue={viewModel?.detailPetroStationResponse?.stationUserName}

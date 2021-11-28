@@ -62,40 +62,46 @@ const AddTransferBonus: React.FC<EditTransferBonusProps> = inject(Stores.transfe
     {
         transferBonusStore.onTransferBonusAddPageLoad();
 
-        await transferBonusStore.listPetroStationViewModel.getPetroStationList();
-
         transferBonusStore.addTransferBonusViewModel.addTransferBonusRequest = new AddTransferBonusRequest();
         transferBonusStore.addTransferBonusViewModel.addTransferBonusRequest.amount = 0;
 
-        if(UserContext.info.role === 10){
-            transferBonusStore.addTransferBonusViewModel.addTransferBonusRequest.stationId = UserContext.info.id;
-            const petro = transferBonusStore.listPetroStationViewModel.listPetroStationResponse?.items?.find(w => w.key === UserContext.info.id);
-            setStationBonus(petro.bonus);
+        if(UserContext.info.role === 100)
+        {
+            await transferBonusStore.listPetroStationViewModel.getPetroStationList(UserContext.info.id);
 
-            await transferBonusStore.listStationUserViewModel.getStationUserList(transferBonusStore.addTransferBonusViewModel.addTransferBonusRequest.stationId);
-        }
-        else {
             let stationOptions = [];
             for (let item of transferBonusStore.listPetroStationViewModel.listPetroStationResponse.items) {
                 stationOptions.push(<Option key={item.key} value={item.key}
-                                                  bonus={item.bonus}>{item.title}</Option>);
+                                            bonus={item.bonus}>{item.title}</Option>);
             }
             setStationOptions(stationOptions);
-            await transferBonusStore.listStationUserViewModel.getStationUserList();
         }
+        if(UserContext.info.role === 10){
+            transferBonusStore.addTransferBonusViewModel.addTransferBonusRequest.stationCompanyId = UserContext.info.id;
+            await transferBonusStore.listPetroStationViewModel.getPetroStationList(UserContext.info.id);
 
-
-        let stationUserOptions = [];
-        for (let item of transferBonusStore.listStationUserViewModel.listStationUserResponse.items) {
-            stationUserOptions.push(<Option key={item.key} value={item.key}
-                                            bonus={item.workerBonusBalance}>{item.title}</Option>);
+            let stationOptions = [];
+            for (let item of transferBonusStore.listPetroStationViewModel.listPetroStationResponse.items) {
+                stationOptions.push(<Option key={item.key} value={item.key}
+                                            bonus={item.bonus}>{item.title}</Option>);
+            }
+            setStationOptions(stationOptions);
         }
-        setStationUsersOptions(stationUserOptions);
+        if(UserContext.info.role === 15) {
+            transferBonusStore.addTransferBonusViewModel.addTransferBonusRequest.stationId = UserContext.info.id;
+            await transferBonusStore.listStationUserViewModel.getStationUserList(UserContext.info.id);
+            let stationUserOptions = [];
+            for (let item of transferBonusStore.listStationUserViewModel.listStationUserResponse.items) {
+                stationUserOptions.push(<Option key={item.key} value={item.key}
+                                                bonus={item.workerBonusBalance}>{item.title}</Option>);
+            }
+            setStationUsersOptions(stationUserOptions);
 
-        transferBonusStore.addTransferBonusViewModel.addTransferBonusRequest.stationId = UserContext.info.id;
-        const petro = transferBonusStore.listPetroStationViewModel.listPetroStationResponse?.items?.find(w => w.key === UserContext.info.id);
+            await transferBonusStore.listPetroStationViewModel.getPetroStationList(null, UserContext.info.id);
 
-        setStationBonus(petro.bonus);
+            const petro = transferBonusStore.listPetroStationViewModel.listPetroStationResponse?.items?.find(w => w.key === UserContext.info.id);
+            setStationBonus(petro.bonus);
+        }
 
         await transferBonusStore.editAppSettingViewModel.getDetailAppSetting();
         setRate(transferBonusStore.editAppSettingViewModel?.detailAppSettingResponse?.bonusMoneyRate ?? 0);
@@ -123,16 +129,17 @@ const AddTransferBonus: React.FC<EditTransferBonusProps> = inject(Stores.transfe
     function onChanged(e){
             viewModel.addTransferBonusRequest[`${e.target.id}`] = e.target.value;
     }
-    function onOptionSelectChanged(e, option, propName) {
+    async function onOptionSelectChanged(e, option, propName) {
         
         viewModel.addTransferBonusRequest[`${propName}`] = e;
         console.log(option);
-        debugger;
+        
         if(propName === "stationId") {
             setStationBonus(+option.bonus);
+            await transferBonusStore.listStationUserViewModel.getStationUserList(e);
             let stationUsers = transferBonusStore.listStationUserViewModel.listStationUserResponse.items;
             let stationUserOptions = [];
-            for (let item of stationUsers.filter(w => w.stationId === +e)) {
+            for (let item of stationUsers) {
                 stationUserOptions.push(<Option key={item.key} value={item.key}
                                                 bonus={item.workerBonusBalance}>{item.title}</Option>);
             }
@@ -157,7 +164,7 @@ const AddTransferBonus: React.FC<EditTransferBonusProps> = inject(Stores.transfe
                   key={"transferBonusForm"}
                  scrollToFirstError>
                 <Row gutter={[24, 16]}>
-                    {UserContext.info.role === 100 &&
+                    {[100, 10].includes(UserContext.info.role) &&
                     <Col offset={8} span={8}>
                         <Form.Item name="stationId" initialValue={viewModel?.addTransferBonusRequest?.stationId}
                                    key={"stationId"}
@@ -217,7 +224,7 @@ const AddTransferBonus: React.FC<EditTransferBonusProps> = inject(Stores.transfe
                                 message: i18next.t("TransferBonuses.Validation.Message.amount.Required")
                             }
                         ]}*/>
-                            <InputNumber min={1} max={stationBonus} style={{width: "100%"}} onChange={onAmountChanged} /> {/*max={fromBalance}*/}
+                            <InputNumber min={1} max={stationUserBonus} style={{width: "100%"}} onChange={onAmountChanged} /> {/*max={fromBalance}*/}
                         </Form.Item>
                     </Col>
                     <Col offset={8} span={8}>

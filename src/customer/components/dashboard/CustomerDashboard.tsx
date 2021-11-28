@@ -65,7 +65,9 @@ const CustomerDashboard: React.FC<DashboardProps> = inject(Stores.customerStore)
         {dataFetched ?
             <div>
                 <Descriptions title={i18next.t("CustomerDashboard.Title")} bordered>
+                    {UserContext.info.role === 1 ?
                     <Descriptions.Item label={i18next.t("CustomerDashboard.TotalCustomerBalance")}>{viewModel?.totalCustomerBalance?.toLocaleString()}</Descriptions.Item>
+                        : ""}
                     <Descriptions.Item label={i18next.t("CustomerDashboard.TotalBranchBalance")}>{viewModel?.totalBranchBalance?.toLocaleString()}</Descriptions.Item>
                     <Descriptions.Item label={i18next.t("CustomerDashboard.TotalCarBalance")}>{viewModel?.totalCarBalance?.toLocaleString()}</Descriptions.Item>
                 </Descriptions>

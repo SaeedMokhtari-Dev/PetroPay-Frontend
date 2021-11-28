@@ -73,6 +73,7 @@ const EditMenu: React.FC<EditMenuProps> = inject(Stores.menuStore)(observer(({me
         }
 
         let menuOptions = [];
+        menuOptions.push(<Option key='0' value={null}>{i18next.t("General.List.NullSelect")}</Option>);
         for (let item of menuStore.listMenuViewModel.listMenuResponse.items) {
             if(localStorage.getItem("currentLanguage") === 'en')
                 menuOptions.push(<Option key={item.key} value={item.key}>{item.enTitle}</Option>);

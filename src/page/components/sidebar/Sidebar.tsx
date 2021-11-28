@@ -125,6 +125,9 @@ const Sidebar: React.FC<SidebarProps> = inject(Stores.pageStore)(observer(({page
         <Menu.Item key="car" icon={<CarOutlined />}>
             <Link to={Routes.car}>{i18next.t('Cars.Menu.Title')}</Link>
         </Menu.Item>
+        <Menu.Item key="transferBalanceCarBatch" icon={<ShopOutlined />}>
+            <Link to={Routes.transferBalanceCarBatch}>{i18next.t('TransferBalances.CarBatch.Menu.Title')}</Link>
+        </Menu.Item>
         <Menu.Item key="rechargeBalance" icon={<DollarOutlined />}>
             <Link to={Routes.rechargeBalance}>{i18next.t('RechargeBalances.Menu.Title')}</Link>
         </Menu.Item>
@@ -134,9 +137,9 @@ const Sidebar: React.FC<SidebarProps> = inject(Stores.pageStore)(observer(({page
         <Menu.Item key="transferBalance" icon={<ShoppingOutlined />}>
             <Link to={Routes.transferBalance}>{i18next.t('TransferBalances.Menu.Title')}</Link>
         </Menu.Item>
-        <Menu.Item key="odometerRecord" icon={<ShoppingOutlined />}>
+        {/*<Menu.Item key="odometerRecord" icon={<ShoppingOutlined />}>
             <Link to={Routes.odometerRecord}>{i18next.t('OdometerRecords.Menu.Title')}</Link>
-        </Menu.Item>
+        </Menu.Item>*/}
         <SubMenu key="reports" icon={<ReadOutlined />} title={i18next.t('General.Menu.Reports')}>
             <Menu.Item key="invoiceSummary" icon={<BookOutlined />}>
                 <Link to={Routes.invoiceSummary}>{i18next.t('InvoiceSummaries.Menu.Title')}</Link>
@@ -183,6 +186,12 @@ const Sidebar: React.FC<SidebarProps> = inject(Stores.pageStore)(observer(({page
         <Menu.Item key="car" icon={<CarOutlined />}>
             <Link to={getBranchCarsRoute(UserContext.info.id)}>{i18next.t('Cars.Menu.Title')}</Link>
         </Menu.Item>
+        <Menu.Item key="transferBalanceCarBatch" icon={<ShopOutlined />}>
+            <Link to={Routes.transferBalanceCarBatch}>{i18next.t('TransferBalances.CarBatch.Menu.Title')}</Link>
+        </Menu.Item>
+        <Menu.Item key="transferBalance" icon={<ShoppingOutlined />}>
+            <Link to={Routes.transferBalance}>{i18next.t('TransferBalances.Menu.Title')}</Link>
+        </Menu.Item>
         <Menu.Item key="odometerRecord" icon={<ShoppingOutlined />}>
             <Link to={Routes.odometerRecord}>{i18next.t('OdometerRecords.Menu.Title')}</Link>
         </Menu.Item>
@@ -217,9 +226,9 @@ const Sidebar: React.FC<SidebarProps> = inject(Stores.pageStore)(observer(({page
             <Menu.Item key="odometerHistory" icon={<ShopOutlined />}>
                 <Link to={Routes.odometerHistory}>{i18next.t('OdometerHistories.Menu.Title')}</Link>
             </Menu.Item>
-            <Menu.Item key="customerStatements" icon={<ShopOutlined />}>
+            {/*<Menu.Item key="customerStatements" icon={<ShopOutlined />}>
                 <Link to={Routes.customerStatement}>{i18next.t('CustomerStatements.Menu.Title')}</Link>
-            </Menu.Item>
+            </Menu.Item>*/}
             <Menu.Item key="companyBranchStatements" icon={<ShopOutlined />}>
                 <Link to={Routes.companyBranchStatement}>{i18next.t('CompanyBranchStatements.Menu.Title')}</Link>
             </Menu.Item>
@@ -257,6 +266,9 @@ const Sidebar: React.FC<SidebarProps> = inject(Stores.pageStore)(observer(({page
         <Menu.Item key="stationUser" icon={<ShopOutlined />}>
             <Link to={Routes.stationUser}>{i18next.t('StationUsers.Menu.Title')}</Link>
         </Menu.Item>
+        <Menu.Item key="transferBonus" icon={<ShopOutlined />}>
+            <Link to={Routes.transferBonus}>{i18next.t('TransferBonuses.Menu.Title')}</Link>
+        </Menu.Item>
         <SubMenu key="reports" icon={<ReadOutlined />} title={i18next.t('General.Menu.Reports')}>
             <Menu.Item key="stationReport" icon={<BookOutlined />}>
                 <Link to={Routes.stationReport}>{i18next.t('StationReports.Menu.Title')}</Link>
@@ -274,6 +286,7 @@ const Sidebar: React.FC<SidebarProps> = inject(Stores.pageStore)(observer(({page
         if(UserContext.info.role == RoleType.admin){
             pageStore.onSidebarPageLoad();
             await pageStore.treeEmployeeMenuViewModel?.getEmployeeMenuTree(UserContext.info.id);
+            
             setDataFetched(true);
         }
     }

@@ -63,29 +63,42 @@ const EditTransferBalance: React.FC<EditTransferBalanceProps> = inject(Stores.tr
         transferBalanceStore.onTransferBalanceEditPageLoad();
 
         transferBalanceStore.editTransferBalanceViewModel.addTransferBalanceRequest = new AddTransferBalanceRequest();
-        transferBalanceStore.editTransferBalanceViewModel.addTransferBalanceRequest.companyId = UserContext.info.id;
-
-        await transferBalanceStore.listCarViewModel.getCarList(UserContext.info.id);
-        await transferBalanceStore.listBranchViewModel.getBranchList(UserContext.info.id);
+        if(UserContext.info.role === 1)
+            transferBalanceStore.editTransferBalanceViewModel.addTransferBalanceRequest.companyId = UserContext.info.id;
+        else if(UserContext.info.role === 5)
+            transferBalanceStore.editTransferBalanceViewModel.addTransferBalanceRequest.branchId = UserContext.info.id;
+        else
+            history.goBack();
 
         let transferBalanceTypeOptions = [];
-        for (let item of TransferBalanceTypes) {
+        const transferBalanceTypes =  UserContext.info.role === 5 ? TransferBalanceTypes.filter(w => w.justBranch === true) : TransferBalanceTypes;
+        for (let item of transferBalanceTypes) {
             transferBalanceTypeOptions.push(<Option key={item.value} value={item.value}>{item.title}</Option>);
         }
+        setTransferBalanceTypeOptions(transferBalanceTypeOptions);
 
+
+        await transferBalanceStore.listCarViewModel.getCarList(
+            transferBalanceStore.editTransferBalanceViewModel.addTransferBalanceRequest.companyId,
+            transferBalanceStore.editTransferBalanceViewModel.addTransferBalanceRequest.branchId
+        );
         let carOptions = [];
         for (let item of transferBalanceStore.listCarViewModel.listCarResponse.items) {
             carOptions.push(<Option key={item.key} value={item.key} balance={item.balance}>{item.carNumber}</Option>);
         }
+        setCarOptions(carOptions);
 
-        let branchOptions = [];
-        for (let item of transferBalanceStore.listBranchViewModel.listBranchResponse.items) {
-            branchOptions.push(<Option key={item.key} value={item.key} balance={item.balance}>{item.title}</Option>);
+
+        if(UserContext.info.role === 1) {
+            await transferBalanceStore.listBranchViewModel.getBranchList(UserContext.info.id);
+            let branchOptions = [];
+            for (let item of transferBalanceStore.listBranchViewModel.listBranchResponse.items) {
+                branchOptions.push(<Option key={item.key} value={item.key}
+                                           balance={item.balance}>{item.title}</Option>);
+            }
+            setBranchOptions(branchOptions);
         }
 
-        setTransferBalanceTypeOptions(transferBalanceTypeOptions);
-        setCarOptions(carOptions);
-        setBranchOptions(branchOptions);
         setDataFetched(true);
     }
     let viewModel = transferBalanceStore.editTransferBalanceViewModel;
@@ -111,12 +124,17 @@ const EditTransferBalance: React.FC<EditTransferBalanceProps> = inject(Stores.tr
         viewModel.addTransferBalanceRequest[`${propName}`] = e;
     }
     function onTransferBalanceTypeChanged(e){
+        
         viewModel.addTransferBalanceRequest.transferBalanceType = +e;
         setTransferBalanceType(+e);
         if(+e === 100)
-            setFromBalance(UserContext.info?.balance);
+            setFromBalance(UserContext.info.balance);
         if(+e === 500)
-            setToBalance(UserContext.info?.balance);
+            setToBalance(UserContext.info.balance);
+        if(+e === 200 && UserContext.info.role === 5)
+            setFromBalance(UserContext.info.balance);
+        if(+e === 400 && UserContext.info.role === 5)
+            setToBalance(UserContext.info.balance);
     }
     function onChanged(e){
         viewModel.addTransferBalanceRequest[`${e.target.id}`] = e.target.value;
@@ -204,6 +222,7 @@ const EditTransferBalance: React.FC<EditTransferBalanceProps> = inject(Stores.tr
                         <React.Fragment>
                             <Divider>{i18next.t("General.TransferBalanceType.BranchToCar")}</Divider>
                             <Col span={12}>
+                                {UserContext.info.role === 1 ?
                                 <Form.Item name="fromBranch"
                                            key={"fromBranch"}
                                            label={i18next.t("TransferBalances.Label.fromBranch")}
@@ -216,7 +235,15 @@ const EditTransferBalance: React.FC<EditTransferBalanceProps> = inject(Stores.tr
                                     <Select showSearch={true} onChange={(e, option) => onOptionSelectChanged(e, option,"branchId", true)}>
                                         {branchOptions}
                                     </Select>
+
                                 </Form.Item>
+                                    :
+                                    <Form.Item name="fromBranch"
+                                               key={"fromBranch"}
+                                               label={i18next.t("TransferBalances.Label.fromBranch")}>
+                                        <label>{UserContext.info.name}</label>
+                                    </Form.Item>
+                                    }
                             </Col>
                             <Col span={12}>
                                 <Form.Item name="branchBalance"
@@ -326,6 +353,7 @@ const EditTransferBalance: React.FC<EditTransferBalanceProps> = inject(Stores.tr
                                 </Form.Item>
                             </Col>
                             <Col span={12}>
+                                {UserContext.info.role === 1 ?
                                 <Form.Item name="toBranch"
                                            key={"toBranch"}
                                            label={i18next.t("TransferBalances.Label.toBranch")}
@@ -339,6 +367,14 @@ const EditTransferBalance: React.FC<EditTransferBalanceProps> = inject(Stores.tr
                                         {branchOptions}
                                     </Select>
                                 </Form.Item>
+                                    :
+                                    <Form.Item name="toBranch"
+                                               key={"toBranch"}
+                                               label={i18next.t("TransferBalances.Label.toBranch")}
+                                               >
+                                        <label>{UserContext.info.name}</label>
+                                    </Form.Item>
+                                }
                             </Col>
                             <Col span={12}>
                                 <Form.Item name="branchBalance"

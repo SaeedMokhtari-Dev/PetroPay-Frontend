@@ -36,7 +36,7 @@ const SupplierDashboard: React.FC<DashboardProps> = inject(Stores.supplierStore)
         if(UserContext.info.role === 15)
             supplierStore.getSupplierViewModel.getSupplierRequest.supplierBranchId = UserContext.info.id;
         await supplierStore.getSupplierViewModel.getDashboardData(supplierStore.getSupplierViewModel.getSupplierRequest);
-
+        supplierStore.getSupplierViewModel.petroStationItems.forEach((w, i) => {w.key = i });
         setDataFetched(true);
     }
 
@@ -53,13 +53,24 @@ const SupplierDashboard: React.FC<DashboardProps> = inject(Stores.supplierStore)
                 <div>
                     <Descriptions title={i18next.t("Dashboard.Supplier.Title")} bordered>
                         <Descriptions.Item label={i18next.t("SupplierDashboard.stationBalance")}>{viewModel?.stationBalance?.toLocaleString()}</Descriptions.Item>
+                        {UserContext.info.role === 15 ?
                         <Descriptions.Item label={i18next.t("SupplierDashboard.stationBonusBalance")}>{viewModel?.stationBonusBalance?.toLocaleString()}</Descriptions.Item>
+                            : "" }
                     </Descriptions>
                     <br/>
                     <Divider>{i18next.t("SupplierDashboard.Section.Stations")}</Divider>
                     <br/>
                     <Table dataSource={viewModel?.petroStationItems} columns={columns} loading={viewModel?.isProcessing}
-                           bordered={true} pagination={false} sticky/>
+                           bordered={true} pagination={false} sticky
+                           summary={() => (
+                               <Table.Summary.Row>
+                                   <Table.Summary.Cell index={0}>{i18next.t("General.Table.Total")}</Table.Summary.Cell>
+                                   <Table.Summary.Cell index={1}></Table.Summary.Cell>
+                                   <Table.Summary.Cell index={5}>{viewModel.petroStationItems.map(w => w.stationBalance).reduce((a, b) => a + b).toLocaleString()}</Table.Summary.Cell>
+                                   <Table.Summary.Cell index={6}>{viewModel.petroStationItems.map(w => w.stationBonusBalance).reduce((a, b) => a + b).toLocaleString()}</Table.Summary.Cell>
+                               </Table.Summary.Row>
+                           )}
+                    />
 
                 </div>
                     :

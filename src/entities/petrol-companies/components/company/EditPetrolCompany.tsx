@@ -47,7 +47,7 @@ const EditPetrolCompany: React.FC<EditPetrolCompanyProps> = inject(Stores.petrol
     const [imageUrl, setImageUrl] = React.useState("");
     const [dataFetched, setDataFetched] = React.useState(false);
     const [petrolCompanyId, setPetrolCompanyId] = React.useState(0);
-    const [petrolCompanyTypeOptions, setPetrolCompanyTypeOptions] = React.useState([]);
+    /*const [petrolCompanyTypeOptions, setPetrolCompanyTypeOptions] = React.useState([]);*/
     const [countryOptions, setCountryOptions] = React.useState([]);
     const [regionOptions, setRegionOptions] = React.useState([]);
 
@@ -84,11 +84,11 @@ const EditPetrolCompany: React.FC<EditPetrolCompanyProps> = inject(Stores.petrol
             petrolCompaniesStore.editPetrolCompanyViewModel.addPetrolCompanyRequest = new AddPetrolCompanyRequest();
             petrolCompaniesStore.editPetrolCompanyViewModel.detailPetrolCompanyResponse = new DetailPetrolCompanyResponse();
         }
-        let typesOptions = [];
+        /*let typesOptions = [];
         for (let item of Types) {
             typesOptions.push(<Option key={item.value} value={item.value}>{i18next.t(item.title)}</Option>);
         }
-        setPetrolCompanyTypeOptions(typesOptions);
+        setPetrolCompanyTypeOptions(typesOptions);*/
 
         let countriesOptions = [];
         for (let item of Countries) {
@@ -256,7 +256,7 @@ const EditPetrolCompany: React.FC<EditPetrolCompanyProps> = inject(Stores.petrol
                 </Form.Item>
                     </Col>
 
-                    <Col span={8}>
+                    {/*<Col span={8}>
                 <Form.Item name="petrolCompanyType" initialValue={viewModel?.detailPetrolCompanyResponse?.petrolCompanyType}
                            key={"petrolCompanyType"}
                            label={i18next.t("PetrolCompanies.Label.petrolCompanyType")}
@@ -266,13 +266,13 @@ const EditPetrolCompany: React.FC<EditPetrolCompanyProps> = inject(Stores.petrol
                                    message: i18next.t("PetrolCompanies.Validation.Message.petrolCompanyType.Required")
                                }
                            ]}>
-                    {/*<Input onChange={onChanged}/>*/}
+                    <Input onChange={onChanged}/>
                     <Select showSearch={true} onChange={(e) => onSelectChanged(e, "petrolCompanyType")} >
                         {petrolCompanyTypeOptions}
                     </Select>
 
                 </Form.Item>
-                    </Col>
+                    </Col>*/}
                     <Col span={8}>
                 <Form.Item name="petrolCompanyCountry" initialValue={viewModel?.detailPetrolCompanyResponse?.petrolCompanyCountry}
                            key={"petrolCompanyCountry"}

@@ -69,6 +69,9 @@ const OdometerHistoryList: React.FC<OdometerHistoryListProps> = inject(Stores.od
         if(UserContext.info.role == 1){
             odometerHistoryStore.getOdometerHistoryViewModel.getOdometerHistoriesRequest.companyId = UserContext.info.id;
         }
+        if(UserContext.info.role === 5){
+            odometerHistoryStore.getOdometerHistoryViewModel.getOdometerHistoriesRequest.companyBranchId = UserContext.info.id;
+        }
 
         try {
             if (UserContext.info.role === 100) {

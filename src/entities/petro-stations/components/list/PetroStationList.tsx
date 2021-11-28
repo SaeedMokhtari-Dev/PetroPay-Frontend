@@ -27,12 +27,12 @@ const { confirm } = Modal;
 
 
 interface PetroStationListProps {
-    petroStationStore?: PetroStationStore
+    petroStationStore?: PetroStationStore;
+    match?: any;
 }
 
-
-
-const PetroStationList: React.FC<PetroStationListProps> = inject(Stores.petroStationStore)(observer(({petroStationStore}) => {
+const PetroStationList: React.FC<PetroStationListProps> = inject(Stores.petroStationStore)(observer(({petroStationStore, match}) => {
+    const [petrolCompanyId, setPetrolCompanyId] = React.useState(0);
     useEffect(() => {
         onLoad();
 
@@ -56,14 +56,18 @@ const PetroStationList: React.FC<PetroStationListProps> = inject(Stores.petroSta
         fixed: 'right',
         render: (text, record) => (
             <div className="inline">
-                <Link to={`/app/petroStation/payment/${record.key}`}>
-                    <Button type="default" icon={<DollarOutlined/>}
-                            title={i18next.t("PetroStations.Button.Payment")}/>
-                </Link>
                 <Button type="primary" icon={<EditOutlined />} onClick={() => showEditPage(record)}
-                            title={i18next.t("General.Button.Edit")} />
-                <Button type="primary" danger icon={<DeleteOutlined />} onClick={() => showDeleteConfirm(record)}
-                        title={i18next.t("General.Button.Delete")} />
+                        title={i18next.t("General.Button.Edit")} />
+                {UserContext.info.role === 100 ?
+                    <React.Fragment>
+                        <Link to={`/app/petroStation/payment/${record.key}`}>
+                            <Button type="default" icon={<DollarOutlined/>}
+                                    title={i18next.t("PetroStations.Button.Payment")}/>
+                        </Link>
+                        <Button type="primary" danger icon={<DeleteOutlined />} onClick={() => showDeleteConfirm(record)}
+                                title={i18next.t("General.Button.Delete")} />
+                    </React.Fragment>
+                    : "" }
             </div>
         )
     }];
@@ -101,11 +105,22 @@ const PetroStationList: React.FC<PetroStationListProps> = inject(Stores.petroSta
 
     async function onLoad() {
         petroStationStore.onPetroStationGetPageLoad();
-        //petroStationStore.onPetroStationEditPageLoad();
+
         petroStationStore.getPetroStationViewModel.pageIndex = 0;
         petroStationStore.getPetroStationViewModel.pageSize = 20;
+
+        let petrolCompanyIdParam: number = null;
+        if(match.params?.petrolCompanyId){
+            petrolCompanyIdParam = +match.params?.petrolCompanyId;
+        }
+        if(UserContext.info.role === 10) {
+            petrolCompanyIdParam = UserContext.info.id;
+        }
+
         await petroStationStore.getPetroStationViewModel.getAllPetroStation(new GetPetroStationRequest(
-            20, 0, (UserContext.info.role === 15 ? UserContext.info.id : null)));
+            20, 0, petrolCompanyIdParam));
+
+        setPetrolCompanyId(petrolCompanyIdParam);
     }
 
     function onUnload() {
@@ -117,13 +132,13 @@ const PetroStationList: React.FC<PetroStationListProps> = inject(Stores.petroSta
         viewModel.pageIndex = pageIndex - 1;
         viewModel.pageSize = pageSize;
         await petroStationStore.getPetroStationViewModel.getAllPetroStation(new GetPetroStationRequest(
-            pageSize, pageIndex - 1, (UserContext.info.role === 15 ? UserContext.info.id : null)));
+            pageSize, pageIndex - 1, petrolCompanyId));
     }
     async function pageSizeChanged(current, pageSize){
         viewModel.pageIndex = 0;
         viewModel.pageSize = pageSize;
         await petroStationStore.getPetroStationViewModel.getAllPetroStation(new GetPetroStationRequest(
-            pageSize, 0, (UserContext.info.role === 15 ? UserContext.info.id : null)));
+            pageSize, 0, petrolCompanyId));
     }
     return (
         <div>

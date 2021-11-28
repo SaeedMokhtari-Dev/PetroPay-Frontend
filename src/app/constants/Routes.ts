@@ -22,6 +22,7 @@ export default
 
     // PetroStation
     petroStation: "/app/petroStation",
+    petroStationList: "/app/petroStation/:petrolCompanyId/list",
     editPetroStation: "/app/petroStation/edit/:petroStationId",
     addPetroStation: "/app/petroStation/add",
     paymentPetroStation: "/app/petroStation/payment/:petroStationId",

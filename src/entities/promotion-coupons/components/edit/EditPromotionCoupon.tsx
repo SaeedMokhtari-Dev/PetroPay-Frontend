@@ -13,7 +13,7 @@ import {
     Modal,
     PageHeader,
     Radio,
-    Row,
+    Row, Select,
     Spin, Switch,
     Upload
 } from "antd";
@@ -27,7 +27,9 @@ import history from "../../../../app/utils/History";
 import PromotionCouponStore from "../../stores/PromotionCouponStore";
 import moment from "moment";
 import Constants from "../../../../app/constants/Constants";
+import UserContext from "../../../../identity/contexts/UserContext";
 const {useEffect} = React;
+const { Option } = Select;
 
 interface EditPromotionCouponProps {
     promotionCouponStore?: PromotionCouponStore;
@@ -38,6 +40,8 @@ const EditPromotionCoupon: React.FC<EditPromotionCouponProps> = inject(Stores.pr
 {
     const [dataFetched, setDataFetched] = React.useState(false);
     const [promotionCouponId, setPromotionCouponId] = React.useState(0);
+    const [companyOptions, setCompanyOptions] = React.useState([]);
+    const [couponForAllCustomer, setCouponForAllCustomer] = React.useState(false);
 
     const [form] = Form.useForm();
 
@@ -66,11 +70,23 @@ const EditPromotionCoupon: React.FC<EditPromotionCouponProps> = inject(Stores.pr
         if(promotionCouponIdParam)
         {
             await promotionCouponStore.editPromotionCouponViewModel.getDetailPromotionCoupon(promotionCouponIdParam);
+            setCouponForAllCustomer(promotionCouponStore.editPromotionCouponViewModel.editPromotionCouponRequest.couponForAllCustomer);
         }
         else{
             promotionCouponStore.editPromotionCouponViewModel.addPromotionCouponRequest = new AddPromotionCouponRequest();
             promotionCouponStore.editPromotionCouponViewModel.detailPromotionCouponResponse = new DetailPromotionCouponResponse();
         }
+
+        await promotionCouponStore.listCompanyViewModel.getCompanyList();
+        let companyOptions = [];
+        if (promotionCouponStore.listCompanyViewModel) {
+            for (let item of promotionCouponStore.listCompanyViewModel.listCompanyResponse.items) {
+                companyOptions.push(<Option key={item.key} value={item.key}>{item.title}</Option>);
+            }
+        }
+        setCompanyOptions(companyOptions);
+
+
         setPromotionCouponId(promotionCouponIdParam);
         setDataFetched(true);
     }
@@ -144,6 +160,16 @@ const EditPromotionCoupon: React.FC<EditPromotionCouponProps> = inject(Stores.pr
             viewModel.editPromotionCouponRequest[`${e.target.id}`] = e.target.checked;
         else
             viewModel.addPromotionCouponRequest[`${e.target.id}`] = e.target.checked;
+
+        if(e.target.id === "couponForAllCustomer"){
+            setCouponForAllCustomer(e.target.checked)
+        }
+    }
+    function onSelectChanged(e, propName){
+        if(promotionCouponId)
+            viewModel.editPromotionCouponRequest[`${propName}`] = e;
+        else
+            viewModel.addPromotionCouponRequest[`${propName}`] = e;
     }
     return (
         <div>
@@ -231,28 +257,40 @@ const EditPromotionCoupon: React.FC<EditPromotionCouponProps> = inject(Stores.pr
                     <Col span={8}>
                         <Form.Item name="couponForAllCustomer" initialValue={viewModel?.detailPromotionCouponResponse?.couponForAllCustomer}
                                    key={"couponForAllCustomer"}
-                                   label={i18next.t("StationUsers.Label.couponForAllCustomer")}>
+                                   label={i18next.t("PromotionCoupons.Label.couponForAllCustomer")}>
                             <Checkbox onChange={onCheckboxChange} defaultChecked={viewModel?.detailPromotionCouponResponse?.couponForAllCustomer} />
                         </Form.Item>
                     </Col>
+                    {!couponForAllCustomer ?
+                        <Col span={8}>
+                            <Form.Item name="companyId" initialValue={viewModel?.detailPromotionCouponResponse?.companyId}
+                                       key={"companyId"}
+                                       label={i18next.t("PromotionCoupons.Label.companyName")}>
+                                {/*<Input onChange={onChanged}/>*/}
+                                <Select style={{width: "100%", display:"block"}} allowClear={true}
+                                        showSearch={true} onChange={(e) => onSelectChanged(e, "companyId")}>
+                                    {companyOptions}
+                                </Select>
+                            </Form.Item>
+                        </Col>: ""}
                     <Col span={8}>
                         <Form.Item name="couponForMonthly" initialValue={viewModel?.detailPromotionCouponResponse?.couponForMonthly}
                                    key={"couponForMonthly"}
-                                   label={i18next.t("StationUsers.Label.couponForMonthly")}>
+                                   label={i18next.t("PromotionCoupons.Label.couponForMonthly")}>
                             <Checkbox onChange={onCheckboxChange} defaultChecked={viewModel?.detailPromotionCouponResponse?.couponForMonthly} />
                         </Form.Item>
                     </Col>
                     <Col span={8}>
                         <Form.Item name="couponForQuarterly" initialValue={viewModel?.detailPromotionCouponResponse?.couponForQuarterly}
                                    key={"couponForQuarterly"}
-                                   label={i18next.t("StationUsers.Label.couponForQuarterly")}>
+                                   label={i18next.t("PromotionCoupons.Label.couponForQuarterly")}>
                             <Checkbox onChange={onCheckboxChange} defaultChecked={viewModel?.detailPromotionCouponResponse?.couponForQuarterly} />
                         </Form.Item>
                     </Col>
                     <Col span={8}>
                         <Form.Item name="couponForYearly" initialValue={viewModel?.detailPromotionCouponResponse?.couponForYearly}
                                    key={"couponForYearly"}
-                                   label={i18next.t("StationUsers.Label.couponForYearly")}>
+                                   label={i18next.t("PromotionCoupons.Label.couponForYearly")}>
                             <Checkbox onChange={onCheckboxChange} defaultChecked={viewModel?.detailPromotionCouponResponse?.couponForYearly} />
                         </Form.Item>
                     </Col>

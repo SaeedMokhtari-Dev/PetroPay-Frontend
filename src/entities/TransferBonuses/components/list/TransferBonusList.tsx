@@ -57,7 +57,7 @@ const TransferBonusList: React.FC<TransferBonusesSidebarProps> = inject(Stores.t
 
     async function onLoad() {
         transferBonusStore.onTransferBonusGetPageLoad();
-        debugger;
+        
         transferBonusStore.getTransferBonusViewModel.getTransferBonusesRequest.pageIndex = 0;
         transferBonusStore.getTransferBonusViewModel.getTransferBonusesRequest.pageSize = 10;
         await transferBonusStore.getTransferBonusViewModel.getAllTransferBonuses(transferBonusStore.getTransferBonusViewModel.getTransferBonusesRequest);

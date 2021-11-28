@@ -17,6 +17,50 @@ Signup
   }
 }
 
+.login-section {
+  width: 30%;
+  min-width: 400px;
+  position: fixed;
+  left: 10%;
+  top: 5%;
+  z-index: 1;
+  background: hsl(0, 0, 100);
+  border-radius: 36px;
+  box-shadow: 0 3px 25px hsla(0, 0, 0, 0.2);
+  overflow: hidden;
+  /* display: flex; */
+  border: 8px solid;
+  border-image-slice: 1;
+  border-image-source: linear-gradient(to right, #743AB6, #d53a9d);
+  padding: 1%;
+}
+.logo-section {
+  position: fixed;
+  right: 10%;
+}
 
+@media(max-width:856px) {
+  .login-section {
+    width: 95%;
+    position: fixed;
+    left: 1%;
+    top: 1%;
+    padding: 1%;
+  }
+  .logo-section {
+    display: none;
+  }
+}
 
+@media(max-width:452px) {
+  .login-section{
+    left: 0;
+    top: 0;
+    width: 100%;
+
+  }
+  .logo-section {
+    display: none;
+  }
+}
 

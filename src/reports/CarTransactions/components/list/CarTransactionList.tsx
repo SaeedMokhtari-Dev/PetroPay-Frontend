@@ -93,7 +93,7 @@ const CarTransactionList: React.FC<CarTransactionListProps> = inject(Stores.carT
             await carTransactionStore.listCarViewModel.getCarList();
             let carOptions = [];
             if(carTransactionStore.listCompanyViewModel) {
-                debugger;
+                
                 if(UserContext.info.role !== 5) {
                     for (let item of carTransactionStore.listCarViewModel.listCarResponse.items) {
                         carOptions.push(<Option key={item.key} value={item.carNumber}>{item.carNumber}</Option>);

@@ -180,7 +180,7 @@ const EditSubscription: React.FC<EditSubscriptionProps> = inject(Stores.subscrip
         }
     }
     function onChanged(e){
-        debugger;
+        
         if(subscriptionId)
             viewModel.editSubscriptionRequest[`${e.target.id}`] = e.target.value;
         else
@@ -247,7 +247,7 @@ const EditSubscription: React.FC<EditSubscriptionProps> = inject(Stores.subscrip
             viewModel.errorMessage = i18next.t("Subscriptions.Validation.Message.bundlesId.Required");
             return;
         }
-        debugger;
+        
 
         let request: CalculateSubscriptionRequest = new CalculateSubscriptionRequest();
         request.bundlesId = bundleId;
@@ -267,7 +267,7 @@ const EditSubscription: React.FC<EditSubscriptionProps> = inject(Stores.subscrip
             request.couponCode = viewModel.addSubscriptionRequest.couponCode;
             request.numberOfDateDiff = viewModel.addSubscriptionRequest.numberOfDateDiff;
         }
-        debugger;
+        
         let result = await viewModel.calculateCost(request, subscriptionId);
 
         setSubscriptionCost(result);

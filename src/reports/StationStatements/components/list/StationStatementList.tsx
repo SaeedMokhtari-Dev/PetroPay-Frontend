@@ -63,7 +63,7 @@ const StationStatementList: React.FC<StationStatementListProps> = inject(Stores.
         }
 
         try {
-            await stationStatementStore.listPetroStationViewModel.getPetroStationList();
+            await stationStatementStore.listPetroStationViewModel.getPetroStationList(stationStatementStore.getStationStatementViewModel.getStationStatementsRequest.stationId);
             let petroStationOptions = [];
             if (stationStatementStore.listPetroStationViewModel) {
                 for (let item of stationStatementStore.listPetroStationViewModel.listPetroStationResponse.items) {
@@ -148,7 +148,7 @@ const StationStatementList: React.FC<StationStatementListProps> = inject(Stores.
                           key={"searchForm"}
                           scrollToFirstError>
                         <Row gutter={[24, 16]}>
-                            {UserContext.info.role == 100 ?
+                            {[10, 100].includes(UserContext.info.role) ?
                                 <Col span={8}>
                                     <Form.Item name="stationId" initialValue={viewModel?.getStationStatementsRequest?.stationId}
                                                key={"stationId"}

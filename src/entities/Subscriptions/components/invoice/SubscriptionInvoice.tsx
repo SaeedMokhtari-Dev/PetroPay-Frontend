@@ -37,7 +37,7 @@ const SubscriptionInvoice: React.FC<SubscriptionInvoiceProps> = inject(Stores.su
 
     async function onLoad() {
         subscriptionStore.onSubscriptionInvoicePageLoad();
-        debugger;
+        
         let invoiceIdParam = +match.params?.invoiceNumber;
         if(invoiceIdParam){
             subscriptionStore.invoiceSubscriptionViewModel?.getInvoiceSubscription(invoiceIdParam);
@@ -58,7 +58,7 @@ const SubscriptionInvoice: React.FC<SubscriptionInvoiceProps> = inject(Stores.su
         //subscriptionStore.onSubscriptionEditPageUnload();
     }
     async function print(){
-        debugger;
+        
         setExportPdfLoading(true);
         try {
             let response = await ApiService.postPrivate(`/api/subscription/invoice-pdf/${invoiceId}`, null, true);

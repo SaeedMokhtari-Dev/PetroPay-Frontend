@@ -14,7 +14,7 @@ import {
     Modal,
     PageHeader,
     Radio,
-    Row,
+    Row, Select,
     Spin
 } from "antd";
 import i18next from "i18next";
@@ -28,7 +28,9 @@ import history from "../../../../app/utils/History";
 import StationUserStore from "../../stores/StationUserStore";
 import { PasswordInput } from 'antd-password-input-strength';
 import { MaskedInput } from 'antd-mask-input';
+import UserContext from "../../../../identity/contexts/UserContext";
 const {useEffect} = React;
+const { Option } = Select;
 
 interface EditStationUserProps {
     stationUserStore?: StationUserStore;
@@ -39,8 +41,7 @@ const EditStationUser: React.FC<EditStationUserProps> = inject(Stores.stationUse
 {
     const [dataFetched, setDataFetched] = React.useState(false);
     const [stationUserId, setStationUserId] = React.useState(0);
-
-
+    const [petroStationOptions, setPetroStationOptions] = React.useState([]);
 
 
     const [form] = Form.useForm();
@@ -75,6 +76,17 @@ const EditStationUser: React.FC<EditStationUserProps> = inject(Stores.stationUse
             stationUserStore.editStationUserViewModel.addStationUserRequest = new AddStationUserRequest();
             stationUserStore.editStationUserViewModel.detailStationUserResponse = new DetailStationUserResponse();
         }
+        if(UserContext.info.role === 10) {
+            await stationUserStore.listPetroStationViewModel.getPetroStationList(UserContext.info.id);
+            let petroStationOptions = [];
+            if (stationUserStore.listPetroStationViewModel) {
+                for (let item of stationUserStore.listPetroStationViewModel.listPetroStationResponse.items) {
+                    petroStationOptions.push(<Option key={item.key} value={item.key}>{item.title}</Option>);
+                }
+            }
+            setPetroStationOptions(petroStationOptions);
+        }
+
         setStationUserId(stationUserIdParam);
         setDataFetched(true);
     }
@@ -117,12 +129,18 @@ const EditStationUser: React.FC<EditStationUserProps> = inject(Stores.stationUse
         else
             viewModel.addStationUserRequest[`${e.target.id}`] = e.target.checked;
     }
-    /*function onSwitchChange(e){
+    function onSelectChanged(e, propName) {
         if(stationUserId)
-            stationUserStore.editStationUserViewModel.editStationUserRequest.companyStationUserActiva = e;
+            viewModel.editStationUserRequest[`${propName}`] = e;
         else
-            stationUserStore.editStationUserViewModel.addStationUserRequest.companyStationUserActiva = e;
-    }*/
+            viewModel.addStationUserRequest[`${propName}`] = e;
+    }
+        /*function onSwitchChange(e){
+            if(stationUserId)
+                stationUserStore.editStationUserViewModel.editStationUserRequest.companyStationUserActiva = e;
+            else
+                stationUserStore.editStationUserViewModel.addStationUserRequest.companyStationUserActiva = e;
+        }*/
 
     return (
         <div>
@@ -138,6 +156,18 @@ const EditStationUser: React.FC<EditStationUserProps> = inject(Stores.stationUse
                   key={"stationUserForm"}
                  scrollToFirstError>
                 <Row gutter={[24, 16]}>
+                    {UserContext.info.role === 10 ?
+                            <Col span={8}>
+                                <Form.Item name="stationWorkerId" initialValue={viewModel?.detailStationUserResponse?.stationId}
+                                           key={"stationWorkerId"}
+                                           label={i18next.t("StationReports.SearchPanel.Label.stationWorkerId")}>
+                                    <Select style={{width: "100%", display:"block"}} allowClear={true}
+                                            showSearch={true} onChange={(e) => onSelectChanged(e, "stationId")}>
+                                        {petroStationOptions}
+                                    </Select>
+                                </Form.Item>
+                            </Col>
+                        : "" }
                     <Col span={8}>
                 <Form.Item name="stationWorkerFname" initialValue={viewModel?.detailStationUserResponse?.stationWorkerFname}
                            key={"stationWorkerFname"}
@@ -168,6 +198,20 @@ const EditStationUser: React.FC<EditStationUserProps> = inject(Stores.stationUse
 
                     <Divider>{i18next.t("StationUsers.Section.Accesses")}</Divider>
 
+                    <Col span={8}>
+                        <Form.Item name="accessBonusTransfer" initialValue={viewModel?.detailStationUserResponse?.accessBonusTransfer}
+                                   key={"accessBonusTransfer"}
+                                   label={i18next.t("StationUsers.Label.accessBonusTransfer")}>
+                            <Checkbox onChange={onCheckboxChange} defaultChecked={viewModel?.detailStationUserResponse?.accessBonusTransfer} />
+                        </Form.Item>
+                    </Col>
+                    <Col span={8}>
+                        <Form.Item name="accessStationBonusBalance" initialValue={viewModel?.detailStationUserResponse?.accessStationBonusBalance}
+                                   key={"accessStationBonusBalance"}
+                                   label={i18next.t("StationUsers.Label.accessStationBonusBalance")}>
+                            <Checkbox onChange={onCheckboxChange} defaultChecked={viewModel?.detailStationUserResponse?.accessStationBonusBalance} />
+                        </Form.Item>
+                    </Col>
                     <Col span={8}>
                         <Form.Item name="accessStationBalance" initialValue={viewModel?.detailStationUserResponse?.accessStationBalance}
                                    key={"accessStationBalance"}
