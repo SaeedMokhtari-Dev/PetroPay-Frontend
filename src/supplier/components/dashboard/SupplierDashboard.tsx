@@ -66,7 +66,7 @@ const SupplierDashboard: React.FC<DashboardProps> = inject(Stores.supplierStore)
                                <Table.Summary.Row>
                                    <Table.Summary.Cell index={0}>{i18next.t("General.Table.Total")}</Table.Summary.Cell>
                                    <Table.Summary.Cell index={1}></Table.Summary.Cell>
-                                   <Table.Summary.Cell index={5}>{viewModel.petroStationItems.map(w => w.stationBalance).reduce((a, b) => a + b).toLocaleString()}</Table.Summary.Cell>
+                                   {/*<Table.Summary.Cell index={5}>{viewModel.petroStationItems.map(w => w.stationBalance).reduce((a, b) => a + b).toLocaleString()}</Table.Summary.Cell>*/}
                                    <Table.Summary.Cell index={6}>{viewModel.petroStationItems.map(w => w.stationBonusBalance).reduce((a, b) => a + b).toLocaleString()}</Table.Summary.Cell>
                                </Table.Summary.Row>
                            )}

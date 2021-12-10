@@ -58,19 +58,24 @@ const StationStatementList: React.FC<StationStatementListProps> = inject(Stores.
         stationStatementStore.getStationStatementViewModel.getStationStatementsRequest = new GetStationStatementRequest();
         stationStatementStore.getStationStatementViewModel.getStationStatementsRequest.pageSize = 20;
         stationStatementStore.getStationStatementViewModel.getStationStatementsRequest.pageIndex = 0;
-        if(UserContext.info.role == 10){
+        if(UserContext.info.role === 10){
+            stationStatementStore.getStationStatementViewModel.getStationStatementsRequest.companyId = UserContext.info.id;
+        }
+        if(UserContext.info.role === 15){
             stationStatementStore.getStationStatementViewModel.getStationStatementsRequest.stationId = UserContext.info.id;
         }
 
         try {
-            await stationStatementStore.listPetroStationViewModel.getPetroStationList(stationStatementStore.getStationStatementViewModel.getStationStatementsRequest.stationId);
-            let petroStationOptions = [];
-            if (stationStatementStore.listPetroStationViewModel) {
-                for (let item of stationStatementStore.listPetroStationViewModel.listPetroStationResponse.items) {
-                    petroStationOptions.push(<Option key={item.key} value={item.key}>{item.title}</Option>);
+            if([10, 100].includes(UserContext.info.role)) {
+                await stationStatementStore.listPetroStationViewModel.getPetroStationList(stationStatementStore.getStationStatementViewModel.getStationStatementsRequest.companyId);
+                let petroStationOptions = [];
+                if (stationStatementStore.listPetroStationViewModel) {
+                    for (let item of stationStatementStore.listPetroStationViewModel.listPetroStationResponse.items) {
+                        petroStationOptions.push(<Option key={item.key} value={item.key}>{item.title}</Option>);
+                    }
                 }
+                setPetroStationOptions(petroStationOptions);
             }
-            setPetroStationOptions(petroStationOptions);
         }
         catch {
 

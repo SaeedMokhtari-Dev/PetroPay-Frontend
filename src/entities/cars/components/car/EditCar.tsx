@@ -371,7 +371,7 @@ const EditCar: React.FC<EditCarProps> = inject(Stores.carStore)(observer(({carSt
                                            message: i18next.t("Cars.Validation.Message.carIdNumber1E.Required")
                                        }
                                    ]}>
-                            <MaskedInput mask="1 1 1 1" maxLength= {8} onChange={onChanged}/>
+                            <MaskedInput mask="1 1 1 1" maxLength={8} style={{direction: "ltr"}} onChange={onChanged}/>
                         </Form.Item>
                     </Col>
                     <Col span={6}>
@@ -384,7 +384,7 @@ const EditCar: React.FC<EditCarProps> = inject(Stores.carStore)(observer(({carSt
                                    message: i18next.t("Cars.Validation.Message.carIdText1E.Required")
                                }
                            ]}>
-                    <MaskedInput mask="A A A" maxLength={6} onChange={onChanged}/>
+                    <MaskedInput mask="A A A" maxLength={6} style={{direction: "ltr"}} onChange={onChanged}/>
                 </Form.Item>
                     </Col>
 

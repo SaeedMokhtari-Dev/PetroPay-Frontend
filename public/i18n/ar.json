@@ -18,6 +18,7 @@
   "General.Image.LessThan2MB": "يجب أن يكون حجم الصورة أصغر من 2 ميغا بايت!",
   "General.Image.JustImage": "يمكن فقط تحميل ملفات بصيغة JPG/PNG ",
   "General.Currency.Symbol": "ج. م",
+  "General.List.NullSelect": "يرجي الاختيار ",
 
   "General.HeaderMenu.User": "مرحبا ",
   "General.HeaderMenu.Profile": "الملف الشخصي",
@@ -414,14 +415,15 @@
   "StationUsers.Label.stationUserName": "اسم المستخدم",
   "StationUsers.Label.stationUserPassword": "كلمة المرور",
   "StationUsers.Label.stationId": "stationId",
-  "StationUsers.Label.accessStationBalance": "accessStationBalance",
-  "StationUsers.Label.accessBonusTransfer": "accessBonusTransfer",
-  "StationUsers.Label.accessStationBonusBalance": "accessStationBonusBalance",
-  "StationUsers.Label.accessAppReport": "accessAppReport",
-  "StationUsers.Label.accessFuelingApp": "accessFuelingApp",
-  "StationUsers.Label.accessChangeOilApp": "accessChangeOilApp",
-  "StationUsers.Label.accessCarWasherApp": "accessCarWasherApp",
-  "StationUsers.Label.accessChangeTyreApp": "accessChangeTyreApp",
+  "StationUsers.Label.stationName": "اسم المحطة",
+  "StationUsers.Label.accessStationBalance": "رصيد المحطة",
+  "StationUsers.Label.accessBonusTransfer": "تحويل الرصيد",
+  "StationUsers.Label.accessStationBonusBalance": "رصيد النقاط",
+  "StationUsers.Label.accessAppReport": "التقارير",
+  "StationUsers.Label.accessFuelingApp": "برنامج التموين",
+  "StationUsers.Label.accessChangeOilApp": "برنامج تغير الزيوت",
+  "StationUsers.Label.accessCarWasherApp": "برنامج المغسلة",
+  "StationUsers.Label.accessChangeTyreApp": "برنامج خدمة الايطارات",
   "StationUsers.Label.accessTemp1": "accessTemp1",
   "StationUsers.Label.accessTemp2": "accessTemp2",
   "StationUsers.Label.accessTemp3": "accessTemp3",
@@ -638,6 +640,7 @@
   "Subscriptions.Invoice.Label.billedTo": "فاتورة الي",
   "Subscriptions.Invoice.Label.customerName": "اسم العميل",
   "Subscriptions.Invoice.Label.customerAddress": "عنوان العميل",
+  "Subscriptions.Invoice.Label.customerTaxNumber": "رقم البطاقة الضريبية",
 
   "Subscriptions.Invoice.Label.serviceDescription": "الوصف",
   "Subscriptions.Invoice.Label.serviceDescriptionValue": "خدمات بتروباي",
@@ -1010,6 +1013,7 @@
   "TransferBalances.Error.Get.Message": "حدث خطأ أثناء محاولة الحصول على قائمة محطات الوقود.",
 
   "Api.TransferBalance.Add.Successful": "تم تحويل الرصيد بنجاح",
+  "TransferBalances.Validation.Message.amount.Required": "يرجي ادخال المبلغ .",
 
   "TransferBalances.CarBatch.Menu.Title": "شحن مجمع لرصيد السيارات",
   "TransferBalances.CarBatch.Edit.HeaderText": "شحن مجمع لرصيد السيارات",
@@ -1020,6 +1024,7 @@
   "TransferBalances.Label.consumptionValue": "معدل الاستهلاك",
   "TransferBalances.Label.newBalance": "الرصيد الجديد",
 
+  "TransferBalances.Alert.branchSelect": "هل انت متاكد من اختيار الفرع ",
   "TransferBalances.Button.autoRecharge": "شحن الي حسب المعدل",
 
   "TransferBalances.Validation.Message.amount.Negative": "مبلغ الشحن لا يمكن ان يكون بالسالب",
@@ -1067,6 +1072,7 @@
   "PromotionCoupons.Label.userId": "رقم المستخدم",
   "PromotionCoupons.Label.userName": "اسم المستخدم",
   "PromotionCoupons.Label.companyId": "رقم الشركة",
+  "PromotionCoupons.Label.companyName": "اسم الشركة",
   "PromotionCoupons.Label.couponForAllCustomer": "لجميع العملاء",
   "PromotionCoupons.Label.couponForMonthly": "شهري ",
   "PromotionCoupons.Label.couponForQuarterly": "ربع سنوي",
@@ -1249,7 +1255,7 @@
   "Api.NewCustomer.Add.Successful": "تم الاضافة بنجاح",
   "Api.NewCustomer.Edit.Successful": "تم التعديل بنجاح",
   "Api.NewCustomer.Deleted.Successful": "تم الحذف بنجاح",
-  "Api.NewCustomer.Activated.Successful": "تم اغلاق الطلب ",
+  "Api.NewCustomer.Activated.Successful": "تم اغلاق الطلب",
   "Api.NewCustomer.Id.Required": "Id is Required",
 
   "NewCustomers.Error.Get.Message": "حدث خطأ أثناء محاولة الحصول على قائمة طلبات العملاء الجدد.",
@@ -1362,8 +1368,8 @@
 
   "OdometerBetweenDates.SearchPanel.Label.carId": "Car Id Number",
   "OdometerBetweenDates.SearchPanel.Label.companyBranchName": "Company Branch Name",
-  "OdometerBetweenDates.SearchPanel.Label.transDateFrom": "Transaction Date From",
-  "OdometerBetweenDates.SearchPanel.Label.transDateTo": "Transaction Date To",
+  "OdometerBetweenDates.SearchPanel.Label.dateTimeFrom": "Transaction Date From",
+  "OdometerBetweenDates.SearchPanel.Label.dateTimeTo": "Transaction Date To",
   "OdometerBetweenDates.SearchPanel.Label.companyId": "companyId",
   "OdometerBetweenDates.SearchPanel.Label.companyName": "Company Name",
 

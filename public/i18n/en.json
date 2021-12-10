@@ -640,7 +640,7 @@
   "Subscriptions.Invoice.Label.billedTo": "BILLED TO",
   "Subscriptions.Invoice.Label.customerName": "Customer Name",
   "Subscriptions.Invoice.Label.customerAddress": "Customer Address",
-
+  "Subscriptions.Invoice.Label.customerTaxNumber": "Customer Tax Number",
   "Subscriptions.Invoice.Label.serviceDescription": "DESCRIPTION",
   "Subscriptions.Invoice.Label.serviceDescriptionValue": "Petropay service",
   "Subscriptions.Invoice.Label.unitCost": "UNIT COST",

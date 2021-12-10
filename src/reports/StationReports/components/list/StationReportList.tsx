@@ -79,20 +79,25 @@ const StationReportList: React.FC<StationReportListProps> = inject(Stores.statio
         stationReportStore.getStationReportViewModel.getStationReportsRequest.pageSize = 20;
         stationReportStore.getStationReportViewModel.getStationReportsRequest.pageIndex = 0;
         if(UserContext.info.role === 10){
+            stationReportStore.getStationReportViewModel.getStationReportsRequest.companyId = UserContext.info.id;
+        }
+        if(UserContext.info.role === 15){
             stationReportStore.getStationReportViewModel.getStationReportsRequest.stationId = UserContext.info.id;
         }
 
         try {
-            await stationReportStore.listPetroStationViewModel.getPetroStationList(stationReportStore.getStationReportViewModel.getStationReportsRequest.stationId);
-            let petroStationOptions = [];
-            if (stationReportStore.listPetroStationViewModel) {
-                for (let item of stationReportStore.listPetroStationViewModel.listPetroStationResponse.items) {
-                    petroStationOptions.push(<Option key={item.key} value={item.key}>{item.title}</Option>);
+            if([10, 100].includes(UserContext.info.role)) {
+                await stationReportStore.listPetroStationViewModel.getPetroStationList(stationReportStore.getStationReportViewModel.getStationReportsRequest.companyId);
+                let petroStationOptions = [];
+                if (stationReportStore.listPetroStationViewModel) {
+                    for (let item of stationReportStore.listPetroStationViewModel.listPetroStationResponse.items) {
+                        petroStationOptions.push(<Option key={item.key} value={item.key}>{item.title}</Option>);
+                    }
                 }
+                setPetroStationOptions(petroStationOptions);
             }
-            setPetroStationOptions(petroStationOptions);
 
-            await stationReportStore.listStationUserViewModel.getStationUserList();
+            await stationReportStore.listStationUserViewModel.getStationUserList(stationReportStore.getStationReportViewModel.getStationReportsRequest.stationId);
             let stationUserOptions = [];
             if (stationReportStore.listStationUserViewModel) {
                 if(stationReportStore.listStationUserViewModel.listStationUserResponse.items) {

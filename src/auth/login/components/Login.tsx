@@ -2,16 +2,27 @@ import React, {useEffect} from 'react';
 import {inject, observer} from "mobx-react";
 import AuthStore from "auth/stores/AuthStore";
 import "auth/login/components/Login.scss";
-import {Button, Form, Input, Radio} from "antd";
+import {Header} from "antd/es/layout/layout";
+import {Button, Form, Input, Menu, Radio, Tag} from "antd";
 import i18next from "i18next";
 import {withTranslation} from "react-i18next";
 import Routes from "app/constants/Routes";
 import { Link } from "react-router-dom";
 import history from "../../../app/utils/History";
 import {useParams} from "react-router-dom";
-import { EyeInvisibleOutlined, EyeTwoTone, UserOutlined, LockOutlined } from '@ant-design/icons';
+import {
+    EyeInvisibleOutlined,
+    EyeTwoTone,
+    UserOutlined,
+    LockOutlined,
+    DollarOutlined,
+    SettingOutlined
+} from '@ant-design/icons';
 import RoleTypeUtils from "../../../app/utils/RoleTypeUtils";
 import NavigationService from "../../../app/services/NavigationService";
+import UserContext from "../../../identity/contexts/UserContext";
+
+const { SubMenu } = Menu;
 
 interface LoginProps {
     authStore?: AuthStore,
@@ -99,8 +110,22 @@ const Login: React.FC<LoginProps> = inject('authStore')(observer(({authStore, ma
         localStorage.setItem("roleType", viewModel.roleType.toString());
         NavigationService.navigate(Routes.resetPassword);
     }
+    function changeLanguage(e){
+        i18next.changeLanguage(e.key, () => {
+            localStorage.setItem("currentLanguage", e.key);
+            history.go(0);
+        });
+    }
     return (
         <div>
+            <Header className="site-layout-background" style={{ padding: 0, height: "1px" }}>
+                <Menu mode="horizontal" style={localStorage.getItem("currentLanguage") == 'en' ? {float:"right"} : {float:"left"}}>
+                    <SubMenu key="language" icon={<SettingOutlined />} title={i18next.t("General.HeaderMenu.Languages")}>
+                        <Menu.Item key="en" onClick={changeLanguage}>{i18next.t("General.HeaderMenu.English")}</Menu.Item>
+                        <Menu.Item key="ar" onClick={changeLanguage}>{i18next.t("General.HeaderMenu.Arabic")}</Menu.Item>
+                    </SubMenu>
+                </Menu>
+            </Header>
             {!viewModel?.roleType && (
                 <div className={"mainContent"}>
                     <div className={"role-type"}>

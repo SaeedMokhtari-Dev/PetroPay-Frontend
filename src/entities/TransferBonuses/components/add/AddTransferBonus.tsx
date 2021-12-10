@@ -144,7 +144,7 @@ const AddTransferBonus: React.FC<EditTransferBonusProps> = inject(Stores.transfe
                                                 bonus={item.workerBonusBalance}>{item.title}</Option>);
             }
             setStationUsersOptions(stationUserOptions);
-            viewModel.addTransferBonusRequest[`${propName}`] = 0;
+            viewModel.addTransferBonusRequest[`${propName}`] = e;
         }
         if(propName === "stationWorkerId")
             setStationUserBonus(+option.bonus);

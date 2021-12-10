@@ -4,6 +4,8 @@ import {AppStore} from "app/stores/AppStore";
 import ChangeUserPasswordRequest from "../../auth/common/handlers/change-user-password/ChangeUserPasswordRequest";
 import TreeEmployeeMenuViewModel from "../../entities/employees/view-models/TreeEmployeeMenuViewModel";
 import GetEmployeeViewModel from "../../entities/employees/view-models/GetEmployeeViewModel";
+import GetCurrentUserBalanceViewModel
+    from "../../services/CurrentUserBalances/view-models/GetCurrentUserBalanceViewModel";
 
 export default class PageStore
 {
@@ -14,6 +16,8 @@ export default class PageStore
     changeUserPasswordRequest: ChangeUserPasswordRequest;
 
     treeEmployeeMenuViewModel: TreeEmployeeMenuViewModel;
+
+    getCurrentUserBalanceViewModel: GetCurrentUserBalanceViewModel;
 
     constructor(public appStore: AppStore)
     {

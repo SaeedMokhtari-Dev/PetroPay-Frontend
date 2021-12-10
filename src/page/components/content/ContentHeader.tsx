@@ -13,6 +13,8 @@ import history from "../../../app/utils/History";
 import { PasswordInput } from 'antd-password-input-strength';
 import ChangeUserPasswordRequest from "../../../auth/common/handlers/change-user-password/ChangeUserPasswordRequest";
 import ChangeUserPasswordHandler from "../../../auth/common/handlers/change-user-password/ChangeUserPasswordHandler";
+import GetCurrentUserBalanceViewModel
+    from "../../../services/CurrentUserBalances/view-models/GetCurrentUserBalanceViewModel";
 const { SubMenu } = Menu
 
 
@@ -23,6 +25,8 @@ interface ContentHeaderProps {
 const ContentHeader: React.FC<ContentHeaderProps> = inject(Stores.pageStore)(observer(({pageStore}) =>
 {
     const [modalVisible, setModalVisible] = React.useState(false);
+    const [userBalance, setUserBalance] = React.useState(0);
+
     const [isLoading, setLoading] = React.useState(false);
     const [form] = Form.useForm();
     const layout = {
@@ -34,11 +38,20 @@ const ContentHeader: React.FC<ContentHeaderProps> = inject(Stores.pageStore)(obs
 
         return onUnload;
     }, []);
+    let intervalId;
     function onLoad(){
         pageStore.changeUserPasswordRequest = new ChangeUserPasswordRequest();
+        pageStore.getCurrentUserBalanceViewModel = new GetCurrentUserBalanceViewModel();
+        intervalId = setInterval(async () => {
+            await pageStore.getCurrentUserBalanceViewModel.getCurrentUserBalance();
+            setUserBalance(pageStore.getCurrentUserBalanceViewModel?.balance);
+        }, 10000);
     }
     function onUnload(){
-
+        debugger;
+        clearInterval(intervalId);
+        pageStore.changeUserPasswordRequest = null;
+        pageStore.getCurrentUserBalanceViewModel = null;
     }
 
     function handleClickMenu(e) {
@@ -87,7 +100,8 @@ const ContentHeader: React.FC<ContentHeaderProps> = inject(Stores.pageStore)(obs
                 {UserContext.info?.role !== 100 &&
                     <div>
                 <Tag icon={<DollarOutlined />} color="success">
-                    {UserContext.info?.balance?.toLocaleString()}
+                    {/*{UserContext.info?.balance?.toLocaleString()}*/}
+                    {userBalance?.toLocaleString()}
                 </Tag> </div>}
                 </Menu.Item>
 

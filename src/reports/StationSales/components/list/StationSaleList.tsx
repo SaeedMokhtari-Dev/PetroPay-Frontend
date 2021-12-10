@@ -65,20 +65,25 @@ const StationSaleList: React.FC<StationSaleListProps> = inject(Stores.stationSal
         stationSaleStore.getStationSaleViewModel.getStationSalesRequest.pageSize = 20;
         stationSaleStore.getStationSaleViewModel.getStationSalesRequest.pageIndex = 0;
         if(UserContext.info.role === 10){
+            stationSaleStore.getStationSaleViewModel.getStationSalesRequest.companyId = UserContext.info.id;
+        }
+        if(UserContext.info.role === 15){
             stationSaleStore.getStationSaleViewModel.getStationSalesRequest.stationId = UserContext.info.id;
         }
 
         try {
-            await stationSaleStore.listPetroStationViewModel.getPetroStationList(stationSaleStore.getStationSaleViewModel.getStationSalesRequest.stationId);
-            let petroStationOptions = [];
-            if (stationSaleStore.listPetroStationViewModel) {
-                for (let item of stationSaleStore.listPetroStationViewModel.listPetroStationResponse.items) {
-                    petroStationOptions.push(<Option key={item.key} value={item.key}>{item.title}</Option>);
+            if([10, 100].includes(UserContext.info.role)) {
+                await stationSaleStore.listPetroStationViewModel.getPetroStationList(stationSaleStore.getStationSaleViewModel.getStationSalesRequest.companyId);
+                let petroStationOptions = [];
+                if (stationSaleStore.listPetroStationViewModel) {
+                    for (let item of stationSaleStore.listPetroStationViewModel.listPetroStationResponse.items) {
+                        petroStationOptions.push(<Option key={item.key} value={item.key}>{item.title}</Option>);
+                    }
                 }
+                setPetroStationOptions(petroStationOptions);
             }
-            setPetroStationOptions(petroStationOptions);
 
-            await stationSaleStore.listStationUserViewModel.getStationUserList();
+            await stationSaleStore.listStationUserViewModel.getStationUserList(stationSaleStore.getStationSaleViewModel.getStationSalesRequest.stationId);
             let stationUserOptions = [];
             if (stationSaleStore.listStationUserViewModel) {
                 if(stationSaleStore.listStationUserViewModel.listStationUserResponse.items) {

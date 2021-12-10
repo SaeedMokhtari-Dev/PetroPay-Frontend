@@ -14,6 +14,7 @@ export default class InvoiceSubscriptionResponse implements IDeserialize
     companyWebsite: string;
     customerName: string;
     customerAddress: string;
+    customerTaxNumber: string;
     serviceDescription: string;
     unitCost: number;
     quantity: number;

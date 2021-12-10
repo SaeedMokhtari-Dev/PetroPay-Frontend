@@ -166,5 +166,7 @@ export default
     apiDashboardSupplierGet: "/api/dashboard/supplier",
     apiDashboardAdminGet: "/api/dashboard/admin",
 
+    apiCurrentUserBalanceGet: "/api/current-user-balance/get",
+
     apiLog: "/api/log"
 }

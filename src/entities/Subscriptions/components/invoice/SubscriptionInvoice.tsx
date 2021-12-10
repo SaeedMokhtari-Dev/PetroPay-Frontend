@@ -114,6 +114,9 @@ const SubscriptionInvoice: React.FC<SubscriptionInvoiceProps> = inject(Stores.su
                                 <Descriptions.Item label={i18next.t("Subscriptions.Invoice.Label.customerAddress")} span={3}>
                                     {viewModel.invoiceSubscriptionResponse?.customerAddress}
                                 </Descriptions.Item>
+                                <Descriptions.Item label={i18next.t("Subscriptions.Invoice.Label.customerTaxNumber")} span={3}>
+                                    {viewModel.invoiceSubscriptionResponse?.customerTaxNumber}
+                                </Descriptions.Item>
                             </Descriptions>
                         </Col>
                         <Col span={12}>
