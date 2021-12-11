@@ -39,9 +39,12 @@ const ContentHeader: React.FC<ContentHeaderProps> = inject(Stores.pageStore)(obs
         return onUnload;
     }, []);
     let intervalId;
-    function onLoad(){
+    async function onLoad(){
+        debugger;
         pageStore.changeUserPasswordRequest = new ChangeUserPasswordRequest();
         pageStore.getCurrentUserBalanceViewModel = new GetCurrentUserBalanceViewModel();
+        await pageStore.getCurrentUserBalanceViewModel.getCurrentUserBalance();
+        setUserBalance(pageStore.getCurrentUserBalanceViewModel?.balance);
         intervalId = setInterval(async () => {
             await pageStore.getCurrentUserBalanceViewModel.getCurrentUserBalance();
             setUserBalance(pageStore.getCurrentUserBalanceViewModel?.balance);
