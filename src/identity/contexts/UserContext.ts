@@ -21,7 +21,7 @@ export default class UserContext
 
             if(response.success)
             {
-                debugger;
+                
                 this.info = new UserInfo().deserialize(response.data);
 
                 return AuthState.loggedIn;

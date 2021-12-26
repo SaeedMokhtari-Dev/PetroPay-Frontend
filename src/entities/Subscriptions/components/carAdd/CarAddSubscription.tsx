@@ -12,19 +12,7 @@ import history from "../../../../app/utils/History";
 import SubscriptionStore from "../../stores/SubscriptionStore";
 import "./CarAddSubscription.scss";
 import difference from 'lodash/difference';
-import SubscriptionColumns from "../list/SubscriptionColumns";
-import {
-    CarOutlined,
-    CheckCircleOutlined,
-    CheckOutlined,
-    CloseOutlined,
-    DeleteOutlined,
-    EditOutlined
-} from "@ant-design/icons";
-import UserContext from "../../../../identity/contexts/UserContext";
 import CarAddSubscriptionColumns from "./CarAddSubscriptionColumns";
-import AddSubscriptionRequest from "../../handlers/add/AddSubscriptionRequest";
-import AddCarRequest from "../../../cars/handlers/add/AddCarRequest";
 import CarAddSubscriptionRequest from "../../handlers/carAdd/CarAddSubscriptionRequest";
 const {useEffect} = React;
 

@@ -67,7 +67,7 @@ const AddTransferBonus: React.FC<EditTransferBonusProps> = inject(Stores.transfe
 
         if(UserContext.info.role === 100)
         {
-            await transferBonusStore.listPetroStationViewModel.getPetroStationList(UserContext.info.id);
+            await transferBonusStore.listPetroStationViewModel.getPetroStationList();
 
             let stationOptions = [];
             for (let item of transferBonusStore.listPetroStationViewModel.listPetroStationResponse.items) {

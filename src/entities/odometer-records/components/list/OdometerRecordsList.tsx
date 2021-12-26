@@ -10,7 +10,7 @@ import {
 } from "antd";
 import {
     EditOutlined, DeleteOutlined,
-    ExclamationCircleOutlined, PlusCircleOutlined
+    ExclamationCircleOutlined, PlusCircleOutlined, FileExcelOutlined
 } from '@ant-design/icons';
 import i18next from "i18next";
 import OdometerRecordsColumns from "./OdometerRecordsColumns";
@@ -19,6 +19,7 @@ import NavigationService from "../../../../app/services/NavigationService";
 import GetOdometerRecordRequest from "../../handlers/get/GetOdometerRecordRequest";
 import OdometerRecordStore from "../../stores/OdometerRecordStore";
 import UserContext from "../../../../identity/contexts/UserContext";
+import ExportExcel from "../../../../app/utils/ExportExcel";
 
 const { confirm } = Modal;
 
@@ -116,6 +117,13 @@ const OdometerRecordsList: React.FC<OdometerRecordsSidebarProps> = inject(Stores
         await odometerRecordStore.getOdometerRecordViewModel.getAllOdometerRecords(
             new GetOdometerRecordRequest(pageSize, 0, viewModel.companyId));
     }
+
+    async function ExportToExcel(){
+        viewModel.odometerRecordExport = [];
+        await viewModel.getAllOdometerRecords(new GetOdometerRecordRequest(viewModel.pageSize, viewModel.pageIndex, viewModel.companyId, viewModel.branchId,true));
+        if(viewModel.odometerRecordExport && viewModel.odometerRecordExport?.length > 0)
+            ExportExcel(columns.filter(w => w.key !== "action"), viewModel?.odometerRecordExport, "odometerRecord");
+    }
     return (
         <div>
             <PageHeader
@@ -128,6 +136,9 @@ const OdometerRecordsList: React.FC<OdometerRecordsSidebarProps> = inject(Stores
                             {i18next.t("General.Button.Add")}
                         </Button>
                     ,
+                        <Button key={"ExportExcel"} type="primary" loading={viewModel?.isProcessing} icon={<FileExcelOutlined />} onClick={ExportToExcel}>
+                            {i18next.t("General.Button.ExportExcel")}
+                        </Button>
                 ]}
             />
 

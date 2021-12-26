@@ -21,7 +21,6 @@ import "./EditSubscription.scss";
 import BundlesColumns from "../../../bundles/components/list/BundlesColumns";
 import CalculateSubscriptionResponse from "../../handlers/calculate/CalculateSubscriptionResponse";
 const {useEffect} = React;
-const { RangePicker } = DatePicker;
 const { Option } = Select;
 
 interface EditSubscriptionProps {
@@ -194,7 +193,7 @@ const EditSubscription: React.FC<EditSubscriptionProps> = inject(Stores.subscrip
     function disabledDate(current) {
         // Can not select days before today and today
 
-        return current && current < moment().endOf('day');
+        return current && current < moment().add(-1, 'day').endOf('day');
     }
 
     function onDatePickerChanged(e, d){

@@ -5,7 +5,8 @@ export default class GetOdometerRecordRequest
         public pageSize: number,
         public pageIndex: number,
         public companyId?: number,
-        public branchId?: number
+        public branchId?: number,
+        public exportToFile?: boolean
     ) {
     }
 }

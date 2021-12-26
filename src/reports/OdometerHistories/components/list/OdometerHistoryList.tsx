@@ -84,7 +84,7 @@ const OdometerHistoryList: React.FC<OdometerHistoryListProps> = inject(Stores.od
                 }
                 setCompanyOptions(companyOptions);
             }
-            if(UserContext.info.role === 1) {
+            if([100, 1].includes(UserContext.info.role)) {
                 await odometerHistoryStore.listBranchViewModel.getBranchList();
                 let branchOptions = [];
                 for (let item of odometerHistoryStore.listBranchViewModel.listBranchResponse.items) {
@@ -211,7 +211,7 @@ const OdometerHistoryList: React.FC<OdometerHistoryListProps> = inject(Stores.od
                           scrollToFirstError>
                         {dataFetched ?
                             <Row gutter={[24, 16]}>
-                                {UserContext.info.role == 100 ?
+                                {UserContext.info.role === 100 ?
                                     <Col span={8}>
                                         <Form.Item name="companyId"
                                                    initialValue={viewModel?.getOdometerHistoriesRequest?.companyId}
@@ -224,7 +224,7 @@ const OdometerHistoryList: React.FC<OdometerHistoryListProps> = inject(Stores.od
                                             </Select>
                                         </Form.Item>
                                     </Col> : ""}
-                                {UserContext.info.role === 1 ?
+                                {[100, 1].includes(UserContext.info.role) ?
                                 <Col span={8}>
                                     <Form.Item name="companyBranchName"
                                                initialValue={viewModel?.getOdometerHistoriesRequest?.companyBranchName}
@@ -248,6 +248,20 @@ const OdometerHistoryList: React.FC<OdometerHistoryListProps> = inject(Stores.od
                                                 showSearch={true} onChange={(e) => onSelectChanged(e, "carIdNumber")}>
                                             {carOptions}
                                         </Select>
+                                    </Form.Item>
+                                </Col>
+                                <Col span={8}>
+                                    <Form.Item name="dateFrom"
+                                               key={"dateFrom"}
+                                               label={i18next.t("NewCustomers.SearchPanel.Label.dateFrom")}>
+                                        <DatePicker format={Constants.dateFormat} onChange={((date, dateString) => onDateChange(date, dateString, "dateFrom"))} />
+                                    </Form.Item>
+                                </Col>
+                                <Col span={8}>
+                                    <Form.Item name="dateTo"
+                                               key={"dateTo"}
+                                               label={i18next.t("NewCustomers.SearchPanel.Label.dateTo")}>
+                                        <DatePicker format={Constants.dateFormat} onChange={((date, dateString) => onDateChange(date, dateString, "dateTo"))} />
                                     </Form.Item>
                                 </Col>
                             </Row>

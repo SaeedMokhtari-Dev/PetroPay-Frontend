@@ -15,6 +15,7 @@ import {message} from "antd";
 export default class GetOdometerRecordViewModel {
     columns: any[];
     odometerRecordList: OdometerRecordItem[];
+    odometerRecordExport: OdometerRecordItem[];
     totalSize: number;
     isProcessing: boolean;
     errorMessage: string;
@@ -31,14 +32,19 @@ export default class GetOdometerRecordViewModel {
     public async getAllOdometerRecords(getOdometerRecordsRequest: GetOdometerRecordRequest) {
         try {
             this.isProcessing = true;
+            
             let response = await GetOdometerRecordHandler.get(getOdometerRecordsRequest);
 
             if (response && response.success) {
 
                 let result = response.data;
                 let items = result.items;
-                this.odometerRecordList = items;
-                this.totalSize = result.totalCount;
+                if(getOdometerRecordsRequest.exportToFile)
+                    this.odometerRecordExport = items;
+                else {
+                    this.odometerRecordList = items;
+                    this.totalSize = result.totalCount;
+                }
             } else {
                 this.errorMessage = getLocalizedString(response.message);
             }
@@ -46,6 +52,7 @@ export default class GetOdometerRecordViewModel {
             this.errorMessage = i18next.t('OdometerRecords.Error.Get.Message');
             log.error(e);
         } finally {
+            getOdometerRecordsRequest.exportToFile = false;
             this.isProcessing = false;
         }
     }
